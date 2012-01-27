@@ -12,7 +12,7 @@ URI: git://arago-project.org/git/meta-ti
 branch: master
 revision: HEAD
 
-Send pull requests to [TBD]
+Send pull requests to meta-arago@arago-project.org
 
 Layer maintainers: Chase Maupin <chase.maupin@ti.com>
                    Denys Dmytriyenko <denys@ti.com>
