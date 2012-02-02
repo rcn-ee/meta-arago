@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a886c9ef769b2d8271115d2502512e5d"
 
 SECTION = "multimedia"
 
-PR = "r7"
+PR = "r8"
 
 INITSCRIPT_NAME = "matrix-gui-2.0"
 INITSCRIPT_PARAMS = "defaults 97"
@@ -25,12 +25,6 @@ SRC_URI = "git://gitorious.org/matrix-gui-v2/matrix-gui-v2.git;protocol=git;bran
 require matrix-gui-paths.inc
 
 S = "${WORKDIR}/git"
-
-MATRIX_CONFIG = "800x480_config.ini"
-MATRIX_CONFIG_am3517-evm = "480x272_config.ini"
-MATRIX_CONFIG_am180x-evm = "480x272_config.ini"
-MATRIX_CONFIG_am37x-evm = "640x480_config.ini"
-MATRIX_CONFIG_beagleboard = "640x480_config.ini"
 
 MATRIX_ROT = ""
 MATRIX_ROT_am37x-evm = "-display transformed:Rot90"
@@ -51,9 +45,6 @@ do_install(){
     # TODO: replace init script with systemd files
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-gui-2.0
-
-    # Install the matrix config file to configure the screen resolution
-    install -m 0644 ${S}/matrix_config/${MATRIX_CONFIG} ${D}${MATRIX_WEB_DIR}/matrix_config.ini
 }
 
 RDEPENDS_${PN} += "matrix-lighttpd-config lighttpd lighttpd-module-cgi lighttpd-module-compress lighttpd-module-expire php php-cgi php-cli matrix-gui-browser refresh-screen"
