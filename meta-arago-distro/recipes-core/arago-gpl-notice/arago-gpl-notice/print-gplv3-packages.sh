@@ -31,20 +31,26 @@ done
 
 if [ "$gplv3_packages" != "" ]
 then
-    echo "***************************************************************"
-    echo "***************************************************************"
-    echo "NOTICE: This file system contains the followin GPLv3 packages:"
-    echo -e $gplv3_packages
-    echo "If you do not wish to distribute GPLv3 components please remove"
-    echo "the above packages prior to distribution.  This can be done using"
-    echo "the opkg remove command.  i.e.:"
-    echo "    opkg remove <package>"
-    echo "Where <package> is the name printed in the list above"
-    echo ""
-    echo "NOTE: If the package is a dependency of another package you"
-    echo "      will be notified of the dependent packages.  You should"
-    echo "      use the --force-removal-of-dependent-packages option to"
-    echo "      also remove the dependent packages as well"
-    echo "***************************************************************"
-    echo "***************************************************************"
+# NOTE: Redirecting to STDERR to make sure the output is flushed before
+#       anything else prints
+cat << EOM 2>&1
+***************************************************************
+***************************************************************
+NOTICE: This file system contains the followin GPLv3 packages:
+EOM
+    echo -e $gplv3_packages 2>&1
+cat << EOM 2>&1
+If you do not wish to distribute GPLv3 components please remove
+the above packages prior to distribution.  This can be done using
+the opkg remove command.  i.e.:
+    opkg remove <package>
+Where <package> is the name printed in the list above
+
+NOTE: If the package is a dependency of another package you
+      will be notified of the dependent packages.  You should
+      use the --force-removal-of-dependent-packages option to
+      also remove the dependent packages as well
+***************************************************************
+***************************************************************
+EOM
 fi
