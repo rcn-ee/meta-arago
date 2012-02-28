@@ -34,17 +34,17 @@ do_install(){
 	install -d ${D}${MATRIX_WEB_DIR}
 	cp -rf ${S}/* ${D}${MATRIX_WEB_DIR}
 
-    # Install our php.ini file
-    install -m 0644 ${WORKDIR}/php.ini ${D}${MATRIX_BASE_DIR}/
+	# Install our php.ini file
+	install -m 0644 ${WORKDIR}/php.ini ${D}${MATRIX_BASE_DIR}/
 
-    # Set the proper path in the init script
-    sed -i -e s=__MATRIX_WEB_DIR__=${MATRIX_WEB_DIR}= ${WORKDIR}/init
-    sed -i -e "s/__MATRIX_ROT__/\"${MATRIX_ROT}\"/" ${WORKDIR}/init
+	# Set the proper path in the init script
+	sed -i -e s=__MATRIX_WEB_DIR__=${MATRIX_WEB_DIR}= ${WORKDIR}/init
+	sed -i -e "s/__MATRIX_ROT__/\"${MATRIX_ROT}\"/" ${WORKDIR}/init
 
-    # Install the init script
-    # TODO: replace init script with systemd files
-    install -d ${D}${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-gui-2.0
+	# Install the init script
+	# TODO: replace init script with systemd files
+	install -d ${D}${sysconfdir}/init.d
+	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/matrix-gui-2.0
 }
 
 RDEPENDS_${PN} += "matrix-lighttpd-config lighttpd lighttpd-module-cgi lighttpd-module-compress lighttpd-module-expire php php-cgi php-cli matrix-gui-browser refresh-screen"

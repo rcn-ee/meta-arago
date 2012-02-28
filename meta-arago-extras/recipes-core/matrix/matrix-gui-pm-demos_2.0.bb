@@ -8,9 +8,9 @@ PR = "${INC_PR}.0"
 
 inherit allarch
 
-S = ${WORKDIR}/git/power_apps
+S = "${WORKDIR}/git/power_apps"
 
 # Make sure power submenu and app images has been installed
-RDEPENDS +=  matrix-gui-apps-images matrix-gui-submenus-power
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-power"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"

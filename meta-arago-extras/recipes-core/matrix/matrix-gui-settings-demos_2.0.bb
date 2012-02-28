@@ -8,9 +8,9 @@ PR = "${INC_PR}.0"
 
 inherit allarch
 
-S = ${WORKDIR}/git/settings_apps
+S = "${WORKDIR}/git/settings_apps"
 
 # Make sure setting submenu and app images has been installed
-RDEPENDS +=  matrix-gui-apps-images matrix-gui-submenus-settings am-sysinfo
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-settings am-sysinfo"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"

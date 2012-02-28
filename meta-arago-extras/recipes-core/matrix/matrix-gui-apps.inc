@@ -1,6 +1,6 @@
 require matrix-gui-paths.inc
 
-MATRIX_FILES_DIR ?= ${S}
+MATRIX_FILES_DIR ?= "${S}"
 
 # Append a generic function to the do_install step that will look in the
 # MATRIX_FILES_DIR for .desktop files and then:

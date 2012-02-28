@@ -8,9 +8,9 @@ PR = "${INC_PR}.0"
 
 inherit allarch
 
-S = ${WORKDIR}/git/usb_apps
+S = "${WORKDIR}/git/usb_apps"
 
 # Make sure usb submenu and app images has been installed
-RDEPENDS +=  "matrix-gui-apps-images matrix-gui-submenus-usb bonnie++"
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-usb bonnie++"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"

@@ -31,7 +31,7 @@ do_install(){
 PACKAGES += "${PN}-arm ${PN}-3d ${PN}-cryptos ${PN}-display ${PN}-ethernet ${PN}-multimedia ${PN}-power ${PN}-pru ${PN}-qt4 ${PN}-settings ${PN}-usb ${PN}-wifi ${PN}-oprofile"
 
 # Make sure app images has been installed
-RDEPENDS += matrix-gui-apps-images
+RDEPENDS += "matrix-gui-apps-images"
 
 # Add the files for each submenu package
 FILES_${PN}-arm = "${MATRIX_APP_DIR}/arm_submenu/*"

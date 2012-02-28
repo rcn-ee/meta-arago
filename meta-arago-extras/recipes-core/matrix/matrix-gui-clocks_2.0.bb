@@ -8,10 +8,10 @@ PR = "${INC_PR}.0"
 
 inherit allarch
 
-S = ${WORKDIR}/git/clocks_apps
+S = "${WORKDIR}/git/clocks_apps"
 
 # Make sure power submenu and app images has been installed
-RDEPENDS +=  matrix-gui-apps-images matrix-gui-submenus-power
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-power"
 
 # Break out the individual files into separate packages.  That way only the
 # clocks supported for each device can be installed.  Prepend the list so

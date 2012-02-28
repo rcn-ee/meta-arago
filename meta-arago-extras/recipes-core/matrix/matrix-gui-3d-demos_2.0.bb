@@ -6,7 +6,7 @@ require matrix-gui-apps-git.inc
 
 PR = "${INC_PR}.0"
 
-S = ${WORKDIR}/git/3d_apps
+S = "${WORKDIR}/git/3d_apps"
 
 # Make sure 3D submenu has been installed and app images has been installed
 
@@ -15,7 +15,6 @@ S = ${WORKDIR}/git/3d_apps
 #       to the matrix-gui-submenus-3d dependency.  So if matrix v2 moves
 #       into the same layer as libgles this may be acceptable, or perhaps
 #       we can use an RRECOMMENDS instead.
-RDEPENDS +=  "matrix-gui-apps-images matrix-gui-submenus-3d libgles-omap3-rawdemos"
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-3d libgles-omap3-rawdemos"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"
-

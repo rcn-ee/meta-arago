@@ -8,9 +8,9 @@ PR = "${INC_PR}.0"
 
 inherit allarch
 
-S = ${WORKDIR}/git/multimedia_apps
+S = "${WORKDIR}/git/multimedia_apps"
 
 # Make sure multimedia submenu and app images has been installed
-RDEPENDS += matrix-gui-apps-images matrix-gui-submenus-multimedia
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-multimedia"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"
