@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e7
 
 SECTION = "system"
 
-PACKAGE_STRIP = no
+PACKAGE_STRIP = "no"
 
 SRCREV = "16"
 PV = "1.0"
