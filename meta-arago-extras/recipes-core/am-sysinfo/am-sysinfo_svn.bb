@@ -9,9 +9,9 @@ PACKAGE_STRIP = "no"
 
 SRCREV = "16"
 PV = "1.0"
-PR = "r2+svnr${SRCPV}"
+PR = "r3+svnr${SRCPV}"
 
-SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;proto=https;user=anonymous;pswd=''"
+SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;protocol=https;user=anonymous;pswd=''"
 
 S = "${WORKDIR}/trunk"
 
