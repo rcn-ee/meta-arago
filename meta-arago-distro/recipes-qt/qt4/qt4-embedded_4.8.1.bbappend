@@ -2,4 +2,4 @@
 # For our distribution purposes we only use LGPLv2.1
 LICENSE = "LGPLv2.1"
 
-PR_append = "-arago1"
+PR_append = "-arago0"
