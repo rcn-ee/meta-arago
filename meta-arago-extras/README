@@ -1,15 +1,18 @@
-This layer depends on:
+meta-arago-extras provides additional TI SDK applications that are distro-agnostic
+
+This layer works with the latest Yocto Project release (currently 1.2) and tracks
+the stable/maintenance branches (currently "denzil") of the corresponding layers:
 
 URI: git://git.openembedded.org/openembedded-core
-branch: master
+branch: denzil
 revision: HEAD
 
 URI: git://git.openembedded.org/meta-openembedded
-branch: master
+branch: denzil
 revision: HEAD
 
 URI: git://arago-project.org/git/meta-ti
-branch: master
+branch: denzil
 revision: HEAD
 
 Send pull requests to meta-arago@arago-project.org
