@@ -15,8 +15,12 @@ ARAGO_BASE = "\
     mtd-utils \
     curl \
     initscript-telnetd \
-    devmem2 \
     ethtool \
+    "
+
+# these require meta-openembedded/meta-oe layer
+ARAGO_EXTRA = "\
+    devmem2 \
     tcpdump \
     "
 
@@ -30,6 +34,5 @@ RDEPENDS_${PN} = "\
     netbase \
     update-alternatives \
     module-init-tools \
-    task-basic \
     ${ARAGO_BASE} \
     "
