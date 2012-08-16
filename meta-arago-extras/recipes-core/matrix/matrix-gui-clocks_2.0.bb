@@ -4,28 +4,34 @@ LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 inherit allarch
 
 S = "${WORKDIR}/git/clocks_apps"
 
 # Make sure power submenu and app images has been installed
-RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-power"
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
 
 # Break out the individual files into separate packages.  That way only the
 # clocks supported for each device can be installed.  Prepend the list so
 # that we can get the files in ${bindir} first
-PACKAGES =+ "${PN}-300mhz ${PN}-600mhz ${PN}-800mhz ${PN}-1ghz"
+PACKAGES =+ "${PN}-275mhz ${PN}-300mhz ${PN}-500mhz ${PN}-600mhz ${PN}-720mhz ${PN}-800mhz ${PN}-1ghz"
 
 # Split the matrix files by clock
+FILES_${PN}-275mhz += "${MATRIX_APP_DIR}/power_set_275mhz/*"
 FILES_${PN}-300mhz += "${MATRIX_APP_DIR}/power_set_300mhz/*"
+FILES_${PN}-500mhz += "${MATRIX_APP_DIR}/power_set_500mhz/*"
 FILES_${PN}-600mhz += "${MATRIX_APP_DIR}/power_set_600mhz/*"
+FILES_${PN}-720mhz += "${MATRIX_APP_DIR}/power_set_720mhz/*"
 FILES_${PN}-800mhz += "${MATRIX_APP_DIR}/power_set_800mhz/*"
 FILES_${PN}-1ghz += "${MATRIX_APP_DIR}/power_set_1ghz/*"
 
 # Split the ${bindir} files by clock
-FILES_${PN}-300mhz += "${bindir}/setopp2.sh"
-FILES_${PN}-600mhz += "${bindir}/setopp3.sh"
-FILES_${PN}-800mhz += "${bindir}/setopp4.sh"
-FILES_${PN}-1ghz += "${bindir}/setopp1.sh"
+FILES_${PN}-275mhz += "${bindir}/setclock275MHz.sh"
+FILES_${PN}-300mhz += "${bindir}/setclock300MHz.sh"
+FILES_${PN}-500mhz += "${bindir}/setclock500MHz.sh"
+FILES_${PN}-600mhz += "${bindir}/setclock600MHz.sh"
+FILES_${PN}-720mhz += "${bindir}/setclock720MHz.sh"
+FILES_${PN}-800mhz += "${bindir}/setclock800MHz.sh"
+FILES_${PN}-1ghz += "${bindir}/setclock1GHz.sh"
