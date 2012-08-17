@@ -1,6 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r8"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+PR = "r9"
 
 inherit task
 
@@ -19,7 +20,7 @@ RDEPENDS_${PN} = "\
     libpcre \
     iptables \
     iperf \
-    psplash-ti \
+    psplash \
     u-boot \
     arago-gpl-notice \
     nfs-utils-client \
