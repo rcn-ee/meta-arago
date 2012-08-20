@@ -1,0 +1,55 @@
+From 48350388ab4cb8a0965e7a3f8630bc3f3e3c8d7b Mon Sep 17 00:00:00 2001
+From: Franklin S Cooper Jr <fcooper@ti.com>
+Date: Mon, 20 Aug 2012 07:16:18 -0500
+Subject: [PATCH] php-native: Fix host contamination issue
+
+* Within ext/iconv/config.m4 there is a check in place to try to locate
+  particular header files and if the header files aren't found then a
+  default location is used (/usr/). Both the CFLAGS and LDFLAGS have this
+  default location added to it. This leads to a host contamination issue
+  which propagates to the rest of the entire config/build since CFLAGS and
+  LDFLAGS will use the host's include and lib directory as the first place
+  to check.
+
+* This issue was discovered when the configure was failing due to seeing the
+  following error in the config.log:
+  <path to work dir>/sysroots/x86_64-linux/usr/lib/libxml2.so: undefined reference to
+  gzopen64@ZLIB_1.2.3.3. The /usr/lib directory in /sysroots/x86_64-linux
+  contained zlib 1.2.6 while my host (Ubuntu 10.04) /usr/lib directory had
+  zlib 1.2.3.3
+
+* Deleting the two lines solves that alter the CFLAGS and LDFLAGS fixes this
+  issue. This isn't a valid fix for PHP but should work for OE.
+
+* This issue is in the latest 5.3.x version of php and possibly under 5.4.x.
+
+* Below contains several bug reports that seem to be based on this same issue:
+    https://bugs.php.net/bug.php?id=53443
+    https://bugs.php.net/bug.php?id=61130
+    https://bugs.php.net/bug.php?id=53442
+  None of the suggested fixes seem valid since /usr/ and /usr/local should never
+  be considered a proper default location. A similar type of check is done in
+  several other ext but for some reason only this issue shows up.
+
+Signed-off-by: Franklin S Cooper Jr <fcooper@ti.com>
+---
+ ext/iconv/config.m4 |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
+
+diff --git a/ext/iconv/config.m4 b/ext/iconv/config.m4
+index 13e0371..41c2db9 100644
+--- a/ext/iconv/config.m4
++++ b/ext/iconv/config.m4
+@@ -28,9 +28,6 @@ if test "$PHP_ICONV" != "no"; then
+       PHP_ICONV_PREFIX="$ICONV_DIR"
+     fi
+ 
+-    CFLAGS="-I$PHP_ICONV_PREFIX/include $CFLAGS"
+-    LDFLAGS="-L$PHP_ICONV_PREFIX/$PHP_LIBDIR $LDFLAGS"
+-
+     if test -r "$PHP_ICONV_PREFIX/include/giconv.h"; then
+       PHP_ICONV_H_PATH="$PHP_ICONV_PREFIX/include/giconv.h"
+     else
+-- 
+1.7.0.4
+
