@@ -1,3 +1,3 @@
-PR_append = "-arago0"
+PR_append = "-arago1"
 
-EXTRA_OEMAKE += "-mimplicit-it=thumb"
+EXTRA_OEMAKE += "CFLAGS+='-Wa,-mimplicit-it=thumb'"
