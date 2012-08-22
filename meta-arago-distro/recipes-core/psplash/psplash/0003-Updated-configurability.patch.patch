@@ -1,0 +1,90 @@
+From 91aae19ff80429bc8e7f35cf131f0491ce3e2f63 Mon Sep 17 00:00:00 2001
+From: Franklin S Cooper Jr <fcooper@ti.com>
+Date: Fri, 6 Jul 2012 19:04:19 -0500
+Subject: [PATCH 3/3] Updated configurability.patch
+
+* Updating configurability.patch to work with the most recent version
+  (last update 5/10/2012) of psplash.
+
+Signed-off-by: Franklin S Cooper Jr <fcooper@ti.com>
+---
+ psplash.c |   16 ++++++++--------
+ psplash.h |    3 +++
+ 2 files changed, 11 insertions(+), 8 deletions(-)
+
+diff --git a/psplash.c b/psplash.c
+index 09cf0d0..9ccfc83 100644
+--- a/psplash.c
++++ b/psplash.c
+@@ -46,14 +46,14 @@ psplash_draw_msg (PSplashFB *fb, const char *msg)
+ 
+   psplash_fb_draw_rect (fb, 
+ 			0, 
+-			fb->height - (fb->height/6) - h, 
+-			fb->width,
++			fb->height - (fb->height/PSPLASH_TEXT_DIVIDER) - h,
++            fb->width,
+ 			h,
+ 			PSPLASH_BACKGROUND_COLOR);
+ 
+   psplash_fb_draw_text (fb,
+ 			(fb->width-w)/2, 
+-			fb->height - (fb->height/6) - h,
++			fb->height - (fb->height/PSPLASH_TEXT_DIVIDER) - h,
+ 			PSPLASH_TEXT_COLOR,
+ 			&radeon_font,
+ 			msg);
+@@ -66,7 +66,7 @@ psplash_draw_progress (PSplashFB *fb, int value)
+ 
+   /* 4 pix border */
+   x      = ((fb->width  - BAR_IMG_WIDTH)/2) + 4 ;
+-  y      = fb->height - (fb->height/6) + 4;
++  y      = fb->height - (fb->height/PSPLASH_PROGRESS_DIVIDER) + 4;
+   width  = BAR_IMG_WIDTH - 8; 
+   height = BAR_IMG_HEIGHT - 8;
+ 
+@@ -270,7 +270,7 @@ main (int argc, char** argv)
+   /* Draw the Poky logo  */
+   psplash_fb_draw_image (fb, 
+ 			 (fb->width  - POKY_IMG_WIDTH)/2, 
+-			 ((fb->height * 5) / 6 - POKY_IMG_HEIGHT)/2,
++			 (fb->height - POKY_IMG_HEIGHT)/2,
+ 			 POKY_IMG_WIDTH,
+ 			 POKY_IMG_HEIGHT,
+ 			 POKY_IMG_BYTES_PER_PIXEL,
+@@ -279,15 +279,15 @@ main (int argc, char** argv)
+   /* Draw progress bar border */
+   psplash_fb_draw_image (fb, 
+ 			 (fb->width  - BAR_IMG_WIDTH)/2, 
+-			 fb->height - (fb->height/6), 
++			 fb->height - (fb->height/PSPLASH_PROGRESS_DIVIDER), 
+ 			 BAR_IMG_WIDTH,
+ 			 BAR_IMG_HEIGHT,
+ 			 BAR_IMG_BYTES_PER_PIXEL,
+ 			 BAR_IMG_RLE_PIXEL_DATA);
+ 
+-  psplash_draw_progress (fb, 0);
++  psplash_draw_progress (fb, 0); /* draw initial progress */
+ 
+-  psplash_draw_msg (fb, MSG);
++  if (strlen(MSG)) psplash_draw_msg (fb, MSG);
+ 
+   psplash_main (fb, pipe_fd, 0);
+ 
+diff --git a/psplash.h b/psplash.h
+index f78c117..ec399ed 100644
+--- a/psplash.h
++++ b/psplash.h
+@@ -55,6 +55,9 @@ typedef int            bool;
+ #define TRUE 1
+ #endif
+ 
++#define PSPLASH_PROGRESS_DIVIDER    3
++#define PSPLASH_TEXT_DIVIDER        3
++
+ #define PSPLASH_FIFO "psplash_fifo"
+ 
+ #define CLAMP(x, low, high) \
+-- 
+1.7.0.4
+
