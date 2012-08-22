@@ -4,13 +4,30 @@ LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 inherit allarch
 
 S = "${WORKDIR}/git/power_apps"
 
 # Make sure power submenu and app images has been installed
-RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-power"
+RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+# Break out the individual files into separate packages.  That way only the
+# PM features supported for each device can be installed.  Prepend the list
+# so that we can get the files in ${bindir} first.
+PACKAGES =+ "${PN}-count ${PN}-dump-reg ${PN}-snapshot1 ${PN}-snapshot2 ${PN}-suspend"
+
+# Split the matrix files by PM app
+FILES_${PN}-count += "${MATRIX_APP_DIR}/pm_count/*"
+FILES_${PN}-dump-reg += "${MATRIX_APP_DIR}/pm_dump_reg/*"
+FILES_${PN}-snapshot1 += "${MATRIX_APP_DIR}/pm_snapshot_1/*"
+FILES_${PN}-snapshot2 += "${MATRIX_APP_DIR}/pm_snapshot_2/*"
+FILES_${PN}-suspend += "${MATRIX_APP_DIR}/pm_suspend/*"
+
+# Split the ${bindir} files by PM app
+FILES_${PN}-count += "${bindir}/pm_count.sh"
+FILES_${PN}-dump-reg += "${bindir}/pm_dump_reg.sh"
+FILES_${PN}-snapshot1 += "${bindir}/pm_snapshot_1.sh"
+FILES_${PN}-snapshot2 += "${bindir}/pm_snapshot_2.sh"
+FILES_${PN}-suspend += "${bindir}/pm_suspend.sh"
