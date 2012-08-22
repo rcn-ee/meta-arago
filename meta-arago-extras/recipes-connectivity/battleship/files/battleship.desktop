@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Battleship
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/battleship/battleship-icon.png
+Type=Application
+Exec=battleship
+Categories=wifi
+X-ProgramType=gui

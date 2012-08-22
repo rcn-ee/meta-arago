@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=WiFi-Direct Demo
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/wifi-direct-demo/wifi-direct-icon.png
+Type=Application
+Exec=wifi-direct-demo
+Categories=wifi
+X-ProgramType=gui
