@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM := "file://COPYING;md5=80ea1ff5788f65d5c5b3206d50d4bc6c"
 SECTION = "system"
 PRIORITY = "optional"
 
-PR = "r0"
+PR = "r1"
 
-DEPENDS += "virtual/kernel"
+DEPENDS = "virtual/kernel"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(am37x-evm|am3517-evm)"
+COMPATIBLE_MACHINE = "(omap3)"
 
 BRANCH ?= "master"
 SRCREV = "ac75d09d29a805d89c49dd2741b79f3069e97827"
