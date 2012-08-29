@@ -4,12 +4,14 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7aefb5e1cffc7b6a3ef18b803f957922"
 SECTION = "system"
 
-SRCREV = "76"
-PR = "r1+svnr${SRCPV}"
+PR = "r2"
 
-SRC_URI = "svn://gforge.ti.com/svn/am_benchmarks/;module=trunk;protocol=https;user=anonymous;pswd=''"
+BRANCH ?= "master"
+SRCREV = "e9fbf7990e93d97e7471e509626969d244cca214"
 
-S = "${WORKDIR}/trunk"
+SRC_URI = "git://gitorious.org/arm_benchmarks/arm_benchmarks.git;protocol=git;branch=${BRANCH}"
+
+S = "${WORKDIR}/git"
 
 do_compile() {
 	export CROSS_COMPILE=${TARGET_PREFIX}

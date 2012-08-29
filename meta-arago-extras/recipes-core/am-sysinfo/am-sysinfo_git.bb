@@ -6,14 +6,15 @@ LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e7
 SECTION = "system"
 
 PACKAGE_STRIP = "no"
+PR = "r5"
 
-SRCREV = "17"
-PV = "1.0"
-PR = "r4+svnr${SRCPV}"
+BRANCH ?= "master"
+SRCREV = "f2b325741ebcd440c4b2fc91a65270391224426e"
 
-SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;protocol=https;user=anonymous;pswd=''"
+SRC_URI = "git://gitorious.org/am_sysinfo/am_sysinfo.git;protocol=git;branch=${BRANCH}"
 
-S = "${WORKDIR}/trunk"
+S = "${WORKDIR}/git"
+
 
 do_compile() {
 	${CC} ${CFLAGS} ${LDFLAGS} -o mem_util/mem_util mem_util/mem_util.c
