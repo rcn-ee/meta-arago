@@ -2,7 +2,7 @@ require recipes-core/eglibc/eglibc-package.inc
 
 require external-arago-toolchain.inc
 
-PR = "r1"
+PR = "r2"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
@@ -24,6 +24,8 @@ INSANE_SKIP_libstdc++ = "True"
 INSANE_SKIP_glibc-utils = "True"
 INSANE_SKIP_glibc-dev = "True"
 INSANE_SKIP_gdbserver = "True"
+
+SRC_URI = "file://SUPPORTED"
 
 PROVIDES = "\
 	virtual/${TARGET_PREFIX}gcc \
