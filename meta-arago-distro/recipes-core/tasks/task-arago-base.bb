@@ -1,7 +1,7 @@
 DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -11,7 +11,7 @@ ARAGO_ALSA_BASE = "\
     "
 
 ARAGO_BASE = "\
-    ${ARAGO_ALSA_BASE} \
+    module-init-tools \
     mtd-utils \
     curl \
     initscript-telnetd \
@@ -26,13 +26,7 @@ ARAGO_EXTRA = "\
 
 # minimal set of packages - needed to boot
 RDEPENDS_${PN} = "\
-    base-files \
-    base-passwd \
-    busybox \
-    initscripts \
-    modutils-initscripts \
-    netbase \
-    update-alternatives \
-    module-init-tools \
+    ${ARAGO_ALSA_BASE} \
     ${ARAGO_BASE} \
+    ${ARAGO_EXTRA} \
     "

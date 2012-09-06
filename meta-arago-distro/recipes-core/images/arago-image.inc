@@ -3,22 +3,24 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-IMAGE_PREPROCESS_COMMAND = "rootfs_update_timestamp"
-
 # 4KB per 1 inode should be enough
 EXTRA_IMAGECMD_ext2.gz += "-i 4096"
 
-IMAGE_INSTALL += " \
-	${ROOTFS_PKGMANAGE} \
-"
+VIRTUAL-RUNTIME_dev_manager = "udev"
+VIRTUAL-RUNTIME_init_manager = "sysvinit"
+VIRTUAL-RUNTIME_initscripts = "initscripts"
+VIRTUAL-RUNTIME_login_manager = "tinylogin shadow"
 
-IMAGE_DEV_MANAGER   = "udev"
-IMAGE_INIT_MANAGER  = "sysvinit"
-IMAGE_INITSCRIPTS   = " "
-IMAGE_LOGIN_MANAGER = "tinylogin shadow"
+ARAGO_IMAGE_EXTRA_INSTALL ?= ""
+
+IMAGE_INSTALL += " \
+	task-core-boot \
+	${ROOTFS_PKGMANAGE} \
+	${ARAGO_IMAGE_EXTRA_INSTALL} \
+"
 
 export IMAGE_BASENAME = "arago-image"
 
 IMAGE_LINGUAS = ""
 
-inherit image
+inherit core-image
