@@ -1,7 +1,7 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -57,8 +57,7 @@ ARAGO_SDK_PREREQ = "\
     jpeg \
     jpeg-tools \
     freetype \
-    lighttpd \
-    lighttpd-module-cgi \
+    thttpd \
     "
 
 ARAGO_CONSOLE = "\
