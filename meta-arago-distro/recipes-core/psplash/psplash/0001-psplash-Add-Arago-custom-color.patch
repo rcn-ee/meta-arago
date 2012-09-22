@@ -1,0 +1,39 @@
+From be4eb4c5c3992deee2cfaa5da8913473623f728b Mon Sep 17 00:00:00 2001
+From: Franklin S. Cooper Jr <fcooper@ti.com>
+Date: Fri, 21 Sep 2012 15:18:24 -0500
+Subject: [PATCH] psplash: Add Arago custom color
+
+* Port custom colors used in psplash-ti from oe-classic.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ psplash-colors.h |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/psplash-colors.h b/psplash-colors.h
+index d701089..a6a5992 100644
+--- a/psplash-colors.h
++++ b/psplash-colors.h
+@@ -20,15 +20,15 @@
+ #define _HAVE_PSPLASH_COLORS_H
+ 
+ /* This is the overall background color */
+-#define PSPLASH_BACKGROUND_COLOR 0xec,0xec,0xe1
++#define PSPLASH_BACKGROUND_COLOR 0x00,0x00,0x00
+ 
+ /* This is the color of any text output */
+-#define PSPLASH_TEXT_COLOR 0x6d,0x6d,0x70
++#define PSPLASH_TEXT_COLOR 0xff,0xff,0xff
+ 
+ /* This is the color of the progress bar indicator */
+-#define PSPLASH_BAR_COLOR 0x6d,0x6d,0x70
++#define PSPLASH_BAR_COLOR 0xe3,0x71,0x00
+ 
+ /* This is the color of the progress bar background */
+-#define PSPLASH_BAR_BACKGROUND_COLOR 0xec,0xec,0xe1
++#define PSPLASH_BAR_BACKGROUND_COLOR 0x00,0x00,0x00
+ 
+ #endif
+-- 
+1.7.0.4
+

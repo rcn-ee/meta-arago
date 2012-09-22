@@ -1,7 +1,7 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago1"
+PR_append = "-arago2"
 
 # Update which portion of the psplash.h file to use as a checksum. This tweak
 # has already been done in oe-core master
@@ -14,6 +14,7 @@ SRC_URI += "file://psplash-18bpp.patch                      \
             file://0003-Updated-configurability.patch.patch \
             file://psplash-poky-img.h                       \
             file://psplash-bar-img.h                        \
+            file://0001-psplash-Add-Arago-custom-color.patch\
 "
 
 do_configure_prepend() {
