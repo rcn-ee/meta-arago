@@ -1,0 +1,25 @@
+#!/bin/sh
+
+
+case "$1" in
+    start )
+        # If this is a 3 partition card mount the first and third
+        # partition.  Else only mount the first one.
+        if [ -e /dev/mmcblk0p1 -a -e /dev/mmcblk0p3 ]
+        then
+            modprobe g_mass_storage file=/dev/mmcblk0p1,/dev/mmcblk0p3
+        elif [ -e /dev/mmcblk0p1 ]
+        then
+            modprobe g_mass_storage file=/dev/mmcblk0p1
+        fi
+    ;;
+    stop )
+        lsmod | grep g_mass_storage > /dev/null
+        if [ "$?" == "0" ]
+        then
+            rmmod g_mass_storage
+        fi
+    ;;
+esac
+
+exit 0
