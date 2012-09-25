@@ -10,11 +10,11 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR = "${INC_PR}.4"
+PR_append = "-arago5"
 
-SRC_URI += " \
-            file://find.pl \
-            "
+SRC_URI += "file://find.pl \
+            file://0002-Modify-eng_cryptodev.c-to-make-SHA1-and-MD5-work-wit.patch \
+"
 
 do_configure_prepend() {
   cp ${WORKDIR}/find.pl ${S}/util/find.pl
