@@ -4,7 +4,7 @@ HOMEPAGE = "http://udhcp.busybox.net/"
 LICENSE = "GPLv2 & BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=de10de48642ab74318e893a61105afbb"
 
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
