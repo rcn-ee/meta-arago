@@ -1,15 +1,16 @@
 DESCRIPTION = "Wifi Direct Demo"
 SECTION = "network"
 LICENSE = "BSD"
-RDEPENDS += "wpa-supplicant"
-
-PR = "r0"
+LIC_FILES_CHKSUM = "file://src/main.cpp;md5=cf285050f56a20d116b026c9f8ded4f7"
 
 COMPATIBLE_MACHINE = "(am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
+RDEPENDS += "wpa-supplicant"
+
+PR = "r1"
+
 BRANCH = "dbus"
 SRCREV = "0950a67d9fe9a70668a993774e65ba9d457d750c"
-PR_append = "+gitr${SRCREV}"
 
 SRC_URI = "git://git.profusion.mobi/users/lucas/wifi-direct-demo.git;protocol=git;branch=${BRANCH} \
            file://wifi-direct-demo.desktop"

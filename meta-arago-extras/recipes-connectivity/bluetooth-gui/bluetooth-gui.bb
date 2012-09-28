@@ -1,15 +1,15 @@
 DESCRIPTION = "Bluetooth GUI Application"
 SECTION = "network"
 LICENSE = "BSD"
-RDEPENDS += "pulseaudio"
-
-PR = "r10"
-
+LIC_FILES_CHKSUM = "file://src/main.cpp;beginline=1;endline=37;md5=83d75e9470fc1ba29e6f494fdef321be"
 COMPATIBLE_MACHINE = "(omap3evm|am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
+
+RDEPENDS += "pulseaudio"
 
 BRANCH = "master"
 SRCREV = "d9fc6f1ab023230170672d5243cbee58d740e7fe"
-PR_append = "+gitr${SRCREV}"
+
+PR = "r11"
 
 SRC_URI = "git://git.profusion.mobi/users/lucas/BT_Demo.git;protocol=git;branch=${BRANCH} \
            file://bluetooth-icon.png \
@@ -17,7 +17,6 @@ SRC_URI = "git://git.profusion.mobi/users/lucas/BT_Demo.git;protocol=git;branch=
            file://bt_demo.desktop"
 
 require recipes-core/matrix/matrix-gui-paths.inc
-
 
 S = "${WORKDIR}/git"
 
@@ -39,7 +38,7 @@ do_install () {
        install -m 644 ${WORKDIR}/bluetooth-icon.png ${D}${MATRIX_APP_DIR}/bt_demo
 }
 
-PACKAGES += "${PN} matrix-gui-bluetooth-demos"
+PACKAGES += "matrix-gui-bluetooth-demos"
 
 FILES_${PN} +=" \
 	${bindir}/bluetooth-gui \
