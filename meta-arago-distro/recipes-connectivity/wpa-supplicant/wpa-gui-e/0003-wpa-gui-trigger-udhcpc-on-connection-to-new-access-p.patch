@@ -1,0 +1,72 @@
+From 1043f0e3138a92ff76b13fcc9d15025e9f046938 Mon Sep 17 00:00:00 2001
+From: Eyal Reizer <eyalr@ti.com>
+Date: Wed, 29 Jun 2011 14:33:56 +0300
+Subject: [PATCH] wpa-gui:trigger udhcpc on connection to new access point
+
+When establishing a connection with an access point run a shell script
+that is used for triggering a dhcp request
+
+upstream-status: pending
+
+Signed-off-by: Eyal Reizer <eyalr@ti.com>wpa
+---
+ wpagui.cpp |   11 ++++++++++-
+ wpagui.h   |    1 +
+ 2 files changed, 11 insertions(+), 1 deletions(-)
+ mode change 100644 => 100755 wpagui.cpp
+ mode change 100644 => 100755 wpagui.h
+
+diff --git awpagui.cpp b/wpagui.cpp
+old mode 100644
+new mode 100755
+index 97bf5ac..e9b0701
+--- a/wpagui.cpp
++++ b/wpagui.cpp
+@@ -26,6 +26,7 @@
+ #include <QCloseEvent>
+ #include <QImageReader>
+ #include <QSettings>
++#include <QProcess>
+
+ #include "wpagui.h"
+ #include "dirent.h"
+@@ -174,7 +175,7 @@ WpaGui::WpaGui(QApplication *_app, QWidget *parent, const char *, Qt::WFlags)
+		printf("Failed to open control connection to "
+		       "wpa_supplicant.\n");
+	}
+-
++        isConnectionEstablished = false;
+	updateStatus();
+	networkMayHaveChanged = true;
+	updateNetworks();
+@@ -554,6 +555,14 @@ void WpaGui::updateStatus()
+			} else if (strcmp(start, "wpa_state") == 0) {
+				status_updated = true;
+				textStatus->setText(wpaStateTranslate(pos));
++                                if (textStatus->text() == "Completed") {
++                                    if (!isConnectionEstablished) {
++                                        QProcess::execute(QString("/usr/share/wpa_gui/connection_script.sh"));
++                                        isConnectionEstablished = true;
++                                    }
++                                }
++                                else
++                                    isConnectionEstablished = false;
+			} else if (strcmp(start, "key_mgmt") == 0) {
+				auth_updated = true;
+				textAuthentication->setText(pos);
+diff --git a/wpa_supplicant/wpa_gui-qt4/wpagui.h b/wpa_supplicant/wpa_gui-qt4/wpagui.h
+old mode 100644
+new mode 100755
+index 2e1af8e..b93fcb1
+--- a/wpagui.h
++++ b/wpagui.h
+@@ -122,6 +122,7 @@ private:
+	void createTrayIcon(bool);
+	bool ackTrayIcon;
+	bool startInTray;
++        bool isConnectionEstablished;
+
+	int openCtrlConnection(const char *ifname);
+
+--
+1.7.0.4
