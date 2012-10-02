@@ -2,7 +2,7 @@
 
 matrixgui="/usr/bin/matrix_browser"
 ROTATION=__MATRIX_ROT__
-GUI_OPTS="-qws $ROTATION http://localhost:8080/"
+GUI_OPTS="-qws $ROTATION http://localhost:80/"
 PIDFILE="/var/run/matrix-gui-2.0.pid"
 
 test -x "$matrixgui" || exit 0

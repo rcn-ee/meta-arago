@@ -142,7 +142,7 @@ static-file.exclude-extensions = ( ".php", ".pl", ".fcgi" )
 ######### Options that are good to be but not neccesary to be changed #######
 
 ## bind to port (default: 80)
-server.port                = 8080
+server.port                = 80
 
 ## bind to localhost (default: all interfaces)
 #server.bind                = "grisu.home.kneschke.de"

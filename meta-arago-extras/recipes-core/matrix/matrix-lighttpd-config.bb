@@ -1,9 +1,11 @@
-DESCRIPTION = "ligHTTPD config for matrix"
+DESCRIPTION = "Lighttpd config for Matrix"
 
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://../lighttpd.conf.matrix;md5=58caecbd847bcc4d5141dea2ee4c42ec"
+LIC_FILES_CHKSUM = "file://../lighttpd.conf.matrix;md5=bf036dce30a4114d5942c1f8d0152191"
 
 inherit allarch
+
+PR = "1"
 
 SRC_URI = "file://lighttpd.conf.matrix"
 
