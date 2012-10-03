@@ -7,22 +7,22 @@
 -    return PyString_FromStringAndSize(out, outlen);
 +    return PyString_FromStringAndSize((char*)out, outlen);
  }
-
+ 
  int AES_type_check(AES_KEY *key) {
 --- SWIG/_evp.i
 +++ SWIG/_evp.i
 @@ -4,6 +4,9 @@
-
+ 
  Portions Copyright (c) 2004-2007 Open Source Applications Foundation.
  Author: Heikki Toivonen
 +
 +Copyright (c) 2009-2010 Heikki Toivonen. All rights reserved.
 +
  */
-
+ 
  %include <openssl/opensslconf.h>
 @@ -180,7 +183,7 @@
-
+ 
      PKCS5_PBKDF2_HMAC_SHA1(passbuf, passlen, saltbuf, saltlen, iter,
                             keylen, key);
 -    ret = PyString_FromStringAndSize(key, keylen);
@@ -31,14 +31,14 @@
      return ret;
  }
 @@ -339,7 +342,7 @@
-     klen = EVP_BytesToKey(cipher, md, (unsigned char *)sbuf,
-         (unsigned char *)dbuf, dlen, iter,
+     klen = EVP_BytesToKey(cipher, md, (unsigned char *)sbuf, 
+         (unsigned char *)dbuf, dlen, iter, 
          key, NULL); /* Since we are not returning IV no need to derive it */
 -    ret = PyString_FromStringAndSize(key, klen);
 +    ret = PyString_FromStringAndSize((char*)key, klen);
      return ret;
  }
-
+ 
 @@ -435,7 +438,7 @@
          PyErr_SetString(_evp_err, ERR_reason_error_string(ERR_get_error()));
          return NULL;
@@ -50,7 +50,7 @@
      return ret;
 @@ -513,7 +516,7 @@
          PyErr_SetString(PyExc_ValueError, "EVP_PKEY as DER failed");
-         return NULL;
+         return NULL; 
      }
 -    der = PyString_FromStringAndSize(pp, len);
 +    der = PyString_FromStringAndSize((char*)pp, len);
@@ -67,12 +67,12 @@
 + * Copyright (c) 2009-2010 Heikki Toivonen. All rights reserved.
 + *
   */
-
+ 
  %module(threads=1) _m2crypto
 @@ -38,6 +41,19 @@
  #define CONST098
  #endif
-
+ 
 +/* Bring in STACK_OF macro definition */
 +%include <openssl/safestack.h>
 +
@@ -98,10 +98,10 @@
 -%apply Pointer NONNULL { STACK * };
 +%apply Pointer NONNULL { STACK_OF(X509) * };
  %apply Pointer NONNULL { X509 * };
-
+ 
  %rename(pkcs7_new) PKCS7_new;
 @@ -54,8 +54,8 @@
-
+ 
  %threadallow pkcs7_encrypt;
  %inline %{
 -PKCS7 *pkcs7_encrypt(STACK *stack, BIO *bio, EVP_CIPHER *cipher, int flags) {
@@ -109,10 +109,10 @@
 +PKCS7 *pkcs7_encrypt(STACK_OF(X509) *stack, BIO *bio, EVP_CIPHER *cipher, int flags) {
 +    return PKCS7_encrypt(stack, bio, cipher, flags);
  }
-
+ 
  PyObject *pkcs7_decrypt(PKCS7 *pkcs7, EVP_PKEY *pkey, X509 *cert, int flags) {
 @@ -96,14 +96,14 @@
-
+ 
  %threadallow pkcs7_sign1;
  %inline %{
 -PKCS7 *pkcs7_sign1(X509 *x509, EVP_PKEY *pkey, STACK *stack, BIO *bio, int flags) {
@@ -121,7 +121,7 @@
 +    return PKCS7_sign(x509, pkey, stack, bio, flags);
  }
  %}
-
+ 
  %threadallow pkcs7_verify1;
  %inline %{
 -PyObject *pkcs7_verify1(PKCS7 *pkcs7, STACK *stack, X509_STORE *store, BIO *data, int flags) {
@@ -141,7 +141,7 @@
 @@ -131,7 +131,7 @@
      return ret;
  }
-
+ 
 -PyObject *pkcs7_verify0(PKCS7 *pkcs7, STACK *stack, X509_STORE *store, int flags) {
 +PyObject *pkcs7_verify0(PKCS7 *pkcs7, STACK_OF(X509) *stack, X509_STORE *store, int flags) {
      return pkcs7_verify1(pkcs7, stack, store, NULL, flags);
@@ -149,13 +149,13 @@
  %}
 @@ -229,7 +229,7 @@
  }
-
- /* return STACK_OF(X509)* */
--STACK *pkcs7_get0_signers(PKCS7 *p7, STACK *certs, int flags) {
-+STACK_OF(X509) *pkcs7_get0_signers(PKCS7 *p7, STACK_OF(X509) *certs, int flags) {
-     return PKCS7_get0_signers(p7, certs, flags);
+ 
+ /* return STACK_OF(X509)* */     
+-STACK *pkcs7_get0_signers(PKCS7 *p7, STACK *certs, int flags) {     
++STACK_OF(X509) *pkcs7_get0_signers(PKCS7 *p7, STACK_OF(X509) *certs, int flags) {     
+     return PKCS7_get0_signers(p7, certs, flags);      
  }
-
+ 
 --- SWIG/_rand.i
 +++ SWIG/_rand.i
 @@ -87,7 +87,7 @@
@@ -178,7 +178,7 @@
 +**
  */
  /* $Id: m2crypto-0.20.2-openssl-1.0.0.patch,v 1.1 2010/04/30 18:21:16 arfrever Exp $ */
-
+ 
 @@ -17,13 +20,17 @@
  %apply Pointer NONNULL { SSL_CTX * };
  %apply Pointer NONNULL { SSL * };
@@ -191,7 +191,7 @@
  %apply Pointer NONNULL { RSA * };
  %apply Pointer NONNULL { EVP_PKEY *};
  %apply Pointer NONNULL { PyObject *pyfunc };
-
+ 
 +%rename(ssl_get_ciphers) SSL_get_ciphers;
 +extern STACK_OF(SSL_CIPHER) *SSL_get_ciphers(const SSL *ssl);
 +
@@ -201,7 +201,7 @@
 @@ -668,28 +675,24 @@
      return SSL_CIPHER_get_bits(c, NULL);
  }
-
+ 
 -STACK *ssl_get_ciphers(SSL *ssl) {
 -    return (STACK *)SSL_get_ciphers(ssl);
 -}
@@ -211,32 +211,32 @@
 +int sk_ssl_cipher_num(STACK_OF(SSL_CIPHER) *stack) {
 +    return sk_SSL_CIPHER_num(stack);
  }
-
+ 
 -SSL_CIPHER *sk_ssl_cipher_value(STACK *stack, int idx) {
 -    return (SSL_CIPHER *)sk_value(stack, idx);
 +SSL_CIPHER *sk_ssl_cipher_value(STACK_OF(SSL_CIPHER) *stack, int idx) {
 +    return sk_SSL_CIPHER_value(stack, idx);
  }
-
+ 
 -STACK *ssl_get_peer_cert_chain(SSL *ssl) {
 -    return (STACK *)SSL_get_peer_cert_chain(ssl);
 +STACK_OF(X509) *ssl_get_peer_cert_chain(SSL *ssl) {
 +    return SSL_get_peer_cert_chain(ssl);
  }
-
+ 
 -int sk_x509_num(STACK *stack) {
 -    return sk_num(stack);
 +int sk_x509_num(STACK_OF(X509) *stack) {
 +    return sk_X509_num(stack);
  }
-
+ 
 -X509 *sk_x509_value(STACK *stack, int idx) {
 -    return (X509 *)sk_value(stack, idx);
 +X509 *sk_x509_value(STACK_OF(X509) *stack, int idx) {
 +    return sk_X509_value(stack, idx);
  }
  %}
-
+ 
 --- SWIG/_util.i
 +++ SWIG/_util.i
 @@ -48,7 +48,7 @@
@@ -259,7 +259,7 @@
 +**
  */
  /* $Id: m2crypto-0.20.2-openssl-1.0.0.patch,v 1.1 2010/04/30 18:21:16 arfrever Exp $   */
-
+ 
 @@ -148,8 +151,15 @@
  extern int X509_NAME_print_ex(BIO *, X509_NAME *, int, unsigned long);
  %rename(x509_name_print_ex_fp) X509_NAME_print_ex_fp;
@@ -275,13 +275,13 @@
 +
  %rename(x509_name_get_index_by_nid) X509_NAME_get_index_by_NID;
  extern int X509_NAME_get_index_by_NID(X509_NAME *, int, int);
-
+ 
 @@ -171,7 +181,7 @@
      if (PyString_Check($input)) {
          Py_ssize_t len;
-
--        $1 = PyString_AsString($input);
-+        $1 = (unsigned char *)PyString_AsString($input);
+ 
+-        $1 = PyString_AsString($input); 
++        $1 = (unsigned char *)PyString_AsString($input); 
          len = PyString_Size($input);
          if (len > INT_MAX) {
              PyErr_SetString(PyExc_ValueError, "object too large");
@@ -292,7 +292,7 @@
 -extern int X509_NAME_ENTRY_set_data( X509_NAME_ENTRY *, int, CONST unsigned char *, int);
 +extern int X509_NAME_ENTRY_set_data(X509_NAME_ENTRY *, int, CONST unsigned char *, int);
  %typemap(in) (CONST unsigned char *, int);
-
+ 
  %rename(x509_req_new) X509_REQ_new;
 @@ -230,7 +240,7 @@
  %rename(x509_store_ctx_free) X509_STORE_CTX_free;
@@ -300,13 +300,13 @@
  %rename(x509_store_ctx_get1_chain) X509_STORE_CTX_get1_chain;
 -extern STACK *X509_STORE_CTX_get1_chain(X509_STORE_CTX *);
 +extern STACK_OF(X509) *X509_STORE_CTX_get1_chain(X509_STORE_CTX *);
-
+ 
  %rename(x509_extension_get_critical) X509_EXTENSION_get_critical;
  extern int X509_EXTENSION_get_critical(X509_EXTENSION *);
 @@ -348,7 +358,7 @@
          PyErr_SetString(_x509_err, ERR_reason_error_string(ERR_get_error()));
      }
-     else {
+     else {     
 -        ret = PyString_FromStringAndSize(buf, len);
 +        ret = PyString_FromStringAndSize((char*)buf, len);
          OPENSSL_free(buf);
@@ -314,79 +314,79 @@
      return ret;
 @@ -435,12 +445,12 @@
  }
-
+ 
  int x509_name_set_by_nid(X509_NAME *name, int nid, PyObject *obj) {
 -    return X509_NAME_add_entry_by_NID(name, nid, MBSTRING_ASC, PyString_AsString(obj), -1, -1, 0);
 +    return X509_NAME_add_entry_by_NID(name, nid, MBSTRING_ASC, (unsigned char *)PyString_AsString(obj), -1, -1, 0);
  }
-
+ 
  /* x509_name_add_entry_by_txt */
  int x509_name_add_entry_by_txt(X509_NAME *name, char *field, int type, char *bytes, int len, int loc, int set) {
 -    return X509_NAME_add_entry_by_txt(name, field, type, bytes, len, loc, set);
 +    return X509_NAME_add_entry_by_txt(name, field, type, (unsigned char *)bytes, len, loc, set);
  }
-
+ 
  PyObject *x509_name_get_der(X509_NAME *name)
 @@ -450,23 +460,23 @@
  }
-
+ 
  /* sk_X509_new_null() is a macro returning "STACK_OF(X509) *". */
 -STACK *sk_x509_new_null(void) {
 -    return (STACK *)sk_X509_new_null();
 +STACK_OF(X509) *sk_x509_new_null(void) {
 +    return sk_X509_new_null();
  }
-
+ 
  /* sk_X509_free() is a macro. */
 -void sk_x509_free(STACK *stack) {
 -    sk_X509_free((STACK_OF(X509) *)stack);
 +void sk_x509_free(STACK_OF(X509) *stack) {
 +    sk_X509_free(stack);
  }
-
+ 
  /* sk_X509_push() is a macro. */
 -int sk_x509_push(STACK *stack, X509 *x509) {
 -    return sk_X509_push((STACK_OF(X509) *)stack, x509);
 +int sk_x509_push(STACK_OF(X509) *stack, X509 *x509) {
 +    return sk_X509_push(stack, x509);
  }
-
+ 
  /* sk_X509_pop() is a macro. */
 -X509 *sk_x509_pop(STACK *stack) {
 -    return sk_X509_pop((STACK_OF(X509) *)stack);
 +X509 *sk_x509_pop(STACK_OF(X509) *stack) {
 +    return sk_X509_pop(stack);
  }
-
+ 
  int x509_store_load_locations(X509_STORE *store, const char *file) {
 @@ -493,21 +503,29 @@
      return X509_REQ_set_version(x, version);
  }
-
+ 
 -int x509_req_add_extensions(X509_REQ *req, STACK *exts) {
 -    return X509_REQ_add_extensions(req, (STACK_OF(X509_EXTENSION) *)exts);
 +int x509_req_add_extensions(X509_REQ *req, STACK_OF(X509_EXTENSION) *exts) {
 +    return X509_REQ_add_extensions(req, exts);
  }
-
+ 
 -X509_NAME_ENTRY *x509_name_entry_create_by_txt( X509_NAME_ENTRY **ne, char *field, int type, char *bytes, int len) {
 -    return X509_NAME_ENTRY_create_by_txt( ne, field, type, bytes, len);
 +X509_NAME_ENTRY *x509_name_entry_create_by_txt(X509_NAME_ENTRY **ne, char *field, int type, char *bytes, int len) {
 +    return X509_NAME_ENTRY_create_by_txt( ne, field, type, (unsigned char *)bytes, len);
  }
-
--LHASH *
--x509v3_lhash(){
+ 
+-LHASH * 
+-x509v3_lhash(){ 
 -       return lh_new(NULL,NULL);
 +#if OPENSSL_VERSION_NUMBER >= 0x10000000L
-+LHASH_OF(CONF_VALUE)
++LHASH_OF(CONF_VALUE) 
 +#else
 +LHASH
 +#endif
-+*x509v3_lhash() {
++*x509v3_lhash() { 
 +    return lh_new(NULL, NULL); /* Should probably be lh_CONF_VALUE_new but won't compile. */
  }
-
+ 
  X509V3_CTX *
 -x509v3_set_conf_lhash(LHASH * lhash){
 +#if OPENSSL_VERSION_NUMBER >= 0x10000000L
@@ -400,7 +400,7 @@
 @@ -517,11 +535,20 @@
        return ctx;
  }
-
+ 
 -X509_EXTENSION *x509v3_ext_conf(LHASH *conf, X509V3_CTX *ctx, char *name, char *value) {
 +X509_EXTENSION *
 +#if OPENSSL_VERSION_NUMBER >= 0x10000000L
@@ -409,8 +409,8 @@
 +x509v3_ext_conf(LHASH                *conf, X509V3_CTX *ctx, char *name, char *value) {
 +#endif
        X509_EXTENSION * ext = NULL;
-       ext = X509V3_EXT_conf(conf, ctx, name, value);
-       PyMem_Free(ctx);
+       ext = X509V3_EXT_conf(conf, ctx, name, value); 
+       PyMem_Free(ctx); 
 +#if OPENSSL_VERSION_NUMBER >= 0x10000000L
 +      lh_CONF_VALUE_free(conf);
 +#else
@@ -418,57 +418,57 @@
 +#endif
        return ext;
  }
-
+ 
 @@ -543,33 +570,33 @@
  }
-
+ 
  /* sk_X509_EXTENSION_new_null is a macro. */
 -STACK *sk_x509_extension_new_null(void) {
 -    return (STACK *)sk_X509_EXTENSION_new_null();
 +STACK_OF(X509_EXTENSION) *sk_x509_extension_new_null(void) {
 +    return sk_X509_EXTENSION_new_null();
  }
-
+ 
  /* sk_X509_EXTENSION_free() is a macro. */
 -void sk_x509_extension_free(STACK *stack) {
 -    sk_X509_EXTENSION_free((STACK_OF(X509_EXTENSION) *)stack);
 +void sk_x509_extension_free(STACK_OF(X509_EXTENSION) *stack) {
 +    sk_X509_EXTENSION_free(stack);
  }
-
+ 
  /* sk_X509_EXTENSION_push() is a macro. */
 -int sk_x509_extension_push(STACK *stack, X509_EXTENSION *x509_ext) {
 -    return sk_X509_EXTENSION_push((STACK_OF(X509_EXTENSION) *)stack, x509_ext);
 +int sk_x509_extension_push(STACK_OF(X509_EXTENSION) *stack, X509_EXTENSION *x509_ext) {
 +    return sk_X509_EXTENSION_push(stack, x509_ext);
  }
-
+ 
  /* sk_X509_EXTENSION_pop() is a macro. */
 -X509_EXTENSION *sk_x509_extension_pop(STACK *stack) {
 -    return sk_X509_EXTENSION_pop((STACK_OF(X509_EXTENSION) *)stack);
 +X509_EXTENSION *sk_x509_extension_pop(STACK_OF(X509_EXTENSION) *stack) {
 +    return sk_X509_EXTENSION_pop(stack);
  }
-
+ 
  /* sk_X509_EXTENSION_num() is a macro. */
 -int sk_x509_extension_num(STACK *stack) {
 -    return sk_X509_EXTENSION_num((STACK_OF(X509_EXTENSION) *)stack);
 +int sk_x509_extension_num(STACK_OF(X509_EXTENSION) *stack) {
 +    return sk_X509_EXTENSION_num(stack);
  }
-
+ 
  /* sk_X509_EXTENSION_value() is a macro. */
 -X509_EXTENSION *sk_x509_extension_value(STACK *stack, int i) {
 -    return sk_X509_EXTENSION_value((STACK_OF(X509_EXTENSION) *)stack, i);
 +X509_EXTENSION *sk_x509_extension_value(STACK_OF(X509_EXTENSION) *stack, int i) {
 +    return sk_X509_EXTENSION_value(stack, i);
  }
-
+ 
  /* X509_STORE_CTX_get_app_data is a macro. */
 @@ -590,7 +617,7 @@
  #define I2DTYPE int (*)()
- #endif
-
+ #endif   
+ 
 -STACK *
 +STACK_OF(X509) *
  make_stack_from_der_sequence(PyObject * pyEncodedString){
@@ -477,25 +477,25 @@
 @@ -606,7 +633,7 @@
          return NULL;
      }
-
--    certs = ASN1_seq_unpack((unsigned char *)encoded_string, encoded_string_len, (D2ITYPE)d2i_X509, (void(*)())X509_free );
-+    certs = ASN1_seq_unpack_X509((unsigned char *)encoded_string, encoded_string_len, d2i_X509, X509_free );
+ 
+-    certs = ASN1_seq_unpack((unsigned char *)encoded_string, encoded_string_len, (D2ITYPE)d2i_X509, (void(*)())X509_free ); 
++    certs = ASN1_seq_unpack_X509((unsigned char *)encoded_string, encoded_string_len, d2i_X509, X509_free ); 
      if (!certs) {
         PyErr_SetString(_x509_err, ERR_reason_error_string(ERR_get_error()));
         return NULL;
 @@ -616,13 +643,13 @@
  }
-
+ 
  PyObject *
 -get_der_encoding_stack(STACK * stack){
 +get_der_encoding_stack(STACK_OF(X509) *stack){
      PyObject * encodedString;
-
+     
      unsigned char * encoding;
-     int len;
-
--    encoding = ASN1_seq_pack((STACK_OF(X509)*) stack, (I2DTYPE)i2d_X509, NULL, &len);
-+    encoding = ASN1_seq_pack_X509(stack, i2d_X509, NULL, &len);
+     int len; 
+     
+-    encoding = ASN1_seq_pack((STACK_OF(X509)*) stack, (I2DTYPE)i2d_X509, NULL, &len); 
++    encoding = ASN1_seq_pack_X509(stack, i2d_X509, NULL, &len); 
      if (!encoding) {
         PyErr_SetString(_x509_err, ERR_reason_error_string(ERR_get_error()));
         return NULL;
@@ -521,37 +521,37 @@
          assert p7.type() == SMIME.PKCS7_SIGNED, p7.type()
          assert isinstance(p7, SMIME.PKCS7), p7
 @@ -73,9 +73,8 @@
-
+         
          p7, data = SMIME.smime_load_pkcs7_bio(self.signed)
-
+         
 -        assert data.read() == self.cleartext
          assert isinstance(p7, SMIME.PKCS7), p7
 -        v = s.verify(p7)
 +        v = s.verify(p7, data)
          assert v == self.cleartext
-
+     
          t = p7.get0_signers(sk)
 @@ -95,7 +94,6 @@
          s.set_x509_store(st)
-
+         
          p7, data = SMIME.smime_load_pkcs7_bio(self.signed)
 -        assert data.read() == self.cleartext
          assert isinstance(p7, SMIME.PKCS7), p7
          self.assertRaises(SMIME.PKCS7_Error, s.verify, p7) # Bad signer
-
+ 
 @@ -169,7 +167,7 @@
          s.set_cipher(SMIME.Cipher('des_ede3_cbc'))
-
+         
          tmp = BIO.MemoryBuffer()
 -        s.write(tmp, p7, buf)
 +        s.write(tmp, p7)
-
+ 
          p7 = s.encrypt(tmp)
-
+         
 @@ -211,6 +209,7 @@
          assert p7.write(f) == 1
          f.close()
-
+ 
 +        p7 = s.sign(BIO.MemoryBuffer('some text'), SMIME.PKCS7_DETACHED)
          self.filenameSmime = 'tests/sig.p7s'
          f = BIO.openfile(self.filenameSmime, 'wb')
@@ -562,7 +562,7 @@
          s = buf.read()
 -        assert len(s) == 1204, len(s)
 +        assert len(s) in (1204, 1243), len(s)
-
+         
      def test_load_pkcs7(self):
          assert SMIME.load_pkcs7(self.filename).type() == SMIME.PKCS7_SIGNED
 --- tests/test_ssl_offline.py
@@ -590,15 +590,15 @@
 +        x509 = X509.load_cert('tests/server.pem')
 +        assert check(x509, srv_host)
 +        self.assertRaises(Checker.WrongHost, check, x509, 'example.com')
-+
++        
 +        doctest.testmod(Checker)
 +
-+
++    
 +class ContextTestCase(unittest.TestCase):
 +    def test_ctx_load_verify_locations(self):
 +        ctx = SSL.Context()
 +        self.assertRaises(ValueError, ctx.load_verify_locations, None, None)
-+
++        
 +    def test_map(self):
 +        from M2Crypto.SSL.Context import map, _ctxmap
 +        assert isinstance(map(), _ctxmap)
@@ -621,7 +621,7 @@
 +    suite = unittest.TestSuite()
 +    suite.addTest(unittest.makeSuite(CheckerTestCase))
 +    suite.addTest(unittest.makeSuite(ContextTestCase))
-+    return suite
++    return suite    
 +
 +
 +if __name__ == '__main__':
@@ -631,15 +631,15 @@
 --- tests/test_ssl.py
 +++ tests/test_ssl.py
 @@ -2,7 +2,10 @@
-
+ 
  """Unit tests for M2Crypto.SSL.
-
+ 
 -Copyright (c) 2000-2004 Ng Pheng Siong. All rights reserved."""
 +Copyright (c) 2000-2004 Ng Pheng Siong. All rights reserved.
 +
 +Copyright (c) 2009-2010 Heikki Toivonen. All rights reserved.
 +"""
-
+ 
  """
  TODO
 @@ -405,8 +408,11 @@
@@ -658,8 +658,8 @@
              self.stop_server(pid)
 @@ -1032,45 +1038,6 @@
          # XXX need server to test against
-
-
+ 
+ 
 -class CheckerTestCase(unittest.TestCase):
 -    def test_checker(self):
 -        from M2Crypto.SSL import Checker
@@ -670,16 +670,16 @@
 -        x509 = X509.load_cert('tests/server.pem')
 -        assert check(x509, srv_host)
 -        self.assertRaises(Checker.WrongHost, check, x509, 'example.com')
--
+-        
 -        import doctest
 -        doctest.testmod(Checker)
--
--
+-        
+-    
 -class ContextTestCase(unittest.TestCase):
 -    def test_ctx_load_verify_locations(self):
 -        ctx = SSL.Context()
 -        self.assertRaises(ValueError, ctx.load_verify_locations, None, None)
--
+-        
 -    def test_map(self):
 -        from M2Crypto.SSL.Context import map, _ctxmap
 -        assert isinstance(map(), _ctxmap)
@@ -703,7 +703,7 @@
      def test_session_load_bad(self):
          self.assertRaises(SSL.SSLError, SSL.Session.load_session,
 @@ -1086,8 +1053,6 @@
-
+ 
  def suite():
      suite = unittest.TestSuite()
 -    suite.addTest(unittest.makeSuite(CheckerTestCase))
