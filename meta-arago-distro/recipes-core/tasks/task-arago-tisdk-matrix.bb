@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -30,10 +30,10 @@ MATRIX_APPS_append_omap3 = "        \
 "
 
 MATRIX_APPS_append_ti33x = "        \
+    matrix-gui-ethernet-demos       \
     matrix-gui-3d-demos             \
     matrix-gui-multimedia-demos     \
                                     \
-    matrix-gui-clocks               \
     matrix-gui-clocks-275mhz        \
     matrix-gui-clocks-500mhz        \
     matrix-gui-clocks-600mhz        \
@@ -41,7 +41,10 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
+                                    \
     matrix-gui-wifi-demos           \
+    matrix-gui-bluetooth-demos      \
+    matrix-gui-wifi-direct-demo     \
 "
 
 MATRIX_APPS_append_beagleboard = "  \
@@ -53,7 +56,6 @@ MATRIX_APPS_append_am3517-evm = "   \
 "
 
 MATRIX_APPS_append_am37x-evm = "    \
-    matrix-gui-clocks               \
     matrix-gui-clocks-300mhz        \
     matrix-gui-clocks-600mhz        \
     matrix-gui-clocks-800mhz        \
@@ -67,14 +69,19 @@ MATRIX_APPS_append_am37x-evm = "    \
     matrix-gui-pm-demos-suspend     \
                                     \
     matrix-gui-wifi-demos           \
+    matrix-gui-wifi-direct-demo     \
+    matrix-gui-bluetooth-demos      \
+                                    \
     matrix-gui-display-control      \
     matrix-gui-camera-loopback      \
     matrix-gui-v4l2-demos           \
     matrix-gui-display-control      \
 "
 
-RDEPENDS_append_am180x-evm = "  \
-    matrix-gui-wifi-demos       \
+RDEPENDS_append_am180x-evm = "      \
+    matrix-gui-wifi-demos           \
+    matrix-gui-bluetooth-demos      \
+    matrix-gui-wifi-direct-demo     \
 "
 
 RDEPENDS_${PN} = "        \
