@@ -9,7 +9,7 @@ require matrix-gui-paths.inc
 # reset the LIC_FILES_CHKSUM setting from the matrix-gui-apps-git.inc file
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6e0ae7214f6c74c149cb25f373057fa9"
 
-PR = "${INC_PR}.8"
+PR = "${INC_PR}.9"
 
 # These packages make submenus in matrix and are not architecture specific
 inherit allarch
@@ -31,7 +31,7 @@ do_install(){
 PACKAGES += "${PN}-arm ${PN}-3d ${PN}-cryptos ${PN}-display ${PN}-ethernet ${PN}-multimedia ${PN}-power ${PN}-pru ${PN}-qt4 ${PN}-settings ${PN}-usb ${PN}-wifi ${PN}-oprofile"
 
 # Make sure app images has been installed
-RDEPENDS += "matrix-gui-apps-images"
+RDEPENDS_${PN} += "matrix-gui-apps-images"
 
 # Add the files for each submenu package
 FILES_${PN}-arm = "${MATRIX_APP_DIR}/arm_submenu/*"

@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://main.cpp;beginline=9;endline=37;md5=884b90f5bf0d711fe
 SECTION = "multimedia"
 
 # Make sure that QT font libraries have been installed
-RDEPENDS += "qt4-embedded-fonts"
+RDEPENDS_${PN} += "qt4-embedded-fonts"
 
-PR = "r1"
+PR = "r2"
 
 SRCREV = "23acf023743e864bb30158636840a080e36d45b6"
 BRANCH ?= "master"

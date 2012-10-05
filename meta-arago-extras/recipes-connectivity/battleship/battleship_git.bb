@@ -2,9 +2,8 @@ DESCRIPTION = "Battleship game with wifi direct"
 SECTION = "network"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://src/kgamecanvas.cpp;beginline=1;endline=25;md5=b4fc9c236e9a19cfaeaca80abbb29032"
-RDEPENDS += "wpa-supplicant"
 
-PR = "r1"
+PR = "r2"
 
 COMPATIBLE_MACHINE = "(omap3evm|am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
@@ -39,6 +38,8 @@ PACKAGES += "${PN} matrix-gui-wifi-battleship-demo"
 FILES_${PN} +=" \
 	${bindir}/battleship \
 	"
+
+RDEPENDS_${PN} += "wpa-supplicant"
 
 FILES_matrix-gui-wifi-battleship-demo += " \
 	${MATRIX_APP_DIR}/battleship/* \

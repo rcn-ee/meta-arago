@@ -3,10 +3,10 @@ HOMEPAGE = "http://code.google.com/p/bluez-tools/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 
-RDEPENDS = "bluez4 obexd"
+RDEPENDS_${PN} = "bluez4 obexd"
 DEPENDS = "glib-2.0 dbus-glib"
 
-PR = "r0+gitr${SRCREV}"
+PR = "r1+gitr${SRCREV}"
 
 SRCREV = "171181b6ef6c94aefc828dc7fd8de136b9f97532"
 

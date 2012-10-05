@@ -4,14 +4,14 @@ LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.2"
 
 inherit allarch
 
 S = "${WORKDIR}/git/clocks_apps"
 
 # Make sure power submenu and app images has been installed
-RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
+RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
 
 # Break out the individual files into separate packages.  That way only the
 # clocks supported for each device can be installed.  Prepend the list so

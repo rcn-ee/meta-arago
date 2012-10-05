@@ -7,7 +7,7 @@ require matrix-gui-apps-git.inc
 LIC_FILES_CHKSUM := "file://../${LICENSE_CHECKSUM} \
                      file://../../udhcpd_eth1.conf;beginline=1;endline=14;md5=70668b1ed5416406a61ef9abdd90d601 \
 "
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 inherit allarch
 
@@ -23,7 +23,7 @@ do_install_append() {
 }
 
 # Make sure ethernet submenu and app images has been installed
-RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-ethernet"
+RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-ethernet"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/* \
                 ${sysconfdir}/udhcpd_eth1.conf"

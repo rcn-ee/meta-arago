@@ -4,16 +4,16 @@ LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 
 inherit allarch
 
 S = "${WORKDIR}/git/arm_apps"
 
 # Make sure arm submenu and app images has been installed
-RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-arm"
+RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-arm"
 
 # Make sure the benchmarks have been installed
-RDEPENDS += "arm-benchmarks lmbench nbench-byte"
+RDEPENDS_${PN} += "arm-benchmarks lmbench nbench-byte"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"

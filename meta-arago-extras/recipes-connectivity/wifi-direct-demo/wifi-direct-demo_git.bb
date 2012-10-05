@@ -5,9 +5,7 @@ LIC_FILES_CHKSUM = "file://src/main.cpp;md5=cf285050f56a20d116b026c9f8ded4f7"
 
 COMPATIBLE_MACHINE = "(am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
-RDEPENDS += "wpa-supplicant"
-
-PR = "r1"
+PR = "r2"
 
 BRANCH = "dbus"
 SRCREV = "0950a67d9fe9a70668a993774e65ba9d457d750c"
@@ -44,6 +42,8 @@ FILES_${PN} +=" \
 	${bindir}/wifi_init.sh \
 	${bindir}/wifi_exit.sh \
 	"
+
+RDEPENDS_${PN} += "wpa-supplicant"
 
 FILES_matrix-gui-wifi-direct-demo += " \
 	${MATRIX_APP_DIR}/wifi-direct-demo/* \
