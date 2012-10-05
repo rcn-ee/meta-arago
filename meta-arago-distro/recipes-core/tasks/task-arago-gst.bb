@@ -10,9 +10,11 @@ GSTREAMER = " \
     gst-plugins-base \
     gst-plugins-good \
     gst-plugins-bad \
+    gst-plugins-ugly \
     gst-plugins-base-meta \
     gst-plugins-good-meta \
     gst-plugins-bad-meta \
+    gst-plugins-ugly-meta \
     "
 
 RDEPENDS_${PN} = "\
