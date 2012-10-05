@@ -1,0 +1,29 @@
+From ec785d544f417aa2d88f8803e4392ff02ab424ae Mon Sep 17 00:00:00 2001
+From: Punya Prakash <pprakash@ti.com>
+Date: Fri, 4 Nov 2011 13:03:57 -0500
+Subject: [PATCH]  gstfbdevsink: Fix depth value for GST_VIDEO_CAPS_RGB_15
+
+RGB color format does not have any alpha components, adding alpha length to depth could yield wrong results.
+
+Upstream-Status: Pending
+
+Signed-off-by: Punya Prakash <pprakash@ti.com>
+---
+ sys/fbdev/gstfbdevsink.c |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/sys/fbdev/gstfbdevsink.c b/sys/fbdev/gstfbdevsink.c
+index 8925f3d..568f091 100644
+--- a/sys/fbdev/gstfbdevsink.c
++++ b/sys/fbdev/gstfbdevsink.c
+@@ -185,8 +185,7 @@ gst_fbdevsink_getcaps (GstBaseSink * bsink)
+       "bpp", G_TYPE_INT, fbdevsink->varinfo.bits_per_pixel,
+       "depth", G_TYPE_INT, fbdevsink->varinfo.red.length +
+       fbdevsink->varinfo.green.length +
+-      fbdevsink->varinfo.blue.length +
+-      fbdevsink->varinfo.transp.length,
++      fbdevsink->varinfo.blue.length,
+       "endianness", G_TYPE_INT, endianness,
+       "red_mask", G_TYPE_INT, rmask,
+       "green_mask", G_TYPE_INT, gmask, "blue_mask", G_TYPE_INT, bmask, NULL);
+-- 
