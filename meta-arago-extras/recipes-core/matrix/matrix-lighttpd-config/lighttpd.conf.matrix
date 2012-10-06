@@ -20,7 +20,7 @@ server.modules              = (
 #                               "mod_trigger_b4_dl",
 #                               "mod_auth",
 #                               "mod_status",
-#                               "mod_setenv",
+                                "mod_setenv",
                                 "mod_expire",
 #                               "mod_fastcgi",
 #                               "mod_proxy",
@@ -296,6 +296,9 @@ $HTTP["url"] =~ "\.(jpg|gif|png)$" { expire.url = ( "" => "access 3 years" ) }
 #### setenv
 #setenv.add-request-header  = ( "TRAV_ENV" => "mysql://user@host/db" )
 #setenv.add-response-header = ( "X-Secret-Message" => "42" )
+setenv.add-environment = (
+    "PATH" => "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:."
+)
 
 ## for mod_trigger_b4_dl
 # trigger-before-download.gdbm-filename = "/home/weigon/testbase/trigger.db"

@@ -1,13 +1,18 @@
 DESCRIPTION = "Lighttpd config for Matrix"
 
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://../lighttpd.conf.matrix;md5=bf036dce30a4114d5942c1f8d0152191"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
 
 inherit allarch
 
-PR = "1"
+PR = "r2"
 
 SRC_URI = "file://lighttpd.conf.matrix"
+
+# Grabbed COPYING file from lighttpd_1.4.30
+SRC_URI += "file://COPYING"
+
+S = "${WORKDIR}"
 
 do_install() {
 	install -d ${D}${sysconfdir}
@@ -15,7 +20,7 @@ do_install() {
 }
 
 FILES_${PN} = "${sysconfdir}/lighttpd.conf.matrix"
-RDEPENDS_${PN} = "lighttpd"
+RDEPENDS_${PN} = "lighttpd lighttpd-module-setenv"
 
 pkg_postinst_${PN} () {
 if [ -f $D${sysconfdir}/lighttpd.conf ] ; then
