@@ -1,0 +1,24 @@
+# Kernel build targets
+linux:
+	@echo =================================
+	@echo     Building the Linux Kernel
+	@echo =================================
+	$(MAKE) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) tisdk_$(PLATFORM)_defconfig
+	$(MAKE) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) uImage
+	$(MAKE) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) modules
+
+linux_install:
+	@echo ===================================
+	@echo     Installing the Linux Kernel
+	@echo ===================================
+	install -d $(DESTDIR)/boot
+	install $(LINUXKERNEL_INSTALL_DIR)/arch/arm/boot/uImage $(DESTDIR)/boot
+	install $(LINUXKERNEL_INSTALL_DIR)/vmlinux $(DESTDIR)/boot
+	install $(LINUXKERNEL_INSTALL_DIR)/System.map $(DESTDIR)/boot
+	$(MAKE) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) INSTALL_MOD_PATH=$(DESTDIR) modules_install
+
+linux_clean:
+	@echo =================================
+	@echo     Cleaning the Linux Kernel
+	@echo =================================
+	$(MAKE) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) mrproper

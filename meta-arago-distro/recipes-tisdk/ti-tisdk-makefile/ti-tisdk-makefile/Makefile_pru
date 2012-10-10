@@ -1,0 +1,18 @@
+# pru build targets
+pru: linux
+	@echo ===========================
+	@echo    Building PRU Examples
+	@echo ===========================
+	@cd example-applications; cd `find . -name "*pru*"`; make
+
+pru_clean:
+	@echo ===========================
+	@echo    Cleaning PRU Examples
+	@echo ===========================
+	@cd example-applications; cd `find . -name "*pru*"`; make clean
+
+pru_install:
+	@echo ==============================
+	@echo     Installing PRU Examples
+	@echo ==============================
+	@cd example-applications; cd `find . -name "*pru*"`; make install

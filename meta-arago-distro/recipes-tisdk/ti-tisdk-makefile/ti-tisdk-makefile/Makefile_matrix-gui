@@ -1,0 +1,18 @@
+# Make Rules for matrix-gui project
+matrix-gui:
+	@echo =============================
+	@echo      Building Matrix GUI
+	@echo =============================
+	@echo    NOTHING TO DO.  COMPILATION NOT REQUIRED
+
+matrix-gui_clean:
+	@echo =============================
+	@echo      Cleaning Matrix GUI
+	@echo =============================
+	@echo    NOTHING TO DO.
+
+matrix-gui_install:
+	@echo =============================
+	@echo     Installing Matrix GUI
+	@echo =============================
+	@cd example-applications; cd `find . -name "*matrix-gui-2.0*"`; make install

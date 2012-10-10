@@ -1,0 +1,76 @@
+# Wireless build targets
+wireless: compat-modules bt-firmware bt-enable
+wireless_install: compat-modules_install bt-firmware_install bt-enable_install
+wireless_clean: compat-modules_clean bt-firmware_clean bt-enable_clean
+
+bt-firmware:
+	@echo ============================
+	@echo      Building bt-firmware
+	@echo ============================
+	@echo    NOTHING TO DO.  COMPILATION NOT REQUIRED
+
+bt-firmware_install:
+	@echo ==============================
+	@echo      Installing bt-firmware
+	@echo ==============================
+	@cd board-support/extra-drivers; cd `find . -name "*bt-firmware*"`; make DEST_DIR=${DESTDIR} BASE_LIB_DIR="/lib" PLATFORM=${PLATFORM} install
+
+bt-firmware_clean:
+	@echo ============================
+	@echo      Cleaning bt-firmware
+	@echo ============================
+	@echo    NOTHING TO DO.
+
+bt-enable: linux
+	@echo ===========================
+	@echo      Building bt-enable
+	@echo ===========================
+	@cd board-support/extra-drivers; cd `find . -name "*bt-enable*"`; \
+	make DEST_DIR=${DESTDIR} PLATFORM=${PLATFORM}
+
+bt-enable_install:
+	@echo ============================
+	@echo      Installing bt-enable
+	@echo ============================
+	@cd board-support/extra-drivers; cd `find . -name "*bt-enable*"`; \
+	make DEST_DIR=${DESTDIR} PLATFORM=${PLATFORM} install
+
+bt-enable_clean:
+	@echo ===========================
+	@echo      Cleaning bt-enable
+	@echo ===========================
+	@cd board-support/extra-drivers; cd `find . -name "*bt-enable*"`; \
+	make DEST_DIR=${DESTDIR} PLATFORM=${PLATFORM} clean
+
+compat-modules: linux
+	@echo ================================
+	@echo      Building compat-modules
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "*compat-bluetooth*"`; \
+	./scripts/driver-select bt; make DEPMOD=echo DESTDIR=${DESTDIR} KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm; \
+	cd ..; \
+	cd `find . -maxdepth 1 -name "*compat-wireless*"`; \
+	./scripts/driver-select wl12xx; make DEPMOD=echo DESTDIR=${DESTDIR} KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm
+
+compat-modules_install:
+	@echo ==================================
+	@echo      Installing compat-modules
+	@echo ==================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "*compat-bluetooth*"`; \
+	make DEPMOD=echo DESTDIR=${DESTDIR} KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} INSTALL_MOD_PATH=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm install-modules; \
+	cd ..; \
+	cd `find . -maxdepth 1 -name "*compat-wireless*"`; \
+	make DEPMOD=echo DESTDIR=${DESTDIR} KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} INSTALL_MOD_PATH=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm install-modules
+
+compat-modules_clean:
+	@echo ================================
+	@echo      Cleaning compat-wireless
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "*compat-bluetooth*"`; \
+	make DEPMOD=echo DESTDIR=${DESTDIR} KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm clean; \
+	cd ..; \
+	cd `find . -maxdepth 1 -name "*compat-wireless*"`; \
+	make DEPMOD=echo DESTDIR=${DESTDIR} KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm clean

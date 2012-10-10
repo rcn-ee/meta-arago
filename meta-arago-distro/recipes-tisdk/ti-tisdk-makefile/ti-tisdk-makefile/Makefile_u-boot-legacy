@@ -1,0 +1,16 @@
+# u-boot build targets
+u-boot-legacy: u-boot
+u-boot-legacy_clean: u-boot_clean
+u-boot-legacy_install: u-boot_install
+
+u-boot:
+	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) $(UBOOT_MACHINE)
+	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE)
+
+u-boot_clean:
+	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) clean
+
+u-boot_install:
+	install -d $(DESTDIR)/boot
+	install $(TI_SDK_PATH)/board-support/u-boot-*/u-boot.bin $(DESTDIR)/boot
+	install $(TI_SDK_PATH)/board-support/u-boot-*/u-boot.map $(DESTDIR)/boot

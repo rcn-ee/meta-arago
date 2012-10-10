@@ -1,0 +1,24 @@
+# av-examples make targets
+av-examples:
+	@echo =============================
+	@echo    Building AV Examples
+	@echo =============================
+	@cd example-applications; cd `find . -name "*av-examples*"`; make
+
+av-examples_clean:
+	@echo =============================
+	@echo    Cleaning AV Examples
+	@echo =============================
+	@cd example-applications; cd `find . -name "*av-examples*"`; make clean
+
+av-examples_install:
+	@echo ==============================================
+	@echo    Installing AV Examples - Release version
+	@echo ==============================================
+	@cd example-applications; cd `find . -name "*av-examples*"`; make install
+
+av-examples_install_debug:
+	@echo ============================================
+	@echo    Installing AV Examples - Debug version
+	@echo ============================================
+	@cd example-applications; cd `find . -name "*av-examples*"`; make install_debug

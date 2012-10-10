@@ -1,0 +1,24 @@
+# matrix-gui-browser build targets
+matrix-gui-browser:
+	@echo =================================
+	@echo    Building Matrix GUI Browser
+	@echo =================================
+	@cd example-applications; cd `find . -name "*matrix-gui-browser*"`; make -f Makefile.build release
+
+matrix-gui-browser_clean:
+	@echo =================================
+	@echo    Cleaning Matrix GUI Browser
+	@echo =================================
+	@cd example-applications; cd `find . -name "*matrix-gui-browser*"`; make -f Makefile.build clean
+
+matrix-gui-browser_install:
+	@echo ===================================================
+	@echo   Installing Matrix GUI Browser - Release version
+	@echo ===================================================
+	@cd example-applications; cd `find . -name "*matrix-gui-browser*"`; make -f Makefile.build install
+
+matrix-gui-browser_install_debug:
+	@echo =================================================
+	@echo   Installing Matrix GUI Browser - Debug Version
+	@echo =================================================
+	@cd example-applications; cd `find . -name "*matrix-gui-browser*"`; make -f Makefile.build install_debug

@@ -1,0 +1,18 @@
+# ti-ocf-crypto-module components
+ti-ocf-crypto-module: linux
+	@echo ===================================
+	@echo    Building TI OCF Crypto Module
+	@echo ===================================
+	@cd board-support/extra-drivers; cd `find . -name "*ti-ocf-crypto-module*"`; make
+
+ti-ocf-crypto-module_clean:
+	@echo ===================================
+	@echo    Cleaning TI OCF Crypto Module
+	@echo ===================================
+	@cd board-support/extra-drivers; cd `find . -name "*ti-ocf-crypto-module*"`; make clean
+
+ti-ocf-crypto-module_install:
+	@echo =====================================
+	@echo    Installing TI OCF Crypto Module
+	@echo =====================================
+	@cd board-support/extra-drivers; cd `find . -name "*ti-ocf-crypto-module*"`; make install

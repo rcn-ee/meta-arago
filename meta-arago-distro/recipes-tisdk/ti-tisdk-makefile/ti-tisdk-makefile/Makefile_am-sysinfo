@@ -1,0 +1,24 @@
+# am-sysinfo build targets
+am-sysinfo:
+	@echo =============================
+	@echo    Building AM Sysinfo
+	@echo =============================
+	@cd example-applications; cd `find . -name "*am-sysinfo*"`; make
+
+am-sysinfo_clean:
+	@echo =============================
+	@echo    Cleaning AM Sysinfo
+	@echo =============================
+	@cd example-applications; cd `find . -name "*am-sysinfo*"`; make clean
+
+am-sysinfo_install:
+	@echo ===============================================
+	@echo     Installing AM Sysinfo - Release version
+	@echo ===============================================
+	@cd example-applications; cd `find . -name "*am-sysinfo*"`; make install
+
+am-sysinfo_install_debug:
+	@echo =============================================
+	@echo     Installing AM Sysinfo - Debug version
+	@echo =============================================
+	@cd example-applications; cd `find . -name "*am-sysinfo*"`; make install_debug
