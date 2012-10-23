@@ -2,7 +2,7 @@ inherit cross-canadian
 
 require external-arago-toolchain.inc
 
-PR = "r1"
+PR = "r2"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
@@ -27,6 +27,11 @@ PACKAGES = "\
 	gcc-cross-canadian-arm \
 	binutils-cross-canadian-arm \
 "
+
+# Don't need the extra target triplet in the new SDK dir structure
+bindir = "${exec_prefix}/bin/"
+libdir = "${exec_prefix}/lib/"
+libexecdir = "${exec_prefix}/libexec/"
 
 gcclibdir = "${libdir}/gcc"
 
