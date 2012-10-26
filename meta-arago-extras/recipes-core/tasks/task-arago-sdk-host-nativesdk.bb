@@ -1,5 +1,5 @@
 DESCRIPTION = "Host packages for a standalone Arago SDK or external toolchain"
-PR = "r0"
+PR = "r1"
 LICENSE = "MIT"
 ALLOW_EMPTY = "1"
 
@@ -13,6 +13,4 @@ RDEPENDS_${PN} = "\
     pkgconfig-nativesdk \
     opkg-nativesdk \
     libtool-nativesdk \
-    autoconf-nativesdk \
-    automake-nativesdk \
     "
