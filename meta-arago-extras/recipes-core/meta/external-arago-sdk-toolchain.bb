@@ -125,5 +125,3 @@ do_install() {
 	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{ld,addr2line,objcopy,readelf,strip,nm,ranlib,gprof,as,c++filt,ar,strings,objdump,size} ${D}${bindir}
 	cp -a ${TOOLCHAIN_PATH}/i686-linux/* ${D}${prefix}/i686-linux
 }
-
-NATIVE_INSTALL_WORKS = "1"

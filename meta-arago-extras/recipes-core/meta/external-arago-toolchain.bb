@@ -257,5 +257,3 @@ do_install() {
 	sed -e "s# /lib# ../../lib#" -e "s# /usr/lib# .#g" ${D}${libdir}/libpthread.so > ${D}${libdir}/temp
 	mv ${D}${libdir}/temp ${D}${libdir}/libpthread.so
 }
-
-NATIVE_INSTALL_WORKS = "1"
