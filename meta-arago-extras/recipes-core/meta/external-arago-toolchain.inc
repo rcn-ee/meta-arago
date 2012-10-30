@@ -1,7 +1,7 @@
 def arg_get_main_version(d):
 	import os,bb
-	if os.path.exists(bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/version'):
-		f = open(bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/version', 'r')
+	if os.path.exists(d.getVar('TOOLCHAIN_PATH', d, 1)+'/version'):
+		f = open(d.getVar('TOOLCHAIN_PATH', d, 1)+'/version', 'r')
 		l = f.readlines();
 		f.close();
 		for s in l:
@@ -12,31 +12,31 @@ def arg_get_main_version(d):
 
 def arg_get_gcc_version(d):
 	import subprocess,os,bb
-	if os.path.exists(bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'gcc'):
-		return subprocess.Popen([bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'gcc', '-v'], stderr=subprocess.PIPE).communicate()[1].splitlines()[-1].split()[2]
+	if os.path.exists(d.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+d.getVar('TARGET_PREFIX', d, 1)+'gcc'):
+		return subprocess.Popen([d.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+d.getVar('TARGET_PREFIX', d, 1)+'gcc', '-v'], stderr=subprocess.PIPE).communicate()[1].splitlines()[-1].split()[2]
 
 def arg_get_bfd_version(d):
 	import subprocess,os,bb
-	if os.path.exists(bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'as'):
-		return subprocess.Popen([bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'as', '-v', '--version'], stderr=subprocess.STDOUT,stdout=subprocess.PIPE).communicate()[0].splitlines()[0].split()[3]
+	if os.path.exists(d.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+d.getVar('TARGET_PREFIX', d, 1)+'as'):
+		return subprocess.Popen([d.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+d.getVar('TARGET_PREFIX', d, 1)+'as', '-v', '--version'], stderr=subprocess.STDOUT,stdout=subprocess.PIPE).communicate()[0].splitlines()[0].split()[3]
 
 def arg_get_gdb_version(d):
 	import subprocess,os,bb
-	if os.path.exists(bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'gdb'):
-		return subprocess.Popen([bb.data.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+bb.data.getVar('TARGET_PREFIX', d, 1)+'gdb', '-v'],stdout=subprocess.PIPE).communicate()[0].splitlines()[0].split()[-1]
+	if os.path.exists(d.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+d.getVar('TARGET_PREFIX', d, 1)+'gdb'):
+		return subprocess.Popen([d.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+d.getVar('TARGET_PREFIX', d, 1)+'gdb', '-v'],stdout=subprocess.PIPE).communicate()[0].splitlines()[0].split()[-1]
 
 def arg_get_libc_version(d):
 	import os,bb
-	if os.path.exists(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/lib/'):
-		for file in os.listdir(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/lib/'):
+	if os.path.exists(d.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/lib/'):
+		for file in os.listdir(d.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/lib/'):
 			if file.find('libc-') == 0:
 				return file[5:-3]
 		return None
 
 def arg_get_kernel_version(d):
 	import os,bb
-	if os.path.exists(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/usr/include/linux/'):
-		f = open(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/usr/include/linux/version.h', 'r')
+	if os.path.exists(d.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/usr/include/linux/'):
+		f = open(d.getVar('TOOLCHAIN_SYSPATH', d, 1)+'/usr/include/linux/version.h', 'r')
 		l = f.readlines();
 		f.close();
 		for s in l:
