@@ -2,7 +2,6 @@ DESCRIPTION = "AMSDK multimedia support files"
 HOMEPAGE = "https://gforge.ti.com/gf/project/am_multimedia/"
 LICENSE = "CC-BY-NC-ND-3.0"
 SECTION = "multimedia"
-PRIORITY = "optional"
 LIC_FILES_CHKSUM = "file://Multimedia_Data_Files_Manifest.doc;md5=5f25f2753d6294d6b3ecac61d2f64146"
 PR = "r0"
 

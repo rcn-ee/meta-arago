@@ -1,7 +1,6 @@
 DESCRIPTION = "A Python crypto and SSL toolkit"
 SECTION = "devel/python"
 HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
-PRIORITY = "optional"
 DEPENDS = "openssl swig-native"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=8064d5f6760668814ca309788894e713"

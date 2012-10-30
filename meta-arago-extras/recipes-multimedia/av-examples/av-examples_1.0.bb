@@ -3,7 +3,6 @@ HOMEPAGE = "https://gforge.ti.com/gf/project/av_examples/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM := "file://COPYING;md5=80ea1ff5788f65d5c5b3206d50d4bc6c"
 SECTION = "system"
-PRIORITY = "optional"
 
 PR = "r1"
 

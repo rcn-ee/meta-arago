@@ -1,7 +1,6 @@
 DESCRIPTION = "Wireless Central Regulatory Domain Agent"
 HOMEPAGE = "http://wireless.kernel.org/en/developers/Regulatory/CRDA"
 SECTION = "base"
-PRIORITY = "optional"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
 
