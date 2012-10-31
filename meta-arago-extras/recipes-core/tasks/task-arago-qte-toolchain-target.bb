@@ -2,7 +2,7 @@ DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
 ALLOW_EMPTY = "1"
 
-PR = "r1"
+PR = "r2"
 
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
@@ -24,8 +24,10 @@ RDEPENDS_${PN} += " \
         libqt-embeddednetwork4-dev \
         libqt-embeddedscript4-dev \
         libqt-embeddedscripttools4-dev \
+        libqt-embeddedsql4-dev \
         libqt-embeddedsvg4-dev \
         libqt-embeddedtest4-dev \
         libqt-embeddedwebkit4-dev \
         libqt-embeddedxml4-dev \
+        libsqlite3-dev \
         "
