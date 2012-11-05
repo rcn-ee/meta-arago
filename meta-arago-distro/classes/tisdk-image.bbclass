@@ -484,7 +484,7 @@ do_sdk_image () {
 
     # Extract the toolchain SDK here so that it will be available when the
     # OPKG_POSTPROCESS_COMMANDS are run
-    tar xjf ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}* -C ${IMAGE_ROOTFS}/
+    tar xjf ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}* -C ${IMAGE_ROOTFS}/
     mv ${IMAGE_ROOTFS}/${SDK_NAME} ${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}
 
     # Creat the base SDK image
