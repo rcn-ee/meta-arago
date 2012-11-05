@@ -29,7 +29,7 @@ SRC_URI = "\
     file://Makefile_wireless \
 "
 
-PR = "r0"
+PR = "r1"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -102,7 +102,7 @@ do_install () {
 
     # fixup Rules.make values
     sed -i -e "s/__PLATFORM__/${MACHINE}/" ${D}/Rules.make
-    sed -i -e "s/__ARCH__/${BASE_PACKAGE_ARCH}/" ${D}/Rules.make
+    sed -i -e "s/__ARCH__/${ARMPKGARCH}/" ${D}/Rules.make
     sed -i -e "s/__UBOOT_MACHINE__/${UBOOT_MACHINE}/" ${D}/Rules.make
 
 }
