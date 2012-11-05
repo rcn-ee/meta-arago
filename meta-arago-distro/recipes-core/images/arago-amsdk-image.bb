@@ -22,6 +22,7 @@ IMAGE_INSTALL = "\
     task-arago-tisdk-matrix-sdk-host \
     task-arago-tisdk-multimedia-sdk-host \
     task-arago-tisdk-qte-sdk-host \
+    task-arago-tisdk-amsdk-sdk-host \
 "
 
 export IMAGE_BASENAME = "arago-amsdk-image"
