@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://src/main.cpp;md5=cf285050f56a20d116b026c9f8ded4f7"
 
 COMPATIBLE_MACHINE = "(am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
-PR = "r2"
+PR = "r3"
 
 BRANCH = "dbus"
 SRCREV = "0950a67d9fe9a70668a993774e65ba9d457d750c"
@@ -35,7 +35,7 @@ do_install () {
        install -m 644 ${WORKDIR}/wifi-direct-demo.desktop ${D}${MATRIX_APP_DIR}/wifi-direct-demo
 }
 
-PACKAGES += "${PN} matrix-gui-wifi-direct-demo"
+PACKAGES += "matrix-gui-wifi-direct-demo"
 
 FILES_${PN} +=" \
 	${bindir}/wifi-direct-demo \
