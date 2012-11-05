@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r3"
+PR = "r4"
 
 inherit task
 
@@ -52,10 +52,6 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
-                                    \
-    matrix-gui-wifi-demos           \
-    matrix-gui-bluetooth-demos      \
-    matrix-gui-wifi-direct-demo     \
 "
 
 MATRIX_APPS_append_beagleboard = "  \
@@ -79,10 +75,6 @@ MATRIX_APPS_append_am37x-evm = "    \
     matrix-gui-pm-demos-snapshot2   \
     matrix-gui-pm-demos-suspend     \
                                     \
-    matrix-gui-wifi-demos           \
-    matrix-gui-wifi-direct-demo     \
-    matrix-gui-bluetooth-demos      \
-                                    \
     matrix-gui-display-control      \
     matrix-gui-camera-loopback      \
     matrix-gui-v4l2-demos           \
@@ -90,9 +82,6 @@ MATRIX_APPS_append_am37x-evm = "    \
 "
 
 RDEPENDS_append_am180x-evm = "      \
-    matrix-gui-wifi-demos           \
-    matrix-gui-bluetooth-demos      \
-    matrix-gui-wifi-direct-demo     \
 "
 
 RDEPENDS_${PN} = "        \
