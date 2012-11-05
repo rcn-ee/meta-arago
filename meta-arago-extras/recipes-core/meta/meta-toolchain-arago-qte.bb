@@ -5,7 +5,7 @@ TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-qte-sdk-${SDK_ARC
 
 require meta-toolchain-arago.bb
 
-PR = "r5"
+PR = "r6"
 
 QT_DIR_NAME = "qtopia"
 
@@ -40,5 +40,5 @@ toolchain_create_sdk_env_script_append() {
 
     # make a symbolic link to mkspecs for compatibility with Nokia's SDK
     # and QTCreator
-    (cd ${SDK_OUTPUT}/${QT_TOOLS_PREFIX}/..; ln -s ${ARAGO_TARGET_SYS}${datadir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+    (cd ${SDK_OUTPUT}/${QT_TOOLS_PREFIX}/..; ln -sf ${ARAGO_TARGET_SYS}${datadir}/${QT_DIR_NAME}/mkspecs mkspecs;)
 }
