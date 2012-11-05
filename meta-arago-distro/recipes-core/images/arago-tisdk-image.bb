@@ -15,6 +15,7 @@ IMAGE_INSTALL += "\
     task-arago-tisdk-crypto \
     task-arago-tisdk-matrix \
     task-arago-tisdk-multimedia \
+    task-arago-tisdk-amsdk \
 "
 
 export IMAGE_BASENAME = "tisdk-rootfs"
