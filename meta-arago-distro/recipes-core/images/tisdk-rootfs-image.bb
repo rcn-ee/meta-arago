@@ -18,4 +18,4 @@ IMAGE_INSTALL += "\
     task-arago-tisdk-amsdk \
 "
 
-export IMAGE_BASENAME = "tisdk-rootfs"
+export IMAGE_BASENAME = "tisdk-rootfs-image"
