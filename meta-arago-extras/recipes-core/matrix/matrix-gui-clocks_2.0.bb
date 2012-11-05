@@ -4,19 +4,27 @@ LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 
 inherit allarch
 
 S = "${WORKDIR}/git/clocks_apps"
 
-# Make sure power submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
-
 # Break out the individual files into separate packages.  That way only the
 # clocks supported for each device can be installed.  Prepend the list so
 # that we can get the files in ${bindir} first
-PACKAGES =+ "${PN}-275mhz ${PN}-300mhz ${PN}-500mhz ${PN}-600mhz ${PN}-720mhz ${PN}-800mhz ${PN}-1ghz"
+PACKAGES = "${PN}-275mhz ${PN}-300mhz ${PN}-500mhz ${PN}-600mhz ${PN}-720mhz ${PN}-800mhz ${PN}-1ghz"
+
+# Make sure power submenu and app images has been installed
+CLOCK_RDEPENDS = "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
+
+RDEPENDS_${PN}-275mhz += "${CLOCK_RDEPENDS}"
+RDEPENDS_${PN}-300mhz += "${CLOCK_RDEPENDS}"
+RDEPENDS_${PN}-500mhz += "${CLOCK_RDEPENDS}"
+RDEPENDS_${PN}-600mhz += "${CLOCK_RDEPENDS}"
+RDEPENDS_${PN}-720mhz += "${CLOCK_RDEPENDS}"
+RDEPENDS_${PN}-800mhz += "${CLOCK_RDEPENDS}"
+RDEPENDS_${PN}-1ghz += "${CLOCK_RDEPENDS}"
 
 # Split the matrix files by clock
 FILES_${PN}-275mhz += "${MATRIX_APP_DIR}/power_set_275mhz/*"
