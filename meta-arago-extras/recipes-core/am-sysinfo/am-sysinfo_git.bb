@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e7
 SECTION = "system"
 
 PACKAGE_STRIP = "no"
-PR = "r5"
+PR = "r6"
 
 BRANCH ?= "master"
-SRCREV = "f2b325741ebcd440c4b2fc91a65270391224426e"
+SRCREV = "86e936b0a50e450089471b53ae8c68e933c15bbd"
 
 SRC_URI = "git://gitorious.org/am_sysinfo/am_sysinfo.git;protocol=git;branch=${BRANCH}"
 
