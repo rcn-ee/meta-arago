@@ -13,9 +13,16 @@ HOST_CLEANUP_PACKAGES = ""
 TOOLCHAIN_CLEANUP_PACKAGES = ""
 
 # List of target side images to build for the SDK
-TARGET_IMAGES = "arago-base-tisdk-image"
+TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image"
 
-IMAGE_INSTALL = "task-arago-tisdk-addons-sdk-host"
+IMAGE_INSTALL = "\
+    task-arago-tisdk-addons-sdk-host \
+    task-arago-tisdk-connectivity-sdk-host \
+    task-arago-tisdk-crypto-sdk-host \
+    task-arago-tisdk-matrix-sdk-host \
+    task-arago-tisdk-multimedia-sdk-host \
+    task-arago-tisdk-qte-sdk-host \
+"
 
 export IMAGE_BASENAME = "arago-amsdk-image"
 
