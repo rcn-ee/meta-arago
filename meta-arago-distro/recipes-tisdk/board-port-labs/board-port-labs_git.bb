@@ -3,29 +3,24 @@ HOMEPAGE = "https://gitorious.org/sitara-board-port"
 LICENSE = "GPLv2"
 DEPENDS += "git-native"
 
-SRC_URI = "file://LICENSE"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d9fb2a547cd8e6bb75c0ecf427a139a9"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=d9fb2a547cd8e6bb75c0ecf427a139a9"
 
 PACKAGE_ARCH = "all"
+
 CREATE_SRCIPK = "1"
 SRCIPK_INSTALL_DIR = "board-support/board-port-labs"
 
-PR = "r0"
+PR = "r1"
 
-REPOS ?= "git://gitorious.org/sitara-board-port/sitara-board-port-linux.git \
-          git://gitorious.org/sitara-board-port/sitara-board-port-uboot.git \
-         "
+BRANCH = "board-port-05.05.00.00"
 
-S = "${WORKDIR}"
+SRC_URI = "\
+    file://LICENSE \
+    git://gitorious.org/sitara-board-port/sitara-board-port-linux.git;protocol=git;branch=${BRANCH};destsuffix=board-support/sitara-board-port-linux;name=board-support-linux \
+    git://gitorious.org/sitara-board-port/sitara-board-port-uboot.git;protocol=git;branch=${BRANCH};destsuffix=board-support/sitara-board-port-uboot;name=board-support-u-boot \
+"
 
-# Checkout the REPOS before the do_patch task so that it will be done prior
-# to the srcipk being made.
-do_repos_checkout() {
-    cd ${S}
-    for r in ${REPOS}
-    do
-        git clone $r
-    done
-}
+SRCREV_board-support-linux = "eaf6d6b4447b132592896fb87d914d130892cd2e"
+SRCREV_board-support-u-boot = "c817fbabece6218f128dc1ce4410563d503cecae"
 
-addtask repos_checkout after do_fetch before do_patch
+S = "${WORKDIR}/board-support"
