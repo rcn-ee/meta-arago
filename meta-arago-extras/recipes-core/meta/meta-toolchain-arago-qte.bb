@@ -5,7 +5,7 @@ TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-qte-sdk-${SDK_ARC
 
 require meta-toolchain-arago.bb
 
-PR = "r7"
+PR = "r8"
 
 QT_DIR_NAME = "qtopia"
 
@@ -13,10 +13,10 @@ toolchain_create_sdk_env_script_append() {
 	echo 'export OE_QMAKE_CFLAGS="$CFLAGS"' >> $script
 	echo 'export OE_QMAKE_CXXFLAGS="$CXXFLAGS"' >> $script
 	echo 'export OE_QMAKE_LDFLAGS="$LDFLAGS"' >> $script
-	echo -e 'export OE_QMAKE_CC=\x24{TARGET_PREFIX}gcc' >> $script
-	echo -e 'export OE_QMAKE_CXX=\x24{TARGET_PREFIX}g++' >> $script
-	echo -e 'export OE_QMAKE_LINK=\x24{TARGET_PREFIX}g++' >> $script
-	echo -e 'export OE_QMAKE_AR=\x24{TARGET_PREFIX}ar' >> $script
+	echo 'export OE_QMAKE_CC=$CC' >> $script
+	echo 'export OE_QMAKE_CXX=$CXX' >> $script
+	echo 'export OE_QMAKE_LINK=$CXX' >> $script
+	echo 'export OE_QMAKE_AR=$AR' >> $script
 	echo 'export OE_QMAKE_LIBDIR_QT=$SDK_PATH/$TARGET_SYS${libdir}' >> $script
 	echo 'export OE_QMAKE_INCDIR_QT=$SDK_PATH/$TARGET_SYS${includedir}/${QT_DIR_NAME}' >> $script
 	echo 'export OE_QMAKE_MOC=$SDK_PATH${bindir_nativesdk}/moc4' >> $script
