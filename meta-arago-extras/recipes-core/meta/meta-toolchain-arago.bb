@@ -4,7 +4,7 @@ TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}"
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r4"
+PR = "r5"
 
 SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
 
@@ -33,17 +33,17 @@ toolchain_create_sdk_env_script () {
 	echo 'export PKG_CONFIG_PATH=$SDK_PATH/$TARGET_SYS${libdir}/pkgconfig' >> $script
 	echo 'export PKG_CONFIG_ALLOW_SYSTEM_LIBS=1' >> $script
 	echo 'export CONFIG_SITE=$SDK_PATH/site-config' >> $script
-	echo -e 'export CC=\x24{TARGET_PREFIX}gcc' >> $script
-	echo -e 'export CXX=\x24{TARGET_PREFIX}g++' >> $script
-	echo -e 'export GDB=\x24{TARGET_PREFIX}gdb' >> $script
-	echo -e 'export CPP="\x24{TARGET_PREFIX}gcc -E"' >> $script
-	echo -e 'export NM=\x24{TARGET_PREFIX}nm' >> $script
-	echo -e 'export RANLIB=\x24{TARGET_PREFIX}ranlib' >> $script
-	echo -e 'export OBJCOPY=\x24{TARGET_PREFIX}objcopy' >> $script
-	echo -e 'export STRIP=\x24{TARGET_PREFIX}strip' >> $script
-	echo -e 'export AS=\x24{TARGET_PREFIX}as' >> $script
-	echo -e 'export AR=\x24{TARGET_PREFIX}ar' >> $script
-	echo -e 'export OBJDUMP=\x24{TARGET_PREFIX}objdump' >> $script
+	printf 'export CC=\x24{TARGET_PREFIX}gcc\n' >> $script
+	printf 'export CXX=\x24{TARGET_PREFIX}g++\n' >> $script
+	printf 'export GDB=\x24{TARGET_PREFIX}gdb\n' >> $script
+	printf 'export CPP="\x24{TARGET_PREFIX}gcc -E"\n' >> $script
+	printf 'export NM=\x24{TARGET_PREFIX}nm\n' >> $script
+	printf 'export AS=\x24{TARGET_PREFIX}as\n' >> $script
+	printf 'export AR=\x24{TARGET_PREFIX}ar\n' >> $script
+	printf 'export RANLIB=\x24{TARGET_PREFIX}ranlib\n' >> $script
+	printf 'export OBJCOPY=\x24{TARGET_PREFIX}objcopy\n' >> $script
+	printf 'export OBJDUMP=\x24{TARGET_PREFIX}objdump\n' >> $script
+	printf 'export STRIP=\x24{TARGET_PREFIX}strip\n' >> $script
 	echo 'export CONFIGURE_FLAGS="--target=$TARGET_SYS --host=$TARGET_SYS --build=${SDK_ARCH}-linux --with-libtool-sysroot=$SDK_PATH/$TARGET_SYS"' >> $script
 	echo 'export CPPFLAGS="${TARGET_CC_ARCH} --sysroot=$SDK_PATH/$TARGET_SYS"' >> $script
 	echo 'export CFLAGS="$CPPFLAGS"' >> $script
