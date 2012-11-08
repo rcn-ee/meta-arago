@@ -2,7 +2,7 @@ require recipes-core/eglibc/eglibc-package.inc
 
 require external-arago-toolchain.inc
 
-PR = "r2"
+PR = "r3"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
@@ -117,7 +117,7 @@ FILES_libgcc-dev = "${base_libdir}/libgcc_s.so"
 
 FILES_libstdc++ = "${libdir}/libstdc++.so.*"
 FILES_libstdc++-dev = "\
-	${includedir}/c++/* \
+	/include/c++ \
 	${libdir}/libstdc++.so \
 	${libdir}/libstdc++.la \
 	${libdir}/libstdc++.a \
@@ -232,6 +232,7 @@ do_install() {
 	install -d ${D}${base_sbindir}
 	install -d ${D}${datadir}
 	install -d ${D}${includedir}
+	install -d ${D}/include
 
 	cp -a ${TOOLCHAIN_PATH}/${ARAGO_TARGET_SYS}${datadir}/* ${D}${datadir}
 	cp -a ${TOOLCHAIN_PATH}/${ARAGO_TARGET_SYS}${base_libdir}/{lib*,ld*} ${D}${base_libdir}
@@ -246,7 +247,7 @@ do_install() {
 
 	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-arago-toolchain', '', 'rm -rf ${D}${includedir}/linux', d)}
 
-	cp -a ${TOOLCHAIN_PATH}/${ARAGO_TARGET_SYS}/include/* ${D}${includedir}
+	cp -a ${TOOLCHAIN_PATH}/${ARAGO_TARGET_SYS}/include/* ${D}/include
 	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'external-arago-toolchain', '', 'rm -rf ${D}${bindir}/gdbserver', d)}
 
 	${@base_conditional('PREFERRED_PROVIDER_binutils-dev', 'external-arago-toolchain', 'do_int_binutils', 'do_ext_binutils', d)}
