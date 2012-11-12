@@ -1,0 +1,87 @@
+From aecef85a39d4839d91e526b88264596417e66c45 Mon Sep 17 00:00:00 2001
+From: Chase Maupin <Chase.Maupin@ti.com>
+Date: Mon, 5 Nov 2012 15:13:05 -0600
+Subject: [PATCH 1/4] am335x_evm: fix mmc boot environment settings
+
+* Fixed the MMC boot environment settings to try first loading
+  the uImage from the FAT partition instead of the ext2 partition.
+* Changed to load the kernel image a kloadaddr to avoid the need
+  to relocate the kernel image during boot.
+* Added ip_method to mmc_args
+* Use bootargs_defaults to set common variables
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ include/configs/am335x_evm.h |   33 +++++++++++++++++++++------------
+ 1 files changed, 21 insertions(+), 12 deletions(-)
+
+diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
+index ec2d835..bd9473b 100644
+--- a/include/configs/am335x_evm.h
++++ b/include/configs/am335x_evm.h
+@@ -46,20 +46,25 @@
+ 
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	"loadaddr=0x80200000\0" \
++    "kloadaddr=0x80007fc0\0" \
+ 	"fdtaddr=0x80F80000\0" \
+ 	"rdaddr=0x81000000\0" \
+-	"bootfile=/boot/uImage\0" \
++	"bootfile=uImage\0" \
+ 	"console=ttyO0,115200n8\0" \
+ 	"optargs=\0" \
+ 	"mmcdev=0\0" \
+-	"mmcroot=/dev/mmcblk0p2 ro\0" \
+-	"mmcrootfstype=ext3 rootwait\0" \
++	"mmc_root=/dev/mmcblk0p2 ro\0" \
++	"mmc_root_fs_type=ext3 rootwait\0" \
+ 	"ramroot=/dev/ram0 rw ramdisk_size=65536 initrd=${rdaddr},64M\0" \
+ 	"ramrootfstype=ext2\0" \
+-	"mmcargs=setenv bootargs console=${console} " \
+-		"${optargs} " \
+-		"root=${mmcroot} " \
+-		"rootfstype=${mmcrootfstype}\0" \
++    "ip_method=none\0" \
++    "bootargs_defaults=setenv bootargs " \
++        "console=${console} " \
++        "${optargs}\0" \
++    "mmc_args=run bootargs_defaults;" \
++        "setenv bootargs ${bootargs} " \
++        "root=${mmc_root} " \
++        "rootfstype=${mmc_root_fs_type} ip=${ip_method}\0" \
+ 	"bootenv=uEnv.txt\0" \
+ 	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenv}\0" \
+ 	"importbootenv=echo Importing environment from mmc ...; " \
+@@ -69,11 +74,11 @@
+ 		"root=${ramroot} " \
+ 		"rootfstype=${ramrootfstype}\0" \
+ 	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
+-	"loaduimagefat=fatload mmc ${mmcdev} ${loadaddr} ${bootfile}\0" \
+-	"loaduimage=ext2load mmc ${mmcdev}:2 ${loadaddr} ${bootfile}\0" \
++	"loaduimagefat=fatload mmc ${mmcdev} ${kloadaddr} ${bootfile}\0" \
++	"loaduimage=ext2load mmc ${mmcdev}:2 ${kloadaddr} /boot/${bootfile}\0" \
+ 	"mmcboot=echo Booting from mmc ...; " \
+-		"run mmcargs; " \
+-		"bootm ${loadaddr}\0" \
++		"run mmc_args; " \
++		"bootm ${kloadaddr}\0" \
+ 	"ramboot=echo Booting from ramdisk ...; " \
+ 		"run ramargs; " \
+ 		"bootm ${loadaddr}\0" \
+@@ -93,8 +98,12 @@
+ 			"echo Running uenvcmd ...;" \
+ 			"run uenvcmd;" \
+ 		"fi;" \
+-		"if run loaduimage; then " \
++		"if run loaduimagefat; then " \
+ 			"run mmcboot;" \
++        "elif run loaduimage; then " \
++            "run mmcboot;" \
++        "else " \
++            "echo Cound not find ${bootfile} ;" \
+ 		"fi;" \
+ 	"fi;" \
+ 
+-- 
+1.7.0.4
+
