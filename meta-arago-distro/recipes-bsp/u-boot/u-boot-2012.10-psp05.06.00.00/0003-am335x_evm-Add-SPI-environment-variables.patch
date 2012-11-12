@@ -1,0 +1,54 @@
+From c2f5b8e4caf33ccd62ba9b245a28d56e3d814471 Mon Sep 17 00:00:00 2001
+From: Chase Maupin <Chase.Maupin@ti.com>
+Date: Mon, 5 Nov 2012 15:26:51 -0600
+Subject: [PATCH 3/4] am335x_evm: Add SPI environment variables
+
+* Added variables to support SPI booting
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+---
+ include/configs/am335x_evm.h |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+
+diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
+index c7f542c..95e9914 100644
+--- a/include/configs/am335x_evm.h
++++ b/include/configs/am335x_evm.h
+@@ -59,6 +59,11 @@
+     "nand_root_fs_type=ubifs rootwait=1\0" \
+     "nand_src_addr=0x280000\0" \
+     "nand_img_siz=0x500000\0" \
++    "spi_root=/dev/mtdblock4 rw\0" \
++    "spi_root_fs_type=jffs2\0" \
++    "spi_src_addr=0x62000\0" \
++    "spi_img_siz=0x380000\0" \
++    "spi_bus_no=0\0" \
+ 	"ramroot=/dev/ram0 rw ramdisk_size=65536 initrd=${rdaddr},64M\0" \
+ 	"ramrootfstype=ext2\0" \
+     "ip_method=none\0" \
+@@ -73,6 +78,10 @@
+         "setenv bootargs ${bootargs} " \
+         "root=${nand_root} noinitrd " \
+         "rootfstype=${nand_root_fs_type} ip=${ip_method}\0" \
++    "spi_args=run bootargs_defaults;" \
++        "setenv bootargs ${bootargs} " \
++        "root=${spi_root} " \
++        "rootfstype=${spi_root_fs_type} ip=${ip_method}\0" \
+ 	"bootenv=uEnv.txt\0" \
+ 	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} ${bootenv}\0" \
+ 	"importbootenv=echo Importing environment from mmc ...; " \
+@@ -92,6 +101,11 @@
+         "nandecc hw 2; " \
+         "nand read.i ${kloadaddr} ${nand_src_addr} ${nand_img_siz}; " \
+         "bootm ${kloadaddr}\0" \
++    "spi_boot=echo Booting from spi ...; " \
++        "run spi_args; " \
++        "sf probe ${spi_bus_no}:0; " \
++        "sf read ${kloadaddr} ${spi_src_addr} ${spi_img_siz}; " \
++        "bootm ${kloadaddr}\0" \
+ 	"ramboot=echo Booting from ramdisk ...; " \
+ 		"run ramargs; " \
+ 		"bootm ${loadaddr}\0" \
+-- 
+1.7.0.4
+
