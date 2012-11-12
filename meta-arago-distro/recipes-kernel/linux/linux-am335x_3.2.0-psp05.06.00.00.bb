@@ -25,7 +25,7 @@ DEPENDS += "am33x-cm3"
 KERNEL_IMAGETYPE = "uImage"
 
 # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
-MACHINE_KERNEL_PR_append = "a+gitr${SRCPV}"
+MACHINE_KERNEL_PR_append = "b+gitr${SRCPV}"
 
 BRANCH = "v3.2-staging"
 
@@ -81,6 +81,9 @@ PATCHES += "file://0001-am335xevm-using-edge-triggered-interrupts-for-WLAN.patch
 
 # Add patch to enable pullup on WLAN enable
 PATCHES += "file://0001-am335x-enable-pullup-on-the-WLAN-enable-pin-fo.patch"
+
+# Add patch to remove dirty tag to kernel local version
+PATCHES += "file://0001-linux-am335x-Remove-dirty-tag.patch"
 
 # Copy the am33x-cm3 firmware if it is available
 do_compile_prepend() {

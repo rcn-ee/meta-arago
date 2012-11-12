@@ -1,0 +1,32 @@
+From 293d87edf88049be3f93649626d6d127a59cc71b Mon Sep 17 00:00:00 2001
+From: Franklin S. Cooper Jr <fcooper@ti.com>
+Date: Mon, 5 Nov 2012 07:28:17 -0600
+Subject: [PATCH] linux-am335x: Remove dirty tag
+
+* Disable LOCALVERSION_AUTO. This will prevent -dirty tag from being
+  added to the kernel version. This tag affects the name of the kernel
+  modules directory.
+* This dirty tag is also added if the kernel's git repository has
+  uncommitted changes.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ arch/arm/configs/am335x_evm_defconfig |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/arch/arm/configs/am335x_evm_defconfig b/arch/arm/configs/am335x_evm_defconfig
+index f1471bc..e78b271 100644
+--- a/arch/arm/configs/am335x_evm_defconfig
++++ b/arch/arm/configs/am335x_evm_defconfig
+@@ -37,7 +37,7 @@ CONFIG_BROKEN_ON_SMP=y
+ CONFIG_INIT_ENV_ARG_LIMIT=32
+ CONFIG_CROSS_COMPILE=""
+ CONFIG_LOCALVERSION=""
+-CONFIG_LOCALVERSION_AUTO=y
++# CONFIG_LOCALVERSION_AUTO is not set
+ CONFIG_HAVE_KERNEL_GZIP=y
+ CONFIG_HAVE_KERNEL_LZMA=y
+ CONFIG_HAVE_KERNEL_LZO=y
+-- 
+1.7.0.4
+
