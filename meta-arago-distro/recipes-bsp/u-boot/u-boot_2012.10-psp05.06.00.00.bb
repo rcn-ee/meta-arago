@@ -23,12 +23,13 @@ DEFAULT_PREFERENCE = "-1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR = "r4+gitr${SRCPV}"
+PR = "r5+gitr${SRCPV}"
 
 SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH} \
            file://0001-am335x_evm-fix-mmc-boot-environment-settings.patch \
            file://0002-am335x_evm-Add-NAND-environment-variables.patch \
            file://0003-am335x_evm-Add-SPI-environment-variables.patch \
+           file://0004-am335x_evm-Add-NET-environment-variables.patch \
 "
 
 BRANCH = "amsdk-05.06.00.00"
