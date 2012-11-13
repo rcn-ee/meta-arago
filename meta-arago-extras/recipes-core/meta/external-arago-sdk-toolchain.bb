@@ -2,7 +2,7 @@ inherit cross-canadian
 
 require external-arago-toolchain.inc
 
-PR = "r2"
+PR = "r3"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
@@ -16,15 +16,18 @@ LIC_FILES_CHKSUM = "\
 "
 
 INSANE_SKIP_gcc-cross-canadian-arm = "dev-so"
+INSANE_SKIP_gdb-cross-canadian-arm = "dev-so"
 INSANE_SKIP_binutils-cross-canadian-arm = "dev-so"
 
 PROVIDES = "\
 	gcc-cross-canadian-arm \
+	gdb-cross-canadian-arm \
 	binutils-cross-canadian-arm \
 "
 
 PACKAGES = "\
 	gcc-cross-canadian-arm \
+	gdb-cross-canadian-arm \
 	binutils-cross-canadian-arm \
 "
 
@@ -32,6 +35,7 @@ PACKAGES = "\
 bindir = "${exec_prefix}/bin/"
 libdir = "${exec_prefix}/lib/"
 libexecdir = "${exec_prefix}/libexec/"
+datadir = "${exec_prefix}/share/"
 
 gcclibdir = "${libdir}/gcc"
 
@@ -53,6 +57,14 @@ FILES_gcc-cross-canadian-arm = "\
 	${bindir}/${TARGET_PREFIX}g++ \
 	${bindir}/${TARGET_PREFIX}cpp \
 	${libexecdir}/* \
+"
+
+FILES_gdb-cross-canadian-arm = "\
+	${bindir}/${TARGET_PREFIX}gdb \
+	${bindir}/${TARGET_PREFIX}gdbtui \
+	${datadir}/gdb/* \
+	${datadir}/info/* \
+	${datadir}/man/man1/${TARGET_PREFIX}* \
 "
 
 FILES_binutils-cross-canadian-arm = "\
@@ -91,14 +103,17 @@ FILES_binutils-cross-canadian-arm = "\
 "
 
 DESCRIPTION_gcc-cross-canadian-arm = "The GNU cc and gcc C compilers"
+DESCRIPTION_gdb-cross-canadian-arm = "gdb - GNU debugger"
 DESCRIPTION_binutils-cross-canadian-arm = "A GNU collection of binary utilities"
 
 LICENSE = "${ARG_LIC_LIBC}"
 LICENSE_gcc-cross-canadian-arm = "${ARG_LIC_GCC}"
+LICENSE_gdb-cross-canadian-arm = "${ARG_LIC_GDB}"
 LICENSE_binutils-cross-canadian-arm = "${ARG_LIC_BFD}"
 
 PKGV = "${ARG_VER_MAIN}"
 PKGV_gcc-cross-canadian-arm = "${ARG_VER_GCC}"
+PKGV_gdb-cross-canadian-arm = "${ARG_VER_GDB}"
 PKGV_binutils-cross-canadian-arm = "${ARG_VER_BFD}"
 
 do_install() {
@@ -109,6 +124,9 @@ do_install() {
 	install -d ${D}${libdir}/ldscripts
 	install -d ${D}${includedir}
 	install -d ${D}${libexecdir}
+	install -d ${D}${datadir}/gdb
+	install -d ${D}${datadir}/info
+	install -d ${D}${datadir}/man/man1
 	install -d ${D}${gcclibdir}/${ARAGO_TARGET_SYS}/${ARG_VER_GCC}/include
 	install -d ${D}${prefix}/i686-linux
 
@@ -117,6 +135,11 @@ do_install() {
 	cp -a ${TOOLCHAIN_PATH}/lib/gcc/${ARAGO_TARGET_SYS}/${ARG_VER_GCC}/* ${D}${gcclibdir}/${ARAGO_TARGET_SYS}/${ARG_VER_GCC}
 	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gcov,gccbug,gcc,g++,cpp} ${D}${bindir}
 	cp -a ${TOOLCHAIN_PATH}/libexec/* ${D}${libexecdir}
+
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gdb,gdbtui} ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/share/gdb/* ${D}${datadir}/gdb/
+	cp -a ${TOOLCHAIN_PATH}/share/info/* ${D}${datadir}/info/
+	cp -a ${TOOLCHAIN_PATH}/share/man/man1/${TARGET_PREFIX}* ${D}${datadir}/man/man1/
 
 	cp -a ${TOOLCHAIN_PATH}/${ARAGO_TARGET_SYS}/bin/{ld,addr2line,objcopy,readelf,strip,nm,ranlib,gprof,as,c++filt,ar,strings,objdump,size} ${D}${prefix}/${ARAGO_TARGET_SYS}/bin
 	cp -a ${TOOLCHAIN_PATH}/include/*.h ${D}${includedir}
