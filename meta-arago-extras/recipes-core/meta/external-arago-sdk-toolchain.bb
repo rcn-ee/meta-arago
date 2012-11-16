@@ -2,7 +2,7 @@ inherit cross-canadian
 
 require external-arago-toolchain.inc
 
-PR = "r3"
+PR = "r4"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
@@ -21,13 +21,13 @@ INSANE_SKIP_binutils-cross-canadian-arm = "dev-so"
 
 PROVIDES = "\
 	gcc-cross-canadian-arm \
-	gdb-cross-canadian-arm \
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'gdb-cross-canadian-arm', '', d)} \
 	binutils-cross-canadian-arm \
 "
 
 PACKAGES = "\
 	gcc-cross-canadian-arm \
-	gdb-cross-canadian-arm \
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'gdb-cross-canadian-arm', '', d)} \
 	binutils-cross-canadian-arm \
 "
 
@@ -136,10 +136,10 @@ do_install() {
 	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gcov,gccbug,gcc,g++,cpp} ${D}${bindir}
 	cp -a ${TOOLCHAIN_PATH}/libexec/* ${D}${libexecdir}
 
-	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gdb,gdbtui} ${D}${bindir}
-	cp -a ${TOOLCHAIN_PATH}/share/gdb/* ${D}${datadir}/gdb/
-	cp -a ${TOOLCHAIN_PATH}/share/info/* ${D}${datadir}/info/
-	cp -a ${TOOLCHAIN_PATH}/share/man/man1/${TARGET_PREFIX}* ${D}${datadir}/man/man1/
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gdb* ${D}${bindir}', '', d)}
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/share/gdb/* ${D}${datadir}/gdb/', '', d)}
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/share/info/* ${D}${datadir}/info/', '', d)}
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/share/man/man1/${TARGET_PREFIX}* ${D}${datadir}/man/man1/', '', d)}
 
 	cp -a ${TOOLCHAIN_PATH}/${ARAGO_TARGET_SYS}/bin/{ld,addr2line,objcopy,readelf,strip,nm,ranlib,gprof,as,c++filt,ar,strings,objdump,size} ${D}${prefix}/${ARAGO_TARGET_SYS}/bin
 	cp -a ${TOOLCHAIN_PATH}/include/*.h ${D}${includedir}
