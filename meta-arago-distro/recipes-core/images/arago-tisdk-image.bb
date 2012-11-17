@@ -6,6 +6,7 @@ require arago-image.inc
 IMAGE_INSTALL += "\
     task-arago-base \
     task-arago-console \
+    task-arago-test \
     task-arago-base-tisdk \
     task-arago-tisdk-graphics \
     task-arago-tisdk-qte \
