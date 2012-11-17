@@ -1,27 +1,37 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r2"
+PR = "r3"
 
 inherit task
 
 MATRIX_ESSENTIALS = "        \
     matrix-gui               \
-    refresh-screen           \
     matrix-lighttpd-config   \
+"
+
+MATRIX_GUI = "               \
+    refresh-screen           \
     matrix-gui-browser       \
 "
+
+MATRIX_GUI_keystone = ""
 
 MATRIX_COMMON_APPS = "              \
     matrix-gui-armbenchmarks-demos  \
     matrix-gui-crypto-demos         \
     matrix-gui-oprofile-demos       \
-    matrix-gui-qt4-demos            \
     matrix-gui-settings-demos       \
     matrix-gui-usb-demos            \
     matrix-gui-submenus-ethernet    \
+"
+
+MATRIX_QT_APPS = "                  \
+    matrix-gui-qt4-demos            \
     matrix-gui-thermostat-demo      \
 "
+
+MATRIX_QT_APPS_keystone = ""
 
 MATRIX_APPS = ""
 
@@ -87,6 +97,8 @@ RDEPENDS_append_am180x-evm = "      \
 
 RDEPENDS_${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
+    ${MATRIX_GUI}         \
     ${MATRIX_COMMON_APPS} \
+    ${MATRIX_QT_APPS} \
     ${MATRIX_APPS}        \
 "
