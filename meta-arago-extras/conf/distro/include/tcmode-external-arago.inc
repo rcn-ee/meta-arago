@@ -26,6 +26,7 @@ PREFERRED_PROVIDER_virtual/libc = "external-arago-toolchain"
 PREFERRED_PROVIDER_virtual/libintl = "external-arago-toolchain"
 PREFERRED_PROVIDER_virtual/libiconv = "external-arago-toolchain"
 PREFERRED_PROVIDER_glibc-thread-db = "external-arago-toolchain"
+PREFERRED_PROVIDER_gdbserver = "external-arago-toolchain"
 
 PREFERRED_PROVIDER_gcc-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-arago-sdk-toolchain"
 PREFERRED_PROVIDER_binutils-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-arago-sdk-toolchain"
