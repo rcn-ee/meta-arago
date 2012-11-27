@@ -4,7 +4,7 @@ TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}"
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r10"
+PR = "r11"
 
 SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
 
@@ -54,27 +54,27 @@ toolchain_create_sdk_env_script () {
 	echo 'export OECORE_ACLOCAL_OPTS="-I $SDK_PATH/usr/share/aclocal"' >> $script
 	echo 'export OECORE_DISTRO_VERSION="${DISTRO_VERSION}"' >> $script
 	echo 'export OECORE_SDK_VERSION="${SDK_VERSION}"' >> $script
-	echo 'export PYTHONHOME=$SDK_PATH' >> $script
-	echo 'export PYTHONPATH=lib/python2.7' >> $script
 }
 
-create_gdb_stub () {
-	# Special case for gdb, that is built as part of canadian-cross-sdk
-	mv ${ARAGO_TARGET_SYS}-gdb ${ARAGO_TARGET_SYS}-gdb.real
-	printf "#!/bin/sh\nif [ -n \x22\x24BASH_SOURCE\x22 ]; then\n\t. \x60dirname \x24BASH_SOURCE\x60/../environment-setup\nfi\n" > ${ARAGO_TARGET_SYS}-gdb
-	printf "LD_LIBRARY_PATH=\x24SDK_PATH/lib:\x24LD_LIBRARY_PATH \x24SDK_PATH/lib/ld-linux.so.2 \x24SDK_PATH/bin/${ARAGO_TARGET_SYS}-gdb.real \x24\x2a\n" >> ${ARAGO_TARGET_SYS}-gdb
-	chmod +x ${ARAGO_TARGET_SYS}-gdb
+create_shell_stub () {
+	i=$1
+	mv $i $i.real
+	printf "#!/bin/sh\nif [ -n \x22\x24BASH_SOURCE\x22 ]; then\n\t. \x60dirname \x24BASH_SOURCE\x60/../environment-setup\nfi\n" > $i
+	if [ "$2" == "yes" ]; then
+		echo 'export PYTHONHOME=$SDK_PATH' >> $i
+		echo 'export PYTHONPATH=lib/python2.7' >> $i
+	fi
+	printf "LD_LIBRARY_PATH=\x24SDK_PATH/lib:\x24LD_LIBRARY_PATH \x24SDK_PATH/lib/ld-linux.so.2 \x24SDK_PATH/bin/$i.real \x24\x2a\n" >> $i
+	chmod +x $i
 }
 
 populate_sdk_ipk_append () {
 	cd ${SDK_OUTPUT}/${SDKPATH}/bin
 	binfiles=`find ! -name "${ARAGO_TARGET_SYS}-*" -type f -perm +111 -exec file {} \;|grep -v ":.*ASCII.*text"|cut -d":" -f1|cut -c3-`
 	for i in $binfiles; do
-		mv $i $i.real
-		printf "#!/bin/sh\nif [ -n \x22\x24BASH_SOURCE\x22 ]; then\n\t. \x60dirname \x24BASH_SOURCE\x60/../environment-setup\nfi\n" > $i
-		printf "LD_LIBRARY_PATH=\x24SDK_PATH/lib:\x24LD_LIBRARY_PATH \x24SDK_PATH/lib/ld-linux.so.2 \x24SDK_PATH/bin/$i.real \x24\x2a\n" >> $i
-		chmod +x $i
+		create_shell_stub $i
 	done
 
-	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', '', 'create_gdb_stub', d)}
+	# Special case for gdb, that is built as part of canadian-cross-sdk
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', '', 'create_shell_stub ${ARAGO_TARGET_SYS}-gdb yes', d)}
 }
