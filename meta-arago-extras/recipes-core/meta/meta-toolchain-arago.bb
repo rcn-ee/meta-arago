@@ -4,7 +4,7 @@ TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}"
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r12"
+PR = "r13"
 
 SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
 
@@ -77,4 +77,10 @@ populate_sdk_ipk_append () {
 
 	# Special case for gdb, that is built as part of canadian-cross-sdk
 	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', '', 'create_shell_stub ${TARGET_PREFIX}gdb yes', d)}
+
+	# Remove broken .la files
+	for i in `find ${SDK_OUTPUT}/${SDKTARGETSYSROOT} -name \*.la`; do
+		rm -f $i
+	done
+	rm -f ${SDK_OUTPUT}/${SDKPATH}/lib/*.la
 }
