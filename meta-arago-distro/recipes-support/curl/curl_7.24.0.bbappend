@@ -2,6 +2,7 @@
 # per TSU exemption and export control restrictions
 
 DEPENDS := "${@d.getVar('DEPENDS', True).replace('gnutls', '')}"
+DEPENDS += "openssl"
 
 EXTRA_OECONF += "\
             --with-ssl \
@@ -19,4 +20,4 @@ EXTRA_OECONF += "\
 
 CURLGNUTLS = "--without-gnutls"
 
-PR_append = "-arago1"
+PR_append = "-arago2"
