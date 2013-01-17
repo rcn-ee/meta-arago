@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to install additional packages only used in the Arago SDK"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -16,6 +16,11 @@ OOBE_ti33x += "\
     parse-ip \
 "
 
+EXTRA_APPLICATIONS = "\
+    screenshot \
+"
+
 RDEPENDS_${PN} = "\
     ${OOBE} \
+    ${EXTRA_APPLICATIONS} \
 "
