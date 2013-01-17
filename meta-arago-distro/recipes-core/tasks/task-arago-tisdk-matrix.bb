@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r4"
+PR = "r5"
 
 inherit task
 
@@ -29,6 +29,7 @@ MATRIX_COMMON_APPS = "              \
 MATRIX_QT_APPS = "                  \
     matrix-gui-qt4-demos            \
     matrix-gui-thermostat-demo      \
+    ${@base_conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','matrix-gui-apps-quick-playground','', d)} \
 "
 
 MATRIX_QT_APPS_keystone = ""
