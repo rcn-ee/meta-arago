@@ -2,7 +2,7 @@ DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-PR = "r0"
+PR = "r1"
 
 inherit task
 
@@ -61,25 +61,25 @@ DEMO_APPS = "\
 
 CONNECTIVITY_RDEPENDS = ""
 
-# Need to add ${FIRMWARE_AND_DRIVERS} to the below lists once the recipes have
-# been added to meta-ti
-
 CONNECTIVITY_RDEPENDS_am37x-evm = "\
     ${WLAN_COMMON} \
     ${BLUETOOTH_STACK} \
     ${DEMO_APPS} \
+    ${FIRMWARE_AND_DRIVERS} \
 "
 
 CONNECTIVITY_RDEPENDS_am180x-evm  = "\
     ${WLAN_COMMON} \
     ${BLUETOOTH_STACK} \
     ${DEMO_APPS} \
+    ${FIRMWARE_AND_DRIVERS} \
 "
 
 CONNECTIVITY_RDEPENDS_ti33x = "\
     ${WLAN_COMMON} \
     ${BLUETOOTH_STACK} \
     ${DEMO_APPS} \
+    ${FIRMWARE_AND_DRIVERS} \
 "
 
 RDEPENDS_${PN} = "\
