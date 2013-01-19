@@ -2,7 +2,7 @@ DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-PR = "r1"
+PR = "r2"
 
 inherit task
 
@@ -51,12 +51,12 @@ BLUETOOTH_STACK = "\
     ussp-push \
 "
 
-# Need to add battleship to the below list once the application has been fixed
 DEMO_APPS = "\
     bluetooth-gui \
     wifi-direct-demo \
     wpa-gui-e \
     wl1271-demo \
+    battleship \
 "
 
 CONNECTIVITY_RDEPENDS = ""
