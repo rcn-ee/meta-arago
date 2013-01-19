@@ -1,0 +1,36 @@
+From 0f11fd034274c795d9c506faa83a9fa947ba358a Mon Sep 17 00:00:00 2001
+From: Moosa <moosab@ti.com>
+Date: Thu, 3 May 2012 17:37:17 +0300
+Subject: [PATCH] compat-wireless: add pm_runtime_enabled
+
+* Add pm_runtime definition to header file
+
+Upstream-Status: Pending
+
+Signed-off-by: Moosa Baransi <moosab@ti.com>
+---
+ include/linux/compat-2.6.38.h |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
+
+diff --git a/include/linux/compat-2.6.38.h b/include/linux/compat-2.6.38.h
+index 63f9dd6..94ee602 100644
+--- a/include/linux/compat-2.6.38.h
++++ b/include/linux/compat-2.6.38.h
+@@ -9,6 +9,15 @@
+ #include <linux/skbuff.h>
+ #include <linux/etherdevice.h>
+
++#ifdef CONFIG_PM_RUNTIME
++static inline bool pm_runtime_enabled(struct device *dev)
++{
++    return !dev->power.disable_depth;
++}
++#else
++    static inline bool pm_runtime_enabled(struct device *dev) { return false; }
++#endif
++
+ /* rename member in struct mmc_host in include/linux/mmc/host.h */
+ #define max_segs	max_hw_segs
+
+--
+1.7.1
