@@ -1,0 +1,47 @@
+From 267cb471c7b182786f58a2a74f3d8bc977cb4527 Mon Sep 17 00:00:00 2001
+From: Vita Preskovsky <vitap@ti.com>
+Date: Thu, 29 Dec 2011 16:09:36 +0200
+Subject: [PATCH] compat-bluetooth-2.6: removed unused BT modules from compilation
+
+  * config.mk is changed to not compile unused BT modules
+
+ Signed-off-by: Vita Preskovsky <vitap@ti.com>
+---
+ config.mk |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/config.mk b/config.mk
+index f09d16d..56ac6df 100644
+--- a/config.mk
++++ b/config.mk
+@@ -226,14 +226,14 @@ ifndef CONFIG_COMPAT_KERNEL_2_6_28
+ CONFIG_COMPAT_BT_HIDP=m
+ endif #CONFIG_COMPAT_KERNEL_2_6_28
+
+-CONFIG_BT_HCIUART=M
++CONFIG_BT_HCIUART=m
+ CONFIG_BT_HCIUART_H4=y
+ CONFIG_BT_HCIUART_BCSP=y
+-CONFIG_BT_HCIUART_ATH3K=y
++#CONFIG_BT_HCIUART_ATH3K=y
+ CONFIG_BT_HCIUART_LL=y
+
+ CONFIG_BT_HCIVHCI=m
+-CONFIG_BT_MRVL=m
++#CONFIG_BT_MRVL=m
+
+ ifdef CONFIG_PCMCIA
+ CONFIG_BT_HCIDTL1=m
+@@ -606,8 +606,8 @@ CONFIG_IWM=m
+ # CONFIG_IWM_DEBUG=y
+ # CONFIG_IWM_TRACING=y
+
+-CONFIG_BT_HCIBTSDIO=m
+-CONFIG_BT_MRVL_SDIO=m
++#CONFIG_BT_HCIBTSDIO=m
++#CONFIG_BT_MRVL_SDIO=m
+
+ ifndef CONFIG_COMPAT_KERNEL_2_6_27
+ CONFIG_ATH6KL=m
+--
+1.7.0.4

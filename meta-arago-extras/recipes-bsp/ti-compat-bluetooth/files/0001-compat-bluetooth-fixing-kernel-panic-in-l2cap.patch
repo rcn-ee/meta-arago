@@ -1,0 +1,54 @@
+From 95bb5df2c28a51790ab3d63b34e417e2fc9c6235 Mon Sep 17 00:00:00 2001
+From: Vita Preskovsky <vitap@ti.com>
+Date: Tue, 12 Jun 2012 17:56:02 +0300
+Subject: [PATCH] compat-bluetooth: fixing kernel panic in l2cap
+
+ * fixing kernel panic in l2cap layer. The problem appears
+   for first time in new version R5.00.18.
+
+Upstream-Status: Pending
+
+Signed-off-by: Vita Preskovsky <vitap@ti.com>
+---
+ include/net/bluetooth/l2cap.h |    1 +
+ net/bluetooth/l2cap_core.c    |    6 +++++-
+ 2 files changed, 6 insertions(+), 1 deletions(-)
+
+diff --git a/include/net/bluetooth/l2cap.h b/include/net/bluetooth/l2cap.h
+index c0d168a..5651a70 100644
+--- a/include/net/bluetooth/l2cap.h
++++ b/include/net/bluetooth/l2cap.h
+@@ -494,6 +494,7 @@ struct l2cap_chan {
+
+	struct list_head list;
+	struct list_head global_l;
++	bool global_b;
+
+	void		*data;
+	struct l2cap_ops *ops;
+diff --git a/net/bluetooth/l2cap_core.c b/net/bluetooth/l2cap_core.c
+index ffa2f6b..847dabc 100644
+--- a/net/bluetooth/l2cap_core.c
++++ b/net/bluetooth/l2cap_core.c
+@@ -316,6 +316,7 @@ struct l2cap_chan *l2cap_chan_create(struct sock *sk)
+
+	write_lock_bh(&chan_list_lock);
+	list_add(&chan->global_l, &chan_list);
++	chan->global_b = true;
+	write_unlock_bh(&chan_list_lock);
+
+	INIT_DELAYED_WORK(&chan->chan_timer, l2cap_chan_timeout);
+@@ -332,7 +333,10 @@ struct l2cap_chan *l2cap_chan_create(struct sock *sk)
+ void l2cap_chan_destroy(struct l2cap_chan *chan)
+ {
+	write_lock_bh(&chan_list_lock);
+-	list_del(&chan->global_l);
++	if (chan->global_b) {
++		list_del(&chan->global_l);
++		chan->global_b = false;
++	}
+	write_unlock_bh(&chan_list_lock);
+
+	chan_put(chan);
+--
+1.7.0.4
