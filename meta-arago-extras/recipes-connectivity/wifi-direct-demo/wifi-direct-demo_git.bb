@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://src/main.cpp;md5=cf285050f56a20d116b026c9f8ded4f7"
 
 COMPATIBLE_MACHINE = "(am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
-PR = "r3"
+PR = "r4"
 
-BRANCH = "dbus"
-SRCREV = "0950a67d9fe9a70668a993774e65ba9d457d750c"
+BRANCH = "master"
+SRCREV = "9041d6052b43a38e3f06a474822f3f7382bf14a5"
 
-SRC_URI = "git://git.profusion.mobi/users/lucas/wifi-direct-demo.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://www.github.com/TI-ECS/wifi-direct-demo.git;protocol=git;branch=${BRANCH} \
            file://wifi-direct-demo.desktop"
 
 require recipes-core/matrix/matrix-gui-paths.inc
