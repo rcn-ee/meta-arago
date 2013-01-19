@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://src/main.cpp;beginline=1;endline=37;md5=83d75e9470fc1
 COMPATIBLE_MACHINE = "(omap3evm|am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
 BRANCH = "master"
-SRCREV = "d9fc6f1ab023230170672d5243cbee58d740e7fe"
+SRCREV = "046643eac13b4d6b6fd7525539ef666509df264e"
 
-PR = "r12"
+PR = "r13"
 
-SRC_URI = "git://git.profusion.mobi/users/lucas/BT_Demo.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://www.github.com/TI-ECS/BT_Demo.git;protocol=git;branch=${BRANCH} \
            file://bluetooth-icon.png \
            file://desc_bluetooth.html \
            file://bt_demo.desktop"
