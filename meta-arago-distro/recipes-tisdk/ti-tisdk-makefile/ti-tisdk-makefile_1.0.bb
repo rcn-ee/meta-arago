@@ -25,11 +25,11 @@ SRC_URI = "\
     file://Makefile_pru \
     file://Makefile_ti-ocf-crypto-module \
     file://Makefile_qt-tstat \
-    file://Makefile_qml-playground \
+    file://Makefile_quick-playground \
     file://Makefile_wireless \
 "
 
-PR = "r2"
+PR = "r3"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -42,7 +42,7 @@ MAKEFILES_COMMON = "linux \
 
 # Add device specific make targets
 MAKEFILES_omap3 += "u-boot-spl \
-                    qml-playground \
+                    quick-playground \
 "
 MAKEFILES_am37x-evm += "av-examples \
                         ti-ocf-crypto-module \
@@ -52,7 +52,7 @@ MAKEFILES_am3517-evm += "av-examples \
                          ti-ocf-crypto-module \
 "
 MAKEFILES_ti33x += "u-boot-spl \
-                    qml-playground wireless \
+                    quick-playground wireless \
 "
 MAKEFILES_am180x-evm += "pru \
                          u-boot-legacy \

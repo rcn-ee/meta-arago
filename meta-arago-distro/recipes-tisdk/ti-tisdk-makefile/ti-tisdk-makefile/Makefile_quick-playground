@@ -1,0 +1,24 @@
+# Quick Playground build targets
+quick-playground:
+	@echo =================================
+	@echo    Building Quick Playground App
+	@echo =================================
+	@cd example-applications; cd `find . -name "*quick-playground*"`; make -f Makefile.build release
+
+quick-playground_clean:
+	@echo =================================
+	@echo    Cleaning Quick Playground App
+	@echo =================================
+	@cd example-applications; cd `find . -name "*quick-playground*"`; make -f Makefile.build clean
+
+quick-playground_install:
+	@echo ====================================================
+	@echo   Installing Quick Playground App - Release version
+	@echo ====================================================
+	@cd example-applications; cd `find . -name "*quick-playground*"`; make -f Makefile.build install
+
+quick-playground_install_debug:
+	@echo ==================================================
+	@echo   Installing Quick Playground App - Debug version
+	@echo ==================================================
+	@cd example-applications; cd `find . -name "*quick-playground*"`; make -f Makefile.build install_debug
