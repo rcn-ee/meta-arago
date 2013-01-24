@@ -272,6 +272,11 @@ echo "
 sw_manifest_toolchain_target() {
     opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/arm-arago-linux-gnueabi/var/lib/opkg/info"
 
+echo "
+<h2><u>Development Libraries Installed on Host</u></h2>
+<p>This table describes software libraries and headers that are installed on the development host and used during the development of software to run on the target.  Some of this software may be licensed under GPLv3.  Customers should be careful when linking against these libraries to make sure they are complying with the license(s) of the library</p>
+" >> ${SW_MANIFEST_FILE}
+
     generate_sw_manifest_table $opkg_dir
 }
 
