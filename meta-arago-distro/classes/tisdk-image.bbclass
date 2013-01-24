@@ -37,7 +37,7 @@ TISDK_TOOLCHAIN_PATH ?= "linux-devkit"
 TISDK_TOOLCHAIN ?= "meta-toolchain-arago"
 
 # List of the type of target file system images we want to include
-TARGET_IMAGE_TYPES ?= "tar.bz2 ubi"
+TARGET_IMAGE_TYPES ?= "tar.bz2 tar.gz ubi"
 
 # If EXTRA_TISDK_FILES points to a valid directory then all the contents
 # of that directory will be added to the SDK using the same directory
