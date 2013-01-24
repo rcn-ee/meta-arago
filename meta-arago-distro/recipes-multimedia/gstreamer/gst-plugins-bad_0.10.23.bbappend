@@ -1,4 +1,4 @@
-PR_append = "-arago2"
+PR_append = "-arago3"
 
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
@@ -16,3 +16,9 @@ SRC_URI += "file://0001-gstfbdevsink-Fix-depth-value-for-GST_VIDEO_CAPS_RGB_.pat
 # Add faad has a dependency to insure gst-plugins-bad-faad is built.
 DEPENDS += "faad2"
 RDEPENDS_${PN}-faad += "libfaad"
+
+# Disable features that have potential commercial licensing restrictions
+EXTRA_OECONF += "\
+    --disable-mpeg2enc \
+    --disable-acm \
+"
