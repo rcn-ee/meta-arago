@@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=93a105adb99011afa5baee932b560714 \
 
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r1"
+PR = "r2"
 
 BRANCH ?= "master"
-SRCREV = "429c802ea04c41f7b29efb89642828091fb83f9b"
+SRCREV = "1d3f0ecc0e9c9358166db94965b9075b5ae73723"
 
 SRC_URI = "git://gitorious.org/thermostat-demo/thermostat-demo.git;protocol=git"
 
