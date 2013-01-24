@@ -1,0 +1,24 @@
+# arm-benchmarks build targets
+arm-benchmarks:
+	@echo =============================
+	@echo    Building ARM Benchmarks
+	@echo =============================
+	@cd example-applications; cd `find . -name "*arm-benchmarks*"`; make
+
+arm-benchmarks_clean:
+	@echo =============================
+	@echo    Cleaning ARM Benchmarks
+	@echo =============================
+	@cd example-applications; cd `find . -name "*arm-benchmarks*"`; make clean
+
+arm-benchmarks_install:
+	@echo ==============================================
+	@echo   Installing ARM Benchmarks - Release version
+	@echo ==============================================
+	@cd example-applications; cd `find . -name "*arm-benchmarks*"`; make install
+
+arm-benchmarks_install_debug:
+	@echo ============================================
+	@echo   Installing ARM Benchmarks - Debug Version
+	@echo ============================================
+	@cd example-applications; cd `find . -name "*arm-benchmarks*"`; make install_debug
