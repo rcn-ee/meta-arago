@@ -1,14 +1,14 @@
 DESCRIPTION = "Wifi Direct Demo"
 SECTION = "network"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://src/main.cpp;md5=cf285050f56a20d116b026c9f8ded4f7"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=75859989545e37968a99b631ef42722e"
 
 COMPATIBLE_MACHINE = "(am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
-PR = "r4"
+PR = "r5"
 
 BRANCH = "master"
-SRCREV = "9041d6052b43a38e3f06a474822f3f7382bf14a5"
+SRCREV = "1d41618cded6d82b285e14b85b59f3320fb22469"
 
 SRC_URI = "git://www.github.com/TI-ECS/wifi-direct-demo.git;protocol=git;branch=${BRANCH} \
            file://wifi-direct-demo.desktop"
