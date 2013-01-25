@@ -1,7 +1,7 @@
 DESCRIPTION = "Initialization and demo application for bluetooth on WL1271 chipset"
 SECTION = "network"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://README.md;md5=7fd458a478fbc8a473a2d5b95c5cb048"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=bb965abb1955d78452750ca40717999c"
 
 DEPENDS += "openobex"
 RDEPENDS_${PN} += "bluez4 openobex ussp-push obexftp bluez-hcidump"
@@ -9,13 +9,14 @@ RDEPENDS_${PN} += "bluez4 openobex ussp-push obexftp bluez-hcidump"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGE_STRIP = "no"
 
-PR = "r1+gitr${SRCREV}"
+PR = "r2+gitr${SRCREV}"
 
-SRCREV = "c7faa4cd2ef26b72ef2ae3d3d4854ea83a2ee636"
+BRANCH = "wl12xx"
+SRCREV = "7736f86b8c157ffc3e2a0b9e55a97c093faae14e"
 
 COMPATIBLE_MACHINE = "am37x-evm|am180x-evm|da850-omapl138-evm|am335x-evm"
 
-SRC_URI = "git://github.com/TI-ECS/wl1271-bluetooth.git;protocol=git"
+SRC_URI = "git://github.com/TI-ECS/wl1271-bluetooth.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
