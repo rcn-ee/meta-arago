@@ -56,6 +56,21 @@ SRCIPK_SECTION ?= "${SECTION}"
 # Default SRCIPK_INCLUDE_EXTRAFILES is to include the extra files
 SRCIPK_INCLUDE_EXTRAFILES ?= "1"
 
+
+# Remove git repositories before packaging up the sources
+clear_git() {
+
+    cd ${S}
+
+    if [ -d ".git" ]
+    then
+        rm -rf .git
+    fi
+
+    cd -
+
+}
+
 # Create a README file that describes the contents of the source ipk
 sourceipk_create_readme() {
     readme="$1/README.${PN}-src"
@@ -79,6 +94,9 @@ sourceipk_create_readme() {
 sourceipk_do_create_srcipk() {
     if [ ${CREATE_SRCIPK} != "0" ]
     then
+
+        clear_git
+
         tmp_dir="${WORKDIR}/sourceipk-tmp"
         srcipk_dir="${WORKDIR}/sourceipk-data"
         mkdir -p $tmp_dir/CONTROL
