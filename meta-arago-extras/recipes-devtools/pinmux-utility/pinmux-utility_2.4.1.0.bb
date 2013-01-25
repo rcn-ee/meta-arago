@@ -5,14 +5,14 @@ COMPATIBLE_MACHINE = "am335x-evm|am37x-evm|am3517-evm|beagleboard"
 
 PR = "r0"
 
-SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/815/5471/PinMuxUtility_v2_03_01_00.zip;name=base;subdir=${P}"
+SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/850/5562/PinMuxUtility_v2_04_01_00.zip;name=base;subdir=${P}"
 
 # Temporarily add LICENSE file here since zip files don't contain any license information. This file was grabbed
 # from the License Agreement screen when installing this application.
 SRC_URI += "file://LICENSE"
 
-SRC_URI[base.md5sum] = "31f28b06f72c042e5400fc53b4a29c0e"
-SRC_URI[base.sha256sum] = "2b0de3592c5f4b803a207d092dba227d10e1af65e0d4f06e1d8d23f317a452f9"
+SRC_URI[base.md5sum] = "f65ec03bbbb9e14126ac8ce2795acede"
+SRC_URI[base.sha256sum] = "a95fe1b436419bf97bfdcc0b7ce95e497558ad81190d95dc0869ef9fc794094c"
 
 S = "${WORKDIR}/${P}"
 
