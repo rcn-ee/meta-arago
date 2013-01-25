@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=ba590e1d103f891d0151609046aef9e8"
 
 PACKAGE_ARCH = "all"
 
-PR = "r0+gitr${SRCREV}"
+PR = "r1+gitr${SRCREV}"
 
 # This recipe provides the latest firmware files for wl12xx.
 # Therefore, use the contents of this recipe instead of the contents
@@ -12,8 +12,10 @@ PR = "r0+gitr${SRCREV}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RPROVIDES_${PN}  = "linux-firmware-wl12xx"
 
-SRCREV = "38e0dd7999b9087e00d1a59306a7c22fd23246cf"
-SRC_URI = "git://github.com/TI-ECS/ti-utils.git;protocol=git"
+SRCREV = "ol_R5.SP3.05"
+SRC_URI = "git://github.com/TI-OpenLink/ti-utils.git;protocol=git \
+           file://Makefile \
+          "
 
 S = "${WORKDIR}/git/hw/firmware"
 
@@ -22,6 +24,7 @@ do_compile() {
 }
 
 do_install() {
+    cp ${WORKDIR}/Makefile ${S}
     oe_runmake 'DEST_DIR=${D}' install
 }
 
