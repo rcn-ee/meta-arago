@@ -1,0 +1,24 @@
+# ti-crypto-examples build targets
+ti-crypto-examples:
+	@echo =================================
+	@echo    Building TI Crypto Examples
+	@echo =================================
+	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make
+
+ti-crypto-examples_clean:
+	@echo =================================
+	@echo    Cleaning TI Crypto Examples
+	@echo =================================
+	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make clean
+
+ti-crypto-examples_install:
+	@echo ===================================================
+	@echo   Installing TI Crypto Examples - Release version
+	@echo ===================================================
+	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make install
+
+ti-crypto-examples_install_debug:
+	@echo =================================================
+	@echo   Installing TI Crypto Examples - Debug Version
+	@echo =================================================
+	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make install_debug
