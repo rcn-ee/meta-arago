@@ -5,7 +5,7 @@ HOMEPAGE = "http://hostap.epitest.fi"
 DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
 SECTION = "kernel/userland"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://../COPYING;md5=c54ce9345727175ff66d17b67ff51f58"
+LIC_FILES_CHKSUM = "file://../COPYING;md5=ab87f20cd7e8c0d0a6539b34d3791d0e"
 
 DEPENDS = "libnl openssl"
 
@@ -20,11 +20,11 @@ CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
 
 # Add TI to the end to make it clear that this is a TI customized version
 # of hostap
-PV = "0.7.3+0.8.0-rc-ti"
+PV = "2.0-devel-ti"
 
-PR = "r0+gitr${SRCPV}"
+PR = "r1+gitr${SRCPV}"
 
-SRCREV = "ol_R5.00.18"
+SRCREV = "ol_R5.SP3.05"
 
 SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
 	file://0001-hostapd-change-conf-file-for-better-oob-startup.patch;patchdir=.. \
