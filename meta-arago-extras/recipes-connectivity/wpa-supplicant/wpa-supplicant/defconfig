@@ -424,3 +424,7 @@ CONFIG_DEBUG_FILE=y
 # for p2p
 CONFIG_P2P=y
 CONFIG_AP=y
+
+# IEEE 802.11n (High Throughput) support
+CONFIG_IEEE80211N=y
+
