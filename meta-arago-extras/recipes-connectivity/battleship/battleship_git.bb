@@ -1,14 +1,14 @@
 DESCRIPTION = "Battleship game with wifi direct"
 SECTION = "network"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://src/kgamecanvas.cpp;beginline=1;endline=25;md5=b4fc9c236e9a19cfaeaca80abbb29032"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=75859989545e37968a99b631ef42722e"
 
-PR = "r3"
+PR = "r4"
 
 COMPATIBLE_MACHINE = "(omap3evm|am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
 BRANCH = "master"
-SRCREV = "c202d2bbc6b1d1b80ee357872cd8329b7f10dca3"
+SRCREV = "78524080276f5395b91c1d36858522f69f529462"
 PR_append = "+gitr${SRCREV}"
 
 SRC_URI = "git://www.github.com/TI-ECS/battleship.git;protocol=git;branch=${BRANCH} \
