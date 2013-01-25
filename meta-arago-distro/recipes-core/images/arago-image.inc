@@ -15,6 +15,7 @@ ARAGO_IMAGE_EXTRA_INSTALL ?= ""
 
 IMAGE_INSTALL += " \
 	task-core-boot \
+	bash \
 	${ROOTFS_PKGMANAGE} \
 	${ARAGO_IMAGE_EXTRA_INSTALL} \
 "
