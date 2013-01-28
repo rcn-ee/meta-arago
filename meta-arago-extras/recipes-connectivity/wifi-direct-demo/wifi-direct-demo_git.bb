@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=75859989545e37968a99b631ef42722e"
 
 COMPATIBLE_MACHINE = "(am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
-PR = "r5"
+PR = "r6"
 
 BRANCH = "master"
 SRCREV = "1d41618cded6d82b285e14b85b59f3320fb22469"

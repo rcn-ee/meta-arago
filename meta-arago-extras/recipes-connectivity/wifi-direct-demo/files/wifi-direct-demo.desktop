@@ -4,6 +4,6 @@ Name=WiFi-Direct Demo
 GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/wifi-direct-demo/wifi-direct-icon.png
 Type=Application
-Exec=wifi-direct-demo
+Exec=/usr/sbin/kill_wpa_supplicant.sh wifi-direct-demo
 Categories=wifi
 X-ProgramType=gui
