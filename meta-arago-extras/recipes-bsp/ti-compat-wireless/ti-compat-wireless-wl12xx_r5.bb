@@ -15,7 +15,7 @@ PV = "0.${TAG}"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "a"
+PR_append = "b"
 
 COMPAT_WIRELESS_VERSION = "2012-11-18-r5-sp3"
 
@@ -25,7 +25,6 @@ SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/994/6330/ti-compat-wirel
            file://0001-compat-wireless-add-pm_runtime_enabled.patch \
            file://0001-compat-wireless-exclude-BT-building.patch \
            file://0002-compat-wireless-enable-test-mode.patch \
-           file://0004-added-driver-version.patch \
            file://0002-ti-compat-wireless-enable-uapsd-configuration.patch \
            file://0001-wl12xx-additional-two-members-for-wl12xx_platform_da.patch \
            file://0001-git-version-use-compat-base-tree.patch \
