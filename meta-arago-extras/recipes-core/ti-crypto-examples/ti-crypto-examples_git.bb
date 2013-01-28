@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://AES/aes_256.c;beginline=9;endline=35;md5=8edbb4dee965
 SECTION = "console"
 DEPENDS += "openssl"
 
-PR = "r1"
+PR = "r2"
 
 BRANCH ?= "master"
-SRCREV = "7d7092f14005da15f556ef52cad73fb7fd038d7a"
+SRCREV = "37aad72a4d49d0a6dbe934495e5c3bd973a72f1a"
 
 SRC_URI = "git://arago-project.org/git/projects/crypto-example-apps.git;protocol=git;branch=${BRANCH}"
 
