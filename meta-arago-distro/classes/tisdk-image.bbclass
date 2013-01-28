@@ -259,6 +259,14 @@ sw_manifest_toolchain_host() {
     opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/var/lib/opkg/info"
 
 echo "
+<h2><u>GPLv3 Development Host Content</u></h2>
+<p>This table describes any GPLv3 software being delivered that is expected to run on a Development Host, instead of the target device.</p>
+" >> ${SW_MANIFEST_FILE}
+
+    generate_sw_manifest_table $opkg_dir "true"
+
+
+echo "
 <h2><u>Development Host Content</u></h2>
 <p>This table describes any software being delivered that is expected to run on a Development Host, instead of the target device.  Some of this software may be licensed under GPLv3 but it is not expected to be shipped as a product.</p>
 " >> ${SW_MANIFEST_FILE}
@@ -271,6 +279,13 @@ echo "
 # the host but intended for the target.
 sw_manifest_toolchain_target() {
     opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/arm-arago-linux-gnueabi/var/lib/opkg/info"
+
+echo "
+<h2><u>GPLv3 Development Libraries Installed on Host</u></h2>
+<p>This table describes GPLv3 software libraries and headers that are installed on the development host and used during the development of software to run on the target. Customers should be careful when linking against these libraries to make sure they are complying with the license(s) of the library</p>
+" >> ${SW_MANIFEST_FILE}
+
+    generate_sw_manifest_table $opkg_dir "true"
 
 echo "
 <h2><u>Development Libraries Installed on Host</u></h2>
