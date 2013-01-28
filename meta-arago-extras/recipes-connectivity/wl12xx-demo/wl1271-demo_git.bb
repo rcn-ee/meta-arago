@@ -4,12 +4,12 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bb965abb1955d78452750ca40717999c"
 
 DEPENDS += "openobex"
-RDEPENDS_${PN} += "bluez4 openobex ussp-push obexftp bluez-hcidump"
+RDEPENDS_${PN} += "bluez4 openobex ussp-push obexftp bluez-hcidump obex-client"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGE_STRIP = "no"
 
-PR = "r2+gitr${SRCREV}"
+PR = "r3+gitr${SRCREV}"
 
 BRANCH = "wl12xx"
 SRCREV = "7736f86b8c157ffc3e2a0b9e55a97c093faae14e"
