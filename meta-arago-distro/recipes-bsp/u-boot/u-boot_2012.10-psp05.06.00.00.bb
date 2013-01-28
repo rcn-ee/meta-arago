@@ -23,14 +23,14 @@ DEFAULT_PREFERENCE = "-1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR = "r6+gitr${SRCPV}"
+PR = "r7+gitr${SRCPV}"
 
 SRC_URI = "git://arago-project.org/git/projects/u-boot-am33x.git;protocol=git;branch=${BRANCH} \
 "
 
 BRANCH = "amsdk-05.06.00.00"
 
-SRCREV = "${AUTOREV}"
+SRCREV = "6536bfa6b7f16bb49fdea8c72959e3ed54e77a82"
 
 S = "${WORKDIR}/git"
 
