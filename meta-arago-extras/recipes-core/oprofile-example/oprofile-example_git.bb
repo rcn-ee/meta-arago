@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://signal_parent.c;beginline=1;endline=37;md5=3c72149bb4
 
 SECTION = "system"
 
-PACKAGE_STRIP = "no"
+INHIBIT_PACKAGE_STRIP = "1"
 
-PR = "r0"
+PR = "r1"
 
 BRANCH ?= "master"
 SRCREV = "875147fcaf0706f91b1bcbf9d80821de78257955"
