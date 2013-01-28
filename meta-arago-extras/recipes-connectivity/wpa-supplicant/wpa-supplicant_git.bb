@@ -17,7 +17,7 @@ RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 DEFAULT_PREFERENCE = "-1"
 
 SRCREV = "ol_R5.SP3.05"
-PR = "r1+gitr${SRCPV}"
+PR = "r2+gitr${SRCPV}"
 # Add ti to the PV to indicate that this is a TI modify version of wpa-supplicant.
 PV = "2.0-devel-ti"
 
@@ -25,6 +25,7 @@ SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
            file://defconfig \
            file://defaults-sane \
            file://wpa-supplicant.sh \
+           file://kill_wpa_supplicant.sh \
            file://wpa_supplicant.conf \
            file://wpa_supplicant.conf-sane \
            file://99_wpa_supplicant \
@@ -39,7 +40,7 @@ S = "${WORKDIR}/git/wpa_supplicant"
 PACKAGES_prepend = "wpa-supplicant-passphrase wpa-supplicant-cli "
 FILES_wpa-supplicant-passphrase = "/usr/sbin/wpa_passphrase"
 FILES_wpa-supplicant-cli = "/usr/sbin/wpa_cli"
-FILES_${PN} += " /usr/share/dbus-1/system-services/*"
+FILES_${PN} += " /usr/share/dbus-1/system-services/* /usr/sbin/kill_wpa_supplicant.sh"
 
 #we introduce MY_ARCH to get 'armv5te' as arch instead of the misleading 'arm' on armv5te builds
 MY_ARCH := "${PACKAGE_ARCH}"
@@ -54,6 +55,7 @@ do_install () {
 	install -m 755 wpa_supplicant ${D}${sbindir}
 	install -m 755 wpa_passphrase ${D}${sbindir}
 	install -m 755 wpa_cli        ${D}${sbindir}
+	install -m 755 ${WORKDIR}/kill_wpa_supplicant.sh ${D}${sbindir}
 
 	install -d ${D}${docdir}/wpa_supplicant
 	install -m 644 README ${WORKDIR}/wpa_supplicant.conf ${D}${docdir}/wpa_supplicant
