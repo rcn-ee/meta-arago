@@ -25,7 +25,7 @@ DEPENDS += "am33x-cm3"
 KERNEL_IMAGETYPE = "uImage"
 
 # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
-MACHINE_KERNEL_PR_append = "f+gitr${SRCPV}"
+MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
 
 BRANCH = "v3.2-staging"
 
@@ -62,6 +62,16 @@ PATCHES += "file://0001-am33x-Add-memory-addresses-for-crypto-modules.patch \
                 file://0001-am335x-Add-crypto-driver-settings-to-defconfig.patch \
                 file://0001-am335x-Add-pm_runtime-API-to-crypto-driver.patch \
                 file://0002-am335x-Add-suspend-resume-routines-to-crypto-driver.patch \
+                file://0001-ARM-AM33xx-hwmod-Convert-SHA0-crypto-device-data-to-.patch \
+                file://0002-crypto-omap4-sham-Use-finer-grained-PM-management.patch \
+                file://0003-crypto-omap4-sham-Add-suspend-resume-PM-support.patch \
+                file://0004-crypto-omap4-sham-Don-t-use-hardcoded-base-address.patch \
+                file://0005-ARM-AM33xx-hwmod-Convert-AES0-crypto-device-data-to-.patch \
+                file://0006-crypto-omap4-aes-User-finer-grained-PM-management.patch \
+                file://0007-crypto-omap4-aes-Add-suspend-resume-PM-support.patch \
+                file://0008-crypto-omap4-aes-Don-t-use-hardcoded-base-address.patch \
+                file://0009-ARM-AM33xx-hwmod-Convert-RNG-device-data-to-hwmod.patch \
+                file://0010-hwrng-omap4-rng-Convert-to-use-pm_runtime-API.patch \
                "
 
 # Add SmartReflex support early driver patches while working to get the driver
