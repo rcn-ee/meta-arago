@@ -2,7 +2,7 @@ DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-PR = "r2"
+PR = "r3"
 
 inherit task
 
@@ -23,6 +23,7 @@ WLAN_COMMON = "\
     oppserver \
     bluez-tools \
     obexd \
+    obex-client \
     pulseaudio \
     pulseaudio-server \
     pulseaudio-module-loopback \
