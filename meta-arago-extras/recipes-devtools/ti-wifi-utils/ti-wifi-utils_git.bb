@@ -7,8 +7,9 @@ RDEPENDS = "ti-compat-wireless-wl12xx wl12xx-firmware"
 
 inherit update-rc.d
 INITSCRIPT_NAME="calibrate.sh"
+INITSCRIPT_PARAMS = "start 20 2 3 4 5 ."
 
-PR ="r1+gitr${SRCPV}"
+PR ="r2+gitr${SRCPV}"
 PV ="0.0"
 
 SRCREV = "ol_R5.SP3.05"
