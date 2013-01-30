@@ -1,9 +1,9 @@
-require ${COREBASE}/meta/recipes-qt/qt4/qt-${PV}.inc
+require ${COREBASE}/meta/recipes-qt/qt4/qt4-${PV}.inc
 require ${COREBASE}/meta/recipes-qt/qt4/qt4-embedded.inc
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.2"
 
-FILESEXTRAPATHS_append := "${THISDIR}/${PN}:${COREBASE}/meta/recipes-qt/qt4/qt-4.8.0:${COREBASE}/meta/recipes-qt/qt4/files:"
+FILESEXTRAPATHS_append := "${THISDIR}/${PN}:${COREBASE}/meta/recipes-qt/qt4/qt4-${PV}:${COREBASE}/meta/recipes-qt/qt4/files:"
 
 DEFAULT_PREFERENCE = "-1"
 
