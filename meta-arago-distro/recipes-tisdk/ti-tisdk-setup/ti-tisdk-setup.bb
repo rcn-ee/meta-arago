@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://setup.sh;beginline=3;endline=31;md5=fc4b04a33df6d892c
 
 COMPATIBLE_MACHINE = "am37x-evm|am3517-evm|beagleboard|ti33x|am180x-evm"
 
-PR = "r5"
+PR = "r6"
 
 BRANCH ?= "master"
-SRCREV = "f0c3ec9c0475d7a69b81476141cc45999a11d34d"
+SRCREV = "708cff4993a472b55fb4bf96579b608bcfac1a5a"
 SRC_URI = "git://arago-project.org/git/projects/tisdk-setup-scripts.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
