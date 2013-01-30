@@ -1,18 +1,18 @@
 meta-arago-distro provides Arago distribution configuration for TI SDK products
 
-This layer works with the latest Yocto Project release (currently 1.2) and tracks
-the stable/maintenance branches (currently "denzil") of the corresponding layers:
+This layer works with the latest Yocto Project release (currently 1.3) and tracks
+the stable/maintenance branches (currently "danny") of the corresponding layers:
 
 URI: git://git.openembedded.org/openembedded-core
-branch: denzil
+branch: danny
 revision: HEAD
 
 URI: git://git.openembedded.org/meta-openembedded
-branch: denzil
+branch: danny
 revision: HEAD
 
 URI: git://arago-project.org/git/meta-ti
-branch: denzil
+branch: danny
 revision: HEAD
 
 Send pull requests to meta-arago@arago-project.org
