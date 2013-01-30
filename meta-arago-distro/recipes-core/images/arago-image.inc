@@ -14,7 +14,7 @@ VIRTUAL-RUNTIME_login_manager = "tinylogin shadow"
 ARAGO_IMAGE_EXTRA_INSTALL ?= ""
 
 IMAGE_INSTALL += " \
-	task-core-boot \
+	packagegroup-core-boot \
 	bash \
 	${ROOTFS_PKGMANAGE} \
 	${ARAGO_IMAGE_EXTRA_INSTALL} \

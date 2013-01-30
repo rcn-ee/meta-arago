@@ -1,11 +1,11 @@
 # Qt Embedded toolchain
-TOOLCHAIN_HOST_TASK = "task-arago-qte-toolchain-host-nativesdk task-arago-cross-canadian-${TRANSLATED_TARGET_ARCH}"
-TOOLCHAIN_TARGET_TASK = "task-arago-qte-toolchain-target"
+TOOLCHAIN_HOST_TASK = "nativesdk-packagegroup-arago-qte-toolchain-host packagegroup-arago-cross-canadian-${TRANSLATED_TARGET_ARCH}"
+TOOLCHAIN_TARGET_TASK = "packagegroup-arago-qte-toolchain-target"
 TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-qte-sdk-${SDK_ARCH}"
 
 require meta-toolchain-arago.bb
 
-PR = "r9"
+PR = "r10"
 
 QT_DIR_NAME = "qtopia"
 

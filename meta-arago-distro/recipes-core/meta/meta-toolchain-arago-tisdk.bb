@@ -1,6 +1,6 @@
 require recipes-core/meta/meta-toolchain-arago-qte.bb
 
-TOOLCHAIN_TARGET_TASK = "task-arago-toolchain-tisdk-target"
+TOOLCHAIN_TARGET_TASK = "packagegroup-arago-toolchain-tisdk-target"
 TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}"
 
 PR = "r0"

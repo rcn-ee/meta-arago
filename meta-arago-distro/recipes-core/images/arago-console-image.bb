@@ -20,8 +20,8 @@ ROOTFS_SIZE_hawkboard = "81920"
 ROOTFS_SIZE_overo = "81920"
 
 IMAGE_INSTALL += "\
-    task-arago-base \
-    task-arago-console \
+    packagegroup-arago-base \
+    packagegroup-arago-console \
     "
 
 export IMAGE_BASENAME = "arago-console-image"

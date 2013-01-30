@@ -18,14 +18,13 @@ TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image"
 TISDK_TOOLCHAIN = "meta-toolchain-arago-tisdk"
 
 IMAGE_INSTALL = "\
-    task-arago-tisdk-addons-sdk-host \
-    task-arago-tisdk-connectivity-sdk-host \
-    task-arago-tisdk-crypto-sdk-host \
-    task-arago-tisdk-matrix-sdk-host \
-    task-arago-tisdk-multimedia-sdk-host \
-    task-arago-tisdk-qte-sdk-host \
-    task-arago-tisdk-amsdk-sdk-host \
+    packagegroup-arago-tisdk-addons-sdk-host \
+    packagegroup-arago-tisdk-connectivity-sdk-host \
+    packagegroup-arago-tisdk-crypto-sdk-host \
+    packagegroup-arago-tisdk-matrix-sdk-host \
+    packagegroup-arago-tisdk-multimedia-sdk-host \
+    packagegroup-arago-tisdk-qte-sdk-host \
+    packagegroup-arago-tisdk-amsdk-sdk-host \
 "
 
 export IMAGE_BASENAME = "arago-amsdk-image"
-
