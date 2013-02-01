@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to add gstreamer and gstreamer plugins"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
@@ -17,5 +17,6 @@ GSTREAMER = " \
 
 RDEPENDS_${PN} = "\
     ${GSTREAMER} \
-    gst-ffmpeg \
     "
+
+#    gst-ffmpeg
