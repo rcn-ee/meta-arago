@@ -1,13 +1,10 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-
-PR = "r1"
+PR = "r2"
 
 inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-ALLOW_EMPTY = "1"
 
 GRAPHICS_SDK = "\
     libgles-omap3 \

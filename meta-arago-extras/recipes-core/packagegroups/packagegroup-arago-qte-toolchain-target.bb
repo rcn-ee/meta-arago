@@ -1,14 +1,9 @@
 DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
-ALLOW_EMPTY = "1"
 
-PR = "r4"
+PR = "r5"
 
 inherit packagegroup
-
-LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-
 
 QT_SGX_SUPPORT = "\
     libqt-embeddedopengl4-dev \
@@ -16,7 +11,7 @@ QT_SGX_SUPPORT = "\
 "
 
 RDEPENDS_${PN} += " \
-        task-arago-standalone-sdk-target \
+        packagegroup-arago-standalone-sdk-target \
         qt4-embedded-mkspecs \
         libqt-embeddedmultimedia4-dev \
         libqt-embeddedphonon4-dev \
