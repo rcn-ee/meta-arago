@@ -4,7 +4,7 @@ TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}"
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r16"
+PR = "r17"
 
 SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
 
@@ -56,36 +56,182 @@ toolchain_create_sdk_env_script () {
 	echo 'export OECORE_SDK_VERSION="${SDK_VERSION}"' >> $script
 }
 
-create_shell_stub () {
-	i=$1
-	mv $i $i.real
-	printf "#!/bin/sh\nif [ -n \x22\x24BASH_SOURCE\x22 ]; then\n" > $i
-	printf "\tfilename\x3D\x60echo \x24\x7BBASH_SOURCE\x23\x23\x2A\x2F\x7D\x60\n" >> $i
-	printf "\tdirname\x3D\x24\x7BBASH_SOURCE\x2F\x25\x24filename\x2F\x7D\n" >> $i
-	printf "\t\x2E \x24dirname\x2E\x2E\x2Fenvironment-setup\n" >> $i
-	printf "fi\n" >> $i
-
-	if [ "$2" == "yes" ]; then
-		echo 'export PYTHONHOME=$SDK_PATH' >> $i
-		echo 'export PYTHONPATH=lib/python2.7' >> $i
-	fi
-	printf "LD_LIBRARY_PATH=\x24SDK_PATH/lib:\x24LD_LIBRARY_PATH \x24SDK_PATH/lib/ld-linux.so.2 \x24SDK_PATH/bin/$i.real \x24\x2a\n" >> $i
-	chmod +x $i
-}
-
 populate_sdk_ipk_append () {
-	cd ${SDK_OUTPUT}/${SDKPATH}/bin
-	binfiles=`find ! -name "${ARAGO_TARGET_SYS}-*" -type f -perm +111 -exec file {} \;|grep -v ":.*ASCII.*text"|cut -d":" -f1|cut -c3-`
-	for i in $binfiles; do
-		create_shell_stub $i
-	done
-
-	# Special case for gdb, that is built as part of canadian-cross-sdk
-	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', '', 'create_shell_stub ${TARGET_PREFIX}gdb yes', d)}
-
 	# Remove broken .la files
 	for i in `find ${SDK_OUTPUT}/${SDKPATH} -name \*.la`; do
 		rm -f $i
 	done
-	rm -f ${SDK_OUTPUT}/${SDKPATH}/lib/*.la
+	mkdir -p "${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/lib/${TUNE_PKGARCH}${TARGET_VENDOR}-${TARGET_OS}"
+}
+
+fakeroot create_sdk_files() {
+	# Setup site file for external use
+	toolchain_create_sdk_siteconfig ${SDK_OUTPUT}/${SDKPATH}/site-config-${REAL_MULTIMACH_TARGET_SYS}
+
+	toolchain_create_sdk_env_script ${SDK_OUTPUT}/${SDKPATH}/environment-setup
+
+	# Add version information
+	toolchain_create_sdk_version ${SDK_OUTPUT}/${SDKPATH}/version-${REAL_MULTIMACH_TARGET_SYS}
+
+	cp ${ARAGOBASE}/scripts/relocate_sdk.py ${SDK_OUTPUT}/${SDKPATH}/
+
+	# Replace the ##DEFAULT_INSTALL_DIR## with the correct pattern.
+	# Escape special characters like '+' and '.' in the SDKPATH
+	escaped_sdkpath=$(echo ${SDKPATH} |sed -e "s:[\+\.]:\\\\\\\\\0:g")
+	sed -i -e "s:##DEFAULT_INSTALL_DIR##:$escaped_sdkpath:" ${SDK_OUTPUT}/${SDKPATH}/relocate_sdk.py
+}
+
+fakeroot tar_sdk() {
+	# Package it up
+	mkdir -p ${SDK_DEPLOY}
+	cd ${SDK_OUTPUT}/${SDKPATH}
+	tar --owner=root --group=root -cj --file=${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.bz2 .
+}
+
+fakeroot create_shar() {
+	cat << "EOF" > ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.sh
+#!/bin/bash
+
+INST_ARCH=$(uname -m | sed -e "s/i[3-6]86/ix86/" -e "s/x86[-_]64/x86_64/")
+SDK_ARCH=$(echo ${SDK_ARCH} | sed -e "s/i[3-6]86/ix86/" -e "s/x86[-_]64/x86_64/")
+
+if [ "$INST_ARCH" != "$SDK_ARCH" ]; then
+	# Allow for installation of ix86 SDK on x86_64 host
+	if [ "$INST_ARCH" != x86_64 -o "$SDK_ARCH" != ix86 ]; then
+		echo "Error: Installation machine not supported!"
+		exit 1
+	fi
+fi
+
+DEFAULT_INSTALL_DIR="${SDKPATH}"
+SUDO_EXEC=""
+target_sdk_dir=""
+answer=""
+while getopts ":yd:" OPT; do
+	case $OPT in
+	y)
+		answer="Y"
+		[ "$target_sdk_dir" = "" ] && target_sdk_dir=$DEFAULT_INSTALL_DIR
+		;;
+	d)
+		target_sdk_dir=$OPTARG
+		;;
+	*)
+		echo "Usage: $(basename $0) [-y] [-d <dir>]"
+		echo "  -y         Automatic yes to all prompts"
+		echo "  -d <dir>   Install the SDK to <dir>"
+		exit 1
+		;;
+	esac
+done
+
+printf "Enter target directory for SDK (default: $DEFAULT_INSTALL_DIR): "
+if [ "$target_sdk_dir" = "" ]; then
+	read target_sdk_dir
+	[ "$target_sdk_dir" = "" ] && target_sdk_dir=$DEFAULT_INSTALL_DIR
+else
+	echo "$target_sdk_dir"
+fi
+
+eval target_sdk_dir=$target_sdk_dir
+if [ -d $target_sdk_dir ]; then
+	target_sdk_dir=$(cd $target_sdk_dir; pwd)
+else
+	target_sdk_dir=$(readlink -m $target_sdk_dir)
+fi
+
+if [ -e "$target_sdk_dir/environment-setup*" ]; then
+	echo "The directory \"$target_sdk_dir\" already contains a SDK for this architecture."
+	printf "If you continue, existing files will be overwritten! Proceed[y/N]?"
+
+	default_answer="n"
+else
+	printf "You are about to install the SDK to \"$target_sdk_dir\". Proceed[Y/n]?"
+
+	default_answer="y"
+fi
+
+if [ "$answer" = "" ]; then
+	read answer
+	[ "$answer" = "" ] && answer="$default_answer"
+else
+	echo $answer
+fi
+
+if [ "$answer" != "Y" -a "$answer" != "y" ]; then
+	echo "Installation aborted!"
+	exit 1
+fi
+
+# Try to create the directory (this will not succeed if user doesn't have rights)
+mkdir -p $target_sdk_dir >/dev/null 2>&1
+
+# if don't have the right to access dir, gain by sudo 
+if [ ! -x $target_sdk_dir -o ! -w $target_sdk_dir -o ! -r $target_sdk_dir ]; then 
+	SUDO_EXEC=$(which "sudo")
+	if [ -z $SUDO_EXEC ]; then
+		echo "No command 'sudo' found, please install sudo first. Abort!"
+		exit 1
+	fi
+
+	# test sudo could gain root right
+	$SUDO_EXEC pwd >/dev/null 2>&1
+	[ $? -ne 0 ] && echo "Sorry, you are not allowed to execute as root." && exit 1
+
+	# now that we have sudo rights, create the directory
+	$SUDO_EXEC mkdir -p $target_sdk_dir >/dev/null 2>&1
+fi
+
+payload_offset=$(($(grep -na -m1 "^MARKER:$" $0|cut -d':' -f1) + 1))
+
+printf "Extracting SDK..."
+tail -n +$payload_offset $0| $SUDO_EXEC tar xj -C $target_sdk_dir
+echo "done"
+
+printf "Setting it up..."
+# fix environment paths
+for env_setup_script in `ls $target_sdk_dir/environment-setup*`; do
+	$SUDO_EXEC sed -e "s:$DEFAULT_INSTALL_DIR:$target_sdk_dir:g" -i $env_setup_script
+done
+
+# fix dynamic loader paths in all ELF SDK binaries
+native_sysroot=$target_sdk_dir
+dl_path=$($SUDO_EXEC find $native_sysroot/lib -name "ld-linux*")
+if [ "$dl_path" = "" ] ; then
+	echo "SDK could not be set up. Relocate script unable to find ld-linux.so. Abort!"
+	exit 1
+fi
+executable_files=$($SUDO_EXEC find $native_sysroot ! -name "${ARAGO_TARGET_SYS}-*" -type f -perm +111)
+gdb_files=$($SUDO_EXEC find $native_sysroot -name "${ARAGO_TARGET_SYS}-gdb*" -type f -perm +111)
+$SUDO_EXEC ${env_setup_script%/*}/relocate_sdk.py $target_sdk_dir $dl_path $executable_files $gdb_files
+if [ $? -ne 0 ]; then
+	echo "SDK could not be set up. Relocate script failed. Abort!"
+	exit 1
+fi
+
+# replace ${SDKPATH} with the new prefix in all text files: configs/scripts/etc
+$SUDO_EXEC find $native_sysroot -type f -exec file '{}' \;|grep ":.*\(ASCII\|script\|source\).*text"|cut -d':' -f1|$SUDO_EXEC xargs sed -i -e "s:$DEFAULT_INSTALL_DIR:$target_sdk_dir:g"
+
+# change all symlinks pointing to ${SDKPATH}
+for l in $($SUDO_EXEC find $native_sysroot -type l); do
+	$SUDO_EXEC ln -sfn $(readlink $l|$SUDO_EXEC sed -e "s:$DEFAULT_INSTALL_DIR:$target_sdk_dir:") $l
+done
+
+echo done
+
+# delete the relocating script, so that user is forced to re-run the installer
+# if he/she wants another location for the sdk
+$SUDO_EXEC rm ${env_setup_script%/*}/relocate_sdk.py
+
+echo "SDK has been successfully set up and is ready to be used."
+
+exit 0
+
+MARKER:
+EOF
+	# append the SDK tarball
+	cat ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.bz2 >> ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.sh
+
+	# delete the old tarball, we don't need it anymore
+	rm ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.bz2
 }
