@@ -4,7 +4,7 @@ TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}"
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r17"
+PR = "r18"
 
 SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
 
@@ -201,7 +201,7 @@ if [ "$dl_path" = "" ] ; then
 	echo "SDK could not be set up. Relocate script unable to find ld-linux.so. Abort!"
 	exit 1
 fi
-executable_files=$($SUDO_EXEC find $native_sysroot ! -name "${ARAGO_TARGET_SYS}-*" -type f -perm +111)
+executable_files=$($SUDO_EXEC find $native_sysroot -path $native_sysroot/libexec/gcc/${ARAGO_TARGET_SYS} -prune -o ! -name "${ARAGO_TARGET_SYS}-*" -type f -perm +111 -print)
 gdb_files=$($SUDO_EXEC find $native_sysroot -name "${ARAGO_TARGET_SYS}-gdb*" -type f -perm +111)
 $SUDO_EXEC ${env_setup_script%/*}/relocate_sdk.py $target_sdk_dir $dl_path $executable_files $gdb_files
 if [ $? -ne 0 ]; then
