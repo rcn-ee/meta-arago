@@ -75,13 +75,10 @@ do_sdk_image[cleandirs] += "${S}"
 
 # Call the cleanup_host_packes to remove packages that should be removed from
 # the host for various reasons.  This may include licensing issues as well.
-OPKG_POSTPROCESS_COMMANDS = "cleanup_host_packages; cleanup_toolchain_packages; "
+OPKG_POSTPROCESS_COMMANDS = "cleanup_host_packages; "
 
 # List of packages to remove from the SDK host package set
 HOST_CLEANUP_PACKAGES ?= ""
-
-# List of packages to remove from the SDK toolchain package set
-TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 
 # Remove any packages that may have been pulled in by other package installs
 # that are not desired.  This should be used with caution.
@@ -89,30 +86,6 @@ cleanup_host_packages() {
     if [ "${HOST_CLEANUP_PACKAGES}" != "" ]
     then
         opkg-cl ${IPKG_ARGS} --force-depends remove ${HOST_CLEANUP_PACKAGES}
-    fi
-}
-
-# Remove undesired packages that may be pulled into the toolchain by -dev
-# package dependencies.  This is usually GPLv3 components.
-cleanup_toolchain_packages() {
-    if [ "${TOOLCHAIN_CLEANUP_PACKAGES}" != "" ]
-    then
-        # Make sure the TISDK_TOOLCHAIN_PATH is valid
-        if [ ! -d ${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH} ]
-        then
-            echo "Could not find the TISDK_TOOLCHAIN_PATH (${TISDK_TOOLCHAIN_PATH})"
-            return 1
-        fi
-
-        # Clean up the native side of the toolchain
-        opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}"
-        opkg_conf="${opkg_dir}/etc/opkg-sdk.conf"
-        opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
-
-        # Clean up the target side of the toolchain
-        opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/arm-arago-linux-gnueabi"
-        opkg_conf="${opkg_dir}/etc/opkg.conf"
-        opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
     fi
 }
 
@@ -504,11 +477,6 @@ do_sdk_image () {
 	mkdir -p ${DEPLOY_DIR_IMAGE}
 
 	mkdir -p ${IMAGE_ROOTFS}/etc
-
-    # Extract the toolchain SDK here so that it will be available when the
-    # OPKG_POSTPROCESS_COMMANDS are run
-    tar xjf ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}* -C ${IMAGE_ROOTFS}/
-    mv ${IMAGE_ROOTFS}/${SDK_NAME} ${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}
 
     # Creat the base SDK image
 	rootfs_${IMAGE_PKGTYPE}_do_rootfs
