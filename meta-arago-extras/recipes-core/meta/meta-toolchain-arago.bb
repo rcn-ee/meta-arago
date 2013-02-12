@@ -1,10 +1,11 @@
 TOOLCHAIN_HOST_TASK ?= "nativesdk-packagegroup-arago-sdk-host packagegroup-arago-cross-canadian-${TRANSLATED_TARGET_ARCH}"
 TOOLCHAIN_TARGET_TASK ?= "packagegroup-arago-standalone-sdk-target"
 TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}"
+TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r18"
+PR = "r19"
 
 SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
 
@@ -61,6 +62,9 @@ populate_sdk_ipk_append () {
 	for i in `find ${SDK_OUTPUT}/${SDKPATH} -name \*.la`; do
 		rm -f $i
 	done
+
+	cleanup_toolchain_packages
+
 	mkdir -p "${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/lib/${TUNE_PKGARCH}${TARGET_VENDOR}-${TARGET_OS}"
 }
 
@@ -79,6 +83,26 @@ fakeroot create_sdk_files() {
 	# Escape special characters like '+' and '.' in the SDKPATH
 	escaped_sdkpath=$(echo ${SDKPATH} |sed -e "s:[\+\.]:\\\\\\\\\0:g")
 	sed -i -e "s:##DEFAULT_INSTALL_DIR##:$escaped_sdkpath:" ${SDK_OUTPUT}/${SDKPATH}/relocate_sdk.py
+}
+
+# Remove undesired packages that may be pulled into the toolchain by -dev
+# package dependencies.  This is usually GPLv3 components.
+cleanup_toolchain_packages() {
+	if [ "${TOOLCHAIN_CLEANUP_PACKAGES}" != "" ]
+	then
+		# Clean up the native side of the toolchain
+		opkg_dir="${SDK_OUTPUT}/${SDKPATH}/"
+		opkg_conf="${opkg_dir}/etc/opkg-sdk.conf"
+		opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
+
+		# Clean up the target side of the toolchain
+		opkg_dir="${SDK_OUTPUT}/${SDKTARGETSYSROOT}"
+		opkg_conf="${opkg_dir}/etc/opkg.conf"
+		opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
+
+		# Clean up empty directories from cleaned up packages
+		find ${SDK_OUTPUT} -depth -type d -empty -print0 | xargs -r0 /bin/rmdir
+	fi
 }
 
 fakeroot tar_sdk() {
