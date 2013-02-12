@@ -47,6 +47,9 @@ CREATE_SRCIPK ?= "0"
 # Default installation prefix
 SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
 
+# Specify the directory of the sources
+SRCIPK_SRC_DIR ?= "${S}"
+
 # Default PACKAGE_ARCH for sources is "all"
 SRCIPK_PACKAGE_ARCH ?= "all"
 
@@ -55,7 +58,6 @@ SRCIPK_SECTION ?= "${SECTION}"
 
 # Default SRCIPK_INCLUDE_EXTRAFILES is to include the extra files
 SRCIPK_INCLUDE_EXTRAFILES ?= "1"
-
 
 # Remove git repositories before packaging up the sources
 clear_git() {
@@ -126,11 +128,11 @@ sourceipk_do_create_srcipk() {
 
         # Copy sources for packaging
         mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
-        if [ -e ${S} ]; then
-	    if [ "${S}" = "${WORKDIR}" ]; then
-		excludes='--exclude ./temp --exclude ./sourceipk-tmp --exclude ./sourceipk-data'
-	    fi
-            tar -C ${S} -cO $excludes . | tar -C $tmp_dir/${SRCIPK_INSTALL_DIR} -xpf -
+        if [ -e ${SRCIPK_SRC_DIR} ]; then
+            if [ "${SRCIPK_SRC_DIR}" = "${WORKDIR}" ]; then
+                excludes='--exclude ./temp --exclude ./sourceipk-tmp --exclude ./sourceipk-data'
+            fi
+            tar -C ${SRCIPK_SRC_DIR} -cO $excludes . | tar -C $tmp_dir/${SRCIPK_INSTALL_DIR} -xpf -
         fi
 
         if [ ${SRCIPK_INCLUDE_EXTRAFILES} != "0" ]
