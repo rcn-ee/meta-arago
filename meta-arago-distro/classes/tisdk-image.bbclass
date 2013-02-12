@@ -46,6 +46,9 @@ TARGET_IMAGE_TYPES ?= "tar.bz2 tar.gz ubi"
 # the variable is in the BB_ENV_EXTRAWHITE list.
 EXTRA_TISDK_FILES ?= ""
 
+# Variable to specify the name of the secondary bootloader
+SECONDARY_BOOTLOADER_NAME ?= "MLO-${MACHINE}"
+
 # Manifest file location which will be created as part of the image build
 # process.
 # This manifest follows the TI manifest format requirements which is why
@@ -552,13 +555,16 @@ do_sdk_image () {
         return 1
     fi
 
-    # Copy the MLO image if it exists
-    if [ -e ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE} ]
+    if [ "${SECONDARY_BOOTLOADER_NAME}" != "" ]
     then
-        cp ${DEPLOY_DIR_IMAGE}/MLO-${MACHINE} ${prebuilt_dir}/
-    else
-        echo "Could not find the MLO image"
-        return 1
+        # Copy the secondary bootloader image if it exists
+        if [ -e ${DEPLOY_DIR_IMAGE}/${SECONDARY_BOOTLOADER_NAME} ]
+        then
+            cp ${DEPLOY_DIR_IMAGE}/${SECONDARY_BOOTLOADER_NAME} ${prebuilt_dir}/
+        else
+            echo "Could not find the secondary bootloader image"
+            return 1
+        fi
     fi
 
     # Add the EXTRA_TISDK_FILES contents if they exist
