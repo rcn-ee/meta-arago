@@ -478,6 +478,11 @@ do_sdk_image () {
 
 	mkdir -p ${IMAGE_ROOTFS}/etc
 
+    chmod 755 ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}*
+
+    # Temporarily extract the toolchain sdk so we can read license information from it.
+    echo "${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}" | ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}*
+
     # Creat the base SDK image
 	rootfs_${IMAGE_PKGTYPE}_do_rootfs
 
@@ -562,6 +567,14 @@ do_sdk_image () {
     # Create the TI software manifest
     generate_sw_manifest
 
+    # Delete installed toolchain sdk since we need the toolchain sdk installer
+    # not the extracted version
+    rm -rf ${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}
+
+    # Copy over the toolchain sdk installer an give it a simple name which
+    # matches the traditional name within the SDK.
+    cp ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}* ${IMAGE_ROOTFS}/linux-devkit.sh
+
     # Copy the opkg.conf used by the image to allow for future updates
     cp ${WORKDIR}/opkg.conf ${IMAGE_ROOTFS}/etc/
 
@@ -572,6 +585,11 @@ do_sdk_image () {
 
     # Create the image directory symlinks
     ${@get_imagecmds(d)}
+}
+
+license_create_manifest() {
+    # Override license_create_manifest and do nothing
+    echo ""
 }
 
 EXPORT_FUNCTIONS do_sdk_image
