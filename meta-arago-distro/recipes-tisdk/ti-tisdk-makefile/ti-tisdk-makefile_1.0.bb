@@ -30,7 +30,7 @@ SRC_URI = "\
     file://Makefile_wireless \
 "
 
-PR = "r4"
+PR = "r5"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -60,6 +60,10 @@ MAKEFILES_am180x-evm += "pru \
                          u-boot-legacy \
                          wireless \
 "
+
+PLATFORM_ARCH = "${ARMPKGARCH}"
+# Use ARCH format expected by the makefile
+PLATFORM_ARCH_omapl138 = "armv5te"
 
 # This step will stitch together the final Makefile based on the supported
 # make targets.
@@ -104,7 +108,7 @@ do_install () {
 
     # fixup Rules.make values
     sed -i -e "s/__PLATFORM__/${MACHINE}/" ${D}/Rules.make
-    sed -i -e "s/__ARCH__/${ARMPKGARCH}/" ${D}/Rules.make
+    sed -i -e "s/__ARCH__/${PLATFORM_ARCH}/" ${D}/Rules.make
     sed -i -e "s/__UBOOT_MACHINE__/${UBOOT_MACHINE}/" ${D}/Rules.make
 
 }
