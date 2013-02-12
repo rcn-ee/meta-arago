@@ -4,7 +4,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7aefb5e1cffc7b6a3ef18b803f957922"
 SECTION = "system"
 
-PR = "r2"
+PR = "r3"
 
 BRANCH ?= "master"
 SRCREV = "e9fbf7990e93d97e7471e509626969d244cca214"
@@ -13,14 +13,16 @@ SRC_URI = "git://gitorious.org/arm_benchmarks/arm_benchmarks.git;protocol=git;br
 
 S = "${WORKDIR}/git"
 
+PLATFORM_ARCH = "${ARMPKGARCH}"
+# Use ARCH format expected by the makefile
+PLATFORM_ARCH_omapl138 = "armv5te"
+
 do_compile() {
 	export CROSS_COMPILE=${TARGET_PREFIX}
-	export ARCH=${ARMPKGARCH}
 	# build the release version
-	make release
+	make ARCH=${PLATFORM_ARCH} release
 }
 
 do_install() {
-	export ARCH=${ARMPKGARCH}
-	make DESTDIR=${D} install
+	make ARCH=${PLATFORM_ARCH} DESTDIR=${D} install
 }
