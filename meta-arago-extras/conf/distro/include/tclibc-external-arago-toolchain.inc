@@ -9,18 +9,20 @@ LIBCOVERRIDE = ":libc-glibc"
 OVERRIDES .= "${LIBCOVERRIDE}"
 
 PREFERRED_PROVIDER_virtual/libiconv ?= "external-arago-toolchain"
-PREFERRED_PROVIDER_virtual/libiconv-nativesdk ?= "eglibc-nativesdk"
 PREFERRED_PROVIDER_virtual/libintl ?= "external-arago-toolchain"
 PREFERRED_PROVIDER_virtual/libc ?= "external-arago-toolchain"
-PREFERRED_PROVIDER_virtual/libc-nativesdk ?= "eglibc-nativesdk"
 PREFERRED_PROVIDER_virtual/libc-locale ?= "external-arago-toolchain"
+
+PREFERRED_PROVIDER_virtual/nativesdk-libiconv ?= "nativesdk-eglibc"
+PREFERRED_PROVIDER_virtual/nativesdk-libintl ?= "nativesdk-eglibc"
+PREFERRED_PROVIDER_virtual/nativesdk-libc ?= "nativesdk-eglibc"
 
 LIBC_DEPENDENCIES = "libsegfault \
 		     glibc \
-    		     glibc-dbg \
-    		     glibc-dev \
-    		     glibc-utils \
-    		     glibc-thread-db \
+		     glibc-dbg \
+		     glibc-dev \
+		     glibc-utils \
+		     glibc-thread-db \
 		     ${@get_libc_locales_dependencies(d)}"
 
 LIBC_LOCALE_DEPENDENCIES = "\
