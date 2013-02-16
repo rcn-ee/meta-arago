@@ -16,7 +16,7 @@ inherit autotools
 PR = "r1"
 SRCREV="11982"
 EGLIBC_BRANCH="eglibc-2_12"
-SRC_URI = "svn://www.eglibc.org/svn/branches/;module=${EGLIBC_BRANCH};proto=http "
+SRC_URI = "svn://www.eglibc.org/svn/branches/;module=${EGLIBC_BRANCH};protocol=http "
 S = "${WORKDIR}/${EGLIBC_BRANCH}/localedef"
 
 do_unpack_append() {
