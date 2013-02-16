@@ -588,10 +588,12 @@ do_sdk_image () {
 }
 
 license_create_manifest() {
-    # Override license_create_manifest and do nothing
-    echo ""
+    :
+}
+
+rootfs_install_complementary() {
+    :
 }
 
 EXPORT_FUNCTIONS do_sdk_image
 addtask sdk_image before do_build after do_install
-
