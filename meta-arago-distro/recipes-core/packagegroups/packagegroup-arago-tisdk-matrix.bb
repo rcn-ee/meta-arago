@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 inherit packagegroup
 
@@ -36,13 +36,13 @@ MATRIX_QT_APPS_keystone = ""
 MATRIX_APPS = ""
 
 MATRIX_APPS_append_omap3 = "        \
-    matrix-gui-3d-demos             \
+    ${@base_contains('MACHINE_FEATURES','sgx','matrix-gui-3d-demos','',d)} \
     matrix-gui-multimedia-demos     \
 "
 
 MATRIX_APPS_append_ti33x = "        \
     matrix-gui-ethernet-demos       \
-    matrix-gui-3d-demos             \
+    ${@base_contains('MACHINE_FEATURES','sgx','matrix-gui-3d-demos','',d)} \
     matrix-gui-multimedia-demos     \
                                     \
     matrix-gui-clocks-275mhz        \
