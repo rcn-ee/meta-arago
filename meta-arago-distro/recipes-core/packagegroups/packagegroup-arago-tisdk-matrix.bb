@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 inherit packagegroup
 
@@ -96,6 +96,7 @@ MATRIX_APPS_append_am180x-evm = "   \
     matrix-gui-bluetooth-demos      \
     matrix-gui-wifi-direct-demo     \
     matrix-gui-wifi-battleship-demo \
+    matrix-gui-pru-demos            \
 "
 
 RDEPENDS_${PN} = "        \
