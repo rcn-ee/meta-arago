@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r11"
+PR = "r12"
 
 inherit packagegroup
 
@@ -31,18 +31,24 @@ MATRIX_QT_APPS = "                  \
     ${@base_conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','matrix-gui-apps-quick-playground','', d)} \
 "
 
+MATRIX_SGX_DEMOS = "                \
+    matrix-3d-demo-chameleon        \
+    matrix-3d-demo-film             \
+    matrix-3d-demo-lantern          \
+    matrix-3d-demo-skull            \
+"
 MATRIX_QT_APPS_keystone = ""
 
 MATRIX_APPS = ""
 
 MATRIX_APPS_append_omap3 = "        \
-    ${@base_contains('MACHINE_FEATURES','sgx','matrix-gui-3d-demos','',d)} \
+    ${@base_contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
     matrix-gui-multimedia-demos     \
 "
 
 MATRIX_APPS_append_ti33x = "        \
     matrix-gui-ethernet-demos       \
-    ${@base_contains('MACHINE_FEATURES','sgx','matrix-gui-3d-demos','',d)} \
+    ${@base_contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
     matrix-gui-multimedia-demos     \
                                     \
     matrix-gui-clocks-275mhz        \
