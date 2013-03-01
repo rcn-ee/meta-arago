@@ -1,4 +1,4 @@
-PR_append = "-arago0"
+PR_append = "-arago1"
 
 # Disable features that have potential commercial licensing restrictions
 EXTRA_OECONF += "\
@@ -22,4 +22,16 @@ EXTRA_OECONF += "\
     --disable-muxer=mpeg2svcd \
     --disable-muxer=mpeg2video \
     --disable-muxer=mpeg2vob \
+                            \
+    --disable-encoder=ac3_fixed \
+    --disable-encoder=ac3 \
+    --disable-decoder=ac3 \
+    --disable-decoder=eac3 \
+    --disable-demuxer=ac3 \
+    --disable-demuxer=eac3 \
+    --disable-demuxer=dts \
+    --disable-muxer=ac3 \
+    --disable-muxer=eac3 \
+    --disable-muxer=dts \
+    --disable-parser=ac3 \
 "
