@@ -25,7 +25,7 @@ DEPENDS += "am33x-cm3"
 KERNEL_IMAGETYPE = "uImage"
 
 # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
-MACHINE_KERNEL_PR_append = "g+gitr${SRCPV}"
+MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
 
 BRANCH = "v3.2-staging"
 
@@ -72,6 +72,7 @@ PATCHES += "file://0001-am33x-Add-memory-addresses-for-crypto-modules.patch \
                 file://0008-crypto-omap4-aes-Don-t-use-hardcoded-base-address.patch \
                 file://0009-ARM-AM33xx-hwmod-Convert-RNG-device-data-to-hwmod.patch \
                 file://0010-hwrng-omap4-rng-Convert-to-use-pm_runtime-API.patch \
+                file://0001-omap4-rng-Remove-check-for-GP-only-device-type-in-RN.patch \
                "
 
 # Add SmartReflex support early driver patches while working to get the driver
