@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add gstreamer and gstreamer plugins"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
@@ -16,6 +16,5 @@ GSTREAMER = " \
 
 RDEPENDS_${PN} = "\
     ${GSTREAMER} \
+    gst-ffmpeg \
     "
-
-#    gst-ffmpeg
