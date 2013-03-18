@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -27,6 +27,7 @@ WLAN_COMMON = "\
     pulseaudio-module-bluetooth-device \
     eventdump \
     wpa-supplicant \
+    ${@base_contains('WILINK_VERSION','WILINK-8','wlconf','',d)} \
 "
 
 FIRMWARE_AND_DRIVERS = "\
