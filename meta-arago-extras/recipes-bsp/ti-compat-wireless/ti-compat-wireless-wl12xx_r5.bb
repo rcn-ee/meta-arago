@@ -9,38 +9,53 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 RDEPENDS_${PN} = "wireless-tools"
 
-TAG = "${@'${COMPAT_WIRELESS_VERSION}'.replace('-', '')}"
-PV = "0.${TAG}"
+PV = "r5.sp4.01"
 
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "b"
+PR_append = "c"
 
-COMPAT_WIRELESS_VERSION = "2012-11-18-r5-sp3"
+SRCREV_wl12xx = "ol_R5.SP4.01"
+SRCREV_compat = "ol_R5.SP4.01"
+SRCREV_compat-wireless = "ol_R5.SP4.01"
+
+SRCREV_FORMAT = "compat-wireless"
 
 S = "${WORKDIR}/compat-wireless"
 
-SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/994/6330/ti-compat-wireless-R5_SP3.05.tar.gz \
-           file://0001-compat-wireless-add-pm_runtime_enabled.patch \
-           file://0001-compat-wireless-exclude-BT-building.patch \
-           file://0002-compat-wireless-enable-test-mode.patch \
-           file://0002-ti-compat-wireless-enable-uapsd-configuration.patch \
-           file://0001-wl12xx-additional-two-members-for-wl12xx_platform_da.patch \
-           file://0001-git-version-use-compat-base-tree.patch \
+SRC_URI = "git://github.com/TI-OpenLink/compat-wireless.git;destsuffix=compat-wireless;name=compat-wireless \
+           git://github.com/TI-OpenLink/compat.git;destsuffix=compat;name=compat \
+           git://github.com/TI-OpenLink/wl12xx.git;destsuffix=wl12xx;name=wl12xx \
+           file://0001-git-version-use-compat-base-tree.patch;patchdir=../wl12xx \
+           file://0001-compat-wireless-add-pm_runtime_enabled.patch;patchdir=../compat \
+           file://0001-wl12xx-additional-two-members-for-wl12xx_platform_da.patch;patchdir=../wl12xx \
           "
-SRC_URI_append_am335x-evm = "file://0001-wl12xx-Decrease-number-of-RX-transactions.patch \
-                             file://0002-wl12xx-Decrease-number-of-TX-transactions.patch \
-"
 
-SRC_URI[md5sum] = "3d86e0cbd0e2f07d09bf3cd52b6b2f98"
-SRC_URI[sha256sum] = "927e4a6f8397973c7ed30dada28a661b76486004756beef38176fda35370dd83"
+SRC_URI_append_am335x-evm = "file://0001-wl12xx-Decrease-number-of-RX-transactions.patch;patchdir=../wl12xx \
+                             file://0002-wl12xx-Decrease-number-of-TX-transactions.patch;patchdir=../wl12xx \
+"
 
 EXTRA_OEMAKE = "KLIB_BUILD=${STAGING_KERNEL_DIR} KLIB=${D}"
 
+# Prevent sourceipk clear_git function from running.
+# This preserves the git repo until driver-select is ran.
+
+clear_git() {
+    :
+}
+
 do_configure() {
     cd ${S}
+    GIT_TREE="${WORKDIR}/wl12xx" GIT_COMPAT_TREE="${WORKDIR}/compat" ./scripts/admin-refresh.sh
+
     ./scripts/driver-select wl12xx
+
+    # Delete the .git repository since it should no longer be needed.
+    rm -rf ${S}/.git ${S}/.gitignore
+
+    # Now generate the sourceipk with the properly configured sources
+    sourceipk_do_create_srcipk
 }
 
 do_configure_append() {
