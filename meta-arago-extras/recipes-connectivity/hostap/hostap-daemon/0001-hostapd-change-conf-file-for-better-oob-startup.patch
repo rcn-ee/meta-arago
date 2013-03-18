@@ -1,6 +1,6 @@
-From 685a744a1dc46853185191eb46a7cae4d49f30d1 Mon Sep 17 00:00:00 2001
+From 66b55f187843bca53cb3b7ef9c8fcd434a72f768 Mon Sep 17 00:00:00 2001
 From: Eyal Reizer <eyalr@ti.com>
-Date: Mon, 19 Nov 2012 09:47:39 +0200
+Date: Thu, 21 Feb 2013 03:55:22 -0800
 Subject: [PATCH] hostapd: change conf file for better sdk out of box startup
 
 Change the default channel to 6 and change the ssid to a more
@@ -14,7 +14,7 @@ Signed-off-by: Eyal Reizer <eyalr@ti.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/hostapd/hostapd.conf b/hostapd/hostapd.conf
-index 494f7ca..9310ef4 100644
+index f71a881..00843aa 100644
 --- a/hostapd/hostapd.conf
 +++ b/hostapd/hostapd.conf
 @@ -83,7 +83,7 @@ ctrl_interface_group=0
@@ -26,15 +26,15 @@ index 494f7ca..9310ef4 100644
  
  # Country code (ISO/IEC 3166-1). Used to set regulatory domain.
  # Set as needed to indicate country in which device is operating.
-@@ -105,7 +105,7 @@ hw_mode=g
- # (default: 0, i.e., not set)
- # Please note that some drivers do not use this value from hostapd and the
+@@ -107,7 +107,7 @@ hw_mode=g
  # channel will need to be configured separately with iwconfig.
+ # When set to 0, automatic channel selection will be engaged. A channel
+ # will be selected from the desired hw_mode.
 -channel=1
 +channel=6
  
- # Beacon interval in kus (1.024 ms) (default: 100; range 15..65535)
- beacon_int=100
+ # Automatic channel selection (ACS) whitelist
+ # (default: not set)
 -- 
 1.7.9.5
 

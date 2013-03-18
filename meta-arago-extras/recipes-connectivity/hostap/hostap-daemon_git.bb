@@ -22,9 +22,9 @@ CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
 # of hostap
 PV = "2.0-devel-ti"
 
-PR = "r1+gitr${SRCPV}"
+PR = "r2+gitr${SRCPV}"
 
-SRCREV = "ol_R5.SP3.05"
+SRCREV = "ol_R5.SP4.01"
 
 SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
 	file://0001-hostapd-change-conf-file-for-better-oob-startup.patch;patchdir=.. \
