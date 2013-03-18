@@ -13,11 +13,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
-PR = "r0+gitr${SRCREV}"
+PR = "r1+gitr${SRCREV}"
 
 COMPATIBLE_MACHINE = "omap3|omapl138|da850-omapl138-evm|ti33x"
 
-SRCREV = "db43d1f05efda9777d7ac1ac366637e29e21f77f"
+SRCREV = "adbc27c11d5c5c8c20a93a8beca647b4a6aaa03b"
 SRC_URI = "git://github.com/TI-ECS/bt-firmware.git;protocol=git \
            file://0001-Makefile-allow-building-within-the-OE.patch"
 
