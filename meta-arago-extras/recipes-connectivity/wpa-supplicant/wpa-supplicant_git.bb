@@ -16,8 +16,8 @@ RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 # wpa-supplicant the DEFAULT_PREFERENCE will be set to -1.
 DEFAULT_PREFERENCE = "-1"
 
-SRCREV = "ol_R5.SP3.05"
-PR = "r2+gitr${SRCPV}"
+SRCREV = "ol_R5.SP4.01"
+PR = "r3+gitr${SRCPV}"
 # Add ti to the PV to indicate that this is a TI modify version of wpa-supplicant.
 PV = "2.0-devel-ti"
 
@@ -32,7 +32,6 @@ SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
            file://wpa_supplicant.conf \
            file://fi.epitest.hostap.WPASupplicant.service \
            file://fi.w1.wpa_supplicant1.service \
-           file://0001-P2P-Fix-broken-rx-action-frame-handling-INTERNAL-SQU.patch;patchdir=.. \
           "
 
 S = "${WORKDIR}/git/wpa_supplicant"
