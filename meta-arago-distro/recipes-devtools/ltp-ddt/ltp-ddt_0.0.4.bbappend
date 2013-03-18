@@ -3,6 +3,10 @@ PR_append = "-arago0+gitr${SRCPV}"
 # Auto rev so we pick up the latest changes
 SRCREV = "${AUTOREV}"
 
+# Use special branch for platforms with older <=3.2 kernel
+BRANCH_am37x-evm = "v3.2"
+BRANCH_am180x-evm = "v3.2"
+
 do_compile_kmodules() {
         unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
         oe_runmake modules
