@@ -15,7 +15,7 @@ RDEPENDS_${PN} = "\
     iptables \
     iperf \
     psplash \
-    u-boot \
+    ${PREFERRED_PROVIDER_virtual/bootloader} \
     arago-gpl-notice \
     nfs-utils-client \
     "
