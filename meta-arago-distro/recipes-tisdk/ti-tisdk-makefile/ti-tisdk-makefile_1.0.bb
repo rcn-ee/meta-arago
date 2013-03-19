@@ -30,7 +30,7 @@ SRC_URI = "\
     file://Makefile_wireless \
 "
 
-PR = "r5"
+PR = "r6"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -55,6 +55,9 @@ MAKEFILES_am3517-evm += "av-examples \
 "
 MAKEFILES_ti33x += "u-boot-spl \
                     quick-playground wireless \
+"
+MAKEFILES_omap-a15 += "u-boot-spl \
+                    quick-playground \
 "
 MAKEFILES_am180x-evm += "pru \
                          u-boot-legacy \
