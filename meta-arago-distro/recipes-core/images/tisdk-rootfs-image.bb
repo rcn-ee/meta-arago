@@ -1,5 +1,5 @@
 # Arago TI SDK filesystem image
-COMPATIBLE_MACHINE = "omap3|omapl138|ti33x"
+COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|omap-a15"
 
 require arago-base-tisdk-image.bb
 
