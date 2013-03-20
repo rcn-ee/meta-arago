@@ -14,7 +14,7 @@ RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 # wpa-supplicant the DEFAULT_PREFERENCE will be set to -1.
 DEFAULT_PREFERENCE = "-1"
 
-PR = "r5"
+PR = "r6"
 
 SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
            file://defconfig \
