@@ -1,0 +1,68 @@
+From bb09bbce828112d81ae473d10a07736e73704ac4 Mon Sep 17 00:00:00 2001
+From: Eyal Reizer <eyalr@ti.com>
+Date: Sun, 10 Mar 2013 04:42:58 -0700
+Subject: [PATCH] git-version-wl18xx: use compat base tree
+
+For compat-wireless based builds use compat_base_tree_version in  version.h
+When building with compat-wireless mechanism, the version info captured
+in version.h reflects target kernel and not the wl18xx version.
+
+Signed-off-by: Eyal Reizer <eyalr@ti.com>
+---
+ drivers/net/wireless/ti/wl18xx/Makefile |   12 ++++++++----
+ drivers/net/wireless/ti/wlcore/Makefile |   12 ++++++++----
+ 2 files changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/net/wireless/ti/wl18xx/Makefile b/drivers/net/wireless/ti/wl18xx/Makefile
+index 4ddb258..55cc561 100644
+--- a/drivers/net/wireless/ti/wl18xx/Makefile
++++ b/drivers/net/wireless/ti/wl18xx/Makefile
+@@ -1,12 +1,16 @@
+ wl18xx-objs	= main.o acx.o tx.o io.o debugfs.o
+ 
+ define filechk_version.h
+-	(echo 'static const char *wl18xx_git_head = \
+-			"$(shell git describe --dirty)";')
++         echo '#ifdef COMPAT_BASE_TREE_VERSION'; \
++         echo 'static const char *wl18xx_git_head =  COMPAT_BASE_TREE_VERSION;'; \
++         echo '#else'; \
++         echo 'static const char *wl18xx_git_head = \
++                        "$(shell git describe --dirty)";'; \
++         echo '#endif')
+ endef
+ 
+-$(obj)/version.h: .git/HEAD .git/index .git/refs/tags
+-	@$(call filechk,version.h)
++#$(obj)/version.h: .git/HEAD .git/index .git/refs/tags
++#	@$(call filechk,version.h)
+ 
+ $(obj)/main.c: $(src)/version.h
+ 
+diff --git a/drivers/net/wireless/ti/wlcore/Makefile b/drivers/net/wireless/ti/wlcore/Makefile
+index 9923a1a..647489c 100644
+--- a/drivers/net/wireless/ti/wlcore/Makefile
++++ b/drivers/net/wireless/ti/wlcore/Makefile
+@@ -3,12 +3,16 @@ wlcore-objs		= main.o cmd.o io.o event.o tx.o rx.o ps.o acx.o \
+ 
+ define filechk_version.h
+ 	(echo 'static const char *wlcore_timestamp = __TIMESTAMP__;'; \
+-	echo 'static const char *wlcore_git_head = \
+-			"$(shell git describe --dirty)";')
++         echo '#ifdef COMPAT_BASE_TREE_VERSION'; \
++         echo 'static const char *wl12xx_git_head =  COMPAT_BASE_TREE_VERSION;'; \
++         echo '#else'; \
++         echo 'static const char *wl12xx_git_head = \
++                        "$(shell git describe --dirty)";'; \
++         echo '#endif')
+ endef
+ 
+-$(obj)/version.h: .git/HEAD .git/index .git/refs/tags
+-	@$(call filechk,version.h)
++#$(obj)/version.h: .git/HEAD .git/index .git/refs/tags
++#	@$(call filechk,version.h)
+ 
+ $(obj)/main.c: $(src)/version.h
+ 
+-- 
+1.7.9.5
+
