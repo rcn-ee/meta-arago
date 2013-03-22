@@ -6,10 +6,12 @@ the stable/maintenance branches (currently "danny") of the corresponding layers:
 URI: git://git.openembedded.org/openembedded-core
 branch: danny
 revision: HEAD
+layers: meta
 
 URI: git://git.openembedded.org/meta-openembedded
 branch: danny
 revision: HEAD
+layers: meta-oe, toolchain-layer
 
 URI: git://arago-project.org/git/meta-ti
 branch: danny
