@@ -2,7 +2,7 @@ inherit cross-canadian
 
 require external-arago-toolchain.inc
 
-PR = "r4"
+PR = "r5"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
@@ -15,9 +15,9 @@ LIC_FILES_CHKSUM = "\
 	file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420 \
 "
 
-INSANE_SKIP_gcc-cross-canadian-arm = "dev-so"
+INSANE_SKIP_gcc-cross-canadian-arm = "dev-so staticdev"
 INSANE_SKIP_gdb-cross-canadian-arm = "dev-so"
-INSANE_SKIP_binutils-cross-canadian-arm = "dev-so"
+INSANE_SKIP_binutils-cross-canadian-arm = "dev-so staticdev"
 
 PROVIDES = "\
 	gcc-cross-canadian-arm \
@@ -32,10 +32,10 @@ PACKAGES = "\
 "
 
 # Don't need the extra target triplet in the new SDK dir structure
-bindir = "${exec_prefix}/bin/"
-libdir = "${exec_prefix}/lib/"
-libexecdir = "${exec_prefix}/libexec/"
-datadir = "${exec_prefix}/share/"
+bindir = "${exec_prefix}/bin"
+libdir = "${exec_prefix}/lib"
+libexecdir = "${exec_prefix}/libexec"
+datadir = "${exec_prefix}/share"
 
 gcclibdir = "${libdir}/gcc"
 
@@ -124,9 +124,9 @@ do_install() {
 	install -d ${D}${libdir}/ldscripts
 	install -d ${D}${includedir}
 	install -d ${D}${libexecdir}
-	install -d ${D}${datadir}/gdb
-	install -d ${D}${datadir}/info
-	install -d ${D}${datadir}/man/man1
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'install -d ${D}${datadir}/gdb', '', d)}
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'install -d ${D}${datadir}/info', '', d)}
+	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-arago-sdk-toolchain', 'install -d ${D}${datadir}/man/man1', '', d)}
 	install -d ${D}${gcclibdir}/${ARAGO_TARGET_SYS}/${ARG_VER_GCC}/include
 	install -d ${D}${prefix}/i686-linux
 
