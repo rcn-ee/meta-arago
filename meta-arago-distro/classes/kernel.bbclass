@@ -20,6 +20,11 @@ python __anonymous () {
     image = d.getVar('INITRAMFS_IMAGE', True)
     if image:
         d.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs')
+
+    machine_kernel_pr = d.getVar('MACHINE_KERNEL_PR', True)
+
+    if machine_kernel_pr:
+        d.setVar('PR', machine_kernel_pr)
 }
 
 inherit kernel-arch deploy
