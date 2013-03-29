@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r2"
+PR = "r3"
 
 inherit packagegroup
 
@@ -14,6 +14,10 @@ UTILS = " \
 # Add pru and profibus sources for omapl138 devices
 UTILS_append_am180x-evm = " \
     ti-pru-sw-examples-src \
+"
+
+UTILS_append_omap-a15 = " \
+    omapconf-src \
 "
 
 RDEPENDS_${PN} = "\
