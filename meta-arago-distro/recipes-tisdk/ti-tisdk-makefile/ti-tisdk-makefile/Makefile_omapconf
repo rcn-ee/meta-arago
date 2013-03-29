@@ -1,0 +1,19 @@
+# omapconf build targets
+omapconf:
+	@echo =======================
+	@echo    Building OmapConf
+	@echo =======================
+	@cd example-applications; cd `find . -name "*omapconf*"`; make CROSS_COMPILE=${CROSS_COMPILE} omapconf
+
+omapconf_clean:
+	@echo =======================
+	@echo    Cleaning OmapConf
+	@echo =======================
+	@cd example-applications; cd `find . -name "*omapconf*"`; make clean
+
+omapconf_install:
+	@echo ==========================================
+	@echo   Installing OmapConf - Release version
+	@echo ==========================================
+	@cd example-applications; cd `find . -name "*omapconf*"`; make DESTDIR=${DESTDIR}/usr/bin install
+

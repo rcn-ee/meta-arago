@@ -28,9 +28,10 @@ SRC_URI = "\
     file://Makefile_qt-tstat \
     file://Makefile_quick-playground \
     file://Makefile_wireless \
+    file://Makefile_omapconf \
 "
 
-PR = "r6"
+PR = "r7"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -58,6 +59,7 @@ MAKEFILES_ti33x += "u-boot-spl \
 "
 MAKEFILES_omap-a15 += "u-boot-spl \
                     quick-playground \
+                    omapconf \
 "
 MAKEFILES_am180x-evm += "pru \
                          u-boot-legacy \
