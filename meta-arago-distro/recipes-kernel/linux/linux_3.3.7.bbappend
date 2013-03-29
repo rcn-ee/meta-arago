@@ -1,4 +1,3 @@
-PR_append = "-arago0"
+PR_append = "-arago1"
 
 require copy-defconfig.inc
-require setup-defconfig.inc

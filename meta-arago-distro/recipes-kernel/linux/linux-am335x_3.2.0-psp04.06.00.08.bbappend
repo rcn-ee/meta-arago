@@ -1,4 +1,4 @@
-PR_append = "-arago1"
+PR_append = "-arago2"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 
@@ -6,4 +6,3 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 KVER = "${PV}"
 
 require copy-defconfig.inc
-require setup-defconfig.inc

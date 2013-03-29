@@ -1,4 +1,4 @@
-MACHINE_KERNEL_PR_append = "-arago0"
+MACHINE_KERNEL_PR_append = "-arago3"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 
@@ -7,4 +7,3 @@ KVER = "2.6.37"
 PSPREL = "03.21.00.04.sdk"
 
 require copy-defconfig.inc
-require setup-defconfig.inc
