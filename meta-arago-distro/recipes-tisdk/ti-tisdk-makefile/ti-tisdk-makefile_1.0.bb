@@ -14,6 +14,7 @@ SRC_URI = "\
     file://Makefile \
     file://Rules.make \
     file://Makefile_linux \
+    file://Makefile_linux-dtbs \
     file://Makefile_u-boot-legacy \
     file://Makefile_matrix-gui \
     file://Makefile_arm-benchmarks \
@@ -31,7 +32,7 @@ SRC_URI = "\
     file://Makefile_omapconf \
 "
 
-PR = "r7"
+PR = "r8"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -60,6 +61,7 @@ MAKEFILES_ti33x += "u-boot-spl \
 MAKEFILES_omap-a15 += "u-boot-spl \
                     quick-playground \
                     omapconf \
+                    linux-dtbs \
 "
 MAKEFILES_am180x-evm += "pru \
                          u-boot-legacy \

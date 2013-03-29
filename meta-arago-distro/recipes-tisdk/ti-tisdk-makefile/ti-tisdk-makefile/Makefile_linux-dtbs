@@ -1,0 +1,20 @@
+# Kernel DTB build targets
+linux-dtbs:
+	@echo =====================================
+	@echo     Building the Linux Kernel DTBs
+	@echo =====================================
+	$(MAKE) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) dtbs
+
+linux-dtbs_install:
+	@echo =======================================
+	@echo     Installing the Linux Kernel DTBs
+	@echo =======================================
+	install -d $(DESTDIR)/boot
+	@cp -f $(LINUXKERNEL_INSTALL_DIR)/arch/arm/boot/dts/*.dtb $(DESTDIR)/boot/
+
+linux-dtbs_clean:
+	@echo =======================================
+	@echo     Cleaning the Linux Kernel DTBs
+	@echo =======================================
+	@echo "Nothing to do"
+
