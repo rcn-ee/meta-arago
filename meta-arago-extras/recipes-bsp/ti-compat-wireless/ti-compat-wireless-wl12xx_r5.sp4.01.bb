@@ -9,8 +9,6 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 RDEPENDS_${PN} = "wireless-tools"
 
-PV = "r5.sp4.01"
-
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
