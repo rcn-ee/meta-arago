@@ -3,7 +3,7 @@ SECTION = "network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=75859989545e37968a99b631ef42722e"
 
-PR = "r5"
+PR = "r6"
 
 COMPATIBLE_MACHINE = "(omap3evm|am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
@@ -39,7 +39,7 @@ FILES_${PN} +=" \
 	${bindir}/battleship \
 	"
 
-RDEPENDS_${PN} += "wpa-supplicant"
+RDEPENDS_${PN} += "wpa-supplicant wifi-direct-launcher"
 
 FILES_matrix-gui-wifi-battleship-demo += " \
 	${MATRIX_APP_DIR}/battleship/* \

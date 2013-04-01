@@ -4,6 +4,6 @@ Name=Battleship
 GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/battleship/battleship-icon.png
 Type=Application
-Exec=/usr/sbin/kill_wpa_supplicant.sh battleship
+Exec=/usr/sbin/wifi-direct-launcher.sh battleship
 Categories=wifi
 X-ProgramType=gui
