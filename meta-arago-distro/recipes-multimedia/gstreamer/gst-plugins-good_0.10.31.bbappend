@@ -1,14 +1,6 @@
-PR_append = "-arago1"
+PR_append = "-arago2"
 
-# The below changes are meant to mimic the patch
-# "gst-plugins-good: disable (uninstalled) examples" commit
-# eef5cca4f364545759d8cf624f38e3cd6e8fd295 The patch mentioned above has
-# already been applied to master and has been requested to be pulled into
-# denzil. The below changes can be removed once that patch has been applied
-# to the denzil branch
-
-DEPENDS := "${@oe_filter_out('gtk+','${DEPENDS}', d)}"
 DEPENDS := "${@oe_filter_out('gconf','${DEPENDS}', d)}"
 DEPENDS := "${@oe_filter_out('gconf-native','${DEPENDS}', d)}"
 
-EXTRA_OECONF += "--disable-examples --disable-gconftool --disable-gconf"
+EXTRA_OECONF += "--disable-gconftool --disable-gconf"
