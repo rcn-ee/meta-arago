@@ -4,8 +4,6 @@
 HOMEPAGE = "http://hostap.epitest.fi"
 DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
 SECTION = "kernel/userland"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://../COPYING;md5=ab87f20cd7e8c0d0a6539b34d3791d0e"
 
 DEPENDS = "libnl openssl"
 
@@ -13,23 +11,17 @@ DEPENDS = "libnl openssl"
 # default
 DEFAULT_PREFERENCE = "-1"
 
+PR = "r3"
+
 inherit update-rc.d
 INITSCRIPT_NAME="hostapd"
 
 CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
 
-# Add TI to the end to make it clear that this is a TI customized version
-# of hostap
-PV = "2.0-devel-ti"
-
-PR = "r2+gitr${SRCPV}"
-
-SRCREV = "ol_R5.SP4.01"
-
 SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
-	file://0001-hostapd-change-conf-file-for-better-oob-startup.patch;patchdir=.. \
-	file://defconfig \
-	file://init"
+           file://0001-hostapd-change-conf-file-for-better-oob-startup.patch;patchdir=.. \
+           file://defconfig \
+	       file://init"
 
 S = "${WORKDIR}/git/hostapd"
 
@@ -59,3 +51,4 @@ do_install() {
 updatercd_postinst () {
 :
 }
+
