@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -16,10 +16,15 @@ TOOLS_omap-a15 = ""
 TOOLS_am37x-evm_append = " flash-utility"
 TOOLS_am3517-evm_append = " flash-utility"
 
+README = ""
+README_omap-a15 = "tisdk-readme"
+README_ti33x = "tisdk-readme"
+
 RDEPENDS_${PN} = "\
     ${TOOLS} \
     ti-tisdk-setup \
     tisdk-uenv \
+    ${README} \
     board-port-labs-src \
     ti-tisdk-makefile \
     ${U-BOOT_SRC} \
