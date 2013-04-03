@@ -2,10 +2,10 @@ DESCRIPTION = "Package containing scripts to setup the development host and targ
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://setup.sh;beginline=3;endline=31;md5=fc4b04a33df6d892c9f4d4a9d92b945e"
 
-PR = "r8"
+PR = "r9"
 
 BRANCH ?= "master"
-SRCREV = "4b1ccd075df5e722b1cb11c0798d030786a6d536"
+SRCREV = "e0e3916a1d128e3ee5ac76bc4fdf708f704cd6d7"
 SRC_URI = "git://arago-project.org/git/projects/tisdk-setup-scripts.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
