@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
@@ -19,6 +19,7 @@ TOOLS_am3517-evm_append = " flash-utility"
 RDEPENDS_${PN} = "\
     ${TOOLS} \
     ti-tisdk-setup \
+    tisdk-uenv \
     board-port-labs-src \
     ti-tisdk-makefile \
     ${U-BOOT_SRC} \
