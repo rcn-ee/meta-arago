@@ -1,17 +1,17 @@
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
+ARAGO_QT_PROVIDER = "${@base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d)}"
+PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
+
 PREFERRED_VERSION_qt4-embedded = "4.8.3"
 PREFERRED_VERSION_qt4-native = "4.8.3"
 PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.3"
 
-# Use v4.08.00.02 of the Graphics SDK
-PREFERRED_VERSION_omap3-sgx-modules = "4.08.00.02"
-PREFERRED_VERSION_libgles-omap3 = "4.08.00.02"
+# Use v4.09.00.01 of the Graphics SDK
+PREFERRED_VERSION_omap3-sgx-modules = "4.09.00.01"
+PREFERRED_VERSION_libgles-omap3 = "4.09.00.01"
 
-ARAGO_QT_PROVIDER = "${@base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d)}"
-
-PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
-
+# Use latest TI staging kernel and u-boot trees
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
