@@ -32,7 +32,7 @@ SRC_URI = "\
     file://Makefile_omapconf \
 "
 
-PR = "r8"
+PR = "r9"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -44,9 +44,12 @@ MAKEFILES_COMMON = "linux \
                     qt-tstat \
 "
 
+# This example application should not be used when using non-SGX
+QUICK_PLAYGROUND = "${@base_conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','quick-playground','', d)}"
+
 # Add device specific make targets
 MAKEFILES_omap3 += "u-boot-spl \
-                    quick-playground \
+                    ${QUICK_PLAYGROUND} \
 "
 MAKEFILES_am37x-evm += "av-examples \
                         ti-ocf-crypto-module \
@@ -56,10 +59,11 @@ MAKEFILES_am3517-evm += "av-examples \
                          ti-ocf-crypto-module \
 "
 MAKEFILES_ti33x += "u-boot-spl \
-                    quick-playground wireless \
+                    ${QUICK_PLAYGROUND} \
+                    wireless \
 "
 MAKEFILES_omap-a15 += "u-boot-spl \
-                    quick-playground \
+                    ${QUICK_PLAYGROUND} \
                     omapconf \
                     linux-dtbs \
 "
