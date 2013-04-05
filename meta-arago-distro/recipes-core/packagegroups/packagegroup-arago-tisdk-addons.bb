@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
@@ -16,6 +16,7 @@ UTILS = " \
     arm-benchmarks \
     dropbear \
     openssh-sftp-server \
+    parted \
 "
 
 # Add PRU examples for am180x-evm devices
