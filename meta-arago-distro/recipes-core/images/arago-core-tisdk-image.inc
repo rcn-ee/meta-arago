@@ -14,6 +14,12 @@ COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|omap-a15"
 HOST_CLEANUP_PACKAGES = ""
 TOOLCHAIN_CLEANUP_PACKAGES = "libgnutls-dev libgnutls-extra26 libgnutls-openssl27 libtasn1-dev"
 
+# Set DTB filters for each machine.  Use "unknown" by default to avoid
+# picking up DTB files for devices with not DTB support.
+DTB_FILTER = "unknown"
+DTB_FILTER_ti33x = "am335x"
+DTB_FILTER_omap5-evm = "omap5"
+
 # List of target side images to build for the SDK
 TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image"
 
