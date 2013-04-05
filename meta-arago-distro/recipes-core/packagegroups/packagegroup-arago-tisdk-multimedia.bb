@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
@@ -13,6 +13,10 @@ MULTIMEDIA_append_omap3 = " \
 "
 
 MULTIMEDIA_append_ti33x = " \
+    amsdk-av-files \
+"
+
+MULTIMEDIA_append_omap-a15 = " \
     amsdk-av-files \
 "
 
