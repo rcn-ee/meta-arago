@@ -3,12 +3,10 @@ PREFERRED_PROVIDER_virtual/gettext = "gettext"
 PREFERRED_VERSION_qt4-embedded = "4.8.3"
 PREFERRED_VERSION_qt4-native = "4.8.3"
 PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.3"
-PREFERRED_VERSION_wpa-supplicant = "2.0-devel-ti"
-PREFERRED_VERSION_hostap-daemon = "2.0-devel-ti"
 
-# Use v4.08.00.01 of the Graphics SDK
-PREFERRED_VERSION_omap3-sgx-modules = "4.08.00.01"
-PREFERRED_VERSION_libgles-omap3 = "4.08.00.01"
+# Use v4.08.00.02 of the Graphics SDK
+PREFERRED_VERSION_omap3-sgx-modules = "4.08.00.02"
+PREFERRED_VERSION_libgles-omap3 = "4.08.00.02"
 
 ARAGO_QT_PROVIDER = "${@base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d)}"
 
@@ -69,3 +67,13 @@ PREFERRED_VERSION_bluez4 = "4.98"
 PREFERRED_VERSION_bluez-hcidump = "2.2"
 PREFERRED_VERSION_bash = "3.2.48"
 PREFERRED_VERSION_gettext = "0.16.1"
+
+# Support Wilink 6 PG 2 modules
+# By default am180x-evm comes with an outdated wilink 6 module
+# All other platforms build the latest Wilink 6 PG 3 modules
+PREFERRED_VERSION_ti-compat-bluetooth_am180x-evm = "r5.00.18"
+PREFERRED_VERSION_ti-compat-wireless-wl12xx_am180x-evm = "r5.00.18"
+PREFERRED_VERSION_wl12xx-firmware_am180x-evm = "r5.00.18"
+PREFERRED_VERSION_wpa-supplicant_am180x-evm = "r5.00.18"
+PREFERRED_VERSION_hostap-daemon_am180x-evm = "r5.00.18"
+PREFERRED_VERSION_ti-wifi-utils_am180x-evm = "r5.00.18"
