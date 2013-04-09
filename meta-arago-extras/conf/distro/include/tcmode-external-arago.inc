@@ -4,8 +4,6 @@
 
 EXTERNAL_TOOLCHAIN ?= "/usr/local/arago-2011.09/${TARGET_ARCH}"
 
-prefix_nativesdk = ""
-
 ARAGO_TARGET_SYS = "arm-arago-linux-gnueabi"
 TARGET_PREFIX = "${ARAGO_TARGET_SYS}-"
 
