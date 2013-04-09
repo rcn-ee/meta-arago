@@ -5,9 +5,7 @@ TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r19"
-
-SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
+PR = "r20"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
