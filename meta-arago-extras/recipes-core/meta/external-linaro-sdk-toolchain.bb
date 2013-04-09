@@ -1,6 +1,6 @@
 inherit cross-canadian
 
-PR = "r1"
+PR = "r2"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
@@ -28,12 +28,6 @@ PACKAGES = "\
 	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-linaro-sdk-toolchain', 'gdb-cross-canadian-arm', '', d)} \
 	binutils-cross-canadian-arm \
 "
-
-# Don't need the extra target triplet in the new SDK dir structure
-bindir = "${exec_prefix}/bin"
-libdir = "${exec_prefix}/lib"
-libexecdir = "${exec_prefix}/libexec"
-datadir = "${exec_prefix}/share"
 
 gcclibdir = "${libdir}/gcc"
 
