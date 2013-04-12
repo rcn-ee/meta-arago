@@ -528,6 +528,19 @@ do_sdk_image () {
         return 1
     fi
 
+    # Copy the DTB files if they exist.
+    # NOTE: For simplicity remove the uImage- prefix on the dtb files.  Get just the symlink
+    #       files for a cleaner name.  Use the DTB_FILTER variable to allow finding the
+    #       dtb files for only that MACHINE type
+    if [ "${DTB_FILTER}" != "unknown" ]
+    then
+        for f in `find ${DEPLOY_DIR_IMAGE} -type l -name "*${DTB_FILTER}*.dtb"`
+        do
+            dtb_file=`basename $f | sed s/uImage-//`
+            cp $f ${prebuilt_dir}/${dtb_file}
+        done
+    fi
+
     if [ "${SECONDARY_BOOTLOADER_NAME}" != "" ]
     then
         # Copy the secondary bootloader image if it exists
