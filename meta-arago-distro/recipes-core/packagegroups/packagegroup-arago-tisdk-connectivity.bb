@@ -10,7 +10,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 # These are the packages that all platforms use for WLAN support
 WLAN_COMMON = "\
     hostap-daemon \
-    ti-wifi-utils \
     wireless-tools \
     htop \
     netperf \
@@ -31,6 +30,7 @@ WLAN_COMMON = "\
 "
 
 FIRMWARE_AND_DRIVERS = "\
+    ti-wifi-utils \
     ti-compat-wireless-wl12xx \
     ti-compat-bluetooth \
     bt-firmware \
