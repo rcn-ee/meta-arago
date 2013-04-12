@@ -16,7 +16,7 @@ inherit kernel
 KVER = "${PV}"
 
 require copy-defconfig.inc
-require setup-defconfig.inc
+require recipes-kernel/linux/setup-defconfig.inc
 ###################################################
 
 # Stage the power management firmware before building the kernel
@@ -25,7 +25,7 @@ DEPENDS += "am33x-cm3"
 KERNEL_IMAGETYPE = "uImage"
 
 # The main PR is now using MACHINE_KERNEL_PR, for ti33x see conf/machine/include/ti33x.inc
-MACHINE_KERNEL_PR_append = "h+gitr${SRCPV}"
+MACHINE_KERNEL_PR_append = "i+gitr${SRCPV}"
 
 BRANCH = "v3.2-staging"
 
