@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
@@ -37,6 +37,7 @@ ARAGO_FSTOOLS = "\
     e2fsprogs \
     e2fsprogs-e2fsck \
     e2fsprogs-mke2fs \
+    e2fsprogs-tune2fs \
     dosfstools \
     util-linux-fdisk \
     "
