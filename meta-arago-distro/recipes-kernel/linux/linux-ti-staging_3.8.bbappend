@@ -1,4 +1,4 @@
-MACHINE_KERNEL_PR_append = "-arago4"
+MACHINE_KERNEL_PR_append = "-arago5"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 
@@ -28,4 +28,14 @@ pkg_postrm_kernel-devicetree () {
         DTB_SYMLINK_NAME=`echo ${KERNEL_IMAGE_SYMLINK_NAME} | sed "s/${MACHINE}/${DTS_BASE_NAME}/g"`
         update-alternatives --remove ${DTS_BASE_NAME}.dtb devicetree-${DTB_SYMLINK_NAME}.dtb ${KERNEL_PRIORITY} || true
     done
+}
+
+# The below lines are overlayed until the LOCALVERSION change is merged into
+# the oe-core danny branch.
+kernel_do_configure_prepend() {
+    if [ ! -e ${B}/.scmversion -a ! -e ${S}/.scmversion ]
+    then
+        echo ${KERNEL_LOCALVERSION} > ${B}/.scmversion
+        echo ${KERNEL_LOCALVERSION} > ${S}/.scmversion
+    fi
 }
