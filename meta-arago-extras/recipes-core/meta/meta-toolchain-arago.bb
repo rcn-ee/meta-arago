@@ -91,7 +91,7 @@ cleanup_toolchain_packages() {
 	if [ "${TOOLCHAIN_CLEANUP_PACKAGES}" != "" ]
 	then
 		# Clean up the native side of the toolchain
-		opkg_dir="${SDK_OUTPUT}/${SDKPATH}/"
+		opkg_dir="${SDK_OUTPUT}/${SDKPATHNATIVE}"
 		opkg_conf="${opkg_dir}/etc/opkg-sdk.conf"
 		opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
 

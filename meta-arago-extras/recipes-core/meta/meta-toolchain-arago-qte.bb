@@ -31,7 +31,7 @@ toolchain_create_sdk_env_script_append() {
 	#Adds qt.conf file that points qmake to properly locate Qt library and header files.
 	#This enables Qt Creator to work properly
 
-	qt_conf="${SDK_OUTPUT}/${SDKPATH}/bin/qt.conf"
+	qt_conf="${SDK_OUTPUT}/${SDKPATHNATIVE}/bin/qt.conf"
 	touch $qt_conf
 	echo '[Paths]' >> $qt_conf
 	echo 'Prefix = $(SDK_PATH)' >> $qt_conf
@@ -40,5 +40,5 @@ toolchain_create_sdk_env_script_append() {
 
 	# make a symbolic link to mkspecs for compatibility with Nokia's SDK
 	# and QTCreator
-	(cd ${SDK_OUTPUT}/${SDKPATH}; ln -sf ${ARAGO_TARGET_SYS}${datadir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+	(cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; ln -sf ${ARAGO_TARGET_SYS}${datadir}/${QT_DIR_NAME}/mkspecs mkspecs;)
 }
