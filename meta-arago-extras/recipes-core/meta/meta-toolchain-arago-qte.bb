@@ -5,7 +5,7 @@ TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-qte-sdk-${SDK_ARC
 
 require meta-toolchain-arago.bb
 
-PR = "r10"
+PR = "r11"
 
 QT_DIR_NAME = "qtopia"
 
@@ -31,7 +31,7 @@ toolchain_create_sdk_env_script_append() {
 	#Adds qt.conf file that points qmake to properly locate Qt library and header files.
 	#This enables Qt Creator to work properly
 
-	qt_conf="${SDK_OUTPUT}/${SDKPATHNATIVE}/bin/qt.conf"
+	qt_conf="${SDK_OUTPUT}/${SDKPATHNATIVE}${bindir_nativesdk}/qt.conf"
 	touch $qt_conf
 	echo '[Paths]' >> $qt_conf
 	echo 'Prefix = $(SDK_PATH)' >> $qt_conf
