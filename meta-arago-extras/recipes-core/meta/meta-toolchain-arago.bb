@@ -5,7 +5,7 @@ TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r21"
+PR = "r22"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
@@ -30,7 +30,7 @@ toolchain_create_sdk_env_script () {
 	echo 'export TOOLCHAIN_PREFIX=$TOOLCHAIN_SYS-' >> $script
 	echo 'export SDK_PATH_NATIVE=$SDK_PATH/sysroots/$SDK_SYS' >> $script
 	echo 'export SDK_PATH_TARGET=$SDK_PATH/sysroots/$TARGET_SYS' >> $script
-	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}:$SDK_PATH_NATIVE${bindir_nativesdk}/$TARGET_SYS:$PATH' >> $script
+	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}:$PATH' >> $script
 	echo 'export CPATH=$SDK_PATH_TARGET/usr/include:$CPATH' >> $script
 	echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH_TARGET' >> $script
 	echo 'export PKG_CONFIG_PATH=$SDK_PATH_TARGET${libdir}/pkgconfig' >> $script
@@ -67,7 +67,18 @@ populate_sdk_ipk_append () {
 
 	cleanup_toolchain_packages
 
+	# Do some extra setup work due to new structure
 	mkdir -p "${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/lib/${TUNE_PKGARCH}${TARGET_VENDOR}-${TARGET_OS}"
+	tcpath="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/${TOOLCHAIN_SYS}"
+	mkdir -p $tcpath
+	cd $tcpath
+	mkdir -p libc/lib
+	mkdir -p libc/usr/lib
+	ln -s ${SDKTARGETSYSROOT}/lib libc/lib/${TOOLCHAIN_SYS}
+	ln -s ${SDKTARGETSYSROOT}/usr/lib libc/usr/lib/${TOOLCHAIN_SYS}
+	ln -s ${SDKTARGETSYSROOT}/usr/include libc/usr/include
+	ln -s ${SDKTARGETSYSROOT}/include include
+	cd -
 }
 
 fakeroot create_sdk_files() {
