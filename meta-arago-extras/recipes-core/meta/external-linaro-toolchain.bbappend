@@ -2,7 +2,7 @@ INSANE_SKIP_libstdc++-dev += "staticdev"
 
 ALLOW_EMPTY_${PN}-utils = "1"
 
-PR_append = "-arago2"
+PR_append = "-arago3"
 
 PROVIDES += "virtual/${TARGET_PREFIX}gcc-intermediate"
 
@@ -60,6 +60,11 @@ FILES_${PN} += "\
 	${base_libdir}/libcidn-*.so \
 	${base_libdir}/libmemusage.so \
 	${base_libdir}/libpcprofile.so \
+"
+
+FILES_${PN}-dev += "\
+	${libdir}/*.a \
+	${base_libdir}/*.a \
 "
 
 FILES_linux-libc-headers = ""
