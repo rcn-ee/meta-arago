@@ -31,6 +31,12 @@ PACKAGES = "\
 	binutils-cross-canadian-arm \
 "
 
+# Don't need the extra target triplet in the new SDK dir structure
+bindir = "${exec_prefix}/bin"
+libdir = "${exec_prefix}/lib"
+libexecdir = "${exec_prefix}/libexec"
+datadir = "${exec_prefix}/share"
+
 gcclibdir = "${libdir}/gcc"
 
 FILES_gcc-cross-canadian-arm = "\
