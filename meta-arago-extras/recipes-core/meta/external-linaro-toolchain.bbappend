@@ -2,7 +2,7 @@ INSANE_SKIP_libstdc++-dev += "staticdev"
 
 ALLOW_EMPTY_${PN}-utils = "1"
 
-PR_append = "-arago1"
+PR_append = "-arago2"
 
 PROVIDES += "virtual/${TARGET_PREFIX}gcc-intermediate"
 
@@ -74,7 +74,17 @@ FILES_linux-libc-headers-dev = "\
 	${includedir}/video \
 "
 
+FILES_libstdc++-dev = "\
+	/include/c++ \
+	${base_libdir}/libstdc++.so \
+	${base_libdir}/libstdc++.a \
+	${base_libdir}/libsupc++.a \
+"
+
 do_install_append() {
+	install -d ${D}/include
+	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/include/* ${D}/include
+
 	rm -rf ${D}/lib/libgfortran*
 	rm -rf ${D}/lib/ldscripts
 	rm -rf ${D}${datadir}/lintian
