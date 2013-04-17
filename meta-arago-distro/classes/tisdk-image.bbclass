@@ -232,7 +232,7 @@ echo "
 
 # Create the host side toolchain components table
 sw_manifest_toolchain_host() {
-    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/var/lib/opkg/info"
+    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/i686-*-linux/var/lib/opkg/info"
 
 echo "
 <h2><u>GPLv3 Development Host Content</u></h2>
@@ -254,7 +254,7 @@ echo "
 # Create the target side toolchain components table.  These are components on
 # the host but intended for the target.
 sw_manifest_toolchain_target() {
-    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/arm-arago-linux-gnueabi/var/lib/opkg/info"
+    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/arm*-linux-gnueabi*/var/lib/opkg/info"
 
 echo "
 <h2><u>GPLv3 Development Libraries Installed on Host</u></h2>
