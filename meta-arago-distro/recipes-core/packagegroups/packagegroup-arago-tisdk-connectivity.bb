@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
@@ -52,10 +52,12 @@ BLUETOOTH_STACK = "\
 DEMO_APPS = "\
     bluetooth-gui \
     wifi-direct-demo \
-    wpa-gui-e \
     wl1271-demo \
-    battleship \
 "
+
+# Won't build with new gcc-4.7, need to include <unistd.h>
+#    wpa-gui-e
+#    battleship
 
 CONNECTIVITY_RDEPENDS = ""
 
