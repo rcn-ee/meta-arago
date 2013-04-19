@@ -478,10 +478,10 @@ do_sdk_image () {
 
 	mkdir -p ${IMAGE_ROOTFS}/etc
 
-    chmod 755 ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}*
+    chmod 755 ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk*
 
     # Temporarily extract the toolchain sdk so we can read license information from it.
-    echo "${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}" | ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}*
+    echo "${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}" | ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk*
 
     # Creat the base SDK image
 	rootfs_${IMAGE_PKGTYPE}_do_rootfs
@@ -573,7 +573,7 @@ do_sdk_image () {
 
     # Copy over the toolchain sdk installer an give it a simple name which
     # matches the traditional name within the SDK.
-    cp ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk-${SDK_ARCH}* ${IMAGE_ROOTFS}/linux-devkit.sh
+    cp ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk* ${IMAGE_ROOTFS}/linux-devkit.sh
 
     # Copy the opkg.conf used by the image to allow for future updates
     cp ${WORKDIR}/opkg.conf ${IMAGE_ROOTFS}/etc/
