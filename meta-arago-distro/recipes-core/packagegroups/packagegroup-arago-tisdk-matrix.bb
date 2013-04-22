@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 inherit packagegroup
 
@@ -43,13 +43,20 @@ MATRIX_APPS = ""
 
 MATRIX_APPS_append_omap3 = "        \
     ${@base_contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
-    matrix-gui-multimedia-demos     \
+    matrix-multimedia-demo-aac \
+    matrix-multimedia-demo-h264dec      \
+    matrix-multimedia-demo-mpeg4aacdec   \
+    matrix-multimedia-demo-mpeg4dec     \
 "
 
 MATRIX_APPS_append_ti33x = "        \
     matrix-gui-ethernet-demos       \
     ${@base_contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
-    matrix-gui-multimedia-demos     \
+    matrix-multimedia-demo-aac \
+    matrix-multimedia-demo-audiocapture \
+    matrix-multimedia-demo-h264dec      \
+    matrix-multimedia-demo-mpeg4aacdec   \
+    matrix-multimedia-demo-mpeg4dec     \
                                     \
     matrix-gui-clocks-275mhz        \
     matrix-gui-clocks-500mhz        \
@@ -66,7 +73,10 @@ MATRIX_APPS_append_ti33x = "        \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
-    matrix-gui-multimedia-demos     \
+    matrix-multimedia-demo-aac      \
+    matrix-multimedia-demo-h264dec  \
+    matrix-multimedia-demo-mpeg4aacdec \
+    matrix-multimedia-demo-mpeg4dec \
 "
 
 MATRIX_APPS_append_beagleboard = "  \
@@ -99,6 +109,8 @@ MATRIX_APPS_append_am37x-evm = "    \
     matrix-gui-bluetooth-demos      \
     matrix-gui-wifi-direct-demo     \
     matrix-gui-wifi-battleship-demo \
+                                    \
+    matrix-multimedia-demo-audiocapture \
 "
 
 MATRIX_APPS_append_am180x-evm = "   \
