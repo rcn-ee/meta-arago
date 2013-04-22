@@ -1,14 +1,14 @@
 DESCRIPTION = "Task to install crypto sources in SDK"
 LICENSE = "MIT"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-CRYPTO_RDEPENDS = " \
-    ti-crypto-examples-src \
-"
+CRYPTO_RDEPENDS = ""
+
+CRYPTO_RDEPENDS_append_ti33x = " ti-crypto-examples-src"
 
 CRYPTO_RDEPENDS_append_am37x-evm = "\
     ti-ocf-crypto-module-src \

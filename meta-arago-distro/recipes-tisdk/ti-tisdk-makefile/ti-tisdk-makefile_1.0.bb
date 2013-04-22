@@ -32,12 +32,11 @@ SRC_URI = "\
     file://Makefile_omapconf \
 "
 
-PR = "r10"
+PR = "r11"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
                     arm-benchmarks \
-                    ti-crypto-examples \
                     am-sysinfo \
                     matrix-gui-browser \
                     refresh-screen \
@@ -63,6 +62,7 @@ MAKEFILES_append_am3517-evm = " av-examples \
 MAKEFILES_append_ti33x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \                    
                            wireless \
+                           ti-crypto-examples \
 "
 MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
