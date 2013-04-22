@@ -69,14 +69,13 @@ case "$1" in
     fi
 
     echo -n "Starting Matrix GUI application"
-    start-stop-daemon --start --quiet --background --exec $matrixgui -- $GUI_OPTS
-	pidof ${matrixgui} > $PIDFILE
+    start-stop-daemon --start --quiet --background -m --pidfile $PIDFILE --exec $matrixgui -- $GUI_OPTS
     echo "."
     ;;
 
   stop)
     echo -n "Stopping Matrix GUI application"
-    start-stop-daemon --stop --quiet --pidfile /var/run/matrix-gui-2.0.pid
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
     echo "."
     ;;
   *)
