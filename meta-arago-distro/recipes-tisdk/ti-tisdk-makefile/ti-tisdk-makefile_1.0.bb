@@ -32,7 +32,7 @@ SRC_URI = "\
     file://Makefile_omapconf \
 "
 
-PR = "r9"
+PR = "r10"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -43,33 +43,35 @@ MAKEFILES_COMMON = "linux \
                     refresh-screen \
                     qt-tstat \
 "
+MAKEFILES = ""
 
 # This example application should not be used when using non-SGX
 QUICK_PLAYGROUND = "${@base_conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','quick-playground','', d)}"
 
 # Add device specific make targets
-MAKEFILES_omap3 += "u-boot-spl \
-                    ${QUICK_PLAYGROUND} \
+
+MAKEFILES_append_omap3 = " u-boot-spl \
+                           ${QUICK_PLAYGROUND} \
 "
-MAKEFILES_am37x-evm += "av-examples \
-                        ti-ocf-crypto-module \
-                        wireless \
+MAKEFILES_append_am37x-evm = " av-examples \
+                               ti-ocf-crypto-module \
+                               wireless \
 "
-MAKEFILES_am3517-evm += "av-examples \
-                         ti-ocf-crypto-module \
+MAKEFILES_append_am3517-evm = " av-examples \
+                                ti-ocf-crypto-module \
 "
-MAKEFILES_ti33x += "u-boot-spl \
-                    ${QUICK_PLAYGROUND} \
-                    wireless \
+MAKEFILES_append_ti33x = " u-boot-spl \
+                           ${QUICK_PLAYGROUND} \                    
+                           wireless \
 "
-MAKEFILES_omap-a15 += "u-boot-spl \
-                    ${QUICK_PLAYGROUND} \
-                    omapconf \
-                    linux-dtbs \
+MAKEFILES_append_omap-a15 = " u-boot-spl \
+                              ${QUICK_PLAYGROUND} \
+                              omapconf \
+                              linux-dtbs \
 "
-MAKEFILES_am180x-evm += "pru \
-                         u-boot-legacy \
-                         wireless \
+MAKEFILES_append_am180x-evm = " pru \
+                                u-boot-legacy \
+                                wireless \
 "
 
 PLATFORM_ARCH = "${ARMPKGARCH}"
