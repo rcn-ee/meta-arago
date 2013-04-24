@@ -30,9 +30,8 @@ PREFERRED_VERSION_u-boot-am37x_am37x-evm = "2012.04.01"
 
 PREFERRED_PROVIDER_virtual/kernel_am3517-evm = "linux-omap-psp"
 PREFERRED_VERSION_linux-omap-psp_am3517-evm = "2.6.37"
-PREFERRED_PROVIDER_virtual/bootloader_am3517-evm = "u-boot"
-PREFERRED_PROVIDER_u-boot_am3517-evm = "u-boot"
-PREFERRED_VERSION_u-boot_am3517-evm = "2011.12"
+PREFERRED_PROVIDER_virtual/bootloader_am3517-evm = "u-boot-am3517"
+PREFERRED_PROVIDER_u-boot_am3517-evm = "u-boot-am3517"
 
 PREFERRED_PROVIDER_virtual/kernel_beagleboard = "linux"
 PREFERRED_VERSION_linux_beagleboard = "3.3.7"
