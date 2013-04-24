@@ -65,6 +65,13 @@ PREFERRED_VERSION_bluez-hcidump = "2.2"
 PREFERRED_VERSION_bash = "3.2.48"
 PREFERRED_VERSION_gettext = "0.16.1"
 
+WILINK_VERSION = "WILINK-6"
+PREFERRED_PROVIDER_wl12xx-firmware = "${@base_contains('WILINK_VERSION','WILINK-8','wl18xx-firmware','wl12xx-firmware',d)}"
+PREFERRED_PROVIDER_ti-compat-wireless-wl12xx = "${@base_contains('WILINK_VERSION','WILINK-8','ti-compat-wireless-wl18xx','ti-compat-wireless-wl12xx',d)}"
+PREFERRED_PROVIDER_hostap-daemon = "${@base_contains('WILINK_VERSION','WILINK-8','hostap-daemon-wl18xx','hostap-daemon',d)}"
+PREFERRED_PROVIDER_wpa-supplicant = "${@base_contains('WILINK_VERSION','WILINK-8','wpa-supplicant-wl18xx','wpa-supplicant',d)}"
+PREFERRED_PROVIDER_ti-wifi-utils = "${@base_contains('WILINK_VERSION','WILINK-8','ti-wifi-utils-wl18xx','ti-wifi-utils',d)}"
+
 # Support Wilink 6 PG 2 modules
 # By default am180x-evm comes with an outdated wilink 6 module
 # All other platforms build the latest Wilink 6 PG 3 modules
