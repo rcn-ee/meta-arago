@@ -2,7 +2,7 @@ inherit cross-canadian
 
 require external-arago-toolchain.inc
 
-PR = "r5"
+PR = "r7"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"

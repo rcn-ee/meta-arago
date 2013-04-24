@@ -60,7 +60,7 @@ MAKEFILES_append_am3517-evm = " av-examples \
                                 ti-ocf-crypto-module \
 "
 MAKEFILES_append_ti33x = " u-boot-spl \
-                           ${QUICK_PLAYGROUND} \                    
+                           ${QUICK_PLAYGROUND} \
                            wireless \
                            ti-crypto-examples \
 "
@@ -122,6 +122,7 @@ do_install () {
     # fixup Rules.make values
     sed -i -e "s/__PLATFORM__/${MACHINE}/" ${D}/Rules.make
     sed -i -e "s/__ARCH__/${PLATFORM_ARCH}/" ${D}/Rules.make
+    sed -i -e "s/__TOOLCHAIN_PREFIX__/${TOOLCHAIN_SYS}-/" ${D}/Rules.make
     sed -i -e "s/__UBOOT_MACHINE__/${UBOOT_MACHINE}/" ${D}/Rules.make
 
 }

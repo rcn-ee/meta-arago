@@ -1,11 +1,11 @@
 # Qt Embedded toolchain
-TOOLCHAIN_HOST_TASK = "nativesdk-packagegroup-arago-qte-toolchain-host packagegroup-arago-cross-canadian-${TRANSLATED_TARGET_ARCH}"
-TOOLCHAIN_TARGET_TASK = "packagegroup-arago-qte-toolchain-target"
-TOOLCHAIN_OUTPUTNAME = "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-qte-sdk-${SDK_ARCH}"
+TOOLCHAIN_HOST_TASK ?= "nativesdk-packagegroup-arago-qte-toolchain-host"
+TOOLCHAIN_TARGET_TASK ?= "packagegroup-arago-qte-toolchain-target"
+TOOLCHAIN_SUFFIX ?= "-qte-sdk"
 
 require meta-toolchain-arago.bb
 
-PR = "r11"
+PR = "r13"
 
 QT_DIR_NAME = "qtopia"
 
@@ -17,16 +17,16 @@ toolchain_create_sdk_env_script_append() {
 	echo 'export OE_QMAKE_CXX=$CXX' >> $script
 	echo 'export OE_QMAKE_LINK=$CXX' >> $script
 	echo 'export OE_QMAKE_AR=$AR' >> $script
-	echo 'export OE_QMAKE_LIBDIR_QT=$SDK_PATH/$TARGET_SYS${libdir}' >> $script
-	echo 'export OE_QMAKE_INCDIR_QT=$SDK_PATH/$TARGET_SYS${includedir}/${QT_DIR_NAME}' >> $script
-	echo 'export OE_QMAKE_MOC=$SDK_PATH${bindir_nativesdk}/moc4' >> $script
-	echo 'export OE_QMAKE_UIC=$SDK_PATH${bindir_nativesdk}/uic4' >> $script
-	echo 'export OE_QMAKE_UIC3=$SDK_PATH${bindir_nativesdk}/uic34' >> $script
-	echo 'export OE_QMAKE_RCC=$SDK_PATH${bindir_nativesdk}/rcc4' >> $script
-	echo 'export OE_QMAKE_QDBUSCPP2XML=$SDK_PATH${bindir_nativesdk}/qdbuscpp2xml4' >> $script
-	echo 'export OE_QMAKE_QDBUSXML2CPP=$SDK_PATH${bindir_nativesdk}/qdbusxml2cpp4' >> $script
-	echo 'export OE_QMAKE_QT_CONFIG=$SDK_PATH/$TARGET_SYS${datadir}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
-	echo 'export QMAKESPEC=$SDK_PATH/$TARGET_SYS${datadir}/${QT_DIR_NAME}/mkspecs/linux-g++' >> $script
+	echo 'export OE_QMAKE_LIBDIR_QT=$SDK_PATH_TARGET${libdir}' >> $script
+	echo 'export OE_QMAKE_INCDIR_QT=$SDK_PATH_TARGET${includedir}/${QT_DIR_NAME}' >> $script
+	echo 'export OE_QMAKE_MOC=$SDK_PATH_NATIVE${bindir_nativesdk}/moc4' >> $script
+	echo 'export OE_QMAKE_UIC=$SDK_PATH_NATIVE${bindir_nativesdk}/uic4' >> $script
+	echo 'export OE_QMAKE_UIC3=$SDK_PATH_NATIVE${bindir_nativesdk}/uic34' >> $script
+	echo 'export OE_QMAKE_RCC=$SDK_PATH_NATIVE${bindir_nativesdk}/rcc4' >> $script
+	echo 'export OE_QMAKE_QDBUSCPP2XML=$SDK_PATH_NATIVE${bindir_nativesdk}/qdbuscpp2xml4' >> $script
+	echo 'export OE_QMAKE_QDBUSXML2CPP=$SDK_PATH_NATIVE${bindir_nativesdk}/qdbusxml2cpp4' >> $script
+	echo 'export OE_QMAKE_QT_CONFIG=$SDK_PATH_TARGET${datadir}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
+	echo 'export QMAKESPEC=$SDK_PATH_TARGET${datadir}/${QT_DIR_NAME}/mkspecs/linux-g++' >> $script
 
 	#Adds qt.conf file that points qmake to properly locate Qt library and header files.
 	#This enables Qt Creator to work properly
@@ -40,5 +40,5 @@ toolchain_create_sdk_env_script_append() {
 
 	# make a symbolic link to mkspecs for compatibility with Nokia's SDK
 	# and QTCreator
-	(cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; ln -sf ${ARAGO_TARGET_SYS}${datadir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+	(cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; ln -sf ${REAL_MULTIMACH_TARGET_SYS}${datadir}/${QT_DIR_NAME}/mkspecs mkspecs;)
 }
