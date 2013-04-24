@@ -26,6 +26,7 @@ toolchain_create_sdk_env_script_append() {
 	echo 'export OE_QMAKE_QDBUSCPP2XML=$SDK_PATH${bindir_nativesdk}/qdbuscpp2xml4' >> $script
 	echo 'export OE_QMAKE_QDBUSXML2CPP=$SDK_PATH${bindir_nativesdk}/qdbusxml2cpp4' >> $script
 	echo 'export OE_QMAKE_QT_CONFIG=$SDK_PATH/$TARGET_SYS${datadir}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
+	echo 'export OE_QMAKE_STRIP="echo"' >> $script
 	echo 'export QMAKESPEC=$SDK_PATH/$TARGET_SYS${datadir}/${QT_DIR_NAME}/mkspecs/linux-g++' >> $script
 
 	#Adds qt.conf file that points qmake to properly locate Qt library and header files.
