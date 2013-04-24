@@ -11,7 +11,7 @@ inherit allarch
 CREATE_SRCIPK = "1"
 SRCIPK_INSTALL_DIR = "board-support/board-port-labs"
 
-PR = "r3"
+PR = "r4"
 
 REPOS ?= "git://gitorious.org/sitara-board-port/sitara-board-port-linux.git \
           git://gitorious.org/sitara-board-port/sitara-board-port-uboot.git \
