@@ -1,6 +1,4 @@
-PR_append = "-arago2"
-
-FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
+PR_append = "-arago3"
 
 # KVER is used by arago-source-ipk.conf
 KVER = "${PV}"
