@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional packages only used in the Arago SDK"
 LICENSE = "MIT"
-PR = "r4"
+PR = "r5"
 
 inherit packagegroup
 
@@ -14,8 +14,10 @@ OOBE_ti33x += "\
     parse-ip \
 "
 
+# Won't build for hardfp - hardcodes tune flags for armv5te?
+#    screenshot
+
 EXTRA_APPLICATIONS = "\
-    screenshot \
 "
 
 RDEPENDS_${PN} = "\

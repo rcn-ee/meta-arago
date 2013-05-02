@@ -1,6 +1,8 @@
 inherit cross-canadian
 
-PR = "r1"
+require external-linaro-bfd-version.inc
+
+PR = "r4"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
@@ -43,13 +45,13 @@ FILES_gcc-cross-canadian-arm = "\
 	${prefix}/${ELT_TARGET_SYS}/bin/g++ \
 	${prefix}/${ELT_TARGET_SYS}/bin/c++ \
 	${prefix}/${ELT_TARGET_SYS}/bin/gcov \
-	${prefix}/${ELT_TARGET_SYS}/bin/gcc \
+	${prefix}/${ELT_TARGET_SYS}/bin/gcc* \
 	${prefix}/${ELT_TARGET_SYS}/lib/libstdc++.* \
 	${prefix}/${ELT_TARGET_SYS}/lib/libgcc_s.* \
 	${prefix}/${ELT_TARGET_SYS}/lib/libsupc++.* \
 	${gcclibdir}/${ELT_TARGET_SYS}/${ELT_VER_GCC}/* \
 	${bindir}/${TARGET_PREFIX}gcov \
-	${bindir}/${TARGET_PREFIX}gcc \
+	${bindir}/${TARGET_PREFIX}gcc* \
 	${bindir}/${TARGET_PREFIX}g++ \
 	${bindir}/${TARGET_PREFIX}cpp \
 	${libexecdir}/* \
@@ -64,7 +66,7 @@ FILES_gdb-cross-canadian-arm = "\
 "
 
 FILES_binutils-cross-canadian-arm = "\
-	${prefix}/${ELT_TARGET_SYS}/bin/ld \
+	${prefix}/${ELT_TARGET_SYS}/bin/ld* \
 	${prefix}/${ELT_TARGET_SYS}/bin/objcopy \
 	${prefix}/${ELT_TARGET_SYS}/bin/strip \
 	${prefix}/${ELT_TARGET_SYS}/bin/nm \
@@ -73,7 +75,7 @@ FILES_binutils-cross-canadian-arm = "\
 	${prefix}/${ELT_TARGET_SYS}/bin/ar \
 	${prefix}/${ELT_TARGET_SYS}/bin/objdump \
 	${prefix}/${ELT_TARGET_SYS}/lib/ldscripts/* \
-	${bindir}/${TARGET_PREFIX}ld \
+	${bindir}/${TARGET_PREFIX}ld* \
 	${bindir}/${TARGET_PREFIX}addr2line \
 	${bindir}/${TARGET_PREFIX}objcopy \
 	${bindir}/${TARGET_PREFIX}readelf \
@@ -115,10 +117,10 @@ do_install() {
 	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-linaro-sdk-toolchain', 'install -d ${D}${datadir}/man/man1', '', d)}
 	install -d ${D}${gcclibdir}/${ELT_TARGET_SYS}/${ELT_VER_GCC}/include
 
-	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/bin/{c++,g++,gcc} ${D}${prefix}/${ELT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/bin/{c++,g++,gcc*} ${D}${prefix}/${ELT_TARGET_SYS}/bin
 	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/lib/{libstdc++.*,libgcc_s.*,libsupc++.*} ${D}${prefix}/${ELT_TARGET_SYS}/lib
 	cp -a ${TOOLCHAIN_PATH}/lib/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/* ${D}${gcclibdir}/${ELT_TARGET_SYS}/${ELT_VER_GCC}
-	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gcov,gcc,g++,cpp} ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gcov,gcc*,g++,cpp} ${D}${bindir}
 	cp -a ${TOOLCHAIN_PATH}/libexec/* ${D}${libexecdir}
 
 	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-linaro-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gdb* ${D}${bindir}', '', d)}
@@ -126,7 +128,7 @@ do_install() {
 	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-linaro-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/share/info/* ${D}${datadir}/info/', '', d)}
 	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-linaro-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/share/man/man1/${TARGET_PREFIX}* ${D}${datadir}/man/man1/', '', d)}
 
-	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/bin/{ld,objcopy,strip,nm,ranlib,as,ar,objdump} ${D}${prefix}/${ELT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/bin/{ld*,objcopy,strip,nm,ranlib,as,ar,objdump} ${D}${prefix}/${ELT_TARGET_SYS}/bin
 	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/lib/ldscripts/* ${D}${prefix}/${ELT_TARGET_SYS}/lib/ldscripts
-	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{ld,addr2line,objcopy,readelf,strip,nm,ranlib,gprof,as,c++filt,ar,strings,objdump,size} ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{ld*,addr2line,objcopy,readelf,strip,nm,ranlib,gprof,as,c++filt,ar,strings,objdump,size} ${D}${bindir}
 }

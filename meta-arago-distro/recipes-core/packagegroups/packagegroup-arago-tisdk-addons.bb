@@ -1,10 +1,13 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+# Doesn't build for hardfp - hardcodes softfp
+#    arm-benchmarks
 
 UTILS = " \
     am-sysinfo \
@@ -13,7 +16,6 @@ UTILS = " \
     oprofile \
     nbench-byte \
     trace-cmd \
-    arm-benchmarks \
     dropbear \
     openssh-sftp-server \
     parted \

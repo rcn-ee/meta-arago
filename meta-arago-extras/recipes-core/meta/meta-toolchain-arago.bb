@@ -1,13 +1,13 @@
-TOOLCHAIN_HOST_TASK ?= "nativesdk-packagegroup-arago-sdk-host packagegroup-arago-cross-canadian-${TRANSLATED_TARGET_ARCH}"
+TOOLCHAIN_HOST_TASK ?= "nativesdk-packagegroup-arago-sdk-host"
+TOOLCHAIN_HOST_TASK += "packagegroup-arago-cross-canadian-${TRANSLATED_TARGET_ARCH}"
 TOOLCHAIN_TARGET_TASK ?= "packagegroup-arago-standalone-sdk-target"
-TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-sdk-${SDK_ARCH}"
+TOOLCHAIN_SUFFIX ?= "-sdk"
+TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}"
 TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r20"
-
-SDKTARGETSYSROOT = "${SDKPATH}/${ARAGO_TARGET_SYS}"
+PR = "r23"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
@@ -15,7 +15,7 @@ toolchain_create_sdk_env_script () {
 	script=${SDK_OUTPUT}/${SDKPATH}/environment-setup
 	rm -f $script
 	touch $script
-	echo 'SDK_PATH="${SDKPATHNATIVE}"' >> $script
+	echo 'SDK_PATH="${SDKPATH}"' >> $script
 	echo 'if [ -z "$ZSH_NAME" ] && [ "x$0" = "x./environment-setup" ]; then' >> $script
 	echo '    echo "Error: This script needs to be sourced. Please run as \". ./environment-setup\""' >> $script
 	echo '    exit 1' >> $script
@@ -26,33 +26,37 @@ toolchain_create_sdk_env_script () {
 	echo '    SDK_PATH=`readlink -f "$SDK_PATH"`' >> $script
 	echo '    export SDK_PATH' >> $script
 	echo 'fi' >> $script
-	echo 'export TARGET_SYS=${ARAGO_TARGET_SYS}' >> $script
-	echo 'export TARGET_PREFIX=$TARGET_SYS-' >> $script
-	echo 'export PATH=$SDK_PATH/bin:$PATH' >> $script
-	echo 'export CPATH=$SDK_PATH/$TARGET_SYS/usr/include:$CPATH' >> $script
-	echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH/$TARGET_SYS' >> $script
-	echo 'export PKG_CONFIG_PATH=$SDK_PATH/$TARGET_SYS${libdir}/pkgconfig' >> $script
+	echo 'export SDK_SYS=${SDK_SYS}' >> $script
+	echo 'export TARGET_SYS=${REAL_MULTIMACH_TARGET_SYS}' >> $script
+	echo 'export TOOLCHAIN_SYS=${TOOLCHAIN_SYS}' >> $script
+	echo 'export TOOLCHAIN_PREFIX=$TOOLCHAIN_SYS-' >> $script
+	echo 'export SDK_PATH_NATIVE=$SDK_PATH/sysroots/$SDK_SYS' >> $script
+	echo 'export SDK_PATH_TARGET=$SDK_PATH/sysroots/$TARGET_SYS' >> $script
+	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}:$PATH' >> $script
+	echo 'export CPATH=$SDK_PATH_TARGET/usr/include:$CPATH' >> $script
+	echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH_TARGET' >> $script
+	echo 'export PKG_CONFIG_PATH=$SDK_PATH_TARGET${libdir}/pkgconfig' >> $script
 	echo 'export PKG_CONFIG_ALLOW_SYSTEM_LIBS=1' >> $script
-	echo 'export CONFIG_SITE=$SDK_PATH/site-config' >> $script
-	printf 'export CC=\x24{TARGET_PREFIX}gcc\n' >> $script
-	printf 'export CXX=\x24{TARGET_PREFIX}g++\n' >> $script
-	printf 'export GDB=\x24{TARGET_PREFIX}gdb\n' >> $script
-	printf 'export CPP="\x24{TARGET_PREFIX}gcc -E"\n' >> $script
-	printf 'export NM=\x24{TARGET_PREFIX}nm\n' >> $script
-	printf 'export AS=\x24{TARGET_PREFIX}as\n' >> $script
-	printf 'export AR=\x24{TARGET_PREFIX}ar\n' >> $script
-	printf 'export RANLIB=\x24{TARGET_PREFIX}ranlib\n' >> $script
-	printf 'export OBJCOPY=\x24{TARGET_PREFIX}objcopy\n' >> $script
-	printf 'export OBJDUMP=\x24{TARGET_PREFIX}objdump\n' >> $script
-	printf 'export STRIP=\x24{TARGET_PREFIX}strip\n' >> $script
-	echo 'export CONFIGURE_FLAGS="--target=$TARGET_SYS --host=$TARGET_SYS --build=${SDK_ARCH}-linux --with-libtool-sysroot=$SDK_PATH/$TARGET_SYS"' >> $script
-	echo 'export CPPFLAGS="${TARGET_CC_ARCH} --sysroot=$SDK_PATH/$TARGET_SYS"' >> $script
+	echo 'export CONFIG_SITE=$SDK_PATH/site-config-$TARGET_SYS' >> $script
+	printf 'export CC=\x24{TOOLCHAIN_PREFIX}gcc\n' >> $script
+	printf 'export CXX=\x24{TOOLCHAIN_PREFIX}g++\n' >> $script
+	printf 'export GDB=\x24{TOOLCHAIN_PREFIX}gdb\n' >> $script
+	printf 'export CPP="\x24{TOOLCHAIN_PREFIX}gcc -E"\n' >> $script
+	printf 'export NM=\x24{TOOLCHAIN_PREFIX}nm\n' >> $script
+	printf 'export AS=\x24{TOOLCHAIN_PREFIX}as\n' >> $script
+	printf 'export AR=\x24{TOOLCHAIN_PREFIX}ar\n' >> $script
+	printf 'export RANLIB=\x24{TOOLCHAIN_PREFIX}ranlib\n' >> $script
+	printf 'export OBJCOPY=\x24{TOOLCHAIN_PREFIX}objcopy\n' >> $script
+	printf 'export OBJDUMP=\x24{TOOLCHAIN_PREFIX}objdump\n' >> $script
+	printf 'export STRIP=\x24{TOOLCHAIN_PREFIX}strip\n' >> $script
+	echo 'export CONFIGURE_FLAGS="--target=$TARGET_SYS --host=$TARGET_SYS --build=${SDK_ARCH}-linux --with-libtool-sysroot=$SDK_PATH_TARGET"' >> $script
+	echo 'export CPPFLAGS="${TARGET_CC_ARCH} --sysroot=$SDK_PATH_TARGET"' >> $script
 	echo 'export CFLAGS="$CPPFLAGS"' >> $script
 	echo 'export CXXFLAGS="$CPPFLAGS"' >> $script
-	echo 'export LDFLAGS="${TARGET_LD_ARCH} --sysroot=$SDK_PATH/$TARGET_SYS"' >> $script
-	echo 'export OECORE_NATIVE_SYSROOT=$SDK_PATH' >> $script
-	echo 'export OECORE_TARGET_SYSROOT=$SDK_PATH/$TARGET_SYS' >> $script
-	echo 'export OECORE_ACLOCAL_OPTS="-I $SDK_PATH/usr/share/aclocal"' >> $script
+	echo 'export LDFLAGS="${TARGET_LD_ARCH} --sysroot=$SDK_PATH_TARGET"' >> $script
+	echo 'export OECORE_NATIVE_SYSROOT=$SDK_PATH_NATIVE' >> $script
+	echo 'export OECORE_TARGET_SYSROOT=$SDK_PATH_TARGET' >> $script
+	echo 'export OECORE_ACLOCAL_OPTS="-I $SDK_PATH_NATIVE/usr/share/aclocal"' >> $script
 	echo 'export OECORE_DISTRO_VERSION="${DISTRO_VERSION}"' >> $script
 	echo 'export OECORE_SDK_VERSION="${SDK_VERSION}"' >> $script
 }
@@ -65,7 +69,18 @@ populate_sdk_ipk_append () {
 
 	cleanup_toolchain_packages
 
+	# Do some extra setup work due to new structure
 	mkdir -p "${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/lib/${TUNE_PKGARCH}${TARGET_VENDOR}-${TARGET_OS}"
+	tcpath="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/${TOOLCHAIN_SYS}"
+	mkdir -p $tcpath
+	cd $tcpath
+	mkdir -p libc/lib
+	mkdir -p libc/usr/lib
+	ln -s ${SDKTARGETSYSROOT}/lib libc/lib/${TOOLCHAIN_SYS}
+	ln -s ${SDKTARGETSYSROOT}/usr/lib libc/usr/lib/${TOOLCHAIN_SYS}
+	ln -s ${SDKTARGETSYSROOT}/usr/include libc/usr/include
+	ln -s ${SDKTARGETSYSROOT}/include include
+	cd -
 }
 
 fakeroot create_sdk_files() {
@@ -220,15 +235,14 @@ for env_setup_script in `ls $target_sdk_dir/environment-setup*`; do
 done
 
 # fix dynamic loader paths in all ELF SDK binaries
-native_sysroot=$target_sdk_dir
+native_sysroot=$target_sdk_dir/sysroots/${SDK_SYS}
 dl_path=$($SUDO_EXEC find $native_sysroot/lib -name "ld-linux*")
 if [ "$dl_path" = "" ] ; then
 	echo "SDK could not be set up. Relocate script unable to find ld-linux.so. Abort!"
 	exit 1
 fi
-executable_files=$($SUDO_EXEC find $native_sysroot -path $native_sysroot/libexec/gcc/${ARAGO_TARGET_SYS} -prune -o ! -name "${ARAGO_TARGET_SYS}-*" -type f -perm +111 -print)
-gdb_files=$($SUDO_EXEC find $native_sysroot -name "${ARAGO_TARGET_SYS}-gdb*" -type f -perm +111)
-$SUDO_EXEC ${env_setup_script%/*}/relocate_sdk.py $target_sdk_dir $dl_path $executable_files $gdb_files
+executable_files=$($SUDO_EXEC find $native_sysroot -type f -perm +111 -print)
+$SUDO_EXEC ${env_setup_script%/*}/relocate_sdk.py $target_sdk_dir $dl_path $executable_files
 if [ $? -ne 0 ]; then
 	echo "SDK could not be set up. Relocate script failed. Abort!"
 	exit 1
