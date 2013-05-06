@@ -12,7 +12,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(omap3)"
 
 BRANCH ?= "master"
-SRCREV = "ac75d09d29a805d89c49dd2741b79f3069e97827"
+SRCREV = "87469a47bf91d681f15f0a2eb368fe695b21508c"
 
 SRC_URI = "git://gitorious.org/av_examples/av_examples.git;protocol=git;branch=${BRANCH}"
 
@@ -24,6 +24,7 @@ INSANE_SKIP_${PN} = "True"
 do_compile() {
 	touch debug
 	export CROSS_COMPILE=${TARGET_PREFIX}
+	export CFLAGS='${TARGET_CC_ARCH}'
 	make release LINUXKERNEL_INSTALL_DIR="${STAGING_KERNEL_DIR}" PLATFORM="${MACHINE}"
 }
 
