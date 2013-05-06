@@ -4,23 +4,23 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5cad16cc3f514a15adb1d710b82d5fc4"
 SECTION = "graphics"
 
-PR = "r0"
+PR = "r1"
 
 BRANCH ?= "master"
-SRCREV = "1f11a23be4386c2ee0387cd12c1a9569c703a3bb" 
+SRCREV = "169242aa7a265d5c94755d74601ad4a3f1828c96"
 
 SRC_URI = "git://gitorious.org/screenshot/screenshot.git;protocol=git;branch=${BRANCH}"
+
 
 S = "${WORKDIR}/git"
 
 do_compile() {
     export CROSS_COMPILE=${TARGET_PREFIX}
-    export ARCH=${ARMPKGARCH}
+    export CFLAGS='${TARGET_CC_ARCH}'
     # build the release version
     make release
 }
 
 do_install() {
-    export ARCH=${ARMPKGARCH}
     make DESTDIR=${D} install
 }
