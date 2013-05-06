@@ -32,7 +32,7 @@ SRC_URI = "\
     file://Makefile_omapconf \
 "
 
-PR = "r11"
+PR = "r12"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -124,6 +124,7 @@ do_install () {
     sed -i -e "s/__ARCH__/${PLATFORM_ARCH}/" ${D}/Rules.make
     sed -i -e "s/__TOOLCHAIN_PREFIX__/${TOOLCHAIN_SYS}-/" ${D}/Rules.make
     sed -i -e "s/__UBOOT_MACHINE__/${UBOOT_MACHINE}/" ${D}/Rules.make
+    sed -i -e "s/__CFLAGS__/${TARGET_CC_ARCH}/" ${D}/Rules.make
 
 }
 
