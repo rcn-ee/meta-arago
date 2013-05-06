@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://armv5te/AES/aes_256.c;beginline=9;endline=35;md5=8edb
 SECTION = "console"
 DEPENDS += "openssl"
 
-PR = "r3"
+PR = "r4"
 
 BRANCH ?= "master"
-SRCREV = "95007ae6a4284841e624680afff8e0859f28d429"
+SRCREV = "ade3446fda75f4e07262b6162343a1b8d85521cb"
 
 SRC_URI = "git://arago-project.org/git/projects/crypto-example-apps.git;protocol=git;branch=${BRANCH}"
 
@@ -23,7 +23,8 @@ SOURCE_DIR_omapl138 = "${S}/armv5te"
 
 do_compile() {
     cd ${SOURCE_DIR}
-
+    export CROSS_COMPILE=${TARGET_PREFIX}
+    export CFLAGS='${TARGET_CC_ARCH}'
     # build the release version
     oe_runmake release
 }
