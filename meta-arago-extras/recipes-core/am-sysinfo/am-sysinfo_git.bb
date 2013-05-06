@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e7
 SECTION = "system"
 
 PACKAGE_STRIP = "no"
-PR = "r6"
+PR = "r7"
 
 BRANCH ?= "master"
-SRCREV = "86e936b0a50e450089471b53ae8c68e933c15bbd"
+SRCREV = "30c1dd8da089da41cac5686a0bebacc8950a8805"
 
 SRC_URI = "git://gitorious.org/am_sysinfo/am_sysinfo.git;protocol=git;branch=${BRANCH}"
 
@@ -17,10 +17,13 @@ S = "${WORKDIR}/git"
 
 
 do_compile() {
-	${CC} ${CFLAGS} ${LDFLAGS} -o mem_util/mem_util mem_util/mem_util.c
+	export CROSS_COMPILE=${TARGET_PREFIX}
+	export CFLAGS='${TARGET_CC_ARCH}'
+	# build the release version
+	oe_runmake release
 }
 
 do_install() {
 	install -d ${D}/${bindir}
-	install -m 0755 ${S}/mem_util/mem_util ${D}/${bindir}
+	install -m 0755 ${S}/mem_util/Release/mem_util ${D}/${bindir}
 }
