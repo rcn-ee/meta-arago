@@ -1,16 +1,14 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r4"
+PR = "r5"
 
 inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-# Doesn't build for hardfp - hardcodes softfp
-#    arm-benchmarks-src
-
 UTILS = " \
     am-sysinfo-src \
+    arm-benchmarks-src \
 "
 
 # Add pru and profibus sources for omapl138 devices
