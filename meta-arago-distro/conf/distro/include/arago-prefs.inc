@@ -1,3 +1,6 @@
+# Use the latest version of ltp-ddt for kernel versions 3.8+
+PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
+
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
 ARAGO_QT_PROVIDER = "${@base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d)}"
