@@ -1,6 +1,8 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
-PR = "r4"
+PR = "r5"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
@@ -49,6 +51,7 @@ ARAGO_UTILS = "\
     iproute2 \
     strace \
     ltrace \
+    ${@base_contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
     "
 
 ARAGO_SDK_PREREQ = "\
