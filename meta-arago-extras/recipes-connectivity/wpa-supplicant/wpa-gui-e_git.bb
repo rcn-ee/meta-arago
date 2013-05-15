@@ -10,11 +10,12 @@ LIC_FILES_CHKSUM = "file://../../COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
 "
 
 PV = "0.7.3+0.8.0-rc"
-PR = "r0+gitr${SRCPV}"
+PR = "r1+gitr${SRCPV}"
 
 SRCREV = "653c4893be17d12ef7bc6e941b765c92c1e4a161"
 
-SRC_URI = "git://w1.fi/srv/git/hostap.git;protocol=git"
+SRC_URI = "git://w1.fi/srv/git/hostap.git;protocol=git \
+           file://0001-wpagui-Fix-was-not-declared-in-this-scope-when-using.patch"
 
 S = "${WORKDIR}/git/wpa_supplicant/wpa_gui-qt4"
 
