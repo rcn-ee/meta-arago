@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 inherit packagegroup
 
@@ -18,7 +18,7 @@ TOOLS_append_am3517-evm = " flash-utility"
 
 README = ""
 README_omap-a15 = "tisdk-readme"
-README_ti33x = "tisdk-readme"
+README_ti33x = "${@base_contains('ARAGO_BRAND','amsdk','','tisdk-readme',d)}"
 
 RDEPENDS_${PN} = "\
     ${TOOLS} \
