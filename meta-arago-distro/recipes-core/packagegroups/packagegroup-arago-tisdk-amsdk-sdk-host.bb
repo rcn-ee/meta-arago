@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 inherit packagegroup
 
@@ -16,15 +16,14 @@ TOOLS_omap-a15 = ""
 TOOLS_append_am37x-evm = " flash-utility"
 TOOLS_append_am3517-evm = " flash-utility"
 
-README = ""
-README_omap-a15 = "tisdk-readme"
-README_ti33x = "${@base_contains('ARAGO_BRAND','amsdk','','tisdk-readme',d)}"
+EXTRA_FILES = ""
+EXTRA_FILES_omap-a15 = "tisdk-readme tisdk-uenv"
+EXTRA_FILES_ti33x = "${@base_contains('ARAGO_BRAND','amsdk','','tisdk-readme tisdk-uenv',d)}"
 
 RDEPENDS_${PN} = "\
     ${TOOLS} \
     ti-tisdk-setup \
-    tisdk-uenv \
-    ${README} \
+    ${EXTRA_FILES} \
     board-port-labs-src \
     ti-tisdk-makefile \
     ${U-BOOT_SRC} \
