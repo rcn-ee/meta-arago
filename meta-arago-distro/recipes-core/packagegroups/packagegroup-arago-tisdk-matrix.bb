@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r15"
+PR = "r16"
 
 inherit packagegroup
 
@@ -69,10 +69,8 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-gui-wifi-demos           \
     matrix-gui-bluetooth-demos      \
     matrix-gui-wifi-direct-demo     \
+    matrix-gui-wifi-battleship-demo \
 "
-
-# Won't build with new gcc-4.7, needs to include <unistd.h>
-#    matrix-gui-wifi-battleship-demo
 
 MATRIX_APPS_append_omap-a15 = "     \
     matrix-multimedia-demo-aac      \
@@ -110,22 +108,18 @@ MATRIX_APPS_append_am37x-evm = "    \
     matrix-gui-wifi-demos           \
     matrix-gui-bluetooth-demos      \
     matrix-gui-wifi-direct-demo     \
+    matrix-gui-wifi-battleship-demo \
                                     \
     matrix-multimedia-demo-audiocapture \
 "
-
-# Won't build with new gcc-4.7, needs to include <unistd.h>
-#    matrix-gui-wifi-battleship-demo
 
 MATRIX_APPS_append_am180x-evm = "   \
     matrix-gui-wifi-demos           \
     matrix-gui-bluetooth-demos      \
     matrix-gui-wifi-direct-demo     \
+    matrix-gui-wifi-battleship-demo \
     matrix-gui-pru-demos            \
 "
-
-# Won't build with new gcc-4.7, needs to include <unistd.h>
-#    matrix-gui-wifi-battleship-demo
 
 RDEPENDS_${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
