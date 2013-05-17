@@ -21,7 +21,7 @@ PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
 
 PREFERRED_PROVIDER_virtual/kernel_am180x-evm = "linux-omapl138-psp"
 PREFERRED_VERSION_linux-omapl138-psp = "2.6.37"
-PREFERRED_PROVIDER_ltp-ddt_am180x = "ltp-ddt-legacy"
+PREFERRED_PROVIDER_ltp-ddt_am180x-evm = "ltp-ddt-legacy"
 PREFERRED_PROVIDER_virtual/bootloader_am180x-evm = "u-boot-am180x"
 PREFERRED_PROVIDER_u-boot_am180x-evm = "u-boot-am180x"
 PREFERRED_VERSION_u-boot-am180x = "2010.12"
