@@ -1,11 +1,15 @@
-PR_append = "-arago1+gitr${SRCPV}"
+PR_append = "-arago2+gitr${SRCPV}"
 
 # Auto rev so we pick up the latest changes
 SRCREV = "${AUTOREV}"
 
+FILES_${PN}-dbg += " \
+	${LTPROOT}/testcases/realtime/*/*/.debug \
+"
+
 do_compile_kmodules() {
-        unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
-        oe_runmake modules
+	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
+	oe_runmake modules
 }
 
 addtask compile_kmodules after do_compile before do_install
