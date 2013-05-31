@@ -7,7 +7,7 @@ TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r23"
+PR = "r24"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
@@ -241,7 +241,7 @@ if [ "$dl_path" = "" ] ; then
 	echo "SDK could not be set up. Relocate script unable to find ld-linux.so. Abort!"
 	exit 1
 fi
-executable_files=$($SUDO_EXEC find $native_sysroot -type f -perm +111 -print)
+executable_files=$($SUDO_EXEC find $native_sysroot -type f -executable)
 $SUDO_EXEC ${env_setup_script%/*}/relocate_sdk.py $target_sdk_dir $dl_path $executable_files
 if [ $? -ne 0 ]; then
 	echo "SDK could not be set up. Relocate script failed. Abort!"
