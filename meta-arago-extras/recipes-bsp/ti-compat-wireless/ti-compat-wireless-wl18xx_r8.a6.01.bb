@@ -18,11 +18,12 @@ PV = "r8.a6.01"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "a"
+PR_append = "b"
 
-SRCREV_wl18xx = "ol_r8.a6.01"
-SRCREV_compat = "ol_r8.a6.01"
-SRCREV_compat-wireless = "ol_r8.a6.01"
+# Tags: ol_r8.a6.01
+SRCREV_wl18xx = "1c0f45f0e8aec0823175f7ac977908888c424aa1"
+SRCREV_compat = "c37c46c4ab5085ba50f650d15854404983b8d09b"
+SRCREV_compat-wireless = "3ec9ecca2cb07584e115ba53117f0084fc8faa25"
 
 SRCREV_FORMAT = "compat-wireless"
 

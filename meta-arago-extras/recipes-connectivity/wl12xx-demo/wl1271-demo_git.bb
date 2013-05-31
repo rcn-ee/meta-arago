@@ -9,7 +9,7 @@ RDEPENDS_${PN} += "bluez4 openobex ussp-push obexftp bluez-hcidump obex-client"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGE_STRIP = "no"
 
-PR = "r3+gitr${SRCREV}"
+PR = "r4+gitr${SRCPV}"
 
 BRANCH = "wl12xx"
 SRCREV = "7736f86b8c157ffc3e2a0b9e55a97c093faae14e"

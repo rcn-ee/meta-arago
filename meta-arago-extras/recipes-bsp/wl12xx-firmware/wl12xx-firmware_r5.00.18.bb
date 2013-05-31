@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=ba590e1d103f891d0151609046aef9e8"
 
 PACKAGE_ARCH = "all"
 
-PR = "r0+gitr${SRCREV}"
+PR = "r1+gitr${SRCPV}"
 
 # This recipe provides the latest firmware files for wl12xx.
 # Therefore, use the contents of this recipe instead of the contents

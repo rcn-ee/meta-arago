@@ -3,13 +3,13 @@ SECTION = "network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=75859989545e37968a99b631ef42722e"
 
-PR = "r7"
+PR = "r8"
 
 COMPATIBLE_MACHINE = "(omap3evm|am37x-evm|am335x-evm|am180x-evm|am181x-evm)"
 
 BRANCH = "master"
 SRCREV = "b5d47f31da94545f89b0333b879b533003f5c841"
-PR_append = "+gitr${SRCREV}"
+PR_append = "+gitr${SRCPV}"
 
 SRC_URI = "git://www.github.com/TI-ECS/battleship.git;protocol=git;branch=${BRANCH} \
            file://battleship.desktop"

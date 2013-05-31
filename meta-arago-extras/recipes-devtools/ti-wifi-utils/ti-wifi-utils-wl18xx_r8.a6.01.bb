@@ -5,9 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
 DEPENDS = "libnl"
 RDEPENDS = "ti-compat-wireless-wl12xx wl12xx-firmware"
 
-PR ="r1+gitr${SRCREV}"
+PR ="r2+gitr${SRCPV}"
 
-SRCREV = "ol_r8.a6.01"
+# Tag: ol_r8.a6.01
+SRCREV = "214dfbdf97cc390b0020c4ea9331a1cf82240a64"
 SRC_URI = "git://github.com/TI-OpenLink/18xx-ti-utils.git \
 "
 

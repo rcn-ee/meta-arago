@@ -2,10 +2,11 @@ DESCRIPTION = "Configuration utility for TI wireless drivers"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;beginline=1;endline=21;md5=adc05a1903d3f107f85c90328e3a9438"
 
-PR ="r1"
-PR_append = "+gitr${SRCREV}"
+PR ="r2"
+PR_append = "+gitr${SRCPV}"
 
-SRCREV = "ol_r8.a6.01"
+# Tag: ol_r8.a6.01
+SRCREV = "214dfbdf97cc390b0020c4ea9331a1cf82240a64"
 SRC_URI = "git://github.com/TI-OpenLink/18xx-ti-utils.git"
 
 S = "${WORKDIR}/git/wlconf"

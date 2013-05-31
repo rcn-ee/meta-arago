@@ -13,7 +13,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
-PR = "r1+gitr${SRCREV}"
+PR = "r2+gitr${SRCPV}"
 
 COMPATIBLE_MACHINE = "omap3|omapl138|da850-omapl138-evm|ti33x"
 

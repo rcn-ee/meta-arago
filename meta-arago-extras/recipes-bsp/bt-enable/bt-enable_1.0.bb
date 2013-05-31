@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://gpio_en_am1808.c;beginline=1;endline=34;md5=fe94639d8
 COMPATIBLE_MACHINE = "omap3|omapl138|ti33x"
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "a+gitr${SRCREV}"
+PR_append = "b+gitr${SRCPV}"
 
 SRCREV = "97c4600ff7d39f1cc6079939248cd9ed15100db4"
 

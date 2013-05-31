@@ -12,11 +12,12 @@ RDEPENDS_${PN} = "wireless-tools"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "c"
+PR_append = "d"
 
-SRCREV_wl12xx = "ol_R5.SP4.01"
-SRCREV_compat = "ol_R5.SP4.01"
-SRCREV_compat-wireless = "ol_R5.SP4.01"
+# Tags: ol_R5.SP4.01
+SRCREV_wl12xx = "e96a68476155f1c3576066ab2d0b1417835dfdcf"
+SRCREV_compat = "984ab77279488f3fea4436da76c0f81a618cef1b"
+SRCREV_compat-wireless = "bcc169e624f54e643e182bc6c15b6380b2f8408a"
 
 SRCREV_FORMAT = "compat-wireless"
 
