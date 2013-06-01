@@ -7,7 +7,7 @@ TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r25"
+PR = "r26"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
@@ -75,16 +75,24 @@ populate_sdk_ipk_append () {
 
 	# Do some extra setup work due to new structure
 	mkdir -p "${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/lib/${TUNE_PKGARCH}${TARGET_VENDOR}-${TARGET_OS}"
+	lexec="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/libexec/gcc/${TOOLCHAIN_SYS}"
+	tcv=`ls -1 $lexec|head -1`
+	ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv
+	ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv
 	tcpath="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/${TOOLCHAIN_SYS}"
 	mkdir -p $tcpath
-	cd $tcpath
-	mkdir -p libc/lib
-	mkdir -p libc/usr/lib
-	ln -s ${SDKTARGETSYSROOT}/lib libc/lib/${TOOLCHAIN_SYS}
-	ln -s ${SDKTARGETSYSROOT}/usr/lib libc/usr/lib/${TOOLCHAIN_SYS}
-	ln -s ${SDKTARGETSYSROOT}/usr/include libc/usr/include
+	pushd $tcpath
 	ln -s ${SDKTARGETSYSROOT}/include include
-	cd -
+	if [ "${TOOLCHAIN_BRAND}" != "arago" ]; then
+		mkdir -p libc
+		cd libc
+	fi
+	mkdir -p lib
+	mkdir -p usr/lib
+	ln -s ${SDKTARGETSYSROOT}/lib lib/${TOOLCHAIN_SYS}
+	ln -s ${SDKTARGETSYSROOT}/usr/lib usr/lib/${TOOLCHAIN_SYS}
+	ln -s ${SDKTARGETSYSROOT}/usr/include usr/include
+	popd
 }
 
 fakeroot create_sdk_files() {
