@@ -5,7 +5,7 @@ TOOLCHAIN_SUFFIX ?= "-qte-sdk"
 
 require meta-toolchain-arago.bb
 
-PR = "r14"
+PR = "r15"
 
 QT_DIR_NAME = "qtopia"
 
@@ -35,11 +35,11 @@ toolchain_create_sdk_env_script_append() {
 	qt_conf="${SDK_OUTPUT}/${SDKPATHNATIVE}${bindir_nativesdk}/qt.conf"
 	touch $qt_conf
 	echo '[Paths]' >> $qt_conf
-	echo 'Prefix = $(SDK_PATH)' >> $qt_conf
+	echo 'Prefix = $(SDK_PATH_TARGET)' >> $qt_conf
 	echo 'Libraries = $(OE_QMAKE_LIBDIR_QT)' >> $qt_conf
 	echo 'Headers = $(OE_QMAKE_INCDIR_QT)' >> $qt_conf
 
 	# make a symbolic link to mkspecs for compatibility with Nokia's SDK
 	# and QTCreator
-	(cd ${SDK_OUTPUT}/${SDKPATH}; ln -sf sysroots/${REAL_MULTIMACH_TARGET_SYS}${datadir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+	(cd ${SDK_OUTPUT}/${SDKTARGETSYSROOT}; ln -sf usr/share/${QT_DIR_NAME}/mkspecs mkspecs;)
 }
