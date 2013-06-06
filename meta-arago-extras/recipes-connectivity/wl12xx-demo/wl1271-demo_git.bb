@@ -9,14 +9,16 @@ RDEPENDS_${PN} += "bluez4 openobex ussp-push obexftp bluez-hcidump obex-client"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGE_STRIP = "no"
 
-PR = "r4+gitr${SRCPV}"
+PR = "r5+gitr${SRCPV}"
 
 BRANCH = "wl12xx"
 SRCREV = "7736f86b8c157ffc3e2a0b9e55a97c093faae14e"
 
 COMPATIBLE_MACHINE = "am37x-evm|am180x-evm|da850-omapl138-evm|am335x-evm"
 
-SRC_URI = "git://github.com/TI-ECS/wl1271-bluetooth.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://github.com/TI-ECS/wl1271-bluetooth.git;protocol=git;branch=${BRANCH} \
+           file://0001-Add-additional-hci0-up.patch \
+"
 
 S = "${WORKDIR}/git"
 

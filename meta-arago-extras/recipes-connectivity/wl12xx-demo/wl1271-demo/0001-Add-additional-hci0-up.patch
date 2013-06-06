@@ -1,0 +1,54 @@
+From 3dd9df41002dd57af0c6ad8e4f6d36156b5bd2e0 Mon Sep 17 00:00:00 2001
+From: Franklin S. Cooper Jr <fcooper@ti.com>
+Date: Fri, 31 May 2013 14:05:29 -0500
+Subject: [PATCH] Add additional hci0 up
+
+* After running the Bluetooth GUI BT CLI wasn't initialized properly.
+* Adding hciconfig hci0 up statement fixes this problem.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ script/am1808/BT_Init.sh   |    1 +
+ script/am335x/BT_Init.sh   |    1 +
+ script/omap3evm/BT_Init.sh |    1 +
+ 3 files changed, 3 insertions(+), 0 deletions(-)
+
+diff --git a/script/am1808/BT_Init.sh b/script/am1808/BT_Init.sh
+index 1645cbf..5620dc5 100755
+--- a/script/am1808/BT_Init.sh
++++ b/script/am1808/BT_Init.sh
+@@ -22,6 +22,7 @@ modprobe gpio_en
+ sleep 2
+ hciattach /dev/ttyS1 texas 2000000 & 
+ sleep 10
++hciconfig hci0 up
+ hciconfig hci0 piscan &> /dev/null
+ agent --path /org/bluez/agent 0000 &> /dev/null &
+ sleep 2
+diff --git a/script/am335x/BT_Init.sh b/script/am335x/BT_Init.sh
+index 0e6f714..873cc30 100755
+--- a/script/am335x/BT_Init.sh
++++ b/script/am335x/BT_Init.sh
+@@ -25,6 +25,7 @@ modprobe gpio_en
+ sleep 2
+ hciattach /dev/ttyO1 texas 3000000 & 
+ sleep 5
++hciconfig hci0 up
+ hciconfig hci0 piscan &> /dev/null
+ agent --path /org/bluez/agent 0000 &> /dev/null &
+ sleep 2
+diff --git a/script/omap3evm/BT_Init.sh b/script/omap3evm/BT_Init.sh
+index 0e6f714..873cc30 100755
+--- a/script/omap3evm/BT_Init.sh
++++ b/script/omap3evm/BT_Init.sh
+@@ -25,6 +25,7 @@ modprobe gpio_en
+ sleep 2
+ hciattach /dev/ttyO1 texas 3000000 & 
+ sleep 5
++hciconfig hci0 up
+ hciconfig hci0 piscan &> /dev/null
+ agent --path /org/bluez/agent 0000 &> /dev/null &
+ sleep 2
+-- 
+1.7.0.4
+
