@@ -4,7 +4,7 @@ LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.4"
+PR = "${INC_PR}.5"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -16,4 +16,4 @@ FILES_${PN} += "${MATRIX_BASE_DIR}/*"
 # Make sure crypto submenu and app images has been installed. Also make sure openssl is available
 RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-cryptos openssl"
 
-RDEPENDS_${PN}_ti33x_append = " ti-crypto-examples"
+RDEPENDS_${PN}_append_ti33x = " ti-crypto-examples"
