@@ -4,9 +4,9 @@ LICENSE_CHECKSUM = "LICENSE;md5=6e0ae7214f6c74c149cb25f373057fa9"
 LIC_FILES_CHKSUM := "file://../${LICENSE_CHECKSUM}"
 
 SRC_URI = "git://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps.git;protocol=git;branch=${BRANCH}"
-SRCREV = "2f938391c53826d261f41e8a177413793194499e"
+SRCREV = "c3ffe73dbbc911742ef87217a060cac1d119c531"
 BRANCH = "master"
-INC_PR = "r13"
+INC_PR = "r14"
 
 # Pull in the base package for installing matrix applications
 require matrix-gui-apps.inc
