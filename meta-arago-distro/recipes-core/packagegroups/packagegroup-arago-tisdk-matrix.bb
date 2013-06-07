@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r16"
+PR = "r17"
 
 inherit packagegroup
 
@@ -23,6 +23,7 @@ MATRIX_COMMON_APPS = "              \
     matrix-gui-settings-demos       \
     matrix-gui-usb-demos            \
     matrix-gui-submenus-ethernet    \
+    matrix-gui-clocks               \
 "
 
 MATRIX_QT_APPS = "                  \
@@ -58,11 +59,6 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-multimedia-demo-mpeg4aacdec   \
     matrix-multimedia-demo-mpeg4dec     \
                                     \
-    matrix-gui-clocks-275mhz        \
-    matrix-gui-clocks-500mhz        \
-    matrix-gui-clocks-600mhz        \
-    matrix-gui-clocks-720mhz        \
-                                    \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
                                     \
@@ -88,10 +84,6 @@ MATRIX_APPS_append_am3517-evm = "   \
 "
 
 MATRIX_APPS_append_am37x-evm = "    \
-    matrix-gui-clocks-300mhz        \
-    matrix-gui-clocks-600mhz        \
-    matrix-gui-clocks-800mhz        \
-    matrix-gui-clocks-1ghz          \
                                     \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-count       \
