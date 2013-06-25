@@ -46,8 +46,11 @@ TARGET_IMAGE_TYPES ?= "tar.bz2 tar.gz ubi"
 # the variable is in the BB_ENV_EXTRAWHITE list.
 EXTRA_TISDK_FILES ?= ""
 
-# Variable to specify the name of the secondary bootloader
-SECONDARY_BOOTLOADER_NAME ?= "MLO-${MACHINE}"
+# Variable to specify the name of SPL
+DEPLOY_SPL_NAME ?= "MLO-${MACHINE}"
+
+# Variable to specify the name of SPL/UART
+DEPLOY_SPL_UART_NAME ?= "u-boot-spl.bin-${MACHINE}"
 
 # Manifest file location which will be created as part of the image build
 # process.
@@ -541,15 +544,24 @@ do_sdk_image () {
         done
     fi
 
-    if [ "${SECONDARY_BOOTLOADER_NAME}" != "" ]
+    if [ "${DEPLOY_SPL_NAME}" != "" ]
     then
-        # Copy the secondary bootloader image if it exists
-        if [ -e ${DEPLOY_DIR_IMAGE}/${SECONDARY_BOOTLOADER_NAME} ]
+        # Copy the SPL image if it exists
+        if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_SPL_NAME} ]
         then
-            cp ${DEPLOY_DIR_IMAGE}/${SECONDARY_BOOTLOADER_NAME} ${prebuilt_dir}/
+            cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_SPL_NAME} ${prebuilt_dir}/
         else
-            echo "Could not find the secondary bootloader image"
+            echo "Could not find the SPL image"
             return 1
+        fi
+    fi
+
+    if [ "${DEPLOY_SPL_UART_NAME}" != "" ]
+    then
+        # Copy the SPL/UART image if it exists
+        if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_SPL_UART_NAME} ]
+        then
+            cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_SPL_UART_NAME} ${prebuilt_dir}/
         fi
     fi
 
