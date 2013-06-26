@@ -7,10 +7,10 @@ SECTION = "system"
 
 INHIBIT_PACKAGE_STRIP = "1"
 
-PR = "r1"
+PR = "r2"
 
 BRANCH ?= "master"
-SRCREV = "875147fcaf0706f91b1bcbf9d80821de78257955"
+SRCREV = "3aa2de4bb698c96f8a481c4048e3140503b26082"
 
 SRC_URI = "git://gitorious.org/oprofile-example/oprofile-example.git;protocol=git;branch=${BRANCH}"
 
