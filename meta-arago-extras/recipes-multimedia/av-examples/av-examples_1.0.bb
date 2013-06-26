@@ -4,7 +4,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM := "file://COPYING;md5=80ea1ff5788f65d5c5b3206d50d4bc6c"
 SECTION = "system"
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "virtual/kernel"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -12,7 +12,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(omap3)"
 
 BRANCH ?= "master"
-SRCREV = "87469a47bf91d681f15f0a2eb368fe695b21508c"
+SRCREV = "b67b11011a8a54a7598eed383f3a106c32b47c6d"
 
 SRC_URI = "git://gitorious.org/av_examples/av_examples.git;protocol=git;branch=${BRANCH}"
 
@@ -22,6 +22,7 @@ S = "${WORKDIR}/git"
 INSANE_SKIP_${PN} = "True"
 
 do_compile() {
+
 	touch debug
 	export CROSS_COMPILE=${TARGET_PREFIX}
 	export CFLAGS='${TARGET_CC_ARCH}'
