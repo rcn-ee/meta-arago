@@ -30,9 +30,10 @@ SRC_URI = "\
     file://Makefile_quick-playground \
     file://Makefile_wireless \
     file://Makefile_omapconf \
+    file://Makefile_oprofile-example \
 "
 
-PR = "r12"
+PR = "r13"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -41,6 +42,7 @@ MAKEFILES_COMMON = "linux \
                     matrix-gui-browser \
                     refresh-screen \
                     qt-tstat \
+                    oprofile-example \
 "
 MAKEFILES = ""
 
