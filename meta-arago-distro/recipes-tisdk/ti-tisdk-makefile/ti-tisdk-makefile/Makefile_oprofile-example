@@ -1,0 +1,18 @@
+# oprofile-example build targets
+oprofile-example:
+	@echo =============================
+	@echo    Building OProfile Example
+	@echo =============================
+	@cd example-applications; cd `find . -name "*oprofile-example*"`; make
+
+oprofile-example_clean:
+	@echo =============================
+	@echo    Cleaning OProfile Example
+	@echo =============================
+	@cd example-applications; cd `find . -name "*oprofile-example*"`; make clean
+
+oprofile-example_install:
+	@echo =============================================
+	@echo     Installing OProfile Example - Debug version
+	@echo =============================================
+	@cd example-applications; cd `find . -name "*oprofile-example*"`; make install
