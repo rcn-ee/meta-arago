@@ -1,5 +1,5 @@
-PR_append = "-arago0"
+PR_append = "-arago1"
 
 # PSPREL and UVER are used by arago-source-ipk.conf
-PSPREL = "05.07.00.00"
+PSPREL = "06.00.00.00"
 UVER = "2013.01.01"
