@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
@@ -9,6 +9,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 UTILS = " \
     am-sysinfo-src \
     arm-benchmarks-src \
+    oprofile-example-src \
 "
 
 # Add pru and profibus sources for omapl138 devices
