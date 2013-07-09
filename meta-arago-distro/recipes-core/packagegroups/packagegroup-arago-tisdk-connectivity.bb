@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r15"
 
 inherit packagegroup
 
@@ -9,14 +9,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 # WLAN support packages.
 # These are the packages that all platforms use for WLAN support
 WLAN_COMMON = "\
-    hostap-daemon \
     wireless-tools \
     htop \
-    netperf \
     iw \
-    crda \
     softap-udhcpd-config \
-    oppserver \
     bluez-tools \
     obexd \
     obex-client \
@@ -26,9 +22,18 @@ WLAN_COMMON = "\
     pulseaudio-module-bluetooth-discover \
     pulseaudio-module-bluetooth-device \
     eventdump \
-    wpa-supplicant \
     ${@base_contains('WILINK_VERSION','WILINK-8','wlconf','',d)} \
 "
+
+# TI/ECS versions of wpa-supplicant/crda/hostap require older libnl, which no longer exists
+#    wpa-supplicant
+#    crda
+#    hostap-daemon
+# No bluetooth/bluetooth.h
+#    oppserver
+
+# netperf has non-standard license, needs verifying
+#    netperf
 
 FIRMWARE_AND_DRIVERS = "\
     ti-wifi-utils \
@@ -52,11 +57,12 @@ BLUETOOTH_STACK = "\
 
 DEMO_APPS = "\
     bluetooth-gui \
-    wifi-direct-demo \
-    wpa-gui-e \
     wl1271-demo \
-    battleship \
 "
+
+#    wifi-direct-demo
+#    battleship
+#    wpa-gui-e
 
 CONNECTIVITY_RDEPENDS = ""
 
