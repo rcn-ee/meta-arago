@@ -3,9 +3,9 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
 
 DEPENDS = "libnl"
-RDEPENDS = "ti-compat-wireless-wl12xx wl12xx-firmware"
+RDEPENDS_${PN} = "ti-compat-wireless-wl12xx wl12xx-firmware"
 
-PR ="r2+gitr${SRCPV}"
+PR ="r3+gitr${SRCPV}"
 
 # Tag: ol_r8.a6.01
 SRCREV = "214dfbdf97cc390b0020c4ea9331a1cf82240a64"
