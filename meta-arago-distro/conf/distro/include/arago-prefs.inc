@@ -6,13 +6,16 @@ PREFERRED_PROVIDER_virtual/gettext = "gettext"
 ARAGO_QT_PROVIDER = "${@base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d)}"
 PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
 
-PREFERRED_VERSION_qt4-embedded = "4.8.3"
-PREFERRED_VERSION_qt4-native = "4.8.3"
-PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.3"
+PREFERRED_VERSION_qt4-embedded = "4.8.4"
+PREFERRED_VERSION_qt4-native = "4.8.4"
+PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.4"
 
 # Use v4.09.00.01 of the Graphics SDK
 PREFERRED_VERSION_omap3-sgx-modules = "4.09.00.01"
 PREFERRED_VERSION_libgles-omap3 = "4.09.00.01"
+PREFERRED_PROVIDER_omap3-sgx-modules = "omap3-sgx-modules"
+PREFERRED_PROVIDER_libgles-omap3 = "libgles-omap3"
+PREFERRED_PROVIDER_virtual/egl = "libgles-omap3"
 
 # Use latest TI staging kernel and u-boot trees
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
@@ -47,7 +50,7 @@ PREFERRED_PROVIDER_u-boot_beagleboard = "u-boot-am37x"
 PREFERRED_VERSION_u-boot-am37x_beagleboard = "2012.04.01"
 
 # Pin down udev version from oe-core, as meta-oe pulls in newer systemd-enhanced version
-PREFERRED_VERSION_udev = "164"
+PREFERRED_VERSION_udev = "182"
 PREFERRED_PROVIDER_udev = "udev"
 
 # Set the PREFERRED_PROVIDER for jpeg functionality based on the MACHINE
@@ -66,7 +69,7 @@ PREFERRED_VERSION_readline-nativesdk = "5.2"
 PREFERRED_VERSION_libnl = "2.0"
 PREFERRED_VERSION_crda = "1.1.1"
 PREFERRED_VERSION_obex = "0.34"
-PREFERRED_VERSION_bluez4 = "4.98"
+PREFERRED_VERSION_bluez4 = "4.101"
 PREFERRED_VERSION_bluez-hcidump = "2.2"
 PREFERRED_VERSION_bash = "3.2.48"
 PREFERRED_VERSION_gettext = "0.16.1"
