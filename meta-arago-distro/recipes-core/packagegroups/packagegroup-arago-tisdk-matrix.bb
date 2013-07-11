@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 inherit packagegroup
 
@@ -23,7 +23,6 @@ MATRIX_COMMON_APPS = "              \
     matrix-gui-settings-demos       \
     matrix-gui-usb-demos            \
     matrix-gui-submenus-ethernet    \
-    matrix-gui-clocks               \
 "
 
 MATRIX_QT_APPS = "                  \
@@ -61,6 +60,7 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
+    matrix-gui-clocks               \
                                     \
     matrix-gui-wifi-demos           \
     matrix-gui-bluetooth-demos      \
@@ -97,6 +97,7 @@ MATRIX_APPS_append_am37x-evm = "    \
     matrix-gui-camera-loopback      \
     matrix-gui-v4l2-demos           \
     matrix-gui-display-control      \
+    matrix-gui-clocks               \
                                     \
     matrix-gui-wifi-demos           \
     matrix-gui-bluetooth-demos      \
