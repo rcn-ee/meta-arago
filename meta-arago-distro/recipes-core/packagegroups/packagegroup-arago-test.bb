@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
@@ -15,6 +15,7 @@ ARAGO_TEST = "\
     rt-tests \
     evtest \
     bc \
+    memtester \
     "
 
 ARAGO_TI_TEST = "\
