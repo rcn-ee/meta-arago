@@ -3,6 +3,8 @@
 # Use the SDK supported kernel and kernel version
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-am335x-psp"
 PREFERRED_VERSION_linux-am335x-psp = "3.2"
+PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.2"
+
 PREFERRED_PROVIDER_ltp-ddt_am335x-evm = "ltp-ddt-legacy"
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-am33x"
 PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-am33x"
