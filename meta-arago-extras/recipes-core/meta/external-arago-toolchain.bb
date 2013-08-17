@@ -2,7 +2,7 @@ require recipes-core/eglibc/eglibc-package.inc
 
 require external-arago-toolchain.inc
 
-PR = "r3"
+PR = "r4"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
@@ -245,7 +245,8 @@ do_install() {
 	rm -rf ${D}${libdir}/*.la
 	rm -rf ${D}${includedir}/{zconf,zlib}.h
 
-	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-arago-toolchain', '', 'rm -rf ${D}${includedir}/linux', d)}
+	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-arago-toolchain', '', 'rm -rf ${D}${includedir}/asm*; rm -rf ${D}${includedir}/drm; rm -rf ${D}${includedir}/linux; rm -rf ${D}${includedir}/mtd; rm -rf ${D}${includedir}/rdma; rm -rf ${D}${includedir}/sound; rm -rf ${D}${includedir}/video', d)}
+	${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-arago-toolchain', '', 'rm -rf ${D}${includedir}/scsi/.install; rm -rf ${D}${includedir}/scsi/scsi_netlink*; rm -rf ${D}${includedir}/scsi/scsi_bsg*', d)}
 
 	cp -a ${TOOLCHAIN_PATH}/${ARAGO_TARGET_SYS}/include/* ${D}/include
 	${@base_conditional('PREFERRED_PROVIDER_gdbserver', 'external-arago-toolchain', '', 'rm -rf ${D}${bindir}/gdbserver', d)}
