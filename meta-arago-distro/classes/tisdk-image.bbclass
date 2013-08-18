@@ -257,7 +257,7 @@ echo "
 # Create the target side toolchain components table.  These are components on
 # the host but intended for the target.
 sw_manifest_toolchain_target() {
-    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/arm*-linux-gnueabi*/var/lib/opkg/info"
+    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/*-oe-linux-gnueabi*/var/lib/opkg/info"
 
 echo "
 <h2><u>GPLv3 Development Libraries Installed on Host</u></h2>
