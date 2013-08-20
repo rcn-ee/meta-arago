@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
-PR = "r15"
+PR = "r16"
 
 inherit packagegroup
 
@@ -25,10 +25,12 @@ WLAN_COMMON = "\
     ${@base_contains('WILINK_VERSION','WILINK-8','wlconf','',d)} \
 "
 
-# TI/ECS versions of wpa-supplicant/crda/hostap require older libnl, which no longer exists
+# TI/ECS versions of wpa-supplicant/crda/hostap/wifi-utils require older libnl,
+# which no longer exists
 #    wpa-supplicant
 #    crda
 #    hostap-daemon
+#    ti-wifi-utils
 # No bluetooth/bluetooth.h
 #    oppserver
 
@@ -36,7 +38,6 @@ WLAN_COMMON = "\
 #    netperf
 
 FIRMWARE_AND_DRIVERS = "\
-    ti-wifi-utils \
     ti-compat-wireless-wl12xx \
     ti-compat-bluetooth \
     bt-firmware \
