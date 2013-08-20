@@ -18,6 +18,7 @@ PREFERRED_PROVIDER_libgles-omap3 = "libgles-omap3"
 PREFERRED_PROVIDER_virtual/egl = "libgles-omap3"
 
 # Use latest TI staging kernel and u-boot trees
+PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.8"
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
@@ -70,7 +71,7 @@ PREFERRED_VERSION_readline = "5.2"
 PREFERRED_VERSION_readline-native = "5.2"
 PREFERRED_VERSION_readline-nativesdk = "5.2"
 
-PREFERRED_VERSION_libnl = "2.0"
+PREFERRED_VERSION_libnl = "3.2.21"
 PREFERRED_VERSION_crda = "1.1.1"
 PREFERRED_VERSION_obex = "0.34"
 PREFERRED_VERSION_bluez4 = "4.101"
