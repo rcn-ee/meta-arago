@@ -9,6 +9,7 @@ PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
 PREFERRED_VERSION_qt4-embedded = "4.8.4"
 PREFERRED_VERSION_qt4-native = "4.8.4"
 PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.4"
+PREFERRED_VERSION_linux-libc-headers = "3.8"
 
 # Use v4.09.00.01 of the Graphics SDK
 PREFERRED_VERSION_omap3-sgx-modules = "4.09.00.01"
@@ -22,6 +23,12 @@ PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.8"
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
+
+PREFERRED_VERSION_linux-libc-headers_am437x-evm = "3.8"
+PREFERRED_PROVIDER_virtual/kernel_am437x-evm = "linux-ti-staging"
+PREFERRED_PROVIDER_virtual/bootloader_am437x-evm = "u-boot-ti-staging"
+PREFERRED_PROVIDER_u-boot_am437x-evm = "u-boot-ti-staging"
+PREFERRED_VERSION_u-boot-ti-staging_am437x-evm = "2013.07+2013.10-rc1"
 
 PREFERRED_VERSION_linux-libc-headers_am180x-evm = "2.6.37.2"
 PREFERRED_PROVIDER_virtual/kernel_am180x-evm = "linux-omapl138-psp"
