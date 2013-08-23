@@ -7,6 +7,7 @@ DEFAULTTUNE = "cortexa8thf-neon"
 DEFAULTTUNE_omap-a15 = "cortexa15thf-neon"
 DEFAULTTUNE_keystone = "cortexa15thf-neon"
 DEFAULTTUNE_omap4 = "cortexa9thf-neon"
+DEFAULTTUNE_ti43x = "cortexa9thf-neon"
 
 PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-linaro-toolchain"
 
