@@ -59,17 +59,42 @@ SRCIPK_SECTION ?= "${SECTION}"
 # Default SRCIPK_INCLUDE_EXTRAFILES is to include the extra files
 SRCIPK_INCLUDE_EXTRAFILES ?= "1"
 
-# Remove git repositories before packaging up the sources
-clear_git() {
+SRCIPK_PRESERVE_GIT ?= "false"
+
+adjust_git() {
+
+    orig_dir="$PWD"
 
     cd ${S}
 
     if [ -d ".git" ]
     then
-        rm -rf .git
+
+        # Grab path to cloned local repository
+        old=`git remote -v | grep "(fetch)" | cut -d ' ' -f 1   | cut -c 7- | tr -d ' '`
+
+        if [ -d $old -a "${SRCIPK_PRESERVE_GIT}" = "true" ]
+        then
+            cd $old
+
+            # Grab actual url used to create the repository
+            orig=`git remote -v | grep "(fetch)" | cut -d ' ' -f 1   | cut -c 7- | tr -d ' '`
+
+            cd -
+
+            git remote set-url origin $orig $old
+
+            # Repackage the repository so its a proper clone of the original (remote) git repository
+            git repack -a -d
+            rm .git/objects/info/alternates
+
+        else
+            rm -rf .git
+        fi
+
     fi
 
-    cd -
+    cd $orig_dir
 
 }
 
@@ -97,7 +122,7 @@ sourceipk_do_create_srcipk() {
     if [ ${CREATE_SRCIPK} != "0" ]
     then
 
-        clear_git
+        adjust_git
 
         tmp_dir="${WORKDIR}/sourceipk-tmp"
         srcipk_dir="${WORKDIR}/sourceipk-data"
