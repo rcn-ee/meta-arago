@@ -4,7 +4,7 @@
 require arago-image.inc
 inherit remove-net-rules
 
-COMPATIBLE_MACHINE = "omap3|ti816x|dm365|omapl138|ti814x|omap4|ti33x|omap-a15"
+COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|ti43x|omap4|omap-a15"
 
 IMAGE_INSTALL += "\
     packagegroup-arago-base \

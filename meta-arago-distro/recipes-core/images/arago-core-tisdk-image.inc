@@ -7,7 +7,7 @@ IMAGE_FSTYPES = "tar.gz"
 
 inherit tisdk-image
 
-COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|omap-a15"
+COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|ti43x|omap-a15"
 
 # List of packages to remove from the host package.  This is usually due to
 # licensing issues and unneeded dependencies.
