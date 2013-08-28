@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r20"
+PR = "r21"
 
 inherit packagegroup
 
@@ -68,6 +68,13 @@ MATRIX_APPS_append_ti33x = "        \
 
 #    matrix-gui-wifi-battleship-demo
 #    matrix-gui-wifi-direct-demo
+
+MATRIX_APPS_append_ti43x = "        \
+    matrix-multimedia-demo-aac      \
+    matrix-multimedia-demo-h264dec  \
+    matrix-multimedia-demo-mpeg4aacdec \
+    matrix-multimedia-demo-mpeg4dec \
+"
 
 MATRIX_APPS_append_omap-a15 = "     \
     matrix-multimedia-demo-aac      \
