@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional packages only used in the Arago SDK"
 LICENSE = "MIT"
-PR = "r7"
+PR = "r8"
 
 inherit packagegroup
 
@@ -15,7 +15,6 @@ OOBE_ti33x += "\
 "
 
 OOBE_ti43x += "\
-    gadget-init \
     parse-ip \
 "
 
