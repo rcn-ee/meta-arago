@@ -16,7 +16,11 @@ PREFERRED_VERSION_omap3-sgx-modules = "4.09.00.01"
 PREFERRED_VERSION_libgles-omap3 = "4.09.00.01"
 PREFERRED_PROVIDER_omap3-sgx-modules = "omap3-sgx-modules"
 PREFERRED_PROVIDER_libgles-omap3 = "libgles-omap3"
+PREFERRED_PROVIDER_libgles-omap3-dev = "libgles-omap3-dev"
+PREFERRED_PROVIDER_libgles-omap3-dbg = "libgles-omap3-dbg"
 PREFERRED_PROVIDER_virtual/egl = "libgles-omap3"
+PREFERRED_PROVIDER_virtual/libgles1 = "libgles-omap3"
+PREFERRED_PROVIDER_virtual/libgles2 = "libgles-omap3"
 
 # Use latest TI staging kernel and u-boot trees
 PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.8"
