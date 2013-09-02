@@ -4,12 +4,11 @@
 # will allow moving SD cards between EVMs and similar boards such as
 # beaglebone and the EVM.
 
-ROOTFS_POSTPROCESS_COMMAND += "rootfs_remove_net_rules;"
+ROOTFS_POSTPROCESS_COMMAND += "rootfs_rm_net_rules;"
 
-rootfs_remove_net_rules () {
+rootfs_rm_net_rules () {
     if [ -e ${IMAGE_ROOTFS}/lib/udev/write_net_rules ]
     then
         rm ${IMAGE_ROOTFS}/lib/udev/write_net_rules
     fi
 }
-
