@@ -1,9 +1,11 @@
 DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
 
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 QT_SGX_SUPPORT = "\
     libqt-embeddedopengl4-dev \
