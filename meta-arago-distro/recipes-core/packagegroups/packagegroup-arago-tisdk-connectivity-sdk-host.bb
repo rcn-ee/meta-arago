@@ -1,14 +1,16 @@
 DESCRIPTION = "Task to install wlan and bluetooth sources into the SDK"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+# Further breaks to resolve
+#    ti-compat-wireless-wl12xx-src
+#    ti-compat-bluetooth-src
+
 FIRMWARE_AND_DRIVERS_SRC = "\
-    ti-compat-wireless-wl12xx-src \
-    ti-compat-bluetooth-src \
     bt-firmware-src \
     bt-enable-src \
 "

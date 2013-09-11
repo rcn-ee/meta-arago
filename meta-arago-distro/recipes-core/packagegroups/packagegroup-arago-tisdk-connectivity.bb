@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
-PR = "r16"
+PR = "r17"
 
 inherit packagegroup
 
@@ -37,9 +37,11 @@ WLAN_COMMON = "\
 # netperf has non-standard license, needs verifying
 #    netperf
 
+# Further breaks to resolve
+#    ti-compat-wireless-wl12xx
+#    ti-compat-bluetooth
+
 FIRMWARE_AND_DRIVERS = "\
-    ti-compat-wireless-wl12xx \
-    ti-compat-bluetooth \
     bt-firmware \
     bt-enable \
     wl12xx-firmware \
