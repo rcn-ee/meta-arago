@@ -1,6 +1,6 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 inherit packagegroup
 
@@ -15,7 +15,6 @@ RDEPENDS_${PN} = "\
     iptables \
     iperf \
     psplash \
-    ${PREFERRED_PROVIDER_virtual/bootloader} \
     arago-gpl-notice \
     nfs-utils-client \
     "
