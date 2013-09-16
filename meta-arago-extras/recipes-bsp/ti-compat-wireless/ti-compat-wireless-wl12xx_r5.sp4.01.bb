@@ -12,7 +12,7 @@ RDEPENDS_${PN} = "wireless-tools"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "d"
+PR_append = "e"
 
 # Tags: ol_R5.SP4.01
 SRCREV_wl12xx = "e96a68476155f1c3576066ab2d0b1417835dfdcf"
@@ -37,10 +37,10 @@ SRC_URI_append_am335x-evm = "file://0001-wl12xx-Decrease-number-of-RX-transactio
 
 EXTRA_OEMAKE = "KLIB_BUILD=${STAGING_KERNEL_DIR} KLIB=${D}"
 
-# Prevent sourceipk clear_git function from running.
+# Prevent sourceipk adjust_git function from running.
 # This preserves the git repo until driver-select is ran.
 
-clear_git() {
+adjust_git() {
     :
 }
 

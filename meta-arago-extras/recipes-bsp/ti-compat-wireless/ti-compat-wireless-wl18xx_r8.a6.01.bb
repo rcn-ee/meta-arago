@@ -18,7 +18,7 @@ PV = "r8.a6.01"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "b"
+PR_append = "c"
 
 # Tags: ol_r8.a6.01
 SRCREV_wl18xx = "1c0f45f0e8aec0823175f7ac977908888c424aa1"
@@ -39,10 +39,10 @@ SRC_URI = "git://github.com/TI-OpenLink/compat-wireless.git;destsuffix=compat-wi
 
 EXTRA_OEMAKE = "KLIB_BUILD=${STAGING_KERNEL_DIR} KLIB=${D}"
 
-# Prevent sourceipk clear_git function from running.
+# Prevent sourceipk adjust_git function from running.
 # This preserves the git repo until driver-select is ran.
 
-clear_git() {
+adjust_git() {
     :
 }
 
