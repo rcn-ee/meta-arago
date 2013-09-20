@@ -160,6 +160,14 @@ sourceipk_do_create_srcipk() {
             tar -C ${SRCIPK_SRC_DIR} -cO $excludes . | tar -C $tmp_dir/${SRCIPK_INSTALL_DIR} -xpf -
         fi
 
+        # Fix up patches/ directory to contain actual patches instead of symlinks
+        if [ -e $tmp_dir/${SRCIPK_INSTALL_DIR}/patches ]
+        then
+            mv $tmp_dir/${SRCIPK_INSTALL_DIR}/patches $tmp_dir/${SRCIPK_INSTALL_DIR}/patches-links
+            cp -rL $tmp_dir/${SRCIPK_INSTALL_DIR}/patches-links $tmp_dir/${SRCIPK_INSTALL_DIR}/patches
+            rm -rf $tmp_dir/${SRCIPK_INSTALL_DIR}/patches-links
+        fi
+
         if [ ${SRCIPK_INCLUDE_EXTRAFILES} != "0" ]
         then
             sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
@@ -167,7 +175,7 @@ sourceipk_do_create_srcipk() {
         fi
 
         #Write the data tarball
-        tar -C $tmp_dir --owner=0 --group=0 -chzf $srcipk_dir/data.tar.gz .
+        tar -C $tmp_dir --owner=0 --group=0 -czf $srcipk_dir/data.tar.gz .
 
         # Create the debian-binary file
         echo "2.0" > $srcipk_dir/debian-binary
