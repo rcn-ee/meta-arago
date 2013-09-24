@@ -523,9 +523,9 @@ do_sdk_image () {
     fi
 
     # Copy the Kernel image if it exists
-    if [ -e ${DEPLOY_DIR_IMAGE}/uImage-${MACHINE}.bin ]
+    if [ -e ${DEPLOY_DIR_IMAGE}/[uz]Image-${MACHINE}.bin ]
     then
-        cp ${DEPLOY_DIR_IMAGE}/uImage-${MACHINE}.bin ${prebuilt_dir}/
+        cp ${DEPLOY_DIR_IMAGE}/[uz]Image-${MACHINE}.bin ${prebuilt_dir}/
     else
         echo "Could not find the Kernel image"
         return 1
@@ -539,7 +539,7 @@ do_sdk_image () {
     then
         for f in `find ${DEPLOY_DIR_IMAGE} -type l -name "*${DTB_FILTER}*.dtb"`
         do
-            dtb_file=`basename $f | sed s/uImage-//`
+            dtb_file=`basename $f | sed s/.Image-//`
             cp $f ${prebuilt_dir}/${dtb_file}
         done
     fi
