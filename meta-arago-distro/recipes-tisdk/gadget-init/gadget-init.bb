@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 COMPATIBLE_MACHINE = "ti33x"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "file://init"
 
@@ -21,4 +21,4 @@ do_install() {
 }
 
 FILES_${PN} = "${sysconfdir} ${bindir}"
-RDEPENDS_${PN} += "kernel-module-g-ether kernel-module-g-mass-storage"
+RRECOMMENDS_${PN} += "kernel-module-g-ether kernel-module-g-mass-storage"
