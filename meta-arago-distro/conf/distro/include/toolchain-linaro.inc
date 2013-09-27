@@ -15,6 +15,11 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-linaro-t
 TOOLCHAIN_SYS := "${ELT_TARGET_SYS}"
 TOOLCHAIN_PREFIX := "${TOOLCHAIN_SYS}-"
 
+# Use specific libc headers instead of ones provided by toolchain
+PREFERRED_PROVIDER_linux-libc-headers_forcevariable = "linux-libc-headers"
+PREFERRED_PROVIDER_linux-libc-headers-dev_forcevariable = "linux-libc-headers"
+PREFERRED_PROVIDER_virtual/linux-libc-headers_forcevariable = "linux-libc-headers"
+
 PREFERRED_PROVIDER_gcc-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-linaro-sdk-toolchain"
 PREFERRED_PROVIDER_binutils-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-linaro-sdk-toolchain"
 #PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "external-linaro-sdk-toolchain"
@@ -27,6 +32,7 @@ SDKGCCVERSION ?= "4.7%"
 SDKBINUVERSION ?= "2.23%"
 SDKEGLIBCVERSION ?= "2.17%"
 SDKLINUXLIBCVERSION ?= "3.8%"
+LINUXLIBCVERSION ?= "3.8%"
 
 PREFERRED_VERSION_gcc-crosssdk ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_gcc-crosssdk-initial ?= "${SDKGCCVERSION}"
@@ -34,6 +40,7 @@ PREFERRED_VERSION_gcc-crosssdk-intermediate ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_nativesdk-gcc-runtime ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_nativesdk-libgcc ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_binutils-crosssdk ?= "${SDKBINUVERSION}"
+PREFERRED_VERSION_linux-libc-headers ?= "${LINUXLIBCVERSION}"
 PREFERRED_VERSION_nativesdk-linux-libc-headers ?= "${SDKLINUXLIBCVERSION}"
 PREFERRED_VERSION_nativesdk-eglibc ?= "${SDKEGLIBCVERSION}"
 PREFERRED_VERSION_nativesdk-eglibc-initial ?= "${SDKEGLIBCVERSION}"
