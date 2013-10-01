@@ -7,7 +7,7 @@ SECTION = "multimedia"
 # Make sure that QT font libraries have been installed
 RDEPENDS_${PN} += "qt4-embedded-fonts"
 
-PR = "r1"
+PR = "r2"
 
 SRCREV = "db2e6b10e5a14358b6120a4a28de2f9d591bc55c"
 BRANCH ?= "master"
@@ -20,5 +20,5 @@ inherit qt4e
 
 do_install() {
 	install -d ${D}/${bindir}
-	install -m 0755 ${S}/matrix_browser ${D}/${bindir}
+	install -m 0755 ${B}/matrix_browser ${D}/${bindir}
 }
