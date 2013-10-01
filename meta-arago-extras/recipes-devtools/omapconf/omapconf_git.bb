@@ -4,13 +4,13 @@ HOMEPAGE = "https://github.com/omapconf/omapconf"
 LICENSE = "GPLv2 BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=205c83c4e2242a765acb923fc766e914"
 
-PV = "1.66"
+PV = "1.68"
 PR = "r0"
 
 COMPATIBLE_MACHINE = "omap-a15|omap4"
 
 BRANCH ?= "master"
-SRCREV = "418b94bde60dbd3f85a0afb6e4d2a808cfb104cd"
+SRCREV = "51fa0acb6ae24a9f14b11bc4b56c4f764b017f3f"
 
 SRC_URI = "git://github.com/omapconf/omapconf.git;protocol=git;branch=${BRANCH}"
 
