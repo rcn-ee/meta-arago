@@ -1,0 +1,20 @@
+# Class to mimic the old qt4e to prep recipe for use with Qt5 libraries
+
+QT5EDEPENDS ?= "qtbase "
+DEPENDS_prepend = "${QT5EDEPENDS}"
+
+inherit qmake5
+
+# we don't want conflicts with qt4
+OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"
+OE_QMAKE_PATH_ARCHDATA = "${OE_QMAKE_PATH_QT_ARCHDATA}"
+OE_QMAKE_PATH_DATA = "${OE_QMAKE_PATH_QT_DATA}"
+OE_QMAKE_PATH_BINS = "${OE_QMAKE_PATH_QT_BINS}"
+OE_QMAKE_PATH_TRANSLATIONS = "${OE_QMAKE_PATH_QT_TRANSLATIONS}"
+OE_QMAKE_PATH_DOCS = "${OE_QMAKE_PATH_QT_DOCS}"
+OE_QMAKE_PATH_SETTINGS = "${OE_QMAKE_PATH_QT_SETTINGS}"
+OE_QMAKE_PATH_EXAMPLES = "${OE_QMAKE_PATH_QT_EXAMPLES}"
+OE_QMAKE_PATH_TESTS = "${OE_QMAKE_PATH_QT_TESTS}"
+
+# Qt uses atomic instructions not supported in thumb mode
+ARM_INSTRUCTION_SET = "arm"
