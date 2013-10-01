@@ -1,3 +1,6 @@
+# Set preferred Qt5 versions. Different namespace from Qt4, so no conflict
+include conf/distro/include/qt5-versions.inc
+
 # Use the latest version of ltp-ddt for kernel versions 3.8+
 PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
