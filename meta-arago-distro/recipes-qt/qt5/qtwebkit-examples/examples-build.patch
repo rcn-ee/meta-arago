@@ -1,0 +1,9 @@
+diff -uNr qtwebkit-examples-opensource-src-5.1.0-orig/qtwebkit-examples.pro qtwebkit-examples-opensource-src-5.1.0/qtwebkit-examples.pro
+--- qtwebkit-examples-opensource-src-5.1.0-orig/qtwebkit-examples.pro	2013-07-02 03:10:27.000000000 -0400
++++ qtwebkit-examples-opensource-src-5.1.0/qtwebkit-examples.pro	2013-09-29 21:31:10.761137146 -0400
+@@ -2,4 +2,4 @@
+ 
+ load(qt_parts)
+ 
+-SUBDIRS += doc
++SUBDIRS += doc examples
