@@ -33,7 +33,7 @@ SRC_URI = "\
     file://Makefile_oprofile-example \
 "
 
-PR = "r14"
+PR = "r15"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -80,8 +80,8 @@ MAKEFILES_append_am180x-evm = " pru \
                                 wireless \
 "
 
-PLATFORM_ARCH = "${ARMPKGARCH}"
 # Use ARCH format expected by the makefile
+PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
 
 # This step will stitch together the final Makefile based on the supported
