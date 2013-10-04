@@ -30,17 +30,17 @@ toolchain_create_sdk_env_script () {
 	echo '    export SDK_PATH' >> $script
 	echo 'fi' >> $script
 	echo 'export SDK_SYS=${SDK_SYS}' >> $script
-	echo 'export TARGET_SYS=${REAL_MULTIMACH_TARGET_SYS}' >> $script
+	echo 'export REAL_MULTIMACH_TARGET_SYS=${REAL_MULTIMACH_TARGET_SYS}' >> $script
 	echo 'export TOOLCHAIN_SYS=${TOOLCHAIN_SYS}' >> $script
 	echo 'export TOOLCHAIN_PREFIX=$TOOLCHAIN_SYS-' >> $script
 	echo 'export SDK_PATH_NATIVE=$SDK_PATH/sysroots/$SDK_SYS' >> $script
-	echo 'export SDK_PATH_TARGET=$SDK_PATH/sysroots/$TARGET_SYS' >> $script
+	echo 'export SDK_PATH_TARGET=$SDK_PATH/sysroots/$REAL_MULTIMACH_TARGET_SYS' >> $script
 	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}:$PATH' >> $script
 	echo 'export CPATH=$SDK_PATH_TARGET/usr/include:$CPATH' >> $script
 	echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH_TARGET' >> $script
 	echo 'export PKG_CONFIG_PATH=$SDK_PATH_TARGET${libdir}/pkgconfig' >> $script
 	echo 'export PKG_CONFIG_ALLOW_SYSTEM_LIBS=1' >> $script
-	echo 'export CONFIG_SITE=$SDK_PATH/site-config-$TARGET_SYS' >> $script
+	echo 'export CONFIG_SITE=$SDK_PATH/site-config-$REAL_MULTIMACH_TARGET_SYS' >> $script
 	printf 'export CC=\x24{TOOLCHAIN_PREFIX}gcc\n' >> $script
 	printf 'export CXX=\x24{TOOLCHAIN_PREFIX}g++\n' >> $script
 	printf 'export GDB=\x24{TOOLCHAIN_PREFIX}gdb\n' >> $script
@@ -52,7 +52,7 @@ toolchain_create_sdk_env_script () {
 	printf 'export OBJCOPY=\x24{TOOLCHAIN_PREFIX}objcopy\n' >> $script
 	printf 'export OBJDUMP=\x24{TOOLCHAIN_PREFIX}objdump\n' >> $script
 	printf 'export STRIP=\x24{TOOLCHAIN_PREFIX}strip\n' >> $script
-	echo 'export CONFIGURE_FLAGS="--target=$TARGET_SYS --host=$TARGET_SYS --build=${SDK_ARCH}-linux --with-libtool-sysroot=$SDK_PATH_TARGET"' >> $script
+	echo 'export CONFIGURE_FLAGS="--target=${TARGET_SYS} --host=${TARGET_SYS} --build=${SDK_ARCH}-linux --with-libtool-sysroot=$SDK_PATH_TARGET"' >> $script
 	echo 'export CPPFLAGS="${TARGET_CC_ARCH} --sysroot=$SDK_PATH_TARGET"' >> $script
 	echo 'export CFLAGS="$CPPFLAGS"' >> $script
 	echo 'export CXXFLAGS="$CPPFLAGS"' >> $script
