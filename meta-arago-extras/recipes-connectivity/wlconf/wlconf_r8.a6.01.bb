@@ -25,7 +25,7 @@ do_install() {
 	install -m 0755 README ${D}${bindir}/wlconf/
 	install -m 0755 example.conf ${D}${bindir}/wlconf/
 	install -m 0755 example.ini ${D}${bindir}/wlconf/
-	install -m 0755 ${S}/official_inis/*
+	install -m 0755 ${S}/official_inis/* \
 			${D}${bindir}/wlconf/official_inis/
 }
 
