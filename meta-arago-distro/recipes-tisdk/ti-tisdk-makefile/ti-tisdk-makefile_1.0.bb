@@ -33,7 +33,7 @@ SRC_URI = "\
     file://Makefile_oprofile-example \
 "
 
-PR = "r16"
+PR = "r17"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -84,6 +84,8 @@ MAKEFILES_append_am180x-evm = " pru \
 PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
 
+KERNEL_BUILD_CMDS = "${@base_contains('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
+
 # This step will stitch together the final Makefile based on the supported
 # make targets.
 do_install () {
@@ -122,6 +124,8 @@ do_install () {
         sed -i -e "s/__CLEAN_TARGETS__/$clean_targets/" ${D}/Makefile
         sed -i -e "s/__INSTALL_TARGETS__/$install_targets/" ${D}/Makefile
     fi
+
+    sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
 
     install  ${WORKDIR}/Rules.make ${D}/Rules.make
 
