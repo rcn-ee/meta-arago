@@ -63,6 +63,14 @@ sed -i -e s=__SDK__INSTALL_DIR__=$install_dir= $install_dir/Rules.make
 linux=`find $install_dir/board-support -maxdepth 1 -name "linux*"`
 linux=`basename $linux`
 sed -i -e s=__KERNEL_NAME__=$linux= $install_dir/Rules.make
+
+threads=`cat /proc/cpuinfo | grep -c processor`
+
+# Create a newline
+echo >> $install_dir/Rules.make
+# Set optimal value for the make file's -j option
+echo "MAKE_JOBS=$threads" >> $install_dir/Rules.make
+
 cd -
 
 
