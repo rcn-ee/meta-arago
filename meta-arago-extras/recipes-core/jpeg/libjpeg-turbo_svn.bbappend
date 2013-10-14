@@ -1,14 +1,6 @@
-PRINC := "${@int(PRINC) + 3}"
+PRINC := "${@int(PRINC) + 4}"
 
 SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;protocol=http;module=trunk"
-
-# Temporarily add this append which incorporates the changes of meta-oe master 
-# patch "libjpeg-turbo: Add RPROVIDES to fix errors when rdepending on jpeg"
-# commit id 662fd013adcbee8c59f4f475a11911c3267eae90.
-
-RPROVIDES_${PN}  += "jpeg"
-RREPLACES_${PN}  += "jpeg"
-RCONFLICTS_${PN} += "jpeg"
 
 # Patch to incorporate the below changes will be sent to meta-oe master and
 # maintenance branch. When this fix is in the maintenance branch then the
