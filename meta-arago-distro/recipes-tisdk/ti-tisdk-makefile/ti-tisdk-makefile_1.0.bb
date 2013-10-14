@@ -33,7 +33,7 @@ SRC_URI = "\
     file://Makefile_oprofile-example \
 "
 
-PR = "r13"
+PR = "r14"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -64,6 +64,10 @@ MAKEFILES_append_am3517-evm = " av-examples \
 MAKEFILES_append_ti33x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
                            wireless \
+                           ti-crypto-examples \
+"
+MAKEFILES_append_ti43x = " u-boot-spl \
+                           ${QUICK_PLAYGROUND} \
                            ti-crypto-examples \
 "
 MAKEFILES_append_omap-a15 = " u-boot-spl \
