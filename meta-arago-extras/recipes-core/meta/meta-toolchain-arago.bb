@@ -10,7 +10,7 @@ require recipes-core/meta/meta-toolchain.bb
 # Add in linux-libc-headers version so that is taken into consideration
 REAL_MULTIMACH_TARGET_SYS = "${TUNE_PKGARCH}-${PREFERRED_VERSION_linux-libc-headers}${TARGET_VENDOR}-${TARGET_OS}"
 
-PR = "r27"
+PR = "r28"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
@@ -107,7 +107,7 @@ fakeroot create_sdk_files() {
 	# Add version information
 	toolchain_create_sdk_version ${SDK_OUTPUT}/${SDKPATH}/version-${REAL_MULTIMACH_TARGET_SYS}
 
-	cp ${ARAGOBASE}/scripts/relocate_sdk.py ${SDK_OUTPUT}/${SDKPATH}/
+	cp ${COREBASE}/scripts/relocate_sdk.py ${SDK_OUTPUT}/${SDKPATH}/
 
 	# Replace the ##DEFAULT_INSTALL_DIR## with the correct pattern.
 	# Escape special characters like '+' and '.' in the SDKPATH
