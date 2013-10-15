@@ -10,7 +10,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=93a105adb99011afa5baee932b560714 \
 
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r4"
+inherit qt-provider
+
+PR = "r5"
+
+DEPENDS += "${QT_DEPENDS_SVG} ${QT_DEPENDS_SCRIPT}"
 
 BRANCH ?= "master"
 SRCREV = "27e033a0ac59928cc3acbb45f4d9bc2101fcf024"
@@ -20,9 +24,10 @@ SRC_URI = " \
 	file://0001-Update-Makefile.build-for-when-build-dir-is-not-the-.patch \
 "
 
-S = "${WORKDIR}/git/"
+SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', 'file://0002-Replace-QtGui-with-QtWidgets-per-Qt5-migration-guide.patch \
+	file://0003-Replace-fromAscii-toAscii-with-fromLatin1-toLatin1-p.patch', '', d)}"
 
-inherit qt4e
+S = "${WORKDIR}/git/"
 
 # use the make targets already created in the Makefile.build files
 do_install() {

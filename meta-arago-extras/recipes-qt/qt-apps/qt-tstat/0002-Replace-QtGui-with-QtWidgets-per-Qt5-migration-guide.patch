@@ -1,0 +1,232 @@
+From 90f70d188b5893fd86aab4f90ac96c9a69ae4e88 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 14 Oct 2013 18:35:30 -0400
+Subject: [PATCH] Replace QtGui with QtWidgets per Qt5 migration guide
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ awayscreen.h          | 2 +-
+ keyboard/keyboard.cpp | 2 +-
+ keyboard/keyboard.h   | 2 +-
+ main.cpp              | 2 +-
+ mainwindow.cpp        | 2 +-
+ mainwindow.h          | 2 +-
+ optionswidget.h       | 2 +-
+ schedulepoint.cpp     | 2 +-
+ schedulepoint.h       | 2 +-
+ schedulescreen.h      | 2 +-
+ settingscreen.cpp     | 2 +-
+ settingscreen.h       | 2 +-
+ thermostatdemo.h      | 2 +-
+ thermostatwidget.h    | 2 +-
+ weatherdatawidget.cpp | 2 +-
+ weatherwidget.h       | 2 +-
+ 16 files changed, 16 insertions(+), 16 deletions(-)
+
+diff --git a/awayscreen.h b/awayscreen.h
+index 2a2b040..b8827b9 100644
+--- a/awayscreen.h
++++ b/awayscreen.h
+@@ -1,7 +1,7 @@
+ #ifndef AWAYSCREEN_H
+ #define AWAYSCREEN_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ class GlobalSettings;
+ 
+diff --git a/keyboard/keyboard.cpp b/keyboard/keyboard.cpp
+index 9261031..0d14530 100644
+--- a/keyboard/keyboard.cpp
++++ b/keyboard/keyboard.cpp
+@@ -37,7 +37,7 @@
+ 
+ #include "keyboard.h"
+ #include "ui_keyboard.h"
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ Keyboard::Keyboard(QWidget *parent) :
+     QWidget(parent),
+diff --git a/keyboard/keyboard.h b/keyboard/keyboard.h
+index 2d5c584..960915c 100644
+--- a/keyboard/keyboard.h
++++ b/keyboard/keyboard.h
+@@ -2,7 +2,7 @@
+ #define KEYBOARD_H
+ 
+ #include <QWidget>
+-#include <QtGui>
++#include <QtWidgets>
+ namespace Ui {
+ class Keyboard;
+ }
+diff --git a/main.cpp b/main.cpp
+index 18234c9..8e0df39 100644
+--- a/main.cpp
++++ b/main.cpp
+@@ -1,4 +1,4 @@
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ #include "mainwindow.h"
+ #include "weatherwidget.h"
+diff --git a/mainwindow.cpp b/mainwindow.cpp
+index b3f8994..d8a0a57 100644
+--- a/mainwindow.cpp
++++ b/mainwindow.cpp
+@@ -9,7 +9,7 @@
+ #include "weatherdata.h"
+ #include "utilities.h"
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ #include <QtDebug>
+ 
+diff --git a/mainwindow.h b/mainwindow.h
+index f59d992..1d46fba 100644
+--- a/mainwindow.h
++++ b/mainwindow.h
+@@ -1,7 +1,7 @@
+ #ifndef MAINWINDOW_H
+ #define MAINWINDOW_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ #include "webdata.h"
+ 
+ 
+diff --git a/optionswidget.h b/optionswidget.h
+index b321280..c797ac2 100644
+--- a/optionswidget.h
++++ b/optionswidget.h
+@@ -1,7 +1,7 @@
+ #ifndef OPTIONSWIDGET_H
+ #define OPTIONSWIDGET_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ #include "awayscreen.h"
+ #include "schedulescreen.h"
+ #include "settingscreen.h"
+diff --git a/schedulepoint.cpp b/schedulepoint.cpp
+index cdaba40..99c7b18 100644
+--- a/schedulepoint.cpp
++++ b/schedulepoint.cpp
+@@ -4,7 +4,7 @@
+ #include "globalsettings.h"
+ #include "utilities.h"
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ 
+ #define MAXTEMP 100
+diff --git a/schedulepoint.h b/schedulepoint.h
+index 1f6d662..38d6acd 100644
+--- a/schedulepoint.h
++++ b/schedulepoint.h
+@@ -1,7 +1,7 @@
+ #ifndef SCHEDULEPOINT_H
+ #define SCHEDULEPOINT_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ #include <QApplication>
+ #include <QColor>
+ #include <QGraphicsItem>
+diff --git a/schedulescreen.h b/schedulescreen.h
+index 9bc0897..c424a3f 100644
+--- a/schedulescreen.h
++++ b/schedulescreen.h
+@@ -1,7 +1,7 @@
+ #ifndef SCHEDULESCREEN_H
+ #define SCHEDULESCREEN_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ #include "schedulepoint.h"
+ 
+ class GlobalSettings;
+diff --git a/settingscreen.cpp b/settingscreen.cpp
+index 2f19ae4..62b73b1 100644
+--- a/settingscreen.cpp
++++ b/settingscreen.cpp
+@@ -4,7 +4,7 @@
+ #include "qkeyboardlineedit.h"
+ #include "webdataengine/openweathermapdataengine.h"
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ #define MAXIMUM_CONTENT_HEIGHT 450
+ #define MAXIMUM_CONTENT_WIDTH 800
+diff --git a/settingscreen.h b/settingscreen.h
+index 4edf175..172dbe2 100644
+--- a/settingscreen.h
++++ b/settingscreen.h
+@@ -1,7 +1,7 @@
+ #ifndef SETTINGSCREEN_H
+ #define SETTINGSCREEN_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ class GlobalSettings;
+ class QKeyboardLineEdit;
+diff --git a/thermostatdemo.h b/thermostatdemo.h
+index 7223f0a..ca7b27e 100644
+--- a/thermostatdemo.h
++++ b/thermostatdemo.h
+@@ -1,7 +1,7 @@
+ #ifndef THERMOSTATDEMO_H
+ #define THERMOSTATDEMO_H
+ 
+-#include <QtGui/QMainWindow>
++#include <QtWidgets/QMainWindow>
+ 
+ class ThermostatDemo : public QMainWindow
+ {
+diff --git a/thermostatwidget.h b/thermostatwidget.h
+index ba8199b..bbe97ef 100644
+--- a/thermostatwidget.h
++++ b/thermostatwidget.h
+@@ -1,7 +1,7 @@
+ #ifndef THERMOSTATWIDGET_H
+ #define THERMOSTATWIDGET_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ class GlobalSettings;
+ 
+diff --git a/weatherdatawidget.cpp b/weatherdatawidget.cpp
+index 33e8185..20e8fe8 100644
+--- a/weatherdatawidget.cpp
++++ b/weatherdatawidget.cpp
+@@ -1,6 +1,6 @@
+ #include "weatherdatawidget.h"
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ #include "globalsettings.h"
+ #include "weatherdata.h"
+ #include "utilities.h"
+diff --git a/weatherwidget.h b/weatherwidget.h
+index bffb368..40a7916 100644
+--- a/weatherwidget.h
++++ b/weatherwidget.h
+@@ -1,7 +1,7 @@
+ #ifndef WEATHERWIDGET_H
+ #define WEATHERWIDGET_H
+ 
+-#include <QtGui>
++#include <QtWidgets>
+ 
+ #include <QtSvg/QSvgWidget>
+ 
+-- 
+1.8.3.2
+

@@ -1,0 +1,71 @@
+From 3be273cead085ac9cf45bc59236f6d6ef18dc349 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 14 Oct 2013 18:39:27 -0400
+Subject: [PATCH] Replace fromAscii()/toAscii() with fromLatin1()/toLatin1()
+ per Qt5 migration guide
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ remoteaccessmanager.cpp                    | 10 +++++-----
+ webdataengine/openweathermapdataengine.cpp |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/remoteaccessmanager.cpp b/remoteaccessmanager.cpp
+index 5eebdef..5a6c547 100644
+--- a/remoteaccessmanager.cpp
++++ b/remoteaccessmanager.cpp
+@@ -103,7 +103,7 @@ void RemoteAccessManager::processIncomingConnection()
+         }
+         else if(requestParser[1].contains(".jpg") || requestParser[1].contains(".png"))
+         {
+-            QFile imageFile(":"+QString::fromAscii(requestParser[1]));
++            QFile imageFile(":"+QString::fromLatin1(requestParser[1]));
+ 
+             if(!imageFile.open(QFile::ReadOnly))
+                 ba = "HTTP/1.1 404 NOT FOUND";
+@@ -119,7 +119,7 @@ void RemoteAccessManager::processIncomingConnection()
+         }
+         else if(requestParser[1].contains(".js"))
+         {
+-            QFile jsFile(":"+QString::fromAscii(requestParser[1]));
++            QFile jsFile(":"+QString::fromLatin1(requestParser[1]));
+ 
+             if(!jsFile.open(QFile::ReadOnly))
+                 ba = "HTTP/1.1 404 NOT FOUND";
+@@ -135,7 +135,7 @@ void RemoteAccessManager::processIncomingConnection()
+         }
+         else if(requestParser[1].contains(".css"))
+         {
+-            QFile cssFile(":"+QString::fromAscii(requestParser[1]));
++            QFile cssFile(":"+QString::fromLatin1(requestParser[1]));
+ 
+             if(!cssFile.open(QFile::ReadOnly))
+                 ba = "HTTP/1.1 404 NOT FOUND";
+@@ -213,9 +213,9 @@ QByteArray RemoteAccessManager::hashToJSONByteArray(QHash<QString, QVariant> has
+     {
+         it.next();
+         if(it.value().type() == QVariant::Hash)
+-            jsonByteArray+="\""+it.key().toAscii()+"\""+QByteArray::fromRawData(":",1)+""+hashToJSONByteArray(it.value().toHash())+",";
++            jsonByteArray+="\""+it.key().toLatin1()+"\""+QByteArray::fromRawData(":",1)+""+hashToJSONByteArray(it.value().toHash())+",";
+         else
+-            jsonByteArray += "\""+it.key().toAscii()+"\""+QByteArray::fromRawData(":",1)+"\""+it.value().toByteArray()+"\""+QByteArray::fromRawData(",",1);
++            jsonByteArray += "\""+it.key().toLatin1()+"\""+QByteArray::fromRawData(":",1)+"\""+it.value().toByteArray()+"\""+QByteArray::fromRawData(",",1);
+     }
+ 
+     jsonByteArray = jsonByteArray.left(jsonByteArray.size()-1);
+diff --git a/webdataengine/openweathermapdataengine.cpp b/webdataengine/openweathermapdataengine.cpp
+index 0286dd5..de39f48 100644
+--- a/webdataengine/openweathermapdataengine.cpp
++++ b/webdataengine/openweathermapdataengine.cpp
+@@ -67,7 +67,7 @@ void OpenWeatherMapDataEngine::responseReceived()
+         QByteArray data = m_reply->readAll();
+         //qDebug() << data;
+ 
+-        m_cityId = parseCityInformation(QString::fromAscii(data));
++        m_cityId = parseCityInformation(QString::fromLatin1(data));
+         //docs say do not delete in the slot so well pass it off to the event loop
+         m_reply->deleteLater();
+         if(m_cityId == -1)
+-- 
+1.8.3.2
+
