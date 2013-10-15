@@ -8,9 +8,12 @@ IMAGE_INSTALL += "\
     packagegroup-arago-base \
     packagegroup-arago-console \
     packagegroup-arago-base-tisdk \
-    matrix-gui-browser \
-    qtwebkit-examples-examples \
     qtbase-plugins \
+    qt-tstat \
     "
+
+# These are now disabled due to gles dependency
+#    matrix-gui-browser
+#    qtwebkit-examples-examples
 
 export IMAGE_BASENAME = "arago-qt5-test-image"
