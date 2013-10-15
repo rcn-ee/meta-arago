@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG_GL = "gles2 icu linuxfb"
+PACKAGECONFIG_GL = "icu linuxfb"
 
 SRC_URI += " \
 	file://0001-qeglfswindow.cpp.patch \
