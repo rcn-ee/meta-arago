@@ -10,12 +10,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=93a105adb99011afa5baee932b560714 \
 
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r3"
+PR = "r4"
 
 BRANCH ?= "master"
 SRCREV = "27e033a0ac59928cc3acbb45f4d9bc2101fcf024"
 
-SRC_URI = "git://gitorious.org/thermostat-demo/thermostat-demo.git;protocol=git"
+SRC_URI = " \
+	git://gitorious.org/thermostat-demo/thermostat-demo.git;protocol=git \
+	file://0001-Update-Makefile.build-for-when-build-dir-is-not-the-.patch \
+"
 
 S = "${WORKDIR}/git/"
 
@@ -23,7 +26,7 @@ inherit qt4e
 
 # use the make targets already created in the Makefile.build files
 do_install() {
-	make -f Makefile.build DESTDIR=${D} install_common
+	cd ${S} && make -f Makefile.build DESTDIR=${D} BUILDDIR=${B} install_common
 }
 
 PACKAGES += "matrix-gui-thermostat-demo"
