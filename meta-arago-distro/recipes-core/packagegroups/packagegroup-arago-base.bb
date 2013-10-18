@@ -1,6 +1,6 @@
 DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
@@ -12,6 +12,7 @@ ARAGO_ALSA_BASE = "\
 ARAGO_BASE = "\
     module-init-tools \
     mtd-utils \
+    mtd-utils-ubifs \
     curl \
     initscript-telnetd \
     ethtool \
