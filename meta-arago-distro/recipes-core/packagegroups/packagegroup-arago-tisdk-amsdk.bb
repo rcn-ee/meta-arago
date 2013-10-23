@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional packages only used in the Arago SDK"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 inherit packagegroup
 
@@ -23,7 +23,6 @@ EXTRA_APPLICATIONS = "\
 "
 
 RDEPENDS_${PN} = "\
-    mount-sdcard \
     ${OOBE} \
     ${EXTRA_APPLICATIONS} \
 "
