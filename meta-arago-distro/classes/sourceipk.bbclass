@@ -65,7 +65,7 @@ adjust_git() {
 
     orig_dir="$PWD"
 
-    cd ${S}
+    cd $tmp_dir/${SRCIPK_INSTALL_DIR}
 
     if [ -d ".git" ]
     then
@@ -122,8 +122,6 @@ sourceipk_do_create_srcipk() {
     if [ ${CREATE_SRCIPK} != "0" ]
     then
 
-        adjust_git
-
         tmp_dir="${WORKDIR}/sourceipk-tmp"
         srcipk_dir="${WORKDIR}/sourceipk-data"
         mkdir -p $tmp_dir/CONTROL
@@ -173,6 +171,10 @@ sourceipk_do_create_srcipk() {
             sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
             cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
         fi
+
+        # Adjust the git repository if there is one.  Do this adjustment
+        # here so we don't have to modify the original sources.
+        adjust_git
 
         #Write the data tarball
         tar -C $tmp_dir --owner=0 --group=0 -czf $srcipk_dir/data.tar.gz .
