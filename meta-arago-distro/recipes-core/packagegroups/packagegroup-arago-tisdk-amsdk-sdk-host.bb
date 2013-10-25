@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r14"
+PR = "r15"
 
 inherit packagegroup
 
@@ -28,6 +28,7 @@ RDEPENDS_${PN} = "\
     ${EXTRA_FILES} \
     board-port-labs-u-boot-src \
     board-port-labs-linux-src \
+    oe-layersetup-src \
     ti-tisdk-makefile \
     ${U-BOOT_SRC} \
     ${KERNEL_SRC} \
