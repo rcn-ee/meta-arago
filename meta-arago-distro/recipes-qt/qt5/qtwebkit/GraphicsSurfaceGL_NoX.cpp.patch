@@ -1,6 +1,6 @@
-diff -Nurp8 Source/WebCore/platform/graphics/surfaces/qt/GraphicsSurfaceGL_NoX.cpp Source/WebCore/platform/graphics/surfaces/qt_new/GraphicsSurfaceGL_NoX.cpp
+diff -Nurp8 Source/WebCore/platform/graphics/surfaces/qt/GraphicsSurfaceGL_NoX.cpp Source-new/WebCore/platform/graphics/surfaces/qt/GraphicsSurfaceGL_NoX.cpp
 --- qtwebkit/Source/WebCore/platform/graphics/surfaces/qt/GraphicsSurfaceGL_NoX.cpp	1970-01-01 05:30:00.000000000 +0530
-+++ qtwebkit/Source/WebCore/platform/graphics/surfaces/qt_new/GraphicsSurfaceGL_NoX.cpp	2013-09-07 13:43:55.186851650 +0530
++++ qtwebkit-new/Source/WebCore/platform/graphics/surfaces/qt/GraphicsSurfaceGL_NoX.cpp	2013-09-07 13:43:55.186851650 +0530
 @@ -0,0 +1,266 @@
 +/*
 + Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies)
