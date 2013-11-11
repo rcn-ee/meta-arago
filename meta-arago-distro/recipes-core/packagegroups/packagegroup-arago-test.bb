@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 inherit packagegroup
 
@@ -21,6 +21,7 @@ ARAGO_TEST = "\
 ARAGO_TI_TEST = "\
     ltp-ddt \
     input-utils \
+    linaro-pm-qa-utils \
     "
 
 ARAGO_TI_TEST_append_omap-a15 = " \
