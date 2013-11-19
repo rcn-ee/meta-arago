@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r22"
+PR = "r23"
 
 inherit packagegroup
 
@@ -72,10 +72,16 @@ MATRIX_APPS_append_ti33x = "        \
 #    matrix-gui-wifi-direct-demo
 
 MATRIX_APPS_append_ti43x = "        \
+    ${@base_contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
+                                    \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-h264dec  \
     matrix-multimedia-demo-mpeg4aacdec \
     matrix-multimedia-demo-mpeg4dec \
+                                    \
+    matrix-gui-generic-pm           \
+    matrix-gui-pm-demos-suspend     \
+    matrix-gui-clocks               \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
