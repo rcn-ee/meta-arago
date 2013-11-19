@@ -1,5 +1,5 @@
 # Kernel build targets
-linux:
+linux: __DTB_DEPEND__
 	@echo =================================
 	@echo     Building the Linux Kernel
 	@echo =================================
@@ -7,7 +7,7 @@ linux:
 	$(MAKE) -j $(MAKE_JOBS) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) __KERNEL_BUILD_CMDS__
 	$(MAKE) -j $(MAKE_JOBS) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) modules
 
-linux_install:
+linux_install: __DTB_DEPEND_INSTALL__
 	@echo ===================================
 	@echo     Installing the Linux Kernel
 	@echo ===================================

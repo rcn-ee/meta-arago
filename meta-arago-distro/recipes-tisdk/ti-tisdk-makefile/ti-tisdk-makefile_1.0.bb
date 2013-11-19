@@ -33,7 +33,7 @@ SRC_URI = "\
     file://Makefile_oprofile-example \
 "
 
-PR = "r17"
+PR = "r18"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -65,10 +65,12 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
                            wireless \
                            ti-crypto-examples \
+                           linux-dtbs \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
                            ti-crypto-examples \
+                           linux-dtbs \
 "
 MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
@@ -85,6 +87,12 @@ PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
 
 KERNEL_BUILD_CMDS = "${@base_contains('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
+
+KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
+KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
+KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
+KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
+KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
 
 # This step will stitch together the final Makefile based on the supported
 # make targets.
@@ -126,6 +134,19 @@ do_install () {
     fi
 
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
+
+    cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
+
+    if [ "$?" == "0" ]
+    then
+        sed -i -e "s/__KERNEL_DEVICETREE__/${KERNEL_DEVICETREE}/" ${D}/Makefile
+        sed -i -e "s/__DTB_DEPEND__/linux-dtbs/" ${D}/Makefile
+        sed -i -e "s/__DTB_DEPEND_INSTALL__/linux-dtbs_install/" ${D}/Makefile
+    else
+        sed -i -e "s/__DTB_DEPEND__//" ${D}/Makefile
+        sed -i -e "s/__DTB_DEPEND_INSTALL__//" ${D}/Makefile
+    fi
+
 
     install  ${WORKDIR}/Rules.make ${D}/Rules.make
 
