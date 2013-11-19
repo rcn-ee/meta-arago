@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r2"
+PR = "r3"
 
 inherit packagegroup
 
@@ -19,6 +19,10 @@ GRAPHICS_SDK = "\
 GRAPHICS_RDEPENDS = ""
 
 GRAPHICS_RDEPENDS_ti33x = "\
+    ${GRAPHICS_SDK} \
+"
+
+GRAPHICS_RDEPENDS_ti43x = "\
     ${GRAPHICS_SDK} \
 "
 
