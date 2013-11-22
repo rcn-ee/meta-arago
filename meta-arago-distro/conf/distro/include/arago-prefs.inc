@@ -17,6 +17,13 @@ PREFERRED_VERSION_linux-libc-headers = "3.8"
 # Use v4.09.00.01 of the Graphics SDK
 PREFERRED_VERSION_omap3-sgx-modules = "4.09.00.01"
 PREFERRED_VERSION_libgles-omap3 = "4.09.00.01"
+
+# Use v5.00.00.01 of the Graphics SDK
+PREFERRED_VERSION_omap3-sgx-modules_ti33x = "5.00.00.01"
+PREFERRED_VERSION_omap3-sgx-modules_ti43x = "5.00.00.01"
+PREFERRED_VERSION_libgles-omap3_ti43x = "5.00.00.01"
+PREFERRED_VERSION_libgles-omap3_ti33x = "5.00.00.01"
+
 PREFERRED_PROVIDER_omap3-sgx-modules = "omap3-sgx-modules"
 PREFERRED_PROVIDER_libgles-omap3 = "libgles-omap3"
 PREFERRED_PROVIDER_libgles-omap3-dev = "libgles-omap3-dev"
