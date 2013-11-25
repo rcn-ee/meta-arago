@@ -7,6 +7,8 @@ QT_MODULE = "qtbase"
 
 require nativesdk-qt5.inc
 
+PR = "r1"
+
 SRC_URI += " \
     file://0001-Add-linux-oe-g-platform.patch \
     file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch \
@@ -179,6 +181,10 @@ do_configure() {
 do_install() {
     # Fix install paths for all
     find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+
+    # switch back the proper qmake
+    rm ${B}/bin/qmake
+    mv ${B}/bin/qmake-real ${B}/bin/qmake
 
     oe_runmake install INSTALL_ROOT=${D}
 
