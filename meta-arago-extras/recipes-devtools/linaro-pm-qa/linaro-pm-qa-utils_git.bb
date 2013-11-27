@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PV = "0.4.4"
-PR = "r1"
+PR = "r2"
 
 BRANCH ?= "master"
 SRCREV = "fbc2762359b863dfbf4fd0bab1e8abd2a6125ed4"
@@ -41,6 +41,9 @@ do_install () {
     # Install the helper scripts in the include directory
     for script in `find . -name "*.sh" | grep include`
     do
+        # Remove hardcoded relative paths
+        sed -i -e 's#..\/utils\/##' ${script}
+
         script_basename=`basename ${script}`
         install -m 0755 $script ${D}${bindir}/linaro-pm-qa-include/${script_basename}
     done
@@ -53,6 +56,8 @@ do_install () {
         # directory then change the include path to the absolute path
         # and to reflect the install location of the helper scripts.
         sed -i -e "s#source ../include#source ${bindir}/linaro-pm-qa-include#g" ${script}
+        # Remove hardcoded relative paths
+        sed -i -e 's#..\/utils\/##' ${script}
 
         script_basename=`basename ${script}`
         install -m 0755 $script ${D}${bindir}/${script_basename}
