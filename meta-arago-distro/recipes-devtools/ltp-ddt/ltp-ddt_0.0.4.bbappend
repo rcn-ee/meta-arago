@@ -1,4 +1,6 @@
-PR_append = "-arago2+gitr${SRCPV}"
+PR_append = "-arago3+gitr${SRCPV}"
+
+RDEPENDS_${PN} += "linaro-pm-qa-utils"
 
 # Auto rev so we pick up the latest changes
 SRCREV = "${AUTOREV}"
