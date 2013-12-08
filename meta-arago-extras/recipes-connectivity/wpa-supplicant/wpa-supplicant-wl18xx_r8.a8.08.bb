@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=ab87f20cd7e8c0d0a6539b34d3791d0e \
 
 FILESEXTRAPATHS_append := "${THISDIR}/wpa-supplicant:"
 
-# Tag: ol_r8.a6.01
-SRCREV = "7190ff7dbd43243290b626068ded0d61c5019050"
-PR = "r2+gitr${SRCPV}"
+# Tag: ol_r8.a8.08
+SRCREV = "257ab333aad993b4be81808524bc0d939c276058"
+PR_append = "a+gitr${SRCPV}"
 
 # Add ti to the PV to indicate that this is a TI modify version of wpa-supplicant.
 PV = "2.0-devel-ti"
