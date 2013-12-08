@@ -92,7 +92,7 @@ PREFERRED_VERSION_readline-native = "5.2"
 PREFERRED_VERSION_readline-nativesdk = "5.2"
 
 PREFERRED_VERSION_libnl = "3.2.21"
-PREFERRED_VERSION_crda = "1.1.1"
+PREFERRED_VERSION_crda = "1.1.3"
 PREFERRED_VERSION_obex = "0.34"
 PREFERRED_VERSION_bluez4 = "4.101"
 PREFERRED_VERSION_bluez-hcidump = "2.2"
