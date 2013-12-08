@@ -11,7 +11,7 @@ DEPENDS = "libnl openssl"
 # default
 DEFAULT_PREFERENCE = "-1"
 
-PR = "r4"
+PR = "r5"
 
 inherit update-rc.d
 INITSCRIPT_NAME="hostapd"
@@ -28,6 +28,7 @@ S = "${WORKDIR}/git/hostapd"
 do_configure() {
 	install -m 0644 ${WORKDIR}/defconfig ${S}/.config
 	echo "CFLAGS += -I${STAGING_INCDIR}" >> .config
+        echo "CFLAGS += -I${STAGING_INCDIR}/libnl3/" >> .config
 	echo "LIBS += -L${STAGING_LIBDIR}" >> .config
 }
 
