@@ -3,12 +3,12 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
 
 DEPENDS = "libnl"
-RDEPENDS_${PN} = "ti-compat-wireless-wl12xx wl12xx-firmware"
+RDEPENDS_${PN} = "wl18xx-firmware"
 
-PR ="r3+gitr${SRCPV}"
+PR ="r0+gitr${SRCPV}"
 
-# Tag: ol_r8.a6.01
-SRCREV = "214dfbdf97cc390b0020c4ea9331a1cf82240a64"
+#Tag: ol_r8.a8.08
+SRCREV = "9627cb09b9de32b8ffcc32d3ce3e275b7c56d8e4"
 SRC_URI = "git://github.com/TI-OpenLink/18xx-ti-utils.git \
 "
 
@@ -20,7 +20,10 @@ RCONFLICTS_${PN} +=  "ti-wifi-utils"
 S = "${WORKDIR}/git"
 
 export CROSS_COMPILE = "${TARGET_PREFIX}"
-CFLAGS += " -DCONFIG_LIBNL20"
+
+EXTRA_OEMAKE = 'CFLAGS="${CFLAGS} -I${STAGING_INCDIR}/libnl3/ -DCONFIG_LIBNL32 " \
+		LDFLAGS="${LDFLAGS} -L${STAGING_LIBDIR}" \
+		NLVER=3'
 
 do_install() {
     install -d ${D}${bindir}
