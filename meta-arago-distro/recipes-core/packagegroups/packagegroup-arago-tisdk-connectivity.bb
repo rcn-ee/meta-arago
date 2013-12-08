@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wlan and bluetooth packages into the target FS"
 LICENSE = "MIT"
-PR = "r17"
+PR = "r18"
 
 inherit packagegroup
 
@@ -23,16 +23,12 @@ WLAN_COMMON = "\
     pulseaudio-module-bluetooth-device \
     eventdump \
     ${@base_contains('WILINK_VERSION','WILINK-8','wlconf','',d)} \
+    wpa-supplicant \
+    crda \
+    hostap-daemon \
+    ti-wifi-utils \
 "
-
-# TI/ECS versions of wpa-supplicant/crda/hostap/wifi-utils require older libnl,
-# which no longer exists
-#    wpa-supplicant
-#    crda
-#    hostap-daemon
-#    ti-wifi-utils
 # No bluetooth/bluetooth.h
-#    oppserver
 
 # netperf has non-standard license, needs verifying
 #    netperf
@@ -42,8 +38,7 @@ WLAN_COMMON = "\
 #    ti-compat-bluetooth
 
 FIRMWARE_AND_DRIVERS = "\
-    bt-firmware \
-    bt-enable \
+    "${@base_contains('WILINK_VERSION','WILINK-6',' oppserver bt-firmware bt-enable' , '',d)}"\
     wl12xx-firmware \
 "
 
