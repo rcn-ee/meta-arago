@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
            file://defaults-sane \
            file://wpa-supplicant.sh \
            file://wpa_supplicant.conf \
+           file://p2p_supplicant.conf \
            file://wpa_supplicant.conf-sane \
            file://99_wpa_supplicant \
            file://wpa_supplicant.conf \
@@ -55,6 +56,7 @@ do_install () {
 	install -d ${D}${sysconfdir}/default
 	install -m 600 ${WORKDIR}/defaults-sane ${D}${sysconfdir}/default/wpa
 	install -m 600 ${WORKDIR}/wpa_supplicant.conf-sane ${D}${sysconfdir}/wpa_supplicant.conf
+	install -m 600 ${WORKDIR}/p2p_supplicant.conf ${D}${sysconfdir}/p2p_supplicant.conf
 
 	if grep -q ^CONFIG_CTRL_IFACE_DBUS=y .config || grep -q ^CONFIG_CTRL_IFACE_DBUS_NEW=y .config; then
 		install -d ${D}/${sysconfdir}/dbus-1/system.d
@@ -104,6 +106,7 @@ pkg_postinst_wpa-supplicant () {
 do_configure () {
 	install -m 0755 ${WORKDIR}/defconfig .config
 	echo "CFLAGS += -I${STAGING_INCDIR}" >> .config
+	echo "CFLAGS += -I${STAGING_INCDIR}/libnl3/" >> .config
 	echo "LIBS += -L${STAGING_LIBDIR}" >> .config
 	echo "LIBS_p += -L${STAGING_LIBDIR}" >> .config
 	if [ "${@base_contains('COMBINED_FEATURES', 'madwifi', 1, 0, d)}" = "1" ]; then
