@@ -1,4 +1,4 @@
-MACHINE_KERNEL_PR_append = "-arago1"
+MACHINE_KERNEL_PR_append = "-arago2"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 
