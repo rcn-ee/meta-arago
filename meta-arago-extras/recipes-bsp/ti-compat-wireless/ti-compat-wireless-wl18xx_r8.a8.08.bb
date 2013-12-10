@@ -5,7 +5,7 @@ DESCRIPTION = "ti compat-wireless drivers for wl18xx"
 HOMEPAGE = "https://gforge.ti.com/gf/project/ecs_nlcp/"
 SECTION = "kernel/modules"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 RDEPENDS_${PN} = "wireless-tools"
 
@@ -14,16 +14,18 @@ RPROVIDES_${PN} += "ti-compat-wireless-wl12xx"
 RREPLACES_${PN} += "ti-compat-wireless-wl12xx"
 RCONFLICTS_${PN} += "ti-compat-wireless-wl12xx"
 
-PV = "r8.a6.01"
+COMPATIBLE_MACHINE = "(omap-a15)"
+
+PV = "r8.a8.08"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "c"
+PR_append = "a"
 
-# Tags: ol_r8.a6.01
-SRCREV_wl18xx = "f076cdad1988daf207ad560db2fe96caaa7c596e"
-SRCREV_compat = "c37c46c4ab5085ba50f650d15854404983b8d09b"
-SRCREV_compat-wireless = "3ec9ecca2cb07584e115ba53117f0084fc8faa25"
+# Tags: ol_r8.a8.08
+SRCREV_wl18xx = "eaa1820c02dc076e6ad9254e9cb7a3bb0c17471b"
+SRCREV_compat = "5d80865281795f962e1400a95202bbd07dd763c0"
+SRCREV_compat-wireless = "23a0d62ea1a57327709a77f08d6265ec807a909f"
 
 SRCREV_FORMAT = "compat-wireless"
 
@@ -32,27 +34,14 @@ S = "${WORKDIR}/compat-wireless"
 SRC_URI = "git://github.com/TI-OpenLink/compat-wireless.git;destsuffix=compat-wireless;name=compat-wireless \
            git://github.com/TI-OpenLink/compat.git;destsuffix=compat;name=compat \
            git://github.com/TI-OpenLink/wl18xx.git;destsuffix=wl18xx;name=wl18xx \
-           file://0001-git-version-wl18xx-use-compat-base-tree.patch;patchdir=../wl18xx \
-           file://0001-wl12xx-additional-two-members-for-wl12xx_platform_da.patch;patchdir=../wl18xx \
-          "
-
+"
 
 EXTRA_OEMAKE = "KLIB_BUILD=${STAGING_KERNEL_DIR} KLIB=${D}"
 
-# Prevent sourceipk adjust_git function from running.
-# This preserves the git repo until driver-select is ran.
-
-adjust_git() {
-    :
-}
-
 do_configure() {
     cd ${S}
-    GIT_TREE="${WORKDIR}/wl18xx" GIT_COMPAT_TREE="${WORKDIR}/compat" ./scripts/admin-refresh.sh
+    GIT_TREE="${WORKDIR}/wl18xx" GIT_COMPAT_TREE="${WORKDIR}/compat" ./scripts/admin-refresh.sh network
     ./scripts/driver-select wl18xx
-
-    # Delete the .git repository since it should no longer be needed.
-    rm -rf ${S}/.git ${S}/.gitignore
 
     # Now generate the sourceipk with the properly configured sources
     sourceipk_do_create_srcipk
@@ -63,5 +52,10 @@ do_configure_append() {
 }
 
 do_install() {
+    # Remove hardcoded references to host depmod
+    sed -i "s#@/sbin/depmod -a## " Makefile
+    sed -i "s#@/sbin/depmod -ae## " Makefile
+
+    # Install modules
     oe_runmake DEPMOD=echo DESTDIR="${D}" INSTALL_MOD_PATH="${D}" LDFLAGS="" install-modules
 }
