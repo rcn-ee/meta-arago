@@ -1,0 +1,142 @@
+From 26384c393fed398ebaddcdcfd54ac12242808bba Mon Sep 17 00:00:00 2001
+From: Joel Fernandes <joelf@ti.com>
+Date: Fri, 6 Dec 2013 16:15:40 +0530
+Subject: [PATCH 11/11] cryptodev: Add AES CBC & CTR modes for 128/192/256 bit
+ key sizes
+
+Signed-off-by: Joel Fernandes <joelf@ti.com>
+---
+ crypto/engine/eng_cryptodev.c | 103 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 103 insertions(+)
+
+diff --git a/crypto/engine/eng_cryptodev.c b/crypto/engine/eng_cryptodev.c
+index d095a58..565ed26 100644
+--- a/crypto/engine/eng_cryptodev.c
++++ b/crypto/engine/eng_cryptodev.c
+@@ -148,6 +148,12 @@ static struct {
+ 	{ CRYPTO_AES_CBC,		NID_aes_128_cbc,	16,	16, },
+ 	{ CRYPTO_AES_CBC,		NID_aes_192_cbc,	16,	24, },
+ 	{ CRYPTO_AES_CBC,		NID_aes_256_cbc,	16,	32, },
++	{ CRYPTO_AES_ECB,		NID_aes_128_ecb,	16,	16, },
++	{ CRYPTO_AES_ECB,		NID_aes_192_ecb,	16,	24, },
++	{ CRYPTO_AES_ECB,		NID_aes_256_ecb,	16,	32, },
++	{ CRYPTO_AES_CTR,		NID_aes_128_ctr,	16,	16, },
++	{ CRYPTO_AES_CTR,		NID_aes_192_ctr,	16,	24, },
++	{ CRYPTO_AES_CTR,		NID_aes_256_ctr,	16,	32, },
+ 	{ CRYPTO_BLF_CBC,		NID_bf_cbc,		8,	16, },
+ 	{ CRYPTO_CAST_CBC,		NID_cast5_cbc,		8,	16, },
+ 	{ CRYPTO_SKIPJACK_CBC,		NID_undef,		0,	 0, },
+@@ -610,6 +616,85 @@ const EVP_CIPHER cryptodev_aes_256_cbc = {
+ 	NULL
+ };
+ 
++const EVP_CIPHER cryptodev_aes_ecb = {
++	NID_aes_128_ecb,
++	16, 16, 16,
++	EVP_CIPH_ECB_MODE,
++	cryptodev_init_key,
++	cryptodev_cipher,
++	cryptodev_cleanup,
++	sizeof(struct dev_crypto_state),
++	EVP_CIPHER_set_asn1_iv,
++	EVP_CIPHER_get_asn1_iv,
++	NULL
++};
++
++const EVP_CIPHER cryptodev_aes_192_ecb = {
++	NID_aes_192_ecb,
++	16, 24, 16,
++	EVP_CIPH_ECB_MODE,
++	cryptodev_init_key,
++	cryptodev_cipher,
++	cryptodev_cleanup,
++	sizeof(struct dev_crypto_state),
++	EVP_CIPHER_set_asn1_iv,
++	EVP_CIPHER_get_asn1_iv,
++	NULL
++};
++
++const EVP_CIPHER cryptodev_aes_256_ecb = {
++	NID_aes_256_ecb,
++	16, 32, 16,
++	EVP_CIPH_ECB_MODE,
++	cryptodev_init_key,
++	cryptodev_cipher,
++	cryptodev_cleanup,
++	sizeof(struct dev_crypto_state),
++	EVP_CIPHER_set_asn1_iv,
++	EVP_CIPHER_get_asn1_iv,
++	NULL
++};
++
++const EVP_CIPHER cryptodev_aes_ctr = {
++	NID_aes_128_ctr,
++	16, 16, 16,
++	EVP_CIPH_CTR_MODE,
++	cryptodev_init_key,
++	cryptodev_cipher,
++	cryptodev_cleanup,
++	sizeof(struct dev_crypto_state),
++	EVP_CIPHER_set_asn1_iv,
++	EVP_CIPHER_get_asn1_iv,
++	NULL
++};
++
++const EVP_CIPHER cryptodev_aes_192_ctr = {
++	NID_aes_192_ctr,
++	16, 24, 16,
++	EVP_CIPH_CTR_MODE,
++	cryptodev_init_key,
++	cryptodev_cipher,
++	cryptodev_cleanup,
++	sizeof(struct dev_crypto_state),
++	EVP_CIPHER_set_asn1_iv,
++	EVP_CIPHER_get_asn1_iv,
++	NULL
++};
++
++const EVP_CIPHER cryptodev_aes_256_ctr = {
++	NID_aes_256_ctr,
++	16, 32, 16,
++	EVP_CIPH_CTR_MODE,
++	cryptodev_init_key,
++	cryptodev_cipher,
++	cryptodev_cleanup,
++	sizeof(struct dev_crypto_state),
++	EVP_CIPHER_set_asn1_iv,
++	EVP_CIPHER_get_asn1_iv,
++	NULL
++};
++
++
+ /*
+  * Registered by the ENGINE when used to find out how to deal with
+  * a particular NID in the ENGINE. this says what we'll do at the
+@@ -647,6 +732,24 @@ cryptodev_engine_ciphers(ENGINE *e, const EVP_CIPHER **cipher,
+ 	case NID_aes_256_cbc:
+ 		*cipher = &cryptodev_aes_256_cbc;
+ 		break;
++	case NID_aes_128_ecb:
++		*cipher = &cryptodev_aes_ecb;
++		break;
++	case NID_aes_192_ecb:
++		*cipher = &cryptodev_aes_192_ecb;
++		break;
++	case NID_aes_256_ecb:
++		*cipher = &cryptodev_aes_256_ecb;
++		break;
++	case NID_aes_128_ctr:
++		*cipher = &cryptodev_aes_ctr;
++		break;
++	case NID_aes_192_ctr:
++		*cipher = &cryptodev_aes_192_ctr;
++		break;
++	case NID_aes_256_ctr:
++		*cipher = &cryptodev_aes_256_ctr;
++		break;
+ 	default:
+ 		*cipher = NULL;
+ 		break;
+-- 
+1.8.3.2
+

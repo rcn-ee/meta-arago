@@ -1,0 +1,36 @@
+From a790ddb9694aff023fdcdbcfadf0b11ee9781b87 Mon Sep 17 00:00:00 2001
+From: Joel A Fernandes <joelagnel@ti.com>
+Date: Sun, 31 Mar 2013 07:33:27 -0500
+Subject: [PATCH 04/11] Sample AF_ALG openssl.cnf To be copied to
+ /usr/lib/ssl/openssl.cnf
+
+Specifies which algorithms to register for AF_ALG
+
+Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+---
+ engines/af_alg_openssl.cnf | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 engines/af_alg_openssl.cnf
+
+diff --git a/engines/af_alg_openssl.cnf b/engines/af_alg_openssl.cnf
+new file mode 100644
+index 0000000..138ed16
+--- /dev/null
++++ b/engines/af_alg_openssl.cnf
+@@ -0,0 +1,13 @@
++openssl_conf = openssl_def
++
++[openssl_def]
++engines = openssl_engines
++
++[openssl_engines]
++af_alg = af_alg_engine
++
++[af_alg_engine]
++default_algorithms = ALL
++CIPHERS=aes-128-cbc
++DIGESTS=sha1
++
+-- 
+1.8.3.2
+
