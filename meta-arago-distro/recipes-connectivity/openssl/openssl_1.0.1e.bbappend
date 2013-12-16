@@ -12,7 +12,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR_append = "-arago7"
+PR_append = "-arago8"
 
 DEPENDS_append_ti33x_class-target = " cryptodev"
 DEPENDS_append_ti43x_class-target = " cryptodev"
@@ -22,7 +22,7 @@ python __anonymous () {
     crypdep = d.getVar("DEPENDS").replace("ocf-linux ", "")
     d.setVar("DEPENDS_ti33x_class-target", crypdep)
     d.setVar("DEPENDS_ti43x_class-target", crypdep)
-    d.setVar("DEPENDS_dra7xx_class-target", crypdep)
+    d.setVar("DEPENDS_dra7xx-evm_class-target", crypdep)
 }
 
 CRYPTODEV_AFALG_PATCHES = " \
