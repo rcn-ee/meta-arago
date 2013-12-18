@@ -1,9 +1,9 @@
-PR_append = "-arago4+gitr${SRCPV}"
+PR_append = "-arago5+gitr${SRCPV}"
 
 RDEPENDS_${PN} += "linaro-pm-qa-utils"
 
 # Commit corresponds to ti2013.12.00 release
-SRCREV = "c0ed100634b7320c0e2f55773a8937eb2a85fb57"
+SRCREV = "02b425d2618b657748452a87d67b84b792760869"
 
 FILES_${PN}-dbg += " \
 	${LTPROOT}/testcases/realtime/*/*/.debug \
