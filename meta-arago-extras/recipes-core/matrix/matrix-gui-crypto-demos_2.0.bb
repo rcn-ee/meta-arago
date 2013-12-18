@@ -4,7 +4,7 @@ LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.7"
+PR = "${INC_PR}.8"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -12,6 +12,8 @@ S = "${WORKDIR}/git/cryptos_apps_scripts"
 S_ti33x = "${WORKDIR}/git/cryptos_apps_program"
 S_ti43x = "${WORKDIR}/git/cryptos_apps_program"
 S_dra7xx-evm = "${WORKDIR}/git/cryptos_apps_program"
+
+SRC_URI += "file://0001-openssl_perf.sh-remove-module-manipulation.patch;striplevel=2"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"
 

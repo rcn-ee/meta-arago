@@ -1,0 +1,107 @@
+From 04607c9d12330f72e96733582734155cb1a32a37 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 17 Dec 2013 19:43:16 -0500
+Subject: [PATCH] openssl_perf.sh: remove module manipulation
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ .../openssl_perf_scripts/openssl_perf.sh           | 71 ----------------------
+ 1 file changed, 71 deletions(-)
+
+diff --git a/cryptos_apps_program/openssl_perf_scripts/openssl_perf.sh b/cryptos_apps_program/openssl_perf_scripts/openssl_perf.sh
+index 9da9ae2..1334274 100644
+--- a/cryptos_apps_program/openssl_perf_scripts/openssl_perf.sh
++++ b/cryptos_apps_program/openssl_perf_scripts/openssl_perf.sh
+@@ -1,13 +1,7 @@
+ #!/bin/sh
+ 
+-
+-CRYPTOMOD=/lib/modules/2.6.37/kernel/crypto/ocf/cryptodev.ko
+-OCFMOD=/lib/modules/2.6.37/crypto/ocf/ocf_omap3_cryptok.ko
+-
+-
+ OPENSSL=/usr/bin/openssl
+ 
+-
+ cat /proc/cpuinfo | grep OMAP3 > /dev/null 2> /dev/null
+ if [ `echo $?` = "0" ]
+ then
+@@ -16,69 +10,6 @@ else
+ 	export CPU=other
+ fi
+ 
+-
+-
+-
+-if [ $CPU = "OMAP3" ]
+-then
+-ls -l /dev/crypto > /dev/null 2> /dev/null
+-if [ `echo $?` = "1" ]
+-then
+-	if [ -r $CRYPTOMOD ]
+-	then
+-		echo "Installing cryptodev module"
+-		insmod $CRYPTOMOD
+-		if [ `echo $?` = "1" ]
+-		then
+-			echo "Cryptodev failed.  Test will run in SW only mode."
+-		else
+-			lsmod | grep ocf_omap3_cryptok >/dev/null
+-			if [ `echo $?` = "1" ]
+-			then
+-				if [ -r $OCFMOD ]
+-				then
+-					echo "Installing ocf_omap3_crypto module"
+-					insmod $OCFMOD ocf_omap3_crypto_dma=1
+-					if [ `echo $?` = "1" ]
+-					then
+-						echo "Removing cryptodev.  Running test in SW only mode."
+-						rmmod cryptodev
+-					fi
+-				else
+-					echo "Can't find OCF driver.  Running test in SW only mode."
+-					rmmod cryptodev
+-				fi
+-			else
+-				echo "ocf_omap3_crypto module is already installed"
+-			fi
+-		fi
+-	fi
+-else
+-	echo "Cryptodev module is already installed"
+-	lsmod | grep ocf_omap3_cryptok >/dev/null
+-	if [ `echo $?` = "1" ]
+-	then
+-		if [ -r $OCFMOD ]
+-		then
+-			echo "Installing ocf_omap3_crypto module"
+-			insmod $OCFMOD ocf_omap3_crypto_dma=1
+-			if [ `echo $?` = "1" ]
+-			then
+-				echo "Removing cryptodev.  Running test in SW only mode."
+-				rmmod cryptodev
+-			fi
+-		else
+-			echo "Can't find OCF driver.  Running test in SW only mode."
+-			rmmod cryptodev
+-		fi
+-	else
+-		echo "ocf_omap3_crypto module is already installed"
+-	fi
+-fi
+-fi
+-
+-
+-
+ if [ -r $OPENSSL ]
+ then
+ 	$OPENSSL version
+@@ -123,5 +54,3 @@ time -v $OPENSSL speed -evp md5 -engine cryptodev > $TEMP 2>&1
+ egrep 'Doing|User|System|Percent|Elapsed' $TEMP
+ 
+ rm $TEMP
+-
+-
+-- 
+1.8.3.2
+
