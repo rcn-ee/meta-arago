@@ -33,7 +33,7 @@ SRC_URI = "\
     file://Makefile_oprofile-example \
 "
 
-PR = "r19"
+PR = "r21"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -56,7 +56,6 @@ MAKEFILES_append_omap3 = " u-boot-spl \
 "
 MAKEFILES_append_am37x-evm = " av-examples \
                                ti-ocf-crypto-module \
-                               wireless \
 "
 MAKEFILES_append_am3517-evm = " av-examples \
                                 ti-ocf-crypto-module \
@@ -79,7 +78,6 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
 "
 MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
-                                wireless \
 "
 
 # Use ARCH format expected by the makefile
