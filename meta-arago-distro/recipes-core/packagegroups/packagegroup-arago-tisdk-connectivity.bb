@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wlan packages into the target FS"
 LICENSE = "MIT"
-PR = "r20"
+PR = "r21"
 
 inherit packagegroup
 
@@ -40,6 +40,12 @@ DEMO_APPS = "\
 CONNECTIVITY_RDEPENDS = ""
 
 CONNECTIVITY_RDEPENDS_ti33x = "\
+    ${WLAN_COMMON} \
+    ${DEMO_APPS} \
+    ${FIRMWARE_AND_DRIVERS} \
+"
+
+CONNECTIVITY_RDEPENDS_ti43x = "\
     ${WLAN_COMMON} \
     ${DEMO_APPS} \
     ${FIRMWARE_AND_DRIVERS} \
