@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r24"
+PR = "r25"
 
 inherit packagegroup
 
@@ -65,7 +65,6 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-gui-clocks               \
                                     \
     matrix-gui-wifi-demos           \
-    matrix-gui-bluetooth-demos      \
 "
 
 MATRIX_APPS_append_ti43x = "        \
@@ -116,7 +115,6 @@ MATRIX_APPS_append_am37x-evm = "    \
 "
 
 MATRIX_APPS_append_am180x-evm = "   \
-    matrix-gui-bluetooth-demos      \
     matrix-gui-pru-demos            \
 "
 
