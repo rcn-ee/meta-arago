@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r23"
+PR = "r24"
 
 inherit packagegroup
 
@@ -68,9 +68,6 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-gui-bluetooth-demos      \
 "
 
-#    matrix-gui-wifi-battleship-demo
-#    matrix-gui-wifi-direct-demo
-
 MATRIX_APPS_append_ti43x = "        \
     ${@base_contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
                                     \
@@ -114,23 +111,14 @@ MATRIX_APPS_append_am37x-evm = "    \
     matrix-gui-display-control      \
     matrix-gui-clocks               \
                                     \
-    matrix-gui-wifi-demos           \
-    matrix-gui-bluetooth-demos      \
                                     \
     matrix-multimedia-demo-audiocapture \
 "
 
-#    matrix-gui-wifi-battleship-demo
-#    matrix-gui-wifi-direct-demo
-
 MATRIX_APPS_append_am180x-evm = "   \
-    matrix-gui-wifi-demos           \
     matrix-gui-bluetooth-demos      \
     matrix-gui-pru-demos            \
 "
-
-#    matrix-gui-wifi-battleship-demo
-#    matrix-gui-wifi-direct-demo
 
 RDEPENDS_${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
