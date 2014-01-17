@@ -33,7 +33,7 @@ SRC_URI = "\
     file://Makefile_oprofile-example \
 "
 
-PR = "r21"
+PR = "r22"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
