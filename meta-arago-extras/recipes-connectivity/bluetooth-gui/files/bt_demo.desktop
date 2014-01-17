@@ -1,9 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Name=Bluetooth
-GenericName=Bluetooth
-Icon=/usr/share/matrix-gui-2.0/apps/bt_demo/bluetooth-icon.png
-Type=Application
-Exec=bluetooth-gui --blacklist-alsa-cards="L138 EVM,omap3evm,AM335X EVM"
-X-ProgramType=gui
-X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/bt_demo/desc_bluetooth.html
