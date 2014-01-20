@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 inherit packagegroup
 
@@ -17,6 +17,8 @@ ARAGO_TEST = "\
     bc \
     memtester \
     libdrm-tests \
+    powertop \
+    stress \
     "
 
 ARAGO_TI_TEST = "\
