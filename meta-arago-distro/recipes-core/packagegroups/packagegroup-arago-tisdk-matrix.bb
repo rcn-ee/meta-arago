@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r26"
+PR = "r27"
 
 inherit packagegroup
 
@@ -49,6 +49,7 @@ MATRIX_APPS_append_omap3 = "        \
     matrix-multimedia-demo-h264dec      \
     matrix-multimedia-demo-mpeg4aacdec   \
     matrix-multimedia-demo-mpeg4dec     \
+    ts-calibrate-init \
 "
 
 MATRIX_APPS_append_ti33x = "        \
@@ -65,6 +66,7 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-gui-clocks               \
                                     \
     matrix-gui-wifi-demos           \
+    ts-calibrate-init \
 "
 
 MATRIX_APPS_append_ti43x = "        \
@@ -78,8 +80,8 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
     matrix-gui-clocks               \
-                                    \
     matrix-gui-wifi-demos           \
+    ts-calibrate-init \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
