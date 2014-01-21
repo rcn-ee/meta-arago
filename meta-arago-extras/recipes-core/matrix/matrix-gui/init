@@ -9,7 +9,6 @@ test -x "$matrixgui" || exit 0
 
 export TSLIB_TSDEVICE=/dev/input/touchscreen0
 export QWS_MOUSE_PROTO=Auto
-tsfile=/etc/pointercal
 
 case "$1" in
   start)
@@ -24,32 +23,10 @@ case "$1" in
     # in the kernel.  This should have no impact on cortex-A8 devices.
     echo 2 > /proc/cpu/alignment
 
-    # Do not try to calibrate the touchscreen if it doesn't exist.
+    # Set the QWS_MOUSE_PROTO for touchscreen if it exists
     if [ -e /dev/input/touchscreen0 ]
     then
         export QWS_MOUSE_PROTO=Tslib:/dev/input/touchscreen0
-        # Check if the SD card is mounted and the first partition is
-        # vfat.  If so let's write the pointercal file there so that if
-        # someone messes up calibration they can just delete the file from
-        # any system and reboot the board.
-        mount | grep /media/mmcblk0p1 | grep vfat > /dev/null 2>&1
-        if [ "$?" = "0" ]
-        then
-            tsfile=/media/mmcblk0p1/pointercal
-            export TSLIB_CALIBFILE=$tsfile
-        fi
-
-        if [ ! -f $tsfile ] ; then
-            echo -n "Calibrating touchscreen (first time only)"
-            ts_calibrate
-            echo "."
-            # If we create a pointercal file and it was not in /etc/pointercal
-            # let's copy it there as well if it does not already exist.
-            if [ ! -f /etc/pointercal -a -f $tsfile ]
-            then
-                cp $tsfile /etc/pointercal
-            fi
-        fi
     fi
 
     #Clear out the the tmp and lock directory
