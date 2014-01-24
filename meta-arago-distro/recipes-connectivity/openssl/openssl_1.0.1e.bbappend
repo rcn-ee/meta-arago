@@ -12,7 +12,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR_append = "-arago8"
+PR_append = "-arago9"
 
 DEPENDS_append_ti33x_class-target = " cryptodev"
 DEPENDS_append_ti43x_class-target = " cryptodev"
@@ -27,7 +27,6 @@ python __anonymous () {
 
 CRYPTODEV_AFALG_PATCHES = " \
 	file://0001-Add-AF_ALG-interface-support-to-OpenSSL.patch \
-	file://0002-Modify-eng_cryptodev.c-to-make-SHA1-and-MD5-work-wit.patch \
 	file://0004-Sample-AF_ALG-openssl.cnf.patch \
 	file://0001-eng_cryptodev.c-update-to-cryptodev-1.6.patch \
 	file://0009-eng_cryptodev-Add-SHA224-initialization-to-cryptodev.patch \
