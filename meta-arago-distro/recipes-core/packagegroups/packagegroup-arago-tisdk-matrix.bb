@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r27"
+PR = "r28"
 
 inherit packagegroup
 
@@ -76,6 +76,8 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-multimedia-demo-h264dec  \
     matrix-multimedia-demo-mpeg4aacdec \
     matrix-multimedia-demo-mpeg4dec \
+                                    \
+    matrix-gui-apps-dual-camera     \
                                     \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
