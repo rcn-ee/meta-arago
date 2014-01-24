@@ -1,6 +1,6 @@
-DESCRIPTION = "Task to install wlan packages into the target FS"
+DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r21"
+PR = "r22"
 
 inherit packagegroup
 
@@ -37,17 +37,25 @@ DEMO_APPS = "\
     wpa-gui-e \
 "
 
+BLUETOOTH_STACK = "\
+    bluez4 \
+    bluez4-agent \
+    bluez-hcidump \
+"
+
 CONNECTIVITY_RDEPENDS = ""
 
 CONNECTIVITY_RDEPENDS_ti33x = "\
     ${WLAN_COMMON} \
     ${DEMO_APPS} \
+    ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
 "
 
 CONNECTIVITY_RDEPENDS_ti43x = "\
     ${WLAN_COMMON} \
     ${DEMO_APPS} \
+    ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
 "
 
