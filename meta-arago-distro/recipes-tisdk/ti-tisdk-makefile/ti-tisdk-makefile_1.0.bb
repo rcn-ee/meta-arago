@@ -31,9 +31,10 @@ SRC_URI = "\
     file://Makefile_wireless \
     file://Makefile_omapconf \
     file://Makefile_oprofile-example \
+    file://Makefile_dual-camera-demo \
 "
 
-PR = "r24"
+PR = "r25"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -71,6 +72,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            ti-crypto-examples \
                            linux-dtbs \
                            wireless \
+                           dual-camera-demo \
 "
 MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
