@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
 DEPENDS = "libnl"
 RDEPENDS_${PN} = "wl18xx-firmware"
 
-PR ="r0+gitr${SRCPV}"
+PR ="r1+gitr${SRCPV}"
 
-#Tag: ol_r8.a8.08
-SRCREV = "9627cb09b9de32b8ffcc32d3ce3e275b7c56d8e4"
+#Tag: ol_r8.a8.10
+SRCREV = "c50159d66af1786414b819ebcaa8b2571ae790a1"
 SRC_URI = "git://github.com/TI-OpenLink/18xx-ti-utils.git \
 "
 
