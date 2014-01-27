@@ -1,18 +1,20 @@
-From 0649cc8f954a957a32180dc714ab4226503c5a66 Mon Sep 17 00:00:00 2001
+From 6e7fd68f1b21813c8df49bfc4d808f41baacc01a Mon Sep 17 00:00:00 2001
 From: Yaniv Mahani <yanivma@ti.com>
 Date: Wed, 27 Nov 2013 13:43:55 +0200
 Subject: [PATCH] hostapd change conf file for better oob startup
 
 Changed some of the default parameters
+
+Signed-off-by: Yaniv Mahani <yanivma@ti.com>
 ---
- hostapd/hostapd.conf |  726 +++++++-------------------------------------------
- 1 file changed, 89 insertions(+), 637 deletions(-)
+ hostapd/hostapd.conf |  724 ++++++--------------------------------------------
+ 1 file changed, 88 insertions(+), 636 deletions(-)
 
 diff --git a/hostapd/hostapd.conf b/hostapd/hostapd.conf
-index f26f310..162fc28 100644
+index f26f310..5e7b115 100644
 --- a/hostapd/hostapd.conf
 +++ b/hostapd/hostapd.conf
-@@ -1,9 +1,23 @@
+@@ -1,5 +1,19 @@
  ##### hostapd configuration file ##############################################
  # Empty lines and lines starting with # are ignored
 +#
@@ -32,11 +34,6 @@ index f26f310..162fc28 100644
 
  # AP netdevice name (without 'ap' postfix, i.e., wlan0 uses wlan0ap for
  # management frames); ath0 for madwifi
--interface=wlan0
-+interface=wlan1
-
- # In case of madwifi, atheros, and nl80211 driver interfaces, an additional
- # configuration parameter, bridge, may be used to notify hostapd if the
 @@ -22,7 +36,7 @@ interface=wlan0
  # default: hostap). nl80211 is used with all Linux mac80211 drivers.
  # Use driver=none if building hostapd as a standalone RADIUS server that does
