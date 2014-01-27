@@ -1,8 +1,8 @@
 DESCRIPTION = "Qt Dual Camera Demo"
 HOMEPAGE = "https://gitorious.org/dual-camera-demo/"
 SECTION = "multimedia"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://main.cpp;md5=424a1b7299bcd2c5fad3b05493dd8898"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://main.cpp;beginline=1;endline=18;md5=1e0116b09fc3d8f888286927eac06928"
 
 require recipes-core/matrix/matrix-gui-paths.inc
 
