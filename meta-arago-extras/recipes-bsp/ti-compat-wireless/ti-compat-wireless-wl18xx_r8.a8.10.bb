@@ -20,9 +20,9 @@ PV = "r8.a8.08"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}"
-PR_append = "a"
+PR_append = "b"
 
-# Tags: ol_r8.a8.08
+# Tags: ol_r8.a8.10
 SRCREV_wl18xx = "eaa1820c02dc076e6ad9254e9cb7a3bb0c17471b"
 SRCREV_compat = "5d80865281795f962e1400a95202bbd07dd763c0"
 SRCREV_compat-wireless = "23a0d62ea1a57327709a77f08d6265ec807a909f"
