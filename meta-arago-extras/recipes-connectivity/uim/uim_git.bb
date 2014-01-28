@@ -1,7 +1,8 @@
 DESCRIPTION = "Shared Transport Line Discipline User Mode initialisation Manager Daemon"
-LICENSE = "GPLv2"
+LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://uim.c;beginline=1;endline=18;md5=9f0bbfbc10c67689e81a523e2976c31e"
 
+PV = "1.0"
 PR ="r1"
 PR_append = "+gitr${SRCPV}"
 
@@ -21,8 +22,8 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc"
 
 do_install() {
-        install -d ${D}${bindir}
-        install -m 0755 uim ${D}${bindir}
+	install -d ${D}${bindir}
+	install -m 0755 uim ${D}${bindir}
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${WORKDIR}/uim-sysfs ${D}${sysconfdir}/init.d
 }
