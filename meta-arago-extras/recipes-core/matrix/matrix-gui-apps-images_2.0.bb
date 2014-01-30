@@ -3,7 +3,6 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
-require matrix-gui-paths.inc
 
 PR = "${INC_PR}.0"
 
