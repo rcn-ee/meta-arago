@@ -3,7 +3,6 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 LICENSE = "CC-BY-SA"
 
 require matrix-gui-apps-git.inc
-require matrix-gui-paths.inc
 
 # This package does not use a subdirectory as ${S} so we need to
 # reset the LIC_FILES_CHKSUM setting from the matrix-gui-apps-git.inc file
