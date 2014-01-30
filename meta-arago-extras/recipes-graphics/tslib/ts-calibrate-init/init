@@ -11,10 +11,11 @@
 # GNU General Public License for more details.
 
 tsfile=/etc/pointercal
+export TSLIB_TSDEVICE=/dev/input/touchscreen0
 
 # First let's check if we even see a touchscreen device node.  If not
 # then bail out.
-if [ ! -e /dev/input/touchscreen0 ]
+if [ ! -e $TSLIB_TSDEVICE ]
 then
     exit
 fi

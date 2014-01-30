@@ -6,7 +6,7 @@ RDEPENDS_${PN} += "tslib"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://init;beginline=2;endline=11;md5=4b2e3b15f01cf63d2cb7988afdcc6c60"
 
-PR = "r1"
+PR = "r2"
 
 S = "${WORKDIR}"
 
