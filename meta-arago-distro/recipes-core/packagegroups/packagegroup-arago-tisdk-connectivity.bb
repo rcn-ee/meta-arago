@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r22"
+PR = "r23"
 
 inherit packagegroup
 
@@ -41,6 +41,7 @@ BLUETOOTH_STACK = "\
     bluez4 \
     bluez4-agent \
     bluez-hcidump \
+    uim \
 "
 
 CONNECTIVITY_RDEPENDS = ""
