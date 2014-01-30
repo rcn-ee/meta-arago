@@ -27,10 +27,10 @@ fi
 
 #TODO how can we find the SD card and not eMMC?  can we look for a "boot"
 # LABEL?
-mount | grep /media/mmcblk0p1 | grep vfat > /dev/null 2>&1
+mount | grep /run/media/mmcblk0p1 | grep vfat > /dev/null 2>&1
 if [ "$?" = "0" ]
 then
-    tsfile=/media/mmcblk0p1/pointercal
+    tsfile=/run/media/mmcblk0p1/pointercal
 fi
 
 export TSLIB_CALIBFILE=$tsfile
