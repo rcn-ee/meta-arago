@@ -1,4 +1,7 @@
-PR_append = "-arago1"
+PR_append = "-arago0"
+
+PACKAGECONFIG := "${@oe_filter_out('x264','${PACKAGECONFIG}', d)}"
+LICENSE_FLAGS = ""
 
 # Disable features that have potential commercial licensing restrictions
 EXTRA_OECONF += "\
