@@ -15,7 +15,7 @@ PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
 PREFERRED_VERSION_qt4-embedded = "4.8.5"
 PREFERRED_VERSION_qt4-native = "4.8.5"
 PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.5"
-PREFERRED_VERSION_linux-libc-headers = "3.8"
+PREFERRED_VERSION_linux-libc-headers = "3.10"
 
 # Use v4.09.00.01 of the Graphics SDK
 PREFERRED_VERSION_omap3-sgx-modules_omap3 = "4.09.00.01"
@@ -30,12 +30,12 @@ PREFERRED_PROVIDER_virtual/libgles1 = "libgles-omap3"
 PREFERRED_PROVIDER_virtual/libgles2 = "libgles-omap3"
 
 # Use latest TI staging kernel and u-boot trees
-PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.8"
+PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.10"
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
 
-PREFERRED_VERSION_linux-libc-headers_am437x-evm = "3.8"
+PREFERRED_VERSION_linux-libc-headers_am437x-evm = "3.10"
 PREFERRED_PROVIDER_virtual/kernel_am437x-evm = "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader_am437x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am437x-evm = "u-boot-ti-staging"
