@@ -31,8 +31,9 @@ mount | grep /media/mmcblk0p1 | grep vfat > /dev/null 2>&1
 if [ "$?" = "0" ]
 then
     tsfile=/media/mmcblk0p1/pointercal
-    export TSLIB_CALIBFILE=$tsfile
 fi
+
+export TSLIB_CALIBFILE=$tsfile
 
 if [ ! -f $tsfile ] ; then
     echo -n "Calibrating touchscreen (first time only)"
