@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r23"
+PR = "r24"
 
 inherit packagegroup
 
@@ -51,6 +51,7 @@ CONNECTIVITY_RDEPENDS_ti33x = "\
     ${DEMO_APPS} \
     ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
+    bt-firmware \
 "
 
 CONNECTIVITY_RDEPENDS_ti43x = "\
