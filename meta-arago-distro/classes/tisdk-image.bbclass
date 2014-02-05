@@ -532,12 +532,17 @@ do_sdk_image () {
     fi
 
     # Copy the DTB files if they exist.
-    # NOTE: For simplicity remove the uImage- prefix on the dtb files.  Get just the symlink
-    #       files for a cleaner name.  Use the DTB_FILTER variable to allow finding the
-    #       dtb files for only that MACHINE type
+    # NOTE: For simplicity remove the uImage- prefix on the dtb files.  Get
+    # just the symlink files for a cleaner name.  Use the DTB_FILTER variable
+    # to allow finding the dtb files for only that MACHINE type
+    # NOTE: The DTB_FILTER variable is interpreted as a regex which means
+    #       that for cases where the DTB files to be selected do not have
+    #       a common naming you can use something line filter1\|filter2 which
+    #       will be interpreted as an "or" and allow matching both expressions.
+    #       The \| is important for delimiting these values.
     if [ "${DTB_FILTER}" != "unknown" ]
     then
-        for f in `find ${DEPLOY_DIR_IMAGE} -type l -name "*${DTB_FILTER}*.dtb"`
+        for f in `find ${DEPLOY_DIR_IMAGE} -type l -regex ".*\(${DTB_FILTER}\).*\.dtb"`
         do
             dtb_file=`basename $f | sed s/.Image-//`
             cp $f ${prebuilt_dir}/${dtb_file}
