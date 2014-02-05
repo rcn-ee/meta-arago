@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r17"
+PR = "r18"
 
 inherit packagegroup
 
@@ -14,6 +14,7 @@ KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-src"
 TOOLS = "pinmux-utility"
 TOOLS_omap-a15 = ""
 TOOLS_ti43x = ""
+TOOLS_keystone = ""
 TOOLS_append_am37x-evm = " flash-utility"
 TOOLS_append_am3517-evm = " flash-utility"
 
