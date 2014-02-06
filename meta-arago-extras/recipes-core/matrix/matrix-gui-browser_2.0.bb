@@ -11,9 +11,9 @@ RDEPENDS_${PN} += "${QT_RDEPENDS_FONTS}"
 
 DEPENDS += "${QT_DEPENDS_WEBKIT}"
 
-PR = "r3"
+PR = "r4"
 
-SRCREV = "db2e6b10e5a14358b6120a4a28de2f9d591bc55c"
+SRCREV = "d962b18b628f0006642491c2250ef01557591e66"
 BRANCH ?= "master"
 
 SRC_URI = "git://gitorious.org/matrix-gui-v2/matrix_browser.git;protocol=git;branch=${BRANCH}"

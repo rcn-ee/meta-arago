@@ -12,16 +12,15 @@ require recipes-core/matrix/matrix-gui-paths.inc
 
 inherit qt-provider
 
-PR = "r5"
+PR = "r6"
 
 DEPENDS += "${QT_DEPENDS_SVG} ${QT_DEPENDS_SCRIPT}"
 
 BRANCH ?= "master"
-SRCREV = "27e033a0ac59928cc3acbb45f4d9bc2101fcf024"
+SRCREV = "e6225f9e485675e4390dcc7575810e9f63501692"
 
 SRC_URI = " \
 	git://gitorious.org/thermostat-demo/thermostat-demo.git;protocol=git \
-	file://0001-Update-Makefile.build-for-when-build-dir-is-not-the-.patch \
 "
 
 SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', 'file://0002-Replace-QtGui-with-QtWidgets-per-Qt5-migration-guide.patch \
@@ -29,9 +28,13 @@ SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', 'file://0002-Replace-QtGui
 
 S = "${WORKDIR}/git/"
 
-# use the make targets already created in the Makefile.build files
+BUILDDIR ?= "."
+
 do_install() {
-	cd ${S} && make -f Makefile.build DESTDIR=${D} BUILDDIR=${B} install_common
+	install -d ${D}/usr/bin
+	install -m 0755 ${BUILDDIR}/ThermostatDemo ${D}/usr/bin/ThermostatDemo
+	install -d ${D}${MATRIX_APP_DIR}/qt_tstat
+	cp -rf matrix-files/*  ${D}${MATRIX_APP_DIR}/qt_tstat
 }
 
 PACKAGES += "matrix-gui-thermostat-demo"
