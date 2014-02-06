@@ -84,14 +84,14 @@ rm $install_dir/linux-devkit.sh
 # Update example applications CCS project files
 
 # Grab some essential variables from environment-setup
-TARGET_SYS=`sed -n 's/^export TARGET_SYS=//p' $install_dir/linux-devkit/environment-setup`
+REAL_MULTIMACH_TARGET_SYS=`sed -n 's/^export REAL_MULTIMACH_TARGET_SYS=//p' $install_dir/linux-devkit/environment-setup`
 TOOLCHAIN_SYS=`sed -n 's/^export TOOLCHAIN_SYS=//p' $install_dir/linux-devkit/environment-setup`
 SDK_SYS=`sed -n 's/^export SDK_SYS=//p' $install_dir/linux-devkit/environment-setup`
 
 # Grab toolchain's GCC version
 GCC_VERSION=`ls $install_dir/linux-devkit/sysroots/$SDK_SYS/usr/lib/gcc/$TOOLCHAIN_SYS/`
 
-TOOLCHAIN_TARGET_INCLUDE_DIR="linux-devkit/sysroots/$TARGET_SYS/usr/include"
+TOOLCHAIN_TARGET_INCLUDE_DIR="linux-devkit/sysroots/$REAL_MULTIMACH_TARGET_SYS/usr/include"
 TOOLCHAIN_INCLUDE_DIR="linux-devkit/sysroots/$SDK_SYS/usr/lib/gcc/$TOOLCHAIN_SYS/$GCC_VERSION/include"
 
 # Update CCS project files using important paths to headers
