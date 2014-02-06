@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://main.cpp;beginline=1;endline=18;md5=1e0116b09fc3d8f88
 
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r0"
+PR = "r1"
 
 BRANCH = "master"
-SRCREV = "af299a206482562ceae8aa690a8b6644a3e0a66e"
+SRCREV = "ee954e04b3efe160b3fabf5a8d640740ce1a7e85"
 
 SRC_URI = "git://gitorious.org/dual-camera-demo/dual-camera-demo.git;protocol=git;branch=${BRANCH}"
 
@@ -19,7 +19,11 @@ inherit qt-provider
 
 # use the make targets already created in the Makefile.build files
 do_install() {
-    cd ${S} && make -f Makefile.build DESTDIR=${D} install_common
+    install -d ${D}/usr/bin
+    install -d ${D}${MATRIX_APP_DIR}/arm_multimedia_dual-camera
+    install dual_camera ${D}/usr/bin/dual_camera
+    install dual_camera.sh ${D}/usr/bin/dual_camera.sh
+    install matrix/* ${D}/${MATRIX_APP_DIR}/arm_multimedia_dual-camera
 }
 
 PACKAGES += "matrix-gui-apps-dual-camera"
