@@ -3,7 +3,7 @@ ti-crypto-examples:
 	@echo =================================
 	@echo    Building TI Crypto Examples
 	@echo =================================
-	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make
+	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make release
 
 ti-crypto-examples_clean:
 	@echo =================================

@@ -34,7 +34,7 @@ SRC_URI = "\
     file://Makefile_dual-camera-demo \
 "
 
-PR = "r26"
+PR = "r27"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \

@@ -3,22 +3,22 @@ dual-camera:
 	@echo ================================
 	@echo    Building Dual Camera Demo
 	@echo ================================
-	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make -f Makefile.build release
+	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make
 
 dual-camera_clean:
 	@echo ================================
 	@echo    Building Dual Camera Demo
 	@echo ================================
-	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make -f Makefile.build clean
+	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make clean
 
 dual-camera_install:
 	@echo ===================================================
 	@echo   Installing Dual Camera Demo - Release version
 	@echo ===================================================
-	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make -f Makefile.build install
+	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make install
 
 dual-camera_install_debug:
 	@echo =================================================
 	@echo   Installing Dual Camera Demo - Debug version
 	@echo =================================================
-	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make -f Makefile.build install_debug
+	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make install_debug
