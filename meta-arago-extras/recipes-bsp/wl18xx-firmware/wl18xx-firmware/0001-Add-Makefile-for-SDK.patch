@@ -1,0 +1,34 @@
+From 5f21057d483ba622a4de7075348548540c82a480 Mon Sep 17 00:00:00 2001
+From: Franklin S. Cooper Jr <fcooper@ti.com>
+Date: Wed, 5 Feb 2014 21:03:08 -0600
+Subject: [PATCH] Add Makefile for SDK
+
+* Add Makefile to sources so it is packaged in the SDK.
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ Makefile |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 Makefile
+
+diff --git a/Makefile b/Makefile
+new file mode 100644
+index 0000000..62f4783
+--- /dev/null
++++ b/Makefile
+@@ -0,0 +1,12 @@
++# Installs the the ti-connectiviy wlan firmware files into the root file system
++
++install:
++	@if [ ! -d $(DESTDIR) ] ; then \
++		echo "The extracted target filesystem directory doesn't exist."; \
++		echo "Please run setup.sh in the SDK's root directory and then try again."; \
++		exit 1; \
++	fi
++	install -d  $(DEST_DIR)/lib/firmware/ti-connectivity
++	cp -RpP * $(DEST_DIR)/lib/firmware/ti-connectivity/
++	rm -f $(DEST_DIR)/lib/firmware/ti-connectivity/Makefile
++
+-- 
+1.7.0.4
+
