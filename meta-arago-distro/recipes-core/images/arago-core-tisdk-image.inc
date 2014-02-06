@@ -7,7 +7,7 @@ IMAGE_FSTYPES = "tar.gz"
 
 inherit tisdk-image
 
-COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|ti43x|omap-a15"
+COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|ti43x|omap-a15|keystone"
 
 # List of packages to remove from the host package.  This is usually due to
 # licensing issues and unneeded dependencies.
@@ -21,9 +21,13 @@ DTB_FILTER_ti33x = "am335x"
 DTB_FILTER_omap5-evm = "omap5"
 DTB_FILTER_dra7xx-evm = "dra7"
 DTB_FILTER_ti43x = "am43"
+DTB_FILTER_keystone = "k2hk"
 
 # List of target side images to build for the SDK
 TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image"
+
+# Some devices do not support display and use a server image instead
+TARGET_IMAGES_keystone-evm = "arago-base-tisdk-image tisdk-server-rootfs-image"
 
 TISDK_TOOLCHAIN = "meta-toolchain-arago-tisdk"
 
