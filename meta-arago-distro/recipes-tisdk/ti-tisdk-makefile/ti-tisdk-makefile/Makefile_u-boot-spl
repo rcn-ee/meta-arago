@@ -4,14 +4,20 @@ u-boot-spl_clean: u-boot_clean
 u-boot-spl_install: u-boot_install
 
 u-boot:
+	@echo ===================================
+	@echo    Building U-boot
+	@echo ===================================
 	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) $(UBOOT_MACHINE)
 	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE)
 
 u-boot_clean:
+	@echo ===================================
+	@echo    Cleaining U-boot
+	@echo ===================================
 	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) clean
 
 u-boot_install:
-	install -d $(DESTDIR)/boot
-	install $(TI_SDK_PATH)/board-support/u-boot-*/u-boot.img $(DESTDIR)/boot
-	install $(TI_SDK_PATH)/board-support/u-boot-*/MLO $(DESTDIR)/boot
-	install $(TI_SDK_PATH)/board-support/u-boot-*/u-boot.map $(DESTDIR)/boot
+	@echo ===================================
+	@echo    Installing U-boot
+	@echo ===================================
+	@echo "Nothing to do"
