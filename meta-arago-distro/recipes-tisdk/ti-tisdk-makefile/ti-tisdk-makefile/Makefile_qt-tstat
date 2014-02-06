@@ -3,22 +3,22 @@ qt-tstat:
 	@echo ================================
 	@echo    Building QT Thermostat App
 	@echo ================================
-	@cd example-applications; cd `find . -name "*qt-tstat*"`; make -f Makefile.build release
+	@cd example-applications; cd `find . -name "*qt-tstat*"`; make release
 
 qt-tstat_clean:
 	@echo ================================
 	@echo    Cleaning QT Thermostat App
 	@echo ================================
-	@cd example-applications; cd `find . -name "*qt-tstat*"`; make -f Makefile.build clean
+	@cd example-applications; cd `find . -name "*qt-tstat*"`; make clean
 
 qt-tstat_install:
 	@echo ===================================================
 	@echo   Installing QT Thermostat App - Release version
 	@echo ===================================================
-	@cd example-applications; cd `find . -name "*qt-tstat*"`; make -f Makefile.build install
+	@cd example-applications; cd `find . -name "*qt-tstat*"`; make install
 
 qt-tstat_install_debug:
 	@echo =================================================
 	@echo   Installing QT Thermostat App - Debug version
 	@echo =================================================
-	@cd example-applications; cd `find . -name "*qt-tstat*"`; make -f Makefile.build install_debug
+	@cd example-applications; cd `find . -name "*qt-tstat*"`; make install_debug
