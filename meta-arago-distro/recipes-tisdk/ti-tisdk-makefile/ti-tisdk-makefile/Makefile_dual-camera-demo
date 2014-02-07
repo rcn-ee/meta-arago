@@ -1,23 +1,23 @@
 # QT Dual Camera build targets
-dual-camera:
+dual-camera-demo:
 	@echo ================================
 	@echo    Building Dual Camera Demo
 	@echo ================================
 	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make
 
-dual-camera_clean:
+dual-camera-demo_clean:
 	@echo ================================
 	@echo    Building Dual Camera Demo
 	@echo ================================
 	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make clean
 
-dual-camera_install:
+dual-camera-demo_install:
 	@echo ===================================================
 	@echo   Installing Dual Camera Demo - Release version
 	@echo ===================================================
 	@cd example-applications; cd `find . -name "*dual-camera-demo*"`; make install
 
-dual-camera_install_debug:
+dual-camera-demo_install_debug:
 	@echo =================================================
 	@echo   Installing Dual Camera Demo - Debug version
 	@echo =================================================
