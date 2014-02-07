@@ -11,6 +11,11 @@ linux_install: __DTB_DEPEND_INSTALL__
 	@echo ===================================
 	@echo     Installing the Linux Kernel
 	@echo ===================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
 	install -d $(DESTDIR)/boot
 	install $(LINUXKERNEL_INSTALL_DIR)/arch/arm/boot/__KERNEL_BUILD_CMDS__ $(DESTDIR)/boot
 	install $(LINUXKERNEL_INSTALL_DIR)/vmlinux $(DESTDIR)/boot
