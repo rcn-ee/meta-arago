@@ -1,6 +1,6 @@
 DESCRIPTION = "Firmware files for Bluetooth"
 LICENSE = "TI-TSPA"
-LIC_FILES_CHKSUM = "file://am335x/LICENCE;md5=5f67a65df8b40038a3251b2fe5b912df \
+LIC_FILES_CHKSUM = "file://am335x/LICENCE;md5=4b46aed2a87412c84f9363a8db053e1b \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -11,16 +11,17 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
-PR = "r3+gitr${SRCPV}"
+PR = "r4+gitr${SRCPV}"
 
-COMPATIBLE_MACHINE = "ti33x"
+COMPATIBLE_MACHINE = "ti33x|ti43x"
 
-SRCREV = "57a8e569575e742c47dc2452c4932dcfff816442"
+SRCREV = "7496df8d130f2db85d5d50b1f703213edf0b54fb"
 SRC_URI = "git://github.com/TI-ECS/bt-firmware.git;protocol=git \
            file://0001-Makefile-allow-building-within-the-OE.patch"
 
 PLATFORM = "unknown"
 PLATFORM_ti33x = "am335x-evm"
+PLATFORM_ti43x = "am437x-evm"
 
 S = "${WORKDIR}/git"
 

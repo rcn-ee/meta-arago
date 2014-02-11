@@ -1,6 +1,6 @@
-From 8f226ccc9d2cbd10d454e131376c35f502a45e3b Mon Sep 17 00:00:00 2001
-From: Chase Maupin <Chase.Maupin@ti.com>
-Date: Wed, 7 Mar 2012 14:11:42 -0600
+From 465ffd990e3366732eb5e2271313539b55c4ccb7 Mon Sep 17 00:00:00 2001
+From: Eyal Reizer <eyalr@ti.com>
+Date: Tue, 11 Feb 2014 15:17:53 +0200
 Subject: [PATCH] Makefile: allow building with OE
 
 * Use defaults and source values that allow building this
@@ -10,17 +10,19 @@ Upstread-Status: Pending
     * Will be accepted into next release
 
 Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
+    < adapated for am437x>
+Signed-off-by: Eyal Reizer <eyalr@ti.com>
 ---
- Makefile |   21 +++++++++++++++++++++
- 1 files changed, 21 insertions(+), 0 deletions(-)
+ Makefile |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 9035e40..bd94881 100644
+index 9035e40..23bc5b6 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1,5 +1,26 @@
+@@ -1,5 +1,28 @@
  # Installs the the Bluetooth firmware files into the root file system
-
+ 
 +-include ../../../Rules.make
 +
 +# If KERNEL_DIR is not set then use the default in Rules.make
@@ -41,9 +43,12 @@ index 9035e40..bd94881 100644
 +ifeq ($(PLATFORM), am37x-evm)
 +    MACHINE_NAME := omap3evm
 +endif
-+
++ifeq ($(PLATFORM), am437x-evm)
++    MACHINE_NAME := am43xx
++endif
  install:
-	install -d $(DEST_DIR)${BASE_LIB_DIR}/firmware
-	cp -f ./${MACHINE_NAME}/* $(DEST_DIR)${BASE_LIB_DIR}/firmware
---
+ 	install -d $(DEST_DIR)${BASE_LIB_DIR}/firmware
+ 	cp -f ./${MACHINE_NAME}/* $(DEST_DIR)${BASE_LIB_DIR}/firmware
+-- 
 1.7.0.4
+
