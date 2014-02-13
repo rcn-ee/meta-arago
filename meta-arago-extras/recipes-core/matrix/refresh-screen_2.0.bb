@@ -7,9 +7,9 @@ SECTION = "multimedia"
 # Make sure that QT font libraries have been installed
 RDEPENDS_${PN} += "qt4-embedded-fonts"
 
-PR = "r3"
+PR = "r4"
 
-SRCREV = "e652edf9403fe9329e1bcd14b79503045a53705c"
+SRCREV = "4dfdf85f17033f950e01f25341665f979edde6c3"
 BRANCH ?= "master"
 
 SRC_URI = "git://gitorious.org/matrix-gui-v2/refresh-screen.git;protocol=git;branch=${BRANCH}"
