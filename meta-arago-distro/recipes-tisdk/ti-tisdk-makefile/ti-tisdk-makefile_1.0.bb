@@ -63,9 +63,9 @@ MAKEFILES_append_am3517-evm = " av-examples \
 "
 MAKEFILES_append_ti33x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
-                           wireless \
                            ti-crypto-examples \
                            linux-dtbs \
+                           wireless \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
