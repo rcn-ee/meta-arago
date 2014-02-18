@@ -1,7 +1,7 @@
 meta-arago-distro provides Arago distribution configuration for TI SDK products
 
-This layer works with the latest Yocto Project release (currently 1.4) and tracks
-the stable/maintenance branches (currently "dylan") of the corresponding layers:
+This layer works with the latest Yocto Project release (currently 1.5) and tracks
+the stable/maintenance branches (currently "dora") of the corresponding layers:
 
 URI: git://git.openembedded.org/openembedded-core
 branch: dylan
