@@ -4,9 +4,6 @@ include conf/distro/include/qt5-versions.inc
 # Use the latest version of ltp-ddt for kernel versions 3.8+
 PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
-# Use the latest version of libdrm
-PREFERRED_VERSION_libdrm = "2.4.46"
-
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
 ARAGO_QT_PROVIDER = "${@base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d)}"
