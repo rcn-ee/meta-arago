@@ -1,0 +1,28 @@
+cryptodev: linux
+	@echo ================================
+	@echo      Building cryptodev-linux
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "cryptodev*"`; \
+	make ARCH=arm KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR)
+
+cryptodev_clean:
+	@echo ================================
+	@echo      Cleaning cryptodev-linux
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "cryptodev*"`; \
+	make clean
+
+cryptodev_install:
+	@echo ================================
+	@echo      Installing cryptodev-linux
+	@echo ================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "cryptodev*"`; \
+	make ARCH=arm  KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET)  install
