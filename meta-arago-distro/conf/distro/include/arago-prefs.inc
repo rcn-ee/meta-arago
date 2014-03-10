@@ -1,3 +1,19 @@
+# Set *target* toolchain preferences at global distro level.
+# Cross and SDK toolchain preferences are set in toolchain-*.inc files
+GCCVERSION ?= "4.7%"
+BINUVERSION ?= "2.23%"
+EGLIBCVERSION ?= "2.17%"
+LINUXLIBCVERSION ?= "3.8"
+
+PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
+PREFERRED_VERSION_gcc-runtime ?= "${GCCVERSION}"
+PREFERRED_VERSION_libgcc ?= "${GCCVERSION}"
+PREFERRED_VERSION_binutils ?= "${BINUVERSION}"
+PREFERRED_VERSION_linux-libc-headers ?= "${LINUXLIBCVERSION}"
+PREFERRED_VERSION_eglibc ?= "${EGLIBCVERSION}"
+PREFERRED_VERSION_eglibc-locale ?= "${EGLIBCVERSION}"
+PREFERRED_VERSION_eglibc-initial ?= "${EGLIBCVERSION}"
+
 # Set preferred Qt5 versions. Different namespace from Qt4, so no conflict
 include conf/distro/include/qt5-versions.inc
 
@@ -12,7 +28,6 @@ PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
 PREFERRED_VERSION_qt4-embedded = "4.8.4"
 PREFERRED_VERSION_qt4-native = "4.8.4"
 PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.4"
-PREFERRED_VERSION_linux-libc-headers = "3.8"
 
 # Use v4.09.00.01 of the Graphics SDK
 PREFERRED_VERSION_omap3-sgx-modules_omap3 = "4.09.00.01"
