@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 inherit packagegroup
 
@@ -17,6 +17,7 @@ UTILS = " \
     dropbear \
     openssh-sftp-server \
     ptpd \
+    u-boot-fw-utils \
 "
 
 UTILS_append_ti33x = " mmc-utils"
