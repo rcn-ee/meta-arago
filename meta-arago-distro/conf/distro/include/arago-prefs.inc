@@ -44,6 +44,9 @@ PREFERRED_PROVIDER_virtual/egl = "libgles-omap3"
 PREFERRED_PROVIDER_virtual/libgles1 = "libgles-omap3"
 PREFERRED_PROVIDER_virtual/libgles2 = "libgles-omap3"
 
+PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
+PREFERRED_PROVIDER_virtual/mesa = "mesa-gl"
+
 # Use latest TI staging kernel and u-boot trees
 PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.10"
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
