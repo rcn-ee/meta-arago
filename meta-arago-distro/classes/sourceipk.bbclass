@@ -186,7 +186,7 @@ sourceipk_do_create_srcipk() {
         mkdir -p ${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}
         pkg_file=${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}/${PN}-src_${PV}-${PR}_${SRCIPK_PACKAGE_ARCH}.ipk
         rm -f $pkg_file
-        ( cd $srcipk_dir && ar -crf $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz )
+        ( cd $srcipk_dir && ar -crf $pkg_file ./debian-binary ./control.tar.gz ./data.tar.gz )
 
         # Remove the temporary directory
         rm -rf $tmp_dir
