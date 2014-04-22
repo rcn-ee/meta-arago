@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r14"
+PR = "r15"
 
 inherit packagegroup
 
@@ -17,8 +17,10 @@ UTILS = " \
     dropbear \
     openssh-sftp-server \
     ptpd \
-    u-boot-fw-utils \
 "
+
+UTILS_UBOOT_FW = "u-boot-fw-utils"
+UTILS_UBOOT_FW_ti43x = ""
 
 UTILS_append_ti33x = " mmc-utils"
 UTILS_append_ti43x = " mmc-utils"
@@ -34,4 +36,5 @@ UTILS_append_omap-a15 = " parted"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
+    ${UTILS_UBOOT_FW} \
 "
