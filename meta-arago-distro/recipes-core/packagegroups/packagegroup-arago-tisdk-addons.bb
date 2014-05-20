@@ -17,6 +17,7 @@ UTILS = " \
     dropbear \
     openssh-sftp-server \
     ptpd \
+    libdrm-kms \
 "
 
 UTILS_UBOOT_FW = "u-boot-fw-utils"
