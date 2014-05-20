@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -29,11 +29,26 @@ MULTIMEDIA_append_am37x-evm = " \
     av-examples \
 "
 
+MULTIMEDIA_append_omap5-evm = " \
+    abefw \
+    "
+
 MULTIMEDIA_append_am3517-evm = " \
     av-examples \
 "
 
+ACCEL_FW = ""
+ACCEL_FW_append_omap-a15 = " \
+    ipumm-fw \
+    "
+ACCEL_FW_append_dra7xx-evm = " \
+    dspdce-fw \
+    vis \
+    "
+
+
 RDEPENDS_${PN} = "\
     packagegroup-arago-gst \
     ${MULTIMEDIA} \
+    ${ACCEL_FW} \
 "
