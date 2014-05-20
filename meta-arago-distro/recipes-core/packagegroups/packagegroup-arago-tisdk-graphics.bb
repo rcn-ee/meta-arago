@@ -30,6 +30,20 @@ GRAPHICS_RDEPENDS_omap3 = "\
     ${GRAPHICS_SDK} \
 "
 
+GRAPHICS_RDEPENDS_omap-a15 = "\
+    libgbm \
+    omap5-sgx-ddk-um-linux \
+    "
+# Put this back when compile issues are fixed against 3.12
+#    omapdrm-pvr
+
+GRAPHICS_BLTSVILLE = ""
+GRAPHICS_BLTSVILLE_omap-a15 = " \
+    bltsville   \
+    "
+
+
 RDEPENDS_${PN} = "\
     ${GRAPHICS_RDEPENDS} \
+    ${GRAPHICS_BLTSVILLE} \
 "
