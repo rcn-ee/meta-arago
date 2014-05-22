@@ -51,6 +51,14 @@ PREFERRED_PROVIDER_virtual/libgles2_omap-a15 = "omap5-sgx-ddk-um-linux"
 PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa = "mesa-gl"
 
+# This is required when using keystone devices with graphical support
+# such as Qt5
+PREFERRED_PROVIDER_virtual/egl_keystone = "mesa"
+PREFERRED_PROVIDER_virtual/libgles1_keystone = "mesa"
+PREFERRED_PROVIDER_virtual/libgles2_keystone = "mesa"
+PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"
+PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
+
 # Use latest TI staging kernel and u-boot trees
 PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.10"
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
