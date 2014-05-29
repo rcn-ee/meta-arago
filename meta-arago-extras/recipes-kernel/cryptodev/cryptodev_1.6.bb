@@ -8,4 +8,6 @@ RREPLACES_${PN} = "ocf-linux"
 
 inherit module
 
-PR = "r1"
+PR = "r2"
+
+SRC_URI += "file://0002-In-the-3.13-rc1-Linux-kernel-the-INIT_COMPLETION-mac.patch"
