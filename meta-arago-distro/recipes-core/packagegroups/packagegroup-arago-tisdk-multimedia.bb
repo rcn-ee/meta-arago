@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r7"
+PR = "r8"
 
 inherit packagegroup
 
@@ -19,6 +19,7 @@ MULTIMEDIA_append_ti33x = " \
 MULTIMEDIA_append_ti43x = " \
     amsdk-av-files \
     dual-camera-demo \
+    image-gallery \
 "
 
 MULTIMEDIA_append_omap-a15 = " \
