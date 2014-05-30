@@ -14,7 +14,7 @@ u-boot_clean:
 	@echo ===================================
 	@echo    Cleaining U-boot
 	@echo ===================================
-	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) clean
+	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) distclean
 
 u-boot_install:
 	@echo ===================================
