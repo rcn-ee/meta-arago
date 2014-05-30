@@ -3,22 +3,22 @@ refresh-screen:
 	@echo =============================
 	@echo    Building Refresh Screen
 	@echo =============================
-	@cd example-applications; cd `find . -name "*refresh-screen*"`; make release
+	@cd example-applications; cd `find . -name "*refresh-screen*"`; make -f Makefile.build release
 
 refresh-screen_clean:
 	@echo =============================
 	@echo    Cleaning Refresh Screen
 	@echo =============================
-	@cd example-applications; cd `find . -name "*refresh-screen*"`; make clean
+	@cd example-applications; cd `find . -name "*refresh-screen*"`; make -f Makefile.build clean
 
 refresh-screen_install:
 	@echo ================================================
 	@echo   Installing Refresh Screen - Release version
 	@echo ================================================
-	@cd example-applications; cd `find . -name "*refresh-screen*"`; make install
+	@cd example-applications; cd `find . -name "*refresh-screen*"`; make -f Makefile.build install
 
 refresh-screen_install_debug:
 	@echo ==============================================
 	@echo   Installing Refresh Screen - Debug Version
 	@echo ==============================================
-	@cd example-applications; cd `find . -name "*refresh-screen*"`; make install_debug
+	@cd example-applications; cd `find . -name "*refresh-screen*"`; make -f Makefile.build install_debug
