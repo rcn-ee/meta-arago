@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
@@ -18,6 +18,7 @@ MULTIMEDIA_append_am3517-evm = " \
 
 MULTIMEDIA_append_ti43x = " \
     dual-camera-demo-src \
+    image-gallery-src \
 "
 
 RDEPENDS_${PN} = "\
