@@ -8,7 +8,7 @@ require matrix-gui-apps-git.inc
 # reset the LIC_FILES_CHKSUM setting from the matrix-gui-apps-git.inc file
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6e0ae7214f6c74c149cb25f373057fa9"
 
-PR = "${INC_PR}.9"
+PR = "${INC_PR}.10"
 
 # These packages make submenus in matrix and are not architecture specific
 inherit allarch
@@ -27,7 +27,7 @@ do_install(){
     done
 }
 
-PACKAGES += "${PN}-arm ${PN}-3d ${PN}-cryptos ${PN}-display ${PN}-ethernet ${PN}-multimedia ${PN}-power ${PN}-pru ${PN}-qt4 ${PN}-settings ${PN}-usb ${PN}-wifi ${PN}-oprofile"
+PACKAGES += "${PN}-arm ${PN}-3d ${PN}-cryptos ${PN}-display ${PN}-ethernet ${PN}-multimedia ${PN}-power ${PN}-pru ${PN}-qt4 ${PN}-settings ${PN}-usb ${PN}-wifi ${PN}-oprofile ${PN}-camera"
 
 # Make sure app images has been installed
 RDEPENDS_${PN} += "matrix-gui-apps-images"
@@ -46,3 +46,4 @@ FILES_${PN}-settings = "${MATRIX_APP_DIR}/settings_submenu/*"
 FILES_${PN}-usb = "${MATRIX_APP_DIR}/usb_submenu/*"
 FILES_${PN}-wifi = "${MATRIX_APP_DIR}/wifi_submenu/*"
 FILES_${PN}-oprofile = "${MATRIX_APP_DIR}/oprofile_submenu/*"
+FILES_${PN}-camera = "${MATRIX_APP_DIR}/camera_submenu/*"
