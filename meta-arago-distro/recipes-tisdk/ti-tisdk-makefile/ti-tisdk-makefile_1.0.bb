@@ -32,10 +32,11 @@ SRC_URI = "\
     file://Makefile_omapconf \
     file://Makefile_oprofile-example \
     file://Makefile_dual-camera-demo \
+    file://Makefile_image-gallery \
     file://Makefile_cryptodev \
 "
 
-PR = "r33"
+PR = "r34"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -75,6 +76,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            linux-dtbs \
                            wireless \
                            dual-camera-demo \
+                           image-gallery \
                            cryptodev \
 "
 

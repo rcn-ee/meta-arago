@@ -1,0 +1,24 @@
+# QT Image Gallery build targets
+image-gallery:
+	@echo ================================
+	@echo    Building Image Gallery
+	@echo ================================
+	@cd example-applications; cd `find . -name "*image-gallery*"`; make -f Makefile.build
+
+image-gallery_clean:
+	@echo ================================
+	@echo    Building Image Gallery
+	@echo ================================
+	@cd example-applications; cd `find . -name "*image-gallery*"`; make -f Makefile.build clean
+
+image-gallery_install:
+	@echo ===================================================
+	@echo   Installing Image Gallery - Release version
+	@echo ===================================================
+	@cd example-applications; cd `find . -name "*image-gallery*"`; make -f Makefile.build install
+
+image-gallery_install_debug:
+	@echo =================================================
+	@echo   Installing Dual Camera Demo - Debug version
+	@echo =================================================
+	@cd example-applications; cd `find . -name "*image-galleryo*"`; make -f Makefile.build install_debug
