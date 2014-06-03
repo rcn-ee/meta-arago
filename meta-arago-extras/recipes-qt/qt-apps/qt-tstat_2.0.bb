@@ -12,7 +12,7 @@ require recipes-core/matrix/matrix-gui-paths.inc
 
 inherit qt-provider
 
-PR = "r7"
+PR = "r8"
 
 DEPENDS += "${QT_DEPENDS_SVG} ${QT_DEPENDS_SCRIPT}"
 
@@ -28,13 +28,11 @@ SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', 'file://0002-Replace-QtGui
 
 S = "${WORKDIR}/git/"
 
-BUILDDIR ?= "."
-
 do_install() {
 	install -d ${D}/usr/bin
-	install -m 0755 ${BUILDDIR}/ThermostatDemo ${D}/usr/bin/ThermostatDemo
+	install -m 0755 ${B}/ThermostatDemo ${D}/usr/bin/ThermostatDemo
 	install -d ${D}${MATRIX_APP_DIR}/qt_tstat
-	cp -rf matrix-files/*  ${D}${MATRIX_APP_DIR}/qt_tstat
+	cp -rf ${S}/matrix-files/*  ${D}${MATRIX_APP_DIR}/qt_tstat
 }
 
 PACKAGES += "matrix-gui-thermostat-demo"
