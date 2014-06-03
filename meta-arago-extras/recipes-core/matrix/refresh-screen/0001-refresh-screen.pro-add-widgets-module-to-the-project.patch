@@ -1,0 +1,26 @@
+From 3969a5b06cfa28e531080cfdb12ea69ada870f36 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 12 May 2014 21:07:32 -0400
+Subject: [PATCH] refresh-screen.pro: add widgets module to the project for Qt5
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ refresh_screen.pro | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/refresh_screen.pro b/refresh_screen.pro
+index afe5c25..a79abd0 100644
+--- a/refresh_screen.pro
++++ b/refresh_screen.pro
+@@ -4,7 +4,7 @@
+ #
+ #-------------------------------------------------
+ 
+-QT       += core gui
++QT       += core gui widgets
+ 
+ TARGET = refresh_screen
+ TEMPLATE = app
+-- 
+1.9.2
+
