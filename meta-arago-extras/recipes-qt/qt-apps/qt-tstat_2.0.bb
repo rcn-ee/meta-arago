@@ -12,12 +12,12 @@ require recipes-core/matrix/matrix-gui-paths.inc
 
 inherit qt-provider
 
-PR = "r8"
+PR = "r9"
 
 DEPENDS += "${QT_DEPENDS_SVG} ${QT_DEPENDS_SCRIPT}"
 
 BRANCH ?= "master"
-SRCREV = "2960431fd38239cc089c8738776f3ff9dcfe7f1c"
+SRCREV = "2512773c2d9da989e6a42c1e90b2b34496713072"
 
 SRC_URI = " \
 	git://gitorious.org/thermostat-demo/thermostat-demo.git;protocol=git \

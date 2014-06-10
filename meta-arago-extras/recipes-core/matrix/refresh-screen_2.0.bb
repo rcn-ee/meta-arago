@@ -9,9 +9,9 @@ inherit qt-provider
 # Make sure that QT font libraries have been installed
 RDEPENDS_${PN} += "${QT_RDEPENDS_FONTS}"
 
-PR = "r5"
+PR = "r6"
 
-SRCREV = "4dfdf85f17033f950e01f25341665f979edde6c3"
+SRCREV = "ad3835b250c8b2b55ae65ffa19c2b85e412826b0"
 BRANCH ?= "master"
 
 SRC_URI = "git://gitorious.org/matrix-gui-v2/refresh-screen.git;protocol=git;branch=${BRANCH}"
