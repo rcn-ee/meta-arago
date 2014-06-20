@@ -12,6 +12,7 @@ FILESEXTRAPATHS_append := "${THISDIR}/wpa-supplicant:"
 
 # Tag: ol_r8.a8.10
 SRCREV = "257ab333aad993b4be81808524bc0d939c276058"
+BRANCH = "mbss_suspend"
 PR_append = "b+gitr${SRCPV}"
 
 # Add ti to the PV to indicate that this is a TI modify version of wpa-supplicant.
