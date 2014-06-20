@@ -614,7 +614,7 @@ do_sdk_image () {
     mv ${IMAGE_ROOTFS}/etc ${IMAGE_ROOTFS}/.etc
 
     # Create the image directory symlinks
-    ${@get_imagecmds(d)}
+    # $ { @ get_imagecmds(d) }
 }
 
 license_create_manifest() {
