@@ -1,9 +1,9 @@
 # Set *target* toolchain preferences at global distro level.
 # Cross and SDK toolchain preferences are set in toolchain-*.inc files
-GCCVERSION ?= "4.7%"
-BINUVERSION ?= "2.23%"
-EGLIBCVERSION ?= "2.17%"
-LINUXLIBCVERSION ?= "3.10"
+GCCVERSION ?= "4.8%"
+BINUVERSION ?= "2.24%"
+EGLIBCVERSION ?= "2.19%"
+LINUXLIBCVERSION ?= "3.14"
 
 PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
 PREFERRED_VERSION_gcc-runtime ?= "${GCCVERSION}"
@@ -21,7 +21,7 @@ include conf/distro/include/qt5-versions.inc
 PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
 # Use the latest version of libdrm
-PREFERRED_VERSION_libdrm = "2.4.46"
+PREFERRED_VERSION_libdrm = "2.4.52"
 
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
@@ -68,10 +68,8 @@ PREFERRED_VERSION_u-boot = "2014.04+2014.07-rc3"
 PREFERRED_PROVIDER_virtual/bootloader_keystone = "u-boot-keystone"
 PREFERRED_PROVIDER_u-boot_keystone = "u-boot-keystone"
 
-PREFERRED_VERSION_linux-libc-headers_am335x-evm = "3.10"
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
 
-PREFERRED_VERSION_linux-libc-headers_am437x-evm = "3.10"
 PREFERRED_PROVIDER_virtual/kernel_am437x-evm = "linux-ti-staging"
 
 PREFERRED_VERSION_linux-libc-headers_am180x-evm = "2.6.37.2"
