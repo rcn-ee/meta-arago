@@ -2,11 +2,6 @@
 TCMODE = "default"
 TCLIBC = "eglibc"
 
-DEFAULTTUNE = "cortexa8thf-neon"
-DEFAULTTUNE_omap-a15 = "cortexa15thf-neon"
-DEFAULTTUNE_keystone = "cortexa15thf-neon"
-DEFAULTTUNE_omap4 = "cortexa9thf-neon"
-
 # Match some of the external vars
 TOOLCHAIN_SYS := "${TARGET_SYS}"
 TOOLCHAIN_PREFIX := "${TARGET_PREFIX}"
