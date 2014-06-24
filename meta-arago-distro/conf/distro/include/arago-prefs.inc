@@ -98,3 +98,7 @@ PREFERRED_VERSION_gettext = "0.16.1"
 PREFERRED_PROVIDER_wpa-supplicant = "wpa-supplicant"
 PREFERRED_PROVIDER_wpa-supplicant_ti33x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_ti43x = "wpa-supplicant-wl18xx"
+
+def filter_out(f, str, d):
+    from re import match
+    return " ".join(filter(lambda x: not match(f, x, 0), str.split()))
