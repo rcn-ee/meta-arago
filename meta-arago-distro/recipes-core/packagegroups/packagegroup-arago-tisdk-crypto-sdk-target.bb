@@ -8,9 +8,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 CRYPTO_API = "ocf-linux-dev"
 
-CRYPTO_API_ti33x = "cryptodev-dev"
-CRYPTO_API_ti43x = "cryptodev-dev"
-CRYPTO_API_dra7xx-evm = "cryptodev-dev"
+CRYPTO_API_ti33x = "cryptodev-module-dev"
+CRYPTO_API_ti43x = "cryptodev-module-dev"
+CRYPTO_API_dra7xx-evm = "cryptodev-module-dev"
 
 RDEPENDS_${PN} = "\
     openssl-dev \
