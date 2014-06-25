@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r16"
+PR = "r17"
 
 inherit packagegroup
 
@@ -18,6 +18,7 @@ UTILS = " \
     openssh-sftp-server \
     ptpd \
     libdrm-kms \
+    ${@base_contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
 "
 
 UTILS_UBOOT_FW = "u-boot-fw-utils"
