@@ -19,7 +19,7 @@ TOOLCHAIN_CLEANUP_PACKAGES = "libgnutls-dev libgnutls-extra26 libgnutls-openssl2
 DTB_FILTER = "unknown"
 DTB_FILTER_ti33x = "am335x"
 DTB_FILTER_omap5-evm = "omap5"
-DTB_FILTER_dra7xx-evm = "dra7"
+DTB_FILTER_dra7xx = "dra7"
 DTB_FILTER_ti43x = "am43"
 DTB_FILTER_keystone = "k2hk"
 

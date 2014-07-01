@@ -14,7 +14,7 @@ VIDEO_FILES_append_beagleboard = "video_vga"
 VIDEO_FILES_append_am3517-evm  = "video_wqvga"
 VIDEO_FILES_append_am335x-evm  = "video_wvga \
 				                  video_wqvga"
-VIDEO_FILES_append_dra7xx-evm  = "video_wvga"
+VIDEO_FILES_append_dra7xx  = "video_wvga"
 
 SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/564/5179/amsdk-av-files_${PV}.tar.gz;name=avfilestarball"
 

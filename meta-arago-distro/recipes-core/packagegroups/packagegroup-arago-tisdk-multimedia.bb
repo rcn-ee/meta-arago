@@ -39,10 +39,16 @@ MULTIMEDIA_append_am3517-evm = " \
 "
 
 ACCEL_FW = ""
-ACCEL_FW_append_omap-a15 = " \
+ACCEL_FW_append_am57xx-evm = " \
     ipumm-fw \
     "
+
+ACCEL_FW_append_omap5-evm = " \
+    ipumm-fw \
+    "
+
 ACCEL_FW_append_dra7xx-evm = " \
+    ipumm-fw \
     dspdce-fw \
     vis \
     "

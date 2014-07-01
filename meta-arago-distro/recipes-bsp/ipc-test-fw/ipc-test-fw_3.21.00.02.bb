@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 FWVER = "eng-4-gb9283b0"
 PR = "r0+${FWVER}"
 
-COMPATIBLE_MACHINE = "omap5-evm|dra7xx-evm"
+COMPATIBLE_MACHINE = "omap5-evm|dra7xx"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INSANE_SKIP_${PN} = "arch"
@@ -20,7 +20,7 @@ SRC_URI[md5sum] = "4fcba6844949ea909131684a80233800"
 SRC_URI[sha256sum] = "3b90b195c382937551251055aaa9185627e86027c91fb41a594dc390391d5fb6"
 
 FW_FILES_omap5-evm = "tesla-dsp.xe64T ducati-m3-core0.xem3"
-FW_FILES_dra7xx-evm = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66 dra7-ipu1-fw.xem4 dra7-ipu2-fw.xem4"
+FW_FILES_dra7xx = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66 dra7-ipu1-fw.xem4 dra7-ipu2-fw.xem4"
 
 do_compile() {
     :

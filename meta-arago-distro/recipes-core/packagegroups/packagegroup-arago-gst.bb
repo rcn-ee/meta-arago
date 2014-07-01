@@ -16,7 +16,7 @@ GSTREAMER = " \
 
 GSTREAMER_ACCEL_MM = ""
 GSTREAMER_ACCEL_MM_omap-a15 = "gst-plugins-ducati"
-GSTREAMER_ACCEL_MM_append_dra7xx-evm = " gst-plugins-vpe"
+GSTREAMER_ACCEL_MM_append_dra7xx = " gst-plugins-vpe"
 
 RDEPENDS_${PN} = "\
     ${GSTREAMER} \

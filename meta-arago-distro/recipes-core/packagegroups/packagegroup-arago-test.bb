@@ -22,6 +22,7 @@ ARAGO_TEST = "\
     yavta \
     "
 
+ARAGO_TI_TEST_am57xx-evm = ""
 ARAGO_TI_TEST = "\
     ltp-ddt \
     input-utils \
@@ -36,7 +37,7 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     bvtest \
     "
 
-ARAGO_TI_TEST_append_dra7xx-evm = " \
+ARAGO_TI_TEST_append_dra7xx = " \
     vpe-vpdma \
     "
 

@@ -80,7 +80,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            cryptodev \
 "
 
-MAKEFILES_append_dra7xx-evm = " cryptodev"
+MAKEFILES_append_dra7xx = " cryptodev"
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
@@ -101,7 +101,7 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
 KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb"
 KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
 KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
-KERNEL_DEVICETREE_dra7xx-evm = "dra7-evm.dtb"
+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb"
 
 # This step will stitch together the final Makefile based on the supported
 # make targets.
