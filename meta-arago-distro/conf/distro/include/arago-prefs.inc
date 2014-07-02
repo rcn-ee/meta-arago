@@ -59,10 +59,9 @@ PREFERRED_PROVIDER_virtual/libgles2_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
 
-# Use the mainline u-boot recipe for TI devices unless overridden below
-PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-PREFERRED_PROVIDER_u-boot = "u-boot"
-PREFERRED_VERSION_u-boot = "2014.04+2014.07-rc3"
+# Use the u-boot staging recipe for TI devices unless overridden below
+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
 
 # Use latest TI staging kernel and u-boot trees
 PREFERRED_PROVIDER_virtual/bootloader_keystone = "u-boot-keystone"
