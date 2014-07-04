@@ -18,6 +18,7 @@ DEPENDS_append_ti33x_class-target = " cryptodev"
 DEPENDS_append_ti43x_class-target = " cryptodev"
 DEPENDS_append_dra7xx-evm_class-target = " cryptodev"
 DEPENDS_append_am57xx-evm_class-target = " cryptodev"
+DEPENDS_append_keystone_class-target = " cryptodev"
 
 python __anonymous () {
     crypdep = d.getVar("DEPENDS").replace("ocf-linux ", "")
@@ -25,6 +26,7 @@ python __anonymous () {
     d.setVar("DEPENDS_ti43x_class-target", crypdep)
     d.setVar("DEPENDS_dra7xx-evm_class-target", crypdep)
     d.setVar("DEPENDS_am57xx-evm_class-target", crypdep)
+    d.setVar("DEPENDS_keystone_class-target", crypdep)
 }
 
 CRYPTODEV_AFALG_PATCHES = " \
@@ -39,6 +41,7 @@ SRC_URI_append_ti33x_class-target = "${CRYPTODEV_AFALG_PATCHES}"
 SRC_URI_append_ti43x_class-target = "${CRYPTODEV_AFALG_PATCHES}"
 SRC_URI_append_dra7xx-evm_class-target = "${CRYPTODEV_AFALG_PATCHES}"
 SRC_URI_append_am57xx-evm_class-target = "${CRYPTODEV_AFALG_PATCHES}"
+SRC_URI_append_keystone_class-target = "${CRYPTODEV_AFALG_PATCHES}"
 
 # Override do_configure to replace target with linux-armv4 to enable ASM code
 # optimization for ARM arch (including armv7) for extra performance
