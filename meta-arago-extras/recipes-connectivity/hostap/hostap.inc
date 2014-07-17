@@ -1,5 +1,5 @@
 # This is a TI specific version of the hostap-daemon recipe for use with the
-# wl12xx wlan and bluetooth module.
+# wl18xx wlan module
 
 HOMEPAGE = "http://hostap.epitest.fi"
 DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
@@ -11,15 +11,14 @@ DEPENDS = "libnl openssl"
 # default
 DEFAULT_PREFERENCE = "-1"
 
-PR = "r5"
+PR = "r6"
 
 inherit update-rc.d
 INITSCRIPT_NAME="hostapd"
 
 CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
 
-SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git;branch=${BRANCH} \
-           file://0001-hostapd-change-conf-file-for-better-oob-startup.patch;patchdir=.. \
+SRC_URI = "git://git.ti.com/wilink8-wlan/hostap.git;protocol=git;branch=${BRANCH} \
            file://defconfig \
 	       file://init"
 
