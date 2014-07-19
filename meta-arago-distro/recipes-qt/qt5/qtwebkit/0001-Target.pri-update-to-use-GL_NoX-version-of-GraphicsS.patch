@@ -1,0 +1,29 @@
+From 90de2ab42bdd51b92dd00f700d6766ca1ffd23c0 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Thu, 17 Jul 2014 16:11:46 -0400
+Subject: [PATCH] Target.pri: update to use GL_NoX version of GraphicsSurface
+ sources
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ Source/WebCore/Target.pri | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/Source/WebCore/Target.pri b/Source/WebCore/Target.pri
+index e2044bc..cc9bdd4 100644
+--- a/Source/WebCore/Target.pri
++++ b/Source/WebCore/Target.pri
+@@ -4283,6 +4283,10 @@ use?(GRAPHICS_SURFACE) {
+             platform/graphics/surfaces/glx/X11Helper.cpp \
+             platform/graphics/surfaces/glx/GraphicsSurfaceGLX.cpp
+     }
++    contains(QT_CONFIG, opengles2) {
++        SOURCES -= platform/graphics/surfaces/qt/GraphicsSurfaceGLX.cpp
++        SOURCES += platform/graphics/surfaces/qt/GraphicsSurfaceGL_NoX.cpp
++    }
+ }
+ 
+ build?(qttestsupport) {
+-- 
+2.0.0
+
