@@ -1,8 +1,9 @@
 DESCRIPTION = "Ethernet example applications"
 HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
-LICENSE = "CC-BY-SA & GPLv2+"
 
 require matrix-gui-apps-git.inc
+
+LICENSE = "CC-BY-SA-3.0 & GPLv2+"
 
 LIC_FILES_CHKSUM := "file://../${LICENSE_CHECKSUM} \
                      file://../../udhcpd_eth1.conf;beginline=1;endline=14;md5=70668b1ed5416406a61ef9abdd90d601 \
