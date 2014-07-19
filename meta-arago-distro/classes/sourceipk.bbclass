@@ -61,32 +61,108 @@ SRCIPK_INCLUDE_EXTRAFILES ?= "1"
 
 SRCIPK_PRESERVE_GIT ?= "false"
 
-adjust_git() {
+# Create a shallow clone of the git repository to reduce the size of
+# the sourceipk
+SRCIPK_SHALLOW_CLONE ?= "false"
 
+# This function will return the fetch URL for a git repository passed as
+# the first parameter.
+get_remote() {
+    git_repo="$1"
+
+    if [ "$git_repo" == "" ]
+    then
+        echo "git_repo not passed to get_remote"
+        exit 1
+    fi
+
+    cd $git_repo
+
+    # Get the remote repository fetch URL
+    remote=`git remote -v | grep "(fetch)" | cut -d ' ' -f 1   | cut -c 7- | tr -d ' '`
+
+    # Since the echo'ed value of this statment is the returned value redirect
+    # the output of this command to /dev/null
+    cd - > /dev/null
+
+    # echo back the remote repository URL as the output of this function
+    echo $remote
+
+    return 0
+}
+
+# Some git repositories are very large and we do not want to ship the
+# full history.  Instead we want to limit history to reduce the size while
+# still keeping the git repository in place.  The full history can be
+# fetched using git pull --unshallow or just git pull
+# NOTE: This function depends on a git version >= 1.7.10.  It will work
+#       with older versions but the size will be larger because rather
+#       than just a single branch the limited history will be a depth of
+#       1 for all branches and tags.
+limit_git_history() {
+    # By default limit the history to 1 commit since the user can always
+    # use git pull --unshallow to fetch the rest of history.  The depth
+    # level of 1 is set to keep from tracking through all merges and
+    # pulling excess history
+    commits="1"
+
+    # Temporary directory to make shallow clones in
+    gitshallowclone="${WORKDIR}/temp-git-shallow-clone"
+
+    # Change directory to the git repository to be safe
+    cd $tmp_dir/${SRCIPK_INSTALL_DIR}
+
+    # Create a temporary directory to hold the shallow git clone
+    mkdir -p $gitshallowclone
+
+    remote=`get_remote $PWD`
+
+    git clone --depth $commits --branch ${BRANCH} file://$remote $gitshallowclone
+
+    # remove original kernel clone since we will replace it with the shallow
+    # clone
+    rm -rf $tmp_dir/${SRCIPK_INSTALL_DIR}/.git
+
+    # replace the original kernel git data with the shallow clone git data
+    mv $gitshallowclone/.git $tmp_dir/${SRCIPK_INSTALL_DIR}/
+    rm -rf $gitshallowclone
+
+    cd -
+}
+
+adjust_git() {
     orig_dir="$PWD"
 
     cd $tmp_dir/${SRCIPK_INSTALL_DIR}
 
     if [ -d ".git" ]
     then
+        # Get the location of the local repository
+        local_repo=`get_remote $PWD`
 
-        # Grab path to cloned local repository
-        old=`git remote -v | grep "(fetch)" | cut -d ' ' -f 1   | cut -c 7- | tr -d ' '`
-
-        if [ -d $old -a "${SRCIPK_PRESERVE_GIT}" = "true" ]
+        if [ -d $local_repo -a "${SRCIPK_PRESERVE_GIT}" = "true" ]
         then
-            cd $old
+            cd $local_repo
+
+            # If SRCIPK_SHALLOW_CLONE is true then make a shallow copy of the
+            # git repository and then fix up the git URLs
+            if [ "${SRCIPK_SHALLOW_CLONE}" == "true" ]
+            then
+                limit_git_history
+            fi
 
             # Grab actual url used to create the repository
-            orig=`git remote -v | grep "(fetch)" | cut -d ' ' -f 1   | cut -c 7- | tr -d ' '`
+            remote_repo=`get_remote $PWD`
 
             cd -
 
-            git remote set-url origin $orig $old
+            git remote set-url origin $remote_repo $local_repo
 
-            # Repackage the repository so its a proper clone of the original (remote) git repository
+            # Repackage the repository so its a proper clone of the original
+            # (remote) git repository
             git repack -a -d
-            rm .git/objects/info/alternates
+
+            rm -f .git/objects/info/alternates
 
         else
             rm -rf .git
@@ -95,7 +171,6 @@ adjust_git() {
     fi
 
     cd $orig_dir
-
 }
 
 # Create a README file that describes the contents of the source ipk
