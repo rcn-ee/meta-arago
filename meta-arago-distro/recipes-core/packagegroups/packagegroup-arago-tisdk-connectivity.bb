@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r25"
+PR = "r26"
 
 inherit packagegroup
 
@@ -35,7 +35,7 @@ FIRMWARE_AND_DRIVERS = "\
 "
 
 DEMO_APPS = "\
-    wpa-gui-e \
+    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
 "
 
 BLUETOOTH_STACK = "\
