@@ -5,7 +5,7 @@ require arago-base-tisdk-image.bb
 IMAGE_INSTALL += "\
     packagegroup-arago-test \
     ${@base_contains('MACHINE_FEATURES','sgx','packagegroup-arago-tisdk-graphics','',d)} \
-    ${@base_conditional('QT_PROVIDER','qt5','packagegroup-arago-tisdk-qt5','packagegroup-arago-tisdk-qte',d)} \
+    packagegroup-arago-tisdk-qte \
     packagegroup-arago-tisdk-addons \
     packagegroup-arago-tisdk-connectivity \
     packagegroup-arago-tisdk-crypto \
