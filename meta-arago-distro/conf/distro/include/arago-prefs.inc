@@ -25,7 +25,7 @@ PREFERRED_VERSION_libdrm = "2.4.52"
 
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
-ARAGO_QT_PROVIDER = "${@base_contains('QT_PROVIDER','qt5','',base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d),d)}"
+ARAGO_QT_PROVIDER = "${@base_conditional('QT_PROVIDER','qt5','',base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d),d)}"
 PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
 
 PREFERRED_VERSION_qt4-embedded = "4.8.5"
