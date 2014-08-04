@@ -5,4 +5,6 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago2"
+INITSCRIPT_PARAMS_udev = "start 04 S ."
+
+PR_append = "-arago3"
