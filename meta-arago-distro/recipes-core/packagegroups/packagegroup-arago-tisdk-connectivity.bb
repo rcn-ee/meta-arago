@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r26"
+PR = "r27"
 
 inherit packagegroup
 
@@ -31,6 +31,7 @@ WLAN_COMMON = "\
 #    netperf
 
 FIRMWARE_AND_DRIVERS = "\
+    ti-compat-wireless-wl18xx \
     wl18xx-firmware \
 "
 
