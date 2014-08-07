@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r29"
+PR = "r30"
 
 inherit packagegroup
 
@@ -77,8 +77,7 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-multimedia-demo-mpeg4aacdec \
     matrix-multimedia-demo-mpeg4dec \
                                     \
-    matrix-gui-apps-dual-camera     \
-    matrix-gui-apps-image-gallery   \
+    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'matrix-gui-apps-dual-camera matrix-gui-apps-image-gallery', d)} \
                                     \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \

@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 inherit packagegroup
 
@@ -18,8 +18,7 @@ MULTIMEDIA_append_ti33x = " \
 
 MULTIMEDIA_append_ti43x = " \
     amsdk-av-files \
-    dual-camera-demo \
-    image-gallery \
+    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'dual-camera-demo image-gallery', d)} \
 "
 
 MULTIMEDIA_append_omap-a15 = " \
