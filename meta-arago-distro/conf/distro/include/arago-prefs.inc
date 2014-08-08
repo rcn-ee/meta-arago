@@ -76,6 +76,10 @@ PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader_am437x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am437x-evm = "u-boot-ti-staging"
+
+PREFERRED_PROVIDER_virtual/bootloader_omap-a15 = "u-boot-ti-staging"
+PREFERRED_PROVIDER_u-boot_omap-a15 = "u-boot-ti-staging"
+
 PREFERRED_VERSION_u-boot-ti-staging = "2014.07%"
 
 # Pin down udev version from oe-core, as meta-oe pulls in newer systemd-enhanced version
