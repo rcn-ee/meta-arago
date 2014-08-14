@@ -1,3 +1,3 @@
-PR_append = "-arago0"
+PR_append = "-arago1"
 
-QT_MODULE_BRANCH = "5.3"
+QT_MODULE_BRANCH = "5.4"
