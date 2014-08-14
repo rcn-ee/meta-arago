@@ -10,32 +10,22 @@
 # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-tsfile=/etc/pointercal
-export TSLIB_TSDEVICE=/dev/input/touchscreen0
-
 # First let's check if we even see a touchscreen device node.  If not
 # then bail out.
-if [ ! -e $TSLIB_TSDEVICE ]
+if [ ! -e /dev/input/touchscreen0 ]
 then
     exit
 fi
 
-# Check if the SD card is mounted and the first partition is
-# vfat.  If so let's write the pointercal file there so that if
-# someone messes up calibration they can just delete the file from
-# any system and reboot the board.
+# Import Important System Environment Variables
+SCRIPTS=/etc/profile.d/*.sh
 
-#TODO how can we find the SD card and not eMMC?  can we look for a "boot"
-# LABEL?
-mount | grep /run/media/mmcblk0p1 | grep vfat > /dev/null 2>&1
-if [ "$?" = "0" ]
-then
-    tsfile=/run/media/mmcblk0p1/pointercal
-fi
+for f in $SCRIPTS
+do
+    source $f
+done
 
-export TSLIB_CALIBFILE=$tsfile
-
-if [ ! -f $tsfile ] ; then
+if [ ! -f $TSLIB_CALIBFILE ] ; then
     echo -n "Calibrating touchscreen (first time only)"
     ts_calibrate
     echo "."
@@ -45,8 +35,8 @@ if [ ! -f $tsfile ] ; then
     # that running other applications that look for /etc/pointercal and
     # without TSLIB_CALIBFILE set will still get the right calibration.
     # TODO: can we just globally export TSLIB_CALIBFILE?
-    if [ ! -f /etc/pointercal -a -f $tsfile ]
+    if [ ! -f /etc/pointercal -a -f $TSLIB_CALIBFILE ]
     then
-        cp $tsfile /etc/pointercal
+        cp $TSLIB_CALIBFILE /etc/pointercal
     fi
 fi
