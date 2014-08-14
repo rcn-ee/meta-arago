@@ -1,33 +1,22 @@
 #! /bin/sh
 
 matrixgui="/usr/bin/matrix_browser"
-ROTATION=__MATRIX_ROT__
-GUI_OPTS="-qws $ROTATION http://localhost:80/"
+GUI_OPTS="http://localhost:80/ __MATRIX_FLAGS__"
 PIDFILE="/var/run/matrix-gui-2.0.pid"
+
+# Important System Environment Variables
+SCRIPTS=/etc/profile.d/*.sh
+
+for f in $SCRIPTS
+do
+    source $f
+done
 
 test -x "$matrixgui" || exit 0
 
-export TSLIB_TSDEVICE=/dev/input/touchscreen0
-export QWS_MOUSE_PROTO=Auto
-
 case "$1" in
   start)
-    chvt 4
-
-    # ARM9 devices get a lot of alignment trap errors with the current
-    # version of Qt (4.7.2) that we use.  The printing of these messages
-    # is causing a severe slowdown with matrix and other Qt applications
-    # that matrix launches.  The root cause is under investigation and an
-    # issue is being filed in the Qt JIRA tracker.  For now using the
-    # following command will do a software fixup of the alignment trap errors
-    # in the kernel.  This should have no impact on cortex-A8 devices.
-    echo 2 > /proc/cpu/alignment
-
-    # Set the QWS_MOUSE_PROTO for touchscreen if it exists
-    if [ -e /dev/input/touchscreen0 ]
-    then
-        export QWS_MOUSE_PROTO=Tslib:/dev/input/touchscreen0
-    fi
+#    chvt 4
 
     #Clear out the the tmp and lock directory
     cd __MATRIX_WEB_DIR__
