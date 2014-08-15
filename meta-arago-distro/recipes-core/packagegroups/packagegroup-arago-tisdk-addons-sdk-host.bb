@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -18,6 +18,10 @@ UTILS_append_am180x-evm = " \
 "
 
 UTILS_append_omap-a15 = " \
+    omapconf-src \
+"
+
+UTILS_append_ti33x = " \
     omapconf-src \
 "
 
