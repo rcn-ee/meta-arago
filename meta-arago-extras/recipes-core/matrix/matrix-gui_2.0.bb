@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a886c9ef769b2d8271115d2502512e5d"
 
 SECTION = "multimedia"
 
-PR = "r18"
+PR = "r19"
 
 INITSCRIPT_NAME = "matrix-gui-2.0"
 INITSCRIPT_PARAMS = "defaults 97"
@@ -27,7 +27,6 @@ require matrix-gui-paths.inc
 S = "${WORKDIR}/git"
 
 MATRIX_FLAGS = "${@base_conditional('QT_PROVIDER','qt5','','-qws',d)}"
-MATRIX_FLAGS_append_am37x-evm = "-display transformed:Rot90"
 
 do_install(){
 	install -d ${D}${MATRIX_BASE_DIR}
