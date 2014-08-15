@@ -1,7 +1,7 @@
 # Common file for patches or tweaks that are needed by qt4-embedded and
 # qt4-embedded-gles
 
-PR := "${PR}-arago7"
+PR := "${PR}-arago8"
 
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
@@ -18,3 +18,8 @@ SRC_URI += "file://0001-PATCH-make-demos-maximized-for-TISDK-use.patch \
             file://0002-qwslock-messages.patch \
             file://qte.sh \
 "
+
+# Rotate the display only for am37x_evm
+do_install_prepend_am37x-evm () {
+    echo "export QWS_DISPLAY="transformed:Rot90" >> ${WORKDIR}/qte.sh
+}
