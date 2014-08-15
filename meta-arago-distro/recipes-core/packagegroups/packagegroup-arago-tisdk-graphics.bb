@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r4"
+PR = "r5"
 
 inherit packagegroup
 
@@ -22,6 +22,7 @@ GRAPHICS_RDEPENDS_ti33x = "\
     ${GRAPHICS_SDK} \
     weston \
     weston-init \
+    weston-examples \
 "
 
 GRAPHICS_RDEPENDS_ti43x = "\
