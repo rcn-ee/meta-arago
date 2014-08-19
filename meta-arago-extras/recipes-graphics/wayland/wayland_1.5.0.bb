@@ -10,12 +10,17 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1d4476a7d98dd5691c53d4d43a510c72 \
                     file://src/wayland-server.c;endline=21;md5=079ae21dbf98ada52ec23744851b0a5c"
 
-SRC_URI = "http://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "1d882776b27329b91d2d500b6d66dd1d"
-SRC_URI[sha256sum] = "0069e1e9af888b3e05384380ad8cc6c976ea3e81d08ba19b7675ce1d693a41b5"
+BRANCH = "master"
+SRCREV = "3ac62cd6b6012f40e37b1bd7fc1e8178585905ca"
+
+SRC_URI = "git://anongit.freedesktop.org/wayland/wayland;protocol=git;branch=${BRANCH}"
+
 SRC_URI_append_class-native = " \
     file://disable-macro-checks-not-used-for-scanner.patch \
     "
+
+S = "${WORKDIR}/git"
+
 EXTRA_OECONF_class-native = "--disable-documentation --enable-scanner"
 
 inherit autotools pkgconfig

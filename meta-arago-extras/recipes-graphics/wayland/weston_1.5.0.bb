@@ -5,15 +5,18 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=275efac2559a224527bd4fd593d38466 \
                     file://src/compositor.c;endline=23;md5=aa98a8db03480fe7d500d0b1f4b8850c"
 
-SRC_URI = "http://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
+BRANCH = "master"
+SRCREV = "880193622024d7dc2b36421251d97b08da324570"
+
+SRC_URI = "git://anongit.freedesktop.org/wayland/weston;protocol=git;branch=${BRANCH} \
            file://weston.png \
            file://weston.desktop \
            file://disable-wayland-scanner-pkg-check.patch \
            file://make-lcms-explicitly-configurable.patch \
            file://make-libwebp-explicitly-configurable.patch \
 "
-SRC_URI[md5sum] = "8eb40d230efc2411f083c20656534780"
-SRC_URI[sha256sum] = "06388ba04ac79aa72d685cc1a8e646ddb2b8cfe11fcc742294f9addac48b7684"
+
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig useradd
 
