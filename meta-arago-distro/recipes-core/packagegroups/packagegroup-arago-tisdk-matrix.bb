@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r30"
+PR = "r31"
 
 inherit packagegroup
 
@@ -28,7 +28,7 @@ MATRIX_COMMON_APPS = "              \
 "
 
 MATRIX_QT_APPS = "                  \
-    matrix-gui-qt4-demos            \
+    ${@base_conditional('QT_PROVIDER', 'qt5', 'matrix-gui-qt5-demos', 'matrix-gui-qt4-demos', d)} \
     matrix-gui-thermostat-demo      \
     ${@base_conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','matrix-gui-apps-quick-playground','', d)} \
 "
