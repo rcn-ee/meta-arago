@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r32"
+PR = "r33"
 
 inherit packagegroup
 
@@ -66,7 +66,6 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
                                     \
-    matrix-gui-wifi-demos           \
     ts-calibrate-init \
 "
 
@@ -83,7 +82,6 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
     matrix-gui-clocks               \
-    matrix-gui-wifi-demos           \
     matrix-gui-pm-demos-governor    \
     ts-calibrate-init \
 "
