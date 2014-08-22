@@ -1,7 +1,7 @@
 DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
 
-PR = "r7"
+PR = "r8"
 
 inherit packagegroup
 
@@ -62,6 +62,7 @@ QT5_DEV = " \
         qtsensors-dev \
         qtsvg-dev \
         qtxmlpatterns-dev \
+        qtquick1-dev \
 "
 
 RDEPENDS_${PN} += " \

@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -33,6 +33,7 @@ QT5_ESSENTIALS = "\
     qtmultimedia-plugins \
     qtwayland-plugins \
     qt3d \
+    qtquick1 \
 "
 
 RDEPENDS_${PN} = "\
