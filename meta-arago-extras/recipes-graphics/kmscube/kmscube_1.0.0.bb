@@ -3,7 +3,7 @@ HOMEPAGE = "http://git.ti.com"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://kmscube.c;beginline=1;endline=23;md5=e760965096e52da8f3969dd53b6bf158"
 
-DEPENDS = "libdrm libgbm-glsdk omap5-sgx-ddk-um-linux"
+DEPENDS = "libdrm libgbm omap5-sgx-ddk-um-linux"
 
 COMPATIBLE_MACHINE = "omap-a15"
 
