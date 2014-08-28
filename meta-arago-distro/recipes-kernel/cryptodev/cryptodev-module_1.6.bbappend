@@ -1,6 +1,6 @@
-PR_append = "-arago1"
+PR_append = "-arago2"
 
-module_autoload_cryptodev-module = "cryptodev-module"
+module_autoload_cryptodev = "cryptodev-module"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
