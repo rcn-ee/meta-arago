@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r28"
+PR = "r29"
 
 inherit packagegroup
 
@@ -31,11 +31,9 @@ WLAN_COMMON = "\
 #    netperf
 
 FIRMWARE_AND_DRIVERS = "\
+    ti-compat-wireless-wl18xx \
     wl18xx-firmware \
 "
-
-# Disable for now until conflict with kernel resolved
-#    ti-compat-wireless-wl18xx
 
 DEMO_APPS = "\
     ${@base_conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
