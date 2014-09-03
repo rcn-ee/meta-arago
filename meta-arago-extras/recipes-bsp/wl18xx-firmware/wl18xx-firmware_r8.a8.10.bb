@@ -13,7 +13,7 @@ RCONFLICTS_${PN} += "wl12xx-firmware"
 
 # Tag: ol_r8.a8.10
 SRCREV = "89dc93a5c23fd69ebacd64c936ba5aabf173c29b"
-SRC_URI = "git://github.com/TI-OpenLink/wl18xx_fw.git;protocol=git \
+SRC_URI = "git://github.com/TI-OpenLink/wl18xx_fw.git;protocol=git;branch=mbss \
            file://0001-Add-Makefile-for-SDK.patch \
           "
 
