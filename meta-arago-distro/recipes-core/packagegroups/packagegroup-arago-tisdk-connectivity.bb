@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r24"
+PR = "r25"
 
 inherit packagegroup
 
@@ -24,6 +24,7 @@ WLAN_COMMON = "\
     crda \
     hostap-daemon-wl18xx \
     ti-wifi-utils-wl18xx \
+    wl18xx-target-scripts \
 "
 
 # netperf has non-standard license, needs verifying
