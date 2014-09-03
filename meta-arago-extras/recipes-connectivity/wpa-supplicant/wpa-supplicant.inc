@@ -16,7 +16,7 @@ DEFAULT_PREFERENCE = "-1"
 
 PR = "r6"
 
-SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
+SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git;branch=${BRANCH} \
            file://defconfig \
            file://defaults-sane \
            file://wpa-supplicant.sh \
