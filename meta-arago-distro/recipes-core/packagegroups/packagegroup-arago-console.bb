@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -67,7 +67,7 @@ ARAGO_SDK_PREREQ = "\
 
 ARAGO_CONSOLE = "\
     ${ARAGO_ALSA_EXTRA} \
-    ${ARAGO_TSLIB} \
+    ${@base_conditional('QT_PROVIDER', 'qt5', '', '${ARAGO_TSLIB}', d)} \
     ${ARAGO_NCURSES} \
     ${ARAGO_FSTOOLS} \
     ${ARAGO_UTILS} \

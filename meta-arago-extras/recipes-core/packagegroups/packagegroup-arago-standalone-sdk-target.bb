@@ -1,5 +1,5 @@
 DESCRIPTION = "Target packages for the standalone SDK"
-PR = "r5"
+PR = "r6"
 LICENSE = "MIT"
 
 inherit packagegroup
@@ -25,7 +25,7 @@ RDEPENDS_${PN} = "\
     libopkg-dev \
     libpng-dev \
     readline-dev \
-    tslib-dev \
+    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'tslib-dev', d)} \
     libusb-compat-dev \
     libusb1-dev \
     zlib-dev \
