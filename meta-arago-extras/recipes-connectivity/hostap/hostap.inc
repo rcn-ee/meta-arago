@@ -18,7 +18,7 @@ INITSCRIPT_NAME="hostapd"
 
 CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
 
-SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git \
+SRC_URI = "git://github.com/TI-OpenLink/hostap.git;protocol=git;branch=${BRANCH} \
            file://0001-hostapd-change-conf-file-for-better-oob-startup.patch;patchdir=.. \
            file://defconfig \
 	       file://init"
