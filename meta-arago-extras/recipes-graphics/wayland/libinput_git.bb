@@ -8,10 +8,10 @@ inherit autotools pkgconfig
 
 DEPENDS = "libevdev udev mtdev"
 
-PR = "r1"
+PR = "r2"
 
 BRANCH = "master"
-SRCREV = "bb10ec84d3704fc0fb40591bcbffe90f6c77966d"
+SRCREV = "0647574c46e5e930063ace7b35385213dca33dc1"
 
 PV = "0.5.0"
 
