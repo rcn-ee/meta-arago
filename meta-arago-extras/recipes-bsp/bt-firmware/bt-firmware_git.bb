@@ -11,13 +11,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
-PR = "r5+gitr${SRCPV}"
+PR = "r6+gitr${SRCPV}"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
 
 SRCREV = "e08f59b41b6145b6baf1cb68bca018233ab5e93a"
 SRC_URI = "git://github.com/TI-ECS/bt-firmware.git;protocol=git \
-           file://0001-Makefile-allow-building-within-the-OE.patch"
+           file://0001-Makefile-allow-building-within-the-OE.patch \
+           file://0001-bt-firmware-Remove-platform-check-and-install-defaul.patch"
 
 PLATFORM = "unknown"
 PLATFORM_ti33x = "am335x-evm"
