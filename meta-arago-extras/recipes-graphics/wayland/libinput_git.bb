@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=673e626420c7f859fbe2be3a9c13632d"
 
 inherit autotools pkgconfig
 
-DEPENDS = "libevdev udev"
+DEPENDS = "libevdev udev mtdev"
 
-PR = "r0"
+PR = "r1"
 
 BRANCH = "master"
 SRCREV = "bb10ec84d3704fc0fb40591bcbffe90f6c77966d"
@@ -18,5 +18,3 @@ PV = "0.5.0"
 SRC_URI = "git://anongit.freedesktop.org/wayland/libinput;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
-
-
