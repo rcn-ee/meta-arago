@@ -1,0 +1,31 @@
+From ae54be549e6ebeef829d5c1089d5307d00d0b791 Mon Sep 17 00:00:00 2001
+From: Shawn Rutledge <shawn.rutledge@digia.com>
+Date: Mon, 1 Sep 2014 15:30:42 +0200
+Subject: [PATCH] Wayland: correct touch location
+
+The window margins were offsetting the touch point in the wrong
+direction.
+
+Task-number: QTBUG-36602
+Change-Id: Id8b31d2de4051f36d3ff4e088bbc9bd7cc84ca13
+Reviewed-by: Laszlo Agocs <laszlo.agocs@digia.com>
+---
+ src/client/qwaylandinputdevice.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/client/qwaylandinputdevice.cpp b/src/client/qwaylandinputdevice.cpp
+index 4a100f7..014303f 100644
+--- a/src/client/qwaylandinputdevice.cpp
++++ b/src/client/qwaylandinputdevice.cpp
+@@ -921,7 +921,7 @@ void QWaylandInputDevice::handleTouchPoint(int id, double x, double y, Qt::Touch
+ 
+         tp.area = QRectF(0, 0, 8, 8);
+         QMargins margins = win->frameMargins();
+-        tp.area.moveCenter(win->window()->mapToGlobal(QPoint(x+margins.left(), y+margins.top())));
++        tp.area.moveCenter(win->window()->mapToGlobal(QPoint(x - margins.left(), y - margins.top())));
+     }
+ 
+     tp.state = state;
+-- 
+1.7.9.5
+
