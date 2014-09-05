@@ -12,9 +12,7 @@ RDEPENDS_${PN} = "wireless-tools"
 PV = "r8.a9.14"
 inherit module
 
-PR = "${MACHINE_KERNEL_PR}+b+gitr${SRCPV}"
-
-PARALLEL_MAKE = ""
+PR = "${MACHINE_KERNEL_PR}+c+gitr${SRCPV}"
 
 # Tags: ol_r8.a9.14
 SRCREV_wl18xx = "0e48c4b55cfa0d557a098cbe92b1f092f1a9ad67"
