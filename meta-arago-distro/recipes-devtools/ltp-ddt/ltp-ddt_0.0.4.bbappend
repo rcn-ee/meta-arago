@@ -1,4 +1,6 @@
-PR_append = "-arago4+gitr${SRCPV}"
+PR_append = "-arago5+gitr${SRCPV}"
+
+PARALLEL_MAKE = ""
 
 RDEPENDS_${PN} += "linaro-pm-qa-utils"
 

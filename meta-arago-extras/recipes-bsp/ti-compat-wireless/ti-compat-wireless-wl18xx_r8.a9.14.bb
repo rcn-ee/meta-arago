@@ -12,7 +12,9 @@ RDEPENDS_${PN} = "wireless-tools"
 PV = "r8.a9.14"
 inherit module
 
-PR = "${MACHINE_KERNEL_PR}+a+gitr${SRCPV}"
+PR = "${MACHINE_KERNEL_PR}+b+gitr${SRCPV}"
+
+PARALLEL_MAKE = ""
 
 # Tags: ol_r8.a9.14
 SRCREV_wl18xx = "0e48c4b55cfa0d557a098cbe92b1f092f1a9ad67"
@@ -26,7 +28,7 @@ S = "${WORKDIR}/compat-wireless"
 
 SRC_URI = "git://git.ti.com/wilink8-wlan/wl18xx.git;branch=${BRANCH_wl18xx};destsuffix=wl18xx;name=wl18xx \
            git://git.ti.com/wilink8-wlan/backports.git;branch=${BRANCH_backports};destsuffix=backports;name=backports \
- "
+"
 
 export KLIB_BUILD="${STAGING_KERNEL_DIR}"
 export KLIB="${D}"
@@ -41,11 +43,10 @@ do_configure() {
     make defconfig-wl18xx
 
     # Now generate the sourceipk with the properly configured sources
-	sourceipk_do_create_srcipk
+    sourceipk_do_create_srcipk
 }
 
 do_install() {
     # Install modules
     oe_runmake modules_install
 }
-

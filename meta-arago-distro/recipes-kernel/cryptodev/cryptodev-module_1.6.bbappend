@@ -1,4 +1,6 @@
-PR_append = "-arago2"
+PR_append = "-arago3"
+
+PARALLEL_MAKE = ""
 
 module_autoload_cryptodev = "cryptodev-module"
 
