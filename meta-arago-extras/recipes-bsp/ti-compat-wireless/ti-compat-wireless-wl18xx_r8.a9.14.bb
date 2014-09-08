@@ -5,14 +5,14 @@ DESCRIPTION = "ti compat-wireless drivers for wl18xx"
 HOMEPAGE = "https://git.ti.com/wilink8-wlan/wl18xx"
 SECTION = "kernel/modules"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://../backports/COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 RDEPENDS_${PN} = "wireless-tools"
 
 PV = "r8.a9.14"
 inherit module
 
-PR = "${MACHINE_KERNEL_PR}+c+gitr${SRCPV}"
+PR = "${MACHINE_KERNEL_PR}+d+gitr${SRCPV}"
 
 # Tags: ol_r8.a9.14
 SRCREV_wl18xx = "0e48c4b55cfa0d557a098cbe92b1f092f1a9ad67"
