@@ -2,10 +2,10 @@ DESCRIPTION = "Scripts and configuration files for TI wireless drivers"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;beginline=1;endline=21;md5=b8d6a0865f50159bf5c0d175d1f4a705"
 
-PR ="r1+gitr${SRCPV}"
+PR ="r2+gitr${SRCPV}"
 
 # Tag: ol_r8.a9.14
-SRCREV = "4d9f47235501fb2c665b6336a54e0ba152e8e941"
+SRCREV = "3a09bcf797ffe16a0d793e550caec9322a4e8027"
 BRANCH = "sitara-mbss"
 SRC_URI = "git://git.ti.com/wilink8-wlan/wl18xx-target-scripts.git;protocol=git;branch=${BRANCH}"
 
