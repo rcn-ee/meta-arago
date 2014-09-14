@@ -12,10 +12,10 @@ RDEPENDS_${PN} = "wireless-tools"
 PV = "r8.a9.14"
 inherit module
 
-PR = "${MACHINE_KERNEL_PR}+d+gitr${SRCPV}"
+PR = "${MACHINE_KERNEL_PR}+e+gitr${SRCPV}"
 
 # Tags: ol_r8.a9.14
-SRCREV_wl18xx = "0e48c4b55cfa0d557a098cbe92b1f092f1a9ad67"
+SRCREV_wl18xx = "3ccf4f9ff3fd5607f4d6e32fd84e2b3783532033"
 BRANCH_wl18xx = "ap_p2p"
 SRCREV_backports = "0d46f43a2f3ccdd53de19eee5b9c674bf8ef09a2"
 BRANCH_backports = "ap_dfs_mbss_all"
