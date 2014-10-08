@@ -2,7 +2,7 @@ INSANE_SKIP_libstdc++-dev += "staticdev"
 
 ALLOW_EMPTY_${PN}-utils = "1"
 
-PR_append = "-arago6"
+PR_append = "-arago7"
 
 PROVIDES := "${@oe_filter_out('virtual/linux-libc-headers', '${PROVIDES}', d)}"
 PROVIDES := "${@oe_filter_out('linux-libc-headers', '${PROVIDES}', d)}"
@@ -115,4 +115,7 @@ do_install_append() {
 	rm -r ${D}${bindir} || true
 	rm -r ${D}${sbindir} || true
 	rm -r ${D}${libexecdir} || true
+	rm -rf ${D}/lib/libacl.so*
+	rm -rf ${D}/lib/libattr.so*
+	rm -rf ${D}${libdir}/liblzma.so*
 }
