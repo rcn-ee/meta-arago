@@ -4,13 +4,11 @@ TOOLCHAIN_TARGET_TASK ?= "packagegroup-arago-standalone-sdk-target"
 TOOLCHAIN_SUFFIX ?= "-sdk"
 TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}"
 TOOLCHAIN_CLEANUP_PACKAGES ?= ""
+SDKIMAGE_FEATURES = ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-# Add in linux-libc-headers version so that is taken into consideration
-REAL_MULTIMACH_TARGET_SYS = "${TUNE_PKGARCH}-${PREFERRED_VERSION_linux-libc-headers}${TARGET_VENDOR}-${TARGET_OS}"
-
-PR = "r28"
+PR = "r29"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
@@ -64,7 +62,9 @@ toolchain_create_sdk_env_script () {
 	echo 'export OECORE_SDK_VERSION="${SDK_VERSION}"' >> $script
 }
 
-populate_sdk_ipk_append () {
+SDK_POSTPROCESS_COMMAND += "arago_sdk_fixup; "
+
+arago_sdk_fixup () {
 	# Remove broken .la files
 	for i in `find ${SDK_OUTPUT}/${SDKPATH} -name \*.la`; do
 		rm -f $i
@@ -122,7 +122,7 @@ cleanup_toolchain_packages() {
 	then
 		# Clean up the native side of the toolchain
 		opkg_dir="${SDK_OUTPUT}/${SDKPATHNATIVE}"
-		opkg_conf="${opkg_dir}/etc/opkg-sdk.conf"
+		opkg_conf="${SDK_OUTPUT}/etc/opkg-sdk.conf"
 		opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
 
 		# Clean up the target side of the toolchain
@@ -162,7 +162,10 @@ TMPSDKPATH="${SDKPATH}"
 SUDO_EXEC=""
 target_sdk_dir=""
 answer=""
-while getopts ":yd:" OPT; do
+relocate=1
+savescripts=0
+verbose=0
+while getopts ":yd:DRS" OPT; do
 	case $OPT in
 	y)
 		answer="Y"
@@ -171,14 +174,32 @@ while getopts ":yd:" OPT; do
 	d)
 		target_sdk_dir=$OPTARG
 		;;
+	D)
+		verbose=1
+		;;
+	R)
+		relocate=0
+		savescripts=1
+		;;
+	S)
+		savescripts=1
+		;;
 	*)
 		echo "Usage: $(basename $0) [-y] [-d <dir>]"
 		echo "  -y         Automatic yes to all prompts"
 		echo "  -d <dir>   Install the SDK to <dir>"
+		echo "======== Advanced DEBUGGING ONLY OPTIONS ========"
+		echo "  -S         Save relocation scripts"
+		echo "  -R         Do not relocate executables"
+		echo "  -D         use set -x to see what is going on"
 		exit 1
 		;;
 	esac
 done
+
+if [ $verbose = 1 ] ; then
+	set -x
+fi
 
 printf "Enter target directory for SDK (default: $DEFAULT_INSTALL_DIR): "
 if [ "$target_sdk_dir" = "" ]; then
@@ -188,11 +209,16 @@ else
 	echo "$target_sdk_dir"
 fi
 
-eval target_sdk_dir=$target_sdk_dir
-if [ -d $target_sdk_dir ]; then
-	target_sdk_dir=$(cd $target_sdk_dir; pwd)
+eval target_sdk_dir=$(echo "$target_sdk_dir"|sed 's/ /\\ /g')
+if [ -d "$target_sdk_dir" ]; then
+	target_sdk_dir=$(cd "$target_sdk_dir"; pwd)
 else
-	target_sdk_dir=$(readlink -m $target_sdk_dir)
+	target_sdk_dir=$(readlink -m "$target_sdk_dir")
+fi
+
+if [ -n "$(echo $target_sdk_dir|grep ' ')" ]; then
+	echo "The target directory path ($target_sdk_dir) contains spaces. Abort!"
+	exit 1
 fi
 
 if [ -e "$target_sdk_dir/environment-setup*" ]; then
@@ -256,11 +282,24 @@ if [ "$dl_path" = "" ] ; then
 	echo "SDK could not be set up. Relocate script unable to find ld-linux.so. Abort!"
 	exit 1
 fi
-executable_files=$($SUDO_EXEC find $native_sysroot -type f -executable)
-$SUDO_EXEC ${env_setup_script%/*}/relocate_sdk.py $target_sdk_dir $dl_path $executable_files
-if [ $? -ne 0 ]; then
-	echo "SDK could not be set up. Relocate script failed. Abort!"
+executable_files=$($SUDO_EXEC find $native_sysroot -type f -perm /111 -exec file '{}' \;| grep "\(executable\|dynamically linked\)" | cut -f 1 -d ':')
+
+tdir=`mktemp -d`
+if [ x$tdir = x ] ; then
+	echo "SDK relocate failed, could not create a temporary directory"
 	exit 1
+fi
+echo "#!/bin/bash" > $tdir/relocate_sdk.sh
+echo exec ${env_setup_script%/*}/relocate_sdk.py $target_sdk_dir $dl_path $executable_files >> $tdir/relocate_sdk.sh
+$SUDO_EXEC mv $tdir/relocate_sdk.sh ${env_setup_script%/*}/relocate_sdk.sh
+$SUDO_EXEC chmod 755 ${env_setup_script%/*}/relocate_sdk.sh
+rm -rf $tdir
+if [ $relocate = 1 ] ; then
+	$SUDO_EXEC ${env_setup_script%/*}/relocate_sdk.sh
+	if [ $? -ne 0 ]; then
+		echo "SDK could not be set up. Relocate script failed. Abort!"
+		exit 1
+	fi
 fi
 
 # replace ${SDKPATH} with the new prefix in all text files: configs/scripts/etc
@@ -271,11 +310,20 @@ for l in $($SUDO_EXEC find $native_sysroot -type l); do
 	$SUDO_EXEC ln -sfn $(readlink $l|$SUDO_EXEC sed -e "s:$TMPSDKPATH:$target_sdk_dir:") $l
 done
 
+# find out all perl scripts in $native_sysroot and modify them replacing the
+# host perl with SDK perl.
+for perl_script in $($SUDO_EXEC find $native_sysroot -type f -exec grep "^#!.*perl" -l '{}' \;); do
+	$SUDO_EXEC sed -i -e "s:^#! */usr/bin/perl.*:#! /usr/bin/env perl:g" -e \
+		"s: /usr/bin/perl: /usr/bin/env perl:g" $perl_script
+done
+
 echo done
 
 # delete the relocating script, so that user is forced to re-run the installer
 # if he/she wants another location for the sdk
-$SUDO_EXEC rm ${env_setup_script%/*}/relocate_sdk.py
+if [ $savescripts = 0 ] ; then
+	$SUDO_EXEC rm ${env_setup_script%/*}/relocate_sdk.py ${env_setup_script%/*}/relocate_sdk.sh
+fi
 
 echo "SDK has been successfully set up and is ready to be used."
 

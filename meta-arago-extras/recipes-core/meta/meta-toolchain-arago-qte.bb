@@ -5,13 +5,14 @@ TOOLCHAIN_SUFFIX ?= "-qte-sdk"
 
 require meta-toolchain-arago.bb
 
-PR = "r18"
+PR = "r19"
 
 # There could be qt5, qt4e and qt4x11 providers, but we don't support qt4x11 for now
 QT_DIR_NAME = "${@base_conditional('QT_PROVIDER', 'qt5', 'qt5', 'qtopia', d)}"
 QT_BIN_PREFIX = "${@base_conditional('QT_PROVIDER', 'qt5', "${QT_DIR_NAME}/", '', d)}"
 QT_BIN_SUFFIX = "${@base_conditional('QT_PROVIDER', 'qt5', '', '4', d)}"
 QT_MKSPECS_LOCATION = "${@base_conditional('QT_PROVIDER', 'qt5', "${libdir}", "${datadir}", d)}"
+QT_MKSPECS_DIR = "${@base_conditional('QT_PROVIDER', 'qt5', "linux-oe-g++", "linux-gnueabi-oe-g++", d)}"
 
 toolchain_create_sdk_env_script_append() {
 	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}/${QT_DIR_NAME}:$PATH' >> $script
@@ -33,7 +34,7 @@ toolchain_create_sdk_env_script_append() {
 	echo 'export OE_QMAKE_QDBUSXML2CPP=$SDK_PATH_NATIVE${bindir_nativesdk}/${QT_BIN_PREFIX}qdbusxml2cpp${QT_BIN_SUFFIX}' >> $script
 	echo 'export OE_QMAKE_QT_CONFIG=$SDK_PATH_TARGET${QT_MKSPECS_LOCATION}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
 	echo 'export OE_QMAKE_STRIP="echo"' >> $script
-	echo 'export QMAKESPEC=$SDK_PATH_TARGET${QT_MKSPECS_LOCATION}/${QT_DIR_NAME}/mkspecs/linux-gnueabi-oe-g++' >> $script
+	echo 'export QMAKESPEC=$SDK_PATH_TARGET${QT_MKSPECS_LOCATION}/${QT_DIR_NAME}/mkspecs/${QT_MKSPECS_DIR}' >> $script
 	echo 'export QMAKE_DEFAULT_LIBDIRS=${QT_QMAKE_LIBDIR_QT}' >> $script
 	echo 'export QMAKE_DEFAULT_INCDIRS=${QT_QMAKE_INCDIR_QT}' >> $script
 
@@ -49,7 +50,7 @@ toolchain_create_sdk_env_script_append() {
 	echo 'HostPrefix = $(SDK_PATH_NATIVE)' >> $qt_conf
 	echo 'HostBinaries = $(OE_QMAKE_HOST_BINDIR_QT)' >> $qt_conf
 
-	# make a symbolic link to mkspecs for compatibility with Nokia's SDK
-	# and QTCreator
+	# make a symbolic link to mkspecs for compatibility with Qt SDK and QTCreator
 	(cd ${SDK_OUTPUT}/${SDKTARGETSYSROOT}; ln -sf .${QT_MKSPECS_LOCATION}/${QT_DIR_NAME}/mkspecs mkspecs;)
+	(cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; ln -sf ../${REAL_MULTIMACH_TARGET_SYS}${QT_MKSPECS_LOCATION}/${QT_DIR_NAME}/mkspecs mkspecs;)
 }
