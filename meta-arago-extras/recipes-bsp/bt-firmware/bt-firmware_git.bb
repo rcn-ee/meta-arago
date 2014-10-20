@@ -1,6 +1,6 @@
 DESCRIPTION = "Firmware files for Bluetooth"
 LICENSE = "TI-TSPA"
-LIC_FILES_CHKSUM = "file://am335x/LICENCE;md5=4b46aed2a87412c84f9363a8db053e1b \
+LIC_FILES_CHKSUM = "file://am335x/LICENCE;md5=1c9961176d6529283e0d0c983be41b45 \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -11,12 +11,13 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
-PR = "r4+gitr${SRCPV}"
+PR = "r5+gitr${SRCPV}"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x"
 
-SRCREV = "7496df8d130f2db85d5d50b1f703213edf0b54fb"
-SRC_URI = "git://github.com/TI-ECS/bt-firmware.git;protocol=git \
+SRCREV = "fbcab22449ce930a4192ffeb470c168f4e85e0c6"
+BRANCH = "master"
+SRC_URI = "git://git.ti.com/wilink8-bt/ti-bt-firmware.git;branch=${BRANCH} \
            file://0001-Makefile-allow-building-within-the-OE.patch"
 
 PLATFORM = "unknown"
