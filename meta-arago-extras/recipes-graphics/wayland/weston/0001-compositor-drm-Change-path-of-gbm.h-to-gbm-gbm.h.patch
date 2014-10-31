@@ -1,0 +1,26 @@
+From 5f655cb89813e39d6410493b4725e447212ea3a3 Mon Sep 17 00:00:00 2001
+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
+Date: Tue, 24 Sep 2013 19:13:50 +0530
+Subject: [PATCH] compositor-drm: Change path of gbm.h to gbm/gbm.h
+
+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+---
+ src/compositor-drm.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/compositor-drm.c b/src/compositor-drm.c
+index f055118..7a59872 100644
+--- a/src/compositor-drm.c
++++ b/src/compositor-drm.c
+@@ -35,7 +35,7 @@
+ #include <xf86drmMode.h>
+ #include <drm_fourcc.h>
+ 
+-#include <gbm.h>
++#include <gbm/gbm.h>
+ #include <libbacklight.h>
+ #include <libudev.h>
+ 
+-- 
+1.7.9.5
+

@@ -1,0 +1,47 @@
+From c8b6fe71ad0231c4787836f4156e604cedfe45a8 Mon Sep 17 00:00:00 2001
+From: Mrinmayee Hingolikar <mrinmayee@ti.com>
+Date: Thu, 3 Jul 2014 15:06:31 +0530
+Subject: [PATCH] Makefile change to search for correct drm headers
+
+Signed-off-by: Mrinmayee Hingolikar <mrinmayee@ti.com>
+---
+ src/Makefile.am   | 3 ++-
+ tests/Makefile.am | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 749c074..a6e44e7 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -2,6 +2,7 @@ bin_PROGRAMS = weston				\
+ 	$(weston_launch)
+ 
+ AM_CPPFLAGS =					\
++        $(DRM_COMPOSITOR_CFLAGS)                \
+ 	-I$(top_srcdir)/shared			\
+ 	-DDATADIR='"$(datadir)"'		\
+ 	-DMODULEDIR='"$(moduledir)"'		\
+@@ -9,7 +10,7 @@ AM_CPPFLAGS =					\
+ 	-DIN_WESTON
+ 
+ weston_LDFLAGS = -export-dynamic
+-weston_CFLAGS = $(GCC_CFLAGS) $(COMPOSITOR_CFLAGS) $(LIBUNWIND_CFLAGS)
++weston_CFLAGS = $(GCC_CFLAGS) $(COMPOSITOR_CFLAGS) $(LIBUNWIND_CFLAGS) 
+ weston_LDADD = $(COMPOSITOR_LIBS) $(LIBUNWIND_LIBS) \
+ 	$(DLOPEN_LIBS) -lm ../shared/libshared.la
+ 
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index 5be52c6..42ebd2b 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -47,6 +47,7 @@ AM_CPPFLAGS =					\
+ 	-I$(top_srcdir)/shared			\
+ 	-I$(top_builddir)/src			\
+ 	-DUNIT_TEST				\
++	$(DRM_COMPOSITOR_CFLAGS)                \
+ 	$(COMPOSITOR_CFLAGS)
+ 
+ surface_global_test_la_SOURCES = surface-global-test.c
+-- 
+2.0.1
+
