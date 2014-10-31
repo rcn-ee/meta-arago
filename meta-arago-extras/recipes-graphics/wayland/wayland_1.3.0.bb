@@ -10,9 +10,13 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1d4476a7d98dd5691c53d4d43a510c72 \
                     file://src/wayland-server.c;endline=21;md5=079ae21dbf98ada52ec23744851b0a5c"
 
-SRC_URI = "http://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "d16d27081e0871de82d08840c2f133fc"
-SRC_URI[sha256sum] = "2e817685f68a26acd19964d69ddbc4549ba5412114ad95e1a9f5934cce470d6e"
+
+SRC_URI = "git://anongit.freedesktop.org/wayland/wayland;protocol=git"
+SRCREV = "2c3dbb89031f120fb191492634e53a583f99d57d"
+
+S = "${WORKDIR}/git"
+
+PR = "r1"
 
 SRC_URI_append_class-native = " file://just-scanner.patch"
 
