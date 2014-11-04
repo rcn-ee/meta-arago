@@ -1,10 +1,8 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 inherit packagegroup
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 RDEPENDS_${PN} = "\
     dbus \
