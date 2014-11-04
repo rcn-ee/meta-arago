@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r7"
+PR = "r8"
 
 inherit packagegroup
 
@@ -23,8 +23,8 @@ QT5_DEMOS = "\
 "
 
 QT_DEMOS = "\
-    qt-tstat \
 "
+#    qt-tstat 
 
 RDEPENDS_${PN} = "\
     packagegroup-arago-qte \
