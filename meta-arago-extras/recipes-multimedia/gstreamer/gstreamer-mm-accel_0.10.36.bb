@@ -1,11 +1,4 @@
-# This recipe is not valid when not using accelerated multimedia IP
-python __anonymous() {
-    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
-    if not features:
-        return
-    if "mmip" not in features:
-        raise bb.parse.SkipPackage('gstreamer needs dependencies derived from "mmip" flag in MACHINE_FEATURES')
-}
+require gstreamer-mm-accel.inc
 
 # Include the base gst-plugins-bad recipe since this recipe is heavily
 # derived from that one.
@@ -18,7 +11,15 @@ DESCRIPTION = "GStreamer that use multimedia accelerators found on TI devices"
 PROVIDES += "gstreamer"
 RPROVIDES_${PN} += "gstreamer"
 RPROVIDES_${PN}-dev += "gstreamer-dev"
-RPROVIDES_${PN}-meta += "gstreamer-meta"
+RPROVIDES_${PN}-dbg += "gstreamer-dbg"
+RREPLACES_${PN} += "gstreamer"
+RREPLACES_${PN}-dev += "gstreamer-dev"
+RREPLACES_${PN}-dbg += "gstreamer-dbg"
+RCONFLICTS_${PN} += "gstreamer"
+RCONFLICTS_${PN}-dev += "gstreamer-dev"
+RCONFLICTS_${PN}-dbg += "gstreamer-dbg"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "git://git.ti.com/glsdk/gstreamer0-10.git;protocol=git"
 SRCREV = "e505f4a2ceee3b0328eb2efddb9ec1281d3fd60a"

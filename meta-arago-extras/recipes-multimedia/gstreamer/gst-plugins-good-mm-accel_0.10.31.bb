@@ -1,15 +1,9 @@
-# This recipe is not valid when not using accelerated multimedia IP
-python __anonymous() {
-    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
-    if not features:
-        return
-    if "mmip" not in features:
-        raise bb.parse.SkipPackage('gst-plugins-good needs dependencies derived from "mmip" flag in MACHINE_FEATURES')
-}
-
 # Include the base gst-plugins-bad recipe since this recipe is heavily
 # derived from that one.
 require recipes-multimedia/gstreamer/gst-plugins-good_${PV}.bb
+
+require gstreamer-mm-accel.inc
+require gst-plugins-package-mm-accel.inc
 
 DESCRIPTION = "GStreamer good plugins that use multimedia accelerators found \
                on TI devices"
@@ -20,6 +14,14 @@ PROVIDES += "gst-plugins-good"
 RPROVIDES_${PN} += "gst-plugins-good"
 RPROVIDES_${PN}-dev += "gst-plugins-good-dev"
 RPROVIDES_${PN}-meta += "gst-plugins-good-meta"
+RREPLACES_${PN} += "gst-plugins-good"
+RREPLACES_${PN}-dev += "gst-plugins-good-dev"
+RREPLACES_${PN}-meta += "gst-plugins-good-meta"
+RCONFLICTS_${PN} += "gst-plugins-good"
+RCONFLICTS_${PN}-dev += "gst-plugins-good-dev"
+RCONFLICTS_${PN}-meta += "gst-plugins-good-meta"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "git://git.ti.com/glsdk/gst-plugins-good0-10.git;protocol=git"
 SRCREV = "733289614c50ff4e490d5a37ec4af3a540d1dfb9"
@@ -34,9 +36,5 @@ do_configure_prepend() {
 	git submodule init && git submodule update
 	autopoint -f
 }
-
-FILES_${PN} += "\
-                ${libdir}/*.so \
-                ${libdir}/gstreamer-0.10/*"
 
 FILESPATH .= ":${COREBASE}/meta/recipes-multimedia/gstreamer/gst-plugins-good-${PV}"

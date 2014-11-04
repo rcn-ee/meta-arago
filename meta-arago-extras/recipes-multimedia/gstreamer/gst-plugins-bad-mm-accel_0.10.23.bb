@@ -1,15 +1,9 @@
-# This recipe is not valid when not using accelerated multimedia IP
-python __anonymous() {
-    features = bb.data.getVar("MACHINE_FEATURES", d, 1)
-    if not features:
-        return
-    if "mmip" not in features:
-        raise bb.parse.SkipPackage('gst-plugins-bad needs dependencies derived from "mmip" flag in MACHINE_FEATURES')
-}
-
 # Include the base gst-plugins-bad recipe since this recipe is heavily
 # derived from that one.
 require recipes-multimedia/gstreamer/gst-plugins-bad_${PV}.bb
+
+require gstreamer-mm-accel.inc
+require gst-plugins-package-mm-accel.inc
 
 DESCRIPTION = "GStreamer bad plugins that use multimedia accelerators found on \
                TI devices"
@@ -20,6 +14,14 @@ PROVIDES += "gst-plugins-bad"
 RPROVIDES_${PN} += "gst-plugins-bad"
 RPROVIDES_${PN}-dev += "gst-plugins-bad-dev"
 RPROVIDES_${PN}-meta += "gst-plugins-bad-meta"
+RREPLACES_${PN} += "gst-plugins-bad"
+RREPLACES_${PN}-dev += "gst-plugins-bad-dev"
+RREPLACES_${PN}-meta += "gst-plugins-bad-meta"
+RCONFLICTS_${PN} += "gst-plugins-bad"
+RCONFLICTS_${PN}-dev += "gst-plugins-bad-dev"
+RCONFLICTS_${PN}-meta += "gst-plugins-bad-meta"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS += "omap5-sgx-ddk-um-linux libdce libdrm wayland"
 
@@ -34,9 +36,5 @@ do_configure_prepend() {
 	git submodule init && git submodule update
 	autopoint -f
 }
-
-FILES_${PN} += "\
-                ${libdir}/*.so \
-                ${libdir}/gstreamer-0.10/*"
 
 FILESPATH .= ":${COREBASE}/meta/recipes-multimedia/gstreamer/gst-plugins-bad-${PV}"
