@@ -7,9 +7,11 @@ DEPENDS = "gstreamer libdrm ti-ipc"
 
 COMPATIBLE_MACHINE = "dra7xx-evm"
 
+S = "${WORKDIR}/git"
+
 inherit autotools pkgconfig
 
 SRC_URI = "git://git.ti.com/glsdk/example-applications.git;protocol=git"
 SRCREV = "a21dd98d5686a6c4563f89966cb459158085dd1b"
 
-PR = "r0"
+PR = "r1"
