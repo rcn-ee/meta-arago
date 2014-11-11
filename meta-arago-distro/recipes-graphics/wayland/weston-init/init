@@ -41,6 +41,24 @@ case "$1" in
         fi
 
         openvt -s weston
+
+        # Handle touchscreen calibration
+        if [ ! -e /dev/input/touchscreen0 ] ; then
+                exit 0
+        fi
+
+        if [ ! -f $WS_CALUDEV_FILE ] ; then
+            echo -n "Calibrating touchscreen (first time only)"
+            sleep 1
+            CAL_VALUES=`weston-calibrator|cut -c21-`
+            echo 'SUBSYSTEM=="input", ENV{WL_CALIBRATION}="'$CAL_VALUES'"' > $WS_CALUDEV_FILE
+            echo "."
+            udevadm control --reload
+            udevadm trigger
+            killproc weston
+            sleep 1
+            openvt -s weston
+        fi
   ;;
 
   stop)
