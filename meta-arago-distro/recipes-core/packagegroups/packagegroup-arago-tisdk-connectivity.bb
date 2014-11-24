@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r29"
+PR = "r30"
 
 inherit packagegroup
 
@@ -61,6 +61,13 @@ CONNECTIVITY_RDEPENDS_ti43x = "\
     ${DEMO_APPS} \
     ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
+"
+
+CONNECTIVITY_RDEPENDS_dra7xx-evm = "\
+    ${WLAN_COMMON} \
+    ${BLUETOOTH_STACK} \
+    ${@base_contains('ARAGO_BRAND','glsdk','${FIRMWARE_AND_DRIVERS}','',d)} \
+    bt-firmware \
 "
 
 RDEPENDS_${PN} = "\
