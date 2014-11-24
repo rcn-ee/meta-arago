@@ -18,7 +18,8 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|dra7xx-evm"
 SRCREV = "fbcab22449ce930a4192ffeb470c168f4e85e0c6"
 BRANCH = "master"
 SRC_URI = "git://git.ti.com/wilink8-bt/ti-bt-firmware.git;branch=${BRANCH} \
-           file://0001-Makefile-allow-building-within-the-OE.patch"
+           file://0001-Makefile-allow-building-within-the-OE.patch \
+           file://0001-bt-firmware-Remove-platform-check-and-install-defaul.patch"
 
 PLATFORM = "unknown"
 PLATFORM_ti33x = "am335x-evm"

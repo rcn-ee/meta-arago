@@ -1,0 +1,41 @@
+From 40bb43c136ec8001d35f6077e5de5f8ac72f4da0 Mon Sep 17 00:00:00 2001
+From: Roger Monk <r-monk@ti.com>
+Date: Thu, 3 Oct 2013 02:59:54 +0100
+Subject: [PATCH] bt-firmware:  Remove platform check and install default
+ firmware
+
+   * For undefined plaforms, install default firmware
+   * Remove configuration of 'unknown' so that install picks
+     firmware from root directory (default)
+
+Signed-off-by: Roger Monk <r-monk@ti.com>
+---
+ Makefile |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index bd94881..ca8280a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,8 +5,8 @@
+ # If KERNEL_DIR is not set then use the default in Rules.make
+ DEST_DIR ?= ${DESTDIR}
+ 
+-PLATFORM ?= "unknown"
+-MACHINE_NAME ?= "unknown"
++#PLATFORM ?= "unknown"
++#MACHINE_NAME ?= "unknown"
+ 
+ ifeq ($(PLATFORM), am335x-evm)
+     MACHINE_NAME := am335x
+@@ -23,6 +23,6 @@ endif
+ 
+ install:
+ 	install -d $(DEST_DIR)${BASE_LIB_DIR}/firmware
+-	cp -f ./${MACHINE_NAME}/* $(DEST_DIR)${BASE_LIB_DIR}/firmware
++	cp -f ./${MACHINE_NAME}/*.bts $(DEST_DIR)${BASE_LIB_DIR}/firmware
+ 
+ 
+-- 
+1.7.9.5
+
