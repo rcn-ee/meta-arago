@@ -24,7 +24,7 @@ RCONFLICTS_${PN}-meta += "gst-plugins-base-meta"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "git://git.ti.com/glsdk/gst-plugins-base0-10.git;protocol=git"
-SRCREV = "21305017f6095ad6e9b1a8f1006ee5be780b21f8"
+SRCREV = "3427e885daa749275e07339d3633b83c717aa419"
 
 S = "${WORKDIR}/git"
 
