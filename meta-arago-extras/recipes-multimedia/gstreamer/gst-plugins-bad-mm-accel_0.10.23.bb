@@ -25,7 +25,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS += "omap5-sgx-ddk-um-linux libdce libdrm wayland"
 
-SRCREV = "f2df6f3b684f39500e22115b160191cef6d7dbaf"
+SRCREV = "a9510bef52331fee9a23a5c955dbf76ac210056a"
 SRC_URI = "git://git.ti.com/glsdk/gst-plugins-bad0-10.git;protocol=git"
 
 S = "${WORKDIR}/git"
