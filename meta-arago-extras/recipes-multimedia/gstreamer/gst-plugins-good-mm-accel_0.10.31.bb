@@ -24,7 +24,7 @@ RCONFLICTS_${PN}-meta += "gst-plugins-good-meta"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "git://git.ti.com/glsdk/gst-plugins-good0-10.git;protocol=git"
-SRCREV = "733289614c50ff4e490d5a37ec4af3a540d1dfb9"
+SRCREV = "a44097d542f2bf219ac9dc3ef2372e58d769a8f9"
 
 # Fix compile errors with recent kernels
 SRC_URI_append = " file://0001-v4l2-fix-build-with-recent-kernels-the-v4l2_buffer-i.patch \
