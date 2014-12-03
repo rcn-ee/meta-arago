@@ -23,7 +23,7 @@ RCONFLICTS_${PN}-meta += "gst-plugins-good-meta"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "git://git.ti.com/glsdk/gst-plugins-good0-10.git;protocol=git"
+SRC_URI = "gitsm://git.ti.com/glsdk/gst-plugins-good0-10.git;protocol=git"
 SRCREV = "a44097d542f2bf219ac9dc3ef2372e58d769a8f9"
 
 # Fix compile errors with recent kernels
@@ -33,7 +33,6 @@ SRC_URI_append = " file://0001-v4l2-fix-build-with-recent-kernels-the-v4l2_buffe
 S = "${WORKDIR}/git"
 
 do_configure_prepend() {
-	git submodule init && git submodule update
 	autopoint -f
 }
 

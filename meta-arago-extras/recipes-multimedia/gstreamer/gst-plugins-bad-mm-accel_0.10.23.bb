@@ -26,14 +26,13 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS += "omap5-sgx-ddk-um-linux libdce libdrm wayland"
 
 SRCREV = "a9510bef52331fee9a23a5c955dbf76ac210056a"
-SRC_URI = "git://git.ti.com/glsdk/gst-plugins-bad0-10.git;protocol=git"
+SRC_URI = "gitsm://git.ti.com/glsdk/gst-plugins-bad0-10.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF += " --disable-pvr"
 
 do_configure_prepend() {
-	git submodule init && git submodule update
 	autopoint -f
 }
 
