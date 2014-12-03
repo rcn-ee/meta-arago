@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r21"
+PR = "r22"
 
 inherit packagegroup
 
@@ -24,7 +24,6 @@ ARAGO_TEST = "\
     perf \
     "
 
-ARAGO_TI_TEST_am57xx-evm = ""
 ARAGO_TI_TEST = "\
     ltp-ddt \
     input-utils \
