@@ -1,9 +1,6 @@
-PR_append = "-arago8+gitr${SRCPV}"
+PR_append = "-arago9+gitr${SRCPV}"
 
 RDEPENDS_${PN} += "linaro-pm-qa-utils"
-
-# Auto rev so we pick up the latest changes
-SRCREV = "${AUTOREV}"
 
 SRC_URI_remove = "file://0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch"
 

@@ -1,11 +1,6 @@
-# Append the base 2014.07 u-boot mainline recipe to AUTOREV for now so that
-# we can test the latest mainline
-
-PR_append = "-arago4"
+PR_append = "-arago5"
 
 UBOOT_LOCALVERSION = "-g${@d.getVar('SRCPV', True).partition('+')[2][0:7]}"
-
-SRCREV = "${AUTOREV}"
 
 # AM57x EVM is currently on a seperate git tree/branch.
 # Once the software has been integrated to the u-boot-ti-staging
