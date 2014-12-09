@@ -32,7 +32,7 @@ case "$1" in
 
         # This is all a nasty hack
         if test -z "$XDG_RUNTIME_DIR"; then
-                export XDG_RUNTIME_DIR=/run/user/root
+            export XDG_RUNTIME_DIR=/run/user/root
         fi
 
         if [ ! -d "$XDG_RUNTIME_DIR" ] ; then
@@ -42,23 +42,48 @@ case "$1" in
 
         openvt -s weston
 
-        # Handle touchscreen calibration
+        # If there's no touchscreen device available, done
         if [ ! -e /dev/input/touchscreen0 ] ; then
-                exit 0
+            exit 0
         fi
 
-        if [ ! -f $WS_CALUDEV_FILE ] ; then
+        # If it was already calibrated, done
+        if [ -f "$WS_CALUDEV_FILE" ] ; then
+            exit 0
+        fi
+
+        # Check if SD card is mounted
+        mount | grep /run/media/mmcblk0p1 | grep vfat > /dev/null 2>&1
+        if [ "$?" = "0" ] ; then
+            SD_MOUNTED="1"
+        else
+            SD_MOUNTED="0"
+        fi
+
+        # Check if SD card has a calibration rules file
+        SD_CALUDEV_FILE=/run/media/mmcblk0p1/ws-calibrate.rules
+        if [ "$SD_MOUNTED" = "1" -a -f "$SD_CALUDEV_FILE" ] ; then
+            # Copy it over to udev location
+            cp "$SD_CALUDEV_FILE" "$WS_CALUDEV_FILE"
+        else
+            # Run a calibration app and save output to udev rules
             echo -n "Calibrating touchscreen (first time only)"
             sleep 1
             CAL_VALUES=`weston-calibrator|cut -c21-`
             echo 'SUBSYSTEM=="input", ENV{WL_CALIBRATION}="'$CAL_VALUES'"' > $WS_CALUDEV_FILE
             echo "."
-            udevadm control --reload
-            udevadm trigger
-            killproc weston
-            sleep 1
-            openvt -s weston
+            # Copy it back to SD
+            if [ "$SD_MOUNTED" = "1" ] ; then
+                cp "$WS_CALUDEV_FILE" "$SD_CALUDEV_FILE"
+            fi
         fi
+
+        # Reload and re-run udev rules and restart weston
+        udevadm control --reload
+        udevadm trigger
+        killproc weston
+        sleep 1
+        openvt -s weston
   ;;
 
   stop)
