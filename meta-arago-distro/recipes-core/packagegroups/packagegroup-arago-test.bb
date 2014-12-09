@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r22"
+PR = "r23"
 
 inherit packagegroup
 
@@ -22,6 +22,7 @@ ARAGO_TEST = "\
     yavta \
     rng-tools \
     perf \
+    v4l-utils \
     "
 
 ARAGO_TI_TEST = "\
