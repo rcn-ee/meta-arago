@@ -36,7 +36,7 @@ SRC_URI = "\
     file://Makefile_cryptodev \
 "
 
-PR = "r35"
+PR = "r36"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -44,7 +44,7 @@ MAKEFILES_COMMON = "linux \
                     am-sysinfo \
                     matrix-gui-browser \
                     refresh-screen \
-                    qt-tstat \
+                    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'qt-tstat', d)} \
                     oprofile-example \
 "
 MAKEFILES = ""
@@ -75,8 +75,6 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            ti-crypto-examples \
                            linux-dtbs \
                            wireless \
-                           dual-camera-demo \
-                           image-gallery \
                            cryptodev \
 "
 
