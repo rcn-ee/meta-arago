@@ -1,0 +1,31 @@
+From 155da553d7a5d4d84babb94fb0ecac073680c1cd Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 15 Dec 2014 15:51:59 -0500
+Subject: [PATCH] Makefile.build: with Qt5 use qmake available in PATH
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ Makefile.build |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.build b/Makefile.build
+index 192c6f6..79b55f5 100644
+--- a/Makefile.build
++++ b/Makefile.build
+@@ -8,11 +8,11 @@ all: release
+ .PHONY: qmake
+ qmake : matrix_browser.pro
+ 	@. ${ENV_SETUP}; \
+-	qmake2 CONFIG+=release matrix_browser.pro
++	qmake CONFIG+=release matrix_browser.pro
+ 
+ qmake_debug : matrix_browser.pro
+ 	@. ${ENV_SETUP}; \
+-	qmake2 CONFIG+=debug matrix_browser.pro
++	qmake CONFIG+=debug matrix_browser.pro
+ 
+ debug : qmake_debug
+ 	@. ${ENV_SETUP}; \
+-- 
+1.7.9.5
+
