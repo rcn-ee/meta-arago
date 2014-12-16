@@ -9,7 +9,7 @@ inherit qt-provider
 # Make sure that QT font libraries have been installed
 RDEPENDS_${PN} += "${QT_RDEPENDS_FONTS}"
 
-PR = "r6"
+PR = "r7"
 
 SRCREV = "ad3835b250c8b2b55ae65ffa19c2b85e412826b0"
 BRANCH ?= "master"
@@ -19,6 +19,7 @@ SRC_URI = "git://gitorious.org/matrix-gui-v2/refresh-screen.git;protocol=git;bra
 QT5_DIFF = " \
 file://0001-refresh-screen.pro-add-widgets-module-to-the-project.patch \
 file://0002-Replace-QtGui-header-with-QtWidgets-for-Qt5.patch \
+file://0001-Makefile.build-with-Qt5-use-qmake-available-in-PATH.patch \
 "
 
 SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', "${QT5_DIFF}", '', d)}"
