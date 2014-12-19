@@ -3,10 +3,13 @@
 require recipes-multimedia/gstreamer/gst-plugins-base_${PV}.bb
 
 require gstreamer-mm-accel.inc
-require gst-plugins-package-mm-accel.inc
+#require gst-plugins-package-mm-accel.inc
 
 DESCRIPTION = "GStreamer base plugins that use multimedia accelerators found \
                on TI devices"
+
+PN = "gst-plugins-base"
+B = "${S}"
 
 # Set PROVIDES and RPROVIDES values so that the base recipe names can still
 # be used and PREFERRED_PROVIDER can be used to pick between them.
@@ -29,7 +32,12 @@ SRCREV = "3427e885daa749275e07339d3633b83c717aa419"
 S = "${WORKDIR}/git"
 
 do_configure_prepend() {
+	cd ${S}
 	autopoint -f
+}
+
+do_install_prepend() {
+	cd ${S}
 }
 
 EXTRA_OECONF +="--disable-ivorbis "

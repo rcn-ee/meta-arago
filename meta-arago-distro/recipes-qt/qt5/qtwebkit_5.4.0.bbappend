@@ -1,7 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 SRC_URI += " \
 	file://GraphicsSurfaceGL_NoX.cpp.patch \
 	file://GraphicsSurfaceToken.h.patch \
@@ -9,4 +7,4 @@ SRC_URI += " \
 	file://WebCore.pri.patch \
 "
 
-PR_append = "-arago3"
+PR_append = "-arago4"

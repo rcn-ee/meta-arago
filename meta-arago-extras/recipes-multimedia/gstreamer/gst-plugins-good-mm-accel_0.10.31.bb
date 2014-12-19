@@ -3,10 +3,13 @@
 require recipes-multimedia/gstreamer/gst-plugins-good_${PV}.bb
 
 require gstreamer-mm-accel.inc
-require gst-plugins-package-mm-accel.inc
+#require gst-plugins-package-mm-accel.inc
 
 DESCRIPTION = "GStreamer good plugins that use multimedia accelerators found \
                on TI devices"
+
+PN = "gst-plugins-good"
+B = "${S}"
 
 # Set PROVIDES and RPROVIDES values so that the base recipe names can still
 # be used and PREFERRED_PROVIDER can be used to pick between them.
@@ -33,7 +36,12 @@ SRC_URI_append = " file://0001-v4l2-fix-build-with-recent-kernels-the-v4l2_buffe
 S = "${WORKDIR}/git"
 
 do_configure_prepend() {
+	cd ${S}
 	autopoint -f
+}
+
+do_install_prepend() {
+	cd ${S}
 }
 
 FILESPATH .= ":${COREBASE}/meta/recipes-multimedia/gstreamer/gst-plugins-good-${PV}"

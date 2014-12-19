@@ -10,7 +10,7 @@ python split_gstreamer10_packages () {
     postinst = d.getVar('plugin_postinst', True)
     glibdir = d.getVar('libdir', True)
 
-    do_split_packages(d, glibdir, '^lib(.*)\.so\.*', 'lib%s-mm-accel', 'gstreamer %s library', extra_depends='', allow_links=True, hook=gst_lib_hook)
+    do_split_packages(d, glibdir, '^lib(.*)\.so\.*', 'lib%s', 'gstreamer %s library', extra_depends='', allow_links=True, hook=gst_lib_hook)
     do_split_packages(d, gst_libdir, 'libgst(.*)\.so$', d.expand('${PN}-%s'), 'GStreamer plugin for %s', postinst=postinst, extra_depends=d.expand('${PN}'))
     do_split_packages(d, gst_libdir, 'libgst(.*)\.la$', d.expand('${PN}-%s-dev'), 'GStreamer plugin for %s (development files)', extra_depends=d.expand('${PN}-dev'))
     do_split_packages(d, gst_libdir, 'libgst(.*)\.a$', d.expand('${PN}-%s-staticdev'), 'GStreamer plugin for %s (static development files)', extra_depends=d.expand('${PN}-staticdev'))

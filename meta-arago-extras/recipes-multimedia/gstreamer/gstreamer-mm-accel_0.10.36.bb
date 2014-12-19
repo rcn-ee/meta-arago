@@ -6,6 +6,9 @@ require recipes-multimedia/gstreamer/gstreamer_${PV}.bb
 
 DESCRIPTION = "GStreamer that use multimedia accelerators found on TI devices"
 
+PN = "gstreamer"
+B = "${S}"
+
 # Set PROVIDES and RPROVIDES values so that the base recipe names can still
 # be used and PREFERRED_PROVIDER can be used to pick between them.
 PROVIDES += "gstreamer"
@@ -27,7 +30,12 @@ SRCREV = "e505f4a2ceee3b0328eb2efddb9ec1281d3fd60a"
 S = "${WORKDIR}/git"
 
 do_configure_prepend() {
+	cd ${S}
 	autopoint -f
+}
+
+do_install_prepend() {
+	cd ${S}
 }
 
 FILESPATH .= ":${COREBASE}/meta/recipes-multimedia/gstreamer/gstreamer-${PV}"
