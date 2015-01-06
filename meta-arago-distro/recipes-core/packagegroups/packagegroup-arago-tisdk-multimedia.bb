@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 inherit packagegroup
 
@@ -49,7 +49,6 @@ ACCEL_FW_append_omap5-evm = " \
 
 ACCEL_FW_append_dra7xx-evm = " \
     ${@base_contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
-    dspdce-fw \
     vis \
     "
 
