@@ -481,6 +481,7 @@ tisdk_image_setup () {
 
     mkdir -p ${IMAGE_ROOTFS}/etc
     mkdir -p ${IMAGE_ROOTFS}/var/lib/opkg
+    mkdir -p ${IMAGE_ROOTFS}/lib
 
     chmod 755 ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}-tisdk*
 
@@ -614,6 +615,7 @@ tisdk_image_cleanup () {
     # manifest (and maybe one day for online updates) to a hidden directory.
     mv ${IMAGE_ROOTFS}/var ${IMAGE_ROOTFS}/.var
     mv ${IMAGE_ROOTFS}/etc ${IMAGE_ROOTFS}/.etc
+    mv ${IMAGE_ROOTFS}/lib ${IMAGE_ROOTFS}/.lib
 }
 
 license_create_manifest() {
