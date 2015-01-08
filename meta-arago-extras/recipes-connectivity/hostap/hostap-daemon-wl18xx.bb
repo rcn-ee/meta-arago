@@ -12,11 +12,11 @@ FILESEXTRAPATHS_append := "${THISDIR}/hostap-daemon:"
 
 # Add TI to the end to make it clear that this is a TI customized version
 # of hostap
-PV = "2.0-devel-ti"
+PV = "R8.5-devel-ti"
 
-# Tag: ol_r8.a9.14
-SRCREV = "281f5adb8eb7ee9e9220546c0227696b02aab332"
-BRANCH = "single_hostap_dfs_dynamic"
+# Tag: R8.5
+SRCREV = "2710d0ae31fa2dc31f653f346a985268d8d7795c"
+BRANCH = "ap_p2p"
 
 PROVIDES += "hostap-daemon"
 RPROVIDES_${PN} += "hostap-daemon"

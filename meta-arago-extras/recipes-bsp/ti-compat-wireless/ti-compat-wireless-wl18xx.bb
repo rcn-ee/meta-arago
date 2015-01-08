@@ -9,13 +9,13 @@ LIC_FILES_CHKSUM = "file://../backports/COPYING;md5=d7810fab7487fb0aad327b76f1be
 
 RDEPENDS_${PN} = "wireless-tools"
 
-PV = "r8.a9.14"
+PV = "R8.5"
 inherit module
 
 PR = "${MACHINE_KERNEL_PR}+e+gitr${SRCPV}"
 
-# Tags: ol_r8.a9.14
-SRCREV_wl18xx = "3ccf4f9ff3fd5607f4d6e32fd84e2b3783532033"
+# Tags: R8.5
+SRCREV_wl18xx = "cb51164c672b1ecadef339b9f9b39e29ab706723"
 BRANCH_wl18xx = "ap_p2p"
 SRCREV_backports = "0d46f43a2f3ccdd53de19eee5b9c674bf8ef09a2"
 BRANCH_backports = "ap_dfs_mbss_all"

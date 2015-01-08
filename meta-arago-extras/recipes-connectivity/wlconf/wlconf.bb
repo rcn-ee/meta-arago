@@ -2,11 +2,13 @@ DESCRIPTION = "Configuration utility for TI wireless drivers"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;beginline=1;endline=21;md5=adc05a1903d3f107f85c90328e3a9438"
 
-PR ="r2"
+PV = "R8.5"
+
+PR ="r3"
 PR_append = "+gitr${SRCPV}"
 
-# Tag: ol_r8.a9.14
-SRCREV = "e014b59381f04b329fccd0ec18a5f2da7fa0fd63"
+# Tag: R8.5
+SRCREV = "dcf0800f30ba449cd7f3a20f8b3f4853dc829652"
 SRC_URI = "git://git.ti.com/wilink8-wlan/18xx-ti-utils.git"
 
 S = "${WORKDIR}/git/wlconf"
