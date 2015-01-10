@@ -83,6 +83,12 @@ PREFERRED_PROVIDER_u-boot_omap-a15 = "u-boot-ti-staging"
 
 PREFERRED_VERSION_u-boot-ti-staging = "2014.07%"
 
+# Point am57xx-evm to latest mainline
+PREFERRED_PROVIDER_virtual/bootloader_am57xx-evm = "u-boot"
+PREFERRED_PROVIDER_u-boot_am57xx-evm = "u-boot"
+
+PREFERRED_VERSION_u-boot_am57xx-evm = "2014.10+2015.01%"
+
 # Pin down udev version from oe-core, as meta-oe pulls in newer systemd-enhanced version
 PREFERRED_VERSION_udev = "182"
 PREFERRED_PROVIDER_udev = "udev"
