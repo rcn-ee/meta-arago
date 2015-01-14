@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -48,7 +48,7 @@ GRAPHICS_BLTSVILLE_omap-a15 = " \
     "
 
 RDEPENDS_${PN} = "\
-    ${GRAPHICS_WESTON} \
+    ${@base_conditional('QT_PROVIDER', 'qt4e', "", "${GRAPHICS_WESTON}", d)} \
     ${GRAPHICS_RDEPENDS} \
     ${GRAPHICS_BLTSVILLE} \
 "
