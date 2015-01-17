@@ -1,8 +1,10 @@
-PR_append = "-arago9+gitr${SRCPV}"
+PR_append = "-arago10+gitr${SRCPV}"
 
 RDEPENDS_${PN} += "linaro-pm-qa-utils"
 
 SRC_URI_remove = "file://0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch"
+
+SRCREV = "ee4e3d31ff7a45682cabe19d9cf645eb457325e9"
 
 EXTRA_OEMAKE += "KERNEL_PATH="${STAGING_KERNEL_DIR}""
 
