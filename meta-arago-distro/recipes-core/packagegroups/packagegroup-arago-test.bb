@@ -40,7 +40,6 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     omapconf \
     ipc-test-fw \
     ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
-    bvtest \
     "
 
 ARAGO_TI_TEST_append_dra7xx = " \
