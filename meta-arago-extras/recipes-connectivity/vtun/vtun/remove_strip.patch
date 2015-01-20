@@ -1,0 +1,9 @@
+--- vtun-3.0.3/Makefile.orig.in
++++ vtun-3.0.3/Makefile.in
+@@ -99,6 +99,5 @@
+ 	$(INSTALL) -d -m 755 $(INSTALL_OWNER) $(DESTDIR)$(LOCK_DIR)
+ 	$(INSTALL) -d -m 755 $(INSTALL_OWNER) $(DESTDIR)$(SBIN_DIR)
+ 	$(INSTALL) -m 755 $(INSTALL_OWNER) vtund $(DESTDIR)$(SBIN_DIR)
+-	$(BIN_DIR)/strip $(DESTDIR)$(SBIN_DIR)/vtund
+
+ # DO NOT DELETE THIS LINE -- make depend depends on it.

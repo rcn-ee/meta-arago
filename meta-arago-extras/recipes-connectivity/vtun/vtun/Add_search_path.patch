@@ -1,0 +1,11 @@
+--- vtun-3.0.3/configure.orig
++++ vtun-3.0.3/configure
+@@ -5680,7 +5680,7 @@
+     echo "$as_me:$LINENO: checking \"for blowfish.h\"" >&5
+ echo $ECHO_N "checking \"for blowfish.h\"... $ECHO_C" >&6
+     ac_hdr_found=no
+-    for p in $BLOWFISH_HDR_DIR /usr/include/ssl /usr/include/openssl /usr/include /usr/local/include /usr/local/ssl/include  /usr/include/crypto; do
++    for p in $BLOWFISH_HDR_DIR /usr/include/ssl $SSL_HDR_DIR /usr/include/openssl /usr/include /usr/local/include /usr/local/ssl/include  /usr/include/crypto; do
+ 	if test -n "$p"; then
+ 	  dir="$p"
+ 	else
