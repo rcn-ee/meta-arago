@@ -3,24 +3,11 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.3"
+PR = "${INC_PR}.4"
 
 inherit allarch
 
 S = "${WORKDIR}/git/power_apps"
-
-
-do_install_prepend(){
-   install -d ${D}${MATRIX_BASE_DIR}/html-apps/
-
-   cp -rf ${S}/set_governor/power-set-governor ${D}${MATRIX_BASE_DIR}/html-apps/
-
-}
-
-do_install_append(){
-    rm ${D}${MATRIX_APP_DIR}/set_governor/set-governor.php
-}
-
 
 # Make sure power submenu and app images has been installed
 RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
@@ -36,8 +23,8 @@ FILES_${PN}-dump-reg += "${MATRIX_APP_DIR}/pm_dump_reg/*"
 FILES_${PN}-snapshot1 += "${MATRIX_APP_DIR}/pm_snapshot_1/*"
 FILES_${PN}-snapshot2 += "${MATRIX_APP_DIR}/pm_snapshot_2/*"
 FILES_${PN}-suspend += "${MATRIX_APP_DIR}/pm_suspend/*"
-FILES_${PN}-governor += "${MATRIX_APP_DIR}/set_governor/* \
-                         ${MATRIX_BASE_DIR}/html-apps/power-set-governor/*"
+FILES_${PN}-governor += "${MATRIX_APP_DIR}/pm_userspace_governor/* \
+                         ${MATRIX_APP_DIR}/pm_ondemand_governor/*"
 
 # Split the ${bindir} files by PM app
 FILES_${PN}-count += "${bindir}/pm_count.sh"
