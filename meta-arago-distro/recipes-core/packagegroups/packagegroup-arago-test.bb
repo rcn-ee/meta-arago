@@ -43,7 +43,8 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     "
 
 ARAGO_TI_TEST_append_dra7xx = " \
-    vpe-vpdma \
+    vpdma-fw \
+    vpe-tests \
     "
 
 RDEPENDS_${PN} = "\
