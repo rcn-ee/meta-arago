@@ -65,6 +65,12 @@ SRCIPK_PRESERVE_GIT ?= "false"
 # the sourceipk
 SRCIPK_SHALLOW_CLONE ?= "false"
 
+# By default limit the history to 1 commit since the user can always
+# use git pull --unshallow to fetch the rest of history.  The depth
+# level of 1 is set to keep from tracking through all merges and
+# pulling excess history
+SRCIPK_SHALLOW_DEPTH ?= "1"
+
 # This function will return the fetch URL for a git repository passed as
 # the first parameter.
 get_remote() {
@@ -100,11 +106,6 @@ get_remote() {
 #       than just a single branch the limited history will be a depth of
 #       1 for all branches and tags.
 limit_git_history() {
-    # By default limit the history to 1 commit since the user can always
-    # use git pull --unshallow to fetch the rest of history.  The depth
-    # level of 1 is set to keep from tracking through all merges and
-    # pulling excess history
-    commits="1"
 
     # Temporary directory to make shallow clones in
     gitshallowclone="${WORKDIR}/temp-git-shallow-clone"
@@ -117,7 +118,7 @@ limit_git_history() {
 
     remote=`get_remote $PWD`
 
-    git clone --depth $commits --branch ${BRANCH} file://$remote $gitshallowclone
+    git clone --depth ${SRCIPK_SHALLOW_DEPTH} --branch ${BRANCH} file://$remote $gitshallowclone
 
     # remove original kernel clone since we will replace it with the shallow
     # clone
