@@ -1,6 +1,9 @@
 #platform
 PLATFORM=__PLATFORM__
 
+#defconfig
+DEFCONFIG=__DEFCONFIG__
+
 #Architecture
 ARCH=__ARCH__
 

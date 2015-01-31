@@ -36,7 +36,7 @@ SRC_URI = "\
     file://Makefile_cryptodev \
 "
 
-PR = "r36"
+PR = "r37"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -101,6 +101,12 @@ KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
 KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
 KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra72-evm.dtb am57xx-beagle-x15.dtb"
 
+DEFCONFIG = "tisdk_${MACHINE}_defconfig"
+
+AMSDK_DEFCONFIG = "singlecore-omap2plus_defconfig"
+
+DEFCONFIG := "${@base_conditional('ARAGO_BRAND','core','${DEFCONFIG}','${AMSDK_DEFCONFIG}',d)}"
+
 # This step will stitch together the final Makefile based on the supported
 # make targets.
 do_install () {
@@ -159,6 +165,7 @@ do_install () {
 
     # fixup Rules.make values
     sed -i -e "s/__PLATFORM__/${MACHINE}/" ${D}/Rules.make
+    sed -i -e "s/__DEFCONFIG__/${DEFCONFIG}/" ${D}/Rules.make
     sed -i -e "s/__ARCH__/${PLATFORM_ARCH}/" ${D}/Rules.make
     sed -i -e "s/__TOOLCHAIN_PREFIX__/${TOOLCHAIN_SYS}-/" ${D}/Rules.make
     sed -i -e "s/__UBOOT_MACHINE__/${UBOOT_MACHINE}/" ${D}/Rules.make
