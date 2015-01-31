@@ -157,7 +157,11 @@ adjust_git() {
 
             cd -
 
-            git remote set-url origin $remote_repo $local_repo
+            # Some crazy reason I need to add these two lines when doing a
+            # shallow copy. Otherwise, I had problems where git fetch wasn't
+            # properly fetching all the commits and extra remotes.
+            git remote rm origin
+            git remote add origin $remote_repo
 
             # Repackage the repository so its a proper clone of the original
             # (remote) git repository
