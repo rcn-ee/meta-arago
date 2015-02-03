@@ -61,6 +61,16 @@ SRCIPK_INCLUDE_EXTRAFILES ?= "1"
 
 SRCIPK_PRESERVE_GIT ?= "false"
 
+# Git commit message that explains the purpose of the custom git branch
+SRCIPK_CUSTOM_GIT_MESSAGE ?= ""
+
+# File that will store the same information as the commit message but is also
+# used to add something to insure a commit can be committed.
+SRCIPK_SDK_README ?= "TISDK-README"
+
+# Name used when creating the custom branch
+SRCIPK_CUSTOM_GIT_BRANCH ?= ""
+
 # Create a shallow clone of the git repository to reduce the size of
 # the sourceipk
 SRCIPK_SHALLOW_CLONE ?= "false"
@@ -166,6 +176,33 @@ adjust_git() {
             # Repackage the repository so its a proper clone of the original
             # (remote) git repository
             git repack -a -d
+
+
+            if [ "${SRCIPK_CUSTOM_GIT_BRANCH}" != "" -a "${SRCIPK_CUSTOM_GIT_MESSAGE}" != "" ]
+            then
+
+                # Create local git config settings to create commit
+                git config user.email "<>"
+                git config user.name "Texas Instruments SDK Builder"
+
+                # For recipes like the kernel which may end up running
+                # sourceipk more than once.
+                branch_exist=`git branch | grep ${SRCIPK_CUSTOM_GIT_BRANCH}` || echo ""
+                if [ "$branch_exist" != "" -a -f ${SRCIPK_SDK_README} ]
+                then
+                    git add -A
+                    git commit --amend
+                else
+                    echo -e ${SRCIPK_CUSTOM_GIT_MESSAGE} > ${SRCIPK_SDK_README}
+                    git add -A
+                    git commit -F ${SRCIPK_SDK_README}
+                    git checkout -b "${SRCIPK_CUSTOM_GIT_BRANCH}"
+                fi
+
+                # Delete local git config settings
+                rm .gitconfig .git/config > /dev/null 2>&1 || echo ""
+
+            fi
 
             rm -f .git/objects/info/alternates
 
