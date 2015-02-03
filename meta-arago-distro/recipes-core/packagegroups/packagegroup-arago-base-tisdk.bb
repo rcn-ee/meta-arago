@@ -1,6 +1,6 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r14"
+PR = "r15"
 
 inherit packagegroup
 
@@ -14,5 +14,6 @@ RDEPENDS_${PN} = "\
     iperf \
     psplash \
     arago-gpl-notice \
+    arago-feed-config \
     nfs-utils-client \
     "
