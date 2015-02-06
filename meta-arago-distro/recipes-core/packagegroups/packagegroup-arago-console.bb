@@ -66,7 +66,7 @@ ARAGO_SDK_PREREQ = "\
     "
 
 ARAGO_CONSOLE = "\
-    ${ARAGO_ALSA_EXTRA} \
+    ${@base_contains('MACHINE_FEATURES', 'alsa', '${ARAGO_ALSA_EXTRA}', '',d)} \
     ${@base_conditional('QT_PROVIDER', 'qt5', '', '${ARAGO_TSLIB}', d)} \
     ${ARAGO_NCURSES} \
     ${ARAGO_FSTOOLS} \
