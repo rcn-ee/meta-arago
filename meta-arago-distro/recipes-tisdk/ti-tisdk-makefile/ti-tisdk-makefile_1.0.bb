@@ -36,7 +36,7 @@ SRC_URI = "\
     file://Makefile_cryptodev \
 "
 
-PR = "r37"
+PR = "r38"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
