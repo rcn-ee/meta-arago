@@ -3,10 +3,7 @@ DESCRIPTION = "Scripts to initialize usb gadgets"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-COMPATIBLE_MACHINE = "ti33x"
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "file://init"
 
