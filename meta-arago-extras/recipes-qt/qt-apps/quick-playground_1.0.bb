@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://Licence.txt;md5=7cc88160b55ec5db6c6c5bb8e3238c0b"
 
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r2"
+PR = "r3"
 
 BRANCH = "master"
-SRCREV = "4bcf4e7f5aa68dcd28f54bf921c6cc3985ce4305"
+SRCREV = "b055cefbe2ecb9e8009c08abe2c9dcfe447cfc9d"
 
 SRC_URI = "git://arago-project.org/git/projects/qt4-demos.git;protocol=git;branch=${BRANCH}"
 
