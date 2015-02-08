@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r18"
+PR = "r19"
 
 inherit packagegroup
 
@@ -11,7 +11,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 U-BOOT_SRC = "${PREFERRED_PROVIDER_virtual/bootloader}-src"
 KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-src"
 
-TOOLS = "pinmux-utility"
+TOOLS = ""
 TOOLS_omap-a15 = ""
 TOOLS_ti43x = ""
 TOOLS_keystone = ""
@@ -27,7 +27,6 @@ RDEPENDS_${PN} = "\
     ${TOOLS} \
     ti-tisdk-setup \
     ${EXTRA_FILES} \
-    oe-layersetup-src \
     ti-tisdk-makefile \
     ${U-BOOT_SRC} \
     ${KERNEL_SRC} \
