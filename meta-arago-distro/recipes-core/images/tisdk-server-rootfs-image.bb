@@ -3,6 +3,8 @@ COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|keystone"
 
 require arago-image.inc
 
+SPLASH = ""
+
 IMAGE_INSTALL += "\
     packagegroup-arago-base \
     packagegroup-arago-console \

@@ -1,6 +1,6 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r15"
+PR = "r16"
 
 inherit packagegroup
 
@@ -12,7 +12,6 @@ RDEPENDS_${PN} = "\
     libpcre \
     iptables \
     iperf \
-    psplash \
     arago-gpl-notice \
     arago-feed-config \
     nfs-utils-client \
