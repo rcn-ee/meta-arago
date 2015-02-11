@@ -18,7 +18,6 @@ UTILS = " \
     openssh-sftp-server \
     ptpd \
     libdrm-kms \
-    switch-config \
     ${@base_contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
 "
 
@@ -38,6 +37,10 @@ UTILS_append_ti33x = " canutils"
 UTILS_append_ti43x = " canutils"
 UTILS_append_dra7xx = " canutils"
 UTILS_append_omap-a15 = " parted"
+
+UTILS_append_ti33x = " switch-config"
+UTILS_append_ti43x = " switch-config"
+UTILS_append_omap-a15 = " switch-config"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
