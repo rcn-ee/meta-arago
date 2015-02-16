@@ -4,13 +4,13 @@ LIC_FILES_CHKSUM = "file://libdce.h;beginline=1;endline=31;md5=0a398cf815b8b5f31
 
 inherit autotools pkgconfig
 
-PR = "r1+gitr${SRCPV}"
+PR = "r2+gitr${SRCPV}"
 PV = "2.0"
 
 DEPENDS = "libdrm ti-ipc"
 
 SRC_URI = "git://git.omapzoom.org/repo/libdce.git;protocol=git"
-SRCREV = "1916cfef94c4ee41c2beedc9cd87b8916ad29895"
+SRCREV = "bb5786d7ce8ab452ab1edc867e4456d1abf08428"
 
 S = "${WORKDIR}/git"
 EXTRA_OECONF += "IPC_HEADERS=${STAGING_INCDIR}/ti/ipc/mm"
