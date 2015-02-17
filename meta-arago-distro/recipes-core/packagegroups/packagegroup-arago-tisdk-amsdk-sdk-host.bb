@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 inherit packagegroup
 
@@ -10,6 +10,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 U-BOOT_SRC = "${PREFERRED_PROVIDER_virtual/bootloader}-src"
 KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-src"
+
+KERNEL_SHADOW_CLONE := "${PREFERRED_PROVIDER_virtual/kernel}"
+KERNEL_SHADOW_CLONE_ENABLED := "${SRCIPK_SHALLOW_CLONE_pn-${KERNEL_SHADOW_CLONE}}"
 
 TOOLS = ""
 TOOLS_omap-a15 = ""
@@ -30,5 +33,6 @@ RDEPENDS_${PN} = "\
     ti-tisdk-makefile \
     ${U-BOOT_SRC} \
     ${KERNEL_SRC} \
+    ${@base_conditional('KERNEL_SHADOW_CLONE_ENABLED','true','unshallow-repositories','',d)} \
     tisdk-install \
 "
