@@ -177,10 +177,8 @@ adjust_git() {
             # (remote) git repository
             git repack -a -d
 
-
             if [ "${SRCIPK_CUSTOM_GIT_BRANCH}" != "" -a "${SRCIPK_CUSTOM_GIT_MESSAGE}" != "" ]
             then
-
                 # Create local git config settings to create commit
                 git config user.email "<>"
                 git config user.name "Texas Instruments SDK Builder"
@@ -199,8 +197,9 @@ adjust_git() {
                     git checkout -b "${SRCIPK_CUSTOM_GIT_BRANCH}"
                 fi
 
-                # Delete local git config settings
-                rm .gitconfig .git/config > /dev/null 2>&1 || echo ""
+                # Delete local git config settings previously set
+                git config --unset user.email
+                git config --unset user.name
 
             fi
 
