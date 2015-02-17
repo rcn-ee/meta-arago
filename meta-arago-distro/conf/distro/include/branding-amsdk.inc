@@ -11,17 +11,19 @@ PREFERRED_VERSION_sitara-linux-ti-staging = "3.14%"
 SRCIPK_GIT_COMMIT_MESSAGE = "\
 Create local branch\\n\
 \\n\
-The below commit is used for this local branch and is the one used by this sdk:\\n\
+The below commit is used for this local branch and is the one used by\\n\
+this sdk:\\n\
 ${SRCREV}."
 
 SRCIPK_SHALLOW_GIT_COMMIT_MESSAGE ="${SRCIPK_GIT_COMMIT_MESSAGE}\\n\\n\
-To save on installer space only a portion of the commit history has been\\n\
-preserved. Also links to remote branches and tags do not exist in this\\n\
-copy of the repository. To fix this please run:\\n\
-git fetch\\n\
+To reduce the size of the SDK installer only a portion of the git commit\\n\
+history has been preserved. Also links to remote branches and tags do\\n\
+not exist in this copy of the repository.\\n\
+To fix this please run the unshallow-repositories.sh\\n\
+script located in the sdk\'s bin directory\\n\
 \\n\
-This may take a couple of minutes but you will then have a full copy of\\n\
-the git repository.\\n"
+The script may take several minutes but you will then have a full copy of\\n\
+the git repository including its entire git history.\\n"
 
 SRCIPK_CUSTOM_GIT_BRANCH_pn-sitara-linux-ti-staging = "amsdk-8.0"
 SRCIPK_CUSTOM_GIT_MESSAGE_pn-sitara-linux-ti-staging = "${SRCIPK_SHALLOW_GIT_COMMIT_MESSAGE}"
