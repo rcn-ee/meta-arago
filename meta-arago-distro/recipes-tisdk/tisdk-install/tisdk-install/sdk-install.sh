@@ -56,7 +56,6 @@ rm -rf `find $install_dir -name ".svn"`
 
 
 # Update Rules.make variables
-
 sed -i -e s=__SDK__INSTALL_DIR__=$install_dir= $install_dir/Rules.make 
 
 # Find the linux directory name
@@ -97,6 +96,11 @@ TOOLCHAIN_INCLUDE_DIR="linux-devkit/sysroots/$SDK_SYS/usr/lib/gcc/$TOOLCHAIN_SYS
 SDK_PATH_TARGET="linux-devkit/sysroots/$REAL_MULTIMACH_TARGET_SYS/"
 
 sed -i -e s=__SDK_PATH_TARGET__=$SDK_PATH_TARGET= $install_dir/Rules.make
+
+if [ -f "$install_dir/bin/unshallow-repositories.sh" ]
+then
+    sed -i -e s=__SDK_INSTALL_DIR__=$install_dir= $install_dir/bin/unshallow-repositories.sh
+fi
 
 # Update CCS project files using important paths to headers
 
