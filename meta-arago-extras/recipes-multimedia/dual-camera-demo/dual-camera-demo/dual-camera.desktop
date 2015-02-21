@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Dual Camera Demo
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/multimedia-icon.png
+Type=Application
+Exec=dual_camera.sh
+Categories=camera
+ProgramType=gui
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/dual-camera/desc_dual-camera.html

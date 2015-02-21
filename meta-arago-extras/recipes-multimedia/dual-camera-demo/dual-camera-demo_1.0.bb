@@ -7,14 +7,21 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7ca707704d3354a64feeb4f19f52eb5"
 DEPENDS += "libdrm"
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r5"
+PR = "r6"
 
 BRANCH = "drm"
 SRCREV = "0c48cb66cc995420dfec2f1fd620c8977f0170aa"
 
-SRC_URI = "git://gitorious.org/dual-camera-demo/dual-camera-demo.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://gitorious.org/dual-camera-demo/dual-camera-demo.git;protocol=git;branch=${BRANCH} \
+           file://desc_dual-camera.html \
+           file://dual_camera_qt5.sh \
+           file://dual_camera_qt4.sh \
+           file://dual-camera.desktop \
+"
 
 S = "${WORKDIR}/git"
+
+DEMO_SCRIPT = "${@base_conditional('QT_PROVIDER', 'qt5', 'dual_camera_qt5.sh', 'dual_camera_qt4.sh', d)}"
 
 inherit qt-provider
 
@@ -25,8 +32,9 @@ do_install() {
     install -d ${D}/usr/bin
     install -d ${D}${MATRIX_APP_DIR}/dual-camera
     install dual_camera ${D}/usr/bin/dual_camera
-    install dual_camera.sh ${D}/usr/bin/dual_camera.sh
-    install matrix/* ${D}/${MATRIX_APP_DIR}/dual-camera
+    install ${WORKDIR}/${DEMO_SCRIPT} ${D}/usr/bin/dual_camera.sh
+    install ${WORKDIR}/desc_dual-camera.html ${D}/${MATRIX_APP_DIR}/dual-camera
+    install ${WORKDIR}/dual-camera.desktop ${D}/${MATRIX_APP_DIR}/dual-camera
 }
 
 PACKAGES += "matrix-gui-apps-dual-camera"
