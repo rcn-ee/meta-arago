@@ -36,7 +36,7 @@ SRC_URI = "\
     file://Makefile_cryptodev \
 "
 
-PR = "r38"
+PR = "r39"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -76,6 +76,8 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            linux-dtbs \
                            wireless \
                            cryptodev \
+                           dual-camera-demo \
+                           image-gallery \
 "
 
 MAKEFILES_append_dra7xx = " cryptodev"
