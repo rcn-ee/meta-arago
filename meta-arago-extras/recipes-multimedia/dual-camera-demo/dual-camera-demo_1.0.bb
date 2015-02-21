@@ -4,18 +4,21 @@ SECTION = "multimedia"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c7ca707704d3354a64feeb4f19f52eb5"
 
+DEPENDS += "libdrm"
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r4"
+PR = "r5"
 
-BRANCH = "master"
-SRCREV = "255808485bfd9bebd7f13ecd48704b6cc9ae0d69"
+BRANCH = "drm"
+SRCREV = "0c48cb66cc995420dfec2f1fd620c8977f0170aa"
 
 SRC_URI = "git://gitorious.org/dual-camera-demo/dual-camera-demo.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
 inherit qt-provider
+
+export SDK_PATH_TARGET='${STAGING_DIR_HOST}'
 
 # use the make targets already created in the Makefile.build files
 do_install() {
@@ -27,6 +30,8 @@ do_install() {
 }
 
 PACKAGES += "matrix-gui-apps-dual-camera"
+
+RDEPENDS_${PN} += "libdrm libdrm-omap"
 
 RDEPENDS_matrix-gui-apps-dual-camera  = "matrix-gui-apps-images matrix-gui-submenus-camera ${PN}"
 
