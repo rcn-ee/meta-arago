@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 inherit packagegroup
 
@@ -39,8 +39,8 @@ UTILS_append_dra7xx = " canutils"
 UTILS_append_omap-a15 = " parted"
 
 UTILS_append_ti33x = " switch-config"
-UTILS_append_ti43x = " switch-config"
-UTILS_append_omap-a15 = " switch-config"
+UTILS_append_ti43x = " switch-config libdrm-omap"
+UTILS_append_omap-a15 = " switch-config libdrm-omap"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
