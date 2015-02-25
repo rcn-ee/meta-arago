@@ -5,4 +5,15 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago2"
+PR_append = "-arago3"
+
+SRC_URI_append = " \
+                  file://usb1-rules.sh \
+                  file://usb2-rules.sh"
+
+do_install_append() {
+    install -d ${D}/${bindir}
+
+    install -m 0755 ${WORKDIR}/usb1-rules.sh ${D}${bindir}/usb1-rules.sh
+    install -m 0755 ${WORKDIR}/usb2-rules.sh ${D}${bindir}/usb2-rules.sh
+}
