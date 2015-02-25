@@ -8,10 +8,10 @@ require recipes-core/matrix/matrix-gui-paths.inc
 
 inherit qt-provider
 
-PR = "r0"
+PR = "r1"
 
 BRANCH = "master"
-SRCREV = "8901d7c598b277e4e26a5abbcb859e7ceebd340a"
+SRCREV = "1f89d5e6c160e87e73a9c06933e50c3981bbf41d"
 
 SRC_URI = "git://gitorious.org/image-gallery/image-gallery.git;protocol=git;branch=${BRANCH}"
 
