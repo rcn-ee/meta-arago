@@ -13,6 +13,8 @@ S = "${WORKDIR}/git/build"
 LIB_INC_DIR = "${WORKDIR}/git"
 UTILS_LIB_INC_DIR = "${WORKDIR}/git/utils/iface/"
 
+ALLOW_EMPTY_${PN} = "1"
+
 do_compile() {
 # Compile the library
 	make clean
