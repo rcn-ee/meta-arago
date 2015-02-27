@@ -8,7 +8,7 @@ require recipes-core/matrix/matrix-gui-paths.inc
 
 inherit qt-provider
 
-PR = "r1"
+PR = "r2"
 
 BRANCH = "master"
 SRCREV = "1f89d5e6c160e87e73a9c06933e50c3981bbf41d"
@@ -21,7 +21,7 @@ do_install() {
 	install -d ${D}/${bindir}
 	install -m 0755 ${B}/image-gallery ${D}/${bindir}/image-gallery
 	install -d ${D}${MATRIX_APP_DIR}/qt-image-gallery
-	cp -rf matrix-files/*  ${D}${MATRIX_APP_DIR}/qt-image-gallery
+	cp -rf ${S}/matrix-files/*  ${D}${MATRIX_APP_DIR}/qt-image-gallery
 }
 
 PACKAGES += "matrix-gui-apps-image-gallery"
