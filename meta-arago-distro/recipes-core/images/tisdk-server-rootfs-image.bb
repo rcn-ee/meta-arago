@@ -12,6 +12,7 @@ IMAGE_INSTALL += "\
     packagegroup-arago-tisdk-addons \
     packagegroup-arago-tisdk-crypto \
     packagegroup-arago-tisdk-matrix \
+    packagegroup-arago-base-tisdk-server-extra \
     gdb \
 "
 
