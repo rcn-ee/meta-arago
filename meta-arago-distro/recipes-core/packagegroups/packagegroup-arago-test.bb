@@ -23,6 +23,7 @@ ARAGO_TEST = "\
     rng-tools \
     perf \
     v4l-utils \
+    serialcheck \
     "
 
 ARAGO_TI_TEST = "\
