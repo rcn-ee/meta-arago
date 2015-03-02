@@ -1,7 +1,6 @@
-# Wireless build targets
-wireless: wifi-firmware
-wireless_install: wifi-firmware_install
-wireless_clean: wifi-firmware_clean
+wireless: wifi-firmware compat-modules
+wireless_install: wifi-firmware_install compat-modules_install
+wireless_clean: wifi-firmware_clean compat-modules_clean
 
 wifi-firmware:
 	@echo ================================
@@ -22,3 +21,29 @@ wifi-firmware_clean:
 	@echo      Cleaning wifi firmware
 	@echo ================================
 	@echo "Nothing to do" 
+
+compat-modules: linux
+	@echo ================================
+	@echo      Building compat-modules
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "*compat-wireless*"`; \
+	make KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} CC="cc" defconfig-wl18xx; \
+	make KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm
+
+compat-modules_install:
+	@echo ================================
+	@echo      Installing compat-modules
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "*compat-wireless*"`; \
+	make DEPMOD=echo DESTDIR=${DESTDIR} KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} INSTALL_MOD_PATH=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm modules_install
+
+compat-modules_clean:
+	@echo ================================
+	@echo      Cleaning compat-modules
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "*compat-wireless*"`; \
+	make KLIB_BUILD=${LINUXKERNEL_INSTALL_DIR} KLIB=${DESTDIR} CROSS_COMPILE=${CROSS_COMPILE} ARCH=arm clean
+
