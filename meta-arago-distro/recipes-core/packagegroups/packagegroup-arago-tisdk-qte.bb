@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 inherit packagegroup
 
@@ -14,12 +14,14 @@ QT4_DEMOS = "\
 "
 
 QT5_DEMOS = "\
+    qt3d-examples \
+    qtbase-examples \
+    qtdeclarative-examples \
+    qtlocation-examples \
+    qtmultimedia-examples \
+    qtscript-examples \
     qtwayland-examples \
     qtwebkit-examples-examples \
-    qtdeclarative-examples \
-    qtmultimedia-examples \
-    qtbase-examples \
-    qt3d-examples \
     qtquick1-examples \
 "
 

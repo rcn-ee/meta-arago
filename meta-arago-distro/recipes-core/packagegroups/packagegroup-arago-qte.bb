@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r7"
+PR = "r8"
 
 inherit packagegroup
 
@@ -29,11 +29,16 @@ QT4_ESSENTIALS = "\
 QT5_ESSENTIALS = "\
     qtbase-plugins \
     qtdeclarative-plugins \
+    qtdeclarative-qmlplugins \
     qtlocation-plugins \
+    qtlocation-qmlplugins \
     qtmultimedia-plugins \
+    qtmultimedia-qmlplugins \
     qtwayland-plugins \
-    qt3d \
-    qtquick1 \
+    qt3d-qmlplugins \
+    qtwebkit-qmlplugins \
+    qtquick1-plugins \
+    qtquick1-qmlplugins \
 "
 
 RDEPENDS_${PN} = "\
