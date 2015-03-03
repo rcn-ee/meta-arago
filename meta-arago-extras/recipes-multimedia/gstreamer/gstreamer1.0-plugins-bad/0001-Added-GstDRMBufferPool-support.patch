@@ -1,0 +1,774 @@
+From 1df02c3320d74c0f36e0ea7021b033da5d4d891e Mon Sep 17 00:00:00 2001
+From: Pooja Prajod <a0132412@ti.com>
+Date: Thu, 11 Dec 2014 15:42:39 +0530
+Subject: [PATCH] Added GstDRMBufferPool support
+
+GstDRMBufferPool enabled creation of a bufferpool with extended features.
+The pool stores the element that created it, device for drm allocation,
+height, width and size of buffers.
+All the buffers allocated are through drm. The buffers have dmabuf, crop
+and video metadata set.
+---
+ configure.ac                                      |    6 +
+ gst-libs/gst/Makefile.am                          |    2 +-
+ gst-libs/gst/drm/Makefile.am                      |   36 ++
+ gst-libs/gst/drm/gstdrmbufferpool.c               |  434 +++++++++++++++++++++
+ gst-libs/gst/drm/gstdrmbufferpool.h               |  138 +++++++
+ pkgconfig/Makefile.am                             |    3 +
+ pkgconfig/gstreamer-drm-uninstalled.pc.in         |   12 +
+ pkgconfig/gstreamer-drm.pc.in                     |   12 +
+ pkgconfig/gstreamer-plugins-bad-uninstalled.pc.in |    2 +-
+ 9 files changed, 643 insertions(+), 2 deletions(-)
+ create mode 100644 gst-libs/gst/drm/Makefile.am
+ create mode 100644 gst-libs/gst/drm/gstdrmbufferpool.c
+ create mode 100644 gst-libs/gst/drm/gstdrmbufferpool.h
+ create mode 100644 pkgconfig/gstreamer-drm-uninstalled.pc.in
+ create mode 100644 pkgconfig/gstreamer-drm.pc.in
+
+diff --git a/configure.ac b/configure.ac
+index 8f1a4cb..edf8ea8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -457,6 +457,9 @@ AC_ARG_WITH([egl-window-system],
+               [EGL_WINDOW_SYSTEM="$withval"],
+               [EGL_WINDOW_SYSTEM="auto"])
+ 
++dnl *** gst-libs/gst/egl ***
++PKG_CHECK_MODULES([DRM], [libdrm libdrm_omap], HAVE_KMS=yes, HAVE_KMS=no)
++
+ if test x"$EGL_WINDOW_SYSTEM" = x"auto"; then
+   dnl Mali
+   old_LIBS=$LIBS
+@@ -2404,6 +2407,7 @@ gst/yadif/Makefile
+ gst-libs/Makefile
+ gst-libs/gst/Makefile
+ gst-libs/gst/basecamerabinsrc/Makefile
++gst-libs/gst/drm/Makefile
+ gst-libs/gst/egl/Makefile
+ gst-libs/gst/insertbin/Makefile
+ gst-libs/gst/interfaces/Makefile
+@@ -2523,6 +2527,8 @@ pkgconfig/gstreamer-plugins-bad.pc
+ pkgconfig/gstreamer-plugins-bad-uninstalled.pc
+ pkgconfig/gstreamer-codecparsers.pc
+ pkgconfig/gstreamer-codecparsers-uninstalled.pc
++pkgconfig/gstreamer-drm.pc
++pkgconfig/gstreamer-drm-uninstalled.pc
+ pkgconfig/gstreamer-insertbin.pc
+ pkgconfig/gstreamer-insertbin-uninstalled.pc
+ pkgconfig/gstreamer-egl.pc
+diff --git a/gst-libs/gst/Makefile.am b/gst-libs/gst/Makefile.am
+index 1d6cc35..b915d07 100644
+--- a/gst-libs/gst/Makefile.am
++++ b/gst-libs/gst/Makefile.am
+@@ -2,7 +2,7 @@ if HAVE_EGL
+ EGL_DIR = egl
+ endif
+ 
+-SUBDIRS = interfaces basecamerabinsrc codecparsers \
++SUBDIRS = interfaces basecamerabinsrc codecparsers drm \
+ 	 insertbin uridownloader mpegts $(EGL_DIR)
+ 
+ noinst_HEADERS = gst-i18n-plugin.h gettext.h glib-compat-private.h
+diff --git a/gst-libs/gst/drm/Makefile.am b/gst-libs/gst/drm/Makefile.am
+new file mode 100644
+index 0000000..4808009
+--- /dev/null
++++ b/gst-libs/gst/drm/Makefile.am
+@@ -0,0 +1,36 @@
++
++lib_LTLIBRARIES = libgstdrm-@GST_API_VERSION@.la
++
++CLEANFILES = $(BUILT_SOURCES)
++
++libgstdrm_@GST_API_VERSION@_la_SOURCES = \
++	gstdrmbufferpool.c
++
++libgstdrm_@GST_API_VERSION@includedir = \
++	$(includedir)/gstreamer-@GST_API_VERSION@/gst/drm
++
++libgstdrm_@GST_API_VERSION@include_HEADERS = \
++	gstdrmbufferpool.h
++
++libgstdrm_@GST_API_VERSION@_la_CFLAGS = \
++	$(DRM_CFLAGS) \
++	$(OMAPDRM_CFLAGS) \
++	$(GST_PLUGINS_BAD_CFLAGS) \
++	$(GST_PLUGINS_BASE_CFLAGS) \
++	-DGST_USE_UNSTABLE_API \
++	$(GST_CFLAGS)
++
++libgstdrm_@GST_API_VERSION@_la_LIBADD = \
++	$(DRM_LIBS) \
++	-lgstdmabuf-@GST_API_VERSION@ \
++	$(GST_PLUGINS_BASE_LIBS) \
++	$(GST_BASE_LIBS) \
++	$(GST_LIBS) \
++	-lgstdmabuf-@GST_API_VERSION@
++
++libgstdrm_@GST_API_VERSION@_la_LDFLAGS = \
++	$(DRM_LDFLAGS) \
++	$(GST_LIB_LDFLAGS) \
++	$(GST_ALL_LDFLAGS) \
++	$(GST_LT_LDFLAGS)
++
+diff --git a/gst-libs/gst/drm/gstdrmbufferpool.c b/gst-libs/gst/drm/gstdrmbufferpool.c
+new file mode 100644
+index 0000000..6ac8044
+--- /dev/null
++++ b/gst-libs/gst/drm/gstdrmbufferpool.c
+@@ -0,0 +1,434 @@
++/*
++ * GStreamer
++ *
++ * Copyright (C) 2012 Texas Instruments
++ * Copyright (C) 2012 Collabora Ltd
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ *  Rob Clark <rob.clark@linaro.org>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation
++ * version 2.1 of the License.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ */
++
++/**
++ * SECTION:GstDRMBufferPool
++ * @short_description: GStreamer DRM buffer pool support
++ *
++ * Since: 1.2.?
++ */
++
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include <string.h>
++
++#include <gst/dmabuf/dmabuf.h>
++
++#include "gstdrmbufferpool.h"
++
++GST_DEBUG_CATEGORY (drmbufferpool_debug);
++#define GST_CAT_DEFAULT drmbufferpool_debug
++
++static GstFlowReturn gst_drm_alloc_new_buffer (GstBufferPool * pool, GstBuffer ** buffer,
++    GstBufferPoolAcquireParams * params);
++
++
++#define gst_drm_buffer_pool_parent_class parent_class
++G_DEFINE_TYPE (GstDRMBufferPool, gst_drm_buffer_pool, GST_TYPE_BUFFER_POOL);
++
++
++/**
++ * gst_drm_buffer_pool_set_config:
++ * @pool: a #GstBufferPool
++ * @config: a #GstStructure
++ *
++ * Parses the @config to retrieve the caps that is set by gst_buffer_pool_config_set_params().
++ * This caps is then parsed to retrieve the video info. This function can be called to
++ * change the caps of the buffer pool. 
++ * 
++ * Returns: the boolean value, TRUE for success and FALSE in case of an errors
++ *
++ * Since: 1.2.?
++ */
++
++gboolean
++gst_drm_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
++{
++  GstDRMBufferPool *drmpool = GST_DRM_BUFFER_POOL (pool);
++  GstCaps *caps;
++
++  /* get the caps param already set in the config */
++  if (!gst_buffer_pool_config_get_params (config, &caps, NULL, NULL, NULL))
++    goto wrong_config;
++
++  if (caps == NULL)
++    goto no_caps;
++
++  /* now parse the caps from the config to get the video info */
++  if (!gst_video_info_from_caps (&drmpool->info, caps))
++    goto wrong_caps;
++
++  GST_LOG_OBJECT (pool, "%dx%d, caps %" GST_PTR_FORMAT, drmpool->info.width, drmpool->info.height,
++      caps);
++
++  /* Set caps related variables of the pool */
++  drmpool->caps = gst_caps_ref (caps);
++  drmpool->width = drmpool->info.width;
++  drmpool->height = drmpool->info.height;
++
++  return GST_BUFFER_POOL_CLASS (parent_class)->set_config (pool, config);
++
++  /* ERRORS */
++wrong_config:
++  {
++    GST_WARNING_OBJECT (pool, "invalid config");
++    return FALSE;
++  }
++no_caps:
++  {
++    GST_WARNING_OBJECT (pool, "no caps in config");
++    return FALSE;
++  }
++wrong_caps:
++  {
++    GST_WARNING_OBJECT (pool,
++        "failed getting geometry from caps %" GST_PTR_FORMAT, caps);
++    return FALSE;
++  }
++}
++
++
++/**
++ * gst_drm_buffer_pool_initialize:
++ * @pool: a #GstBufferPool
++ * @element: a #GstElement
++ * @fd: a file descriptor
++ * @caps: a #GstCaps
++ * @size: the padded size of buffers
++ *
++ * Initializes the device related info. Sets the params for buffer pool config.
++ * Sets the config of the pool by calling gst_buffer_pool_set_config(). 
++ * 
++ *
++ * Since: 1.2.?
++ */
++
++
++void
++gst_drm_buffer_pool_initialize (GstDRMBufferPool * self,
++    GstElement * element, int fd, GstCaps * caps, guint size)
++{
++  GstStructure *conf;
++
++  /* store the element that requested for the pool */
++  if(element)
++   self->element = gst_object_ref (element);
++
++  /* initialize device info */
++  self->fd = fd;
++  self->dev = omap_device_new (fd);
++
++  /* Padded size of buffers. Can be used for testing requested-buffer-size vs obtained-buffer-size */
++  self->size = size;
++ 
++
++  /* get the present config of the buffer pool */
++  conf = gst_buffer_pool_get_config (GST_BUFFER_POOL(self));
++  if(conf == NULL) {
++   GST_WARNING_OBJECT(self, "NULL config obtained after get_config on the pool");
++   }
++
++  /* set the config params : caps, size of the buffers, min number of buffers,
++     max number of buffers (0 for unlimited) */
++  gst_buffer_pool_config_set_params (conf, caps, size, 0, 0);
++  if(conf == NULL){
++    GST_WARNING_OBJECT(self, "NULL config after set_params");
++   }
++
++  /* set config of the pool */
++  gst_buffer_pool_set_config (GST_BUFFER_POOL(self), conf);
++
++}
++
++
++/**
++ * gst_drm_buffer_pool_new:
++ * @element: a #GstElement
++ * @fd: a file descriptor
++ * @caps: a #GstCaps
++ * @size: the padded size of buffers
++ *
++ * Creates a GstDRMBufferPool and initializes it through gst_drm_buffer_pool_initialize()
++ *
++ * Returns: the #GstDRMBufferPool created and initialized.
++ *
++ * Since: 1.2.?
++ */
++
++GstDRMBufferPool *
++gst_drm_buffer_pool_new (GstElement * element,
++    int fd, GstCaps * caps, guint size)
++{
++  GstDRMBufferPool *self = g_object_new (GST_TYPE_DRM_BUFFER_POOL, NULL);
++
++  GST_DEBUG_OBJECT (element,
++      "Creating DRM buffer pool with caps %" GST_PTR_FORMAT, caps);
++
++  gst_drm_buffer_pool_initialize (self, element, fd, caps, size);
++  
++  return self;
++}
++
++
++/**
++ * gst_drm_buffer_pool_size:
++ * @self: a #GstDRMBufferPool
++ *
++ * Obtain the padded size of buffers set during bufferpool creation
++ *
++ * Returns: the size of individual buffers within the bufferpool.
++ *
++ * Since: 1.2.?
++ */
++
++guint
++gst_drm_buffer_pool_size (GstDRMBufferPool * self)
++{
++  return self->size;
++}
++
++
++/**
++ * gst_drm_buffer_pool_check_caps:
++ * @self: a #GstDRMBufferPool
++ * @caps: a #GstCaps
++ *
++ * Check if the @caps and the caps of the @self is strictly equal
++ *
++ * Returns: the boolean value obtained from gst_caps_is_strictly_equal()
++ *
++ * Since: 1.2.?
++ */
++
++gboolean
++gst_drm_buffer_pool_check_caps (GstDRMBufferPool * self, GstCaps * caps)
++{
++  return gst_caps_is_strictly_equal (self->caps, caps);
++}
++
++
++/**
++ * gst_drm_buffer_pool_destroy:
++ * @self: a #GstDRMBufferPool
++ *
++ * destroy existing bufferpool by gst_object_unref()
++ *
++ * Since: 1.2.?
++ */
++
++void
++gst_drm_buffer_pool_destroy (GstDRMBufferPool * self)
++{
++  g_return_if_fail (self);
++
++  GST_DEBUG_OBJECT (self->element, "destroy pool (contains: %d buffers)",
++      self->nbbufs);
++
++ /* Sets the buffer pool active to FALSE. Unrefs the buffer pool.
++    If the the ref_count becomes zero, all buffers are freed and the bufferpool is destroyed */  
++ if(GST_OBJECT_REFCOUNT(self)) {
++  gst_buffer_pool_set_active (GST_BUFFER_POOL(self), FALSE);
++  gst_object_unref (self);
++  }
++}
++
++
++
++/**
++ * gst_drm_buffer_pool_get:
++ * @self: a #GstDRMBufferPool
++ * @force_alloc: a boolean indicating if a buffer should be acquired from already queued buffers of pool.
++ *
++ * Get a buffer from the #GstDRMBufferPool
++ *
++ * Returns: the #GstBuffer
++ *
++ * Since: 1.2.?
++ */
++
++GstBuffer *
++gst_drm_buffer_pool_get (GstDRMBufferPool * self, gboolean force_alloc)
++{
++  GstBuffer *buf = NULL; 
++  g_return_val_if_fail (self, NULL);
++
++  /* Set the buffer pool to active so that acquire_buffer() is not blocked */
++  gst_buffer_pool_set_active (GST_BUFFER_POOL(self), TRUE);
++
++  /* re-use a buffer off the queued buffers of pool if any are available */
++  if (!force_alloc) {
++     gst_buffer_pool_acquire_buffer (GST_BUFFER_POOL (self), &buf, NULL);
++  } else {
++     GST_BUFFER_POOL_CLASS(GST_DRM_BUFFER_POOL_GET_CLASS (self))->alloc_buffer(GST_BUFFER_POOL (self), &buf, NULL);
++
++  }
++    
++  /* Set the buffer pool active to FALSE */
++  gst_buffer_pool_set_active (GST_BUFFER_POOL(self), FALSE);
++    
++  GST_LOG_OBJECT (self->element, "returning buf %p", buf);
++
++  return GST_BUFFER (buf);
++}
++
++
++/**
++ * gst_drm_buffer_pool_put:
++ * @self: a #GstDRMBufferPool
++ * @force_alloc: a boolean indicating if a buffer should be acquired from already queued buffers of pool.
++ *
++ * Get a buffer from the #GstDRMBufferPool
++ *
++ * Returns: the boolean value corresponding to success (TRUE)
++ *
++ * Since: 1.2.?
++ */
++gboolean
++gst_drm_buffer_pool_put (GstDRMBufferPool * self, GstBuffer * buf)
++{
++  gboolean reuse = gst_buffer_pool_is_active (GST_BUFFER_POOL (self));
++   if(reuse){
++       gst_buffer_pool_release_buffer(GST_BUFFER_POOL(self) , buf);
++   }
++  return reuse;
++}
++
++static void
++gst_drm_buffer_pool_finalize (GObject * pool)
++{
++  GstDRMBufferPool *self = GST_DRM_BUFFER_POOL (pool);
++  GST_DEBUG_OBJECT (self->element, "finalize");
++
++  if (self->caps)
++    gst_caps_unref (self->caps);
++  if (self->element)
++    gst_object_unref (self->element);
++  if (self->dev)
++   omap_device_del (self->dev);
++  G_OBJECT_CLASS (gst_drm_buffer_pool_parent_class)->finalize(pool);
++}
++
++static void
++gst_drm_buffer_pool_class_init (GstDRMBufferPoolClass * klass)
++{
++  GObjectClass *object_class;
++  GstBufferPoolClass *bclass = GST_BUFFER_POOL_CLASS (klass);
++  GST_DEBUG_CATEGORY_INIT (drmbufferpool_debug, "drmbufferpool", 0,
++      "DRM buffer pool");
++  parent_class = g_type_class_peek_parent (klass);
++  object_class = G_OBJECT_CLASS (klass);
++  bclass->set_config = gst_drm_buffer_pool_set_config;
++  bclass->alloc_buffer = gst_drm_alloc_new_buffer;
++  object_class->finalize = gst_drm_buffer_pool_finalize;
++}
++
++static void
++gst_drm_buffer_pool_init (GstDRMBufferPool * self)
++{
++#ifndef GST_DISABLE_GST_DEBUG
++  self->nbbufs = 0;
++#endif /* DEBUG */
++}
++
++/**
++ * gst_drm_alloc_new_buffer:
++ * @bufpool: a #GstBufferPool
++ * @buffer: a pointer to #GstBuffer
++ * @params: a #GstBufferPoolAcquireParams
++ *
++ * Allocate a new buffer to the #GstDRMBufferPool
++ *
++ * Returns: the #GstFlowReturn
++ *
++ * Since: 1.2.?
++ */
++static GstFlowReturn
++gst_drm_alloc_new_buffer (GstBufferPool * bufpool, GstBuffer ** buffer,
++    GstBufferPoolAcquireParams * params)
++{
++
++  /* create a buffer with ref_count = 1 */
++  GstBuffer *buf = gst_buffer_new ();
++  GstDRMBufferPool *pool = GST_DRM_BUFFER_POOL(bufpool);
++  GstVideoCropMeta *crop;
++  GstMetaDmaBuf *dmabuf;
++  GstVideoMeta *videometa;
++
++  /* TODO: if allocation could be handled via libkms then this
++   * bufferpool implementation could be completely generic..
++   * otherwise we might want some support for various different
++   * drm drivers here:
++   */
++
++  struct omap_bo *bo = omap_bo_new (pool->dev, pool->size, OMAP_BO_WC);
++  if (!bo) {
++    GST_WARNING_OBJECT (pool->element, "Failed to create bo");
++    return GST_FLOW_ERROR;;
++  }
++
++  /* allocating a memory to the buffer we created */
++  gst_buffer_append_memory (buf,
++      gst_memory_new_wrapped (GST_MEMORY_FLAG_NO_SHARE, omap_bo_map (bo),
++          pool->size, 0, pool->size, NULL, NULL));
++  
++  /* Adding the necessary metadatas with initialization*/
++
++  dmabuf = gst_buffer_add_dma_buf_meta (GST_BUFFER (buf), omap_bo_dmabuf (bo));
++  if(!dmabuf){
++    GST_DEBUG_OBJECT (pool, "Failed to add dmabuf meta to buffer");
++  }
++
++  videometa = gst_buffer_add_video_meta(buf,GST_VIDEO_FRAME_FLAG_NONE, GST_VIDEO_INFO_FORMAT(&pool->info), pool->width, pool->height);
++  if(!videometa){
++    GST_DEBUG_OBJECT (pool, "Failed to add video meta to buffer");
++  }
++
++  crop = gst_buffer_add_video_crop_meta(buf);
++  if(!crop){
++    GST_DEBUG_OBJECT (pool, "Failed to add crop meta to buffer");
++  } else {
++  crop->x = 0;
++  crop->y = 0;
++  crop->height = pool->height;
++  crop->width = pool->width;
++  }
++
++  /* Pointer to the buffer (passed as argument) should now point to the buffer we created */
++  *buffer = buf;
++
++#ifndef GST_DISABLE_GST_DEBUG
++      {
++        GST_DEBUG_OBJECT (pool, "Creating new buffer (living buffer: %i)",
++            ++pool->nbbufs);
++      }
++#endif
++
++  return GST_FLOW_OK;
++
++}
++
+diff --git a/gst-libs/gst/drm/gstdrmbufferpool.h b/gst-libs/gst/drm/gstdrmbufferpool.h
+new file mode 100644
+index 0000000..a9f3fba
+--- /dev/null
++++ b/gst-libs/gst/drm/gstdrmbufferpool.h
+@@ -0,0 +1,138 @@
++/*
++ * GStreamer
++ *
++ * Copyright (C) 2012 Texas Instruments
++ * Copyright (C) 2012 Collabora Ltd
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ *  Rob Clark <rob.clark@linaro.org>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation
++ * version 2.1 of the License.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ */
++
++#ifndef __GSTDRMBUFFERPOOL_H__
++#define __GSTDRMBUFFERPOOL_H__
++
++#include <gst/gst.h>
++#include <gst/video/gstvideometa.h>
++G_BEGIN_DECLS
++
++/* TODO replace dependency on libdrm_omap w/ libdrm.. the only thing
++ * missing is way to allocate buffers, but this should probably be
++ * done via libdrm?
++ *
++ * NOTE: this dependency is only for those who want to subclass us,
++ * so we could perhaps move the struct definitions into a separate
++ * header or split out private ptr and move that into the .c file..
++ */
++#include <stdint.h>
++#include <omap_drm.h>
++#include <omap_drmif.h>
++
++#define GST_TYPE_DRM_BUFFER_POOL (gst_drm_buffer_pool_get_type())
++#define GST_IS_DRM_BUFFER_POOL(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_DRM_BUFFER_POOL))
++#define GST_DRM_BUFFER_POOL(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_DRM_BUFFER_POOL, GstDRMBufferPool))
++#define GST_DRM_BUFFER_POOL_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_DRM_BUFFER_POOL, GstDRMBufferPoolClass))
++#define GST_DRM_BUFFER_POOL_CLASS(klass)   (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_DRM_BUFFER_POOL, GstDRMBufferPoolClass))
++
++
++typedef struct _GstDRMBufferPool GstDRMBufferPool;
++typedef struct _GstDRMBufferPoolClass GstDRMBufferPoolClass;
++
++
++/*
++ * GstDRMBufferPool:
++ */
++
++struct _GstDRMBufferPool {
++  GstBufferPool parent;
++
++  int fd;
++  struct omap_device *dev;
++
++  /* output (padded) size including any codec padding: */
++  guint size;
++  gint width, height;
++
++  /* Video info obtained from caps */
++  GstVideoInfo info;
++  
++  GstCaps         *caps;
++  GstElement      *element;  /* the element that owns us.. */
++
++#ifndef GST_DISABLE_GST_DEBUG
++  guint            nbbufs;
++#endif /* DEBUG */
++
++  /* TODO add reserved */
++};
++
++struct _GstDRMBufferPoolClass {
++  GstBufferPoolClass klass;
++
++  /* allow the subclass to allocate it's own buffers that extend
++   * GstDRMBuffer:
++   */
++  GstFlowReturn  (*alloc_buffer)(GstBufferPool * pool, GstBuffer ** buffer,
++    GstBufferPoolAcquireParams * params);
++
++  /* The a buffer subclass should not override finalize, as that
++   * would interfere with reviving the buffer and returning to the
++   * pool.  Instead you can implement this vmethod to cleanup a
++   * buffer.
++   */
++  void (*buffer_cleanup)(GstDRMBufferPool * pool, GstBuffer *buf);
++
++  /* Called when a buffer is added back to the pool after its last
++   * ref has been removed.
++   */
++  void (*buffer_pooled)(GstDRMBufferPool * pool, GstBuffer *buf);
++
++  /* TODO add reserved */
++};
++
++GType gst_drm_buffer_pool_get_type (void);
++
++void gst_drm_buffer_pool_initialize (GstDRMBufferPool * self,
++    GstElement * element, int fd, GstCaps * caps, guint size);
++
++/* to set/change the config of pool */
++gboolean gst_drm_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config);
++
++/* create a new drm buffer pool */
++GstDRMBufferPool * gst_drm_buffer_pool_new (GstElement * element,
++    int fd, GstCaps * caps, guint size);
++
++/* unref the drm buffer pool */
++void gst_drm_buffer_pool_destroy (GstDRMBufferPool * self);
++
++/* size of buffers in the pool */
++guint gst_drm_buffer_pool_size (GstDRMBufferPool * self);
++
++/* check the present caps of the pool */
++gboolean gst_drm_buffer_pool_check_caps (GstDRMBufferPool * self,
++    GstCaps * caps);
++
++/* get a buffer from the pool */
++GstBuffer * gst_drm_buffer_pool_get (GstDRMBufferPool * self,
++    gboolean force_alloc);
++
++/* release a buffer to the pool */
++gboolean gst_drm_buffer_pool_put (GstDRMBufferPool * self, GstBuffer * buf);
++
++G_END_DECLS
++
++#endif /* __GSTDRMBUFFERPOOL_H__ */
+diff --git a/pkgconfig/Makefile.am b/pkgconfig/Makefile.am
+index 430e123..3fde657 100644
+--- a/pkgconfig/Makefile.am
++++ b/pkgconfig/Makefile.am
+@@ -3,12 +3,14 @@
+ pcverfiles =  \
+ 	gstreamer-plugins-bad-@GST_API_VERSION@.pc \
+ 	gstreamer-codecparsers-@GST_API_VERSION@.pc \
++        gstreamer-drm-@GST_API_VERSION@.pc \
+ 	gstreamer-insertbin-@GST_API_VERSION@.pc \
+ 	gstreamer-mpegts-@GST_API_VERSION@.pc
+ 
+ pcverfiles_uninstalled = \
+ 	gstreamer-plugins-bad-@GST_API_VERSION@-uninstalled.pc \
+ 	gstreamer-codecparsers-@GST_API_VERSION@-uninstalled.pc \
++        gstreamer-drm-@GST_API_VERSION@-uninstalled.pc \
+ 	gstreamer-insertbin-@GST_API_VERSION@-uninstalled.pc \
+ 	gstreamer-mpegts-@GST_API_VERSION@-uninstalled.pc
+ 
+@@ -36,6 +38,7 @@ CLEANFILES = $(pcverfiles) $(pcverfiles_uninstalled)
+ pcinfiles = \
+            gstreamer-plugins-bad.pc.in gstreamer-plugins-bad-uninstalled.pc.in \
+            gstreamer-codecparsers.pc.in gstreamer-codecparsers-uninstalled.pc.in \
++           gstreamer-drm.pc.in gstreamer-drm-uninstalled.pc.in \
+            gstreamer-insertbin.pc.in gstreamer-insertbin-uninstalled.pc.in \
+            gstreamer-egl.pc.in gstreamer-egl-uninstalled.pc.in \
+            gstreamer-mpegts.pc.in gstreamer-mpegts-uninstalled.pc.in
+diff --git a/pkgconfig/gstreamer-drm-uninstalled.pc.in b/pkgconfig/gstreamer-drm-uninstalled.pc.in
+new file mode 100644
+index 0000000..fc0e3f2
+--- /dev/null
++++ b/pkgconfig/gstreamer-drm-uninstalled.pc.in
+@@ -0,0 +1,12 @@
++prefix=
++exec_prefix=
++libdir=${pcfiledir}/../gst-libs/gst/drm
++includedir=${pcfiledir}/../gst-libs
++
++Name: GStreamer DRM buffer pool, Uninstalled
++Description: DRM buffer pool for GStreamer elements, uninstalled
++Requires: gstreamer-@GST_MAJORMINOR@ gstreamer-base-@GST_MAJORMINOR@
++Version: @VERSION@
++Libs: -L${libdir} ${libdir}/libgstdrm-@GST_MAJORMINOR@.la
++Cflags: -I${includedir}
++
+diff --git a/pkgconfig/gstreamer-drm.pc.in b/pkgconfig/gstreamer-drm.pc.in
+new file mode 100644
+index 0000000..8182b4f
+--- /dev/null
++++ b/pkgconfig/gstreamer-drm.pc.in
+@@ -0,0 +1,12 @@
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@/gstreamer-@GST_MAJORMINOR@
++
++Name: GStreamer DRM buffer pool
++Description: DRM buffer pool for GStreamer elements
++Requires: gstreamer-@GST_MAJORMINOR@ gstreamer-base-@GST_MAJORMINOR@
++Version: @VERSION@
++Libs: -L${libdir} -lgstdrm-@GST_MAJORMINOR@
++Cflags: -I${includedir}
++
+diff --git a/pkgconfig/gstreamer-plugins-bad-uninstalled.pc.in b/pkgconfig/gstreamer-plugins-bad-uninstalled.pc.in
+index 6fcf773..ed0e5b0 100644
+--- a/pkgconfig/gstreamer-plugins-bad-uninstalled.pc.in
++++ b/pkgconfig/gstreamer-plugins-bad-uninstalled.pc.in
+@@ -10,5 +10,5 @@ Name: GStreamer Bad Plugin libraries, Uninstalled
+ Description: Streaming media framework, bad plugins libraries, uninstalled
+ Version: @VERSION@
+ Requires: gstreamer-@GST_API_VERSION@
+-Libs: -L@abs_top_builddir@/gst-libs/gst/basecamerabinsrc -L@abs_top_builddir@/gst-libs/gst/codecparsers -L@abs_top_builddir@/gst-libs/gst/egl -L@abs_top_builddir@/gst-libs/gst/insertbin -L@abs_top_builddir@/gst-libs/gst/interfaces -L@abs_top_builddir@/gst-libs/gst/mpegts -L@abs_top_builddir@/gst-libs/gst/signalprocessor -L@abs_top_builddir@/gst-libs/gst/video
++Libs: -L@abs_top_builddir@/gst-libs/gst/basecamerabinsrc -L@abs_top_builddir@/gst-libs/gst/codecparsers -L@abs_top_builddir@/gst-libs/gst/drm -L@abs_top_builddir@/gst-libs/gst/egl -L@abs_top_builddir@/gst-libs/gst/insertbin -L@abs_top_builddir@/gst-libs/gst/interfaces -L@abs_top_builddir@/gst-libs/gst/mpegts -L@abs_top_builddir@/gst-libs/gst/signalprocessor -L@abs_top_builddir@/gst-libs/gst/video
+ Cflags: -I@abs_top_srcdir@/gst-libs -I@abs_top_builddir@/gst-libs
+-- 
+1.7.9.5
+
