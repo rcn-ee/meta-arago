@@ -12,7 +12,7 @@ RDEPENDS_${PN} = "wireless-tools"
 PV = "R8.5"
 inherit module
 
-PR = "${MACHINE_KERNEL_PR}+e+gitr${SRCPV}"
+PR = "${MACHINE_KERNEL_PR}+f+gitr${SRCPV}"
 
 # Tags: R8.5
 SRCREV_wl18xx = "cb51164c672b1ecadef339b9f9b39e29ab706723"
@@ -38,10 +38,11 @@ do_configure() {
     python ./gentree.py --clean  "${WORKDIR}/wl18xx" "${WORKDIR}/compat-wireless"
 
     cd ${S}
-    make defconfig-wl18xx
 
     # Now generate the sourceipk with the properly configured sources
     sourceipk_do_create_srcipk
+
+    make defconfig-wl18xx
 }
 
 do_install() {
