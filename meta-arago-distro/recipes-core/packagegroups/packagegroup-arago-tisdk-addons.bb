@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r20"
+PR = "r21"
 
 inherit packagegroup
 
@@ -19,6 +19,7 @@ UTILS = " \
     ptpd \
     libdrm-kms \
     ${@base_contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
+    stream \
 "
 
 UTILS_UBOOT_FW = "u-boot-fw-utils"
