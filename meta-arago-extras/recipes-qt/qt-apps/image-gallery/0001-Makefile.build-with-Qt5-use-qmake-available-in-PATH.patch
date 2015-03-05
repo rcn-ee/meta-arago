@@ -1,0 +1,31 @@
+From 6b6a4b55c7ec53384fbbb8a9b0ba95350e7118b7 Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Wed, 4 Mar 2015 11:59:53 -0500
+Subject: [PATCH] Makefile.build: with Qt5 use qmake available in PATH
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ Makefile.build |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.build b/Makefile.build
+index fc3f14c..0afe5c0 100644
+--- a/Makefile.build
++++ b/Makefile.build
+@@ -9,11 +9,11 @@ all: release
+ .PHONY: qmake
+ qmake : image-gallery.pro
+ 	@. ${ENV_SETUP}; \
+-	qmake2 CONFIG+=release image-gallery.pro
++	qmake CONFIG+=release image-gallery.pro
+ 
+ qmake_debug : image-gallery.pro
+ 	@. ${ENV_SETUP}; \
+-	qmake2 CONFIG+=debug image-gallery.pro
++	qmake CONFIG+=debug image-gallery.pro
+ 
+ debug : qmake_debug
+ 	@. ${ENV_SETUP}; \
+-- 
+1.7.9.5
+

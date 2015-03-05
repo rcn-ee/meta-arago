@@ -8,12 +8,18 @@ require recipes-core/matrix/matrix-gui-paths.inc
 
 inherit qt-provider
 
-PR = "r2"
+PR = "r3"
 
 BRANCH = "master"
 SRCREV = "1f89d5e6c160e87e73a9c06933e50c3981bbf41d"
 
 SRC_URI = "git://gitorious.org/image-gallery/image-gallery.git;protocol=git;branch=${BRANCH}"
+
+QT5_DIFF = " \
+    file://0001-Makefile.build-with-Qt5-use-qmake-available-in-PATH.patch \
+"
+
+SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', "${QT5_DIFF}", '', d)}"
 
 S = "${WORKDIR}/git/"
 
