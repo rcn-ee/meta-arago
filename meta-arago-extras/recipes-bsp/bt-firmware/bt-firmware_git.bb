@@ -11,9 +11,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
-PR = "r7+gitr${SRCPV}"
+PR = "r8+gitr${SRCPV}"
 
-COMPATIBLE_MACHINE = "ti33x|ti43x|dra7xx-evm"
+COMPATIBLE_MACHINE = "ti33x|ti43x|dra7xx"
 
 SRCREV = "46f6a1d0087bd9aac6e6cbae58ed9ee236e5f1b1"
 BRANCH = "master"
