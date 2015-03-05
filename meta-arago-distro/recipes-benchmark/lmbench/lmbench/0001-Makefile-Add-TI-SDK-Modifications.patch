@@ -1,0 +1,75 @@
+From 3ed56a3eebce30e1387435eca15c7c82e8f1ed02 Mon Sep 17 00:00:00 2001
+From: "Franklin S. Cooper Jr" <fcooper@ti.com>
+Date: Wed, 4 Mar 2015 15:49:34 -0600
+Subject: [PATCH] Makefile: Add TI SDK Modifications
+
+Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+---
+ src/Makefile |   24 +++++++++++++++---------
+ 1 file changed, 15 insertions(+), 9 deletions(-)
+
+diff --git a/src/Makefile b/src/Makefile
+index c7e4e3c..0133db8 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -34,11 +34,17 @@
+ # I finally know why Larry Wall's Makefile says "Grrrr".
+ SHELL=/bin/sh
+ 
+-CC=`../scripts/compiler`
++CC?=`../scripts/compiler`
+ MAKE=`../scripts/make`
+-AR=ar
++AR?=ar
+ ARCREATE=cr
+-RANLIB=ranlib
++RANLIB?=ranlib
++
++OPTIMIZATIONS = -O3 -ffast-math -ftree-vectorize -funsafe-math-optimizations -fprefetch-loop-arrays
++
++CFLAGS ?=
++CFLAGS += $(OPTIMIZATIONS)
++
+ 
+ # base of installation location
+ BASE=/usr/local
+@@ -112,8 +118,8 @@ LIBOBJS= $O/lib_tcp.o $O/lib_udp.o $O/lib_unix.o $O/lib_timing.o 	\
+ 	$O/lib_sched.o
+ 
+ lmbench: $(UTILS)
+-	@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build all
+-	-@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="k$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build opt
++	@env CFLAGS="$(CFLAGS)" MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build all
++	-@env CFLAGS="$(CFLAGS)" MAKE="$(MAKE)" MAKEFLAGS="k$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build opt
+ 
+ results: lmbench
+ 	@env OS="${OS}" ../scripts/config-run
+@@ -137,7 +143,7 @@ os: lmbench
+ 	@env OS="${OS}" BENCHMARK_HARDWARE=NO  BENCHMARK_OS=YES ../scripts/results
+ 
+ install: lmbench
+-	@env CFLAGS=-O MAKE="$(MAKE)"  MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build install-target
++	@env MAKE="$(MAKE)"  MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build install-target
+ 
+ install-target:
+ 	if [ ! -d $(BASE) ]; then mkdir $(BASE); fi
+@@ -158,13 +164,13 @@ $(ASMS):
+ 	$(CC) -S $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ `basename $@ .s`.c
+ 
+ Wall:
+-	@env CFLAGS="-g -O -Wall" MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
++	@env CFLAGS+=-Wall  MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
+ 
+ debug:
+-	@env CFLAGS="-g -O -DDEBUG" MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
++	@env CFLAGS+=-DDEBUG MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
+ 
+ assembler:
+-	@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build asm
++	@env MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build asm
+ 
+ 
+ tag:
+-- 
+1.7.9.5
+
