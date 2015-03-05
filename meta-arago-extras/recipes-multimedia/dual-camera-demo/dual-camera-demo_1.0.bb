@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7ca707704d3354a64feeb4f19f52eb5"
 DEPENDS += "libdrm"
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r6"
+PR = "r7"
 
 BRANCH = "drm"
 SRCREV = "0c48cb66cc995420dfec2f1fd620c8977f0170aa"
@@ -18,6 +18,12 @@ SRC_URI = "git://gitorious.org/dual-camera-demo/dual-camera-demo.git;protocol=gi
            file://dual_camera_qt4.sh \
            file://dual-camera.desktop \
 "
+
+QT5_DIFF = " \
+    file://0001-Makefile.build-with-Qt5-use-qmake-available-in-PATH.patch \
+"
+
+SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', "${QT5_DIFF}", '', d)}"
 
 S = "${WORKDIR}/git"
 

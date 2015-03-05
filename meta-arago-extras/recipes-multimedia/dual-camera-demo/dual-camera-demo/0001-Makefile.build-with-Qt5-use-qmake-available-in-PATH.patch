@@ -1,0 +1,31 @@
+From 42653f94bbaff15d04ec527add6eeb3082ab4873 Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Wed, 4 Mar 2015 12:00:45 -0500
+Subject: [PATCH] Makefile.build: with Qt5 use qmake available in PATH
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ Makefile.build |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.build b/Makefile.build
+index d715722..fdea3d8 100644
+--- a/Makefile.build
++++ b/Makefile.build
+@@ -9,11 +9,11 @@ all: release
+ .PHONY: qmake
+ qmake : dual_camera.pro
+ 	@. ${ENV_SETUP}; \
+-	qmake2 CONFIG+=release dual_camera.pro
++	qmake CONFIG+=release dual_camera.pro
+ 
+ qmake_debug : dual_camera.pro
+ 	@. ${ENV_SETUP}; \
+-	qmake2 CONFIG+=debug dual_camera.pro
++	qmake CONFIG+=debug dual_camera.pro
+ 
+ debug : qmake_debug
+ 	@. ${ENV_SETUP}; \
+-- 
+1.7.9.5
+
