@@ -353,6 +353,43 @@ echo "
 </tr>
 " >> ${SW_MANIFEST_FILE}
 
+    control_files_there=0
+    for possible_control_file in $control_dir/*.control
+    do
+        if [ -f $possible_control_file ]
+        then
+            control_files_there=1
+            break
+        fi
+    done
+
+    if [ $control_files_there -eq 0 ]
+    then
+        for pkg_idx in $control_dir/oe*; do
+            package_start=`grep -n "^Package" $pkg_idx || true`
+
+            IFS_OLD=${IFS}
+            IFS="
+"
+
+            for pkg in ${package_start}; do
+                end=`echo $pkg | cut -d: -f1`
+
+                if [ -z $begin ]; then
+                    pkg_name=`echo $pkg | cut -d: -f3`
+                    begin=`echo $pkg | cut -d: -f1`
+                    continue
+                fi
+                cnt=$[$cnt+1]
+                head -n $[$end - 1] $pkg_idx | tail -n $[$end - $begin] > ${control_dir}/${pkg_name// /}.control
+
+                pkg_name=`echo $pkg | cut -d: -f3`
+                begin=$end
+            done
+            IFS=${IFS_OLD}
+        done
+    fi
+
     for i in $control_dir/*.control
     do
         package="`cat $i | grep Package: | awk {'print $2'}`"
