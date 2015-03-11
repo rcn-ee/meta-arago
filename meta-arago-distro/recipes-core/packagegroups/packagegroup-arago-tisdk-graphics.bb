@@ -38,9 +38,8 @@ GRAPHICS_RDEPENDS_omap3 = "\
 GRAPHICS_RDEPENDS_omap-a15 = "\
     libgbm \
     omap5-sgx-ddk-um-linux \
+    omapdrm-pvr \
     "
-# Put this back when compile issues are fixed against 3.14
-#    omapdrm-pvr
 
 GRAPHICS_BLTSVILLE = ""
 GRAPHICS_BLTSVILLE_omap-a15 = " \
