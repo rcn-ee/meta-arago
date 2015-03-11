@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r23"
+PR = "r24"
 
 inherit packagegroup
 
@@ -23,13 +23,11 @@ ARAGO_TEST = "\
     rng-tools \
     perf \
     v4l-utils \
-    serialcheck \
     "
 
 ARAGO_TI_TEST = "\
     ltp-ddt \
     input-utils \
-    linaro-pm-qa-utils \
     cpuloadgen \
     "
 
