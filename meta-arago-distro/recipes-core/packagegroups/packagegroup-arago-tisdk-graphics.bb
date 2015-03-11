@@ -41,13 +41,7 @@ GRAPHICS_RDEPENDS_omap-a15 = "\
     omapdrm-pvr \
     "
 
-GRAPHICS_BLTSVILLE = ""
-GRAPHICS_BLTSVILLE_omap-a15 = " \
-    bltsville   \
-    "
-
 RDEPENDS_${PN} = "\
     ${@base_conditional('QT_PROVIDER', 'qt4e', "", "${GRAPHICS_WESTON}", d)} \
     ${GRAPHICS_RDEPENDS} \
-    ${GRAPHICS_BLTSVILLE} \
 "
