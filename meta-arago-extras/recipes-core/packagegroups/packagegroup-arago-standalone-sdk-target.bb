@@ -1,5 +1,5 @@
 DESCRIPTION = "Target packages for the standalone SDK"
-PR = "r6"
+PR = "r7"
 LICENSE = "MIT"
 
 inherit packagegroup
@@ -33,4 +33,5 @@ RDEPENDS_${PN} = "\
     opkg-dev \
     sysvinit-dev \
     util-linux-dev \
+    ${@base_conditional('TCMODE', 'external-linaro', 'libgomp-dev', '', d)} \
     "
