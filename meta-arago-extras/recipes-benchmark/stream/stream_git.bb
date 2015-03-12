@@ -1,10 +1,10 @@
 DESCRIPTION = "Stream Benchmark"
 HOMEPAGE = "http://www.cs.virginia.edu/stream/"
-LICENSE = "BSD"
+LICENSE = "Stream_Benchmark_License"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bca8cbe07976fe64c8946378d08314b0"
 SECTION = "system"
 
-PR = "r0"
+PR = "r1"
 
 BRANCH ?= "master"
 SRCREV = "bd474633b7b0352211b48d84065bf7b7e166e4c2"
