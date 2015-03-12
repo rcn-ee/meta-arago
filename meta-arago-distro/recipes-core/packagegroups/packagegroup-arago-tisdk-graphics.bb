@@ -38,8 +38,9 @@ GRAPHICS_RDEPENDS_omap3 = "\
 GRAPHICS_RDEPENDS_omap-a15 = "\
     libgbm \
     omap5-sgx-ddk-um-linux \
-    omapdrm-pvr \
     "
+# Put this back when compile issues are fixed against 3.14
+#    omapdrm-pvr
 
 RDEPENDS_${PN} = "\
     ${@base_conditional('QT_PROVIDER', 'qt4e', "", "${GRAPHICS_WESTON}", d)} \
