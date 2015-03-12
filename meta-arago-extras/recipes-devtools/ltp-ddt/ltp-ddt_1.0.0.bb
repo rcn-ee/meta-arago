@@ -75,8 +75,6 @@ do_install() {
     oe_runmake install
     install -d ${D}${datadir}
     install -d ${D}${kmoddir}
-    cp -a ${D}${LTPROOT}/share/* ${D}${datadir}
-    rm -rf ${D}${LTPROOT}/share/
     mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
 }
 
