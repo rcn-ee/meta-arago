@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r21"
+PR = "r22"
 
 inherit packagegroup
 
@@ -41,7 +41,7 @@ UTILS_append_omap-a15 = " parted"
 
 UTILS_append_ti33x = " switch-config"
 UTILS_append_ti43x = " switch-config libdrm-omap"
-UTILS_append_omap-a15 = " switch-config libdrm-omap"
+UTILS_append_omap-a15 = " switch-config libdrm-omap stream-openmp"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
