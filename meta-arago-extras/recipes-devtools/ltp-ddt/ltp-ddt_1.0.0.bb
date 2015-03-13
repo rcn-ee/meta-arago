@@ -16,7 +16,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 SRCREV = "eef6281052f36f6fe41059eadcf3b4a94f0d85ea"
 BRANCH ?= "master"
 
-SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
+SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
+    file://ltp-Do-not-link-against-libfl.patch \
+"
 
 S = "${WORKDIR}/git"
 
@@ -64,6 +66,14 @@ kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
 # we explicitly force regeneration of that directory and pass configure options.
 do_configure_append() {
     (cd utils/ffsb-6.0-rc2; autoreconf -fvi; ./configure ${CONFIGUREOPTS})
+}
+
+# The makefiles make excessive use of make -C and several include testcases.mk
+# which triggers a build of the syscall header. To reproduce, build ltp,
+# then delete the header, then "make -j XX" and watch regen.sh run multiple
+# times. Its easier to generate this once here instead.
+do_compile_prepend () {
+    ( make -C ${B}/testcases/kernel include/linux_syscall_numbers.h )
 }
 
 do_compile_append () {
