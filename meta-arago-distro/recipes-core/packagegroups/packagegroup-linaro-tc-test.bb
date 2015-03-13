@@ -1,6 +1,8 @@
 DESCRIPTION = "Group of packages to build with Linaro toolchain for testing"
 LICENSE = "MIT"
 
+PR = "r1"
+
 inherit packagegroup
 
 RDEPENDS_${PN} = "\
@@ -10,8 +12,7 @@ RDEPENDS_${PN} = "\
     bash \
     coreutils \
     apache \
-    wayland \
-    weston \
+    ${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland weston', '', d)} \
     gstreamer \
     openssl \
     openssh \
