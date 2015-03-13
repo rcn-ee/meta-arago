@@ -5,9 +5,9 @@ GLES_EXTRA_DEPS_omap-a15 = "libdrm wayland"
 
 PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl ${GLES_EXTRA_DEPS}"
 
-PR_append = "-arago3"
+PR_append = "-arago4"
 
-QT_CONFIG_FLAGS += "-qpa wayland"
+QT_CONFIG_FLAGS += "-qpa ${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', 'eglfs', d)}"
 
 SRC_URI += "file://qt_env.sh"
 
