@@ -3,6 +3,7 @@ TCMODE = "external-linaro"
 TCLIBC = "external-linaro-toolchain"
 
 ELT_TARGET_SYS = "arm-linux-gnueabihf"
+TARGET_VENDOR = ""
 
 PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-linaro-toolchain"
 
@@ -22,6 +23,10 @@ PREFERRED_PROVIDER_binutils-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "externa
 # Special case for gdb to be built as part of canadian-cross-sdk, instead of packaged from external toolchain
 bindir_pn-gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "${exec_prefix}/bin"
 PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "gdb-cross-canadian-${TRANSLATED_TARGET_ARCH}"
+
+# Set up runtime preferences
+PREFERRED_PROVIDER_libgcc = "external-linaro-toolchain"
+PREFERRED_PROVIDER_gcc-runtime = "external-linaro-toolchain"
 
 SDKGCCVERSION ?= "4.8%"
 SDKBINUVERSION ?= "2.24%"
