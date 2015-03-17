@@ -1,8 +1,9 @@
 INSANE_SKIP_libstdc++-dev += "staticdev"
 
 ALLOW_EMPTY_${PN}-utils = "1"
+ALLOW_EMPTY_ldd = "1"
 
-PR_append = "-arago7"
+PR_append = "-arago8"
 
 PROVIDES := "${@oe_filter_out('virtual/linux-libc-headers', '${PROVIDES}', d)}"
 PROVIDES := "${@oe_filter_out('linux-libc-headers', '${PROVIDES}', d)}"
@@ -94,9 +95,17 @@ FILES_libstdc++-dev = "\
 	${base_libdir}/libsupc++.a \
 "
 
+FILES_libgcc-dev += " \
+	${libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/libgcc*.a \
+	${libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/*.o"
+
 do_install_append() {
 	install -d ${D}/include
 	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/include/* ${D}/include
+
+	install -d ${D}/${libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/
+	cp -a ${TOOLCHAIN_PATH}/${base_libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/*.o ${D}/${libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/
+	cp -a ${TOOLCHAIN_PATH}/${base_libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/libgcc*.a ${D}/${libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/
 
 	ln -sf ld-${ELT_VER_LIBC}.so ${D}${base_libdir}/ld-linux-armhf.so.3
 	if [ -f ${D}${libdir}/libc.so ];then
