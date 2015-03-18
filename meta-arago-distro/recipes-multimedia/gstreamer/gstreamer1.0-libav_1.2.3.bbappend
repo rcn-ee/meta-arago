@@ -1,0 +1,1 @@
+LIBAV_EXTRA_CONFIGURE_COMMON_ARG += "--cross-prefix='${HOST_PREFIX}'"
