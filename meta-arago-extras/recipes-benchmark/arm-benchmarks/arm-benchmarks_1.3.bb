@@ -4,12 +4,12 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7aefb5e1cffc7b6a3ef18b803f957922"
 SECTION = "system"
 
-PR = "r7"
+PR = "r8"
 
 BRANCH ?= "master"
 SRCREV = "7f76ec24d3fedb9b2e3331f77c2f790c8b43f5f0"
 
-SRC_URI = "git://gitorious.org/arm_benchmarks/arm_benchmarks.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://gitorious.org/arm_benchmarks/arm_benchmarks.git;protocol=http;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
