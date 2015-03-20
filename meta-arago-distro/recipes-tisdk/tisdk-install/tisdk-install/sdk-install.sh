@@ -102,6 +102,12 @@ then
     sed -i -e s=__SDK_INSTALL_DIR__=$install_dir= $install_dir/bin/unshallow-repositories.sh
 fi
 
+# Modify create-sdcard.sh to have user-supplied installation directory
+if [ -f "${install_dir}/bin/create-sdcard.sh" ]
+then
+    sed -i -e "s|ti-sdk.*\[0-9\]|${install_dir##*/}|g" ${install_dir}/bin/create-sdcard.sh
+fi
+
 # Update CCS project files using important paths to headers
 
 find $install_dir/example-applications -type f -exec sed -i "s|<TOOLCHAIN_TARGET_INCLUDE_DIR>|$TOOLCHAIN_TARGET_INCLUDE_DIR|g" {} \;
