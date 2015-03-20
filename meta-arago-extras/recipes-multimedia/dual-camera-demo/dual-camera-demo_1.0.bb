@@ -12,7 +12,7 @@ PR = "r8"
 BRANCH = "drm"
 SRCREV = "4ede12a9c6b51b7693b005b00a715056e99fa7a0"
 
-SRC_URI = "git://gitorious.org/dual-camera-demo/dual-camera-demo.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://gitorious.org/dual-camera-demo/dual-camera-demo.git;protocol=http;branch=${BRANCH} \
            file://desc_dual-camera.html \
            file://dual_camera_qt5.sh \
            file://dual_camera_qt4.sh \

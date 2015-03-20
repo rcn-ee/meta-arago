@@ -14,7 +14,7 @@ COMPATIBLE_MACHINE = "(omap3)"
 BRANCH ?= "master"
 SRCREV = "b67b11011a8a54a7598eed383f3a106c32b47c6d"
 
-SRC_URI = "git://gitorious.org/av_examples/av_examples.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://gitorious.org/av_examples/av_examples.git;protocol=http;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
