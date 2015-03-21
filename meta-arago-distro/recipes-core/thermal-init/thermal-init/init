@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case "$1" in
+    start )
+        echo "Enabling thermal zones..."
+        for i in /sys/class/thermal/thermal_zone*/mode; do
+            echo enabled > $i
+        done
+    ;;
+    stop )
+        echo "Disabling thermal zones..."
+        for i in /sys/class/thermal/thermal_zone*/mode; do
+            echo disabled > $i
+        done
+    ;;
+esac
+
+exit 0
