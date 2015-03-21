@@ -1,6 +1,6 @@
 DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
-PR = "r4"
+PR = "r5"
 
 inherit packagegroup
 
@@ -16,6 +16,7 @@ ARAGO_BASE = "\
     curl \
     initscript-telnetd \
     ethtool \
+    thermal-init \
     "
 
 # these require meta-openembedded/meta-oe layer
