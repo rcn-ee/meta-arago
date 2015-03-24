@@ -113,6 +113,19 @@ PREFERRED_PROVIDER_wpa-supplicant_ti33x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_ti43x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_omap-a15 = "wpa-supplicant-wl18xx"
 
+PREFERRED_PROVIDER_gstreamer = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gstreamer-mm-accel', 'gstreamer', d)}"
+PREFERRED_PROVIDER_gstreamer-dev = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gstreamer-mm-accel-dev', 'gstreamer-dev', d)}"
+PREFERRED_PROVIDER_gstreamer-dbg = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gstreamer-mm-accel-dbg', 'gstreamer-dbg', d)}"
+PREFERRED_PROVIDER_gst-plugins-bad = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-bad-mm-accel', 'gst-plugins-bad', d)}"
+PREFERRED_PROVIDER_gst-plugins-bad-dev = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-bad-mm-accel-dev', 'gst-plugins-bad-dev', d)}"
+PREFERRED_PROVIDER_gst-plugins-bad-meta = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-bad-mm-accel-meta', 'gst-plugins-bad-meta', d)}"
+PREFERRED_PROVIDER_gst-plugins-base = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-base-mm-accel', 'gst-plugins-base', d)}"
+PREFERRED_PROVIDER_gst-plugins-base-dev = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-base-mm-accel-dev', 'gst-plugins-base-dev', d)}"
+PREFERRED_PROVIDER_gst-plugins-base-meta = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-base-mm-accel-meta', 'gst-plugins-base-meta', d)}"
+PREFERRED_PROVIDER_gst-plugins-good = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-good-mm-accel', 'gst-plugins-good', d)}"
+PREFERRED_PROVIDER_gst-plugins-good-dev = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-good-mm-accel-dev', 'gst-plugins-good-dev', d)}"
+PREFERRED_PROVIDER_gst-plugins-good-meta = "${@base_contains('MACHINE_FEATURES', 'mmip', 'gst-plugins-good-mm-accel-meta', 'gst-plugins-good-meta', d)}"
+
 def filter_out(f, str, d):
     from re import match
     return " ".join(filter(lambda x: not match(f, x, 0), str.split()))

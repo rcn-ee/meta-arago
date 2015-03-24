@@ -1,13 +1,13 @@
 DESCRIPTION = "Task to build and install header and libs in sdk"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
 RDEPENDS_${PN} = "\
-    gstreamer1.0-dev \
-    gstreamer1.0-plugins-base-dev \
-    gstreamer1.0-plugins-good-dev \
-    gstreamer1.0-plugins-bad-dev \
-    gstreamer1.0-libav-dev \
+    gstreamer-dev \
+    gst-plugins-base-dev \
+    gst-plugins-good-dev \
+    gst-plugins-bad-dev \
+    gst-ffmpeg-dev \
 "
