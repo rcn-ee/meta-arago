@@ -5,7 +5,7 @@ GLES_EXTRA_DEPS_omap-a15 = "libdrm wayland"
 
 PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl ${GLES_EXTRA_DEPS}"
 
-PR_append = "-arago5"
+PR_append = "-arago6"
 
 QT_CONFIG_FLAGS += "-qpa ${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', 'eglfs', d)}"
 
@@ -15,8 +15,11 @@ QT_EGLFS_PATCHES = "\
     file://quit.png \
 "
 
+QT_ENV = "qt_env.sh"
+QT_ENV_ti33x = "${@base_contains('DISTRO_FEATURES', 'wayland', 'qt_env.sh', 'qt_env_ti33x.sh', d)}"
+
 SRC_URI += "\
-    file://qt_env.sh \
+    file://${QT_ENV} \
     ${@base_contains('DISTRO_FEATURES', 'wayland', '', "${QT_EGLFS_PATCHES}", d)}\
 "
 
@@ -33,7 +36,7 @@ python do_patch_append() {
 # Add custom Arago Qt 5 Environment script file
 do_install_append () {
     install -d ${D}${sysconfdir}/profile.d
-    install -m 0644 ${WORKDIR}/qt_env.sh ${D}${sysconfdir}/profile.d/
+    install -m 0644 ${WORKDIR}/${QT_ENV} ${D}${sysconfdir}/profile.d/qt_env.sh
 }
 
 PACKAGES =+ "${PN}-conf"
