@@ -34,9 +34,10 @@ SRC_URI = "\
     file://Makefile_dual-camera-demo \
     file://Makefile_image-gallery \
     file://Makefile_cryptodev \
+    file://Makefile_sgx-modules \
 "
 
-PR = "r41"
+PR = "r42"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -69,6 +70,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            linux-dtbs \
                            wireless \
                            cryptodev \
+                           sgx-modules \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
@@ -76,6 +78,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            linux-dtbs \
                            wireless \
                            cryptodev \
+                           sgx-modules \
                            dual-camera-demo \
                            image-gallery \
 "
@@ -94,6 +97,10 @@ MAKEFILES_append_am180x-evm = " pru \
 # Use ARCH format expected by the makefile
 PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
+
+PLATFORM_SGX = ""
+PLATFORM_SGX_ti33x = "ti335x"
+PLATFORM_SGX_ti43x = "ti43xx"
 
 KERNEL_BUILD_CMDS = "${@base_conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
 
@@ -149,6 +156,8 @@ do_install () {
     fi
 
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
+
+    sed -i -e "s/__PLATFORM_SGX__/${PLATFORM_SGX}/" ${D}/Makefile
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
 
