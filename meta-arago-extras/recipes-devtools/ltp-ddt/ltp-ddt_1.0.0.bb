@@ -13,7 +13,7 @@ inherit autotools module-base kernel-module-split
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "eef6281052f36f6fe41059eadcf3b4a94f0d85ea"
+SRCREV = "f086bed6cc88bf102eaad0e96cb7ebe79944a8ad"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
