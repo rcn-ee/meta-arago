@@ -1,26 +1,6 @@
-wireless: wifi-firmware compat-modules
-wireless_install: wifi-firmware_install compat-modules_install
-wireless_clean: wifi-firmware_clean compat-modules_clean
-
-wifi-firmware:
-	@echo ================================
-	@echo      Building wifi firmware
-	@echo ================================
-	@echo "Nothing to do"
-
-wifi-firmware_install:
-	@echo ==================================
-	@echo      Installing wifi firmware
-	@echo ==================================
-	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "wl18xx-firmware*"`; \
-	make DEST_DIR=${DESTDIR} install
-
-wifi-firmware_clean:
-	@echo ================================
-	@echo      Cleaning wifi firmware
-	@echo ================================
-	@echo "Nothing to do" 
+wireless: compat-modules
+wireless_install: compat-modules_install
+wireless_clean: compat-modules_clean
 
 compat-modules: linux
 	@echo ================================

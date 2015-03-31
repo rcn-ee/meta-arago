@@ -37,7 +37,7 @@ SRC_URI = "\
     file://Makefile_sgx-modules \
 "
 
-PR = "r42"
+PR = "r43"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
