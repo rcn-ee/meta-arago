@@ -35,6 +35,7 @@ case "$1" in
     fi
 
     echo 0 > /sys/class/graphics/fbcon/cursor_blink
+    echo -ne "\033[9;0]\033[14;0]" > /dev/tty4
 
     echo -n "Starting Matrix GUI application"
     start-stop-daemon --start --quiet --background -m --pidfile $PIDFILE --exec $matrixgui -- $GUI_OPTS
@@ -46,7 +47,10 @@ case "$1" in
     start-stop-daemon --stop --quiet --pidfile $PIDFILE
 
     refresh_screen "background-black"
+
+    echo -ne "\033[9;10]\033[14;10]" > /dev/tty4
     echo 1 > /sys/class/graphics/fbcon/cursor_blink
+
     chvt 1
 
     echo "."
