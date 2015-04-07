@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r25"
+PR = "r26"
 
 inherit packagegroup
 
@@ -24,6 +24,7 @@ ARAGO_TEST = "\
     perf \
     v4l-utils \
     smcroute \
+    rwmem \
     "
 
 ARAGO_TI_TEST = "\
