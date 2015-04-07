@@ -1,9 +1,16 @@
 INSANE_SKIP_libstdc++-dev += "staticdev"
+INSANE_SKIP_libgcc-dev += "staticdev"
+INSANE_SKIP_libmudflap-dev += "staticdev"
+INSANE_SKIP_${PN}-dev += "staticdev"
+INSANE_SKIP_libmudflap += "ldflags"
+INSANE_SKIP_libssp += "ldflags"
+INSANE_SKIP_libgomp += "ldflags"
+INSANE_SKIP_libitm += "ldflags textrel"
 
 ALLOW_EMPTY_${PN}-utils = "1"
 ALLOW_EMPTY_ldd = "1"
 
-PR_append = "-arago8"
+PR_append = "-arago9"
 
 PROVIDES := "${@oe_filter_out('virtual/linux-libc-headers', '${PROVIDES}', d)}"
 PROVIDES := "${@oe_filter_out('linux-libc-headers', '${PROVIDES}', d)}"
