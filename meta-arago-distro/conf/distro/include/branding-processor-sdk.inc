@@ -10,11 +10,11 @@ PREFERRED_PROVIDER_virtual/kernel_am437x-evm = "sitara-linux-ti-staging"
 PREFERRED_VERSION_sitara-linux-ti-staging = "3.14%"
 
 # Auto rev important packages to pick up latest
-SRCREV_pn-u-boot-ti-staging_omap-a15 = "${AUTOREV}"
-SRCREV_pn-ltp-ddt_omap-a15 = "${AUTOREV}"
+#SRCREV_pn-u-boot-ti-staging_omap-a15 = "${AUTOREV}"
+#SRCREV_pn-ltp-ddt_omap-a15 = "${AUTOREV}"
 
 # am3 and am4 use sitara-linux-ti-staging, so this only applies to omap-a15
-SRCREV_pn-linux-ti-staging = "${AUTOREV}"
+#SRCREV_pn-linux-ti-staging = "${AUTOREV}"
 
 # Freeze am3 and am4 u-boot
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
