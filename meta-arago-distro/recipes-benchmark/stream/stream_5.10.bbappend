@@ -1,3 +1,6 @@
+INSANE_SKIP_${PN} += "ldflags"
+INSANE_SKIP_${PN}-openmp += "ldflags"
+
 PR_append = "-arago1"
 
 BRANCH = "sdk"

@@ -4,7 +4,7 @@ LICENSE = "Stream_Benchmark_License"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bca8cbe07976fe64c8946378d08314b0"
 SECTION = "system"
 
-PR = "r2"
+PR = "r0"
 
 BRANCH ?= "master"
 SRCREV = "b66f2bab5d6d0b35732ef8406ae03873725a3306"
