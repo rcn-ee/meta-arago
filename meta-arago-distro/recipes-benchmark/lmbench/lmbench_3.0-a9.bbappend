@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+INSANE_SKIP_${PN} += "ldflags"
+
 PR_append = "-arago0"
 
 SRC_URI += "file://0001-Makefile-Add-TI-SDK-Modifications.patch"
