@@ -9,9 +9,9 @@ DEPENDS = "ti-ipc"
 
 BRANCH = "master"
 SRC_URI = "git://git.ti.com/keystone-demos/image-proc.git;protocol=git;branch=${BRANCH}"
-#Commit corresponds to DEV.DEMO_IMAGE_PROC-01.00.00.01
-SRCREV = "1745725128929f6d57a3e8e8ed0ca02fe4b28b51"
-PV = "1.0.0.1"
+#Commit corresponds to DEV.DEMO_IMAGE_PROC-01.00.00.02B
+SRCREV = "08d69947cea192328213bb91d52c43b403d3a36f"
+PV = "1.0.0.2"
 
 S = "${WORKDIR}/git"
 
