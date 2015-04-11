@@ -1,7 +1,7 @@
 DESCRIPTION = "Simple Qt web display using webkit"
 HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix_browser"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://main.cpp;beginline=9;endline=37;md5=884b90f5bf0d711fe32c4f04b5276496"
+LIC_FILES_CHKSUM = "file://main.cpp;beginline=9;endline=37;md5=75a9adc782a6df0d3a5419743e9a9f18"
 SECTION = "multimedia"
 
 inherit qt-provider
@@ -11,9 +11,9 @@ RDEPENDS_${PN} += "${QT_RDEPENDS_FONTS}"
 
 DEPENDS += "${QT_DEPENDS_WEBKIT}"
 
-PR = "r9"
+PR = "r10"
 
-SRCREV = "7f5dccfb5b1b68a3f9162f6ee072eef0e0ba06fe"
+SRCREV = "f68ab545a60ca446635f9db00d64569cef9c9091"
 BRANCH ?= "master"
 
 SRC_URI = "git://gitorious.org/matrix-gui-v2/matrix_browser.git;protocol=http;branch=${BRANCH}"
