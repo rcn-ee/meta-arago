@@ -2,7 +2,8 @@ DESCRIPTION = "Initscripts for kdump recovery mechanism"
 LICENSE = "BSD-3-Clause"
 
 COMPATIBLE_MACHINE = "keystone"
-LIC_FILES_CHKSUM = "file://recoveryfs.sh;md5=e1cea7fe03a879dfe71592798e89ed0d"
+LIC_FILES_CHKSUM = "file://recoveryfs.sh;beginline=1;endline=20;md5=83e9f5412fd9a0db2aee516b52c24535"
+PR ="r1"
 
 S = "${WORKDIR}"
 SRC_URI = "file://recoveryfs.sh"
