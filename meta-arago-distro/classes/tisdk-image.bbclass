@@ -501,6 +501,8 @@ EOF
             IFS="
 "
 
+            begin=""
+            end=""
             for pkg in ${package_start}; do
                 end=`echo $pkg | cut -d: -f1`
 
@@ -515,6 +517,12 @@ EOF
                 pkg_name=`echo $pkg | cut -d: -f3`
                 begin=$end
             done
+            if [ ! -z $end ]; then
+                end=`wc -l $pkg_idx | awk '{ print $1 }'`
+                end=$[$end + 1]
+                tail -n $[$end - $begin] $pkg_idx > ${control_dir}/${pkg_name// /}.control
+            fi
+
             IFS=${IFS_OLD}
         done
     fi
@@ -604,7 +612,7 @@ echo "
 " >> ${SW_MANIFEST_FILE}
 
 cat >> ${SW_MANIFEST_TEXT} << EOF
-| ${package} | ${version} | ${license/\|/\&} | ${delivered_as} | ${modified} | ${location} | ${source}
+| ${package} | ${version} | ${license//\|/or} | ${delivered_as} | ${modified} | ${location} | ${source}
 EOF
     done
 
