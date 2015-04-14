@@ -35,9 +35,10 @@ SRC_URI = "\
     file://Makefile_image-gallery \
     file://Makefile_cryptodev \
     file://Makefile_sgx-modules \
+    file://Makefile_cmem-mod \
 "
 
-PR = "r43"
+PR = "r44"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -89,6 +90,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
                               omapconf \
                               linux-dtbs \
+                              cmem-mod \
 "
 MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
