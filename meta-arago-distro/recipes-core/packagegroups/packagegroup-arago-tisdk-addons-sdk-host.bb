@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r7"
+PR = "r8"
 
 inherit packagegroup
 
@@ -25,6 +25,10 @@ UTILS_append_ti33x = " \
     omapconf-src \
 "
 
+EXTRA_LIBS = ""
+EXTRA_LIBS_append_omap-a15 = " cmem-mod-src"
+
 RDEPENDS_${PN} = "\
     ${UTILS} \
+    ${EXTRA_LIBS} \
 "
