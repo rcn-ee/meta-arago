@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r23"
+PR = "r24"
 
 inherit packagegroup
 
@@ -42,6 +42,9 @@ UTILS_append_ti33x = " switch-config"
 UTILS_append_ti43x = " switch-config libdrm-omap"
 UTILS_append_omap-a15 = " switch-config libdrm-omap stream-openmp"
 
+EXTRA_LIBS = ""
+EXTRA_LIBS_append_omap-a15 = " cmem"
+
 DEVTOOLS = " \
     packagegroup-core-buildessential \
     git \
@@ -51,4 +54,5 @@ RDEPENDS_${PN} = "\
     ${UTILS} \
     ${UTILS_UBOOT_FW} \
     ${DEVTOOLS} \
+    ${EXTRA_LIBS} \
 "
