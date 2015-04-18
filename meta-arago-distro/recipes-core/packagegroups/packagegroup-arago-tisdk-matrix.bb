@@ -125,6 +125,10 @@ MATRIX_APPS_append_am180x-evm = "   \
     matrix-gui-pru-demos            \
 "
 
+MATRIX_APPS_append_keystone = " \
+    matrix-gui-utility-demos	\
+"
+
 RDEPENDS_${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
     ${MATRIX_GUI}         \
