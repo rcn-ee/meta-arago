@@ -38,7 +38,7 @@ SRC_URI = "\
     file://Makefile_cmem-mod \
 "
 
-PR = "r44"
+PR = "r45"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
