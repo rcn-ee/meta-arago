@@ -15,18 +15,12 @@ PV = "1.0.0.2"
 
 S = "${WORKDIR}/git"
 
-MATRIX_BASE_DIR = "${datadir}/matrix-gui-2.0"
-MATRIX_WEB_DIR = "${MATRIX_BASE_DIR}"
-MATRIX_APP_DIR = "${MATRIX_WEB_DIR}/apps"
-MATRIX_IPD_DIR = "${MATRIX_APP_DIR}/demo_imageproc"
-MATRIX_CGI_DIR = "${MATRIX_IPD_DIR}/cgi-bin"
-
-FILES_${PN} = "${MATRIX_IPD_DIR}/demo_imageproc.html"
-FILES_${PN} += "${MATRIX_CGI_DIR}/image_processing_master.out"
+FILES_${PN} = "${bindir}/image_processing_master"
 
 do_install() {
-	install -d ${D}${MATRIX_IPD_DIR}
-	install -d ${D}${MATRIX_CGI_DIR}
-	install -c -m 755 ${S}/ipc/master/image_processing_master.out ${D}${MATRIX_CGI_DIR}
-	install -c -m 755 ${S}/webpage/demo_imageproc.html ${D}${MATRIX_IPD_DIR}
+	if [ ! -d ${D}/${bindir} ]
+	then
+		install -d ${D}${bindir}
+	fi
+	install -c -m 755 ${S}/ipc/master/image_processing_master.out ${D}${bindir}/image_processing_master
 }
