@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r37"
+PR = "r38"
 
 inherit packagegroup
 
@@ -127,6 +127,7 @@ MATRIX_APPS_append_am180x-evm = "   \
 
 MATRIX_APPS_append_keystone = " \
     matrix-gui-utility-demos	\
+    matrix-gui-mc-demos	\
 "
 
 RDEPENDS_${PN} = "        \

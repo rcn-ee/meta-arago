@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM := "file://../${LICENSE_CHECKSUM}"
 DEPENDS += "ca-certificates-native"
 
 SRC_URI = "git://git.ti.com/matrix-gui-v2/matrix-gui-v2-apps.git;protocol=git;branch=${BRANCH}"
-SRCREV = "7a3fb05dfb49b144cb149b31cbc9d452975ddfcd"
+SRCREV = "0b159d3e832b8d7d9ab46cdfbeef870c48476efc"
 BRANCH = "master"
-INC_PR = "r32"
+INC_PR = "r33"
 
 
 # Pull in the base package for installing matrix applications

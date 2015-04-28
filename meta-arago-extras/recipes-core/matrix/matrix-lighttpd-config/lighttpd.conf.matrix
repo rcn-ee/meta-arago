@@ -225,7 +225,7 @@ compress.filetype          = ("text/plain", "text/html","text/javascript","text/
 #                            )
 
 #### CGI module
-cgi.assign                 = ( ".php"  => "/usr/bin/php-cgi")
+cgi.assign                 = ( ".php"  => "/usr/bin/php-cgi", ".out" => "" )
 #cgi.assign                 = ( ".pl"  => "/usr/bin/perl",
 #                               ".cgi" => "/usr/bin/perl" )
 #
