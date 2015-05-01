@@ -1,6 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG = "faad ${@base_contains('DISTRO_FEATURES','wayland','wayland','',d)}"
+PACKAGECONFIG = "faad"
+
+PACKAGECONFIG_append_dra7xx = " ${@base_contains('DISTRO_FEATURES','wayland','wayland','',d)}"
 
 DEPENDS_append_dra7xx = " \
     libdce \
@@ -16,4 +18,4 @@ SRC_URI_append = " \
         file://0006-GstDRMBufferPool-support-fix.patch \
 "
 
-PR_append = "-arago1"
+PR_append = "-arago2"
