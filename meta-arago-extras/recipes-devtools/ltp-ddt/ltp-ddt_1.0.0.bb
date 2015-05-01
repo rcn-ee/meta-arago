@@ -87,7 +87,7 @@ do_install() {
     oe_runmake install
     install -d ${D}${datadir}
     install -d ${D}${kmoddir}
-    mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
+    mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir} || true
 }
 
 # do_make_scripts should be a separate task for the lock to work
