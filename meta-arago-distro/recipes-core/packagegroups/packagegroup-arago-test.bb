@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r26"
+PR = "r27"
 
 inherit packagegroup
 
@@ -25,6 +25,7 @@ ARAGO_TEST = "\
     v4l-utils \
     smcroute \
     rwmem \
+    cpuburn-neon \
     "
 
 ARAGO_TI_TEST = "\
