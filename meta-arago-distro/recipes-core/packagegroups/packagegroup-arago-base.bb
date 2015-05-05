@@ -1,8 +1,10 @@
 DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 ARAGO_ALSA_BASE = "\
     alsa-lib \

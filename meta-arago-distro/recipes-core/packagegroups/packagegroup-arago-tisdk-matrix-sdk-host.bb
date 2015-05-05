@@ -1,8 +1,10 @@
 DESCRIPTION = "Task to install Matrix v2 and associated applications sources in the SDK"
 LICENSE = "MIT"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 MATRIX_GUI = " \
     matrix-gui-browser-src \

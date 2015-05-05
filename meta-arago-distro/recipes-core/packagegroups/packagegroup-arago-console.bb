@@ -1,10 +1,10 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
-PR = "r9"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PR = "r10"
 
 inherit packagegroup
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 # alsa-utils-alsamixer depends on ncurses
 ARAGO_ALSA_EXTRA = "\
