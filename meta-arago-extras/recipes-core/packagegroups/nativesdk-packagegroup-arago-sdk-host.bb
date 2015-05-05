@@ -1,8 +1,10 @@
 DESCRIPTION = "Host packages for a standalone Arago SDK or external toolchain"
-PR = "r6"
+PR = "r7"
 LICENSE = "MIT"
 
 inherit nativesdk packagegroup
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 EXTRA_TOOLS = ""
 EXTRA_TOOLS_omap-a15 = "nativesdk-ti-cgt6x"
