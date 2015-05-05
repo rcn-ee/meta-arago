@@ -1,8 +1,10 @@
-inherit qt-vars
-
-require nativesdk-packagegroup-arago-sdk-host.bb
-
 DESCRIPTION = "Host packages for Qt Embedded SDK"
+PR = "r9"
 LICENSE = "MIT"
 
-RDEPENDS_${PN} += "${QT_RDEPENDS_NATIVESDK_TOOLS}"
+inherit nativesdk packagegroup qt-vars
+
+RDEPENDS_${PN} = "\
+    nativesdk-packagegroup-arago-sdk-host \
+    ${QT_RDEPENDS_NATIVESDK_TOOLS} \
+    "
