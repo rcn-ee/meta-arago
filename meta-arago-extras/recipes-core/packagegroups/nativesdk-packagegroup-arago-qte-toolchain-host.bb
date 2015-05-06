@@ -1,8 +1,8 @@
 DESCRIPTION = "Host packages for Qt Embedded SDK"
-PR = "r9"
+PR = "r10"
 LICENSE = "MIT"
 
-inherit nativesdk packagegroup qt-vars
+inherit packagegroup nativesdk qt-vars
 
 RDEPENDS_${PN} = "\
     nativesdk-packagegroup-arago-sdk-host \
