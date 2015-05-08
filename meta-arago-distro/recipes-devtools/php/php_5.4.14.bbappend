@@ -1,7 +1,9 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago2"
+PR_append = "-arago3"
+
+SRC_URI_append = " files://fix-race-condition-during-install.patch"
 
 SRC_URI_append_virtclass-native = " file://0001-php-native-Fix-host-contamination-issue.patch"
 
