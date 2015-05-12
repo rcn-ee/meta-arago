@@ -51,6 +51,7 @@ ARAGO_UTILS = "\
     usbutils \
     i2c-tools \
     iproute2 \
+    iproute2-tc \
     strace \
     ltrace \
     ${@base_contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
