@@ -2,9 +2,9 @@ DESCRIPTION = "Package that contains a script to setup oe-core development envir
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-PR = "r0"
+PR = "r1"
 
-PACKAGE_ARCH = "all"
+inherit allarch
 
 BRANCH ?= "master"
 SRCREV = "e58f941784fb45fd826779a45b33973e6342700f"

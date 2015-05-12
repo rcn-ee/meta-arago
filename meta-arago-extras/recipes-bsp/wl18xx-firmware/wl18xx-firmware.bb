@@ -2,11 +2,11 @@ DESCRIPTION = "Firmware files for use with TI wl18xx"
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=4977a0fe767ee17765ae63c435a32a9e"
 
-PACKAGE_ARCH = "all"
+inherit allarch
 
 PV = "R8.5"
 
-PR = "r5+gitr${SRCPV}"
+PR = "r6+gitr${SRCPV}"
 
 PROVIDES += "wl12xx-firmware"
 RPROVIDES_${PN} += "wl12xx-firmware"
