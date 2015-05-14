@@ -12,7 +12,7 @@ PR = "r4"
 BRANCH ?= "master"
 SRCREV = "066ecdab2bf0788eec253bf27fd44f7436f0cd04"
 
-SRC_URI = "git://gitorious.org/oprofile-example/oprofile-example.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/apps/oprofile-example.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
