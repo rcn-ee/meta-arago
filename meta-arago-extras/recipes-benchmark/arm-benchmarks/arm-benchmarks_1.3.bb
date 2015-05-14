@@ -9,7 +9,7 @@ PR = "r8"
 BRANCH ?= "master"
 SRCREV = "7f76ec24d3fedb9b2e3331f77c2f790c8b43f5f0"
 
-SRC_URI = "git://gitorious.org/arm_benchmarks/arm_benchmarks.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/apps/arm_benchmarks.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
