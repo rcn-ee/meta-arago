@@ -14,7 +14,7 @@ PR = "r9"
 SRCREV = "4c8817e28ceed2dd886761e3ec1971b11436ba33"
 BRANCH ?= "master"
 
-SRC_URI = "git://gitorious.org/matrix-gui-v2/refresh-screen.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/matrix-gui-v2/refresh-screen.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
