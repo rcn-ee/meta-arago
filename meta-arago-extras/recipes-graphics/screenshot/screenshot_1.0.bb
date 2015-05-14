@@ -9,7 +9,7 @@ PR = "r1"
 BRANCH ?= "master"
 SRCREV = "169242aa7a265d5c94755d74601ad4a3f1828c96"
 
-SRC_URI = "git://gitorious.org/screenshot/screenshot.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/apps/screenshot.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
