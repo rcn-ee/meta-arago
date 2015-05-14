@@ -16,7 +16,7 @@ PR = "r10"
 SRCREV = "f68ab545a60ca446635f9db00d64569cef9c9091"
 BRANCH ?= "master"
 
-SRC_URI = "git://gitorious.org/matrix-gui-v2/matrix_browser.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/matrix-gui-v2/matrix_browser.git;protocol=git;branch=${BRANCH}"
 
 QT5_DIFF = " \
 	file://qt5-webkit.patch \
