@@ -13,7 +13,7 @@ PR = "r4"
 BRANCH = "master"
 SRCREV = "47a13167061e6e8bb44842104bd8bfbc230cf476"
 
-SRC_URI = "git://gitorious.org/image-gallery/image-gallery.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/matrix-gui-v2/image-gallery.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
 
