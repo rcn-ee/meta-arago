@@ -1,6 +1,6 @@
 SUMMARY = "Host Arago SDK package for cross canadian toolchain"
-PN = "packagegroup-arago-cross-canadian-${TRANSLATED_TARGET_ARCH}"
-PR = "r5"
+PN = "packagegroup-arago-cross-canadian-${MACHINE}"
+PR = "r6"
 LICENSE = "MIT"
 
 # Save TRANSLATED_TARGET_ARCH before allarch tramples it
@@ -11,9 +11,9 @@ inherit cross-canadian packagegroup
 PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
 
 RDEPENDS_${PN} = "\
-    binutils-cross-canadian-${TRANSLATED_TARGET_ARCH} \
-    gcc-cross-canadian-${TRANSLATED_TARGET_ARCH} \
-    gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} \
+    binutils-cross-canadian-${@' binutils-cross-canadian-'.join(all_multilib_tune_values(d,'TRANSLATED_TARGET_ARCH').split())} \
+    gdb-cross-canadian-${@' gdb-cross-canadian-'.join(all_multilib_tune_values(d, 'TRANSLATED_TARGET_ARCH').split())} \
+    gcc-cross-canadian-${@' gcc-cross-canadian-'.join(all_multilib_tune_values(d, 'TRANSLATED_TARGET_ARCH').split())} \
     "
 
-#    meta-environment-${TRANSLATED_TARGET_ARCH}
+#    meta-environment-${MACHINE}
