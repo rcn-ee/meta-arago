@@ -38,7 +38,7 @@ SRC_URI = "\
     file://Makefile_cmem-mod \
 "
 
-PR = "r45"
+PR = "r46"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -110,7 +110,7 @@ KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335
 KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dtb"
 KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
 KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
-KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra72-evm.dtb am57xx-beagle-x15.dtb"
+KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra72-evm.dtb am57xx-beagle-x15.dtb am57xx-evm.dtb"
 
 DEFCONFIG = "tisdk_${MACHINE}_defconfig"
 
