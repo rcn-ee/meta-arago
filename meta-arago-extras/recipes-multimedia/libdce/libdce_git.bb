@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://libdce.h;beginline=1;endline=31;md5=0a398cf815b8b5f31
 
 inherit autotools pkgconfig
 
-PR = "r2+gitr${SRCPV}"
-PV = "2.0"
+PR = "r2"
+PV = "2.0+git${SRCPV}"
 
 DEPENDS = "libdrm ti-ipc"
 

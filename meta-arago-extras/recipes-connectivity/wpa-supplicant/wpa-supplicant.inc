@@ -84,6 +84,3 @@ pkg_postinst_wpa-supplicant () {
 		killall -q -HUP dbus-daemon || true
 	fi
 }
-
-
-

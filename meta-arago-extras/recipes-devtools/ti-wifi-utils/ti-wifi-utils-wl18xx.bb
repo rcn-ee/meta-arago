@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4725015cb0be7be389cf06deeae3683d"
 DEPENDS = "libnl"
 RDEPENDS_${PN} = "wl18xx-firmware"
 
-PV = "R8.5"
+PV = "R8.5+git${SRCPV}"
 
-PR ="r3+gitr${SRCPV}"
+PR ="r3"
 
 #Tag: R8.5
 SRCREV = "dcf0800f30ba449cd7f3a20f8b3f4853dc829652"

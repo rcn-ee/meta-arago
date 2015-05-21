@@ -4,7 +4,8 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://interface/prussdrv.c;beginline=1;endline=47;md5=6012fea45c1fbced663277bc90d2163a"
 
 RRECOMMENDS_${PN} = "kernel-module-uio-pru"
-PR = "r0+svnr${SRCPV}"
+PR = "r0"
+PV_append = "+svn${SRCPV}"
 
 COMPATIBLE_MACHINE = "omapl138"
 

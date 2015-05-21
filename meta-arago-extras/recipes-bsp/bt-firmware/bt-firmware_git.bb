@@ -1,7 +1,6 @@
 DESCRIPTION = "Firmware files for Bluetooth"
 LICENSE = "TI-TSPA"
-LIC_FILES_CHKSUM = "file://am335x/LICENCE;md5=1c9961176d6529283e0d0c983be41b45 \
-"
+LIC_FILES_CHKSUM = "file://am335x/LICENCE;md5=1c9961176d6529283e0d0c983be41b45"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,7 +10,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
-PR = "r8+gitr${SRCPV}"
+PV = "R8.5+git${SRCPV}"
+PR = "r8"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|dra7xx"
 

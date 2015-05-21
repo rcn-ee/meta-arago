@@ -13,10 +13,10 @@ FILESEXTRAPATHS_append := "${THISDIR}/wpa-supplicant:"
 # Tag: R8.5
 SRCREV = "2710d0ae31fa2dc31f653f346a985268d8d7795c"
 BRANCH = "ap_p2p"
-PR_append = "c+gitr${SRCPV}"
+PR_append = "c"
 
 # Add ti to the PV to indicate that this is a TI modify version of wpa-supplicant.
-PV = "R8.5-devel-ti"
+PV = "R8.5-devel-ti+git${SRCPV}"
 
 PROVIDES += "wpa-supplicant"
 RPROVIDES_${PN}  += "wpa-supplicant"

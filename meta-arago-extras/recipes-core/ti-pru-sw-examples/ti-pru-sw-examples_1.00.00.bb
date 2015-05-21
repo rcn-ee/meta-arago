@@ -4,7 +4,8 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=c4fd8ee7443c1b2b6238b4b5df796481"
 DEPENDS = "ti-pru-sw-app-loader ti-pru-sw-edma-library"
 RDEPENDS_${PN} = "ti-pru-sw-edma-driver"
-PR = "r0+svnr${SRCPV}"
+PR = "r0"
+PV_append = "+svn${SRCPV}"
 
 COMPATIBLE_MACHINE = "am180x-evm"
 

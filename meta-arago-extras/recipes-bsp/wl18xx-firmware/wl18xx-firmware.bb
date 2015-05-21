@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=4977a0fe767ee17765ae63c435a32a9e"
 
 inherit allarch
 
-PV = "R8.5"
+PV = "R8.5+git${SRCPV}"
 
-PR = "r6+gitr${SRCPV}"
+PR = "r6"
 
 PROVIDES += "wl12xx-firmware"
 RPROVIDES_${PN} += "wl12xx-firmware"

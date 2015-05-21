@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://../backports/COPYING;md5=d7810fab7487fb0aad327b76f1be
 
 RDEPENDS_${PN} = "wireless-tools"
 
-PV = "R8.5"
+PV = "R8.5+git${SRCPV}"
 inherit module
 
-PR = "${MACHINE_KERNEL_PR}+g+gitr${SRCPV}"
+PR = "${MACHINE_KERNEL_PR}+g"
 
 # Tags: R8.5
 SRCREV_wl18xx = "ad69b45b9a670ee7f76be4def03895ac9b3a6d4a"
