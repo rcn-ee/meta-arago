@@ -2,7 +2,7 @@
 # Cross and SDK toolchain preferences are set in toolchain-*.inc files
 GCCVERSION ?= "linaro-4.7%"
 BINUVERSION ?= "linaro-2.24%"
-EGLIBCVERSION ?= "linaro-2.19%"
+EGLIBCVERSION ?= "2.19%"
 EGLIBCINITVERSION ?= "2.19%"
 LINUXLIBCVERSION ?= "3.14"
 
