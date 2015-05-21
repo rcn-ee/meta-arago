@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://switch-config.c;beginline=1;endline=14;md5=659ff9658c
 DEPENDS = "virtual/kernel"
 
 PV = "1.1"
+PR = "r1"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 BRANCH ?= "master"
 SRCREV = "75791ba7f835530f2a10c889977d92e9175faa34"
