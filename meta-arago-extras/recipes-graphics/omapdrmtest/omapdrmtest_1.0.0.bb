@@ -6,11 +6,11 @@ DEPENDS += "libav libdce libdrm libgbm omap5-sgx-ddk-um-linux wayland"
 
 inherit autotools pkgconfig
 
-PR = "r6"
+PR = "r7"
 SRCREV = "a2f483ef833ce7a6f3e0b975d9e49267960b288e"
 
 SRC_URI = "git://git.ti.com/glsdk/omapdrmtest.git;protocol=git"
 
 S = "${WORKDIR}/git"
 
-INSANE_SKIP_omapdrmtest = "dev-deps"
+TARGET_CC_ARCH += "${LDFLAGS}"
