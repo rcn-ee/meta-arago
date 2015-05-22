@@ -3,7 +3,7 @@ DEPENDS += "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad libd
 
 inherit autotools pkgconfig gettext
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 S = "${WORKDIR}/git"
 
@@ -17,3 +17,5 @@ EXTRA_OECONF += "--enable-maintainer-mode"
 EXTRA_OEMAKE += "'ERROR_CFLAGS=-Wno-deprecated-declarations'"
 
 FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
+FILES_${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
+FILES_${PN}-dev += "${libdir}/gstreamer-1.0/*.la"
