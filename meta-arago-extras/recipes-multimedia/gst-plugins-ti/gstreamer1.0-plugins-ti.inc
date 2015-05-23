@@ -3,9 +3,11 @@ DEPENDS += "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad libd
 
 inherit autotools pkgconfig gettext
 
-INC_PR = "r1"
+INC_PR = "r2"
 
 S = "${WORKDIR}/git"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 do_configure() {
 	cd ${S}
