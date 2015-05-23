@@ -1,4 +1,4 @@
-PR_append = "-arago0"
+PR_append = "-arago1"
 
 # Add apps/obex_test for testing
 do_configure_prepend() {
@@ -12,8 +12,8 @@ do_configure_prepend() {
 # enabling log and dump prints lots of debug messages and hex dump value during BT
 # file transfer using openobex, due to which BT transfer get slow.
 
-EXTRA_OECONF := "${@'${EXTRA_OECONF}'.replace('--enable-syslog', '')}"
-EXTRA_OECONF := "${@'${EXTRA_OECONF}'.replace('--enable-dump', '')}"
+EXTRA_OECONF_remove = "--enable-syslog"
+EXTRA_OECONF_remove = "--enable-dump"
 
 # WiLink Bluetooth application build depends on libmisc.a.
 do_install_append() {

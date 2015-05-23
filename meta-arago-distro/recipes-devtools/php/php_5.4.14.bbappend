@@ -1,7 +1,7 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago3"
+PR_append = "-arago4"
 
 SRC_URI_append = " file://fix-race-condition-during-install.patch"
 
@@ -16,10 +16,10 @@ python __anonymous () {
 # Once this issue is fix in meta-oe the below won't be needed.
 # Issue mentioned here: https://bugs.php.net/bug.php?id=60144
 
-EXTRA_OECONF := "${@oe_filter_out('--enable-fpm', '${EXTRA_OECONF}', d)}"
+EXTRA_OECONF_remove = "--enable-fpm"
 
-PACKAGES := "${@oe_filter_out('${PN}-fpm', '${PACKAGES}', d)}"
-PACKAGES := "${@oe_filter_out('${PN}-fpm-apache2', '${PACKAGES}', d)}"
+PACKAGES_remove = "${PN}-fpm"
+PACKAGES_remove = "${PN}-fpm-apache2"
 
 do_install_prepend_pn-php() {
     # Add the below file even though we aren't going to use it.
