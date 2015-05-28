@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 inherit packagegroup
 
@@ -27,6 +27,7 @@ UTILS_append_ti33x = " \
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " cmem-mod-src"
+EXTRA_LIBS_append_dra7xx = " debugss-module-drv-src"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
