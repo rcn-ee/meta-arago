@@ -1,0 +1,29 @@
+debugss-module-drv: linux
+	@echo =======================================
+	@echo      Building debugss-module-drv
+	@echo =======================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "debugss*"`; \
+	make ARCH=arm KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) PLATFORM=__PLATFORM_DEBUGSS__
+
+debugss-module-drv_clean:
+	@echo =======================================
+	@echo      Cleaning debugss-module-drv
+	@echo =======================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "debugss*"`; \
+	make ARCH=arm KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) PLATFORM=__PLATFORM_DEBUGSS__ clean
+
+debugss-module-drv_install:
+	@echo =======================================
+	@echo      Installing debugss-module-drv
+	@echo =======================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "debugss*"`; \
+	make ARCH=arm  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) PLATFORM=__PLATFORM_DEBUGSS__ modules_install
+
