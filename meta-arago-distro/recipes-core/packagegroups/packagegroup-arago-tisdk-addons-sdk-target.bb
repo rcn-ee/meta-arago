@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -15,6 +15,7 @@ UTILS_append_dra7xx = " canutils-dev"
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " cmem-dev"
+EXTRA_LIBS_append_dra7xx = " libulm-dev libulm-staticdev"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
