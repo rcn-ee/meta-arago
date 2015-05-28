@@ -36,9 +36,10 @@ SRC_URI = "\
     file://Makefile_cryptodev \
     file://Makefile_sgx-modules \
     file://Makefile_cmem-mod \
+    file://Makefile_debugss-module-drv \
 "
 
-PR = "r46"
+PR = "r47"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -84,7 +85,9 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            image-gallery \
 "
 
-MAKEFILES_append_dra7xx = " cryptodev"
+MAKEFILES_append_dra7xx = " cryptodev \
+                            debugss-module-drv \
+"
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
@@ -103,6 +106,9 @@ PLATFORM_ARCH_omapl138 = "armv5te"
 PLATFORM_SGX = ""
 PLATFORM_SGX_ti33x = "ti335x"
 PLATFORM_SGX_ti43x = "ti43xx"
+
+PLATFORM_DEBUGSS = ""
+PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
 
 KERNEL_BUILD_CMDS = "${@base_conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
 
@@ -160,6 +166,7 @@ do_install () {
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
 
     sed -i -e "s/__PLATFORM_SGX__/${PLATFORM_SGX}/" ${D}/Makefile
+    sed -i -e "s/__PLATFORM_DEBUGSS__/${PLATFORM_DEBUGSS}/g" ${D}/Makefile
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
 
