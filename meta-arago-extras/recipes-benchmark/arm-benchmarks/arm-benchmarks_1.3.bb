@@ -4,10 +4,10 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7aefb5e1cffc7b6a3ef18b803f957922"
 SECTION = "system"
 
-PR = "r8"
+PR = "r9"
 
 BRANCH ?= "master"
-SRCREV = "7f76ec24d3fedb9b2e3331f77c2f790c8b43f5f0"
+SRCREV = "b3997516aee27d46ce1f59796af82ddbf06d20f4"
 
 SRC_URI = "git://git.ti.com/apps/arm_benchmarks.git;protocol=git;branch=${BRANCH}"
 
