@@ -37,9 +37,10 @@ SRC_URI = "\
     file://Makefile_sgx-modules \
     file://Makefile_cmem-mod \
     file://Makefile_debugss-module-drv \
+    file://Makefile_gdbserverproxy-module-drv \
 "
 
-PR = "r47"
+PR = "r48"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -87,6 +88,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
 
 MAKEFILES_append_dra7xx = " cryptodev \
                             debugss-module-drv \
+                            gdbserverproxy-module-drv \
 "
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
@@ -109,6 +111,9 @@ PLATFORM_SGX_ti43x = "ti43xx"
 
 PLATFORM_DEBUGSS = ""
 PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
+
+PLATFORM_GDBSERVERPROXY = ""
+PLATFORM_GDBSERVERPROXY_dra7xx = "DRA7xx_PLATFORM"
 
 KERNEL_BUILD_CMDS = "${@base_conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
 
@@ -167,6 +172,7 @@ do_install () {
 
     sed -i -e "s/__PLATFORM_SGX__/${PLATFORM_SGX}/" ${D}/Makefile
     sed -i -e "s/__PLATFORM_DEBUGSS__/${PLATFORM_DEBUGSS}/g" ${D}/Makefile
+    sed -i -e "s/__PLATFORM_GDBSERVERPROXY__/${PLATFORM_GDBSERVERPROXY}/g" ${D}/Makefile
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
 
