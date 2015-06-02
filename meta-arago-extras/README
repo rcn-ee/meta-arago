@@ -1,28 +1,27 @@
 meta-arago-extras provides additional TI SDK applications that are distro-agnostic
 
-This layer works with the latest Yocto Project release (currently 1.6) and tracks
-the stable/maintenance branches (currently "daisy") of the corresponding layers:
+This layer works with the latest Yocto Project release (currently 1.8) and tracks
+the stable/maintenance branches (currently "fido") of the corresponding layers:
 
 URI: git://git.openembedded.org/openembedded-core
-branch: daisy
+branch: fido
 revision: HEAD
 layers: meta
 
 URI: git://git.openembedded.org/meta-openembedded
-branch: daisy
+branch: fido
 revision: HEAD
 layers: meta-oe, toolchain-layers, meta-networking
 
 URI: git://arago-project.org/git/meta-ti
-branch: daisy
+branch: fido
 revision: HEAD
 
 URI: git://git.linaro.org/openembedded/meta-linaro
-branch: daisy
+branch: fido
 revision: HEAD
 layers: meta-linaro-toolchain
 
 Send pull requests to meta-arago@arago-project.org
 
-Layer maintainers: Chase Maupin <chase.maupin@ti.com>
-                   Denys Dmytriyenko <denys@ti.com>
+Layer maintainer: Denys Dmytriyenko <denys@ti.com>
