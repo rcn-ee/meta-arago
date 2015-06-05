@@ -13,7 +13,7 @@
 #                             the sources into.
 #   - SRCIPK_PACKAGE_ARCH   = This variable allows specific recipies to
 #                             specify an architecture for the sourcetree
-#                             package is "all" is not appropriate
+#                             package, defaults to the same as binary pkg
 #   - SRCIPK_INC_EXTRAFILES = When set to 1 this variable indicates that
 #                             the source ipk should contain extra files
 #                             such as the README file and recipe.
@@ -51,7 +51,7 @@ SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
 SRCIPK_SRC_DIR ?= "${S}"
 
 # Default PACKAGE_ARCH for sources is "all"
-SRCIPK_PACKAGE_ARCH ?= "all"
+SRCIPK_PACKAGE_ARCH ?= "${PACKAGE_ARCH}"
 
 # Default section matches the recipe section
 SRCIPK_SECTION ?= "${SECTION}"
