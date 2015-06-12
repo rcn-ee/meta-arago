@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r28"
+PR = "r29"
 
 inherit packagegroup
 
@@ -36,6 +36,10 @@ ARAGO_TI_TEST = "\
     "
 
 ARAGO_TI_TEST_append_ti33x = " \
+    omapconf \
+    "
+
+ARAGO_TI_TEST_append_ti43x = " \
     omapconf \
     "
 
