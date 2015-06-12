@@ -1,4 +1,7 @@
-PR_append = "-arago0"
+PR_append = "-arago1"
+
+EXTRA_OECONF_PATHS_remove = "--with-gxx-include-dir=${includedir}/c++/"
+EXTRA_OECONF_PATHS += "--with-gxx-include-dir=/include/c++/${BINV}/"
 
 FILES_${PN} = "\
   ${bindir}/${TARGET_PREFIX}gcc* \
