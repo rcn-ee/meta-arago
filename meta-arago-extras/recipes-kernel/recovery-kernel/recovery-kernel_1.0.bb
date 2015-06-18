@@ -1,7 +1,10 @@
 DESCRIPTION = "Recovery kernel building for Keystone EVM"
 LICENSE = "GPLv2"
 
-PR = "r3"
+# recovery kernel needs devtree compiler to add padding bytes
+DEPENDS += "dtc-native"
+
+PR = "r4"
 COMPATIBLE_MACHINE = "keystone"
 BRANCH = "v3.10.72/master"
 SRCREV = "b9bad8fccc5f9c6bcd78363982b3249a15f193fb"
