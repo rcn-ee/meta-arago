@@ -1,7 +1,7 @@
 DESCRIPTION = "Matrix GUI Application launcher"
 HOMEPAGE = "https://gforge.ti.com/gf/project/matrix-gui-v2/"
 
-LICENSE = "BSD MIT"
+LICENSE = "BSD & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a886c9ef769b2d8271115d2502512e5d"
 
 SECTION = "multimedia"

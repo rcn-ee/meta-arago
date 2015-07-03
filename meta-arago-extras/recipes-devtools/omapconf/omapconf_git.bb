@@ -1,7 +1,7 @@
 DESCRIPTION = "Diagnostic tool for TI OMAP processors"
 HOMEPAGE = "https://github.com/omapconf/omapconf"
 
-LICENSE = "GPLv2 BSD"
+LICENSE = "GPLv2 | BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=205c83c4e2242a765acb923fc766e914"
 
 PV = "1.71+1.72-rc1"
