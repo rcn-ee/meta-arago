@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-PR = "r4"
+PR = "r5"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
@@ -12,7 +12,7 @@ DEPENDS += "zip-native virtual/kernel alsa-lib"
 
 RDEPENDS_${PN} += "pm-qa serialcheck"
 
-inherit autotools module-base kernel-module-split
+inherit autotools-brokensep module-base kernel-module-split
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
