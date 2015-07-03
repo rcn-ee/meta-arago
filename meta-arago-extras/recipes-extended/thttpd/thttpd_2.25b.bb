@@ -21,7 +21,7 @@ PARALLEL_MAKE = ""
 INITSCRIPT_NAME = "thttpd"
 INITSCRIPT_PARAMS = "defaults"
 
-inherit autotools update-rc.d
+inherit autotools-brokensep update-rc.d
 
 EXTRA_OEMAKE += "'WEBDIR=${servicedir}/www'"
 FILES_${PN}-dbg_append = " ${servicedir}/www/cgi-bin/.debug"
