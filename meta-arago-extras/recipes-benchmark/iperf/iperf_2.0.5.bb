@@ -4,7 +4,7 @@ SECTION = "console/network"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/iperf-${PV}.tar.gz \
             file://000-Iperf_Fix-CPU-Usage.diff \
@@ -18,9 +18,9 @@ SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/iperf-${PV}.tar.gz \
 SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
 SRC_URI[sha256sum] = "636b4eff0431cea80667ea85a67ce4c68698760a9837e1e9d13096d20362265b"
 
-inherit autotools
+inherit autotools-brokensep
 
-S="${WORKDIR}/iperf-${PV}"
+S = "${WORKDIR}/iperf-${PV}"
 
 EXTRA_OECONF = "--exec-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
 
@@ -31,7 +31,6 @@ do_configure() {
 }
 
 do_compile() {
-    cd ${WORKDIR}/iperf-${PV}
     oe_runmake
 }
 
