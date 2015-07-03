@@ -6,6 +6,6 @@ CONFIG_NAME ?= "tisdk_${MACHINE}_defconfig"
 # do_compile_prepend so that we can pick up any changes to the
 # defconfig thay may have been done by the sanitizer code.
 do_compile_prepend() {
-    cp ${S}/.config ${S}/arch/arm/configs/${CONFIG_NAME}
+    cp ${B}/.config ${S}/arch/arm/configs/${CONFIG_NAME}
     sourceipk_do_create_srcipk
 }
