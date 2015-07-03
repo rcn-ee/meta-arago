@@ -9,7 +9,6 @@ inherit packagegroup
 RDEPENDS_${PN} = "\
     libgcc \
     libgcc-dev \
-    libstdc++ \
     libstdc++-dev \
     ${LIBC_DEPENDENCIES} \
     linux-libc-headers-dev \
