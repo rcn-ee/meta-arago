@@ -15,4 +15,4 @@ PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
 PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
 
 PREFERRED_PROVIDER_jpeg-native = "jpeg-native"
-PREFERRED_PROVIDER_glibc-gconv-iso8859-1 = "eglibc-locale"
+PREFERRED_PROVIDER_glibc-gconv-iso8859-1 = "glibc-locale"

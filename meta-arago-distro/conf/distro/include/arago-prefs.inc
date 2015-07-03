@@ -1,17 +1,17 @@
 # Set *target* toolchain preferences at global distro level.
 # Cross and SDK toolchain preferences are set in toolchain-*.inc files
-GCCVERSION ?= "linaro-4.7%"
-BINUVERSION ?= "linaro-2.24%"
-EGLIBCVERSION ?= "2.19%"
-EGLIBCINITVERSION ?= "2.19%"
-LINUXLIBCVERSION ?= "3.14"
+GCCVERSION ?= "linaro-4.9%"
+BINUVERSION ?= "linaro-2.25%"
+GLIBCVERSION ?= "2.21%"
+GLIBCINITVERSION ?= "2.21%"
+LINUXLIBCVERSION ?= "3.19"
 
 PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
 PREFERRED_VERSION_binutils ?= "${BINUVERSION}"
 PREFERRED_VERSION_linux-libc-headers ?= "${LINUXLIBCVERSION}"
-PREFERRED_VERSION_eglibc ?= "${EGLIBCVERSION}"
-PREFERRED_VERSION_eglibc-locale ?= "${EGLIBCVERSION}"
-PREFERRED_VERSION_eglibc-initial ?= "${EGLIBCINITVERSION}"
+PREFERRED_VERSION_glibc ?= "${GLIBCVERSION}"
+PREFERRED_VERSION_glibc-locale ?= "${GLIBCVERSION}"
+PREFERRED_VERSION_glibc-initial ?= "${GLIBCINITVERSION}"
 
 # Set preferred Qt5 versions. Different namespace from Qt4, so no conflict
 include conf/distro/include/qt5-versions.inc
@@ -20,7 +20,7 @@ include conf/distro/include/qt5-versions.inc
 PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
 # Use the latest version of libdrm
-PREFERRED_VERSION_libdrm = "2.4.52"
+PREFERRED_VERSION_libdrm = "2.4.59"
 
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
@@ -99,8 +99,8 @@ PREFERRED_VERSION_readline = "5.2"
 PREFERRED_VERSION_readline-native = "5.2"
 PREFERRED_VERSION_readline-nativesdk = "5.2"
 
-PREFERRED_VERSION_libnl = "3.2.24"
-PREFERRED_VERSION_crda = "1.1.3"
+PREFERRED_VERSION_libnl = "3.2.25"
+PREFERRED_VERSION_crda = "3.13"
 PREFERRED_VERSION_obex = "0.34"
 PREFERRED_VERSION_bash = "3.2.48"
 PREFERRED_VERSION_gettext = "0.16.1"
