@@ -7,8 +7,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 FIRMWARE_AND_DRIVERS_SRC = "\
-    ti-compat-wireless-wl18xx-src \
 "
+#    ti-compat-wireless-wl18xx-src 
 
 CONNECTIVITY_RDEPENDS = ""
 
