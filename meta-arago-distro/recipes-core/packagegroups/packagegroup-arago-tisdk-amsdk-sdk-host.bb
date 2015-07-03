@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r21"
-
-inherit packagegroup
+PR = "r22"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 # Choose the kernel and u-boot recipe sources to use
 

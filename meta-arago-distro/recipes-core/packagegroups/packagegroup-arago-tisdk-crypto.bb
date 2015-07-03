@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to install crypto packages into target FS"
 LICENSE = "MIT"
-PR = "r6"
-
-inherit packagegroup
+PR = "r7"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 # Add openssl-misc to get the openssl.cnf file which is
 # needed for "openssl req" and to avoid warnings.

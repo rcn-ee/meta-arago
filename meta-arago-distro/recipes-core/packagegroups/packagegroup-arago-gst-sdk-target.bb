@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to build and install header and libs in sdk"
 LICENSE = "MIT"
-PR = "r9"
-
-inherit packagegroup
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 GST_010_DEPS = " \
     gstreamer-dev \

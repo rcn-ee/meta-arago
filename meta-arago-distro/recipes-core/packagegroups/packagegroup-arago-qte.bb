@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r9"
-
-inherit packagegroup
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 QT4_SGX_SUPPORT = "\
     qt4-embedded-plugin-gfxdriver-gfxpvregl \

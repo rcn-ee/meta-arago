@@ -1,10 +1,10 @@
 DESCRIPTION = "Target packages for the standalone SDK"
-PR = "r7"
+PR = "r9"
 LICENSE = "MIT"
 
-inherit packagegroup
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 RDEPENDS_${PN} = "\
     libgcc \

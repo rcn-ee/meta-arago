@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r8"
-
-inherit packagegroup
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 UTILS = "libdrm-dev"
 

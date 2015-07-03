@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r12"
-
-inherit packagegroup
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 QT4_DEMOS = "\
     qt4-embedded-examples \

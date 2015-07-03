@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to add gstreamer and gstreamer plugins"
 LICENSE = "MIT"
-PR = "r12"
-
-inherit packagegroup
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 GST_010_DEPS = " \
     gstreamer \

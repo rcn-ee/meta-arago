@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to build and install header and libs into the sdk"
 LICENSE = "MIT"
-PR = "r6"
-
-inherit packagegroup
+PR = "r7"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 QT_TOOLCHAIN_TARGET = "\
     packagegroup-arago-qte-toolchain-target \

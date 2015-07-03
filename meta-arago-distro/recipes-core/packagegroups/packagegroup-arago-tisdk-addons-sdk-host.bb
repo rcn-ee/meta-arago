@@ -1,10 +1,10 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r10"
-
-inherit packagegroup
+PR = "r11"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 UTILS = " \
     am-sysinfo-src \
