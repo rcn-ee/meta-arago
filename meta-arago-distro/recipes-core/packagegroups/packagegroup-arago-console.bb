@@ -53,9 +53,12 @@ ARAGO_UTILS = "\
     iproute2 \
     iproute2-tc \
     strace \
-    ltrace \
     ${@base_contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
     "
+
+# ARAGO_UTILS - ltrace fails with __cxa_demangle for now
+#    ltrace 
+
 
 ARAGO_SDK_PREREQ = "\
     zlib \
