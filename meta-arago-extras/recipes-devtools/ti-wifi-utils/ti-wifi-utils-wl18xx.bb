@@ -7,7 +7,7 @@ RDEPENDS_${PN} = "wl18xx-firmware"
 
 PV = "R8.5+git${SRCPV}"
 
-PR ="r3"
+PR = "r4"
 
 #Tag: R8.5
 SRCREV = "dcf0800f30ba449cd7f3a20f8b3f4853dc829652"
@@ -25,6 +25,7 @@ export CROSS_COMPILE = "${TARGET_PREFIX}"
 
 EXTRA_OEMAKE = 'CFLAGS="${CFLAGS} -I${STAGING_INCDIR}/libnl3/ -DCONFIG_LIBNL32 " \
 		LDFLAGS="${LDFLAGS} -L${STAGING_LIBDIR}" \
+		CC="${CC}" \
 		NLVER=3'
 
 do_install() {
