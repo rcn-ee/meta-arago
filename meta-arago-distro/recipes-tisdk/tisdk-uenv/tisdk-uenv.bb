@@ -6,7 +6,7 @@ SRC_URI = "\
     file://uEnv.txt \
 "
 
-PR = "r1"
+PR = "r2"
 PV = "1.0"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
