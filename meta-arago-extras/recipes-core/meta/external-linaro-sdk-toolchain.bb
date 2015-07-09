@@ -2,7 +2,7 @@ inherit cross-canadian
 
 require external-linaro-bfd-version.inc
 
-PR = "r4"
+PR = "r5"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
@@ -39,13 +39,15 @@ datadir = "${exec_prefix}/share"
 
 gcclibdir = "${libdir}/gcc"
 
+# New Linaro toolchain misses these binaries, comment out for now
+#	${prefix}/${ELT_TARGET_SYS}/bin/cpp
+#	${prefix}/${ELT_TARGET_SYS}/bin/cc
+#	${prefix}/${ELT_TARGET_SYS}/bin/g++
+#	${prefix}/${ELT_TARGET_SYS}/bin/c++
+#	${prefix}/${ELT_TARGET_SYS}/bin/gcov
+#	${prefix}/${ELT_TARGET_SYS}/bin/gcc*
+
 FILES_gcc-cross-canadian-arm = "\
-	${prefix}/${ELT_TARGET_SYS}/bin/cpp \
-	${prefix}/${ELT_TARGET_SYS}/bin/cc \
-	${prefix}/${ELT_TARGET_SYS}/bin/g++ \
-	${prefix}/${ELT_TARGET_SYS}/bin/c++ \
-	${prefix}/${ELT_TARGET_SYS}/bin/gcov \
-	${prefix}/${ELT_TARGET_SYS}/bin/gcc* \
 	${prefix}/${ELT_TARGET_SYS}/lib/libstdc++.* \
 	${prefix}/${ELT_TARGET_SYS}/lib/libgcc_s.* \
 	${prefix}/${ELT_TARGET_SYS}/lib/libsupc++.* \
@@ -117,7 +119,7 @@ do_install() {
 	${@base_conditional('PREFERRED_PROVIDER_gdb-cross-canadian-arm', 'external-linaro-sdk-toolchain', 'install -d ${D}${datadir}/man/man1', '', d)}
 	install -d ${D}${gcclibdir}/${ELT_TARGET_SYS}/${ELT_VER_GCC}/include
 
-	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/bin/{c++,g++,gcc*} ${D}${prefix}/${ELT_TARGET_SYS}/bin
+#	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/bin/{c++,g++,gcc*} ${D}${prefix}/${ELT_TARGET_SYS}/bin
 	cp -a ${TOOLCHAIN_PATH}/${ELT_TARGET_SYS}/lib/{libstdc++.*,libgcc_s.*,libsupc++.*} ${D}${prefix}/${ELT_TARGET_SYS}/lib
 	cp -a ${TOOLCHAIN_PATH}/lib/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/* ${D}${gcclibdir}/${ELT_TARGET_SYS}/${ELT_VER_GCC}
 	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gcov,gcc*,g++,cpp} ${D}${bindir}
