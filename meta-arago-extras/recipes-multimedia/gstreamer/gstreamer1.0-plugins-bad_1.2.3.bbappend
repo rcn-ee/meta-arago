@@ -11,13 +11,12 @@ DEPENDS_append_omap-a15 = " \
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI_append = " \
-        file://0001-Added-GstDRMBufferPool-support.patch \
-        file://0002-Modified-waylandsink-to-accept-NV12-format.patch \
-        file://0003-Added-KMSsink-support.patch \
-        file://0004-waylandsink-Removed-dependency-on-dri2.patch \
-        file://0005-vc1parse-and-jpegparse-Fixes-plugin-ranks.patch \
-        file://0006-GstDRMBufferPool-support-fix.patch \
-"
+SRC_URI = "git://git.ti.com/glsdk/gstreamer1-0-plugins-bad.git;protocol=git \
+          "
 
-PR_append = "-arago3"
+S = "${WORKDIR}/git"
+
+SRCREV = "12b0d2ac50aba19da53d2e1ac40d6ada70a79930"
+
+PR_append = "-arago5"
+
