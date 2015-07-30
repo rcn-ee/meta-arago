@@ -1,11 +1,12 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r30"
+PR = "r32"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
+# perf fails with 4.1 kernel
 ARAGO_TEST = "\
     bonnie++ \
     hdparm \
@@ -21,7 +22,6 @@ ARAGO_TEST = "\
     stress \
     yavta \
     rng-tools \
-    perf \
     v4l-utils \
     smcroute \
     rwmem \
@@ -29,8 +29,10 @@ ARAGO_TEST = "\
     pulseaudio-misc \
     "
 
+# Disable this due to IPC missing in 4.1
+#    ltp-ddt
+
 ARAGO_TI_TEST = "\
-    ltp-ddt \
     input-utils \
     cpuloadgen \
     "
@@ -46,12 +48,14 @@ ARAGO_TI_TEST_append_ti43x = " \
 ARAGO_TI_TEST_append_omap-a15 = " \
     omapconf \
     ipc-test-fw \
-    ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
     "
+# omap-a15 -    ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)}
+
+# vpdma-fw and vpe-tests both provide FW image
+#    vpe-tests
 
 ARAGO_TI_TEST_append_dra7xx = " \
     vpdma-fw \
-    vpe-tests \
     "
 
 RDEPENDS_${PN} = "\
