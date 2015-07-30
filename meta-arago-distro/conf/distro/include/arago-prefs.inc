@@ -71,7 +71,7 @@ PREFERRED_VERSION_linux-keystone = "3.10%"
 
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/kernel_am437x-evm = "linux-ti-staging"
-PREFERRED_VERSION_linux-ti-staging = "3.14%"
+PREFERRED_VERSION_linux-ti-staging = "4.1%"
 
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
@@ -80,7 +80,7 @@ PREFERRED_PROVIDER_u-boot_am437x-evm = "u-boot-ti-staging"
 PREFERRED_PROVIDER_virtual/bootloader_omap-a15 = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot_omap-a15 = "u-boot-ti-staging"
 
-PREFERRED_VERSION_u-boot-ti-staging = "2014.07%"
+PREFERRED_VERSION_u-boot-ti-staging = "2015.07%"
 
 # Pin down udev version from oe-core, as meta-oe pulls in newer systemd-enhanced version
 PREFERRED_VERSION_udev = "182"
