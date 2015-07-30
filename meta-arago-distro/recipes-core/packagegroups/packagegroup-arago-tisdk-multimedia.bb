@@ -53,8 +53,10 @@ ACCEL_FW_append_dra7xx-evm = " \
     "
 
 
+# Disable for now, until IPC gets merged to 4.1 kernel
+#    packagegroup-arago-gst
+#    ${ACCEL_FW}
+
 RDEPENDS_${PN} = "\
-    packagegroup-arago-gst \
     ${MULTIMEDIA} \
-    ${ACCEL_FW} \
 "

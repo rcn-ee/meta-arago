@@ -4,6 +4,8 @@ PR = "r3"
 
 inherit packagegroup
 
+# Disable due to missing IPC in 4.1
+#    packagegroup-arago-gst-sdk-target
+
 RDEPENDS_${PN} = "\
-    packagegroup-arago-gst-sdk-target \
 "
