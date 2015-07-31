@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -12,6 +12,7 @@ GRAPHICS_WESTON = "\
     weston-examples \
 "
 
+# Until SGX is fixed with 4.1 - omap3-sgx-modules
 GRAPHICS_SDK = "\
     libgles-omap3 \
     libgles-omap3-blitwsegl \
@@ -19,7 +20,6 @@ GRAPHICS_SDK = "\
     libgles-omap3-frontwsegl \
     libgles-omap3-linuxfbwsegl \
     libgles-omap3-rawdemos \
-    omap3-sgx-modules \
 "
 
 GRAPHICS_RDEPENDS = ""
