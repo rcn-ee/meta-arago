@@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=ab87f20cd7e8c0d0a6539b34d3791d0e \
 
 FILESEXTRAPATHS_append := "${THISDIR}/wpa-supplicant:"
 
-# Tag: R8.5
-SRCREV = "2710d0ae31fa2dc31f653f346a985268d8d7795c"
-BRANCH = "ap_p2p"
-PR_append = "c"
+# Tag: R8.6
+SRCREV = "f80fe345acf103ba6882ac8396f19584ac184904"
+BRANCH = "upstream_24"
+PR_append = "d"
 
 # Add ti to the PV to indicate that this is a TI modify version of wpa-supplicant.
 PV = "R8.5-devel-ti+git${SRCPV}"
