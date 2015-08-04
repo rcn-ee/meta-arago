@@ -40,7 +40,7 @@ SRC_URI = "\
     file://Makefile_gdbserverproxy-module-drv \
 "
 
-PR = "r48"
+PR = "r49"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -127,7 +127,7 @@ DEFCONFIG = "tisdk_${MACHINE}_defconfig"
 
 AMSDK_DEFCONFIG = "singlecore-omap2plus_defconfig"
 
-DEFCONFIG := "${@base_conditional('ARAGO_BRAND','core','${DEFCONFIG}','${AMSDK_DEFCONFIG}',d)}"
+DEFCONFIG := "${@base_conditional('ARAGO_BRAND','amsdk','${AMSDK_DEFCONFIG}','${DEFCONFIG}',d)}"
 
 # This step will stitch together the final Makefile based on the supported
 # make targets.
