@@ -2,7 +2,7 @@ DESCRIPTION = "AMSDK multimedia support files"
 HOMEPAGE = "https://gforge.ti.com/gf/project/am_multimedia/"
 LICENSE = "CC-BY-NC-ND-3.0 & CC-BY-3.0"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://Multimedia_Data_Files_Manifest.doc;md5=9254447a504d2179d83a6bc9e2c28142"
+LIC_FILES_CHKSUM = "file://Multimedia_Data_Files_Manifest.doc;md5=da0727f80b90422138535dfffc36cd1a"
 PR = "r0"
 
 COMPATIBLE_MACHINE = "(omap3|ti33x|ti43x|omap-a15)"
@@ -15,12 +15,13 @@ VIDEO_FILES_append_beagleboard = "video_vga"
 VIDEO_FILES_append_am3517-evm  = "video_wqvga"
 VIDEO_FILES_append_ti33x       = "video_wvga \
                                   video_wqvga"
+VIDEO_FILES_append_ti43x       = "video_wqvga"
 VIDEO_FILES_append_dra7xx      = "video_wvga \
                                   video_1080p \
                                   video_720p \
                                   video_yuv"
- 
-SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/1271/7720/amsdk-av-files_${PV}.tar.gz;name=avfilestarball"
+
+SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/1279/7769/amsdk-av-files_${PV}.tar.gz;name=avfilestarball"
 
 S = "${WORKDIR}/amsdk-av-files"
 
@@ -40,5 +41,5 @@ do_install() {
 
 FILES_${PN} += "${datadir}/ti/*"
 
-SRC_URI[avfilestarball.md5sum] = "3f930cd873bc55bfd52a09b85f567d0c"
-SRC_URI[avfilestarball.sha256sum] = "b389b732df409546c0aba6464a5b0815647d8fa24020c4bede823cbe26337c06"
+SRC_URI[avfilestarball.md5sum] = "29a2f8b5f41f49e30bbe9cf53eb06c5a"
+SRC_URI[avfilestarball.sha256sum] = "64dde10d03156d480c6f38494c9503e73878fa0a8d5009182ed43b0e926b5569"
