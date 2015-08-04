@@ -26,6 +26,10 @@ MULTIMEDIA_append_omap-a15 = " \
     amsdk-av-files \
 "
 
+MULTIMEDIA_append_dra7xx = " \
+    hevc-arm-decoder \
+"
+
 MULTIMEDIA_append_am37x-evm = " \
     av-examples \
 "
