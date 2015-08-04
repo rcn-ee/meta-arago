@@ -5,7 +5,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 require gstreamer1.0-plugins-ti.inc
 
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 SRCREV = "876d28b2de5fa02d0f5fa836cba7be9a14b819eb"
 
-SRC_URI = "git://git.ti.com/glsdk/gst-plugin-vpe.git;protocol=git"
+SRC_URI = "git://git.ti.com/glsdk/gst-plugin-vpe.git;protocol=git \
+           file://ti-video.conf \
+"
+
+do_install_append() {
+    install -d ${D}/etc/modprobe.d
+    install -m 644 ${WORKDIR}/ti-video.conf ${D}/etc/modprobe.d
+}
