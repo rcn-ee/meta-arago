@@ -36,7 +36,7 @@ then
 cat << EOM 2>&1
 ***************************************************************
 ***************************************************************
-NOTICE: This file system contains the followin GPLv3 packages:
+NOTICE: This file system contains the following GPLv3 packages:
 EOM
     echo -e $gplv3_packages 2>&1
 cat << EOM 2>&1
