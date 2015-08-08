@@ -10,8 +10,9 @@ INSANE_SKIP_libitm += "ldflags textrel"
 ALLOW_EMPTY_${PN}-utils = "1"
 ALLOW_EMPTY_ldd = "1"
 ALLOW_EMPTY_libstdc++ = "1"
+ALLOW_EMPTY_libgomp = "1"
 
-PR_append = "-arago13"
+PR_append = "-arago14"
 
 PROVIDES := "${@oe_filter_out('virtual/linux-libc-headers', '${PROVIDES}', d)}"
 PROVIDES := "${@oe_filter_out('linux-libc-headers', '${PROVIDES}', d)}"
