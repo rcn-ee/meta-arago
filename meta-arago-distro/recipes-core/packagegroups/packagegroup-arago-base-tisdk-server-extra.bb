@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r2"
+PR = "r3"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -81,51 +81,52 @@ ARAGO_SECURE_STORAGE = "\
     engine-pkcs11 \
     "
 
+# Disable due to IPC for now
+#    ti-ipc
+#    demo-image-proc
+#    rm-lld
+#    cmem
+#    cmem-mod
+#    pa-lld
+#    qmss-lld
+#    hplib
+#    hplib-mod
+#    multiprocmgr
+#    nwal-lld
+#    netapi
+#    netapi-test
+#    mpm-transport
+#    pktlib
+#    cppi-lld
+#    ipsecmgr-mod
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
     uio-module-drv \
-    multiprocmgr \
-    mpm-transport \
     traceframework \
     cuia \
-    hplib \
-    hplib-mod \
-    netapi \
-    netapi-test \
-    ipsecmgr-mod \
     libnl-xfrm \
-    demo-image-proc \
-    ti-ipc \
-    rm-lld \
-    cmem \
-    cmem-mod \
     mmap-lld \
     udma \
     cuia \
-    qmss-lld \
-    pa-lld \
-    cppi-lld \
     edma3-lld \
     hyplnk-lld \
-    pktlib \
-    nwal-lld \
     srss-tc \
     "
 
-ARAGO_TI_PKGS = "\
-    uio-module-drv \
-    cmem \
-    cmem-mod \
-    "
+ARAGO_TI_PKGS = ""
+#    uio-module-drv \
+#    cmem \
+#    cmem-mod \
+#    "
 ARAGO_TI_PKGS_append_keystone = "${ARAGO_TI_KEYSTONE_PKGS}"
 ARAGO_TI_PKGS_append_k2l-evm = "\
     dfe-lld \
     iqn2-lld \
     "
 
-ARAGO_TI_PKGS_append_k2hk-evm = "\
-    srio-lld \
-    "
+#ARAGO_TI_PKGS_append_k2hk-evm = "\
+#    srio-lld \
+#    "
 
 RDEPENDS_${PN} = "\
     ${ARAGO_LIBNL} \
