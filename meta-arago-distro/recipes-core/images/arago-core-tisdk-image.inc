@@ -42,7 +42,6 @@ IMAGE_INSTALL_QT_keystone = ""
 
 IMAGE_INSTALL = "\
     packagegroup-arago-tisdk-addons-sdk-host \
-    packagegroup-arago-tisdk-connectivity-sdk-host \
     packagegroup-arago-tisdk-crypto-sdk-host \
     packagegroup-arago-tisdk-graphics-sdk-host \
     packagegroup-arago-tisdk-matrix-sdk-host \

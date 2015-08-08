@@ -34,7 +34,6 @@ WLAN_COMMON = "\
 FIRMWARE_AND_DRIVERS = "\
     wl18xx-firmware \
 "
-#    ti-compat-wireless-wl18xx 
 
 DEMO_APPS = "\
     ${@base_conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
