@@ -13,7 +13,7 @@ SRC_URI += "file://remove_strip.patch \
 SRC_URI[md5sum] = "f3becf2a0270910a841060c08d1db824"
 SRC_URI[sha256sum] = "69dcbe4f8c5ce7d91b4150a6309e536d03b61841169746ca5788413ac7edb9cb"
 
-inherit autotools
+inherit autotools-brokensep
 
 do_configure() {
 	oe_runconf --with-lzo-headers=${STAGING_INCDIR}/lzo --with-lzo-lib=${STAGING_LIBDIR} --with-ssl-headers=${STAGING_INCDIR}/openssl --with-ssl-lib=${STAGING_LIBDIR}
