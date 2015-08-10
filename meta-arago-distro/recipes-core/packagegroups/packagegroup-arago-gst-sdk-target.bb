@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to build and install header and libs in sdk"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -20,6 +20,10 @@ GST_1X_DEPS = " \
     gstreamer1.0-plugins-good-dev \
     gstreamer1.0-plugins-bad-dev \
     gstreamer1.0-libav-dev \
+"
+
+GST_1X_DEPS_append_dra7xx = " \
+    gstreamer1.0-plugins-hevc-dev \
 "
 
 RDEPENDS_${PN} = " \
