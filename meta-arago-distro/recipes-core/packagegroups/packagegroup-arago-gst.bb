@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add gstreamer and gstreamer plugins"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 inherit packagegroup
 
@@ -26,6 +26,10 @@ GST_1X_DEPS = " \
     gstreamer1.0-plugins-good-meta \
     gstreamer1.0-plugins-bad-meta \
     gstreamer1.0-libav \
+"
+
+GST_1X_DEPS_append_dra7xx = " \
+    gstreamer1.0-plugins-hevc \
 "
 
 GST_PLUGINS_PREFIX = "${@base_conditional('GST_PROVIDER', '0.10', 'gst-plugins', 'gstreamer1.0-plugins', d)}"
