@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://signal_parent.c;beginline=1;endline=37;md5=3c72149bb4
 SECTION = "system"
 
 INHIBIT_PACKAGE_STRIP = "1"
+CLEANBROKEN = "1"
 
 PR = "r4"
 
@@ -17,8 +18,8 @@ SRC_URI = "git://git.ti.com/apps/oprofile-example.git;protocol=git;branch=${BRAN
 S = "${WORKDIR}/git"
 
 do_compile() {
-    install -d  ${S}/Debug
-    install -d  ${S}/Debug1
+	install -d ${S}/Debug
+	install -d ${S}/Debug1
 	${CC} ${CFLAGS} ${LDFLAGS} -o Debug/signal_parent signal_parent.c
 	${CC} ${CFLAGS} -DUSE_SIGNALS ${LDFLAGS} -o Debug1/signal_parent.opt signal_parent.c
 }
