@@ -7,7 +7,6 @@ do_configure_prepend_class-native() {
 }
 
 require recipes-core/llvm/llvm.inc
-require recipes-core/llvm/llvm3.inc
 
 DEPENDS_append_class-native = " llvm-common-native"
 
@@ -100,4 +99,3 @@ llvm_sysroot_preprocess_target() {
 }
 
 BBCLASSEXTEND = "native nativesdk"
-
