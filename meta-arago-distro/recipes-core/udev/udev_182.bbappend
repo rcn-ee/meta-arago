@@ -5,7 +5,9 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago3"
+PR_append = "-arago4"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI_append = " \
                   file://usb1-rules.sh \
