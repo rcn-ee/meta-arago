@@ -15,6 +15,8 @@ PR = "r8"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|dra7xx"
 
+CLEANBROKEN = "1"
+
 SRCREV = "46f6a1d0087bd9aac6e6cbae58ed9ee236e5f1b1"
 BRANCH = "master"
 SRC_URI = "git://git.ti.com/wilink8-bt/ti-bt-firmware.git;branch=${BRANCH} \
