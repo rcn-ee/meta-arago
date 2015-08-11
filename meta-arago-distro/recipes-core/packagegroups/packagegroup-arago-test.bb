@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r32"
+PR = "r33"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -29,10 +29,8 @@ ARAGO_TEST = "\
     pulseaudio-misc \
     "
 
-# Disable this due to IPC missing in 4.1
-#    ltp-ddt
-
 ARAGO_TI_TEST = "\
+    ltp-ddt \
     input-utils \
     cpuloadgen \
     "
