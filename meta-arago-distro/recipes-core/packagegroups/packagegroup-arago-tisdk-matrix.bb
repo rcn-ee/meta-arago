@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r41"
+PR = "r42"
 
 inherit packagegroup
 
@@ -97,6 +97,7 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-gui-generic-pm           \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
+    matrix-multimedia-demo-h265dec \
 "
 
 MATRIX_APPS_append_beagleboard = "  \
