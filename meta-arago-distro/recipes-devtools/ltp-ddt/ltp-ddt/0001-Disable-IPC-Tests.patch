@@ -1,0 +1,29 @@
+From 88bde7669f9bd2e76295567e4ea93045979f1040 Mon Sep 17 00:00:00 2001
+From: Carlos Hernandez <ceh@ti.com>
+Date: Tue, 4 Aug 2015 16:34:40 -0400
+Subject: [PATCH] Disable IPC Tests
+
+Disable IPC tests until IPC support is added to kernel 4.1
+
+Signed-off-by: Carlos Hernandez <ceh@ti.com>
+---
+ testcases/ddt/Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/testcases/ddt/Makefile b/testcases/ddt/Makefile
+index 0ca6218..b6d6503 100644
+--- a/testcases/ddt/Makefile
++++ b/testcases/ddt/Makefile
+@@ -30,6 +30,9 @@ include $(top_srcdir)/include/mk/env_pre.mk
+ # Disabling EDMA tests until 3.8+ compatible tests are available
+ FILTER_OUT_DIRS                 += edma_test_suite
+ 
++# Disabling IPC tests until 4.1 kernel support is added
++FILTER_OUT_DIRS                 += ipc_test_suite
++
+ ifeq ($(PLATFORM),dra7xx-evm)
+ FILTER_OUT_DIRS                 += mc_test_suite
+ endif
+-- 
+2.4.4
+
