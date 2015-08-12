@@ -40,7 +40,7 @@ case "$1" in
             chmod 0700 $XDG_RUNTIME_DIR
         fi
 
-        openvt -s weston
+        openvt -c 4 -f runWeston
 
         # If there's no touchscreen device available, done
         if [ ! -e /dev/input/touchscreen0 ] ; then
@@ -83,7 +83,7 @@ case "$1" in
         udevadm trigger
         killproc weston
         sleep 1
-        openvt -s weston
+        openvt -c 4 -f runWeston
   ;;
 
   stop)
