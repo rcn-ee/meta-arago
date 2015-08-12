@@ -115,6 +115,9 @@ PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
 PLATFORM_GDBSERVERPROXY = ""
 PLATFORM_GDBSERVERPROXY_dra7xx = "DRA7xx_PLATFORM"
 
+# If it's not defined at all, like for zImage case
+UBOOT_LOADADDRESS ?= "0"
+
 KERNEL_BUILD_CMDS = "${@base_conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
 
 KERNEL_DEVICETREE_ti33x = "am335x-evm.dtb am335x-evmsk.dtb am335x-bone.dtb am335x-boneblack.dtb"
