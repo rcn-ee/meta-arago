@@ -1,0 +1,71 @@
+From 066333592c77ef831286482c7d3636265777a774 Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Fri, 12 Jun 2015 10:24:33 -0400
+Subject: [PATCH 2/2] deform: disable opengl button.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ examples/widgets/painting/deform/pathdeform.cpp |   12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/examples/widgets/painting/deform/pathdeform.cpp b/examples/widgets/painting/deform/pathdeform.cpp
+index f8ecc3b..9da6bf3 100644
+--- a/examples/widgets/painting/deform/pathdeform.cpp
++++ b/examples/widgets/painting/deform/pathdeform.cpp
+@@ -91,7 +91,7 @@ void PathDeformControls::layoutForDesktop()
+     QPushButton *showSourceButton = new QPushButton(mainGroup);
+     showSourceButton->setText(tr("Show Source"));
+ 
+-#ifdef QT_OPENGL_SUPPORT
++#if 0
+     QPushButton *enableOpenGLButton = new QPushButton(mainGroup);
+     enableOpenGLButton->setText(tr("Use OpenGL"));
+     enableOpenGLButton->setCheckable(true);
+@@ -114,7 +114,7 @@ void PathDeformControls::layoutForDesktop()
+     mainGroupLayout->addWidget(textGroup);
+     mainGroupLayout->addWidget(animateButton);
+     mainGroupLayout->addStretch(1);
+-#ifdef QT_OPENGL_SUPPORT
++#if 0
+     mainGroupLayout->addWidget(enableOpenGLButton);
+ #endif
+     mainGroupLayout->addWidget(showSourceButton);
+@@ -140,7 +140,7 @@ void PathDeformControls::layoutForDesktop()
+     connect(deformSlider, SIGNAL(valueChanged(int)), m_renderer, SLOT(setIntensity(int)));
+     connect(fontSizeSlider, SIGNAL(valueChanged(int)), m_renderer, SLOT(setFontSize(int)));
+     connect(animateButton, SIGNAL(clicked(bool)), m_renderer, SLOT(setAnimated(bool)));
+-#ifdef QT_OPENGL_SUPPORT
++#if 0
+     connect(enableOpenGLButton, SIGNAL(clicked(bool)), m_renderer, SLOT(enableOpenGL(bool)));
+ #endif
+ 
+@@ -183,7 +183,7 @@ void PathDeformControls::layoutForSmallScreen()
+     QPushButton *animateButton = new QPushButton(tr("Animated"), mainGroup);
+     animateButton->setCheckable(true);
+ 
+-#ifdef QT_OPENGL_SUPPORT
++#if 0
+     QPushButton *enableOpenGLButton = new QPushButton(mainGroup);
+     enableOpenGLButton->setText(tr("Use OpenGL"));
+     enableOpenGLButton->setCheckable(mainGroup);
+@@ -205,7 +205,7 @@ void PathDeformControls::layoutForSmallScreen()
+     mainGroupLayout->addWidget(fontSizeLabel, 2, 0, Qt::AlignRight);
+     mainGroupLayout->addWidget(fontSizeSlider, 2, 1);
+     mainGroupLayout->addWidget(animateButton, 3,0, 1,2);
+-#ifdef QT_OPENGL_SUPPORT
++#if 0
+     mainGroupLayout->addWidget(enableOpenGLButton, 4,0, 1,2);
+ #endif
+ 
+@@ -221,7 +221,7 @@ void PathDeformControls::layoutForSmallScreen()
+     connect(deformSlider, SIGNAL(valueChanged(int)), m_renderer, SLOT(setIntensity(int)));
+     connect(fontSizeSlider, SIGNAL(valueChanged(int)), m_renderer, SLOT(setFontSize(int)));
+     connect(animateButton, SIGNAL(clicked(bool)), m_renderer, SLOT(setAnimated(bool)));
+-#ifdef QT_OPENGL_SUPPORT
++#if 0
+     connect(enableOpenGLButton, SIGNAL(clicked(bool)), m_renderer, SLOT(enableOpenGL(bool)));
+ #endif
+ 
+-- 
+1.7.9.5
+
