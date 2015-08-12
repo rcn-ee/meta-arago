@@ -1,0 +1,39 @@
+#!/bin/bash
+
+clear
+cat << EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        Please wait...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EOF
+
+weston --idle-time=0 >> /var/log/weston.log 2>&1
