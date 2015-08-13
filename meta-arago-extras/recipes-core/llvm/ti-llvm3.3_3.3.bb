@@ -1,6 +1,8 @@
 DESCRIPTION = "LLVM 3.3 with support for TI C66x intrinsics"
 HOMEPAGE = "https://gitorious.design.ti.com/ocl/llvm33-src"
 
+PR = "r1"
+
 do_configure_prepend_class-native() {
     # Fix paths in llvm-config
     sed -i "s|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|sys::path::parent_path(CurrentPath))\.str()|g" ${S}/tools/llvm-config/llvm-config.cpp
@@ -8,7 +10,9 @@ do_configure_prepend_class-native() {
 
 require recipes-core/llvm/llvm.inc
 
-DEPENDS_append_class-native = " llvm-common-native"
+DEPENDS += "zlib libxml2"
+EXTRA_OECONF += "--enable-zlib"
+
 
 LLVM_DIR = "ti-llvm${PV}"
 
@@ -23,6 +27,11 @@ SRC_URI = " \
 SRCREV = "29629a3e70d445cfbfbb4046a56d3648ebae9544"
 
 S = "${WORKDIR}/git"
+
+LIBXML2_INC = "`pkg-config libxml-2.0 --cflags`"
+LIBXML2_LIBS = "`pkg-config libxml-2.0 --libs`"
+
+EXTRA_OEMAKE += "LIBXML2_INC="${LIBXML2_INC}" LIBXML2_LIBS="${LIBXML2_LIBS}""
 
 do_compile_class-native() {
   cd ${LLVM_BUILD_DIR}
