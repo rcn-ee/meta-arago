@@ -31,7 +31,7 @@ PREFERRED_PROVIDER_gcc-runtime = "external-linaro-toolchain"
 SDKGCCVERSION ?= "linaro-4.9%"
 SDKBINUVERSION ?= "linaro-2.25%"
 SDKGLIBCVERSION ?= "2.21%"
-SDKLINUXLIBCVERSION ?= "3.19%"
+SDKLINUXLIBCVERSION ?= "4.1%"
 
 PREFERRED_VERSION_gcc-crosssdk ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_gcc-crosssdk-initial ?= "${SDKGCCVERSION}"
