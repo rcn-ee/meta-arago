@@ -1,21 +1,18 @@
 #
-# external Linaro eglibc specific configuration
+# external Linaro glibc specific configuration
 #
 
 LIBCEXTENSION = "${@['', '-gnu'][(d.getVar('ABIEXTENSION', True) or '') != '']}"
 
-# Add glibc overrides to the overrides for eglibc.
+# Add glibc overrides to the overrides for glibc.
 LIBCOVERRIDE = ":libc-glibc"
 OVERRIDES .= "${LIBCOVERRIDE}"
 
-PREFERRED_PROVIDER_virtual/libiconv ?= "external-linaro-toolchain"
-PREFERRED_PROVIDER_virtual/libintl ?= "external-linaro-toolchain"
-PREFERRED_PROVIDER_virtual/libc ?= "external-linaro-toolchain"
 PREFERRED_PROVIDER_virtual/libc-locale ?= "external-linaro-toolchain"
 
-PREFERRED_PROVIDER_virtual/nativesdk-libiconv ?= "nativesdk-eglibc"
-PREFERRED_PROVIDER_virtual/nativesdk-libintl ?= "nativesdk-eglibc"
-PREFERRED_PROVIDER_virtual/nativesdk-libc ?= "nativesdk-eglibc"
+PREFERRED_PROVIDER_virtual/nativesdk-libiconv ?= "nativesdk-glibc"
+PREFERRED_PROVIDER_virtual/nativesdk-libintl ?= "nativesdk-glibc"
+PREFERRED_PROVIDER_virtual/nativesdk-libc ?= "nativesdk-glibc"
 
 LIBC_DEPENDENCIES = "libsegfault \
 		     glibc \
