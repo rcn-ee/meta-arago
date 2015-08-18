@@ -1,12 +1,11 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r33"
+PR = "r34"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-# perf fails with 4.1 kernel
 ARAGO_TEST = "\
     bonnie++ \
     hdparm \
@@ -22,6 +21,7 @@ ARAGO_TEST = "\
     stress \
     yavta \
     rng-tools \
+    perf \
     v4l-utils \
     smcroute \
     rwmem \
