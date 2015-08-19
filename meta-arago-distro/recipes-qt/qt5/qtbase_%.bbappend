@@ -5,7 +5,7 @@ GLES_EXTRA_DEPS_omap-a15 = "libdrm wayland"
 
 PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl ${GLES_EXTRA_DEPS}"
 
-PR_append = "-arago7"
+PR_append = "-arago8"
 
 QT_CONFIG_FLAGS += "-qpa ${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', 'eglfs', d)}"
 
@@ -31,7 +31,7 @@ python do_patch_append() {
     work_dir = d.getVar("WORKDIR", True)
     s = d.getVar("S", True)
 
-    if not oe.utils.contains('DISTRO_FEATURES','wayland',True,False,d):
+    if not bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d):
         shutil.copy(os.path.join(work_dir,"quit.png"),os.path.join(s,"examples/widgets/animation/animatedtiles/images/"))
 }
 
@@ -39,6 +39,15 @@ python do_patch_append() {
 do_install_append () {
     install -d ${D}${sysconfdir}/profile.d
     install -m 0644 ${WORKDIR}/${QT_ENV} ${D}${sysconfdir}/profile.d/qt_env.sh
+}
+
+do_install_prepend () {
+    # install fonts manually if they are missing
+    if [ ! -d ${D}/${OE_QMAKE_PATH_LIBS}/fonts ]; then
+        mkdir -p ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+        cp -a ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+        chown -R root:root ${D}/${OE_QMAKE_PATH_LIBS}/fonts
+    fi
 }
 
 PACKAGES =+ "${PN}-conf"
