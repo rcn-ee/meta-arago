@@ -13,7 +13,7 @@ S = "${WORKDIR}/git"
 
 DEPENDS += "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad hevc-arm-decoder"
 
-inherit autotools pkgconfig gettext
+inherit autotools-brokensep pkgconfig gettext
 
 PR = "r3"
 
