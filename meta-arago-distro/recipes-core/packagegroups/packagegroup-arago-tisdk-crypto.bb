@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install crypto packages into target FS"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -15,10 +15,9 @@ CRYPTO_SUPPORT = "\
     openssl-engines \
     "
 
-# all 3 below - cryptodev-module cryptodev-tests
-CRYPTO_SUPPORT_append_ti33x = " ti-crypto-examples"
-CRYPTO_SUPPORT_append_ti43x = " ti-crypto-examples"
-CRYPTO_SUPPORT_append_dra7xx = " ti-crypto-examples"
+CRYPTO_SUPPORT_append_ti33x = " ti-crypto-examples cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT_append_ti43x = " ti-crypto-examples cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT_append_dra7xx = " ti-crypto-examples cryptodev-module cryptodev-tests"
 
 # Add crypto hardware support for am37x-evm
 # NOTE: this package depends on a kernel patch which also has a TSU
