@@ -13,9 +13,7 @@ MULTIMEDIA_append_dra7xx = " \
     hevc-arm-decoder-staticdev \
 "
 
-# Disable due to missing IPC in 4.1
-#    packagegroup-arago-gst-sdk-target
-
 RDEPENDS_${PN} = "\
     ${MULTIMEDIA} \
+    packagegroup-arago-gst-sdk-target \
 "
