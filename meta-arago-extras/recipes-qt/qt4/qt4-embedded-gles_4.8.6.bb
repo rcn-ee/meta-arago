@@ -3,7 +3,7 @@ require ${COREBASE}/meta/recipes-qt/qt4/qt4-embedded.inc
 
 PR = "${INC_PR}.3"
 
-FILESEXTRAPATHS_append := "${THISDIR}/${PN}:${COREBASE}/meta/recipes-qt/qt4/qt4-${PV}:${COREBASE}/meta/recipes-qt/qt4/files:"
+FILESEXTRAPATHS_append := ":${THISDIR}/${PN}:${COREBASE}/meta/recipes-qt/qt4/qt4-${PV}:${COREBASE}/meta/recipes-qt/qt4/files"
 
 DEFAULT_PREFERENCE = "-1"
 
