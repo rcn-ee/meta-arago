@@ -1,0 +1,38 @@
+From 7e3a5727e020ea05702d0d1d819409619c7980c1 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Fri, 21 Aug 2015 13:51:20 -0400
+Subject: [PATCH] util/demux: update use of deprecated API
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ util/demux.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/util/demux.c b/util/demux.c
+index fdd4b77..722fed7 100644
+--- a/util/demux.c
++++ b/util/demux.c
+@@ -46,17 +46,17 @@ static AVFormatContext *
+ open_file(const char *filename)
+ {
+ 	AVFormatContext *afc;
+-	int err = av_open_input_file(&afc, filename, NULL, 0, NULL);
++	int err = avformat_open_input(&afc, filename, NULL, NULL);
+ 
+ 	if (!err)
+-		err = av_find_stream_info(afc);
++		err = avformat_find_stream_info(afc, NULL);
+ 
+ 	if (err < 0) {
+ 		ERROR("%s: lavf error %d", filename, err);
+ 		exit(1);
+ 	}
+ 
+-	dump_format(afc, 0, filename, 0);
++	av_dump_format(afc, 0, filename, 0);
+ 
+ 	return afc;
+ }
+-- 
+2.2.0
+
