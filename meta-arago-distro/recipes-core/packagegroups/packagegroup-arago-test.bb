@@ -46,9 +46,8 @@ ARAGO_TI_TEST_append_ti43x = " \
 ARAGO_TI_TEST_append_omap-a15 = " \
     omapconf \
     ipc-test-fw \
+    ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
     "
-# omap-a15 -    ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)}
-
 # vpdma-fw and vpe-tests both provide FW image
 #    vpe-tests
 
