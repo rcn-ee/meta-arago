@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -15,7 +15,6 @@ QT4_DEMOS = "\
 
 QT5_DEMOS = "\
     qt3d-examples \
-    qt3d-tools \
     qtbase-examples \
     qtdeclarative-examples \
     qtdeclarative-tools \
