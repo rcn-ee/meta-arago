@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -38,9 +38,8 @@ GRAPHICS_RDEPENDS_omap3 = "\
 GRAPHICS_RDEPENDS_omap-a15 = "\
     libgbm \
     omap5-sgx-ddk-um-linux \
+    omapdrm-pvr \
     "
-# Put this back when compile issues are fixed against 3.14
-#    omapdrm-pvr
 
 RDEPENDS_${PN} = "\
     ${@base_contains('DISTRO_FEATURES', 'wayland', "${GRAPHICS_WESTON}", '', d)} \
