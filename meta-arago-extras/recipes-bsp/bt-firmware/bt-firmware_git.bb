@@ -11,7 +11,7 @@ RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
 PV = "R8.5+git${SRCPV}"
-PR = "r8"
+PR = "r9"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|dra7xx"
 
@@ -34,7 +34,7 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}${base_libdir}/firmware
+    install -d ${D}${base_libdir}/firmware/ti-connectivity
     oe_runmake 'DEST_DIR=${D}' 'BASE_LIB_DIR=${base_libdir}' 'PLATFORM=${PLATFORM}' install
 }
 
