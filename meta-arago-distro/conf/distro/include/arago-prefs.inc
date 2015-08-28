@@ -48,6 +48,16 @@ PREFERRED_PROVIDER_virtual/libgles1_omap-a15 = "omap5-sgx-ddk-um-linux"
 PREFERRED_PROVIDER_virtual/libgles2_omap-a15 = "omap5-sgx-ddk-um-linux"
 PREFERRED_PROVIDER_libgbm_omap-a15 = "libgbm"
 
+PREFERRED_PROVIDER_virtual/egl_ti43x = "omap5-sgx-ddk-um-linux"
+PREFERRED_PROVIDER_virtual/libgles1_ti43x = "omap5-sgx-ddk-um-linux"
+PREFERRED_PROVIDER_virtual/libgles2_ti43x = "omap5-sgx-ddk-um-linux"
+PREFERRED_PROVIDER_libgbm_ti43x = "libgbm"
+
+PREFERRED_PROVIDER_virtual/egl_ti33x = "omap5-sgx-ddk-um-linux"
+PREFERRED_PROVIDER_virtual/libgles1_ti33x = "omap5-sgx-ddk-um-linux"
+PREFERRED_PROVIDER_virtual/libgles2_ti33x = "omap5-sgx-ddk-um-linux"
+PREFERRED_PROVIDER_libgbm_ti33x = "libgbm"
+
 PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa = "mesa-gl"
 
