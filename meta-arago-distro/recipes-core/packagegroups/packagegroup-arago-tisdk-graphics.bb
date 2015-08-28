@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r11"
+PR = "r12"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -23,12 +23,17 @@ GRAPHICS_SDK = "\
 "
 
 GRAPHICS_RDEPENDS = ""
+
 GRAPHICS_RDEPENDS_ti33x = "\
-    ${GRAPHICS_SDK} \
+    libgbm \
+    omap5-sgx-ddk-um-linux \
+    omapdrm-pvr \
 "
 
 GRAPHICS_RDEPENDS_ti43x = "\
-    ${GRAPHICS_SDK} \
+    libgbm \
+    omap5-sgx-ddk-um-linux \
+    omapdrm-pvr \
 "
 
 GRAPHICS_RDEPENDS_omap3 = "\
