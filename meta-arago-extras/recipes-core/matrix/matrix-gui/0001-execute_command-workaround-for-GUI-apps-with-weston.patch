@@ -1,0 +1,103 @@
+From 1fcef8505e6cb8769e84c3bd3e0abd67579bcd68 Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Wed, 2 Sep 2015 09:55:05 -0400
+Subject: [PATCH] execute_command: workaround for GUI apps with weston
+
+* For all GUI apps, shutdown matrix before launching
+  - This is needed since matrix is launched fullscreen, and another
+    GUI app may get hidden behind matrix with no way to recover.
+* For MM and 3D apps, shutdown weston before launching
+  - These apps use KMS sink, which collides with weston.
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ execute_command.sh | 34 +++++++++++++++++++++++++++++++++-
+ generate.php       |  2 ++
+ run_script.php     |  2 +-
+ 3 files changed, 36 insertions(+), 2 deletions(-)
+
+diff --git a/execute_command.sh b/execute_command.sh
+index 018c632..86d7106 100755
+--- a/execute_command.sh
++++ b/execute_command.sh
+@@ -59,7 +59,17 @@ do
+ 	outputfilename=$item 
+   fi
+ 
+-  if [ $i -gt 1 ]
++  if [ $i -eq 2 ]
++  then
++    program_type=$item
++  fi
++
++  if [ $i -eq 3 ]
++  then
++    category=$item
++  fi
++
++  if [ $i -gt 3 ]
+   then
+     touch "lock/"$item
+ 
+@@ -68,10 +78,32 @@ do
+ 
+ done
+ 
++if [ $program_type == gui ]
++then
++  /etc/init.d/matrix-gui-2.0 stop
++
++  if [ $category == 3d -o $category == multimedia ]
++  then
++    /etc/init.d/weston stop
++    sleep 1
++  fi
++fi
++
+ echo "Filename:"$filename
+ echo "Output:"$outputfilename
+ eval $filename > "tmp/"$outputfilename 2>&1
+ 
++if [ $program_type == gui ]
++then
++  if [ $category == 3d -o $category == multimedia ]
++  then
++    /etc/init.d/weston start
++    sleep 1
++  fi
++
++  /etc/init.d/matrix-gui-2.0 start
++fi
++
+ #Using a more unique string to detect if the script is completed
+ echo "_?!!MATRIX_SCRIPT_COMPLETED!!?_" >> "tmp/"$outputfilename
+ 
+diff --git a/generate.php b/generate.php
+index 10cfed4..7c08282 100644
+--- a/generate.php
++++ b/generate.php
+@@ -105,6 +105,8 @@ for($x = 0;$x<count($contents)&&strlen($contents[$x])>0;$x++)
+ 		$top["Description_Link"] = get_contents("X-MATRIX-Description",$dotdesktop);
+ 
+ 		$top["Lock"] = get_contents("X-MATRIX-LOCK",$dotdesktop);
++
++		$top["Category"] = get_contents("Categories",$dotdesktop);
+ 	} 
+ 
+ 	if($category == -1)
+diff --git a/run_script.php b/run_script.php
+index 9dd7a10..1481b17 100644
+--- a/run_script.php
++++ b/run_script.php
+@@ -91,7 +91,7 @@ if($currently_locked==false)
+ 	$random_string = strval(rand());
+ 	$random_string .= strval(rand());
+ 
+-	$script_command = "./execute_command.sh \"".addslashes($script_link). "\" ".$random_string.".txt ".$lock_list;
++	$script_command = "./execute_command.sh \"".addslashes($script_link). "\" ".$random_string.".txt \"".$found_app["ProgramType"]."\" \"".$found_app["Category"]."\" ".$lock_list;
+ 
+ 	$last_line = system($script_command." > /dev/null 2>/dev/null & ", $retval);
+ }
+-- 
+1.9.1
+
