@@ -1,6 +1,8 @@
-DESCRIPTION = "Imagination PowerVR SDK binaries for Jacinto6 SoC"
+DESCRIPTION = "Imagination PowerVR SDK binaries/examples"
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM = "file://Jacinto6-IMG-PowerVR-SDK-Manifest.pdf;md5=46bcbfc69f8837c339e15fd4a5044a8c"
+
+CLEANBROKEN = "1"
 
 BRANCH_omap-a15 = "master"
 BRANCH_ti33x = "am4/k4.1"
@@ -11,7 +13,7 @@ SRCREV_omap-a15 = "c2456ec3f03da022fb7489d6b381a4ac26a68203"
 SRCREV_ti33x = "f753b6c00168f9dd534c2b34206845d3cdddabe6"
 SRCREV_ti43x = "f753b6c00168f9dd534c2b34206845d3cdddabe6"
 
-PR = "r1"
+PR = "r2"
 
 COMPATIBLE_MACHINE = "dra7xx|ti43x|ti33x"
 
