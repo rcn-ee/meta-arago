@@ -69,16 +69,7 @@ PREFERRED_PROVIDER_virtual/libgles2_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
 
-# Use the mainline u-boot recipe for TI devices unless overridden below
-PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
-PREFERRED_PROVIDER_u-boot = "u-boot"
-PREFERRED_VERSION_u-boot = "2014.07"
-
 # Use latest TI staging kernel and u-boot trees
-PREFERRED_PROVIDER_virtual/bootloader_keystone = "u-boot-keystone"
-PREFERRED_PROVIDER_u-boot_keystone = "u-boot-keystone"
-PREFERRED_VERSION_linux-keystone = "3.10%"
-
 PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
 PREFERRED_PROVIDER_virtual/kernel_am437x-evm = "linux-ti-staging"
 PREFERRED_VERSION_linux-ti-staging = "4.1%"
