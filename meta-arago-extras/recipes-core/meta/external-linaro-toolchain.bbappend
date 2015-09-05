@@ -4,7 +4,7 @@ ALLOW_EMPTY_ldd = "1"
 ALLOW_EMPTY_libstdc++ = "1"
 ALLOW_EMPTY_libgomp = "1"
 
-PR_append = "-arago18"
+PR_append = "-arago19"
 
 PROVIDES := "${@oe_filter_out('virtual/linux-libc-headers', '${PROVIDES}', d)}"
 PROVIDES := "${@oe_filter_out('linux-libc-headers', '${PROVIDES}', d)}"
@@ -34,6 +34,7 @@ FILES_${PN} += "\
 	${base_libdir}/libcrypt*.so.* \
 	${base_libdir}/libcrypt-*.so \
 	${base_libdir}/libc.so.* \
+	${libdir}/libc.so.* \
 	${base_libdir}/libc-*.so \
 	${base_libdir}/libm*.so.* \
 	${base_libdir}/libm-*.so \
