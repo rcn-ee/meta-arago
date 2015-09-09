@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r43"
+PR = "r44"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -39,6 +39,14 @@ MATRIX_SGX_DEMOS = "                \
     matrix-3d-demo-lantern          \
     matrix-3d-demo-skull            \
 "
+
+MATRIX_SGX_DEMOS_omap-a15 = " \
+    matrix-3d-demo-chameleon \
+    matrix-3d-demo-coverflow \
+    matrix-3d-demo-navigation \
+    matrix-3d-demo-exampleui \
+"
+
 MATRIX_QT_APPS_keystone = ""
 
 MATRIX_APPS = ""
@@ -88,16 +96,19 @@ MATRIX_APPS_append_ti43x = "        \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
+    ${@base_contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
+                                    \
     matrix-multimedia-demo-aac      \
+    matrix-multimedia-demo-h265dec  \
     ${@base_contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264dec','matrix-multimedia-demo-h264dec',d)} \
     ${@base_contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264enc','',d)} \
     ${@base_contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-vip-vpe-ivahdmpeg4encdec','',d)} \
     ${@base_contains('MACHINE_FEATURES','mmip','','matrix-multimedia-demo-mpeg4aacdec',d)} \
     ${@base_contains('MACHINE_FEATURES','mmip','','matrix-multimedia-demo-mpeg4dec',d)} \
+                                    \
     matrix-gui-generic-pm           \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
-    matrix-multimedia-demo-h265dec \
 "
 
 MATRIX_APPS_append_beagleboard = "  \
