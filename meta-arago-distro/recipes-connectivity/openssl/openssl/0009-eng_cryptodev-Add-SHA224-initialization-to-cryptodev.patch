@@ -1,26 +1,27 @@
-From 3b8c75093561d2f4b06b1b9efc7689971c9a1709 Mon Sep 17 00:00:00 2001
-From: Joel A Fernandes <joelagnel@ti.com>
-Date: Fri, 19 Apr 2013 03:19:11 -0500
-Subject: [PATCH 09/11] eng_cryptodev: Add SHA224 initialization to cryptodev
- engine.
+From 67f8fdee6e979173c7c6793593147030df6aaa40 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 8 Sep 2015 17:19:57 -0400
+Subject: [PATCH] eng_cryptodev: Add SHA224 initialization to cryptodev engine.
 
-Signed-off-by: Joel A Fernandes <joelagnel@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- crypto/engine/eng_cryptodev.c | 1 +
- 1 file changed, 1 insertion(+)
+ crypto/engine/eng_cryptodev.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/crypto/engine/eng_cryptodev.c b/crypto/engine/eng_cryptodev.c
-index 00580a5..d095a58 100644
+index b7bff89..3cd4bcf 100644
 --- a/crypto/engine/eng_cryptodev.c
 +++ b/crypto/engine/eng_cryptodev.c
-@@ -170,6 +170,7 @@ static struct {
- #endif
- 	{ CRYPTO_MD5,			NID_md5,		16},
- 	{ CRYPTO_SHA1,			NID_sha1,		20},
-+	{ CRYPTO_SHA2_224,		NID_sha224,		28},
- 	{ CRYPTO_SHA2_256,		NID_sha256,		32},
- 	{ CRYPTO_SHA2_384,		NID_sha384,		48},
- 	{ CRYPTO_SHA2_512,		NID_sha512,		64},
+@@ -216,6 +216,9 @@ static struct {
+         CRYPTO_SHA1, NID_sha1, 20
+     },
+     {
++        CRYPTO_SHA2_224, NID_sha224, 28
++    },
++    {
+         CRYPTO_SHA2_256, NID_sha256, 32
+     },
+     {
 -- 
-1.8.3.2
+2.2.0
 
