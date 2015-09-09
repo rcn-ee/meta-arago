@@ -27,14 +27,6 @@ PREFERRED_PROVIDER_virtual/gettext = "gettext"
 ARAGO_QT_PROVIDER = "${@base_conditional('QT_PROVIDER','qt5','',base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d),d)}"
 PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
 
-PREFERRED_VERSION_qt4-embedded = "4.8.5"
-PREFERRED_VERSION_qt4-native = "4.8.5"
-PREFERRED_VERSION_nativesdk-qt4-tools = "4.8.5"
-
-# Use v4.09.00.01 of the Graphics SDK
-PREFERRED_VERSION_omap3-sgx-modules_omap3 = "4.09.00.01"
-PREFERRED_VERSION_libgles-omap3_omap3 = "4.09.00.01"
-
 PREFERRED_PROVIDER_omap3-sgx-modules = "omap3-sgx-modules"
 PREFERRED_PROVIDER_libgles-omap3 = "libgles-omap3"
 PREFERRED_PROVIDER_libgles-omap3-dev = "libgles-omap3-dev"
