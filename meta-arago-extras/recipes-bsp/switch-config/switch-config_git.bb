@@ -4,16 +4,15 @@ LIC_FILES_CHKSUM = "file://switch-config.c;beginline=1;endline=14;md5=659ff9658c
 
 DEPENDS = "virtual/kernel"
 
-PV = "1.1"
-PR = "r1"
+PV = "2.0"
+PR = "r0"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-BRANCH ?= "master"
-SRCREV = "75791ba7f835530f2a10c889977d92e9175faa34"
+BRANCH ?= "v4.1"
+SRCREV = "669334329dff132c4a093351d48252b12e995b6c"
 
-SRC_URI = "git://git.ti.com/switch-config/switch-config.git;protocol=git;branch=${BRANCH} \
-           file://0001-switch-config.c-include-stdbool.h-to-define-bool-typ.patch"
+SRC_URI = "git://git.ti.com/switch-config/switch-config.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
