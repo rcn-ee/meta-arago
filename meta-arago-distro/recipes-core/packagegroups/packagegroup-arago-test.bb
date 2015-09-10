@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r34"
+PR = "r35"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -48,11 +48,9 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     ipc-test-fw \
     ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
     "
-# vpdma-fw and vpe-tests both provide FW image
-#    vpe-tests
 
 ARAGO_TI_TEST_append_dra7xx = " \
-    vpdma-fw \
+    vpe-tests \
     "
 
 RDEPENDS_${PN} = "\
