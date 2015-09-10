@@ -1,0 +1,26 @@
+# omapdrm-pvr module
+omapdrm-pvr: linux
+	@echo ================================
+	@echo      Building omapdrm-pvr
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
+	make -C ./eurasia_km/eurasiacon/build/linux2/__PLATFORM_OMAPDRM___linux ARCH=arm KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) PVR_NULLDRM=__PVR_NULLDRM__
+
+omapdrm-pvr_clean:
+	@echo ================================
+	@echo      Cleaning omapdrm-pvr
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
+	make -C ./eurasia_km/eurasiacon/build/linux2/__PLATFORM_OMAPDRM___linux ARCH=arm KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) clean
+
+omapdrm-pvr_install:
+	@echo ================================
+	@echo      Installing omapdrm-pvr
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
+	cd ./eurasia_km/eurasiacon/binary2___PLATFORM_OMAPDRM___linux_release/target/kbuild; \
+	make -C $(LINUXKERNEL_INSTALL_DIR) SUBDIRS=`pwd` INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) modules_install
+

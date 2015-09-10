@@ -38,9 +38,10 @@ SRC_URI = "\
     file://Makefile_cmem-mod \
     file://Makefile_debugss-module-drv \
     file://Makefile_gdbserverproxy-module-drv \
+    file://Makefile_omapdrm-pvr \
 "
 
-PR = "r49"
+PR = "r50"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -74,6 +75,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            wireless \
                            cryptodev \
                            sgx-modules \
+                           omapdrm-pvr \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
@@ -84,6 +86,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            sgx-modules \
                            dual-camera-demo \
                            image-gallery \
+                           omapdrm-pvr \
 "
 
 MAKEFILES_append_dra7xx = " cryptodev \
@@ -96,6 +99,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               omapconf \
                               linux-dtbs \
                               cmem-mod \
+                              omapdrm-pvr \
 "
 MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
@@ -108,6 +112,16 @@ PLATFORM_ARCH_omapl138 = "armv5te"
 PLATFORM_SGX = ""
 PLATFORM_SGX_ti33x = "ti335x"
 PLATFORM_SGX_ti43x = "ti43xx"
+
+PLATFORM_OMAPDRM = ""
+PLATFORM_OMAPDRM_ti33x = "omap335x"
+PLATFORM_OMAPDRM_ti43x = "omap437x"
+PLATFORM_OMAPDRM_omap-a15 = "omap5430"
+
+PVR_NULLDRM = ""
+PVR_NULLDRM_ti33x = "1"
+PVR_NULLDRM_ti43x = "1"
+PVR_NULLDRM_omap-a15 = "0"
 
 PLATFORM_DEBUGSS = ""
 PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
@@ -174,6 +188,8 @@ do_install () {
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
 
     sed -i -e "s/__PLATFORM_SGX__/${PLATFORM_SGX}/" ${D}/Makefile
+    sed -i -e "s/__PLATFORM_OMAPDRM__/${PLATFORM_OMAPDRM}/" ${D}/Makefile
+    sed -i -e "s/__PVR_NULLDRM__/${PVR_NULLDRM}/" ${D}/Makefile
     sed -i -e "s/__PLATFORM_DEBUGSS__/${PLATFORM_DEBUGSS}/g" ${D}/Makefile
     sed -i -e "s/__PLATFORM_GDBSERVERPROXY__/${PLATFORM_GDBSERVERPROXY}/g" ${D}/Makefile
 
