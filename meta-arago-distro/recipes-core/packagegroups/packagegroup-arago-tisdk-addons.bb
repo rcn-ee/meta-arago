@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r28"
+PR = "r29"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -35,8 +35,7 @@ UTILS_append_am180x-evm = " ti-pru-sw-examples"
 UTILS_append_omap3 = " canutils"
 UTILS_append_ti33x = " canutils"
 UTILS_append_ti43x = " canutils"
-UTILS_append_dra7xx = " canutils"
-# dra7xx - gdbc6x  dsptop
+UTILS_append_dra7xx = " canutils dsptop gdbc6x"
 UTILS_append_omap-a15 = " parted"
 
 UTILS_append_ti33x = " switch-config"
@@ -44,7 +43,7 @@ UTILS_append_ti43x = " switch-config libdrm-omap"
 UTILS_append_omap-a15 = " switch-config libdrm-omap stream-openmp"
 
 EXTRA_LIBS = ""
-#EXTRA_LIBS_append_omap-a15 = " cmem"
+EXTRA_LIBS_append_omap-a15 = " cmem"
 
 DEVTOOLS = " \
     packagegroup-core-buildessential \
