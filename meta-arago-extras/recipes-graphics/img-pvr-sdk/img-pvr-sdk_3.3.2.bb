@@ -15,7 +15,7 @@ SRCREV_ti43x = "c4df891d6842600a5affdc479269540099e20fda"
 
 PR = "r3"
 
-COMPATIBLE_MACHINE = "dra7xx|ti43x|ti33x"
+COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x"
 
 S = "${WORKDIR}/git"
 
