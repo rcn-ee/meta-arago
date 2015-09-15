@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r24"
+PR = "r25"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -25,12 +25,11 @@ EXTRA_FILES = ""
 EXTRA_FILES_ti43x = "tisdk-uenv"
 EXTRA_FILES_omap-a15 = "tisdk-readme tisdk-uenv"
 
-# ti-tisdk-makefile
-
 RDEPENDS_${PN} = "\
     ${TOOLS} \
     ti-tisdk-setup \
     ${EXTRA_FILES} \
+    ti-tisdk-makefile \
     ${U-BOOT_SRC} \
     ${KERNEL_SRC} \
     ${@base_conditional('KERNEL_SHADOW_CLONE_ENABLED','true','unshallow-repositories','',d)} \
