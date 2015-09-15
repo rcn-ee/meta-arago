@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r29"
+PR = "r30"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -41,6 +41,8 @@ UTILS_append_omap-a15 = " parted"
 UTILS_append_ti33x = " switch-config"
 UTILS_append_ti43x = " switch-config libdrm-omap"
 UTILS_append_omap-a15 = " switch-config libdrm-omap stream-openmp"
+
+UTILS_append_dra7xx = " glsdk-example-apps"
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " cmem"
