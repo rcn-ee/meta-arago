@@ -8,10 +8,10 @@ require recipes-core/matrix/matrix-gui-paths.inc
 
 inherit qt-provider
 
-PR = "r4"
+PR = "r5"
 
 BRANCH = "master"
-SRCREV = "47a13167061e6e8bb44842104bd8bfbc230cf476"
+SRCREV = "d9a2f2e27f59f3bbcde91efc6afba8cd04f3b4be"
 
 SRC_URI = "git://git.ti.com/matrix-gui-v2/image-gallery.git;protocol=git;branch=${BRANCH}"
 
