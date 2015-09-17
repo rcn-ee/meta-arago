@@ -13,4 +13,4 @@ IMAGE_INSTALL += "\
     gdb \
 "
 
-export IMAGE_BASENAME = "tisdk-rootfs"
+export IMAGE_BASENAME = "tisdk-server-rootfs-image"
