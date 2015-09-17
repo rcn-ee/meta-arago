@@ -1,5 +1,5 @@
 DESCRIPTION = "Target packages for the standalone SDK"
-PR = "r9"
+PR = "r10"
 LICENSE = "MIT"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -11,6 +11,7 @@ RDEPENDS_${PN} = "\
     libgcc-dev \
     libstdc++-dev \
     ${LIBC_DEPENDENCIES} \
+    glibc-staticdev \
     linux-libc-headers-dev \
     gdbserver \
     alsa-dev \
