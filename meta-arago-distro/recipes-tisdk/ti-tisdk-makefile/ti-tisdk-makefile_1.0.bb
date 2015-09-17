@@ -28,20 +28,18 @@ SRC_URI = "\
     file://Makefile_ti-ocf-crypto-module \
     file://Makefile_qt-tstat \
     file://Makefile_quick-playground \
-    file://Makefile_wireless \
     file://Makefile_omapconf \
     file://Makefile_oprofile-example \
     file://Makefile_dual-camera-demo \
     file://Makefile_image-gallery \
     file://Makefile_cryptodev \
-    file://Makefile_sgx-modules \
     file://Makefile_cmem-mod \
     file://Makefile_debugss-module-drv \
     file://Makefile_gdbserverproxy-module-drv \
     file://Makefile_omapdrm-pvr \
 "
 
-PR = "r51"
+PR = "r52"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -72,18 +70,14 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
                            ti-crypto-examples \
                            linux-dtbs \
-                           wireless \
                            cryptodev \
-                           sgx-modules \
                            omapdrm-pvr \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
                            ti-crypto-examples \
                            linux-dtbs \
-                           wireless \
                            cryptodev \
-                           sgx-modules \
                            dual-camera-demo \
                            image-gallery \
                            omapdrm-pvr \
@@ -108,10 +102,6 @@ MAKEFILES_append_am180x-evm = " pru \
 # Use ARCH format expected by the makefile
 PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
-
-PLATFORM_SGX = ""
-PLATFORM_SGX_ti33x = "ti335x"
-PLATFORM_SGX_ti43x = "ti43xx"
 
 PLATFORM_OMAPDRM = ""
 PLATFORM_OMAPDRM_ti33x = "omap335x"
@@ -187,7 +177,6 @@ do_install () {
 
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
 
-    sed -i -e "s/__PLATFORM_SGX__/${PLATFORM_SGX}/" ${D}/Makefile
     sed -i -e "s/__PLATFORM_OMAPDRM__/${PLATFORM_OMAPDRM}/" ${D}/Makefile
     sed -i -e "s/__PVR_NULLDRM__/${PVR_NULLDRM}/" ${D}/Makefile
     sed -i -e "s/__PLATFORM_DEBUGSS__/${PLATFORM_DEBUGSS}/g" ${D}/Makefile
