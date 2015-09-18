@@ -26,4 +26,6 @@ export IMAGE_BASENAME = "arago-image"
 
 IMAGE_LINGUAS = ""
 
+ROOTFS_POSTPROCESS_COMMAND += "make_zimage_symlink_relative;"
+
 inherit core-image
