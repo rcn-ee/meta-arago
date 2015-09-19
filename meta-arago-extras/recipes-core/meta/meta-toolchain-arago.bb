@@ -8,7 +8,7 @@ SDKIMAGE_FEATURES = ""
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r29"
+PR = "r30"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
@@ -82,6 +82,8 @@ arago_sdk_fixup () {
 	tcv=`ls -1 $lexec|head -1`
 	ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv
 	ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv
+	ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/${TOOLCHAIN_SYS}
+	ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS}
 	tcpath="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/${TOOLCHAIN_SYS}"
 	mkdir -p $tcpath
 	pushd $tcpath
@@ -90,10 +92,9 @@ arago_sdk_fixup () {
 		mkdir -p libc
 		cd libc
 	fi
-	mkdir -p lib
-	mkdir -p usr/lib
-	ln -s ${SDKTARGETSYSROOT}/lib lib/${TOOLCHAIN_SYS}
-	ln -s ${SDKTARGETSYSROOT}/usr/lib usr/lib/${TOOLCHAIN_SYS}
+	mkdir -p usr
+	ln -s ${SDKTARGETSYSROOT}/lib lib
+	ln -s ${SDKTARGETSYSROOT}/usr/lib usr/lib
 	ln -s ${SDKTARGETSYSROOT}/usr/include usr/include
 	popd
 }
