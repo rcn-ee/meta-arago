@@ -4,7 +4,7 @@ ALLOW_EMPTY_ldd = "1"
 ALLOW_EMPTY_libstdc++ = "1"
 ALLOW_EMPTY_libgomp = "1"
 
-PR_append = "-arago26"
+PR_append = "-arago27"
 
 PROVIDES := "${@oe_filter_out('virtual/linux-libc-headers', '${PROVIDES}', d)}"
 PROVIDES := "${@oe_filter_out('linux-libc-headers', '${PROVIDES}', d)}"
@@ -98,6 +98,7 @@ FILES_libstdc++-dev += "\
 
 FILES_libgomp-dev += "\
 	${libdir}/gcc/${ELT_TARGET_SYS}/${ELT_VER_GCC}/include/omp.h \
+	${libdir}/gcc/${TARGET_SYS} \
 "
 
 do_install_append() {
