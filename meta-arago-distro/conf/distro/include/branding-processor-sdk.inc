@@ -5,8 +5,8 @@ DISTRO_FEATURES_remove_ti33x = "wayland"
 DISTRO_FEATURES_remove_ti43x = "wayland"
 
 # Set CMEM reserved memory region
-CMEM_BASE ?= "a0000000"
-CMEM_SIZE ?= "08000000"
+CMEM_BASE_omap-a15 ?= "a0000000"
+CMEM_SIZE_omap-a15 ?= "08000000"
 
 # To create newlines in the message \n is used and the slash must be escaped
 # to function properly
