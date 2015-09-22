@@ -37,9 +37,10 @@ SRC_URI = "\
     file://Makefile_debugss-module-drv \
     file://Makefile_gdbserverproxy-module-drv \
     file://Makefile_omapdrm-pvr \
+    file://Makefile_opencl-examples \
 "
 
-PR = "r52"
+PR = "r53"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
