@@ -15,7 +15,22 @@ inherit allarch
 S = "${WORKDIR}/git"
 
 # List of submenus to build packages for
-SUBMENUS = "arm_submenu 3d_submenu cryptos_submenu display_submenu ethernet_submenu multimedia_submenu power_submenu pru_submenu qt4_submenu settings_submenu usb_submenu wifi_submenu oprofile_submenu utilities_submenu mc_demo_submenu"
+SUBMENUS = " arm_submenu \
+             3d_submenu \
+             cryptos_submenu \
+             display_submenu \
+             ethernet_submenu \
+             multimedia_submenu \
+             power_submenu \
+             pru_submenu \
+             qt4_submenu \
+             settings_submenu \
+             usb_submenu \
+             wifi_submenu \
+             oprofile_submenu \
+             utilities_submenu \
+             mc_demo_submenu \
+"
 
 do_install(){
     install -d ${D}${MATRIX_APP_DIR}
@@ -26,7 +41,24 @@ do_install(){
     done
 }
 
-PACKAGES += "${PN}-arm ${PN}-3d ${PN}-cryptos ${PN}-display ${PN}-ethernet ${PN}-multimedia ${PN}-power ${PN}-pru ${PN}-qt4 ${PN}-qt5 ${PN}-settings ${PN}-usb ${PN}-wifi ${PN}-oprofile ${PN}-camera  ${PN}-utility ${PN}-mc-demo"
+PACKAGES += " ${PN}-arm \
+              ${PN}-3d \
+              ${PN}-cryptos \
+              ${PN}-display \
+              ${PN}-ethernet \
+              ${PN}-multimedia \
+              ${PN}-power \
+              ${PN}-pru \
+              ${PN}-qt4 \
+              ${PN}-qt5 \
+              ${PN}-settings \
+              ${PN}-usb \
+              ${PN}-wifi \
+              ${PN}-oprofile \
+              ${PN}-camera \
+              ${PN}-utility \
+              ${PN}-mc-demo \
+"
 
 # Make sure app images has been installed
 RDEPENDS_${PN} += "matrix-gui-apps-images"
