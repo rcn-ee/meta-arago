@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.4"
+PR = "${INC_PR}.5"
 
 S = "${WORKDIR}/git/3d_apps"
 
@@ -34,7 +34,6 @@ PACKAGES_append_omap-a15 = " \
 "
 
 MATRIX_3D_DEMO_SGX_QAF_PARAM = "1000"
-MATRIX_3D_DEMO_SGX_QAF_PARAM_omap-a15 = "8000"
 
 do_install_prepend() {
     find ${S} -name '*.desktop' -exec sed -i {} \
