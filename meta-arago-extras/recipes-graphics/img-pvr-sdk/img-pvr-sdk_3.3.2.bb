@@ -10,10 +10,10 @@ BRANCH_ti43x = "am4/k4.1"
 
 SRC_URI = "git://git.ti.com/graphics/img-pvr-sdk.git;protocol=git;branch=${BRANCH}"
 SRCREV_omap-a15 = "c2456ec3f03da022fb7489d6b381a4ac26a68203"
-SRCREV_ti33x = "c4df891d6842600a5affdc479269540099e20fda"
-SRCREV_ti43x = "c4df891d6842600a5affdc479269540099e20fda"
+SRCREV_ti33x = "f24650bc8243b25c23d6a0a502ed79fc472ac424"
+SRCREV_ti43x = "f24650bc8243b25c23d6a0a502ed79fc472ac424"
 
-PR = "r3"
+PR = "r4"
 
 COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x"
 
