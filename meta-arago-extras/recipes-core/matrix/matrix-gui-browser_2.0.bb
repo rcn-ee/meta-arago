@@ -11,20 +11,15 @@ RDEPENDS_${PN} += "${QT_RDEPENDS_FONTS}"
 
 DEPENDS += "${QT_DEPENDS_WEBKIT}"
 
-PR = "r11"
+PR = "r12"
 
-SRCREV = "83019b46fb3dec1a12667d251d35ba8682953a79"
+QT4_SRCREV = "83019b46fb3dec1a12667d251d35ba8682953a79"
+QT5_SRCREV = "5ab1350db5892f1fec9995b53670f27977c69f8d"
+
+SRCREV = "${@base_conditional('QT_PROVIDER', 'qt5', "${QT5_SRCREV}", "${QT4_SRCREV}", d)}"
 BRANCH ?= "master"
 
 SRC_URI = "git://git.ti.com/matrix-gui-v2/matrix_browser.git;protocol=git;branch=${BRANCH}"
-
-QT5_DIFF = " \
-	file://qt5-webkit.patch \
-	file://qt5-gui-widgets-move.patch \
-	file://0001-Makefile.build-with-Qt5-use-qmake-available-in-PATH.patch \
-"
-
-SRC_URI += "${@base_conditional('QT_PROVIDER', 'qt5', "${QT5_DIFF}", '', d)}"
 
 S = "${WORKDIR}/git"
 
