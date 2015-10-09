@@ -12,6 +12,6 @@ S = "${WORKDIR}/git"
 inherit autotools pkgconfig
 
 SRC_URI = "git://git.ti.com/glsdk/example-applications.git;protocol=git"
-SRCREV = "85006e48fbf6e7664699a8d0944013e1f80e8e73"
+SRCREV = "be2b7c64661043e0997f5797a6c87ef7e9f542ee"
 
-PR = "r12"
+PR = "r13"
