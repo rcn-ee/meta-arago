@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://../unshallow-repositories.sh;beginline=3;endline=19;m
 
 SRC_URI = "file://unshallow-repositories.sh"
 
-PR = "r0"
+PR = "r1"
 
 do_install () {
     install -d ${D}/

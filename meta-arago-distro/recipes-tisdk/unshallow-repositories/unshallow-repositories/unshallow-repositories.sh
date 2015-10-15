@@ -35,7 +35,7 @@
 install_dir="__SDK_INSTALL_DIR__"
 
 # Find git binary within the host native bin directory
-sdk_git_bin="$install_dir/linux-devkit/sysroots/i*/usr/bin/git"
+sdk_git_bin="$install_dir/linux-devkit/sysroots/*86*-linux/usr/bin/git"
 sdk_git_bin=`which $sdk_git_bin`
 
 if [ "$sdk_git_bin" = "" ]
