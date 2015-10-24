@@ -1,4 +1,4 @@
-PR_append = "-arago1"
+PR_append = "-arago2"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS_remove = "gmp"
@@ -11,4 +11,4 @@ EXTRA_OECONF += "--disable-gmp \
         --disable-tools \
 "
 
-#SRC_URI += "file://strongswan_libsecstore.patch"
+SRC_URI += "file://pkcs11_plugin.conf"
