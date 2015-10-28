@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -23,6 +23,10 @@ UTILS_append_omap-a15 = " \
 
 UTILS_append_ti33x = " \
     omapconf-src \
+"
+
+UTILS_append_dra7xx = " \
+    opencl-examples-src \
 "
 
 EXTRA_LIBS = ""
