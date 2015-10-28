@@ -40,7 +40,7 @@ SRC_URI = "\
     file://Makefile_opencl-examples \
 "
 
-PR = "r53"
+PR = "r54"
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -87,6 +87,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
 MAKEFILES_append_dra7xx = " cryptodev \
                             debugss-module-drv \
                             gdbserverproxy-module-drv \
+                            opencl-examples \
 "
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
