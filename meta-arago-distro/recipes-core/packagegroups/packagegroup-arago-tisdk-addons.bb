@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r30"
+PR = "r31"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -25,24 +25,34 @@ UTILS = " \
 UTILS_UBOOT_FW = "u-boot-fw-utils"
 UTILS_UBOOT_FW_keystone = ""
 
-UTILS_append_ti33x = " mmc-utils"
-UTILS_append_ti43x = " mmc-utils"
-UTILS_append_omap-a15 = " mmc-utils"
+UTILS_append_ti33x = " mmc-utils \
+                       canutils \
+                       switch-config \
+"
+
+UTILS_append_ti43x = " mmc-utils \
+                       canutils \
+                       switch-config \
+                       libdrm-omap \
+"
+
+UTILS_append_omap-a15 = " mmc-utils \
+                          parted \
+                          switch-config \
+                          libdrm-omap \
+                          stream-openmp \
+"
 
 # Add PRU examples for am180x-evm devices
 UTILS_append_am180x-evm = " ti-pru-sw-examples"
 
 UTILS_append_omap3 = " canutils"
-UTILS_append_ti33x = " canutils"
-UTILS_append_ti43x = " canutils"
-UTILS_append_dra7xx = " canutils dsptop gdbc6x"
-UTILS_append_omap-a15 = " parted"
 
-UTILS_append_ti33x = " switch-config"
-UTILS_append_ti43x = " switch-config libdrm-omap"
-UTILS_append_omap-a15 = " switch-config libdrm-omap stream-openmp"
-
-UTILS_append_dra7xx = " glsdk-example-apps"
+UTILS_append_dra7xx = " canutils \
+                        dsptop \
+                        gdbc6x \
+                        glsdk-example-apps \
+"
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " cmem"
