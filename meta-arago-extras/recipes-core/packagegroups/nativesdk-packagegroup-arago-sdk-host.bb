@@ -1,10 +1,10 @@
 DESCRIPTION = "Host packages for a standalone Arago SDK or external toolchain"
-PR = "r9"
+PR = "r10"
 LICENSE = "MIT"
 
 inherit packagegroup nativesdk
 
-EXTRA_TOOLS = "nativesdk-ti-cgt6x"
+EXTRA_TOOLS = "nativesdk-ti-cgt6x nativesdk-clocl"
 
 RDEPENDS_${PN} = "\
     nativesdk-pkgconfig \
