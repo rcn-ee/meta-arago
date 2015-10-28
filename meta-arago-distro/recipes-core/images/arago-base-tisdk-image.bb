@@ -12,4 +12,11 @@ IMAGE_INSTALL += "\
     packagegroup-arago-base-tisdk \
     "
 
+BAD_RECOMMENDATIONS += " \
+    ti-llvm3.3-dev \
+    opencl-monitor-dev \
+    libulm-dev \
+    gdbserver-c6x-dev \
+"
+
 export IMAGE_BASENAME = "arago-base-tisdk-image"
