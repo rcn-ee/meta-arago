@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r14"
+PR = "r15"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -48,7 +48,7 @@ ACCEL_FW_append_am57xx-evm = " \
     "
 
 ACCEL_FW_append_omap5-evm = " \
-    ${@base_contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw dspdce-fw', '', d)} \
+    ${@base_contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
     "
 
 ACCEL_FW_append_dra7xx-evm = " \
