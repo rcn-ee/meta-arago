@@ -40,16 +40,22 @@ SRC_URI = "\
     file://Makefile_opencl-examples \
 "
 
-PR = "r54"
+PR = "r55"
+
+MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
+                        refresh-screen \
+                        ${@base_conditional('QT_PROVIDER', 'qt5', '', 'qt-tstat', d)} \
+"
+
+MAKEFILES_MATRIX_GUI_keystone = ""
+
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
                     arm-benchmarks \
                     am-sysinfo \
-                    matrix-gui-browser \
-                    refresh-screen \
-                    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'qt-tstat', d)} \
                     oprofile-example \
+                    ${MAKEFILES_MATRIX_GUI} \
 "
 MAKEFILES = ""
 
@@ -101,6 +107,10 @@ MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
 "
 
+MAKEFILES_append_keystone = " u-boot-spl \
+                              linux-dtbs \
+"
+
 # Use ARCH format expected by the makefile
 PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
@@ -131,6 +141,9 @@ KERNEL_DEVICETREE_ti43x = "am43x-epos-evm.dtb am437x-gp-evm.dtb am437x-sk-evm.dt
 KERNEL_DEVICETREE_beaglebone = "am335x-bone.dtb am335x-boneblack.dtb"
 KERNEL_DEVICETREE_omap5-evm = "omap5-uevm.dtb"
 KERNEL_DEVICETREE_dra7xx = "dra7-evm.dtb dra72-evm.dtb am57xx-beagle-x15.dtb am57xx-evm.dtb"
+KERNEL_DEVICETREE_k2hk-evm = "k2hk-evm.dtb"
+KERNEL_DEVICETREE_k2e-evm = "k2e-evm.dtb"
+KERNEL_DEVICETREE_k2l-evm = "k2l-evm.dtb"
 
 DEFCONFIG = "tisdk_${MACHINE}_defconfig"
 
