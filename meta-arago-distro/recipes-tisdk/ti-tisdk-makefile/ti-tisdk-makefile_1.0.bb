@@ -40,7 +40,7 @@ SRC_URI = "\
     file://Makefile_opencl-examples \
 "
 
-PR = "r55"
+PR = "r56"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -109,6 +109,9 @@ MAKEFILES_append_am180x-evm = " pru \
 
 MAKEFILES_append_keystone = " u-boot-spl \
                               linux-dtbs \
+                              cmem-mod \
+                              cryptodev \
+                              ti-crypto-examples \
 "
 
 # Use ARCH format expected by the makefile
