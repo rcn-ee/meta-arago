@@ -1,0 +1,28 @@
+uio-module-drv: linux
+	@echo ================================
+	@echo      Building uio-module-drv
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "uio-module-drv*"`; \
+	make ARCH=arm KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)
+
+uio-module-drv_clean:
+	@echo ================================
+	@echo      Cleaning uio-module-drv
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "uio-module-drv*"`; \
+	make ARCH=arm KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) clean
+
+uio-module-drv_install:
+	@echo ================================
+	@echo      Installing uio-module-drv
+	@echo ================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "uio-module-drv*"`; \
+	make ARCH=arm  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) modules_install

@@ -40,9 +40,10 @@ SRC_URI = "\
     file://Makefile_opencl-examples \
     file://Makefile_boot-monitor \
     file://Makefile_hplib-mod \
+    file://Makefile_uio-module-drv \
 "
 
-PR = "r58"
+PR = "r59"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -116,6 +117,7 @@ MAKEFILES_append_keystone = " u-boot-spl \
                               cryptodev \
                               ti-crypto-examples \
                               hplib-mod \
+                              uio-module-drv \
 "
 
 # Use ARCH format expected by the makefile
