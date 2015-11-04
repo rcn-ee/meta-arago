@@ -38,9 +38,10 @@ SRC_URI = "\
     file://Makefile_gdbserverproxy-module-drv \
     file://Makefile_omapdrm-pvr \
     file://Makefile_opencl-examples \
+    file://Makefile_boot-monitor \
 "
 
-PR = "r56"
+PR = "r57"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -109,6 +110,7 @@ MAKEFILES_append_am180x-evm = " pru \
 
 MAKEFILES_append_keystone = " u-boot-spl \
                               linux-dtbs \
+                              boot-monitor \
                               cmem-mod \
                               cryptodev \
                               ti-crypto-examples \
@@ -199,6 +201,7 @@ do_install () {
     sed -i -e "s/__PVR_NULLDRM__/${PVR_NULLDRM}/" ${D}/Makefile
     sed -i -e "s/__PLATFORM_DEBUGSS__/${PLATFORM_DEBUGSS}/g" ${D}/Makefile
     sed -i -e "s/__PLATFORM_GDBSERVERPROXY__/${PLATFORM_GDBSERVERPROXY}/g" ${D}/Makefile
+    sed -i -e "s/__BOOT_MONITOR_MAKE_TARGET__/${BOOT_MONITOR_MAKE_TARGET}/g" ${D}/Makefile
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
 
