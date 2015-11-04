@@ -39,9 +39,10 @@ SRC_URI = "\
     file://Makefile_omapdrm-pvr \
     file://Makefile_opencl-examples \
     file://Makefile_boot-monitor \
+    file://Makefile_hplib-mod \
 "
 
-PR = "r57"
+PR = "r58"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -114,6 +115,7 @@ MAKEFILES_append_keystone = " u-boot-spl \
                               cmem-mod \
                               cryptodev \
                               ti-crypto-examples \
+                              hplib-mod \
 "
 
 # Use ARCH format expected by the makefile
