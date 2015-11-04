@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r3"
+PR = "r4"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -105,11 +105,9 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     traceframework \
     cuia \
     libnl-xfrm \
-    mmap-lld \
     udma \
     cuia \
     edma3-lld \
-    hyplnk-lld \
     srss-tc \
     "
 
@@ -124,9 +122,16 @@ ARAGO_TI_PKGS_append_k2l-evm = "\
     iqn2-lld \
     "
 
-#ARAGO_TI_PKGS_append_k2hk-evm = "\
-#    srio-lld \
-#    "
+ARAGO_TI_PKGS_append_k2hk-evm = "\
+    srio-lld \
+    mmap-lld \
+    hyplnk-lld \
+    "
+
+ARAGO_TI_PKGS_append_k2e-evm = "\
+    mmap-lld \
+    hyplnk-lld \
+    "
 
 RDEPENDS_${PN} = "\
     ${ARAGO_LIBNL} \
