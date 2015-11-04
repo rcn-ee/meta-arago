@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r14"
+PR = "r15"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -30,8 +30,21 @@ UTILS_append_dra7xx = " \
 "
 
 EXTRA_LIBS = ""
-EXTRA_LIBS_append_omap-a15 = " cmem-mod-src"
-EXTRA_LIBS_append_dra7xx = " debugss-module-drv-src gdbserverproxy-module-drv-src"
+
+EXTRA_LIBS_append_omap-a15 = " \
+    cmem-mod-src \
+"
+
+EXTRA_LIBS_append_dra7xx = " \
+    debugss-module-drv-src \
+    gdbserverproxy-module-drv-src \
+"
+
+EXTRA_LIBS_append_keystone = " \
+    cmem-mod-src \
+    uio-module-drv-src \
+    hplib-mod-src \
+"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
