@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r25"
+PR = "r26"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -13,6 +13,9 @@ KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-src"
 
 KERNEL_SHADOW_CLONE := "${PREFERRED_PROVIDER_virtual/kernel}"
 KERNEL_SHADOW_CLONE_ENABLED := "${SRCIPK_SHALLOW_CLONE_pn-${KERNEL_SHADOW_CLONE}}"
+
+BOOT_MONITOR = ""
+BOOT_MONITOR_keystone = "boot-monitor-src"
 
 TOOLS = ""
 TOOLS_omap-a15 = ""
@@ -32,6 +35,7 @@ RDEPENDS_${PN} = "\
     ti-tisdk-makefile \
     ${U-BOOT_SRC} \
     ${KERNEL_SRC} \
+    ${BOOT_MONITOR} \
     ${@base_conditional('KERNEL_SHADOW_CLONE_ENABLED','true','unshallow-repositories','',d)} \
     tisdk-install \
 "
