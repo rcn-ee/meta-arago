@@ -2,12 +2,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 GLES_EXTRA_DEPS = ""
 GLES_EXTRA_DEPS_omap-a15 = "libdrm wayland"
-GLES_EXTRA_DEPS_ti43x = "libdrm"
+GLES_EXTRA_DEPS_ti43x = "libdrm wayland"
 GLES_EXTRA_DEPS_ti33x = "libdrm"
 
 PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl ${GLES_EXTRA_DEPS}"
 
-PR_append = "-arago10"
+PR_append = "-arago11"
 
 QT_CONFIG_FLAGS += "-qpa ${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', 'eglfs', d)}"
 
