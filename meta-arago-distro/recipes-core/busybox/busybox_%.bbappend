@@ -1,7 +1,7 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago15"
+PR_append = "-arago16"
 
 SRC_URI += " \
 	file://inetd \
