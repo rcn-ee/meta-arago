@@ -1,0 +1,73 @@
+
+# PRU-ICSS build targets
+pru-icss:
+	@echo =================================
+	@echo    Building PRU-ICSS
+	@echo =================================
+	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	for dir in examples pru_cape/pru_fw lib/src labs; \
+	do \
+		make -C $$dir PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
+	done
+
+pru-icss_clean:
+	@echo =================================
+	@echo    Cleaning PRU-ICSS
+	@echo =================================
+	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	for dir in examples pru_cape/pru_fw lib/src labs; \
+	do \
+		make -C $$dir clean PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
+	done
+
+pru-icss_install: __PRU_ICSS_INSTALL_TARGET__
+
+pru-icss_install_common:
+	@echo ===================================================
+	@echo   Installing PRU-ICSS
+	@echo ===================================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	@install -d $(DESTDIR)/lib/firmware/pru
+
+pru-icss_install_none:
+	@echo ===================================================
+	@echo   Nothing to install
+	@echo ===================================================
+
+pru-icss_install_am335x: pru-icss_install_common
+	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	for i in 0 1; \
+	install -m 0644 ./examples/am335x/PRU_Halt/gen/PRU_Halt.out \
+		$(DESTDIR)/lib/firmware/pru; \
+	do \
+		install -m 0644 ./examples/am335x/PRU_RPMsg_Echo_Interrupt$${i}/gen/PRU_RPMsg_Echo_Interrupt$${i}.out \
+			$(DESTDIR)/lib/firmware/pru; \
+	done
+
+pru-icss_install_am437x: pru-icss_install_common
+	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	for i in 0 1; \
+	install -m 0644 ./examples/am437x/PRU_Halt/gen/PRU_Halt.out \
+		$(DESTDIR)/lib/firmware/pru; \
+	do \
+		install -m 0644 ./examples/am437x/PRU_RPMsg_Echo_Interrupt$${i}/gen/PRU_RPMsg_Echo_Interrupt$${i}.out \
+			$(DESTDIR)/lib/firmware/pru; \
+	done
+
+pru-icss_install_am572x: pru-icss_install_common
+	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	for i in 1 2; \
+	install -m 0644 ./examples/am572x/PRU_Halt/gen/PRU_Halt.out \
+		$(DESTDIR)/lib/firmware/pru; \
+	do \
+		for j in 0 1; \
+		do \
+			install -m 0644 ./examples/am572x/PRU_RPMsg_Echo_Interrupt$${i}_$${j}/gen/PRU_RPMsg_Echo_Interrupt$${i}_$${j}.out \
+				$(DESTDIR)/lib/firmware/pru; \
+		done; \
+	done
+

@@ -41,9 +41,10 @@ SRC_URI = "\
     file://Makefile_boot-monitor \
     file://Makefile_hplib-mod \
     file://Makefile_uio-module-drv \
+    file://Makefile_pru-icss \
 "
 
-PR = "r59"
+PR = "r60"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -51,7 +52,6 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
 "
 
 MAKEFILES_MATRIX_GUI_keystone = ""
-
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -82,6 +82,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            linux-dtbs \
                            cryptodev \
                            omapdrm-pvr \
+                           pru-icss \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
@@ -91,6 +92,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            dual-camera-demo \
                            image-gallery \
                            omapdrm-pvr \
+                           pru-icss \
 "
 
 MAKEFILES_append_dra7xx = " cryptodev \
@@ -105,6 +107,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               linux-dtbs \
                               cmem-mod \
                               omapdrm-pvr \
+                              pru-icss \
 "
 MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
@@ -139,6 +142,12 @@ PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
 
 PLATFORM_GDBSERVERPROXY = ""
 PLATFORM_GDBSERVERPROXY_dra7xx = "DRA7xx_PLATFORM"
+
+PRU_ICSS_INSTALL_TARGET = "pru-icss_install_none"
+PRU_ICSS_INSTALL_TARGET_ti33x = "pru-icss_install_am335x"
+PRU_ICSS_INSTALL_TARGET_ti43x = "pru-icss_install_am437x"
+PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
+
 
 # If it's not defined at all, like for zImage case
 UBOOT_LOADADDRESS ?= "0"
@@ -200,12 +209,14 @@ do_install () {
     fi
 
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
+    sed -i -e "s/__SDKMACHINE__/${SDKMACHINE}/g" ${D}/Makefile
 
     sed -i -e "s/__PLATFORM_OMAPDRM__/${PLATFORM_OMAPDRM}/" ${D}/Makefile
     sed -i -e "s/__PVR_NULLDRM__/${PVR_NULLDRM}/" ${D}/Makefile
     sed -i -e "s/__PLATFORM_DEBUGSS__/${PLATFORM_DEBUGSS}/g" ${D}/Makefile
     sed -i -e "s/__PLATFORM_GDBSERVERPROXY__/${PLATFORM_GDBSERVERPROXY}/g" ${D}/Makefile
     sed -i -e "s/__BOOT_MONITOR_MAKE_TARGET__/${BOOT_MONITOR_MAKE_TARGET}/g" ${D}/Makefile
+    sed -i -e "s/__PRU_ICSS_INSTALL_TARGET__/${PRU_ICSS_INSTALL_TARGET}/g" ${D}/Makefile
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
 
