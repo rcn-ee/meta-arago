@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r15"
+PR = "r16"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,10 +19,16 @@ UTILS_append_am180x-evm = " \
 
 UTILS_append_omap-a15 = " \
     omapconf-src \
+    pru-icss-src \
 "
 
 UTILS_append_ti33x = " \
     omapconf-src \
+    pru-icss-src \
+"
+
+UTILS_append_ti43x = " \
+    pru-icss-src \
 "
 
 UTILS_append_dra7xx = " \
@@ -33,6 +39,7 @@ EXTRA_LIBS = ""
 
 EXTRA_LIBS_append_omap-a15 = " \
     cmem-mod-src \
+    pru-icss-src \
 "
 
 EXTRA_LIBS_append_dra7xx = " \

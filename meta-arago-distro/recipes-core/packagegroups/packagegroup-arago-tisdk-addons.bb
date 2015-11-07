@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r32"
+PR = "r33"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,12 +28,14 @@ UTILS_UBOOT_FW_keystone = ""
 UTILS_append_ti33x = " mmc-utils \
                        canutils \
                        switch-config \
+                       pru-icss \
 "
 
 UTILS_append_ti43x = " mmc-utils \
                        canutils \
                        switch-config \
                        libdrm-omap \
+                       pru-icss \
 "
 
 UTILS_append_omap-a15 = " mmc-utils \
@@ -41,6 +43,7 @@ UTILS_append_omap-a15 = " mmc-utils \
                           switch-config \
                           libdrm-omap \
                           stream-openmp \
+                          pru-icss \
 "
 
 # Add PRU examples for am180x-evm devices
