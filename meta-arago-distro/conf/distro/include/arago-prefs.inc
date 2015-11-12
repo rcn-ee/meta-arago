@@ -62,8 +62,7 @@ PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
 
 # Use latest TI staging kernel and u-boot trees
-PREFERRED_PROVIDER_virtual/kernel_am335x-evm = "linux-ti-staging"
-PREFERRED_PROVIDER_virtual/kernel_am437x-evm = "linux-ti-staging"
+PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_RT_SUFFIX}"
 PREFERRED_VERSION_linux-ti-staging = "4.1%"
 
 PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
