@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r33"
+PR = "r34"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -58,6 +58,8 @@ UTILS_append_dra7xx = " canutils \
                         opencl-staticdev \
                         opencl-examples-dev \
 "
+
+UTILS_append_k2g-evm = " canutils"
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " cmem"
