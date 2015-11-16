@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-PR = "r7"
+PR = "r8"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
@@ -16,12 +16,11 @@ inherit autotools-brokensep module-base kernel-module-split
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "9bfb8a0805cbe7b8f534b61c6ea503c092858d66"
+SRCREV = "23dd00e6f29ff5777dd1b851fd41103ebccecacd"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
     file://ltp-Do-not-link-against-libfl.patch \
-    file://0001-testcases-ddt-Makefile-filter-out-testcases-for-k2g.patch \
 "
 
 S = "${WORKDIR}/git"
