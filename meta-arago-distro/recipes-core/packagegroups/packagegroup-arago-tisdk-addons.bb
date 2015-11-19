@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r34"
+PR = "r35"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -29,6 +29,7 @@ UTILS_append_ti33x = " mmc-utils \
                        canutils \
                        switch-config \
                        pru-icss \
+                       strongswan \
 "
 
 UTILS_append_ti43x = " mmc-utils \
@@ -36,6 +37,7 @@ UTILS_append_ti43x = " mmc-utils \
                        switch-config \
                        libdrm-omap \
                        pru-icss \
+                       strongswan \
 "
 
 UTILS_append_omap-a15 = " mmc-utils \
@@ -44,6 +46,7 @@ UTILS_append_omap-a15 = " mmc-utils \
                           libdrm-omap \
                           stream-openmp \
                           pru-icss \
+                          strongswan \
 "
 
 # Add PRU examples for am180x-evm devices
