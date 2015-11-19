@@ -22,7 +22,10 @@ DTB_FILTER_omap5-evm = "omap5"
 DTB_FILTER_dra7xx-evm = "dra7"
 DTB_FILTER_am57xx-evm = "am57xx"
 DTB_FILTER_ti43x = "am43"
-DTB_FILTER_keystone = "k2hk"
+DTB_FILTER_k2hk-evm = "k2hk"
+DTB_FILTER_k2l-evm = "k2l"
+DTB_FILTER_k2e-evm = "k2e"
+DTB_FILTER_k2g-evm = "k2g"
 
 # List of target side images to build for the SDK
 TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image"
