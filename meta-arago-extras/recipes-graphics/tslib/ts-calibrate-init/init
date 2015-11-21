@@ -26,7 +26,10 @@ do
 done
 
 if [ ! -f $TSLIB_CALIBFILE ] ; then
-    echo -n "Calibrating touchscreen (first time only)"
+    echo    "Calibrating touchscreen (first time only)"
+    echo
+    echo    "*** To continue, please complete the touchscreen calibration"
+    echo -n "*** by touching the crosshairs on the LCD screen"
     ts_calibrate
     echo "."
 
