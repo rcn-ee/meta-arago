@@ -67,7 +67,10 @@ case "$1" in
             cp "$SD_CALUDEV_FILE" "$WS_CALUDEV_FILE"
         else
             # Run a calibration app and save output to udev rules
-            echo -n "Calibrating touchscreen (first time only)"
+            echo    "Calibrating touchscreen (first time only)"
+            echo
+            echo    "*** To continue, please complete the touchscreen calibration"
+            echo -n "*** by touching the crosshairs on the LCD screen"
             sleep 1
             CAL_VALUES=`weston-calibrator|cut -c21-`
             echo 'SUBSYSTEM=="input", ENV{WL_CALIBRATION}="'$CAL_VALUES'"' > $WS_CALUDEV_FILE
