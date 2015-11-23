@@ -36,8 +36,8 @@ TARGET_IMAGES_keystone = "arago-base-tisdk-image tisdk-server-rootfs-image"
 TISDK_TOOLCHAIN = "meta-toolchain-arago-tisdk"
 TOOLCHAIN_SUFFIX = "-tisdk"
 
-TISDK_TOOLCHAIN_keystone = "meta-toolchain-arago"
-TOOLCHAIN_SUFFIX_keystone = "-sdk"
+TISDK_TOOLCHAIN_keystone = "meta-toolchain-arago-tisdk-server"
+TOOLCHAIN_SUFFIX_keystone = "-tisdk-server"
 
 IMAGE_INSTALL_QT = "\
     packagegroup-arago-tisdk-qte-sdk-host \
