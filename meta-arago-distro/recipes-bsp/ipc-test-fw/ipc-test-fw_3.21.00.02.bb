@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD;md5=377548
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FWVER = "eng-4-gb9283b0"
-PR = "r0+${FWVER}"
+PR = "r1+${FWVER}"
 
 COMPATIBLE_MACHINE = "omap5-evm|dra7xx"
 
@@ -19,9 +19,6 @@ SRC_URI = "http://arago-project.org/files/releases/ipc-test-fw/${PV}_${FWVER}.ta
 SRC_URI[md5sum] = "4fcba6844949ea909131684a80233800"
 SRC_URI[sha256sum] = "3b90b195c382937551251055aaa9185627e86027c91fb41a594dc390391d5fb6"
 
-FW_FILES_omap5-evm = "tesla-dsp.xe64T ducati-m3-core0.xem3"
-FW_FILES_dra7xx = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66 dra7-ipu1-fw.xem4 dra7-ipu2-fw.xem4"
-
 do_compile() {
     :
 }
@@ -30,7 +27,7 @@ do_compile() {
 # with the real firmware images
 do_install() {
     install -d ${D}${base_libdir}/firmware
-    for f in ${FW_FILES}
+    for f in *.xe*
     do
         install -m 755 ${f} ${D}${base_libdir}/firmware/${f}.test
     done
