@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
-PR = "r11"
+PR = "r12"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -44,6 +44,7 @@ ARAGO_FSTOOLS = "\
     util-linux-fdisk \
     util-linux-mkfs \
     util-linux-sfdisk \
+    util-linux-fsck \
     "
 
 ARAGO_UTILS = "\
