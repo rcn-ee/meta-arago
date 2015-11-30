@@ -28,6 +28,9 @@ TI_SECURE_STORAGE_DEV = "\
 	libp11-staticdev \
 	"
 
+# Broken with 4.1
+#	ipsecmgr-dev
+#	ipsecmgr-staticdev
 EXTRA_LIBS_append_keystone = "\
 	${TI_SECURE_STORAGE_DEV} \
 	cmem-dev \
@@ -57,8 +60,6 @@ EXTRA_LIBS_append_keystone = "\
 	pktlib-staticdev \
 	netapi-dev \
 	netapi-staticdev \
-	ipsecmgr-dev \
-	ipsecmgr-staticdev \
 	libnl-xfrm-dev \
 	libnl-xfrm-staticdev \
 	libnl-dev \
