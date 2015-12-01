@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to install additional utilities/demos for test image"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r3"
+PR = "r4"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -15,11 +15,15 @@ TEST_ADDONS = " \
     gdb \
     "
 
-TEST_ADDONS_TI = ""
+TEST_ADDONS_TI = " \
+    cmem-test \
+    "
 
-#    cmem-test \
-#    "
-#TEST_ADDONS_TI_append_keystone = " \
+TEST_ADDONS_TI_append_keystone = " \
+    mpm-transport-test \
+    multiprocmgr-test \
+    "
+
 #    qmss-lld-test \
 #    pa-lld-test \
 #    cppi-lld-test \
@@ -31,13 +35,11 @@ TEST_ADDONS_TI = ""
 #    sa-lld \
 #    sa-lld-test \
 #    traceframework-test \
-#    multiprocmgr-test \
 #    hplib-test \
 #    hyplnk-lld-test \
 #    nwal-lld \
 #    nwal-lld-test \
 #    udma-test \
-#    mpm-transport-test \
 #    ipc-transport-qmss-test \
 #    ipsecmgr \
 #    netapi-test \

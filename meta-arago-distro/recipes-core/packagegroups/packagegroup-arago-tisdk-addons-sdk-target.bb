@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r16"
+PR = "r17"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,11 +28,6 @@ TI_SECURE_STORAGE_DEV = "\
 	libp11-staticdev \
 	"
 
-# Old version broken against 4.1, new version is not complete
-#	multiprocmgr-dev
-#	multiprocmgr-staticdev
-#	mpm-transport-dev
-#	mpm-transport-staticdev
 # Broken with 4.1
 #	ipsecmgr-dev
 #	ipsecmgr-staticdev
@@ -71,6 +66,10 @@ EXTRA_LIBS_append_keystone = "\
 	libnl-staticdev \
 	ti-ipc-dev \
 	ti-ipc-staticdev \
+	multiprocmgr-dev \
+	multiprocmgr-staticdev \
+	mpm-transport-dev \
+	mpm-transport-staticdev \
 	edma3-lld-dev \
 	edma3-lld-staticdev \
 	lksctp-tools-dev \
