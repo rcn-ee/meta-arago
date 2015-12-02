@@ -112,7 +112,7 @@ fakeroot create_sdk_files() {
 
 	# Replace the ##DEFAULT_INSTALL_DIR## with the correct pattern.
 	# Escape special characters like '+' and '.' in the SDKPATH
-	escaped_sdkpath=$(echo ${SDKPATH_REAL} |sed -e "s:[\+\.]:\\\\\\\\\0:g")
+	escaped_sdkpath=$(echo ${SDKPATH} |sed -e "s:[\+\.]:\\\\\\\\\0:g")
 	sed -i -e "s:##DEFAULT_INSTALL_DIR##:$escaped_sdkpath:" ${SDK_OUTPUT}/${SDKPATH}/relocate_sdk.py
 }
 
