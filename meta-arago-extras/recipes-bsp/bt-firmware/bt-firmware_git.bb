@@ -1,6 +1,6 @@
 DESCRIPTION = "Firmware files for Bluetooth"
 LICENSE = "TI-TSPA"
-LIC_FILES_CHKSUM = "file://am335x/LICENCE;md5=1c9961176d6529283e0d0c983be41b45"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f39eac9f4573be5b012e8313831e72a9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,21 +11,15 @@ RCONFLICTS_${PN} = "linux-firmware-wl12xx"
 RREPLACES_${PN}  = "linux-firmware-wl12xx"
 
 PV = "R8.5+git${SRCPV}"
-PR = "r9"
+PR = "r10"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|dra7xx"
 
 CLEANBROKEN = "1"
 
-SRCREV = "46f6a1d0087bd9aac6e6cbae58ed9ee236e5f1b1"
+SRCREV = "0c0eae241ea8a6e0b33d59f504741c8d5a2587ce"
 BRANCH = "master"
-SRC_URI = "git://git.ti.com/wilink8-bt/ti-bt-firmware.git;branch=${BRANCH} \
-           file://0001-Makefile-allow-building-within-the-OE.patch \
-           file://0001-bt-firmware-Remove-platform-check-and-install-defaul.patch"
-
-PLATFORM = "unknown"
-PLATFORM_ti33x = "am335x-evm"
-PLATFORM_ti43x = "am437x-evm"
+SRC_URI = "git://git.ti.com/ti-bt/service-packs.git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
@@ -35,7 +29,7 @@ do_compile() {
 
 do_install() {
     install -d ${D}${base_libdir}/firmware/ti-connectivity
-    oe_runmake 'DEST_DIR=${D}' 'BASE_LIB_DIR=${base_libdir}' 'PLATFORM=${PLATFORM}' install
+    oe_runmake 'DEST_DIR=${D}' 'BASE_LIB_DIR=${base_libdir}' install
 }
 
-FILES_${PN} += "${base_libdir}/firmware"
+FILES_${PN} += "${base_libdir}/firmware/ti-connectivity/*"
