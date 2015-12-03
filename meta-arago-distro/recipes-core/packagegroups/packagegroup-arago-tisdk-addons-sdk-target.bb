@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r17"
+PR = "r18"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -58,8 +58,6 @@ EXTRA_LIBS_append_keystone = "\
 	nwal-lld-staticdev \
 	pktlib-dev \
 	pktlib-staticdev \
-	netapi-dev \
-	netapi-staticdev \
 	libnl-xfrm-dev \
 	libnl-xfrm-staticdev \
 	libnl-dev \
@@ -83,6 +81,8 @@ EXTRA_LIBS_append_k2l-evm = "\
 	dfe-lld-staticdev \
 	iqn2-lld-dev \
 	iqn2-lld-staticdev \
+	netapi-dev \
+	netapi-staticdev \
 	"
 
 EXTRA_LIBS_append_k2hk-evm = "\
@@ -94,6 +94,8 @@ EXTRA_LIBS_append_k2hk-evm = "\
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
 	hyplnk-lld-staticdev \
+	netapi-dev \
+	netapi-staticdev \
 	"
 
 EXTRA_LIBS_append_k2e-evm = "\
@@ -101,6 +103,8 @@ EXTRA_LIBS_append_k2e-evm = "\
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
 	hyplnk-lld-staticdev \
+	netapi-dev \
+	netapi-staticdev \
 "
 
 UTILS_append_omap3 = " canutils-dev"
