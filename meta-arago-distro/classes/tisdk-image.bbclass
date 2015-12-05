@@ -53,8 +53,8 @@ DEPLOY_SPL_NAME ?= "MLO-${MACHINE}"
 # Variable to specify the name of SPL/UART
 DEPLOY_SPL_UART_NAME ?= "u-boot-spl.bin-${MACHINE}"
 
-# Variable to specify the name of the PMMC firmware
-DEPLOY_PMMC_FW_NAME ?= "pmmc-firmware.bin"
+# Variable to specify the name of the TI SCI firmware
+DEPLOY_TISCI_FW_NAME ?= "ti-sci-firmware-k2g.bin"
 
 # Manifest file location which will be created as part of the image build
 # process.
@@ -758,12 +758,12 @@ tisdk_image_build () {
         fi
     fi
 
-    if [ "${DEPLOY_PMMC_FW_NAME}" != "" ]
+    if [ "${DEPLOY_TISCI_FW_NAME}" != "" ]
     then
-        # Copy pmmc firmware if it exists
-        if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_PMMC_FW_NAME} ]
+        # Copy TI SCI firmware if it exists
+        if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_TISCI_FW_NAME} ]
         then
-            cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_PMMC_FW_NAME} ${prebuilt_dir}/
+            cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_TISCI_FW_NAME} ${prebuilt_dir}/
         fi
     fi
 
