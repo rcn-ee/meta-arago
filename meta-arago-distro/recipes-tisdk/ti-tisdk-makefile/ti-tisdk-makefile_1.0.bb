@@ -44,7 +44,7 @@ SRC_URI = "\
     file://Makefile_pru-icss \
 "
 
-PR = "r61"
+PR = "r62"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -134,7 +134,7 @@ PLATFORM_OMAPDRM_omap-a15 = "omap5430"
 
 PVR_NULLDRM = ""
 PVR_NULLDRM_ti33x = "1"
-PVR_NULLDRM_ti43x = "1"
+PVR_NULLDRM_ti43x = "0"
 PVR_NULLDRM_omap-a15 = "0"
 
 PLATFORM_DEBUGSS = ""
