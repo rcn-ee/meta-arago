@@ -167,4 +167,5 @@ RDEPENDS_${PN} = "\
     boost \
     recovery-kernel \
     k2-initramfs \
+    parse-ip \
     "
