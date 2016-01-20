@@ -7,26 +7,22 @@ be traditional applications, X servers (rootless or fullscreen) or other \
 display servers."
 HOMEPAGE = "http://wayland.freedesktop.org"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=1d4476a7d98dd5691c53d4d43a510c72 \
-                    file://src/wayland-server.c;endline=21;md5=079ae21dbf98ada52ec23744851b0a5c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b31d8f53b6aaf2b4985d7dd7810a70d1 \
+                    file://src/wayland-server.c;endline=24;md5=b8e046164a766bb1ede8ba38e9dcd7ce"
 
 SRC_URI = "http://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "d34c141c975084e4fb668e77b38f840e"
-SRC_URI[sha256sum] = "a7d5102dcf53d08c059d24bc62de491d7cd482070abeb6737a20d0d86ba6fc7f"
-SRC_URI_append_class-native = " \
-    file://disable-macro-checks-not-used-for-scanner.patch \
-    "
-EXTRA_OECONF_class-native = "--disable-documentation --enable-scanner"
+SRC_URI[md5sum] = "5e141b3f2a7005d6c89d6f233c87c317"
+SRC_URI[sha256sum] = "9c8770720aa0034479735f58a4dc4ca9b172ecfede28f5134312e135b7301efa"
+
+EXTRA_OECONF_class-native = "--disable-documentation --disable-libraries"
 
 inherit autotools pkgconfig
 
-# We need wayland-native for the wayland-scanner utility
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 
-DEPENDS_class-native = "expat-native libffi-native"
 DEPENDS = "expat libffi wayland-native"
 
-EXTRA_OECONF = "--disable-documentation --disable-scanner"
+EXTRA_OECONF = "--disable-documentation --with-host-scanner"
 
 # Wayland installs a M4 macro for other projects to use, which uses the target
 # pkg-config to find files.  Replace pkg-config with pkg-config-native.
@@ -37,5 +33,9 @@ do_install_append_class-native() {
 }
 
 sysroot_stage_all_append_class-target () {
+	rm ${SYSROOT_DESTDIR}/${datadir}/aclocal/wayland-scanner.m4
 	cp ${STAGING_DATADIR_NATIVE}/aclocal/wayland-scanner.m4 ${SYSROOT_DESTDIR}/${datadir}/aclocal/
 }
+
+FILES_${PN} = "${libdir}/*${SOLIBS}"
+FILES_${PN}-dev += "${bindir} ${datadir}/wayland"
