@@ -16,19 +16,19 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 file changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/tests/modetest/modetest.c b/tests/modetest/modetest.c
-index 4b9cf2f..208af86 100644
+index 22e3e81..a74e39a 100644
 --- a/tests/modetest/modetest.c
 +++ b/tests/modetest/modetest.c
-@@ -1163,7 +1163,7 @@ static void clear_cursors(struct device *dev)
- 	cursor_stop();
+@@ -1181,7 +1181,7 @@ static void clear_cursors(struct device *dev)
+ 		bo_destroy(dev->mode.cursor_bo);
  }
  
 -static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned int count)
 +static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned int count, int dont_stop)
  {
- 	uint32_t handles[4], pitches[4], offsets[4] = {0}; /* we only use [0] */
+ 	uint32_t handles[4] = {0}, pitches[4] = {0}, offsets[4] = {0};
  	unsigned int other_fb_id;
-@@ -1241,7 +1241,7 @@ static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned
+@@ -1258,7 +1258,7 @@ static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned
  			fprintf(stderr, "select timed out or error (ret %d)\n",
  				ret);
  			continue;
@@ -37,8 +37,8 @@ index 4b9cf2f..208af86 100644
  			break;
  		}
  #endif
-@@ -1442,7 +1442,7 @@ static int cursor_supported(void)
- 	return 1;
+@@ -1492,7 +1492,7 @@ static int pipe_resolve_connectors(struct device *dev, struct pipe_arg *pipe)
+ 	return 0;
  }
  
 -static char optstr[] = "cdD:efM:P:ps:Cvw:";
@@ -46,25 +46,25 @@ index 4b9cf2f..208af86 100644
  
  int main(int argc, char **argv)
  {
-@@ -1458,6 +1458,7 @@ int main(int argc, char **argv)
+@@ -1507,6 +1507,7 @@ int main(int argc, char **argv)
  	char *module = NULL;
  	unsigned int i;
- 	int count = 0, plane_count = 0;
-+  int dont_stop= 0;
+ 	unsigned int count = 0, plane_count = 0;
++	int dont_stop= 0;
  	unsigned int prop_count = 0;
  	struct pipe_arg *pipe_args = NULL;
  	struct plane_arg *plane_args = NULL;
-@@ -1542,6 +1543,9 @@ int main(int argc, char **argv)
+@@ -1594,6 +1595,9 @@ int main(int argc, char **argv)
  
  			prop_count++;
  			break;
-+    case 't':
-+      dont_stop = 1;
-+      break;
++		case 't':
++			dont_stop = 1;
++			break;
  		default:
  			usage(argv[0]);
  			break;
-@@ -1626,7 +1630,7 @@ int main(int argc, char **argv)
+@@ -1666,7 +1670,7 @@ int main(int argc, char **argv)
  			set_cursors(&dev, pipe_args, count);
  
  		if (test_vsync)
