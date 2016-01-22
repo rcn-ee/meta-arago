@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "9c1b03f3184fa0b0dfdf67e215048085156e1a2ca344af6613fed36794
 
 inherit autotools pkgconfig useradd distro_features_check
 # depends on virtual/egl
-REQUIRED_DISTRO_FEATURES = "opengl"
+#REQUIRED_DISTRO_FEATURES = "opengl"
 
 DEPENDS = "libxkbcommon gdk-pixbuf pixman cairo glib-2.0 jpeg"
 DEPENDS += "wayland libinput virtual/egl pango"
