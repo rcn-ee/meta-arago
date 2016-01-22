@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r35"
+PR = "r36"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -70,6 +70,18 @@ EXTRA_LIBS_append_omap-a15 = " cmem"
 DEVTOOLS = " \
     packagegroup-core-buildessential \
     git \
+"
+
+DEVTOOLS_append_ti33x = " \
+    nodejs \
+"
+
+DEVTOOLS_append_ti43x = " \
+    nodejs \
+"
+
+DEVTOOLS_append_omap-a15 = " \
+    nodejs \
 "
 
 RDEPENDS_${PN} = "\
