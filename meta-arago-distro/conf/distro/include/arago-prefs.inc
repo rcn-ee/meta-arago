@@ -20,7 +20,7 @@ include conf/distro/include/qt5-versions.inc
 PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
 # Use the latest version of libdrm
-PREFERRED_VERSION_libdrm = "2.4.59"
+PREFERRED_VERSION_libdrm = "2.4.66"
 
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
