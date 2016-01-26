@@ -3,7 +3,7 @@ DESCRIPTION = "Prebuilt Keystone2 initramfs with SerDes and QMSS firmware"
 LICENSE = "TI-TFL"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3a86335d32864b0bef996bee26cc0f2c"
 
-PV = "0.0.1"
+PV = "0.0.2"
 PR = "r0"
 
 CLEANBROKEN = "1"
@@ -14,8 +14,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "http://arago-project.org/files/releases/k2-fw/${P}.tar.gz"
 
-SRC_URI[md5sum] = "086550a4303f75b6233a9b2ab4800acd"
-SRC_URI[sha256sum] = "5db79d0f364d94d67ca85bc4d5ec35baaae7b39759fcab0dd0e049e2d12fb269"
+SRC_URI[md5sum] = "6f64aef93b0132ca1cdaf65cfed9d41b"
+SRC_URI[sha256sum] = "2748bccb2b589054157b349cd726f4f6edcd89104eb3a8c3d0d0d672e2e34a0e"
 
 S = "${WORKDIR}"
 TARGET = "k2-fw-initrd.cpio.gz"
