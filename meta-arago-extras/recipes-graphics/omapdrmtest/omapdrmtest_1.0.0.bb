@@ -6,11 +6,12 @@ DEPENDS += "libav libdce libdrm libgbm omap5-sgx-ddk-um-linux wayland"
 
 inherit autotools pkgconfig
 
-PR = "r8"
+PR = "r9"
 SRCREV = "152713c45d7972ed08f506255c43ce7ff634a9f5"
 
 SRC_URI = "git://git.ti.com/glsdk/omapdrmtest.git;protocol=git \
 	file://0001-util-demux-update-use-of-deprecated-API.patch \
+	file://0001-configure-disable-kmscube.patch \
 "
 
 S = "${WORKDIR}/git"
