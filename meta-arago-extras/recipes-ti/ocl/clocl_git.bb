@@ -6,11 +6,11 @@ include ocl.inc
 
 PR = "${INC_PR}.0"
 
-DEPENDS = "ti-llvm3.3 ti-llvm3.3-native boost"
+DEPENDS = "ti-llvm3.6 ti-llvm3.6-native boost"
 
 S = "${WORKDIR}/git/host"
 
-export WANT_LLVM_RELEASE = "3.3-ti"
+export WANT_LLVM_RELEASE = "3.6-ti"
 
 TARGET_class-target = "arm"
 TARGET_class-native = "x86"

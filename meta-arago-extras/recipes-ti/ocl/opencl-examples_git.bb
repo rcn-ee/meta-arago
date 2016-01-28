@@ -6,7 +6,7 @@ include ocl.inc
 
 PR = "${INC_PR}.0"
 
-COMPATIBLE_MACHINE = "dra7xx|k2hk-evm"
+COMPATIBLE_MACHINE = "dra7xx|k2hk-evm|k2l-evm|k2e-evm"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "opencl ti-cgt6x-native clocl-native"
@@ -30,6 +30,10 @@ OCL_EXAMPLE_LIST = " buffer \
                      matmpy \
                      ooo_callback \
                      edmamgr \
+                     sgemm \
+                     vecadd_openmp \
+                     vecadd_openmp_t \
+                     dgemm \
 "
 
 python do_unpack_append() {
