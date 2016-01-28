@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r20"
+PR = "r21"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -123,6 +123,9 @@ UTILS_append_dra7xx = " canutils-dev \
                         elfutils-dev \
                         elfutils-staticdev \
 "
+UTILS_append_k2hk-evm = " opencl-staticdev"
+UTILS_append_k2l-evm = " opencl-staticdev"
+UTILS_append_k2e-evm = " opencl-staticdev"
 UTILS_append_k2g-evm = " canutils-dev"
 
 EXTRA_LIBS = ""
@@ -130,6 +133,15 @@ EXTRA_LIBS_append_omap-a15 = " cmem-dev"
 EXTRA_LIBS_append_dra7xx = " libulm-dev \
                              libulm-staticdev \
                              gdbserver-c6x-dev \
+"
+EXTRA_LIBS_append_k2hk-evm = " libulm-staticdev \
+                               gdbserver-c6x-dev \
+"
+EXTRA_LIBS_append_k2l-evm = " libulm-staticdev \
+                              gdbserver-c6x-dev \
+"
+EXTRA_LIBS_append_k2e-evm = " libulm-staticdev \
+                              gdbserver-c6x-dev \
 "
 
 RDEPENDS_${PN} = "\

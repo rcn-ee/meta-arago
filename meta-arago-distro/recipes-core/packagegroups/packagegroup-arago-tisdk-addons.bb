@@ -62,6 +62,27 @@ UTILS_append_dra7xx = " canutils \
                         opencl-examples-dev \
 "
 
+UTILS_append_k2hk-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+    gdbc6x \
+    dsptop \
+"
+
+UTILS_append_k2l-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+    gdbc6x \
+    dsptop \
+"
+
+UTILS_append_k2e-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+    gdbc6x \
+    dsptop \
+"
+
 UTILS_append_k2g-evm = " canutils"
 
 EXTRA_LIBS = ""
