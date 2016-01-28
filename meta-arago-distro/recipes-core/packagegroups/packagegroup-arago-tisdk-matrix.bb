@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r47"
+PR = "r48"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -160,6 +160,21 @@ MATRIX_APPS_append_am180x-evm = "   \
 MATRIX_APPS_append_keystone = " \
     matrix-gui-utility-demos	\
     matrix-gui-mc-demos	\
+"
+
+MATRIX_APPS_append_k2hk-evm = "      \
+    matrix-opencl-demo-floatcompute  \
+    matrix-opencl-demo-vecadd        \
+"
+
+MATRIX_APPS_append_k2l-evm = "       \
+    matrix-opencl-demo-floatcompute  \
+    matrix-opencl-demo-vecadd        \
+"
+
+MATRIX_APPS_append_k2e-evm = "       \
+    matrix-opencl-demo-floatcompute  \
+    matrix-opencl-demo-vecadd        \
 "
 
 RDEPENDS_${PN} = "        \
