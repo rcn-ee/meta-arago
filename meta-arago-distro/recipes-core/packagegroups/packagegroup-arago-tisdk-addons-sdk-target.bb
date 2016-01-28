@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -120,6 +120,8 @@ UTILS_append_ti33x = " canutils-dev"
 UTILS_append_ti43x = " canutils-dev"
 UTILS_append_dra7xx = " canutils-dev \
                         opencl-staticdev \
+                        elfutils-dev \
+                        elfutils-staticdev \
 "
 UTILS_append_k2g-evm = " canutils-dev"
 
