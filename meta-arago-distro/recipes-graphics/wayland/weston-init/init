@@ -63,8 +63,9 @@ case "$1" in
         # Check if SD card has a calibration rules file
         SD_CALUDEV_FILE=/run/media/mmcblk0p1/ws-calibrate.rules
         if [ "$SD_MOUNTED" = "1" -a -f "$SD_CALUDEV_FILE" ] ; then
-            # Copy it over to udev location
+            # Copy it over to udev location, and done
             cp "$SD_CALUDEV_FILE" "$WS_CALUDEV_FILE"
+            exit 0
         else
             # Run a calibration app and save output to udev rules
             echo    "Calibrating touchscreen (first time only)"
@@ -85,7 +86,7 @@ case "$1" in
         udevadm control --reload
         udevadm trigger
         killproc weston
-        sleep 1
+        sleep 2
         openvt -c 4 -f runWeston
   ;;
 
@@ -96,7 +97,7 @@ case "$1" in
 
   restart)
 	$0 stop
-        sleep 1
+        sleep 2
         $0 start
   ;;
 
