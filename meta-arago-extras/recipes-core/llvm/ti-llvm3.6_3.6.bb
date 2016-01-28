@@ -1,7 +1,7 @@
-DESCRIPTION = "LLVM 3.3 with support for TI C66x intrinsics"
+DESCRIPTION = "LLVM 3.6 with support for TI C66x intrinsics"
 HOMEPAGE = "https://gitorious.design.ti.com/ocl/llvm33-src"
 
-PR = "r1"
+PR = "r2"
 
 do_configure_prepend_class-native() {
     # Fix paths in llvm-config
@@ -10,26 +10,46 @@ do_configure_prepend_class-native() {
 
 require recipes-core/llvm/llvm.inc
 
-DEPENDS += "zlib libxml2"
-EXTRA_OECONF += "--enable-zlib"
+LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=47e311aa9caedd1b3abf098bd7814d1d"
+
+DEPENDS += "libxml2"
 
 
 LLVM_DIR = "ti-llvm${PV}"
 
-BRANCH = "master"
+LLVM_GIT_NAME = "llvm"
+LLVM_GIT_URI = "git://git.ti.com/opencl/llvm.git"
+LLVM_GIT_PROTOCOL = "git"
+LLVM_GIT_BRANCH = "release_36_ti"
+LLVM_GIT_DESTSUFFIX = "git"
+LLVM_GIT_SRCREV = "2ff2f1fe65645f9323372e382d0fd9647462abcb"
+
+CLANG_GIT_NAME = "clang"
+CLANG_GIT_URI = "git://git.ti.com/opencl/clang.git"
+CLANG_GIT_PROTOCOL = "git"
+CLANG_GIT_BRANCH = "release_36_ti"
+CLANG_GIT_DESTSUFFIX = "${LLVM_GIT_DESTSUFFIX}/tools/clang"
+CLANG_GIT_SRCREV = "7b43bc10396ecdd141cec40acacbc240ac76a84f"
 
 SRC_URI = " \
-  git://git.ti.com/opencl/ti-llvm-clang-3_3.git;protocol=git;branch=${BRANCH} \
+  ${LLVM_GIT_URI};protocol=${LLVM_GIT_PROTOCOL};branch=${LLVM_GIT_BRANCH};destsuffix=${LLVM_GIT_DESTSUFFIX};name=${LLVM_GIT_NAME} \
+  ${CLANG_GIT_URI};protocol=${CLANG_GIT_PROTOCOL};branch=${CLANG_GIT_BRANCH};destsuffix=${CLANG_GIT_DESTSUFFIX};name=${CLANG_GIT_NAME} \
   file://0001-configure-Do-not-check-build-executable-extension.patch \
 "
 
-
-SRCREV = "29629a3e70d445cfbfbb4046a56d3648ebae9544"
+SRCREV_${LLVM_GIT_NAME} = "${LLVM_GIT_SRCREV}"
+SRCREV_${CLANG_GIT_NAME} = "${CLANG_GIT_SRCREV}"
 
 S = "${WORKDIR}/git"
 
 LIBXML2_INC = "`pkg-config libxml-2.0 --cflags`"
 LIBXML2_LIBS = "`pkg-config libxml-2.0 --libs`"
+
+EXTRA_OECONF += " --enable-targets="host,arm,c6000,msp430" \
+                  --disable-zlib \
+                  --disable-terminfo \
+                  --disable-libedit \
+"
 
 EXTRA_OEMAKE += "LIBXML2_INC="${LIBXML2_INC}" LIBXML2_LIBS="${LIBXML2_LIBS}""
 
@@ -54,6 +74,13 @@ do_compile_class-nativesdk() {
         RANLIB="${BUILD_RANLIB}" \
         PATH="${STAGING_BINDIR_NATIVE}:$PATH" \
         cross-compile-build-tools
+
+    # Workaround for timestamp issue on built-tools
+    for f in ${LLVM_BUILD_DIR}/BuildTools/Release/bin/*
+    do
+        touch $f
+    done
+
     oe_runmake
 }
 
@@ -95,6 +122,7 @@ do_install_class-native() {
     install -m 0755 ${LLVM_INSTALL_DIR}/llvm-config${PV}-ti ${D}${bindir}
 }
 
+
 SYSROOT_PREPROCESS_FUNCS_class-target += "llvm_sysroot_preprocess_target"
 SYSROOT_PREPROCESS_FUNCS_class-nativesdk += "llvm_sysroot_preprocess_target"
 
@@ -106,5 +134,7 @@ llvm_sysroot_preprocess_target() {
     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
     mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${PV}-ti
 }
+
+INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE}.0 += "dev-so"
 
 BBCLASSEXTEND = "native nativesdk"
