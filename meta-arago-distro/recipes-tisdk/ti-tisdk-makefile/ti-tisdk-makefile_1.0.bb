@@ -44,7 +44,7 @@ SRC_URI = "\
     file://Makefile_pru-icss \
 "
 
-PR = "r62"
+PR = "r63"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -123,6 +123,21 @@ MAKEFILES_append_keystone = " u-boot-spl \
                               uio-module-drv \
 "
 
+MAKEFILES_append_k2hk-evm = " opencl-examples \
+                              gdbserverproxy-module-drv \
+                              debugss-module-drv \
+"
+
+MAKEFILES_append_k2l-evm = " opencl-examples \
+                             gdbserverproxy-module-drv \
+                             debugss-module-drv \
+"
+
+MAKEFILES_append_k2e-evm = " opencl-examples \
+                             gdbserverproxy-module-drv \
+                             debugss-module-drv \
+"
+
 # Use ARCH format expected by the makefile
 PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
@@ -139,9 +154,11 @@ PVR_NULLDRM_omap-a15 = "0"
 
 PLATFORM_DEBUGSS = ""
 PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
+PLATFORM_DEBUGSS_keystone = "KEYSTONE_PLATFORM"
 
 PLATFORM_GDBSERVERPROXY = ""
 PLATFORM_GDBSERVERPROXY_dra7xx = "DRA7xx_PLATFORM"
+PLATFORM_GDBSERVERPROXY_keystone = "KEYSTONE_PLATFORM"
 
 PRU_ICSS_INSTALL_TARGET = "pru-icss_install_none"
 PRU_ICSS_INSTALL_TARGET_ti33x = "pru-icss_install_am335x"
