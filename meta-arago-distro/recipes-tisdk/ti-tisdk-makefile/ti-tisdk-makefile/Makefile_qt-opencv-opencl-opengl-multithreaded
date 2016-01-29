@@ -1,0 +1,24 @@
+# qt-opencv-opencl-opengl-multithreaded  build targets
+qt-opencv-opencl-opengl-multithreaded:
+	@echo =============================
+	@echo    Building QT OpenCV Multithreaded
+	@echo =============================
+	@cd example-applications; cd `find . -name "*qt-opencv-opencl-opengl-multithreaded*"`; make -f Makefile.build release
+
+qt-opencv-opencl-opengl-multithreaded_clean:
+	@echo =============================
+	@echo    Cleaning QT OpenCV Multithreaded
+	@echo =============================
+	@cd example-applications; cd `find . -name "*qt-opencv-opencl-opengl-multithreaded*"`; make -f Makefile.build clean
+
+qt-opencv-opencl-opengl-multithreaded_install:
+	@echo ================================================
+	@echo   Installing QT OpenCV Multithreaded - Release version
+	@echo ================================================
+	@cd example-applications; cd `find . -name "*qt-opencv-opencl-opengl-multithreaded*"`; make -f Makefile.build install
+
+qt-opencv-opencl-opengl-multithreaded_install_debug:
+	@echo ==============================================
+	@echo   Installing QT OpenCV Multithreaded - Debug Version
+	@echo ==============================================
+	@cd example-applications; cd `find . -name "*qt-opencv-opencl-opengl-multithreaded*"`; make -f Makefile.build install_debug

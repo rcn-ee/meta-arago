@@ -42,9 +42,10 @@ SRC_URI = "\
     file://Makefile_hplib-mod \
     file://Makefile_uio-module-drv \
     file://Makefile_pru-icss \
+    file://Makefile_qt-opencv-opencl-opengl-multithreaded \
 "
 
-PR = "r63"
+PR = "r64"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -99,6 +100,7 @@ MAKEFILES_append_dra7xx = " cryptodev \
                             debugss-module-drv \
                             gdbserverproxy-module-drv \
                             opencl-examples \
+                            qt-opencv-opencl-opengl-multithreaded \
 "
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
