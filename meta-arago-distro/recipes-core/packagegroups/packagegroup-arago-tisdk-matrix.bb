@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r49"
+PR = "r50"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -124,6 +124,7 @@ MATRIX_APPS_append_omap-a15 = "     \
 MATRIX_APPS_append_dra7xx = "        \
     matrix-opencl-demo-floatcompute  \
     matrix-opencl-demo-vecadd        \
+    matrix-video-analytics-opencv-opencl-opengl-demo \
 "
 
 MATRIX_APPS_append_beagleboard = "  \
