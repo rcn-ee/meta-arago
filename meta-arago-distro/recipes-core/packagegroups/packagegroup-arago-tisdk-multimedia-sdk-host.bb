@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,6 +19,10 @@ MULTIMEDIA_append_am3517-evm = " \
 MULTIMEDIA_append_ti43x = " \
     dual-camera-demo-src \
     image-gallery-src \
+"
+
+MULTIMEDIA_append_dra7xx = " \
+    qt-opencv-opencl-opengl-multithreaded-src \
 "
 
 #Demo doesn't work on 3.14
