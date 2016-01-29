@@ -5,17 +5,18 @@ LIC_FILES_CHKSUM = "file://Jacinto6-IMG-PowerVR-SDK-Manifest.pdf;md5=46bcbfc69f8
 CLEANBROKEN = "1"
 
 BRANCH_omap-a15 = "master"
-BRANCH_ti33x = "am4/k4.1"
-BRANCH_ti43x = "master"
+BRANCH_ti33x = "am3/k4.1"
+BRANCH_ti43x = "am4/k4.1"
 
 SRC_URI = "git://git.ti.com/graphics/img-pvr-sdk.git;protocol=git;branch=${BRANCH}"
 SRCREV_omap-a15 = "c2456ec3f03da022fb7489d6b381a4ac26a68203"
-SRCREV_ti33x = "f24650bc8243b25c23d6a0a502ed79fc472ac424"
-SRCREV_ti43x = "c2456ec3f03da022fb7489d6b381a4ac26a68203"
+SRCREV_ti33x = "ca2d479543fc6884818604b32a66de8ffc77145f"
+SRCREV_ti43x = "e4052bf874fce9d59c340ae1cda41a7391abcb1a"
 
-PR = "r5"
+PR = "r6"
 
 COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git"
 
