@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r48"
+PR = "r49"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -158,8 +158,8 @@ MATRIX_APPS_append_am180x-evm = "   \
 "
 
 MATRIX_APPS_append_keystone = " \
-    matrix-gui-utility-demos	\
-    matrix-gui-mc-demos	\
+    matrix-gui-utility-demos    \
+    matrix-mc-demo-ipc          \
 "
 
 MATRIX_APPS_append_k2hk-evm = "      \
