@@ -7,7 +7,7 @@ require matrix-gui-apps-git.inc
 # reset the LIC_FILES_CHKSUM setting from the matrix-gui-apps-git.inc file
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6e0ae7214f6c74c149cb25f373057fa9"
 
-PR = "${INC_PR}.14"
+PR = "${INC_PR}.15"
 
 # These packages make submenus in matrix and are not architecture specific
 inherit allarch
@@ -31,6 +31,7 @@ SUBMENUS = " arm_submenu \
              utilities_submenu \
              mc_demo_submenu \
              opencl_submenu \
+             videoanalytics_submenu \
 "
 
 do_install(){
@@ -60,6 +61,7 @@ PACKAGES += " ${PN}-arm \
               ${PN}-utility \
               ${PN}-mc-demo \
               ${PN}-opencl \
+              ${PN}-videoanalytics \
 "
 
 # Make sure app images has been installed
@@ -84,3 +86,4 @@ FILES_${PN}-camera = "${MATRIX_APP_DIR}/camera_submenu/*"
 FILES_${PN}-utility = "${MATRIX_APP_DIR}/utilities_submenu/*"
 FILES_${PN}-mc-demo = "${MATRIX_APP_DIR}/mc_demo_submenu/*"
 FILES_${PN}-opencl = "${MATRIX_APP_DIR}/opencl_submenu/*"
+FILES_${PN}-videoanalytics = "${MATRIX_APP_DIR}/videoanalytics_submenu/*"
