@@ -1,0 +1,76 @@
+From c2fd69466fcf1de1d20ee437470b40584964b32d Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Thu, 10 Dec 2015 12:41:15 -0500
+Subject: [PATCH] kmscube.c: init_drm(): select the current CRTC display mode
+ is valid
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ kmscube.c | 35 ++++++++++++++++++++++++++++++++---
+ 1 file changed, 32 insertions(+), 3 deletions(-)
+
+diff --git a/kmscube.c b/kmscube.c
+index 5a18c32..51a2c28 100644
+--- a/kmscube.c
++++ b/kmscube.c
+@@ -89,6 +89,8 @@ static int init_drm(void)
+ 	drmModeRes *resources;
+ 	drmModeConnector *connector = NULL;
+ 	drmModeEncoder *encoder = NULL;
++	drmModeCrtc *crtc = NULL;
++
+ 	int i, j;
+ 	uint32_t maxRes, curRes;
+ 
+@@ -119,10 +121,8 @@ static int init_drm(void)
+ 	for (i = 0; i < resources->count_connectors; i++) {
+ 		connector = drmModeGetConnector(drm.fd, resources->connectors[i]);
+ 		if (connector->connection == DRM_MODE_CONNECTED) {
+-			/* choose the first supported mode */
+-			drm.mode[drm.ndisp] = &connector->modes[0];
+-			drm.connector_id[drm.ndisp] = connector->connector_id;
+ 
++			/* find the matched encoders */
+ 			for (j=0; j<resources->count_encoders; j++) {
+ 				encoder = drmModeGetEncoder(drm.fd, resources->encoders[j]);
+ 				if (encoder->encoder_id == connector->encoder_id)
+@@ -137,6 +137,35 @@ static int init_drm(void)
+ 				return -1;
+ 			}
+ 
++			/* choose the current or first supported mode */
++			crtc = drmModeGetCrtc(drm.fd, encoder->crtc_id);
++			for (j = 0; j < connector->count_modes; j++)
++			{
++				if (crtc->mode_valid)
++				{
++					if ((connector->modes[j].hdisplay == crtc->width) &&
++					(connector->modes[j].vdisplay == crtc->height))
++					{
++						drm.mode[drm.ndisp] = &connector->modes[j];
++						break;
++					}
++				}
++				else
++				{
++					if ((connector->modes[j].hdisplay == crtc->x) &&
++					   (connector->modes[j].vdisplay == crtc->y))
++					{
++						drm.mode[drm.ndisp] = &connector->modes[j];
++						break;
++					}
++				}
++			}
++
++			if(j >= connector->count_modes)
++				drm.mode[drm.ndisp] = &connector->modes[0];
++
++			drm.connector_id[drm.ndisp] = connector->connector_id;
++
+ 			drm.encoder[drm.ndisp]  = (uint32_t) encoder;
+ 			drm.crtc_id[drm.ndisp] = encoder->crtc_id;
+ 			drm.connectors[drm.ndisp] = connector;
+-- 
+1.9.1
+
+

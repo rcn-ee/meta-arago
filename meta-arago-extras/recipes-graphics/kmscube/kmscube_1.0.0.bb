@@ -6,13 +6,18 @@ LIC_FILES_CHKSUM = "file://kmscube.c;beginline=1;endline=23;md5=e760965096e52da8
 DEPENDS = "libdrm libgbm omap5-sgx-ddk-um-linux"
 
 COMPATIBLE_MACHINE = "ti43x|omap-a15"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools pkgconfig
 
-PR = "r3"
+PR = "r4"
 SRCREV = "1c8a0d26c5b1918432fd94d2ac9894b3dcdb2814"
 
 SRC_URI = "git://git.ti.com/glsdk/kmscube.git;protocol=git"
+
+SRC_URI_append_ti43x = " \
+    file://0001-kmscube.c-init_drm-select-the-current-CRTC-display-m.patch \
+"
 
 S = "${WORKDIR}/git"
 
