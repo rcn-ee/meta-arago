@@ -2,10 +2,10 @@ DESCRIPTION = "Package containing scripts to setup the development host and targ
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://setup.sh;beginline=3;endline=31;md5=fc4b04a33df6d892c9f4d4a9d92b945e"
 
-PR = "r27"
+PR = "r28"
 
 BRANCH ?= "master"
-SRCREV = "9ba9b0c10634d71aa4685aedc4ce9990534586ea"
+SRCREV = "b391f655577f8dc56ba63abfbfe9eac4ab11e8b6"
 SRC_URI = "git://arago-project.org/git/projects/tisdk-setup-scripts.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
@@ -14,6 +14,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SDCARD_SCRIPT = " create-sdcard.sh"
 SDCARD_SCRIPT_keystone = ""
+SDCARD_SCRIPT_k2g-evm = " create-sdcard.sh"
 
 SETUP_SCRIPTS = " common.sh \
                   setup-host-check.sh \
@@ -34,6 +35,7 @@ UBOOT_ENV_ti43x = "setup-uboot-env-am43x.sh"
 UBOOT_ENV_omap5-evm = "setup-uboot-env-omap5.sh"
 UBOOT_ENV_am57xx-evm = "setup-uboot-env-am57xx-evm.sh"
 UBOOT_ENV_keystone = "setup-uboot-env-keystone.sh"
+UBOOT_ENV_k2g-evm = "setup-uboot-env-k2g-evm.sh"
 UBOOT_ENV = "setup-uboot-unknown.sh"
 
 do_install () {
