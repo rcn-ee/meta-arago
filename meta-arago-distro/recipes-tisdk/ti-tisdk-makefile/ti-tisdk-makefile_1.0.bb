@@ -43,9 +43,10 @@ SRC_URI = "\
     file://Makefile_uio-module-drv \
     file://Makefile_pru-icss \
     file://Makefile_qt-opencv-opencl-opengl-multithreaded \
+    file://Makefile_ipsecmgr-mod \
 "
 
-PR = "r64"
+PR = "r65"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -123,6 +124,7 @@ MAKEFILES_append_keystone = " u-boot-spl \
                               ti-crypto-examples \
                               hplib-mod \
                               uio-module-drv \
+                              ipsecmgr-mod \
 "
 
 MAKEFILES_append_k2hk-evm = " opencl-examples \

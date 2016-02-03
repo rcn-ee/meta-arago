@@ -1,0 +1,28 @@
+ipsecmgr-mod: linux
+	@echo ================================
+	@echo      Building ipsecmgr-mod
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "ipsecmgr-mod*"`; \
+	make ARCH=arm KDIR=$(LINUXKERNEL_INSTALL_DIR)
+
+ipsecmgr-mod_clean:
+	@echo ================================
+	@echo      Cleaning ipsecmgr-mod
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "ipsecmgr-mod*"`; \
+	make ARCH=arm KDIR=$(LINUXKERNEL_INSTALL_DIR) clean
+
+ipsecmgr-mod_install:
+	@echo ================================
+	@echo      Installing ipsecmgr-mod
+	@echo ================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "ipsecmgr-mod*"`; \
+	make ARCH=arm  KDIR=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) install
