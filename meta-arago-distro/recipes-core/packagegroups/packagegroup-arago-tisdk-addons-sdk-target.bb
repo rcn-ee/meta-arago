@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r21"
+PR = "r22"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -100,6 +100,8 @@ EXTRA_LIBS_append_k2hk-evm = "\
 	hplib-staticdev \
 	nwal-lld-dev \
 	nwal-lld-staticdev \
+	aif2-lld-dev \
+	aif2-lld-staticdev \
 	"
 
 EXTRA_LIBS_append_k2e-evm = "\
