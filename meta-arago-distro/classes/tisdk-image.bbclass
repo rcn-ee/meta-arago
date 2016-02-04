@@ -56,6 +56,12 @@ DEPLOY_SPL_UART_NAME ?= "u-boot-spl.bin-${MACHINE}"
 # Variable to specify the name of the TI SCI firmware
 DEPLOY_TISCI_FW_NAME ?= "ti-sci-firmware-k2g.bin"
 
+# Variable to specify the name of Keystone skern file (it has SOC in the name, not MACHINE)
+DEPLOY_K2_SKERN_NAME ?= "skern-*.bin"
+
+# Variable to specify the name of Keystone initramfs with FW images
+DEPLOY_K2_FW_INITRD_NAME ?= "k2-fw-initrd.cpio.gz"
+
 # Manifest file location which will be created as part of the image build
 # process.
 # This manifest follows the TI manifest format requirements which is why
@@ -758,12 +764,30 @@ tisdk_image_build () {
         fi
     fi
 
+    # Copy TI SCI firmware if it exists
     if [ "${DEPLOY_TISCI_FW_NAME}" != "" ]
     then
-        # Copy TI SCI firmware if it exists
         if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_TISCI_FW_NAME} ]
         then
             cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_TISCI_FW_NAME} ${prebuilt_dir}/
+        fi
+    fi
+
+    # Copy skern/boot-monitor image if it exists
+    if [ "${DEPLOY_K2_SKERN_NAME}" != "" ]
+    then
+        if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_K2_SKERN_NAME} ]
+        then
+            cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_K2_SKERN_NAME} ${prebuilt_dir}/
+        fi
+    fi
+
+    # Copy Keystone FW initramfs image if it exists
+    if [ "${DEPLOY_K2_FW_INITRD_NAME}" != "" ]
+    then
+        if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_K2_FW_INITRD_NAME} ]
+        then
+            cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_K2_FW_INITRD_NAME} ${prebuilt_dir}/
         fi
     fi
 
