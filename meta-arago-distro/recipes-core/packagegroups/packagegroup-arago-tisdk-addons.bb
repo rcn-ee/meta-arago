@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r37"
+PR = "r38"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -47,6 +47,7 @@ UTILS_append_omap-a15 = " mmc-utils \
                           stream-openmp \
                           pru-icss \
                           strongswan \
+                          ti-ipc-rtos-fw \
 "
 
 # Add PRU examples for am180x-evm devices
@@ -60,6 +61,10 @@ UTILS_append_dra7xx = " canutils \
                         glsdk-example-apps \
                         opencl-staticdev \
                         opencl-examples-dev \
+"
+
+UTILS_append_keystone = " \
+    ti-ipc-rtos-fw \
 "
 
 UTILS_append_k2hk-evm = " \
