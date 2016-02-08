@@ -25,4 +25,4 @@ ipsecmgr-mod_install:
 	fi
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "ipsecmgr-mod*"`; \
-	make ARCH=arm  KDIR=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) install
+	make ARCH=arm  KDIR=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) install

@@ -46,7 +46,7 @@ SRC_URI = "\
     file://Makefile_ipsecmgr-mod \
 "
 
-PR = "r66"
+PR = "r67"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \

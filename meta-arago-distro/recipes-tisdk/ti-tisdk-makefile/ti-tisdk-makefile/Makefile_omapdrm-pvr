@@ -22,5 +22,5 @@ omapdrm-pvr_install:
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
 	cd ./eurasia_km/eurasiacon/binary2___PLATFORM_OMAPDRM___linux_release/target/kbuild; \
-	make -C $(LINUXKERNEL_INSTALL_DIR) SUBDIRS=`pwd` INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) modules_install
+	make -C $(LINUXKERNEL_INSTALL_DIR) SUBDIRS=`pwd` INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) modules_install
 

@@ -25,5 +25,5 @@ gdbserverproxy-module-drv_install:
 	fi
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "gdbserverproxy*"`; \
-	make ARCH=arm  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) PLATFORM=__PLATFORM_GDBSERVERPROXY__ modules_install
+	make ARCH=arm  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) PLATFORM=__PLATFORM_GDBSERVERPROXY__ modules_install
 

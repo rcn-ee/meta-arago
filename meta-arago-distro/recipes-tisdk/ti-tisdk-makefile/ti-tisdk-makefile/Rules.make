@@ -35,4 +35,7 @@ LINUXKERNEL_INSTALL_DIR=$(TI_SDK_PATH)/board-support/__KERNEL_NAME__
 
 CFLAGS=__CFLAGS__
 
+#Strip modules when installing to conserve disk space
+INSTALL_MOD_STRIP=1
+
 SDK_PATH_TARGET=$(TI_SDK_PATH)/__SDK_PATH_TARGET__
