@@ -14,11 +14,4 @@ IMAGE_INSTALL += "\
     packagegroup-arago-test-addons \
 "
 
-BAD_RECOMMENDATIONS += " \
-    ti-llvm3.6-dev \
-    opencl-monitor-dev \
-    libulm-dev \
-    gdbserver-c6x-dev \
-"
-
 export IMAGE_BASENAME = "tisdk-server-rootfs-image"

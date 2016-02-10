@@ -13,10 +13,11 @@ IMAGE_INSTALL += "\
     "
 
 BAD_RECOMMENDATIONS += " \
-    ti-llvm3.3-dev \
+    ti-llvm3.6-dev \
     opencl-monitor-dev \
     libulm-dev \
     gdbserver-c6x-dev \
+    coreutils \
 "
 
 export IMAGE_BASENAME = "arago-base-tisdk-image"
