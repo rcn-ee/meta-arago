@@ -18,6 +18,7 @@ BAD_RECOMMENDATIONS += " \
     libulm-dev \
     gdbserver-c6x-dev \
     coreutils \
+    coreutils-dev \
 "
 
 export IMAGE_BASENAME = "arago-base-tisdk-image"
