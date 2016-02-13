@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r39"
+PR = "r40"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -101,16 +101,19 @@ DEVTOOLS = " \
 
 DEVTOOLS_append_ti33x = " \
     nodejs \
+    nodejs-npm \
     protobuf \
 "
 
 DEVTOOLS_append_ti43x = " \
     nodejs \
+    nodejs-npm \
     protobuf \
 "
 
 DEVTOOLS_append_omap-a15 = " \
     nodejs \
+    nodejs-npm \
     protobuf \
 "
 
