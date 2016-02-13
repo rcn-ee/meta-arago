@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r37"
+PR = "r38"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -29,6 +29,7 @@ ARAGO_TEST = "\
     pulseaudio-misc \
     kselftests \
     cpuset \
+    procps \
     "
 
 ARAGO_TI_TEST = "\
