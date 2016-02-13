@@ -5,7 +5,7 @@ omapdrm-pvr: linux
 	@echo ================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
-	make -C ./eurasia_km/eurasiacon/build/linux2/__PLATFORM_OMAPDRM___linux ARCH=arm KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) PVR_NULLDRM=__PVR_NULLDRM__
+	make -C ./eurasia_km/eurasiacon/build/linux2/omap_linux ARCH=arm TARGET_PRODUCT=__TARGET_PRODUCT__ KERNELDIR=$(LINUXKERNEL_INSTALL_DIR)
 
 omapdrm-pvr_clean:
 	@echo ================================
@@ -13,7 +13,7 @@ omapdrm-pvr_clean:
 	@echo ================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
-	make -C ./eurasia_km/eurasiacon/build/linux2/__PLATFORM_OMAPDRM___linux ARCH=arm KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) clean
+	make -C ./eurasia_km/eurasiacon/build/linux2/omap_linux ARCH=arm KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) clean
 
 omapdrm-pvr_install:
 	@echo ================================
@@ -21,6 +21,6 @@ omapdrm-pvr_install:
 	@echo ================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
-	cd ./eurasia_km/eurasiacon/binary2___PLATFORM_OMAPDRM___linux_release/target/kbuild; \
+	cd ./eurasia_km/eurasiacon/binary2_omap_linux_release/target/kbuild; \
 	make -C $(LINUXKERNEL_INSTALL_DIR) SUBDIRS=`pwd` INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) modules_install
 
