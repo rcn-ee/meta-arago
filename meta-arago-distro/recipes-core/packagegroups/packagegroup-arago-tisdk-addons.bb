@@ -1,10 +1,12 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r40"
+PR = "r41"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
+
+PACKAGES =+ "${PN}-extra"
 
 UTILS = " \
     am-sysinfo \
@@ -59,8 +61,7 @@ UTILS_append_dra7xx = " canutils \
                         dsptop \
                         gdbc6x \
                         glsdk-example-apps \
-                        opencl-staticdev \
-                        opencl-examples-dev \
+                        opencl-examples \
 "
 
 UTILS_append_keystone = " \
@@ -68,22 +69,19 @@ UTILS_append_keystone = " \
 "
 
 UTILS_append_k2hk-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
+    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
 UTILS_append_k2l-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
+    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
 UTILS_append_k2e-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
+    opencl-examples \
     gdbc6x \
     dsptop \
 "
@@ -99,22 +97,26 @@ DEVTOOLS = " \
     git \
 "
 
-DEVTOOLS_append_ti33x = " \
+EXTRA_PACKAGES = " \
     nodejs \
     nodejs-npm \
     protobuf \
 "
-
-DEVTOOLS_append_ti43x = " \
-    nodejs \
-    nodejs-npm \
-    protobuf \
+EXTRA_PACKAGES_append_dra7xx = " \
+    opencl-staticdev \
+    opencl-examples-dev \
 "
-
-DEVTOOLS_append_omap-a15 = " \
-    nodejs \
-    nodejs-npm \
-    protobuf \
+EXTRA_PACKAGES_append_k2hk-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+"
+EXTRA_PACKAGES_append_k2l-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+"
+EXTRA_PACKAGES_append_k2e-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
 "
 
 RDEPENDS_${PN} = "\
@@ -122,4 +124,8 @@ RDEPENDS_${PN} = "\
     ${UTILS_UBOOT_FW} \
     ${DEVTOOLS} \
     ${EXTRA_LIBS} \
+"
+
+RDEPENDS_${PN}-extra = "\
+    ${EXTRA_PACKAGES} \
 "
