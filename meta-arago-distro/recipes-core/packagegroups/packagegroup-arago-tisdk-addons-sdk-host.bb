@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r18"
+PR = "r19"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -33,18 +33,22 @@ UTILS_append_ti43x = " \
 
 UTILS_append_dra7xx = " \
     opencl-examples-src \
+    openmpacc-examples-src \
 "
 
 UTILS_append_k2hk-evm = " \
     opencl-examples-src \
+    openmpacc-examples-src \
 "
 
 UTILS_append_k2l-evm = " \
     opencl-examples-src \
+    openmpacc-examples-src \
 "
 
 UTILS_append_k2e-evm = " \
     opencl-examples-src \
+    openmpacc-examples-src \
 "
 
 EXTRA_LIBS = ""
