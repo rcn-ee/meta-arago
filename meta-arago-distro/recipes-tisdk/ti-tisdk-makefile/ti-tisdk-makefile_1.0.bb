@@ -44,9 +44,10 @@ SRC_URI = "\
     file://Makefile_pru-icss \
     file://Makefile_qt-opencv-opencl-opengl-multithreaded \
     file://Makefile_ipsecmgr-mod \
+    file://Makefile_openmpacc-examples \
 "
 
-PR = "r67"
+PR = "r68"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -101,6 +102,7 @@ MAKEFILES_append_dra7xx = " cryptodev \
                             debugss-module-drv \
                             gdbserverproxy-module-drv \
                             opencl-examples \
+                            openmpacc-examples \
                             qt-opencv-opencl-opengl-multithreaded \
 "
 
@@ -130,16 +132,19 @@ MAKEFILES_append_keystone = " u-boot-spl \
 MAKEFILES_append_k2hk-evm = " opencl-examples \
                               gdbserverproxy-module-drv \
                               debugss-module-drv \
+                              openmpacc-examples \
 "
 
 MAKEFILES_append_k2l-evm = " opencl-examples \
                              gdbserverproxy-module-drv \
                              debugss-module-drv \
+                             openmpacc-examples \
 "
 
 MAKEFILES_append_k2e-evm = " opencl-examples \
                              gdbserverproxy-module-drv \
                              debugss-module-drv \
+                             openmpacc-examples \
 "
 
 # Use ARCH format expected by the makefile
