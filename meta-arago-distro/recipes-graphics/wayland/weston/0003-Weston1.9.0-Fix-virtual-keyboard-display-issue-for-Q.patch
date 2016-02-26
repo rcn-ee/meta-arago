@@ -1,0 +1,40 @@
+From 7d2f4a97306707fb29e743bf66a827e661aa5615 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Tue, 23 Feb 2016 18:26:57 -0500
+Subject: [PATCH 3/3] Weston1.9.0: Fix virtual keyboard display issue for QT5
+ application
+
+The virtual keyboard does pop up as expected, however, it will never hide
+even when the application is terminated. This problem is due to the order
+of the text APIs( text_input_activate and test_input_show_input_panel) are
+invoked in QT5 and a potential bug of the API implementation. The virtual
+keyboard works as expected if the test_input_show_input_panel() is invoked
+prior to the test_input_activate() as most of the weston sample applications
+do. However, the problem will show up if that order is reversed and the reason
+why is that the current_panel is not set in this case and hence this panel
+cannot be hidden.
+
+It is required to set the current_panel to the text_input when the input_panel
+becomes visible at the first time.
+
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ src/text-backend.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/text-backend.c b/src/text-backend.c
+index cd6c4d99..ba60949 100644
+--- a/src/text-backend.c
++++ b/src/text-backend.c
+@@ -338,6 +338,7 @@ text_input_show_input_panel(struct wl_client *client,
+ 			       text_input->surface);
+ 		wl_signal_emit(&ec->update_input_panel_signal,
+ 			       &text_input->cursor_rectangle);
++		text_input->manager->current_panel = text_input;
+ 	}
+ }
+ 
+-- 
+1.9.1
+
