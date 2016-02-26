@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r50"
+PR = "r51"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -50,6 +50,14 @@ MATRIX_SGX_DEMOS_omap-a15 = " \
 "
 
 MATRIX_SGX_DEMOS_ti43x = " \
+    matrix-3d-demo-chameleon \
+    matrix-3d-demo-coverflow \
+    matrix-3d-demo-navigation \
+    matrix-3d-demo-exampleui \
+    matrix-3d-demo-kmscube \
+"
+
+MATRIX_SGX_DEMOS_ti33x = " \
     matrix-3d-demo-chameleon \
     matrix-3d-demo-coverflow \
     matrix-3d-demo-navigation \

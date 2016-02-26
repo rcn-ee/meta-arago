@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.6"
+PR = "${INC_PR}.7"
 
 S = "${WORKDIR}/git/3d_apps"
 
@@ -34,6 +34,10 @@ PACKAGES_append_omap-a15 = " \
 "
 
 PACKAGES_append_ti43x = " \
+            matrix-3d-demo-kmscube \
+"
+
+PACKAGES_append_ti33x = " \
             matrix-3d-demo-kmscube \
 "
 
