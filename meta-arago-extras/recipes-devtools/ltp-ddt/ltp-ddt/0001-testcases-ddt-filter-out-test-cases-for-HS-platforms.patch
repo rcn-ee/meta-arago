@@ -1,0 +1,44 @@
+From 68458ee412f0e8ea465705b157f978d76f4772a4 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Thu, 25 Feb 2016 13:51:17 -0500
+Subject: [PATCH] testcases/ddt: filter out test cases for HS platforms
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ testcases/ddt/Makefile | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/testcases/ddt/Makefile b/testcases/ddt/Makefile
+index d3e95e7..a08136e 100644
+--- a/testcases/ddt/Makefile
++++ b/testcases/ddt/Makefile
+@@ -38,6 +38,10 @@ ifeq ($(PLATFORM),dra72x-evm)
+ FILTER_OUT_DIRS                 += mc_test_suite
+ endif
+ 
++ifeq ($(PLATFORM),dra7xx-hs-evm)
++FILTER_OUT_DIRS                 += mc_test_suite
++endif
++
+ ifeq ($(PLATFORM),am57xx-evm)
+ FILTER_OUT_DIRS                 += mc_test_suite
+ endif
+@@ -140,6 +144,15 @@ FILTER_OUT_DIRS                 += edma_test_suite
+ FILTER_OUT_DIRS                 += ipc_test_suite
+ endif
+ 
++ifeq ($(PLATFORM),am437x-hs-evm)
++FILTER_OUT_DIRS                 += v4l2_capture_test_suite
++FILTER_OUT_DIRS                 += v4l2_display_test_suite
++FILTER_OUT_DIRS                 += mc_test_suite
++FILTER_OUT_DIRS                 += v4l2_display_davinci_test_suite
++FILTER_OUT_DIRS                 += edma_test_suite
++FILTER_OUT_DIRS                 += ipc_test_suite
++endif
++
+ ifeq ($(PLATFORM),am437x-sk)
+ FILTER_OUT_DIRS                 += v4l2_capture_test_suite
+ FILTER_OUT_DIRS                 += v4l2_display_test_suite
+-- 
+2.2.0
+

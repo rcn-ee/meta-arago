@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-PR = "r9"
+PR = "r10"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
@@ -21,6 +21,7 @@ BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
     file://ltp-Do-not-link-against-libfl.patch \
+    file://0001-testcases-ddt-filter-out-test-cases-for-HS-platforms.patch \
 "
 
 S = "${WORKDIR}/git"
