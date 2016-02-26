@@ -1,8 +1,5 @@
 ARAGO_TISDK_IMAGE = "processor-sdk-linux-image"
 
-# Remove wayland from ti33x DISTRO_FEATURES.
-DISTRO_FEATURES_remove_ti33x = "wayland"
-
 # Set CMEM reserved memory region
 CMEM_BASE_omap-a15 ?= "a0000000"
 CMEM_SIZE_omap-a15 ?= "08000000"
