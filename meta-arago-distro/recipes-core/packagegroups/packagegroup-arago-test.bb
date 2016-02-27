@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r38"
+PR = "r39"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -36,6 +36,7 @@ ARAGO_TI_TEST = "\
     ltp-ddt \
     input-utils \
     cpuloadgen \
+    timestamping \
     "
 
 ARAGO_TI_TEST_append_ti33x = " \
