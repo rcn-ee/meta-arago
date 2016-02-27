@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7ca707704d3354a64feeb4f19f52eb5"
 DEPENDS += "libdrm"
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r12"
+PR = "r13"
 
 BRANCH = "drm"
 SRCREV = "3be10676149c5f6e0ef1660d6b1ee4b9165dd993"
