@@ -4,19 +4,14 @@ LIC_FILES_CHKSUM = "file://Jacinto6-IMG-PowerVR-SDK-Manifest.pdf;md5=46bcbfc69f8
 
 CLEANBROKEN = "1"
 
-BRANCH_omap-a15 = "master"
-BRANCH_ti33x = "am3/k4.1"
-BRANCH_ti43x = "am4/k4.1"
+BRANCH = "master"
 
 SRC_URI = "git://git.ti.com/graphics/img-pvr-sdk.git;protocol=git;branch=${BRANCH}"
-SRCREV_omap-a15 = "c2456ec3f03da022fb7489d6b381a4ac26a68203"
-SRCREV_ti33x = "ca2d479543fc6884818604b32a66de8ffc77145f"
-SRCREV_ti43x = "e4052bf874fce9d59c340ae1cda41a7391abcb1a"
+SRCREV = "76454a25e53e49986b013b1e2fce07be1c8315af"
 
-PR = "r6"
+PR = "r7"
 
 COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x"
-PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git"
 
@@ -26,25 +21,21 @@ do_install () {
     cp -ar ${S}/targetfs/PVRScopeDeveloper ${D}/opt/img-powervr-sdk
 
     install -d ${D}${bindir}/SGX/demos/Raw/
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2ChameleonMan ${D}${bindir}/SGX/demos/Raw/
-}
+    install -d ${D}${bindir}/SGX/demos/Wayland/
 
-do_install_append_omap-a15 () {
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2Coverflow ${D}${bindir}/SGX/demos/Raw/
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2ExampleUI ${D}${bindir}/SGX/demos/Raw/
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2Navigation ${D}${bindir}/SGX/demos/Raw/
-}
+    install -m 755 ${S}/targetfs/Examples/Advanced/NullWS/OGLES2ChameleonMan ${D}${bindir}/SGX/demos/Raw/
+    install -m 755 ${S}/targetfs/Examples/Advanced/NullWS/OGLES2Coverflow ${D}${bindir}/SGX/demos/Raw/
+    install -m 755 ${S}/targetfs/Examples/Advanced/NullWS/OGLES2ExampleUI ${D}${bindir}/SGX/demos/Raw/
+    install -m 755 ${S}/targetfs/Examples/Advanced/NullWS/OGLES2Navigation ${D}${bindir}/SGX/demos/Raw/
+    install -m 755 ${S}/targetfs/Examples/Advanced/NullWS/OGLES2MagicLantern ${D}${bindir}/SGX/demos/Raw/
+    install -m 755 ${S}/targetfs/Examples/Advanced/NullWS/OGLES2FilmTV ${D}${bindir}/SGX/demos/Raw/
 
-do_install_append_ti33x () {
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2MagicLantern ${D}${bindir}/SGX/demos/Raw/
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLESEvilSkull ${D}${bindir}/SGX/demos/Raw/
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLESFilmTV ${D}${bindir}/SGX/demos/Raw/
-}
-
-do_install_append_ti43x () {
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2Coverflow ${D}${bindir}/SGX/demos/Raw/
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2ExampleUI ${D}${bindir}/SGX/demos/Raw/
-    install -m 755 ${S}/targetfs/Examples/Advanced/OGLES2Navigation ${D}${bindir}/SGX/demos/Raw/
+    install -m 755 ${S}/targetfs/Examples/Advanced/Wayland/OGLES2ChameleonMan ${D}${bindir}/SGX/demos/Wayland/
+    install -m 755 ${S}/targetfs/Examples/Advanced/Wayland/OGLES2Coverflow ${D}${bindir}/SGX/demos/Wayland/
+    install -m 755 ${S}/targetfs/Examples/Advanced/Wayland/OGLES2ExampleUI ${D}${bindir}/SGX/demos/Wayland/
+    install -m 755 ${S}/targetfs/Examples/Advanced/Wayland/OGLES2Navigation ${D}${bindir}/SGX/demos/Wayland/
+    install -m 755 ${S}/targetfs/Examples/Advanced/Wayland/OGLES2MagicLantern ${D}${bindir}/SGX/demos/Wayland/
+    install -m 755 ${S}/targetfs/Examples/Advanced/Wayland/OGLES2FilmTV ${D}${bindir}/SGX/demos/Wayland/
 }
 
 INHIBIT_PACKAGE_STRIP = "1"
