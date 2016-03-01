@@ -21,8 +21,12 @@ iface atml0 inet dhcp
 auto eth0
 iface eth0 inet dhcp
         pre-up /bin/grep -v -e "ip=[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" /proc/cmdline > /dev/null
+        udhcpc_opts -R -b
 
 iface eth1 inet dhcp
+iface eth2 inet dhcp
+iface eth3 inet dhcp
+iface eth4 inet dhcp
 
 # Ethernet/RNDIS gadget (g_ether)
 # ... or on host side, usbnet and random hwaddr
@@ -30,4 +34,3 @@ iface usb0 inet dhcp
 
 # Bluetooth networking
 iface bnep0 inet dhcp
-
