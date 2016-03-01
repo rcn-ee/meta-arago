@@ -102,6 +102,11 @@ then
     sed -i -e s=__SDK_INSTALL_DIR__=$install_dir= $install_dir/bin/unshallow-repositories.sh
 fi
 
+if [ -f "$install_dir/bin/create-ubifs.sh" ]
+then
+    sed -i -e s=__SDK_INSTALL_DIR__=$install_dir= $install_dir/bin/create-ubifs.sh
+fi
+
 # Modify create-sdcard.sh to have user-supplied installation directory
 if [ -f "${install_dir}/bin/create-sdcard.sh" ]
 then
