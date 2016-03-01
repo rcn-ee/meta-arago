@@ -2,10 +2,10 @@ DESCRIPTION = "Package containing scripts to setup the development host and targ
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://setup.sh;beginline=3;endline=31;md5=fc4b04a33df6d892c9f4d4a9d92b945e"
 
-PR = "r28"
+PR = "r29"
 
 BRANCH ?= "master"
-SRCREV = "b391f655577f8dc56ba63abfbfe9eac4ab11e8b6"
+SRCREV = "6e4af301f7524546545f5b2b0bb46d7993c07ba8"
 SRC_URI = "git://arago-project.org/git/projects/tisdk-setup-scripts.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
@@ -23,6 +23,7 @@ SETUP_SCRIPTS = " common.sh \
                   setup-targetfs-nfs.sh \
                   setup-tftp.sh \
                   add-to-group.sh \
+                  create-ubifs.sh \
                   ${SDCARD_SCRIPT} \
 "
 
@@ -48,6 +49,10 @@ do_install () {
     done
 
     install -m 0755 ${S}/${UBOOT_ENV} ${D}/bin/setup-uboot-env.sh
+
+    sed -i -e "s|__MKUBIFS_ARGS__|${MKUBIFS_ARGS}|" \
+           -e "s|__UBINIZE_ARGS__|${UBINIZE_ARGS}|" \
+              "${D}/bin/create-ubifs.sh"
 }
 
 FILES_${PN} += "setup.sh"
