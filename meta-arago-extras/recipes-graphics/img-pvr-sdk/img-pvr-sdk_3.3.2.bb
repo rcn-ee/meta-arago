@@ -7,9 +7,9 @@ CLEANBROKEN = "1"
 BRANCH = "master"
 
 SRC_URI = "git://git.ti.com/graphics/img-pvr-sdk.git;protocol=git;branch=${BRANCH}"
-SRCREV = "76454a25e53e49986b013b1e2fce07be1c8315af"
+SRCREV = "75e85fd928128b5acfcea675632acdea203dc318"
 
-PR = "r7"
+PR = "r8"
 
 COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x"
 
