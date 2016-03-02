@@ -1,0 +1,28 @@
+From 82a3cc3ddec96fba7204f5ecab0890801a0b54b4 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Thu, 25 Feb 2016 09:49:24 -0500
+Subject: [PATCH] kmscube.c: init_drm(): enable AM3 support
+
+Enable AM3 support by adding "tilcdc" to the modules list.
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ kmscube.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kmscube.c b/kmscube.c
+index 5a18c32..919b3e7 100644
+--- a/kmscube.c
++++ b/kmscube.c
+@@ -84,7 +84,7 @@ struct drm_fb {
+ static int init_drm(void)
+ {
+ 	static const char *modules[] = {
+-			"omapdrm", "i915", "radeon", "nouveau", "vmwgfx", "exynos"
++			"omapdrm", "tilcdc", "i915", "radeon", "nouveau", "vmwgfx", "exynos"
+ 	};
+ 	drmModeRes *resources;
+ 	drmModeConnector *connector = NULL;
+-- 
+1.9.1
+
