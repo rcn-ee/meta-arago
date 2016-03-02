@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b380c86cea229fa42b9e543fc491f5eb"
 DEPENDS = "flex-native bison-native"
 
 SRC_URI = "http://ftp.stack.nl/pub/users/dimitri/${BP}.src.tar.gz"
-SRC_URI[md5sum] = "9385dc52f0627875f8fa758e754ec674"
-SRC_URI[sha256sum] = "6a718625f0c0c1eb3dee78ec1f83409b49e790f4c6c47fd44cd51cb92695535f"
+SRC_URI[md5sum] = "3d1a5c26bef358c10a3894f356a69fbc"
+SRC_URI[sha256sum] = "d4ab6e28d4d45d8956cad17470aade3fbe2356e8f64b92167e738c1887feccec"
 
 EXTRA_OECONF = "--prefix ${prefix}"
 
