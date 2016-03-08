@@ -14,6 +14,8 @@ BRANCH="hawking_dev"
 SRCREV = "2a5ee7c4f41398c07c593e81af7b71c7720e6de8"
 SRC_URI = "git://arago-project.org/git/projects/libnl-xfrm.git;protocol=git;branch=${BRANCH}"
 
+PR = "r1"
+
 S = "${WORKDIR}/git"
 
 LIBNL_XFRM_LIB = "lib/libnl-xfrm.a"
@@ -34,6 +36,8 @@ do_install_append() {
 	install -c -m 755 ${S}/${LIBNL_XFRM_LIB} ${D}${libdir}/
 	install -c -m 755 ${S}/include/netlink/xfrm/*.h ${D}${includedir}/libnl3/netlink/xfrm/
 	install -c -m 755 ${S}/lib/libnl-xfrm.so ${D}${libdir}/libnl-xfrm.so.1.0.0
+	cd ${D}${includedir}/
+	ln -s libnl3/netlink netlink
 	cd ${D}${libdir}/
 	ln -s libnl-xfrm.so.1.0.0 libnl-xfrm.so.1
 	ln -s libnl-xfrm.so.1.0.0 libnl-xfrm.so
