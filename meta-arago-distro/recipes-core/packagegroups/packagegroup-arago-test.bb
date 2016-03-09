@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r39"
+PR = "r40"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -49,7 +49,6 @@ ARAGO_TI_TEST_append_ti43x = " \
 
 ARAGO_TI_TEST_append_omap-a15 = " \
     omapconf \
-    ipc-test-fw \
     ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
     "
 
