@@ -16,4 +16,4 @@ SRCREV_pn-ltp-ddt = "${AUTOREV}"
 ALTERNATIVE_PRIORITY_pn-opencl-monitor = "1"
 
 # Raise priority for sample IPC FW images
-ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos-fw = "15"
+ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
