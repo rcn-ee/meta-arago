@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -39,6 +39,7 @@ UTILS_append_dra7xx = " \
 UTILS_append_k2hk-evm = " \
     opencl-examples-src \
     openmpacc-examples-src \
+    linalg-examples-src \
 "
 
 UTILS_append_k2l-evm = " \

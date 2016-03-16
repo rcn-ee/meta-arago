@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r42"
+PR = "r43"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -111,6 +111,7 @@ EXTRA_PACKAGES_append_k2hk-evm = " \
     opencl-staticdev \
     opencl-examples-dev \
     openmpacc-examples-dev \
+    linalg-examples \
 "
 EXTRA_PACKAGES_append_k2l-evm = " \
     opencl-staticdev \
