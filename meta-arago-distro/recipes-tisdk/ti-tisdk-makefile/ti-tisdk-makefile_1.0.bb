@@ -45,9 +45,10 @@ SRC_URI = "\
     file://Makefile_qt-opencv-opencl-opengl-multithreaded \
     file://Makefile_ipsecmgr-mod \
     file://Makefile_openmpacc-examples \
+    file://Makefile_linalg-examples \
 "
 
-PR = "r69"
+PR = "r70"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -133,6 +134,7 @@ MAKEFILES_append_k2hk-evm = " opencl-examples \
                               gdbserverproxy-module-drv \
                               debugss-module-drv \
                               openmpacc-examples \
+                              linalg-examples \
 "
 
 MAKEFILES_append_k2l-evm = " opencl-examples \
