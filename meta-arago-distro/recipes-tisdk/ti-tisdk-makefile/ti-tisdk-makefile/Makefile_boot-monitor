@@ -4,7 +4,7 @@ boot-monitor:
 	@echo ================================
 	@cd board-support; \
 	cd `find . -maxdepth 1 -name "boot-monitor*"`; \
-	make __BOOT_MONITOR_MAKE_TARGET__
+	make image___BOOT_MONITOR_MAKE_TARGET__
 
 boot-monitor_clean:
 	@echo ================================
