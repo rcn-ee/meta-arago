@@ -1,13 +1,13 @@
 DESCRIPTION = "Script to parse ip address during boot and make it available to the host system using shared partitions"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://init;beginline=3;endline=31;md5=fc4b04a33df6d892c9f4d4a9d92b945e"
+LIC_FILES_CHKSUM = "file://init;beginline=3;endline=31;md5=f82ddb19a87f97193d08feacfd0e4903"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "file://init"
 
-PR = "r4"
+PR = "r5"
 
 S = "${WORKDIR}"
 
