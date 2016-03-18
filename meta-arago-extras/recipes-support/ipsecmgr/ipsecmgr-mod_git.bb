@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://../../ipsecmgr_snoop.h;beginline=1;endline=33;md5=f7e
 
 include ipsecmgr.inc
 
-MACHINE_KERNEL_PR_append = "b"
+MACHINE_KERNEL_PR_append = "c"
 PR = "${MACHINE_KERNEL_PR}"
 
 EXTRA_OEMAKE += "KDIR="${STAGING_KERNEL_DIR}""
