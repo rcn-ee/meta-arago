@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://../ipsecmgr_snoop.h;beginline=1;endline=33;md5=f7eadc
 
 include ipsecmgr.inc
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "libnl-xfrm"
 RDEPENDS_${PN} = "ipsecmgr-mod"
