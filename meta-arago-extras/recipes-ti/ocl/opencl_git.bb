@@ -8,7 +8,7 @@ PR = "${INC_PR}.0"
 
 inherit cmake
 
-COMPATIBLE_MACHINE = "dra7xx|k2hk-evm|k2l-evm|k2e-evm"
+COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PACKAGES += " ${PN}-runtime"
@@ -29,10 +29,9 @@ DEPENDS = " ocl-gl-headers \
             libulm \
 "
 
-DEPENDS_append_dra7xx   += " ti-ipc virtual/kernel"
-DEPENDS_append_k2hk-evm += " mpm-transport multiprocmgr"
-DEPENDS_append_k2l-evm  += " mpm-transport multiprocmgr"
-DEPENDS_append_k2e-evm  += " mpm-transport multiprocmgr"
+DEPENDS_append_dra7xx   = " ti-ipc virtual/kernel"
+DEPENDS_append_keystone = " mpm-transport multiprocmgr"
+DEPENDS_remove_k2g-evm  = " libulm"
 
 RDEPENDS_${PN}-dev += " ocl-gl-headers-dev opencl-monitor"
 RDEPENDS_${PN}-runtime += " ${PN} opencl-monitor clocl ti-cgt6x"
@@ -48,8 +47,12 @@ OCL_BUILD_TARGET_dra7xx   = "ARM_AM57"
 OCL_BUILD_TARGET_k2hk-evm = "ARM_K2H"
 OCL_BUILD_TARGET_k2l-evm  = "ARM_K2L"
 OCL_BUILD_TARGET_k2e-evm  = "ARM_K2E"
+OCL_BUILD_TARGET_k2g-evm  = "ARM_K2G"
 
-EXTRA_OECMAKE += " -DBUILD_TARGET=${OCL_BUILD_TARGET} -DBUILD_OUTPUT=lib -DENABLE_ULM=1"
+ENABLE_ULM = "1"
+ENABLE_ULM_k2g-evm = "0"
+
+EXTRA_OECMAKE += " -DBUILD_TARGET=${OCL_BUILD_TARGET} -DBUILD_OUTPUT=lib -DENABLE_ULM=${ENABLE_ULM}"
 
 EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} LINUX_DEVKIT_ROOT=${STAGING_DIR_HOST}"
 export KERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
