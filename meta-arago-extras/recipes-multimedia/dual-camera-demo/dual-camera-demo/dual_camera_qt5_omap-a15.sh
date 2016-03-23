@@ -5,7 +5,7 @@ sleep 1
 
 echo 0 > /sys/class/graphics/fbcon/cursor_blink
 
-dual_camera 1 -platform linuxfb
+dual_camera 2 -platform linuxfb
 
 echo 1 > /sys/class/graphics/fbcon/cursor_blink
 

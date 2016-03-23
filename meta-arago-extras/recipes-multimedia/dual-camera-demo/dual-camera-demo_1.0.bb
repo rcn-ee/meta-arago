@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7ca707704d3354a64feeb4f19f52eb5"
 DEPENDS += "libdrm"
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r13"
+PR = "r14"
 
 BRANCH = "drm"
 SRCREV = "3be10676149c5f6e0ef1660d6b1ee4b9165dd993"
@@ -15,13 +15,16 @@ SRCREV = "3be10676149c5f6e0ef1660d6b1ee4b9165dd993"
 SRC_URI = "git://git.ti.com/sitara-linux/dual-camera-demo.git;protocol=git;branch=${BRANCH} \
            file://desc_dual-camera.html \
            file://dual_camera_qt5.sh \
+           file://dual_camera_qt5_omap-a15.sh \
            file://dual_camera_qt4.sh \
            file://dual-camera.desktop \
+           file://0001-dual-camera-demo-Enhance-to-support-both-AM4-AM5.patch \
 "
 
 S = "${WORKDIR}/git"
 
 DEMO_SCRIPT = "${@base_conditional('QT_PROVIDER', 'qt5', 'dual_camera_qt5.sh', 'dual_camera_qt4.sh', d)}"
+DEMO_SCRIPT_omap-a15 = "${@base_conditional('QT_PROVIDER', 'qt5', 'dual_camera_qt5_omap-a15.sh', 'dual_camera_qt4.sh', d)}"
 
 inherit qt-provider
 
