@@ -102,11 +102,6 @@ PREFERRED_VERSION_gettext = "0.16.1"
 PREFERRED_VERSION_elfutils = "0.148"
 PREFERRED_VERSION_m4 = "1.4.9"
 
-PREFERRED_PROVIDER_weston-conf = "weston"
-PREFERRED_VERSION_wayland = "1.6.0"
-PREFERRED_VERSION_weston = "1.6.0"
-PREFERRED_VERSION_libinput = "0.7.0"
-
 PREFERRED_PROVIDER_wpa-supplicant = "wpa-supplicant"
 PREFERRED_PROVIDER_wpa-supplicant_ti33x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_ti43x = "wpa-supplicant-wl18xx"
