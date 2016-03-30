@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 require gstreamer1.0-plugins-ti.inc
 
-PR = "${INC_PR}.7"
-SRCREV = "09d74f69f7a32f39e98a9e9c9ae1d84d4858e7d4"
+PR = "${INC_PR}.8"
+SRCREV = "1ba2ca0ae9767290ec09f27f289b66c2c90db3cc"
 
 SRC_URI = "git://git.ti.com/glsdk/gst-plugin-vpe.git;protocol=git \
            file://ti-video.conf \
