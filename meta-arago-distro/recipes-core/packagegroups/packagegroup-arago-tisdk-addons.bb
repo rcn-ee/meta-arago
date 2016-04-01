@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r43"
+PR = "r44"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -8,9 +8,10 @@ inherit packagegroup
 
 PACKAGES =+ "${PN}-extra"
 
+#    dt
+
 UTILS = " \
     am-sysinfo \
-    dt \
     gdbserver \
     oprofile \
     nbench-byte \
