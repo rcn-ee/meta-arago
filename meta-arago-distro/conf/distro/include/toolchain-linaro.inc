@@ -28,10 +28,10 @@ PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "gdb-cross-can
 PREFERRED_PROVIDER_libgcc = "external-linaro-toolchain"
 PREFERRED_PROVIDER_gcc-runtime = "external-linaro-toolchain"
 
-SDKGCCVERSION ?= "linaro-4.9%"
+SDKGCCVERSION ?= "linaro-5.2%"
 SDKBINUVERSION ?= "linaro-2.25%"
-SDKGLIBCVERSION ?= "2.21%"
-SDKLINUXLIBCVERSION ?= "4.1%"
+SDKGLIBCVERSION ?= "2.23%"
+SDKLINUXLIBCVERSION ?= "4.4%"
 
 PREFERRED_VERSION_gcc-crosssdk ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_gcc-crosssdk-initial ?= "${SDKGCCVERSION}"
