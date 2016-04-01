@@ -1,3 +1,0 @@
-PR_append = "-arago0"
-
-EXTRA_OEMAKE='KERNEL_DIR="${STAGING_EXECPREFIXDIR}" PREFIX="${D}"'
