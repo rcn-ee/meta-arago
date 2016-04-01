@@ -14,7 +14,7 @@ CLEANBROKEN = "1"
 
 S = "${WORKDIR}/git"
 
-CFLAGS_prepend = "-Wall -Wextra -Wno-sign-compare -Wno-pointer-sign "
+EXTRA_OEMAKE = "CC="${CC}""
 
 do_install() {
     install -d ${D}${bindir}
