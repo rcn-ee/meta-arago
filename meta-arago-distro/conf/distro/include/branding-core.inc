@@ -17,3 +17,7 @@ ALTERNATIVE_PRIORITY_pn-opencl-monitor = "1"
 
 # Raise priority for sample IPC FW images
 ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
+
+# Temporarily disable "sgx" machine feature for all SOCs while building
+# latest 4.4 integration kernel, until DDK 1.14 issues are resolved
+MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('sgx', '')}"
