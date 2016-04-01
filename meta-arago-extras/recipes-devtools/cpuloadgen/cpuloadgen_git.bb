@@ -14,7 +14,9 @@ SRC_URI = "git://github.com/ptitiano/cpuloadgen.git;protocol=git;branch=${BRANCH
 
 S = "${WORKDIR}/git"
 
+EXTRA_OEMAKE = "DESTDIR=${D}${bindir} CROSS_COMPILE=${TARGET_PREFIX}"
+
 do_install () {
     install -d ${D}${bindir}
-    oe_runmake DESTDIR=${D}${bindir} install
+    oe_runmake install
 }
