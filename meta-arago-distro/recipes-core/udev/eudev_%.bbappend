@@ -5,7 +5,7 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago4"
+PR_append = "-arago5"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -18,4 +18,5 @@ do_install_append() {
 
     install -m 0755 ${WORKDIR}/usb1-rules.sh ${D}${bindir}/usb1-rules.sh
     install -m 0755 ${WORKDIR}/usb2-rules.sh ${D}${bindir}/usb2-rules.sh
+    ln -sf libudev.so.1 ${D}${base_libdir}/libudev.so.0
 }
