@@ -1,4 +1,4 @@
-INHIBIT_PACKAGE_STRIP = "0"
+#INHIBIT_PACKAGE_STRIP = "0"
 
 ALLOW_EMPTY_${PN}-utils = "1"
 ALLOW_EMPTY_ldd = "1"
@@ -6,7 +6,7 @@ ALLOW_EMPTY_ldd = "1"
 ALLOW_EMPTY_libstdc++ = "1"
 ALLOW_EMPTY_libgomp = "1"
 
-PR_append = "-arago29"
+PR_append = "-arago30"
 
 PROVIDES := "${@oe_filter_out('virtual/linux-libc-headers', '${PROVIDES}', d)}"
 PROVIDES := "${@oe_filter_out('linux-libc-headers', '${PROVIDES}', d)}"
@@ -104,12 +104,6 @@ FILES_libgomp-dev += "\
 "
 
 do_install_append() {
-	mv ${D}${base_libdir}/libc.so ${D}${libdir}/libc.so || true
-	mv ${D}${base_libdir}/libpthread.so ${D}${libdir}/libpthread.so || true
-
-	ln -sf ../../lib/libc.so.6 ${D}${libdir}/libc.so.6
-	ln -sf ../../lib/libpthread.so.0 ${D}${libdir}/libpthread.so.0
-
 	sed -i -e "s# /lib/${ELT_TARGET_SYS}# ../../lib#g" -e "s# /usr/lib/${ELT_TARGET_SYS}# .#g" -e "s# /lib/ld-linux# ../../lib/ld-linux#g" ${D}${libdir}/libc.so
 	sed -i -e "s# /lib/# ../../lib/#g" -e "s# /usr/lib/# ./#g" ${D}${libdir}/libc.so
 
