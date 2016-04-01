@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -13,7 +13,7 @@ ARAGO_ALSA_EXTRA = "\
     alsa-server \
     alsa-utils \
     alsa-utils-aconnect \
-    alsa-utils-alsaconf \
+    alsa-utils-scripts \
     alsa-utils-alsactl \
     alsa-utils-alsamixer \
     alsa-utils-amixer \
