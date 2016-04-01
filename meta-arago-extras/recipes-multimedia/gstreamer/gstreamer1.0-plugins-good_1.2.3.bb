@@ -6,4 +6,3 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
 SRC_URI[md5sum] = "1a1f96bc27ad446e559474299160a9a8"
 SRC_URI[sha256sum] = "bfb33536a515bdcc34482f64b8d9cc3e47c753878b254923b419bc2f7485e470"
 S = "${WORKDIR}/gst-plugins-good-${PV}"
-

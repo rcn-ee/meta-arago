@@ -23,4 +23,3 @@ LIBAV_EXTRA_CONFIGURE_COMMON_ARG = "--target-os=linux \
   ${GSTREAMER_1_0_DEBUG}"
 
 S = "${WORKDIR}/gst-libav-${PV}"
-
