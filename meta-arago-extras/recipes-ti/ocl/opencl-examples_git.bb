@@ -45,7 +45,7 @@ python do_unpack_append() {
     os.makedirs(s)
     shutil.copy(os.path.join(git_dir,"Makefile"),s)
     shutil.copy(os.path.join(git_dir,"make.inc"),s)
-    for example in d.getVar("OCL_EXAMPLE_LIST").split():
+    for example in d.getVar("OCL_EXAMPLE_LIST", True).split():
         shutil.copytree(os.path.join(git_dir,example), os.path.join(s,example))
 }
 
