@@ -22,6 +22,8 @@ SRC_URI = "git://git.ti.com/wilink8-wlan/wl18xx_fw.git;protocol=git;branch=${BRA
 
 S = "${WORKDIR}/git"
 
+CLEANBROKEN = "1"
+
 do_compile() {
     :
 }
