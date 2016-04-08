@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r44"
+PR = "r45"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -58,31 +58,31 @@ UTILS_append_am180x-evm = " ti-pru-sw-examples"
 
 UTILS_append_omap3 = " canutils"
 
+#                        opencl-examples
 UTILS_append_dra7xx = " canutils \
                         dsptop \
                         gdbc6x \
                         glsdk-example-apps \
-                        opencl-examples \
 "
 
 UTILS_append_keystone = " \
     ti-ipc-rtos-fw \
 "
 
+#    opencl-examples
 UTILS_append_k2hk-evm = " \
-    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
+#    opencl-examples
 UTILS_append_k2l-evm = " \
-    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
+#    opencl-examples
 UTILS_append_k2e-evm = " \
-    opencl-examples \
     gdbc6x \
     dsptop \
 "
@@ -103,26 +103,26 @@ EXTRA_PACKAGES = " \
     nodejs-npm \
     protobuf \
 "
+#    opencl-staticdev
+#    opencl-examples-dev
+#    openmpacc-examples-dev
 EXTRA_PACKAGES_append_dra7xx = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
 "
+#    opencl-staticdev
+#    opencl-examples-dev
+#    openmpacc-examples-dev
 EXTRA_PACKAGES_append_k2hk-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
     linalg-examples \
 "
+#    opencl-staticdev
+#    opencl-examples-dev
+#    openmpacc-examples-dev
 EXTRA_PACKAGES_append_k2l-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
 "
+#    opencl-staticdev
+#    opencl-examples-dev
+#    openmpacc-examples-dev
 EXTRA_PACKAGES_append_k2e-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
 "
 
 RDEPENDS_${PN} = "\

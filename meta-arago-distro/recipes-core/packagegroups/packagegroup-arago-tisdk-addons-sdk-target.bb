@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r25"
+PR = "r26"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -119,21 +119,24 @@ EXTRA_LIBS_append_k2e-evm = "\
 UTILS_append_omap3 = " canutils-dev"
 UTILS_append_ti33x = " canutils-dev"
 UTILS_append_ti43x = " canutils-dev"
+#                        opencl-staticdev
+#                        openmpacc-dev
 UTILS_append_dra7xx = " canutils-dev \
-                        opencl-staticdev \
                         elfutils-dev \
                         elfutils-staticdev \
-                        openmpacc-dev \
 "
-UTILS_append_k2hk-evm = " opencl-staticdev \
-                          openmpacc-dev \
+#opencl-staticdev
+#                          openmpacc-dev
+UTILS_append_k2hk-evm = " \
                           linalg-dev \
 "
-UTILS_append_k2l-evm = " opencl-staticdev \
-                         openmpacc-dev \
+#opencl-staticdev
+#                         openmpacc-dev
+UTILS_append_k2l-evm = " \
 "
-UTILS_append_k2e-evm = " opencl-staticdev \
-                         openmpacc-dev \
+#opencl-staticdev
+#                         openmpacc-dev
+UTILS_append_k2e-evm = " \
 "
 UTILS_append_k2g-evm = " canutils-dev"
 

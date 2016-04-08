@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -21,8 +21,8 @@ MULTIMEDIA_append_ti43x = " \
     image-gallery-src \
 "
 
+#    qt-opencv-opencl-opengl-multithreaded-src
 MULTIMEDIA_append_dra7xx = " \
-    qt-opencv-opencl-opengl-multithreaded-src \
 "
 
 #Demo doesn't work on 3.14
