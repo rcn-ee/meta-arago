@@ -31,7 +31,7 @@ python do_unpack_append() {
     shutil.copy(os.path.join(git_dir,"Makefile"),s)
     shutil.copy(os.path.join(git_dir,"make.inc"),s)
     shutil.copy(os.path.join(git_dir,"run_tests_evm.sh"),s)
-    for example in d.getVar("LINALG_EXAMPLE_LIST").split():
+    for example in d.getVar("LINALG_EXAMPLE_LIST", True).split():
         shutil.copytree(os.path.join(git_dir,example), os.path.join(s,example))
 }
 
