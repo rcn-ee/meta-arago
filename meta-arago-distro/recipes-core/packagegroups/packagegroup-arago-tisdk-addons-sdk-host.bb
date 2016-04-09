@@ -38,8 +38,8 @@ UTILS_append_dra7xx = " \
 
 #    opencl-examples-src
 #    openmpacc-examples-src
+#    linalg-examples-src
 UTILS_append_k2hk-evm = " \
-    linalg-examples-src \
 "
 
 #    opencl-examples-src

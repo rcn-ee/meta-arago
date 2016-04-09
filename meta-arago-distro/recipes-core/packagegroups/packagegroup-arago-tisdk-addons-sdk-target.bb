@@ -127,9 +127,9 @@ UTILS_append_dra7xx = " canutils-dev \
 "
 #opencl-staticdev
 #                          openmpacc-dev
-UTILS_append_k2hk-evm = " \
-                          linalg-dev \
-"
+#UTILS_append_k2hk-evm = " \
+#                          linalg-dev \
+#"
 #opencl-staticdev
 #                         openmpacc-dev
 UTILS_append_k2l-evm = " \

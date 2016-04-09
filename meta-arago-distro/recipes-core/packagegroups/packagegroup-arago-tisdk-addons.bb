@@ -111,9 +111,9 @@ EXTRA_PACKAGES_append_dra7xx = " \
 #    opencl-staticdev
 #    opencl-examples-dev
 #    openmpacc-examples-dev
-EXTRA_PACKAGES_append_k2hk-evm = " \
-    linalg-examples \
-"
+#EXTRA_PACKAGES_append_k2hk-evm = " \
+#    linalg-examples \
+#"
 #    opencl-staticdev
 #    opencl-examples-dev
 #    openmpacc-examples-dev
