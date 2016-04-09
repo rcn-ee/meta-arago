@@ -14,9 +14,9 @@ TEST_ADDONS = " \
     strongswan \
     "
 
-TEST_ADDONS_TI = " \
-    cmem-test \
-    "
+#TEST_ADDONS_TI = " \
+#    cmem-test \
+#    "
 
 TEST_ADDONS_TI_append_keystone = " \
     mpm-transport-test \

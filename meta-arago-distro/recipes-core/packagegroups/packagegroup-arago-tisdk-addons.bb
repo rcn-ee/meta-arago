@@ -90,7 +90,7 @@ UTILS_append_k2e-evm = " \
 UTILS_append_k2g-evm = " canutils"
 
 EXTRA_LIBS = ""
-EXTRA_LIBS_append_omap-a15 = " cmem"
+#EXTRA_LIBS_append_omap-a15 = " cmem"
 
 DEVTOOLS = " \
     packagegroup-core-buildessential \

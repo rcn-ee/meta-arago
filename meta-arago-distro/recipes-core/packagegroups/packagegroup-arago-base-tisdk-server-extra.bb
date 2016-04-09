@@ -81,6 +81,8 @@ ARAGO_SECURE_STORAGE = "\
     engine-pkcs11 \
     "
 
+#    cmem-mod
+#    cmem
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
     uio-module-drv \
@@ -91,8 +93,6 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     cuia \
     edma3-lld \
     srss-tc \
-    cmem \
-    cmem-mod \
     ti-ipc \
     mpm-transport \
     multiprocmgr \

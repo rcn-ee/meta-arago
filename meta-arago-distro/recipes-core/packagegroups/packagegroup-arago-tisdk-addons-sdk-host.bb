@@ -54,8 +54,8 @@ UTILS_append_k2e-evm = " \
 
 EXTRA_LIBS = ""
 
+#    cmem-mod-src
 EXTRA_LIBS_append_omap-a15 = " \
-    cmem-mod-src \
     pru-icss-src \
 "
 
@@ -64,8 +64,8 @@ EXTRA_LIBS_append_dra7xx = " \
     gdbserverproxy-module-drv-src \
 "
 
+#    cmem-mod-src
 EXTRA_LIBS_append_keystone = " \
-    cmem-mod-src \
     uio-module-drv-src \
     hplib-mod-src \
     ipsecmgr-mod-src \

@@ -107,11 +107,11 @@ MAKEFILES_append_dra7xx = " cryptodev \
                             qt-opencv-opencl-opengl-multithreaded \
 "
 
+#                              cmem-mod
 MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
                               omapconf \
                               linux-dtbs \
-                              cmem-mod \
                               omapdrm-pvr \
                               pru-icss \
 "
@@ -119,10 +119,10 @@ MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
 "
 
+#                              cmem-mod
 MAKEFILES_append_keystone = " u-boot-spl \
                               linux-dtbs \
                               boot-monitor \
-                              cmem-mod \
                               cryptodev \
                               ti-crypto-examples \
                               hplib-mod \

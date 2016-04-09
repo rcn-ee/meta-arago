@@ -28,10 +28,10 @@ TI_SECURE_STORAGE_DEV = "\
 	libp11-staticdev \
 	"
 
+#	cmem-dev
+#	cmem-staticdev
 EXTRA_LIBS_append_keystone = "\
 	${TI_SECURE_STORAGE_DEV} \
-	cmem-dev \
-	cmem-staticdev \
 	udma-dev \
 	udma-staticdev \
 	traceframework-dev \
@@ -141,7 +141,7 @@ UTILS_append_k2e-evm = " \
 UTILS_append_k2g-evm = " canutils-dev"
 
 EXTRA_LIBS = ""
-EXTRA_LIBS_append_omap-a15 = " cmem-dev"
+#EXTRA_LIBS_append_omap-a15 = " cmem-dev"
 EXTRA_LIBS_append_dra7xx = " libulm-dev \
                              libulm-staticdev \
                              gdbserver-c6x-dev \
