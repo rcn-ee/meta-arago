@@ -6,9 +6,11 @@ TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFI
 TOOLCHAIN_CLEANUP_PACKAGES ?= ""
 SDKIMAGE_FEATURES = ""
 
+inherit toolchain-scripts
+
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r30"
+PR = "r31"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
