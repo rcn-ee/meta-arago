@@ -1,5 +1,5 @@
 DESCRIPTION = "Target packages for the standalone SDK"
-PR = "r10"
+PR = "r11"
 LICENSE = "MIT"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -22,7 +22,7 @@ RDEPENDS_${PN} = "\
     freetype-dev \
     ${@base_conditional('PREFERRED_PROVIDER_jpeg', 'libjpeg-turbo', 'libjpeg-turbo-dev', 'jpeg-dev', d)}  \
     lzo-dev \
-    libopkg-dev \
+    opkg-dev \
     libpng-dev \
     readline-dev \
     ${@base_conditional('QT_PROVIDER', 'qt5', '', 'tslib-dev', d)} \
