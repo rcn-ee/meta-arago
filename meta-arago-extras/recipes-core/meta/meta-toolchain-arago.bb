@@ -126,12 +126,12 @@ cleanup_toolchain_packages() {
 		# Clean up the native side of the toolchain
 		opkg_dir="${SDK_OUTPUT}/${SDKPATHNATIVE}"
 		opkg_conf="${SDK_OUTPUT}/etc/opkg-sdk.conf"
-		opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
+		opkg -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
 
 		# Clean up the target side of the toolchain
 		opkg_dir="${SDK_OUTPUT}/${SDKTARGETSYSROOT}"
 		opkg_conf="${opkg_dir}/etc/opkg.conf"
-		opkg-cl -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
+		opkg -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
 
 		# Clean up empty directories from cleaned up packages
 		find ${SDK_OUTPUT} -depth -type d -empty -print0 | xargs -r0 /bin/rmdir

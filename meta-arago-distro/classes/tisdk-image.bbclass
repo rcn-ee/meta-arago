@@ -99,7 +99,7 @@ HOST_CLEANUP_PACKAGES ?= ""
 cleanup_host_packages() {
     if [ "${HOST_CLEANUP_PACKAGES}" != "" ]
     then
-        opkg-cl ${IPKG_ARGS} --force-depends remove ${HOST_CLEANUP_PACKAGES}
+        opkg ${IPKG_ARGS} --force-depends remove ${HOST_CLEANUP_PACKAGES}
     fi
 }
 
