@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r26"
+PR = "r27"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -16,8 +16,8 @@ UTILS_append_keystone = "\
 	binutils-staticdev \
 	elfutils-dev \
 	elfutils-staticdev \
-	libbz2-dev \
-	libbz2-staticdev \
+	bzip2-dev \
+	bzip2-staticdev \
 	boost-dev \
 	libsdl-dev \
 	"
