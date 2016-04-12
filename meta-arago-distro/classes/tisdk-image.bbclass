@@ -1,4 +1,5 @@
 inherit rootfs_ipk
+inherit image
 inherit image_types
 
 # This defines the list of features that we want to include in the SDK
@@ -653,7 +654,6 @@ IMAGE_PREPROCESS_COMMAND += "tisdk_image_cleanup; "
 # to install a given list of packages using opkg.
 fakeroot python do_rootfs () {
     from oe.rootfs import create_rootfs
-    from oe.image import create_image
     from oe.manifest import create_manifest
 
     # generate the initial manifest
@@ -661,10 +661,18 @@ fakeroot python do_rootfs () {
 
     # generate rootfs
     create_rootfs(d)
-
-    # generate final images
-    create_image(d)
 }
+
+fakeroot python do_image () {
+    from oe.utils import execute_pre_post_process
+
+    pre_process_cmds = d.getVar("IMAGE_PREPROCESS_COMMAND", True)
+
+    execute_pre_post_process(d, pre_process_cmds)
+}
+do_image[dirs] = "${TOPDIR}"
+do_image[umask] = "022"
+addtask do_image after do_rootfs before do_build
 
 tisdk_image_setup () {
     set -x
@@ -816,7 +824,7 @@ tisdk_image_build () {
     fi
 
     # Create the TI software manifest
-    generate_sw_manifest
+#    generate_sw_manifest
 
     # Delete installed toolchain sdk since we need the toolchain sdk installer
     # not the extracted version
