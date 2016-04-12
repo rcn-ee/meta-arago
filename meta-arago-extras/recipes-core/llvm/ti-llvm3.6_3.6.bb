@@ -1,11 +1,16 @@
 DESCRIPTION = "LLVM 3.6 with support for TI C66x intrinsics"
 HOMEPAGE = "https://gitorious.design.ti.com/ocl/llvm33-src"
 
-PR = "r2"
+PR = "r3"
 
 do_configure_prepend_class-native() {
     # Fix paths in llvm-config
     sed -i "s|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|sys::path::parent_path(CurrentPath))\.str()|g" ${S}/tools/llvm-config/llvm-config.cpp
+}
+
+do_configure_prepend() {
+    # Workaround for libdir fix for multilib to undo what is currently upstream
+    sed -i 's:${base_libdir}:/${baselib}:g' ${S}/tools/llvm-config/llvm-config.cpp
 }
 
 require recipes-core/llvm/llvm.inc
@@ -55,11 +60,19 @@ EXTRA_OEMAKE += "LIBXML2_INC="${LIBXML2_INC}" LIBXML2_LIBS="${LIBXML2_LIBS}""
 
 do_compile_class-native() {
   cd ${LLVM_BUILD_DIR}
+
+  # Fix libdir for multilib
+  sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)/${baselib}:g' Makefile.config
+
   oe_runmake
 }
 
 do_compile_class-nativesdk() {
     cd ${LLVM_BUILD_DIR}
+
+    # Fix libdir for multilib
+    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)/${baselib}:g' Makefile.config
+
     oe_runmake \
         AR="${BUILD_AR}" \
         CC="${BUILD_CC}" \
@@ -81,6 +94,28 @@ do_compile_class-nativesdk() {
         touch $f
     done
 
+    oe_runmake
+}
+
+# Workaround for libdir fix for multilib
+do_compile() {
+    cd ${LLVM_BUILD_DIR}
+
+    # Fix libdir for multilib
+    sed -i 's:(PROJ_prefix)${base_libdir}:(PROJ_prefix)/${baselib}:g' Makefile.config
+
+    oe_runmake \
+        AR="${BUILD_AR}" \
+        CC="${BUILD_CC}" \
+        CFLAGS="${BUILD_CFLAGS}" \
+        CXX="${BUILD_CXX}" \
+        CXXFLAGS="${BUILD_CXXFLAGS}" \
+        CPP="${BUILD_CPP}" \
+        CPPFLAGS="${BUILD_CPPFLAGS}" \
+        NM="${BUILD_NM}" \
+        RANLIB="${BUILD_RANLIB}" \
+        PATH="${STAGING_BINDIR_NATIVE}:$PATH" \
+        cross-compile-build-tools
     oe_runmake
 }
 
