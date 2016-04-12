@@ -119,24 +119,21 @@ EXTRA_LIBS_append_k2e-evm = "\
 UTILS_append_omap3 = " canutils-dev"
 UTILS_append_ti33x = " canutils-dev"
 UTILS_append_ti43x = " canutils-dev"
-#                        opencl-staticdev
-#                        openmpacc-dev
 UTILS_append_dra7xx = " canutils-dev \
+                        opencl-staticdev \
                         elfutils-dev \
                         elfutils-staticdev \
+                        openmpacc-dev \
 "
-#opencl-staticdev
-#                          openmpacc-dev
-#UTILS_append_k2hk-evm = " \
-#                          linalg-dev \
-#"
-#opencl-staticdev
-#                         openmpacc-dev
-UTILS_append_k2l-evm = " \
+#                          linalg-dev
+UTILS_append_k2hk-evm = " opencl-staticdev \
+                          openmpacc-dev \
 "
-#opencl-staticdev
-#                         openmpacc-dev
-UTILS_append_k2e-evm = " \
+UTILS_append_k2l-evm = " opencl-staticdev \
+                         openmpacc-dev \
+"
+UTILS_append_k2e-evm = " opencl-staticdev \
+                         openmpacc-dev \
 "
 UTILS_append_k2g-evm = " canutils-dev"
 
