@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r7"
+PR = "r8"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -143,6 +143,7 @@ ARAGO_TI_PKGS_append_k2e-evm = "\
     nwal-lld \
     "
 
+#    recovery-kernel
 RDEPENDS_${PN} = "\
     ${ARAGO_LIBNL} \
     ${ARAGO_PERL} \
@@ -175,7 +176,6 @@ RDEPENDS_${PN} = "\
     file \
     libbz2 \
     boost \
-    recovery-kernel \
     k2-initramfs \
     parse-ip \
     "
