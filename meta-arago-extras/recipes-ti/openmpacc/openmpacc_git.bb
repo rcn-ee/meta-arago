@@ -17,3 +17,7 @@ export LINUX_DEVKIT_ROOT = "${STAGING_DIR_HOST}"
 EXTRA_OECMAKE += "-DVERSION="${PV}" -DBUILD_OUTPUT=lib"
 
 FILES_${PN} += "/usr/share/ti/openmpacc/*"
+
+do_configure_prepend() {
+	sed -i -e 's/-march=armv7-a//' ${S}/libompacc/CMakeLists.txt
+}
