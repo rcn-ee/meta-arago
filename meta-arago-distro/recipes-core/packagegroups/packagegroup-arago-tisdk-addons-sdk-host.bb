@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r23"
+PR = "r24"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -65,10 +65,10 @@ EXTRA_LIBS_append_dra7xx = " \
 "
 
 #    cmem-mod-src
+#    ipsecmgr-mod-src
 EXTRA_LIBS_append_keystone = " \
     uio-module-drv-src \
     hplib-mod-src \
-    ipsecmgr-mod-src \
 "
 
 EXTRA_LIBS_append_k2hk-evm = " \

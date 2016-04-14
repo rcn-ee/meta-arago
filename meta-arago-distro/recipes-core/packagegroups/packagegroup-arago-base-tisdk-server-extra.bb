@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r9"
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -86,6 +86,7 @@ ARAGO_SECURE_STORAGE = "\
 #    mpm-transport
 #    multiprocmgr
 #    qmss-lld
+#    ipsecmgr-mod
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
     uio-module-drv \
@@ -103,7 +104,6 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     hplib-mod \
     pktlib \
     cppi-lld \
-    ipsecmgr-mod \
     "
 
 # The following packages are not yet ready for k2g-evm
@@ -114,31 +114,31 @@ ARAGO_TI_KEYSTONE_PKGS = "\
 
 ARAGO_TI_PKGS = ""
 ARAGO_TI_PKGS_append_keystone = " ${ARAGO_TI_KEYSTONE_PKGS}"
+#    netapi
+#    netapi-test
 ARAGO_TI_PKGS_append_k2l-evm = "\
     dfe-lld \
     iqn2-lld \
-    netapi \
-    netapi-test \
     hplib \
     nwal-lld \
     "
 
 #    srio-lld
+#    netapi
+#    netapi-test
 ARAGO_TI_PKGS_append_k2hk-evm = "\
     mmap-lld \
     hyplnk-lld \
     aif2-lld \
-    netapi \
-    netapi-test \
     hplib \
     nwal-lld \
     "
 
+#    netapi
+#    netapi-test
 ARAGO_TI_PKGS_append_k2e-evm = "\
     mmap-lld \
     hyplnk-lld \
-    netapi \
-    netapi-test \
     hplib \
     nwal-lld \
     "
