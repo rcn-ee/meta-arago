@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r46"
+PR = "r47"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -69,20 +69,20 @@ UTILS_append_keystone = " \
     ti-ipc-rtos-fw \
 "
 
+#    opencl-examples
 UTILS_append_k2hk-evm = " \
-    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
+#    opencl-examples
 UTILS_append_k2l-evm = " \
-    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
+#    opencl-examples
 UTILS_append_k2e-evm = " \
-    opencl-examples \
     gdbc6x \
     dsptop \
 "
@@ -109,21 +109,21 @@ EXTRA_PACKAGES_append_dra7xx = " \
     openmpacc-examples-dev \
 "
 #    linalg-examples
-EXTRA_PACKAGES_append_k2hk-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
-"
-EXTRA_PACKAGES_append_k2l-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
-"
-EXTRA_PACKAGES_append_k2e-evm = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
-"
+#EXTRA_PACKAGES_append_k2hk-evm = " \
+#    opencl-staticdev \
+#    opencl-examples-dev \
+#    openmpacc-examples-dev \
+#"
+#EXTRA_PACKAGES_append_k2l-evm = " \
+#    opencl-staticdev \
+#    opencl-examples-dev \
+#    openmpacc-examples-dev \
+#"
+#EXTRA_PACKAGES_append_k2e-evm = " \
+#    opencl-staticdev \
+#    opencl-examples-dev \
+#    openmpacc-examples-dev \
+#"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \

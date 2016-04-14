@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r8"
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -83,6 +83,9 @@ ARAGO_SECURE_STORAGE = "\
 
 #    cmem-mod
 #    cmem
+#    mpm-transport
+#    multiprocmgr
+#    qmss-lld
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
     uio-module-drv \
@@ -94,12 +97,9 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     edma3-lld \
     srss-tc \
     ti-ipc \
-    mpm-transport \
-    multiprocmgr \
     rm-lld \
     demo-image-proc \
     pa-lld \
-    qmss-lld \
     hplib-mod \
     pktlib \
     cppi-lld \
@@ -123,8 +123,8 @@ ARAGO_TI_PKGS_append_k2l-evm = "\
     nwal-lld \
     "
 
+#    srio-lld
 ARAGO_TI_PKGS_append_k2hk-evm = "\
-    srio-lld \
     mmap-lld \
     hyplnk-lld \
     aif2-lld \
