@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
-PR = "r11"
+PR = "r12"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -21,9 +21,9 @@ MULTIMEDIA_append_ti43x = " \
     image-gallery-src \
 "
 
-MULTIMEDIA_append_dra7xx = " \
-    qt-opencv-opencl-opengl-multithreaded-src \
-"
+#MULTIMEDIA_append_dra7xx = " \
+#    qt-opencv-opencl-opengl-multithreaded-src \
+#"
 
 #Demo doesn't work on 3.14
 # ${@base_conditional('QT_PROVIDER', 'qt5', '', 'dual-camera-demo-src image-gallery-src', d)}

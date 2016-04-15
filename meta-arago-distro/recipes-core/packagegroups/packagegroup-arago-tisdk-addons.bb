@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r47"
+PR = "r48"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -58,11 +58,11 @@ UTILS_append_am180x-evm = " ti-pru-sw-examples"
 
 UTILS_append_omap3 = " canutils"
 
+#                        opencl-examples
 UTILS_append_dra7xx = " canutils \
                         dsptop \
                         gdbc6x \
                         glsdk-example-apps \
-                        opencl-examples \
 "
 
 UTILS_append_keystone = " \
@@ -103,11 +103,11 @@ EXTRA_PACKAGES = " \
     nodejs-npm \
     protobuf \
 "
-EXTRA_PACKAGES_append_dra7xx = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
-"
+#EXTRA_PACKAGES_append_dra7xx = " \
+#    opencl-staticdev \
+#    opencl-examples-dev \
+#    openmpacc-examples-dev \
+#"
 #    linalg-examples
 #EXTRA_PACKAGES_append_k2hk-evm = " \
 #    opencl-staticdev \
