@@ -27,10 +27,6 @@ GRAPHICS_RDEPENDS_omap-a15 = "\
     omap5-sgx-ddk-um-linux-dev \
     "
 
-GRAPHICS_BLTSVILLE = ""
-GRAPHICS_BLTSVILLE_omap-a15 = " bltsville-dev"
-
 RDEPENDS_${PN} = "\
     ${GRAPHICS_RDEPENDS} \
-    ${GRAPHICS_BLTSVILLE} \
 "
