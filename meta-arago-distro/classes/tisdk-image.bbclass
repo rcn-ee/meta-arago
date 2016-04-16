@@ -4,7 +4,7 @@ inherit image_types
 
 # This defines the list of features that we want to include in the SDK
 # image.  The list of packages this will be installed for each features
-# is controlled with the PACKAGE_GROUP_<feature> settings below.
+# is controlled with the FEATURE_PACKAGES_<feature> settings below.
 IMAGE_FEATURES ?= ""
 IMAGE_FEATURES[type] = "list"
 
@@ -13,7 +13,7 @@ IMAGE_FEATURES_prepend = "sdk_base package-management"
 
 # Define our always included sdk package group as the IMAGE_INSTALL settings
 # like you would expect.
-PACKAGE_GROUP_sdk_base = "${IMAGE_INSTALL}"
+FEATURE_PACKAGES_sdk_base = "${IMAGE_INSTALL}"
 
 # Create the list of packages to be installed
 PACKAGE_INSTALL = "${@' '.join(oe.packagegroup.required_packages('${IMAGE_FEATURES}'.split(), d))}"
@@ -77,7 +77,7 @@ def string_set(iterable):
 
 # Add a dependency for the do_rootfs function that will force us to build
 # the TARGET_IMAGES first so that they will be available for packaging.
-do_rootfs[depends] += "${@string_set('%s:do_rootfs' % pn for pn in (d.getVar("TARGET_IMAGES", True) or "").split())}"
+do_rootfs[depends] += "${@string_set('%s:do_image_complete' % pn for pn in (d.getVar("TARGET_IMAGES", True) or "").split())}"
 
 # Add a dependency for the do_populate_sdk function of the TIDSK_TOOLCHAIN
 # variable which will force us to build the toolchain first so that it will be
@@ -673,6 +673,17 @@ fakeroot python do_image () {
 do_image[dirs] = "${TOPDIR}"
 do_image[umask] = "022"
 addtask do_image after do_rootfs before do_build
+
+fakeroot python do_image_complete () {
+    from oe.utils import execute_pre_post_process
+
+    post_process_cmds = d.getVar("IMAGE_POSTPROCESS_COMMAND", True)
+
+    execute_pre_post_process(d, post_process_cmds)
+}
+do_image_complete[dirs] = "${TOPDIR}"
+do_image_complete[umask] = "022"
+addtask do_image_complete after do_image before do_build
 
 tisdk_image_setup () {
     set -x
