@@ -11,8 +11,8 @@ export LIBARCH_DIR    = "${LIBARCH_INSTALL_DIR}"
 export TARGET_ROOTDIR = "${STAGING_DIR_TARGET}"
 
 do_compile() {
-    make examples TARGET=${TARGET} LIBOS=LIB_OPENCL
-
+    cd examples
+    make TARGET=${TARGET} LIBOS=LIB_OPENCL
     # Remove object files before installing so that the binaries are not present
     find . -name "*.obj" -type f -delete
     find . -name "*.o" -type f -delete
