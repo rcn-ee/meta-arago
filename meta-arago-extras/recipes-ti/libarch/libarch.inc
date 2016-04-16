@@ -2,15 +2,15 @@ HOMEPAGE = "https://git.ti.com/library-architecture/libarch"
 LICENSE = "BSD-3-Clause"
 
 PV = "1_0_0_0"
-INC_PR = "r0"
+INC_PR = "r1"
 
 require recipes-ti/includes/arago-paths.inc
 require recipes-ti/includes/ti-staging.inc
 
 BRANCH = "master"
-LIC_FILES_CHKSUM = "file://docs/LibArch_1.0.0_manifest.html;md5=bb48cacb8827ec8d8e5a94c4f2425ee3"
+LIC_FILES_CHKSUM = "file://src/ti/libarch/docs/LibArch_1.0.0_manifest.html;md5=bb48cacb8827ec8d8e5a94c4f2425ee3"
 SRC_URI = "git://git.ti.com/library-architecture/libarch.git;protocol=git;branch=${BRANCH}"
-SRCREV = "c4bc65775bdb6bd8574e43d3cb7148c6bbdc8de6"
+SRCREV = "4b2f1c5d5b6b9f3d021e498120a914456fb9eba1"
 
 COMPATIBLE_MACHINE = "k2hk-evm|am57xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
