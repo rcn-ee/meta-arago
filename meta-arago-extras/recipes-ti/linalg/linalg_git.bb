@@ -3,17 +3,19 @@ DESCRIPTION = "TI Linear Algebra Library"
 include linalg.inc
 PR = "${INC_PR}.0"
 
-TARGET_k2hk-evm = "SOC_K2H"
-MEM_MODEL_k2hk-evm = "Large"
+TARGET_k2hk-evm      = "SOC_K2H"
+TARGET_am57xx-evm    = "SOC_AM572x"
+MEM_MODEL_k2hk-evm   = "Large"
+MEM_MODEL_am57xx-evm = "Small"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 do_compile() {
-   make ARMplusDSP MEM_MODEL=${MEM_MODEL} TARGET=${TARGET} LIBOS=LIB_OPENCL
-   make docs
+   make -f build/Makefile MEM_MODEL=${MEM_MODEL} TARGET=${TARGET} LIBOS=LIB_OPENCL
 }
 
 do_install() {
-   make installARMplusDSPlib DESTDIR=${D}${LINALG_INSTALL_DIR_RECIPE}
+    install -d ${D}${LINALG_INSTALL_DIR_RECIPE}
+    cp -r exports/linalg_${PV}/* ${D}${LINALG_INSTALL_DIR_RECIPE}
 }
 
 # to create a package for LINALG

@@ -2,7 +2,7 @@ HOMEPAGE = "git://git.ti.com/dense-linear-algebra-libraries/linalg.git"
 LICENSE = "BSD-3-Clause"
 
 PV = "1_2_0_0"
-INC_PR = "r0"
+INC_PR = "r1"
 
 S = "${WORKDIR}/git"
 
@@ -11,8 +11,8 @@ require recipes-ti/includes/ti-staging.inc
 
 BRANCH = "master"
 SRC_URI = "git://git.ti.com/dense-linear-algebra-libraries/linalg.git;protocol=git;branch=${BRANCH}"
-LIC_FILES_CHKSUM = "file://docs/LINALG_1.2.0_manifest.html;md5=f30895e41e5947c3439b1ad4cf4c8555"
-SRCREV = "4de29dac3c6fbd16df1b19876593de0afdbcb30f"
+LIC_FILES_CHKSUM = "file://src/ti/linalg/docs/LINALG_1.2.0_manifest.html;md5=f30895e41e5947c3439b1ad4cf4c8555"
+SRCREV = "5e435f2457565ed7c6199406ef248370bb2a4ad2"
 
 DEPENDS = "common-csl-ip \
            libarch \
@@ -40,4 +40,4 @@ export OMP_DIR ="${OMP_INSTALL_DIR}"
 export LIBARCH_DIR = "${LIBARCH_INSTALL_DIR}"
 export TARGET_ROOTDIR="${STAGING_DIR_TARGET}"
 
-COMPATIBLE_MACHINE = "k2hk-evm"
+COMPATIBLE_MACHINE = "k2hk-evm|am57xx"
