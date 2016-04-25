@@ -21,34 +21,11 @@ PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
-ARAGO_QT_PROVIDER = "${@base_conditional('QT_PROVIDER','qt5','',base_contains('MACHINE_FEATURES','sgx','qt4-embedded-gles','qt4-embedded',d),d)}"
-PREFERRED_PROVIDER_qt4-embedded = "${ARAGO_QT_PROVIDER}"
-
-PREFERRED_PROVIDER_omap3-sgx-modules = "omap3-sgx-modules"
-PREFERRED_PROVIDER_libgles-omap3 = "libgles-omap3"
-PREFERRED_PROVIDER_libgles-omap3-dev = "libgles-omap3-dev"
-PREFERRED_PROVIDER_libgles-omap3-dbg = "libgles-omap3-dbg"
-PREFERRED_PROVIDER_virtual/egl = "libgles-omap3"
-PREFERRED_PROVIDER_virtual/libgles1 = "libgles-omap3"
-PREFERRED_PROVIDER_virtual/libgles2 = "libgles-omap3"
-
-PREFERRED_PROVIDER_virtual/egl_omap-a15 = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_virtual/libgles1_omap-a15 = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_virtual/libgles2_omap-a15 = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_libgbm_omap-a15 = "libgbm"
-PREFERRED_PROVIDER_libgbm-dev_omap-a15 = "libgbm-dev"
-
-PREFERRED_PROVIDER_virtual/egl_ti43x = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_virtual/libgles1_ti43x = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_virtual/libgles2_ti43x = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_libgbm_ti43x = "libgbm"
-PREFERRED_PROVIDER_libgbm-dev_ti43x = "libgbm-dev"
-
-PREFERRED_PROVIDER_virtual/egl_ti33x = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_virtual/libgles1_ti33x = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_virtual/libgles2_ti33x = "omap5-sgx-ddk-um-linux"
-PREFERRED_PROVIDER_libgbm_ti33x = "libgbm"
-PREFERRED_PROVIDER_libgbm-dev_ti33x = "libgbm-dev"
+PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
+PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
+PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
+PREFERRED_PROVIDER_libgbm = "libgbm"
+PREFERRED_PROVIDER_libgbm-dev = "libgbm-dev"
 
 PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa = "mesa-gl"
@@ -61,28 +38,18 @@ PREFERRED_PROVIDER_virtual/libgles2_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
 
-# Use latest TI staging kernel and u-boot trees
 PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_KERNEL_SUFFIX}"
 PREFERRED_VERSION_linux-ti-staging = "4.4%"
 
-PREFERRED_PROVIDER_virtual/bootloader_am335x-evm = "u-boot-ti-staging"
-PREFERRED_PROVIDER_u-boot_am335x-evm = "u-boot-ti-staging"
-PREFERRED_PROVIDER_virtual/bootloader_am437x-evm = "u-boot-ti-staging"
-PREFERRED_PROVIDER_u-boot_am437x-evm = "u-boot-ti-staging"
-PREFERRED_PROVIDER_virtual/bootloader_omap-a15 = "u-boot-ti-staging"
-PREFERRED_PROVIDER_u-boot_omap-a15 = "u-boot-ti-staging"
-
+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
+PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
 PREFERRED_VERSION_u-boot-ti-staging = "2015.07%"
 
 # Pin down udev version from oe-core, as meta-oe pulls in newer systemd-enhanced version
 PREFERRED_VERSION_eudev = "3.1.5"
 PREFERRED_PROVIDER_eudev = "eudev"
 
-# Set the PREFERRED_PROVIDER for jpeg functionality based on the MACHINE
-# architecture.  For armv7a devices libjpeg-turbo should be used to take
-# advantage of the SIMD instructions.
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
-PREFERRED_PROVIDER_jpeg_armv5te = "jpeg"
 
 # Setting PREFERRED_VERSIONS due to selecting a specific version of a library or
 # application that does not have a GPLv3 license

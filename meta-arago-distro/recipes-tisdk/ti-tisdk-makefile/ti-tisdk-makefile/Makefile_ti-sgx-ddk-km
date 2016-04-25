@@ -1,26 +1,25 @@
-# omapdrm-pvr module
-omapdrm-pvr: linux
+# ti-sgx-ddk-km module
+ti-sgx-ddk-km: linux
 	@echo ================================
-	@echo      Building omapdrm-pvr
+	@echo      Building ti-sgx-ddk-km
 	@echo ================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
+	cd `find . -maxdepth 1 -name "ti-sgx-ddk-km*" -type d`; \
 	make -C ./eurasia_km/eurasiacon/build/linux2/omap_linux ARCH=arm TARGET_PRODUCT=__TARGET_PRODUCT__ KERNELDIR=$(LINUXKERNEL_INSTALL_DIR)
 
-omapdrm-pvr_clean:
+ti-sgx-ddk-km_clean:
 	@echo ================================
-	@echo      Cleaning omapdrm-pvr
+	@echo      Cleaning ti-sgx-ddk-km
 	@echo ================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
+	cd `find . -maxdepth 1 -name "ti-sgx-ddk-km*" -type d`; \
 	make -C ./eurasia_km/eurasiacon/build/linux2/omap_linux ARCH=arm KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) clean
 
-omapdrm-pvr_install:
+ti-sgx-ddk-km_install:
 	@echo ================================
-	@echo      Installing omapdrm-pvr
+	@echo      Installing ti-sgx-ddk-km
 	@echo ================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "omapdrm-pvr*" -type d`; \
+	cd `find . -maxdepth 1 -name "ti-sgx-ddk-km*" -type d`; \
 	cd ./eurasia_km/eurasiacon/binary2_omap_linux_release/target/kbuild; \
 	make -C $(LINUXKERNEL_INSTALL_DIR) SUBDIRS=`pwd` INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) modules_install
-

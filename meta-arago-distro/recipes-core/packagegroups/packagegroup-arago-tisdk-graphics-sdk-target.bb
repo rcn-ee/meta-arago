@@ -1,30 +1,12 @@
 DESCRIPTION = "Task to install graphics binaries on sdk target"
 LICENSE = "MIT"
-PR = "r6"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PR = "r7"
 
 inherit packagegroup
 
-GRAPHICS_RDEPENDS = ""
-
-GRAPHICS_RDEPENDS_ti33x = "\
+GRAPHICS_RDEPENDS = "\
     libgbm-dev \
-    omap5-sgx-ddk-um-linux-dev \
-    "
-
-GRAPHICS_RDEPENDS_omap3 = "\
-    libgles-omap3-dev \
-"
-
-GRAPHICS_RDEPENDS_ti43x = "\
-    libgbm-dev \
-    omap5-sgx-ddk-um-linux-dev \
-    "
-
-GRAPHICS_RDEPENDS_omap-a15 = "\
-    libgbm-dev \
-    omap5-sgx-ddk-um-linux-dev \
+    ti-sgx-ddk-um-dev \
     "
 
 RDEPENDS_${PN} = "\

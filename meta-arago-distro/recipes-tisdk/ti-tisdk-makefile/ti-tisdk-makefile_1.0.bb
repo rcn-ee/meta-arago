@@ -36,7 +36,7 @@ SRC_URI = "\
     file://Makefile_cmem-mod \
     file://Makefile_debugss-module-drv \
     file://Makefile_gdbserverproxy-module-drv \
-    file://Makefile_omapdrm-pvr \
+    file://Makefile_ti-sgx-ddk-km \
     file://Makefile_opencl-examples \
     file://Makefile_boot-monitor \
     file://Makefile_hplib-mod \
@@ -85,7 +85,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            ti-crypto-examples \
                            linux-dtbs \
                            cryptodev \
-                           omapdrm-pvr \
+                           ti-sgx-ddk-km \
                            pru-icss \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
@@ -95,7 +95,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            cryptodev \
                            dual-camera-demo \
                            image-gallery \
-                           omapdrm-pvr \
+                           ti-sgx-ddk-km \
                            pru-icss \
 "
 
@@ -112,7 +112,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ${QUICK_PLAYGROUND} \
                               omapconf \
                               linux-dtbs \
-                              omapdrm-pvr \
+                              ti-sgx-ddk-km \
                               pru-icss \
 "
 MAKEFILES_append_am180x-evm = " pru \
