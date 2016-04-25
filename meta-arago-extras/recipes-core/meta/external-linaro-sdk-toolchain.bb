@@ -5,6 +5,7 @@ require external-linaro-bfd-version.inc
 PR = "r5"
 
 INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_SYSROOT_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
 EXCLUDE_FROM_SHLIBS = "1"
 
