@@ -1,11 +1,8 @@
---- qtwebkit/Source/WebCore/WebCore.pri.orig	2013-09-08 14:18:22.315635577 +0530
-+++ qtwebkit/Source/WebCore/WebCore.pri	2013-09-08 14:18:44.271634981 +0530
-@@ -213,18 +213,20 @@ use?(3D_GRAPHICS) {
-     } else {
-         contains(QT_CONFIG, opengles2): CONFIG += egl
-     }
- }
- 
+diff --git a/Source/WebCore/WebCore.pri b/Source/WebCore/WebCore.pri
+index 0189394..00f7090 100644
+--- a/Source/WebCore/WebCore.pri
++++ b/Source/WebCore/WebCore.pri
+@@ -227,8 +227,10 @@ use?(3D_GRAPHICS) {
  use?(GRAPHICS_SURFACE) {
      mac: LIBS += -framework IOSurface -framework CoreFoundation
      linux-*: {
@@ -14,12 +11,7 @@
 +        xlibAvailable() {
 +            LIBS += -lXcomposite -lXrender
 +            CONFIG *= x11
-+	}
++        }
      }
  }
  
- have?(sqlite3) {
-     mac {
-         LIBS += -lsqlite3
-     } else {
-         PKGCONFIG += sqlite3
