@@ -45,10 +45,6 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
 PREFERRED_VERSION_u-boot-ti-staging = "2016.05%"
 
-# Pin down udev version from oe-core, as meta-oe pulls in newer systemd-enhanced version
-PREFERRED_VERSION_eudev = "3.1.5"
-PREFERRED_PROVIDER_eudev = "eudev"
-
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 
 # Setting PREFERRED_VERSIONS due to selecting a specific version of a library or
@@ -70,7 +66,3 @@ PREFERRED_PROVIDER_wpa-supplicant = "wpa-supplicant"
 PREFERRED_PROVIDER_wpa-supplicant_ti33x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_ti43x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_omap-a15 = "wpa-supplicant-wl18xx"
-
-def filter_out(f, str, d):
-    from re import match
-    return " ".join(filter(lambda x: not match(f, x, 0), str.split()))

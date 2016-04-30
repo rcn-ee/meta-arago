@@ -1,5 +1,5 @@
 DESCRIPTION = "Target packages for the standalone SDK"
-PR = "r11"
+PR = "r12"
 LICENSE = "MIT"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -31,7 +31,6 @@ RDEPENDS_${PN} = "\
     zlib-dev \
     ncurses-dev \
     opkg-dev \
-    sysvinit-dev \
     util-linux-dev \
     ${@base_conditional('TCMODE', 'external-linaro', 'libgomp-dev', '', d)} \
     "
