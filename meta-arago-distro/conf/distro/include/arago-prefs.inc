@@ -43,7 +43,7 @@ PREFERRED_VERSION_linux-ti-staging = "4.4%"
 
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
 PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
-PREFERRED_VERSION_u-boot-ti-staging = "2015.07%"
+PREFERRED_VERSION_u-boot-ti-staging = "2016.05%"
 
 # Pin down udev version from oe-core, as meta-oe pulls in newer systemd-enhanced version
 PREFERRED_VERSION_eudev = "3.1.5"
