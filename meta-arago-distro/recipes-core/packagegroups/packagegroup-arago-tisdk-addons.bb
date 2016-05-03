@@ -21,7 +21,7 @@ UTILS = " \
     openssh-sftp-server \
     ptpd \
     libdrm-kms \
-    ${@base_contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
+    ${@bb.utils.contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
     stream \
 "
 

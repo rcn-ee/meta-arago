@@ -47,7 +47,7 @@ ARAGO_TI_TEST_append_ti43x = " \
     omapconf \
     "
 
-#    ${@base_contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)}
+#    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)}
 ARAGO_TI_TEST_append_omap-a15 = " \
     omapconf \
     ti-ipc-test \

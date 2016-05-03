@@ -17,6 +17,6 @@ GRAPHICS_RDEPENDS = "\
 "
 
 RDEPENDS_${PN} = "\
-    ${@base_contains('DISTRO_FEATURES', 'wayland', "${GRAPHICS_WESTON}", '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', "${GRAPHICS_WESTON}", '', d)} \
     ${GRAPHICS_RDEPENDS} \
 "

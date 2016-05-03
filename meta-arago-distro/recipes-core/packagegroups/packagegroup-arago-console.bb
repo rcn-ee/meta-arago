@@ -54,7 +54,7 @@ ARAGO_UTILS = "\
     iproute2 \
     iproute2-tc \
     strace \
-    ${@base_contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
     "
 
 # ARAGO_UTILS - ltrace fails with __cxa_demangle for now
@@ -71,8 +71,8 @@ ARAGO_SDK_PREREQ = "\
     "
 
 ARAGO_CONSOLE = "\
-    ${@base_contains('MACHINE_FEATURES', 'alsa', '${ARAGO_ALSA_EXTRA}', '',d)} \
-    ${@base_contains('DISTRO_FEATURES', 'wayland', '', '${ARAGO_TSLIB}', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', '${ARAGO_ALSA_EXTRA}', '',d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', '${ARAGO_TSLIB}', d)} \
     ${ARAGO_NCURSES} \
     ${ARAGO_FSTOOLS} \
     ${ARAGO_UTILS} \
