@@ -1,0 +1,40 @@
+From 79b7c204cafc2c96716b8e91093f135656820e16 Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Thu, 5 May 2016 08:35:34 -0400
+Subject: [PATCH] float_compute, matmpy: Link with libdl to resolve linking
+ error
+
+* with GCC 5.3 toolchain, linking with libgomp also requires linking
+  with libdl
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ examples/float_compute/Makefile | 2 +-
+ examples/matmpy/Makefile        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/examples/float_compute/Makefile b/examples/float_compute/Makefile
+index cb129f3..5514e0e 100644
+--- a/examples/float_compute/Makefile
++++ b/examples/float_compute/Makefile
+@@ -5,4 +5,4 @@ CLOCL_FLAGS =
+ include ../make.inc
+ 
+ $(EXE): main.o dsp_compute.out
+-	@$(CPP) $(CPP_FLAGS) main.o $(LD_FLAGS) $(LIBS) -o $@ -lrt
++	@$(CPP) $(CPP_FLAGS) main.o $(LD_FLAGS) $(LIBS) -o $@ -lrt -ldl
+diff --git a/examples/matmpy/Makefile b/examples/matmpy/Makefile
+index 9b20091..f9e6112 100644
+--- a/examples/matmpy/Makefile
++++ b/examples/matmpy/Makefile
+@@ -6,6 +6,6 @@ CLOCL_FLAGS =
+ include ../make.inc
+ 
+ $(EXE): main.o kernel.out
+-	@$(CPP) $(CPP_FLAGS) main.o $(LD_FLAGS) $(LIBS) -lrt -lgomp -o $@
++	@$(CPP) $(CPP_FLAGS) main.o $(LD_FLAGS) $(LIBS) -lrt -lgomp -ldl -o $@
+ 
+ kernel.out: ccode.obj 
+-- 
+1.9.1
+

@@ -4,7 +4,9 @@ LICENSE = "BSD"
 
 include ocl.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
+
+SRC_URI_append = " file://0001-float_compute-matmpy-Link-with-libdl-to-resolve-link.patch;pnum=2"
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
