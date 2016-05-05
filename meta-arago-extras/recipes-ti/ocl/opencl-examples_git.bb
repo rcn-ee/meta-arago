@@ -28,6 +28,7 @@ OCL_EXAMPLE_LIST = " buffer \
                      simple \
                      vecadd \
                      matmpy \
+                     monte_carlo \
                      ooo_callback \
                      edmamgr \
                      sgemm \
