@@ -13,10 +13,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PACKAGES += " ${PN}-runtime"
 
-#            cmem
 DEPENDS = " ocl-gl-headers \
             opencl-monitor \
             cmake-native \
+            cmem \
             ti-llvm3.6 \
             ti-llvm3.6-native \
             binutils \

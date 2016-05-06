@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r48"
+PR = "r49"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -58,31 +58,31 @@ UTILS_append_am180x-evm = " ti-pru-sw-examples"
 
 UTILS_append_omap3 = " canutils"
 
-#                        opencl-examples
 UTILS_append_dra7xx = " canutils \
                         dsptop \
                         gdbc6x \
                         glsdk-example-apps \
+                        opencl-examples \
 "
 
 UTILS_append_keystone = " \
     ti-ipc-rtos-fw \
 "
 
-#    opencl-examples
 UTILS_append_k2hk-evm = " \
+    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
-#    opencl-examples
 UTILS_append_k2l-evm = " \
+    opencl-examples \
     gdbc6x \
     dsptop \
 "
 
-#    opencl-examples
 UTILS_append_k2e-evm = " \
+    opencl-examples \
     gdbc6x \
     dsptop \
 "
@@ -90,7 +90,7 @@ UTILS_append_k2e-evm = " \
 UTILS_append_k2g-evm = " canutils"
 
 EXTRA_LIBS = ""
-#EXTRA_LIBS_append_omap-a15 = " cmem"
+EXTRA_LIBS_append_omap-a15 = " cmem"
 
 DEVTOOLS = " \
     packagegroup-core-buildessential \
@@ -103,27 +103,27 @@ EXTRA_PACKAGES = " \
     nodejs-npm \
     protobuf \
 "
-#EXTRA_PACKAGES_append_dra7xx = " \
-#    opencl-staticdev \
-#    opencl-examples-dev \
-#    openmpacc-examples-dev \
-#"
-#    linalg-examples
-#EXTRA_PACKAGES_append_k2hk-evm = " \
-#    opencl-staticdev \
-#    opencl-examples-dev \
-#    openmpacc-examples-dev \
-#"
-#EXTRA_PACKAGES_append_k2l-evm = " \
-#    opencl-staticdev \
-#    opencl-examples-dev \
-#    openmpacc-examples-dev \
-#"
-#EXTRA_PACKAGES_append_k2e-evm = " \
-#    opencl-staticdev \
-#    opencl-examples-dev \
-#    openmpacc-examples-dev \
-#"
+EXTRA_PACKAGES_append_dra7xx = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+    openmpacc-examples-dev \
+"
+EXTRA_PACKAGES_append_k2hk-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+    openmpacc-examples-dev \
+    linalg-examples \
+"
+EXTRA_PACKAGES_append_k2l-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+    openmpacc-examples-dev \
+"
+EXTRA_PACKAGES_append_k2e-evm = " \
+    opencl-staticdev \
+    opencl-examples-dev \
+    openmpacc-examples-dev \
+"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \

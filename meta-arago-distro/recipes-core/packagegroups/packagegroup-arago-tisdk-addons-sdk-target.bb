@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r30"
+PR = "r31"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,20 +28,12 @@ TI_SECURE_STORAGE_DEV = "\
 	libp11-staticdev \
 	"
 
-#	cmem-dev
-#	cmem-staticdev
-#	multiprocmgr-dev
-#	multiprocmgr-staticdev
-#	mpm-transport-dev
-#	mpm-transport-staticdev
-#	qmss-lld-dev
-#	qmss-lld-staticdev
-#	ipc-transport-qmss-dev
-#	ipc-transport-qmss-staticdev
 #	ipsecmgr-dev
 #	ipsecmgr-staticdev
 EXTRA_LIBS_append_keystone = "\
 	${TI_SECURE_STORAGE_DEV} \
+	cmem-dev \
+	cmem-staticdev \
 	udma-dev \
 	udma-staticdev \
 	traceframework-dev \
@@ -51,6 +43,8 @@ EXTRA_LIBS_append_keystone = "\
 	common-csl-ip-dev \
 	cppi-lld-dev \
 	cppi-lld-staticdev \
+	qmss-lld-dev \
+	qmss-lld-staticdev \
 	pa-lld-dev \
 	pa-lld-staticdev \
 	rm-lld-dev \
@@ -65,10 +59,16 @@ EXTRA_LIBS_append_keystone = "\
 	libnl-staticdev \
 	ti-ipc-dev \
 	ti-ipc-staticdev \
+	multiprocmgr-dev \
+	multiprocmgr-staticdev \
+	mpm-transport-dev \
+	mpm-transport-staticdev \
 	edma3-lld-dev \
 	edma3-lld-staticdev \
 	lksctp-tools-dev \
 	lksctp-tools-staticdev \
+	ipc-transport-qmss-dev \
+	ipc-transport-qmss-staticdev \
 	"
 
 #	netapi-dev
@@ -84,13 +84,13 @@ EXTRA_LIBS_append_k2l-evm = "\
 	nwal-lld-staticdev \
 	"
 
-#	srio-lld-dev
-#	srio-lld-staticdev
-#	ipc-transport-srio-dev
-#	ipc-transport-srio-staticdev
 #	netapi-dev
 #	netapi-staticdev
 EXTRA_LIBS_append_k2hk-evm = "\
+	srio-lld-dev \
+	srio-lld-staticdev \
+	ipc-transport-srio-dev \
+	ipc-transport-srio-staticdev \
 	mmap-lld \
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
@@ -119,27 +119,26 @@ EXTRA_LIBS_append_k2e-evm = "\
 UTILS_append_omap3 = " canutils-dev"
 UTILS_append_ti33x = " canutils-dev"
 UTILS_append_ti43x = " canutils-dev"
-
-#                        opencl-staticdev
-#                        openmpacc-dev
 UTILS_append_dra7xx = " canutils-dev \
+                        opencl-staticdev \
                         elfutils-dev \
                         elfutils-staticdev \
+                        openmpacc-dev \
 "
-#                          linalg-dev
-#UTILS_append_k2hk-evm = " opencl-staticdev \
-#                          openmpacc-dev \
-#"
-#UTILS_append_k2l-evm = " opencl-staticdev \
-#                         openmpacc-dev \
-#"
-#UTILS_append_k2e-evm = " opencl-staticdev \
-#                         openmpacc-dev \
-#"
+UTILS_append_k2hk-evm = " opencl-staticdev \
+                          openmpacc-dev \
+                          linalg-dev \
+"
+UTILS_append_k2l-evm = " opencl-staticdev \
+                         openmpacc-dev \
+"
+UTILS_append_k2e-evm = " opencl-staticdev \
+                         openmpacc-dev \
+"
 UTILS_append_k2g-evm = " canutils-dev"
 
 EXTRA_LIBS = ""
-#EXTRA_LIBS_append_omap-a15 = " cmem-dev"
+EXTRA_LIBS_append_omap-a15 = " cmem-dev"
 EXTRA_LIBS_append_dra7xx = " libulm-dev \
                              libulm-staticdev \
                              gdbserver-c6x-dev \

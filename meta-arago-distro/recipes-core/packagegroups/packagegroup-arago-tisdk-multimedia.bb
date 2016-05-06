@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r18"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -26,9 +26,9 @@ MULTIMEDIA_append_omap-a15 = " \
     amsdk-av-files \
 "
 
-#    qt-opencv-opencl-opengl-multithreaded-dev
 MULTIMEDIA_append_dra7xx = " \
     hevc-arm-decoder \
+    qt-opencv-opencl-opengl-multithreaded-dev \
 "
 
 MULTIMEDIA_append_am37x-evm = " \

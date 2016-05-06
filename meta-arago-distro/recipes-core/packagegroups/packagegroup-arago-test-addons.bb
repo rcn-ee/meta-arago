@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to install additional utilities/demos for test image"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r8"
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -14,16 +14,15 @@ TEST_ADDONS = " \
     strongswan \
     "
 
-#TEST_ADDONS_TI = " \
-#    cmem-test \
-#    "
+TEST_ADDONS_TI = " \
+    cmem-test \
+    "
 
-#    mpm-transport-test
-#    multiprocmgr-test
-#    qmss-lld-test
-#    mpm-transport-test
 #    ipsecmgr
 TEST_ADDONS_TI_append_keystone = " \
+    mpm-transport-test \
+    multiprocmgr-test \
+    qmss-lld-test \
     pa-lld-test \
     cppi-lld-test \
     edma3-lld-test \
@@ -42,11 +41,11 @@ TEST_ADDONS_TI_append_keystone = " \
 #    ipc-transport-qmss-test
 #    netapi-test
 
-#    srio-lld-test
-#    ipc-transport-srio-test
-#    ipc-transport-qmss-test
 #    netapi-test
 TEST_ADDONS_TI_append_k2hk-evm = " \
+    srio-lld-test \
+    ipc-transport-srio-test \
+    ipc-transport-qmss-test \
     hyplnk-lld-test \
     mmap-lld-test \
     aif2-lld-test \
@@ -55,7 +54,6 @@ TEST_ADDONS_TI_append_k2hk-evm = " \
     nwal-lld \
     "
 
-#    ipc-transport-qmss-test
 #    netapi-test
 TEST_ADDONS_TI_append_k2l-evm = " \
     dfe-lld-test \
@@ -63,9 +61,9 @@ TEST_ADDONS_TI_append_k2l-evm = " \
     nwal-lld-test \
     hplib-test \
     nwal-lld \
+    ipc-transport-qmss-test \
     "
 
-#    ipc-transport-qmss-test
 #    netapi-test
 TEST_ADDONS_TI_append_k2e-evm = " \
     mmap-lld-test \
@@ -73,6 +71,7 @@ TEST_ADDONS_TI_append_k2e-evm = " \
     nwal-lld-test \
     hplib-test \
     nwal-lld \
+    ipc-transport-qmss-test \
     "
 
 RDEPENDS_${PN} = "\

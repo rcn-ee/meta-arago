@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r10"
+PR = "r11"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -81,11 +81,6 @@ ARAGO_SECURE_STORAGE = "\
     engine-pkcs11 \
     "
 
-#    cmem-mod
-#    cmem
-#    mpm-transport
-#    multiprocmgr
-#    qmss-lld
 #    ipsecmgr-mod
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
@@ -97,10 +92,15 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     cuia \
     edma3-lld \
     srss-tc \
+    cmem \
+    cmem-mod \
     ti-ipc \
+    mpm-transport \
+    multiprocmgr \
     rm-lld \
     demo-image-proc \
     pa-lld \
+    qmss-lld \
     hplib-mod \
     pktlib \
     cppi-lld \
@@ -123,10 +123,10 @@ ARAGO_TI_PKGS_append_k2l-evm = "\
     nwal-lld \
     "
 
-#    srio-lld
 #    netapi
 #    netapi-test
 ARAGO_TI_PKGS_append_k2hk-evm = "\
+    srio-lld \
     mmap-lld \
     hyplnk-lld \
     aif2-lld \
