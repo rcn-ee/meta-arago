@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.7"
+PR = "${INC_PR}.8"
 
 S = "${WORKDIR}/git/3d_apps"
 
@@ -64,7 +64,8 @@ RDEPENDS_matrix-3d-demo-vase      = "${3D_DEMOS_RDEPENDS}"
 RDEPENDS_matrix-3d-demo-navigation    = "${3D_DEMOS_RDEPENDS}"
 RDEPENDS_matrix-3d-demo-exampleui     = "${3D_DEMOS_RDEPENDS}"
 RDEPENDS_matrix-3d-demo-kmscube       = "${3D_DEMOS_RDEPENDS_MATRIX} kmscube"
-RDEPENDS_matrix-3d-demo-kmscubevideo  = "${3D_DEMOS_RDEPENDS_MATRIX} omapdrmtest"
+#RDEPENDS_matrix-3d-demo-kmscubevideo  = "${3D_DEMOS_RDEPENDS_MATRIX} omapdrmtest"
+RDEPENDS_matrix-3d-demo-kmscubevideo  = "${3D_DEMOS_RDEPENDS_MATRIX}"
 
 # Split the matrix files by 3d demos
 FILES_matrix-3d-demo-chameleon = "${MATRIX_APP_DIR}/3d_chameleon/*"
