@@ -6,11 +6,11 @@
 # hence this file is mostly empty and used as a template
 
 # Auto rev important packages to pick up latest
-#SRCREV_pn-linux-ti-staging = "${AUTOREV}"
-#SRCREV_pn-linux-ti-staging-rt = "${AUTOREV}"
-#SRCREV_pn-linux-ti-staging-systest = "${AUTOREV}"
-#SRCREV_pn-u-boot-ti-staging = "${AUTOREV}"
-#SRCREV_pn-ltp-ddt = "${AUTOREV}"
+SRCREV_pn-linux-ti-staging = "${AUTOREV}"
+SRCREV_pn-linux-ti-staging-rt = "${AUTOREV}"
+SRCREV_pn-linux-ti-staging-systest = "${AUTOREV}"
+SRCREV_pn-u-boot-ti-staging = "${AUTOREV}"
+SRCREV_pn-ltp-ddt = "${AUTOREV}"
 
 # Lower opencl-monitor priority for now
 ALTERNATIVE_PRIORITY_pn-opencl-monitor = "1"
