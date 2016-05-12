@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r41"
+PR = "r42"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -30,6 +30,7 @@ ARAGO_TEST = "\
     kselftests \
     cpuset \
     procps \
+    mtd-utils-ubifs-tests \
     "
 
 ARAGO_TI_TEST = "\
