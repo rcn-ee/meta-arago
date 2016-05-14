@@ -63,9 +63,8 @@ case "$1" in
         # Check if SD card has a calibration rules file
         SD_CALUDEV_FILE=/run/media/mmcblk0p1/ws-calibrate.rules
         if [ "$SD_MOUNTED" = "1" -a -f "$SD_CALUDEV_FILE" ] ; then
-            # Copy it over to udev location, and done
+            # Copy it over to udev location
             cp "$SD_CALUDEV_FILE" "$WS_CALUDEV_FILE"
-            exit 0
         else
             # Run a calibration app and save output to udev rules
             echo    "Calibrating touchscreen (first time only)"
