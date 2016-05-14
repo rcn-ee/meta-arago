@@ -5,7 +5,7 @@
 
 SRCREV = "7e9f28bedc1ed3205fb5164f686aea96f27a0de2"
 
-PR_append = "-arago0"
+PR_append = ".arago0"
 
 CFLAGS += "-I${S}/include"
 

@@ -1,4 +1,4 @@
-PR_append = "-arago3"
+PR_append = ".arago3"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 DEPENDS_remove = "gmp"

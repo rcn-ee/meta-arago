@@ -11,4 +11,4 @@
 # This package requires TSU exemption. Any update to the version of dropbear being
 # appended must be double checked to see if a new TSU exemption must be made.
 
-PR_append = "-arago1"
+PR_append = ".arago1"

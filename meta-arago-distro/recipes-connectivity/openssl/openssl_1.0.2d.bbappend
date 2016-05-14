@@ -10,7 +10,7 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago0"
+PR_append = ".arago0"
 
 DEPENDS += "cryptodev-linux"
 RDEPENDS_${PN}_class-target += "cryptodev-module"

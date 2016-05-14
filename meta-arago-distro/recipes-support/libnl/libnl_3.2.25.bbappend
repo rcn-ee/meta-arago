@@ -1,4 +1,4 @@
-PR_append = "-arago0"
+PR_append = ".arago0"
 
 do_install_append() {
 #   Install private files to allow libnl extensions

@@ -7,4 +7,4 @@ SRC_URI += " \
 	file://0001-Return-non-zero-value-on-test-failure.patch \
 	file://0002-cpuidle-Avoid-relative-paths.patch"
 
-PR_append = "-arago0"
+PR_append = ".arago0"

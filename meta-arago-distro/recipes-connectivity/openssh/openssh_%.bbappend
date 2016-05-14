@@ -10,4 +10,4 @@
 # openssh-6.1p1
 # openssh-6.2p2
 
-PR_append = "-arago0"
+PR_append = ".arago0"

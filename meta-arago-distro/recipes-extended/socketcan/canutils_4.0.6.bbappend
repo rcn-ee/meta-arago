@@ -5,4 +5,4 @@ TAG = "bab595e38295dcafcfc17a011d3d51f2df1618e6"
 # Set the PV to 4.0.6 plus the commit id
 PV = "4.0.6+gitr${SRCPV}"
 
-PR_append = "-arago0"
+PR_append = ".arago0"
