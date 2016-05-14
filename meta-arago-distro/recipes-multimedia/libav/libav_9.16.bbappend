@@ -1,4 +1,4 @@
-PR_append = "-arago0"
+PR_append = ".arago0"
 
 PACKAGECONFIG := "${@oe_filter_out('x264','${PACKAGECONFIG}', d)}"
 LICENSE_FLAGS = ""

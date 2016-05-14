@@ -1,7 +1,7 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago3"
+PR_append = ".arago3"
 
 # Update which portion of the psplash.h file to use as a checksum. This tweak
 # has already been done in oe-core master

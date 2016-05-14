@@ -5,7 +5,7 @@
 # look for files in this layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = "-arago5"
+PR_append = ".arago5"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

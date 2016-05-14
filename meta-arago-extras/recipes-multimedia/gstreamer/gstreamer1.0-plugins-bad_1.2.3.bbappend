@@ -39,4 +39,4 @@ SRCREV = "3a7dce1011d2ad002f9341c8f0be2e409d73ea7b"
 SRCREV_ti43x = "a536c9e8d9cfaf47759dc194449a1887e0aee15d"
 SRCREV_ti33x = "a536c9e8d9cfaf47759dc194449a1887e0aee15d"
 
-PR_append = "-arago10"
+PR_append = ".arago10"

@@ -1,4 +1,4 @@
-PR_append = "-arago2"
+PR_append = ".arago2"
 
 # Add apps/obex_test for testing
 do_configure_prepend() {
