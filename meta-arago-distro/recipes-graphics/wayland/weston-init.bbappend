@@ -1,4 +1,4 @@
-PR_append = ".arago6"
+PR_append = ".arago7"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
@@ -9,4 +9,7 @@ SRC_URI_append = " \
 do_install_append() {
     install -d ${D}${bindir}
     install -m 755 ${WORKDIR}/runWeston ${D}${bindir}
+    rm -rf ${D}${systemd_system_unitdir}
 }
+
+SYSTEMD_SERVICE_${PN} = ""
