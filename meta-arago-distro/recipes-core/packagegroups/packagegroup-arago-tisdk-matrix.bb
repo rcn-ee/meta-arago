@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r56"
+PR = "r57"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -27,95 +27,67 @@ MATRIX_COMMON_APPS = "              \
     matrix-gui-submenus-ethernet    \
 "
 
-MATRIX_QT_APPS = "                  \
-    ${@base_conditional('QT_PROVIDER', 'qt5', 'matrix-gui-qt5-demos', 'matrix-gui-qt4-demos', d)} \
-    ${@base_conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','matrix-gui-apps-quick-playground','', d)} \
-"
-#    matrix-gui-thermostat-demo      
-
-MATRIX_SGX_DEMOS = "                \
-    matrix-3d-demo-chameleon        \
-    matrix-3d-demo-film             \
-    matrix-3d-demo-lantern          \
-    matrix-3d-demo-skull            \
-"
-
-MATRIX_SGX_DEMOS_omap-a15 = " \
-    matrix-3d-demo-chameleon \
-    matrix-3d-demo-coverflow \
-    matrix-3d-demo-navigation \
-    matrix-3d-demo-exampleui \
-    matrix-3d-demo-kmscube \
-    matrix-3d-demo-kmscubevideo \
-"
-
-MATRIX_SGX_DEMOS_ti43x = " \
-    matrix-3d-demo-chameleon \
-    matrix-3d-demo-coverflow \
-    matrix-3d-demo-navigation \
-    matrix-3d-demo-exampleui \
-    matrix-3d-demo-kmscube \
-"
-
-MATRIX_SGX_DEMOS_ti33x = " \
-    matrix-3d-demo-chameleon \
-    matrix-3d-demo-coverflow \
-    matrix-3d-demo-navigation \
-    matrix-3d-demo-exampleui \
-    matrix-3d-demo-kmscube \
+#    matrix-gui-thermostat-demo
+MATRIX_QT_APPS = " \
+    matrix-gui-qt5-demos \
 "
 
 MATRIX_QT_APPS_keystone = ""
 
-MATRIX_APPS = ""
-
-MATRIX_APPS_append_omap3 = "        \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
-    matrix-multimedia-demo-aac \
-    matrix-multimedia-demo-h264dec      \
-    matrix-multimedia-demo-mpeg4aacdec   \
-    matrix-multimedia-demo-mpeg4dec     \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'ts-calibrate-init', d)} \
+MATRIX_SGX_DEMOS = " \
+    matrix-3d-demo-chameleon \
+    matrix-3d-demo-coverflow \
+    matrix-3d-demo-navigation \
+    matrix-3d-demo-exampleui \
+    matrix-3d-demo-kmscube \
 "
 
+MATRIX_SGX_DEMOS_append_omap-a15 = " \
+    matrix-3d-demo-kmscubevideo \
+"
+
+MATRIX_OPENCL_APPS = " \
+    matrix-opencl-demo-floatcompute  \
+    matrix-opencl-demo-vecadd        \
+"
+
+MATRIX_OPENCL_APPS_append_dra7xx = " \
+    ${@bb.utils.contains('MACHINE_FEATURES','opencl','matrix-video-analytics-opencv-opencl-opengl-demo','',d)} \
+"
+
+MATRIX_APPS = ""
+
 MATRIX_APPS_append_ti33x = "        \
-    matrix-gui-ethernet-demos       \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
-    matrix-multimedia-demo-aac \
+    matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-audiocapture \
-    matrix-multimedia-demo-h264dec      \
-    matrix-multimedia-demo-mpeg4aacdec   \
-    matrix-multimedia-demo-mpeg4dec     \
+    matrix-multimedia-demo-h264dec  \
+    matrix-multimedia-demo-mpeg4aacdec  \
+    matrix-multimedia-demo-mpeg4dec \
                                     \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
                                     \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'ts-calibrate-init', d)} \
+    matrix-gui-ethernet-demos       \
 "
 
 MATRIX_APPS_append_ti43x = "        \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
-                                    \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-h264dec  \
     matrix-multimedia-demo-mpeg4aacdec \
     matrix-multimedia-demo-mpeg4dec \
                                     \
-                                    \
     matrix-gui-generic-pm           \
     matrix-gui-pm-demos-suspend     \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
+                                    \
     matrix-gui-apps-dual-camera     \
     matrix-gui-apps-image-gallery   \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'ts-calibrate-init', d)} \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','${MATRIX_SGX_DEMOS}','',d)} \
-                                    \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-h265dec  \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264dec','matrix-multimedia-demo-h264dec',d)} \
@@ -129,67 +101,17 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-gui-pm-demos-governor    \
 "
 
-MATRIX_APPS_append_dra7xx = "        \
-    matrix-opencl-demo-floatcompute  \
-    matrix-opencl-demo-vecadd        \
-    matrix-video-analytics-opencv-opencl-opengl-demo \
-"
-
-MATRIX_APPS_append_beagleboard = "  \
-    matrix-gui-display-control      \
-"
-
-MATRIX_APPS_append_am3517-evm = "   \
-    matrix-gui-v4l2-demos           \
-"
-
-MATRIX_APPS_append_am37x-evm = "    \
-                                    \
-    matrix-gui-generic-pm           \
-    matrix-gui-pm-demos-count       \
-    matrix-gui-pm-demos-dump-reg    \
-    matrix-gui-pm-demos-snapshot1   \
-    matrix-gui-pm-demos-snapshot2   \
-    matrix-gui-pm-demos-suspend     \
-                                    \
-    matrix-gui-display-control      \
-    matrix-gui-camera-loopback      \
-    matrix-gui-v4l2-demos           \
-    matrix-gui-display-control      \
-    matrix-gui-clocks               \
-                                    \
-                                    \
-    matrix-multimedia-demo-audiocapture \
-"
-
-MATRIX_APPS_append_am180x-evm = "   \
-    matrix-gui-pru-demos            \
-"
-
 MATRIX_APPS_append_keystone = " \
     matrix-gui-utility-demos    \
     matrix-mc-demo-ipc          \
-"
-
-MATRIX_APPS_append_k2hk-evm = "      \
-    matrix-opencl-demo-floatcompute  \
-    matrix-opencl-demo-vecadd        \
-"
-
-MATRIX_APPS_append_k2l-evm = "       \
-    matrix-opencl-demo-floatcompute  \
-    matrix-opencl-demo-vecadd        \
-"
-
-MATRIX_APPS_append_k2e-evm = "       \
-    matrix-opencl-demo-floatcompute  \
-    matrix-opencl-demo-vecadd        \
 "
 
 RDEPENDS_${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
     ${MATRIX_GUI}         \
     ${MATRIX_COMMON_APPS} \
-    ${MATRIX_QT_APPS} \
+    ${MATRIX_QT_APPS}     \
     ${MATRIX_APPS}        \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx',"${MATRIX_SGX_DEMOS}",'',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','opencl',"${MATRIX_OPENCL_APPS}",'',d)} \
 "

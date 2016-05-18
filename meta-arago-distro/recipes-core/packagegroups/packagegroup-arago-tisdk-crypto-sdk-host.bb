@@ -17,13 +17,6 @@ CRYPTO_RDEPENDS_append_ti43x = " cryptodev-module-src"
 CRYPTO_RDEPENDS_append_dra7xx = " cryptodev-module-src"
 CRYPTO_RDEPENDS_append_keystone = " cryptodev-module-src"
 
-CRYPTO_RDEPENDS_append_am37x-evm = "\
-    ti-ocf-crypto-module-src \
-"
-
-CRYPTO_RDEPENDS_append_am3517-evm = "\
-    ti-ocf-crypto-module-src \
-"
 RDEPENDS_${PN} = "\
     ${CRYPTO_RDEPENDS} \
 "
