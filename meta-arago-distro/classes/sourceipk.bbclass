@@ -128,7 +128,9 @@ limit_git_history() {
 
     remote=`get_remote $PWD`
 
-    git clone --depth ${SRCIPK_SHALLOW_DEPTH} --branch ${BRANCH} file://$remote $gitshallowclone
+    # Clone a shallow version of the workdir repo so that the preserved git
+    # points to the commit used in the build.
+    git clone --depth ${SRCIPK_SHALLOW_DEPTH} --branch ${BRANCH} file://$PWD/.git $gitshallowclone
 
     # remove original kernel clone since we will replace it with the shallow
     # clone
@@ -137,6 +139,16 @@ limit_git_history() {
     # replace the original kernel git data with the shallow clone git data
     mv $gitshallowclone/.git $tmp_dir/${SRCIPK_INSTALL_DIR}/
     rm -rf $gitshallowclone
+
+    # Remove the local remote
+    git remote rm origin
+
+    # This is forceful, but unfortuantely, removing the origin remote does not
+    # remove all origin refs, and that causes problems.
+    rm -rf ./.git/refs/remotes/origin
+
+    # Point remote back to upstream
+    git remote add origin $remote
 
     cd -
 }
@@ -148,30 +160,14 @@ adjust_git() {
 
     if [ -d ".git" ]
     then
-        # Get the location of the local repository
-        local_repo=`get_remote $PWD`
-
-        if [ -d $local_repo -a "${SRCIPK_PRESERVE_GIT}" = "true" ]
+        if [ "${SRCIPK_PRESERVE_GIT}" = "true" ]
         then
-            cd $local_repo
-
             # If SRCIPK_SHALLOW_CLONE is true then make a shallow copy of the
             # git repository and then fix up the git URLs
             if [ "${SRCIPK_SHALLOW_CLONE}" == "true" ]
             then
                 limit_git_history
             fi
-
-            # Grab actual url used to create the repository
-            remote_repo=`get_remote $PWD`
-
-            cd -
-
-            # Some crazy reason I need to add these two lines when doing a
-            # shallow copy. Otherwise, I had problems where git fetch wasn't
-            # properly fetching all the commits and extra remotes.
-            git remote rm origin
-            git remote add origin $remote_repo
 
             # Repackage the repository so its a proper clone of the original
             # (remote) git repository
