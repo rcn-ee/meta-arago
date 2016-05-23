@@ -1,6 +1,6 @@
 [Match]
 Name=eth*
-ConditionKernelCommandLine=!root=/dev/nfs
+KernelCommandLine=!root=/dev/nfs
 
 [Network]
 DHCP=yes
