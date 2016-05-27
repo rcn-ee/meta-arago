@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install OpenCL/MP and related components"
 LICENSE = "MIT"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -16,6 +16,7 @@ EXTRA_PKGS = " \
     opencl-staticdev \
     opencl-examples-dev \
     openmpacc-examples-dev \
+    python-pyopencl \
 "
 
 EXTRA_PKGS_append_k2hk-evm = " \
