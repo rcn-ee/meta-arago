@@ -4,13 +4,13 @@ TOOLCHAIN_TARGET_TASK ?= "packagegroup-arago-standalone-sdk-target"
 TOOLCHAIN_SUFFIX ?= "-sdk"
 TOOLCHAIN_OUTPUTNAME ?= "${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}"
 TOOLCHAIN_CLEANUP_PACKAGES ?= ""
-SDKIMAGE_FEATURES = ""
+SDKIMAGE_FEATURES = "package-management"
 
 inherit toolchain-scripts
 
 require recipes-core/meta/meta-toolchain.bb
 
-PR = "r31"
+PR = "r32"
 
 # This function creates an environment-setup-script for use in a deployable SDK
 toolchain_create_sdk_env_script () {
