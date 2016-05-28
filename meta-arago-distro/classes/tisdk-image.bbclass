@@ -9,7 +9,8 @@ IMAGE_FEATURES ?= ""
 IMAGE_FEATURES[type] = "list"
 
 # Always add the sdk_base feature
-IMAGE_FEATURES_prepend = "sdk_base package-management"
+IMAGE_FEATURES_prepend = "sdk_base package-management "
+SDKIMAGE_FEATURES_prepend = "package-management "
 
 # Define our always included sdk package group as the IMAGE_INSTALL settings
 # like you would expect.
@@ -835,7 +836,7 @@ tisdk_image_build () {
     fi
 
     # Create the TI software manifest
-#    generate_sw_manifest
+    generate_sw_manifest
 
     # Delete installed toolchain sdk since we need the toolchain sdk installer
     # not the extracted version
