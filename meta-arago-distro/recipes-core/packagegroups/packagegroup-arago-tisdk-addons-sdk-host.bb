@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r27"
+PR = "r28"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -43,11 +43,11 @@ EXTRA_LIBS_append_dra7xx = " \
     gdbserverproxy-module-drv-src \
 "
 
-#    ipsecmgr-mod-src
 EXTRA_LIBS_append_keystone = " \
     cmem-mod-src \
     uio-module-drv-src \
     hplib-mod-src \
+    ipsecmgr-mod-src \
 "
 
 EXTRA_LIBS_append_k2hk-evm = " \

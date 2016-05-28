@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r32"
+PR = "r33"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,8 +28,6 @@ TI_SECURE_STORAGE_DEV = "\
 	libp11-staticdev \
 	"
 
-#	ipsecmgr-dev
-#	ipsecmgr-staticdev
 EXTRA_LIBS_append_keystone = "\
 	${TI_SECURE_STORAGE_DEV} \
 	cmem-dev \
@@ -69,23 +67,23 @@ EXTRA_LIBS_append_keystone = "\
 	lksctp-tools-staticdev \
 	ipc-transport-qmss-dev \
 	ipc-transport-qmss-staticdev \
+	ipsecmgr-dev \
+	ipsecmgr-staticdev \
 	"
 
-#	netapi-dev
-#	netapi-staticdev
 EXTRA_LIBS_append_k2l-evm = "\
 	dfe-lld-dev \
 	dfe-lld-staticdev \
 	iqn2-lld-dev \
 	iqn2-lld-staticdev \
+	netapi-dev \
+	netapi-staticdev \
 	hplib-dev \
 	hplib-staticdev \
 	nwal-lld-dev \
 	nwal-lld-staticdev \
 	"
 
-#	netapi-dev
-#	netapi-staticdev
 EXTRA_LIBS_append_k2hk-evm = "\
 	srio-lld-dev \
 	srio-lld-staticdev \
@@ -95,6 +93,8 @@ EXTRA_LIBS_append_k2hk-evm = "\
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
 	hyplnk-lld-staticdev \
+	netapi-dev \
+	netapi-staticdev \
 	hplib-dev \
 	hplib-staticdev \
 	nwal-lld-dev \
@@ -103,13 +103,13 @@ EXTRA_LIBS_append_k2hk-evm = "\
 	aif2-lld-staticdev \
 	"
 
-#	netapi-dev
-#	netapi-staticdev
 EXTRA_LIBS_append_k2e-evm = "\
 	mmap-lld \
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
 	hyplnk-lld-staticdev \
+	netapi-dev \
+	netapi-staticdev \
 	hplib-dev \
 	hplib-staticdev \
 	nwal-lld-dev \

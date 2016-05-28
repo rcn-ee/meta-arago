@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to install additional utilities/demos for test image"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r9"
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -18,7 +18,6 @@ TEST_ADDONS_TI = " \
     cmem-test \
     "
 
-#    ipsecmgr
 TEST_ADDONS_TI_append_keystone = " \
     mpm-transport-test \
     multiprocmgr-test \
@@ -32,6 +31,7 @@ TEST_ADDONS_TI_append_keystone = " \
     sa-lld-test \
     traceframework-test \
     udma-test \
+    ipsecmgr \
     "
 
 # The following are not yet ready for k2g-evm
@@ -41,7 +41,6 @@ TEST_ADDONS_TI_append_keystone = " \
 #    ipc-transport-qmss-test
 #    netapi-test
 
-#    netapi-test
 TEST_ADDONS_TI_append_k2hk-evm = " \
     srio-lld-test \
     ipc-transport-srio-test \
@@ -52,9 +51,9 @@ TEST_ADDONS_TI_append_k2hk-evm = " \
     nwal-lld-test \
     hplib-test \
     nwal-lld \
+    netapi-test \
     "
 
-#    netapi-test
 TEST_ADDONS_TI_append_k2l-evm = " \
     dfe-lld-test \
     iqn2-lld-test \
@@ -62,9 +61,9 @@ TEST_ADDONS_TI_append_k2l-evm = " \
     hplib-test \
     nwal-lld \
     ipc-transport-qmss-test \
+    netapi-test \
     "
 
-#    netapi-test
 TEST_ADDONS_TI_append_k2e-evm = " \
     mmap-lld-test \
     hyplnk-lld-test \
@@ -72,6 +71,7 @@ TEST_ADDONS_TI_append_k2e-evm = " \
     hplib-test \
     nwal-lld \
     ipc-transport-qmss-test \
+    netapi-test \
     "
 
 RDEPENDS_${PN} = "\
