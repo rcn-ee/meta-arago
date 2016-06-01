@@ -360,7 +360,7 @@ EOF
 
 # Create the host side toolchain components table
 sw_manifest_toolchain_host() {
-    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/*86*-linux/var/lib/opkg"
+    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/*86*-linux/var/lib/opkg/info"
 
     sw_manifest_table_header "GPLv3 Development Host Content" "This table describes any GPLv3 software being delivered that is expected to run on a Development Host, instead of the target device."
 
