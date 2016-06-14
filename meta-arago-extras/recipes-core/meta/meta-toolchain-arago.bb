@@ -64,7 +64,7 @@ toolchain_create_sdk_env_script () {
 	echo 'export OECORE_SDK_VERSION="${SDK_VERSION}"' >> $script
 }
 
-SDK_POSTPROCESS_COMMAND += "arago_sdk_fixup; "
+SDK_POSTPROCESS_COMMAND_prepend = "arago_sdk_fixup; "
 
 arago_sdk_fixup () {
 	# Remove broken .la files
