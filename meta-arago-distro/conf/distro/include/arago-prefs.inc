@@ -1,6 +1,6 @@
 # Set *target* toolchain preferences at global distro level.
 # Cross and SDK toolchain preferences are set in toolchain-*.inc files
-GCCVERSION ?= "linaro-5.2%"
+GCCVERSION ?= "linaro-5.3%"
 BINUVERSION ?= "linaro-2.25%"
 GLIBCVERSION ?= "2.23%"
 GLIBCINITVERSION ?= "2.23%"
