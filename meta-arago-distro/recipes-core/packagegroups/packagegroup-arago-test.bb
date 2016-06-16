@@ -54,10 +54,6 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     ti-ipc-test \
     "
 
-ARAGO_TI_TEST_append_dra7xx = " \
-    vpe-tests \
-    "
-
 ARAGO_TI_TEST_append_keystone = " \
     ti-ipc-test \
     "
