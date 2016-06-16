@@ -1,24 +1,24 @@
 meta-arago-distro provides Arago distribution configuration for TI SDK products
 
-This layer works with the latest Yocto Project release (currently 1.8) and tracks
-the stable/maintenance branches (currently "fido") of the corresponding layers:
+This layer works with the latest Yocto Project release (currently 2.1+) and tracks
+the stable/maintenance branches (currently "master") of the corresponding layers:
 
 URI: git://git.openembedded.org/openembedded-core
-branch: fido
+branch: master
 revision: HEAD
 layers: meta
 
 URI: git://git.openembedded.org/meta-openembedded
-branch: fido
+branch: master
 revision: HEAD
 layers: meta-oe, toolchain-layer, meta-networking
 
 URI: git://arago-project.org/git/meta-ti
-branch: fido
+branch: master
 revision: HEAD
 
 URI: git://git.linaro.org/openembedded/meta-linaro
-branch: fido
+branch: master
 revision: HEAD
 layers: meta-linaro-toolchain
 
