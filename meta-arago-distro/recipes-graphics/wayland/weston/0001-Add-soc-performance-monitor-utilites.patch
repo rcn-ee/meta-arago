@@ -7,7 +7,7 @@ Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
  Makefile.am                       |   17 +-
  clients/Dra7xx_ddrstat_speed.c    |  494 +++++++++++++
- clients/soc_performance_monitor.c |  624 ++++++++++++++++
+ clients/soc_performance_monitor.c |  625 ++++++++++++++++
  clients/soc_performance_monitor.h |   40 ++
  clients/statcoll.c                | 1433 +++++++++++++++++++++++++++++++++++++
  clients/statcoll.h                |  152 ++++
@@ -564,7 +564,7 @@ new file mode 100644
 index 0000000..5d1db32
 --- /dev/null
 +++ b/clients/soc_performance_monitor.c
-@@ -0,0 +1,624 @@
+@@ -0,0 +1,625 @@
 +/*
 + * Copyright (C) 2016 Texas Instruments
 + * Author: Karthik Ramanan <karthik.ramanan@ti.com>
@@ -640,6 +640,7 @@ index 0000000..5d1db32
 +
 +			/* open, read, and display the message from the FIFO */
 +			bytes=read(fd, buf, MAX_BUF);
++                       buf[bytes]='\0';
 +			if(bytes > 0) 
 +			{
 +				char command[100];
