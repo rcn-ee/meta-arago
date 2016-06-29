@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r50"
+PR = "r51"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -51,6 +51,8 @@ UTILS_append_omap-a15 = " mmc-utils \
                           pru-icss \
                           strongswan \
                           ti-ipc-rtos-fw \
+                          uio-test-pruss \
+                          uio-module-drv-test \
 "
 
 UTILS_append_dra7xx = " canutils \
@@ -60,6 +62,7 @@ UTILS_append_dra7xx = " canutils \
 "
 
 UTILS_append_keystone = " \
+    uio-module-drv-test \
     ti-ipc-rtos-fw \
 "
 
@@ -81,7 +84,15 @@ UTILS_append_k2e-evm = " \
 UTILS_append_k2g-evm = " canutils"
 
 EXTRA_LIBS = ""
-EXTRA_LIBS_append_omap-a15 = " cmem"
+EXTRA_LIBS_append_omap-a15 = " \
+    cmem \
+    uio-module-drv \
+"
+
+EXTRA_LIBS_append_keystone = " \
+    cmem \
+    uio-module-drv \
+"
 
 DEVTOOLS = " \
     packagegroup-core-buildessential \
