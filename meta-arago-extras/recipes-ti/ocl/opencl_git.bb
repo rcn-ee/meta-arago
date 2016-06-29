@@ -27,6 +27,7 @@ DEPENDS = " ocl-gl-headers \
             libloki \
             pkgconfig-native \
             libulm \
+            elfutils \
 "
 
 DEPENDS_append_dra7xx   = " ti-ipc virtual/kernel"
@@ -52,7 +53,7 @@ OCL_BUILD_TARGET_k2g-evm  = "ARM_K2G"
 ENABLE_ULM = "1"
 ENABLE_ULM_k2g-evm = "0"
 
-EXTRA_OECMAKE += " -DBUILD_TARGET=${OCL_BUILD_TARGET} -DBUILD_OUTPUT=lib -DENABLE_ULM=${ENABLE_ULM}"
+EXTRA_OECMAKE += " -DBUILD_TARGET=${OCL_BUILD_TARGET} -DBUILD_OUTPUT=lib -DENABLE_ULM=${ENABLE_ULM} -DOCL_VERSION=${PV}"
 
 EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} LINUX_DEVKIT_ROOT=${STAGING_DIR_HOST}"
 export KERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
