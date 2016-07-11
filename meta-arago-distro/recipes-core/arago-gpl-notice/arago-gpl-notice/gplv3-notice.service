@@ -1,0 +1,11 @@
+[Unit]
+Description=Print notice about GPLv3 packages
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/gplv3-notice
+WorkingDirectory=/etc/init.d
+StandardOutput=tty
+
+[Install]
+WantedBy=multi-user.target
