@@ -5,16 +5,16 @@ LIC_FILES_CHKSUM = "file://dhry.h;beginline=1;endline=377;md5=8f2fbe6e071d9ea4af
 
 POSIX_SMP_GIT_URI = "git://git.ti.com/keystone-demos/posix-smp.git"
 POSIX_SMP_GIT_PROTOCOL = "git"
-POSIX_SMP_GIT_BRANCH = "sbl_prep"
+POSIX_SMP_GIT_BRANCH = "master"
 
 # Below commit ID corresponds to "DEV.POSIX-SMP.01.00.00.01"
-POSIX_SMP_SRCREV = "55d7fd4c60c9d513932a86df3df8dee0244208e0"
+POSIX_SMP_SRCREV = "ed013f29b8651d7fbc4aaf14a23c80880ee6a565"
 
 BRANCH = "${POSIX_SMP_GIT_BRANCH}"
 SRC_URI = "${POSIX_SMP_GIT_URI};protocol=${POSIX_SMP_GIT_PROTOCOL};branch=${BRANCH}"
 
 SRCREV = "${POSIX_SMP_SRCREV}"
 PV = "01.00.00.01"
-INC_PR = "r1"
+INC_PR = "r2"
 
 S = "${WORKDIR}/git"
