@@ -73,4 +73,3 @@ PREFERRED_VERSION_gstreamer1.0-libav = "1.6.3"
 PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.6.3"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad = "1.6.3"
 PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.6.3"
-
