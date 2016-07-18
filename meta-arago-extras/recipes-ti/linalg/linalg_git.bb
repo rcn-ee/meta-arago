@@ -4,9 +4,9 @@ include linalg.inc
 PR = "${INC_PR}.0"
 
 TARGET_k2hk-evm      = "SOC_K2H"
-TARGET_am57xx-evm    = "SOC_AM572x"
+TARGET_dra7xx        = "SOC_AM572x"
 MEM_MODEL_k2hk-evm   = "Large"
-MEM_MODEL_am57xx-evm = "Small"
+MEM_MODEL_dra7xx     = "Small"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 do_compile() {
