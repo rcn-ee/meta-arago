@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://src/ti/libarch/docs/LibArch_1.0.0_manifest.html;md5=b
 SRC_URI = "git://git.ti.com/library-architecture/libarch.git;protocol=git;branch=${BRANCH}"
 SRCREV = "cb6d785e95cd390c6388853a4f1e99a302e5a58f"
 
-COMPATIBLE_MACHINE = "k2hk-evm|am57xx"
+COMPATIBLE_MACHINE = "k2hk-evm|dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git"
@@ -28,5 +28,5 @@ export XDAIS_DIR = "${XDAIS_INSTALL_DIR}"
 export FC_DIR = "${FC_INSTALL_DIR}"
 export PDK_DIR = "${PDK_INSTALL_DIR}"
 
-TARGET_am57xx-evm = "SOC_AM572x"
+TARGET_dra7xx = "SOC_AM572x"
 TARGET_k2hk-evm   = "SOC_K2H"
