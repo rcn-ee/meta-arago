@@ -225,6 +225,21 @@ sourceipk_create_readme() {
     echo "      the \"patches\" directory" >> $readme
 }
 
+SRCIPK_DEPLOYSRC_DIR = "${WORKDIR}/deploy-src"
+
+SSTATETASKS += "do_create_srcipk"
+do_create_srcipk[sstate-inputdirs] = "${SRCIPK_DEPLOYSRC_DIR}"
+do_create_srcipk[sstate-outputdirs] = "${DEPLOY_DIR_IPK}"
+
+python do_create_srcipk_setscene () {
+    sstate_setscene(d)
+}
+addtask do_create_srcipk_setscene
+
+do_create_srcipk[dirs] = "${SRCIPK_DEPLOYSRC_DIR}"
+do_create_srcipk[cleandirs] = "${SRCIPK_DEPLOYSRC_DIR}"
+do_create_srcipk[umask] = "022"
+
 # Create the source ipk file.  The ipk is manually created here instead
 # of using the normal ipk system because some recipes will over write
 # the PACKAGES variable.  Thus if this class added a -src package
@@ -295,8 +310,8 @@ sourceipk_do_create_srcipk() {
         echo "2.0" > $srcipk_dir/debian-binary
 
         #Write the ipk file
-        mkdir -p ${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}
-        pkg_file=${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}/${PN}-src_${PV}-${PR}_${SRCIPK_PACKAGE_ARCH}.ipk
+        mkdir -p ${SRCIPK_DEPLOYSRC_DIR}/${SRCIPK_PACKAGE_ARCH}
+        pkg_file=${SRCIPK_DEPLOYSRC_DIR}/${SRCIPK_PACKAGE_ARCH}/${PN}-src_${PV}-${PR}_${SRCIPK_PACKAGE_ARCH}.ipk
         rm -f $pkg_file
         ( cd $srcipk_dir && ar -crf $pkg_file ./debian-binary ./control.tar.gz ./data.tar.gz )
 
