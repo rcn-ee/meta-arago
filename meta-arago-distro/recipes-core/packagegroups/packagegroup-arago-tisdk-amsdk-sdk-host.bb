@@ -1,6 +1,8 @@
 DESCRIPTION = "Task to install additional scripts and applications into the SDK"
 LICENSE = "MIT"
-PR = "r27"
+PR = "r28"
+
+PN = "packagegroup-arago-tisdk-amsdk-sdk-host${ARAGO_KERNEL_SUFFIX}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
