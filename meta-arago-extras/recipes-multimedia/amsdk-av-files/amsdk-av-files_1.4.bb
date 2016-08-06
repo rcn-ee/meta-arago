@@ -3,9 +3,9 @@ HOMEPAGE = "https://gforge.ti.com/gf/project/am_multimedia/"
 LICENSE = "CC-BY-NC-ND-3.0 & CC-BY-3.0"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://Multimedia_Data_Files_Manifest.doc;md5=da0727f80b90422138535dfffc36cd1a"
-PR = "r0"
+PR = "r1"
 
-COMPATIBLE_MACHINE = "(omap3|ti33x|ti43x|omap-a15)"
+COMPATIBLE_MACHINE = "(omap3|ti33x|ti43x|omap-a15|keystone)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 VIDEO_FILES = "video_480p "
@@ -20,6 +20,8 @@ VIDEO_FILES_append_dra7xx      = "video_wvga \
                                   video_1080p \
                                   video_720p \
                                   video_yuv"
+
+VIDEO_FILES_keystone = "video_720p "
 
 SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/1279/7769/amsdk-av-files_${PV}.tar.gz;name=avfilestarball"
 
