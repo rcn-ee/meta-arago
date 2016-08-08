@@ -1,4 +1,4 @@
-CONFIG_NAME ?= "tisdk_${MACHINE}_defconfig"
+CONFIG_NAME ?= "tisdk_${MACHINE}${ARAGO_KERNEL_SUFFIX}_defconfig"
 
 # Copy the configuration file used during the SDK build in Arago to
 # the kernel sources to be packaged into the sourceipk.  Then call
