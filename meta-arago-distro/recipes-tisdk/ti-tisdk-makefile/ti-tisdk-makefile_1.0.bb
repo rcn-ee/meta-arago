@@ -48,7 +48,7 @@ SRC_URI = "\
     file://Makefile_linalg-examples \
 "
 
-PR = "r72"
+PR = "r73"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -187,7 +187,7 @@ KERNEL_DEVICETREE_k2e-evm = "keystone-k2e-evm.dtb"
 KERNEL_DEVICETREE_k2g-evm = "keystone-k2g-evm.dtb"
 KERNEL_DEVICETREE_k2l-evm = "keystone-k2l-evm.dtb"
 
-DEFCONFIG = "tisdk_${MACHINE}_defconfig"
+DEFCONFIG = "tisdk_${MACHINE}${ARAGO_KERNEL_SUFFIX}_defconfig"
 
 AMSDK_DEFCONFIG = "singlecore-omap2plus_defconfig"
 
