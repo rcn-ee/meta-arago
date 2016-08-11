@@ -40,7 +40,7 @@ TISDK_TOOLCHAIN ?= "meta-toolchain-arago"
 TOOLCHAIN_SUFFIX ?= "-sdk"
 
 # List of the type of target file system images we want to include
-TARGET_IMAGE_TYPES ?= "tar.bz2 tar.gz ubi"
+TARGET_IMAGE_TYPES ?= "tar.xz tar.gz ubi"
 
 # If EXTRA_TISDK_FILES points to a valid directory then all the contents
 # of that directory will be added to the SDK using the same directory
@@ -411,9 +411,9 @@ sw_manifest_target() {
     for image in ${TARGET_IMAGES}
     do
         # Only extract tar.gz or tar.bz2 types
-        if [ -e ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.bz2 ]
+        if [ -e ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.xz ]
         then
-            tar xjf ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.bz2 -C ${IMAGE_ROOTFS}/filesystem --wildcards *.control
+            tar xJf ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.xz -C ${IMAGE_ROOTFS}/filesystem --wildcards *.control
         elif [ -e ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.gz ]
         then
             tar xzf ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.gz -C ${IMAGE_ROOTFS}/filesystem --wildcards *.control

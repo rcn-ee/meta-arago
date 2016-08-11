@@ -3,7 +3,8 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-IMAGE_FSTYPES = "tar.gz"
+IMAGE_FSTYPES = "tar.xz"
+IMAGE_NAME_SUFFIX = ""
 
 inherit tisdk-image
 
@@ -15,7 +16,7 @@ HOST_CLEANUP_PACKAGES = ""
 TOOLCHAIN_CLEANUP_PACKAGES = "libgnutls-dev libgnutls-extra26 libgnutls-openssl27 libtasn1-dev"
 
 # Set DTB filters for each machine.  Use "unknown" by default to avoid
-# picking up DTB files for devices with not DTB support.
+# picking up DTB files for devices with no DTB support.
 DTB_FILTER = "unknown"
 DTB_FILTER_ti33x = "am335x"
 DTB_FILTER_omap5-evm = "omap5"
