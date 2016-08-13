@@ -9,4 +9,4 @@ IMAGE_INSTALL += "\
 
 export IMAGE_BASENAME = "tisdk-server-extra-rootfs-image"
 
-IMAGE_FSTYPES = "tar.gz"
+IMAGE_FSTYPES = "tar.xz"
