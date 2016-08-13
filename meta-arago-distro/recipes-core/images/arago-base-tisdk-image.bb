@@ -4,12 +4,16 @@
 require arago-image.inc
 inherit remove-net-rules
 
+IMAGE_FSTYPES += "cpio.xz"
+
 COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|ti43x|omap4|omap-a15|keystone"
 
 IMAGE_INSTALL += "\
     packagegroup-arago-base \
     packagegroup-arago-console \
     packagegroup-arago-base-tisdk \
+    packagegroup-arago-test \
+    systemd-initramfs \
     "
 
 BAD_RECOMMENDATIONS += " \
