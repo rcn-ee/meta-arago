@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get more basic and console apps"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -51,8 +51,6 @@ ARAGO_UTILS = "\
     fbset \
     usbutils \
     i2c-tools \
-    iproute2 \
-    iproute2-tc \
     strace \
     ${@bb.utils.contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
     "

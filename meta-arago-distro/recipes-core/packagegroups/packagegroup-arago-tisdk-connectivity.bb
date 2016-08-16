@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r33"
+PR = "r34"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -10,7 +10,6 @@ inherit packagegroup
 # These are the packages that all platforms use for WLAN support
 WLAN_COMMON = "\
     wireless-tools \
-    htop \
     iw \
     softap-udhcpd-config \
     obexd \
@@ -25,7 +24,6 @@ WLAN_COMMON = "\
     hostap-daemon-wl18xx \
     ti-wifi-utils-wl18xx \
     wl18xx-target-scripts \
-    iptables \
 "
 
 # netperf has non-standard license, needs verifying
@@ -46,7 +44,12 @@ BLUETOOTH_STACK = "\
     uim \
 "
 
-CONNECTIVITY_RDEPENDS = ""
+CONNECTIVITY_RDEPENDS = " \
+    htop \
+    iptables \
+    iproute2 \
+    iproute2-tc \
+"
 
 CONNECTIVITY_RDEPENDS_ti33x = "\
     ${WLAN_COMMON} \
