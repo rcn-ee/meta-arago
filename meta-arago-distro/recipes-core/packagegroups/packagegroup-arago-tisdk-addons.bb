@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r51"
+PR = "r52"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -81,7 +81,10 @@ UTILS_append_k2e-evm = " \
     dsptop \
 "
 
-UTILS_append_k2g-evm = " canutils"
+UTILS_append_k2g-evm = " \
+    canutils \
+    pru-icss \
+"
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " \
