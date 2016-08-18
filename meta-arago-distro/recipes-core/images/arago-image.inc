@@ -3,6 +3,8 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
+COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|ti43x|omap4|omap-a15|keystone"
+
 IMAGE_FEATURES += "package-management splash"
 
 # 4KB per 1 inode should be enough
@@ -37,4 +39,13 @@ make_bootfiles_symlinks_relative() {
 
 ROOTFS_POSTPROCESS_COMMAND += "make_bootfiles_symlinks_relative;"
 
-inherit core-image
+BAD_RECOMMENDATIONS += " \
+    ti-llvm3.6-dev \
+    opencl-monitor-dev \
+    libulm-dev \
+    gdbserver-c6x-dev \
+    coreutils \
+    coreutils-dev \
+"
+
+inherit core-image remove-net-rules
