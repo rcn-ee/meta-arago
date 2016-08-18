@@ -12,8 +12,6 @@ ARAGO_IMAGE_EXTRA_INSTALL ?= ""
 
 IMAGE_INSTALL += " \
 	packagegroup-core-boot \
-	bash \
-	udev-extraconf \
 	${ARAGO_IMAGE_EXTRA_INSTALL} \
 "
 

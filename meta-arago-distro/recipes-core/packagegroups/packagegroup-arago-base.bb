@@ -1,6 +1,6 @@
 DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,6 +19,8 @@ ARAGO_BASE = "\
     initscript-telnetd \
     ethtool \
     thermal-init \
+    bash \
+    udev-extraconf \
     "
 
 # these require meta-openembedded/meta-oe layer
