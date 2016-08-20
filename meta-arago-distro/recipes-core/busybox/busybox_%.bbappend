@@ -3,4 +3,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append = " file://0001-rtcwake-Allow-poweroff-with-rtcwake-command.patch "
 
-PR_append = ".arago20"
+PR_append = ".arago21"
