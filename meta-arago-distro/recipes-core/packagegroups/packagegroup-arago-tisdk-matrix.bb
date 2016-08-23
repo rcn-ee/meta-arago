@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r59"
+PR = "r60"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -31,6 +31,11 @@ MATRIX_COMMON_APPS = "              \
 MATRIX_QT_APPS = " \
     matrix-gui-qt5-demos \
 "
+
+MATRIX_TOUCH_APPS = " \
+    matrix-gui-touch-demos \
+"
+
 
 MATRIX_QT_APPS_keystone = ""
 
@@ -117,6 +122,7 @@ RDEPENDS_${PN} = "        \
     ${MATRIX_GUI}         \
     ${MATRIX_COMMON_APPS} \
     ${MATRIX_QT_APPS}     \
+    ${MATRIX_TOUCH_APPS}  \
     ${MATRIX_APPS}        \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx',"${MATRIX_SGX_DEMOS}",'',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','opencl',"${MATRIX_OPENCL_APPS}",'',d)} \
