@@ -1,6 +1,6 @@
-From 1fcef8505e6cb8769e84c3bd3e0abd67579bcd68 Mon Sep 17 00:00:00 2001
+From 9169773b546cfea3c829b3c5e79c68c7979ceea4 Mon Sep 17 00:00:00 2001
 From: Jacob Stiffler <j-stiffler@ti.com>
-Date: Wed, 2 Sep 2015 09:55:05 -0400
+Date: Sat, 13 Aug 2016 13:27:30 -0400
 Subject: [PATCH] execute_command: workaround for GUI apps with weston
 
 * For all GUI apps, shutdown matrix before launching
@@ -10,14 +10,15 @@ Subject: [PATCH] execute_command: workaround for GUI apps with weston
   - These apps use KMS sink, which collides with weston.
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
- execute_command.sh | 34 +++++++++++++++++++++++++++++++++-
- generate.php       |  2 ++
- run_script.php     |  2 +-
+ execute_command.sh |   34 +++++++++++++++++++++++++++++++++-
+ generate.php       |    2 ++
+ run_script.php     |    2 +-
  3 files changed, 36 insertions(+), 2 deletions(-)
 
 diff --git a/execute_command.sh b/execute_command.sh
-index 018c632..86d7106 100755
+index 2be1278..b8d98a5 100755
 --- a/execute_command.sh
 +++ b/execute_command.sh
 @@ -59,7 +59,17 @@ do
@@ -47,7 +48,7 @@ index 018c632..86d7106 100755
 +then
 +  /etc/init.d/matrix-gui-2.0 stop
 +
-+  if [ $category == 3d -o $category == multimedia ]
++  if [ $category == 3d -o $category == multimedia -o $category == touch ]
 +  then
 +    /etc/init.d/weston stop
 +    sleep 1
@@ -60,7 +61,7 @@ index 018c632..86d7106 100755
  
 +if [ $program_type == gui ]
 +then
-+  if [ $category == 3d -o $category == multimedia ]
++  if [ $category == 3d -o $category == multimedia -o $category == touch ]
 +  then
 +    /etc/init.d/weston start
 +    sleep 1
@@ -99,5 +100,5 @@ index 9dd7a10..1481b17 100644
  	$last_line = system($script_command." > /dev/null 2>/dev/null & ", $retval);
  }
 -- 
-1.9.1
+1.7.9.5
 
