@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ ! -d /sys/class/thermal ]; then
+    exit 0
+fi
+
 case "$1" in
     start )
         echo "Enabling thermal zones..."
