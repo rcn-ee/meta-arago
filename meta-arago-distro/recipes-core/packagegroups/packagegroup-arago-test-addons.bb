@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to install additional utilities/demos for test image"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r11"
+PR = "r12"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,15 +11,13 @@ TEST_ADDONS = " \
     bridge-utils \
     linuxptp \
     openntpd \
-    strongswan \
     "
 
-TEST_ADDONS_TI = " \
-    cmem-test \
-    "
+TEST_ADDONS_TI = ""
 
 TEST_ADDONS_TI_append_omap-a15 = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
+    cmem-test \
     "
 
 TEST_ADDONS_TI_append_keystone = " \
@@ -36,6 +34,7 @@ TEST_ADDONS_TI_append_keystone = " \
     traceframework-test \
     udma-test \
     ipsecmgr \
+    cmem-test \
     "
 
 # The following are not yet ready for k2g-evm
