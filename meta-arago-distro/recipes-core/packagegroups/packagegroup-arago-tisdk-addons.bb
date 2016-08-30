@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r52"
+PR = "r53"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -23,6 +23,7 @@ UTILS = " \
     libdrm-kms \
     ${@bb.utils.contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
     stream \
+    strongswan \
 "
 
 UTILS_UBOOT_FW = "u-boot-fw-utils"
@@ -32,7 +33,6 @@ UTILS_append_ti33x = " mmc-utils \
                        canutils \
                        switch-config \
                        pru-icss \
-                       strongswan \
 "
 
 UTILS_append_ti43x = " mmc-utils \
@@ -40,7 +40,6 @@ UTILS_append_ti43x = " mmc-utils \
                        switch-config \
                        libdrm-omap \
                        pru-icss \
-                       strongswan \
 "
 
 UTILS_append_omap-a15 = " mmc-utils \
@@ -49,7 +48,6 @@ UTILS_append_omap-a15 = " mmc-utils \
                           libdrm-omap \
                           stream-openmp \
                           pru-icss \
-                          strongswan \
                           ti-ipc-rtos-fw \
                           uio-test-pruss \
                           uio-module-drv-test \

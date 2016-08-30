@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r13"
+PR = "r14"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -154,7 +154,6 @@ RDEPENDS_${PN} = "\
     vsftpd \
     syslog-ng \
     dtc \
-    strongswan \
     procps \
     dhcp-client \
     kexec \
