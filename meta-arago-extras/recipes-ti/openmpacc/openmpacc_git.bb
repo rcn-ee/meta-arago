@@ -2,12 +2,13 @@ DESCRIPTION = "TI OpenMP-Acc host runtime and development packages"
 
 include openmpacc.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 inherit cmake
 
 DEPENDS = "boost boost-native opencl"
 RDEPENDS_${PN} += "opencl-runtime"
+RDEPENDS_${PN}-dev += "clacc"
 
 S = "${WORKDIR}/git/host"
 
