@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r34"
+PR = "r35"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -51,7 +51,7 @@ CONNECTIVITY_RDEPENDS = " \
     iproute2-tc \
 "
 
-CONNECTIVITY_RDEPENDS_ti33x = "\
+CONNECTIVITY_RDEPENDS_append_ti33x = "\
     ${WLAN_COMMON} \
     ${DEMO_APPS} \
     ${BLUETOOTH_STACK} \
@@ -59,14 +59,14 @@ CONNECTIVITY_RDEPENDS_ti33x = "\
     bt-firmware \
 "
 
-CONNECTIVITY_RDEPENDS_ti43x = "\
+CONNECTIVITY_RDEPENDS_append_ti43x = "\
     ${WLAN_COMMON} \
     ${DEMO_APPS} \
     ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
 "
 
-CONNECTIVITY_RDEPENDS_dra7xx = "\
+CONNECTIVITY_RDEPENDS_append_dra7xx = "\
     ${WLAN_COMMON} \
     ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
