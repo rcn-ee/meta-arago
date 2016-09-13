@@ -1,0 +1,50 @@
+From 2ec4bfae82ff054847c2541f23e89d3c0033eef1 Mon Sep 17 00:00:00 2001
+From: "Andrew F. Davis" <afd@ti.com>
+Date: Fri, 9 Sep 2016 10:00:57 -0500
+Subject: [PATCH 5/5] plat-ti: Add AM572x EVM platform flavor
+
+The AM572x EVM is based on the DRA7x EVM exept that is has more memory
+and uses a different UART port. Add this EVM here.
+
+Signed-off-by: Andrew F. Davis <afd@ti.com>
+---
+ core/arch/arm/plat-ti/platform_config.h | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/core/arch/arm/plat-ti/platform_config.h b/core/arch/arm/plat-ti/platform_config.h
+index ae6ff41..9ae4232 100644
+--- a/core/arch/arm/plat-ti/platform_config.h
++++ b/core/arch/arm/plat-ti/platform_config.h
+@@ -74,6 +74,29 @@
+ #define GIC_BASE            0x48211000
+ #define SECRAM_BASE         0x40200000
+ 
++#elif defined(PLATFORM_FLAVOR_am572x_evm)
++
++#define DRAM0_BASE		0xfeb00000
++#define DRAM0_SIZE		0x01500000
++
++#ifdef CFG_WITH_PAGER
++#error Pager not supported on this platform
++#endif /*CFG_WITH_PAGER*/
++
++/* Location of protected DDR on the AM572x EVM */
++#define TZDRAM_BASE		0xfeb00000
++#define TZDRAM_SIZE		0x01300000
++
++#define CFG_TEE_CORE_NB_CORE	2
++
++/* UART3 */
++#define CONSOLE_UART_BASE		0x48020000
++#define CONSOLE_UART_CLK_IN_HZ	48000000
++#define UART_BAUDRATE			115200
++
++#define GIC_BASE            0x48211000
++#define SECRAM_BASE         0x40200000
++
+ #else
+ #error "Unknown platform flavor"
+ #endif
+-- 
+2.9.3
+
