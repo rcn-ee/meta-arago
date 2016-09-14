@@ -7,7 +7,7 @@ Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
  Makefile.am                       |   17 +-
  clients/Dra7xx_ddrstat_speed.c    |  494 +++++++++++++
- clients/soc_performance_monitor.c |  625 ++++++++++++++++
+ clients/soc_performance_monitor.c |  630 ++++++++++++++++
  clients/soc_performance_monitor.h |   40 ++
  clients/statcoll.c                | 1433 +++++++++++++++++++++++++++++++++++++
  clients/statcoll.h                |  152 ++++
@@ -564,7 +564,7 @@ new file mode 100644
 index 0000000..5d1db32
 --- /dev/null
 +++ b/clients/soc_performance_monitor.c
-@@ -0,0 +1,625 @@
+@@ -0,0 +1,630 @@
 +/*
 + * Copyright (C) 2016 Texas Instruments
 + * Author: Karthik Ramanan <karthik.ramanan@ti.com>
@@ -666,9 +666,14 @@ index 0000000..5d1db32
 +
 +					for(i=cpu_load_offset; i<cpu_load_offset+total_cpu_load_items; i++) {
 +						if(strcmp(text[i*2], field) == 0) {
-+							y[i*2+1] = atoi(value)/100.0;
-+							sprintf(text[i*2+1], " %02s%s", value,"%");
-+							printd("CPULOAD: Updating %s with %s\n", field, value);
++							if(strlen(value) <= 2) {
++								y[i*2+1] = atoi(value)/100.0;
++								sprintf(text[i*2+1], " %02s%s", value,"%");
++								printd("CPULOAD: Updating %s with %s\n", field, value);
++							}
++							else {
++								printf("Ignoring value: %s\n", value);
++							}
 +						}
 +					}
 +				}
