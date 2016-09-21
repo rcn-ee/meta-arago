@@ -74,7 +74,7 @@ UTILS_append_k2l-evm = " \
     dsptop \
 "
 
-UTILS_append_k2e-evm = " \
+UTILS_append_k2e = " \
     gdbc6x \
     dsptop \
 "
