@@ -134,7 +134,7 @@ ARAGO_TI_PKGS_append_k2hk-evm = "\
     nwal-lld \
     "
 
-ARAGO_TI_PKGS_append_k2e-evm = "\
+ARAGO_TI_PKGS_append_k2e = "\
     mmap-lld \
     hyplnk-lld \
     netapi \

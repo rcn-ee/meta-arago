@@ -35,7 +35,7 @@ DEPENDS_append_k2l-evm  = " multiprocmgr-rtos \
                             rm-lld-rtos \
 "
 
-DEPENDS_append_k2e-evm  = " multiprocmgr-rtos \
+DEPENDS_append_k2e  = " multiprocmgr-rtos \
                             qmss-lld-rtos \
                             cppi-lld-rtos \
                             rm-lld-rtos \
@@ -50,7 +50,7 @@ S_k2g-evm = "${WORKDIR}/git/monitor_vayu"
 
 BUILD_TARGET_k2hk-evm = "ARM_K2H"
 BUILD_TARGET_k2l-evm  = "ARM_K2L"
-BUILD_TARGET_k2e-evm  = "ARM_K2E"
+BUILD_TARGET_k2e  = "ARM_K2E"
 BUILD_TARGET_dra7xx   = "ARM_AM57"
 BUILD_TARGET_k2g-evm  = "ARM_K2G"
 

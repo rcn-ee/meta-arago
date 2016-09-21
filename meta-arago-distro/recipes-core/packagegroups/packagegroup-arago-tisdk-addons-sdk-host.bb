@@ -60,7 +60,7 @@ EXTRA_LIBS_append_k2l-evm = " \
     gdbserverproxy-module-drv-src \
 "
 
-EXTRA_LIBS_append_k2e-evm = " \
+EXTRA_LIBS_append_k2e = " \
     debugss-module-drv-src \
     gdbserverproxy-module-drv-src \
 "

@@ -26,7 +26,7 @@ DTB_FILTER_am57xx-hs-evm = "${DTB_FILTER_am57xx-evm}"
 DTB_FILTER_ti43x = "am43"
 DTB_FILTER_k2hk-evm = "k2hk"
 DTB_FILTER_k2l-evm = "k2l"
-DTB_FILTER_k2e-evm = "k2e"
+DTB_FILTER_k2e = "k2e"
 DTB_FILTER_k2g-evm = "k2g"
 
 # List of target side images to build for the SDK

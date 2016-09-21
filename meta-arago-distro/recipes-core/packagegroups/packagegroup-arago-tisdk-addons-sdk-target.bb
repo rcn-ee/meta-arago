@@ -103,7 +103,7 @@ EXTRA_LIBS_append_k2hk-evm = "\
 	aif2-lld-staticdev \
 	"
 
-EXTRA_LIBS_append_k2e-evm = "\
+EXTRA_LIBS_append_k2e = "\
 	mmap-lld \
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
@@ -136,7 +136,7 @@ EXTRA_LIBS_append_k2hk-evm = " libulm-staticdev \
 EXTRA_LIBS_append_k2l-evm = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
-EXTRA_LIBS_append_k2e-evm = " libulm-staticdev \
+EXTRA_LIBS_append_k2e = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
 

@@ -67,7 +67,7 @@ TEST_ADDONS_TI_append_k2l-evm = " \
     netapi-test \
     "
 
-TEST_ADDONS_TI_append_k2e-evm = " \
+TEST_ADDONS_TI_append_k2e = " \
     mmap-lld-test \
     hyplnk-lld-test \
     nwal-lld-test \
