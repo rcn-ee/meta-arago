@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago0"
+PR_append = ".arago1"
 
 is_armv7 = "1"
 
@@ -14,11 +14,11 @@ EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX}  \
 "
 
 SRC_URI += " \
-    file://optee2-0001-plat-ti-Fixed-issues-with-MMU-mapping.patch \
-    file://optee2-0002-monitor-update-to-support-platform-services.patch \
-    file://optee2-0003-plat-ti-Move-load-address-to-the-end-of-DRAM-and-inc.patch \
-    file://optee2-0004-plat-ti-Add-DRA72x-platform-flavor.patch \
-    file://optee2-0005-plat-ti-Add-AM572x-EVM-platform-flavor.patch \
+    file://0001-plat-ti-Fixed-issues-with-MMU-mapping.patch \
+    file://0002-monitor-update-to-support-platform-services.patch \
+    file://0003-plat-ti-Move-load-address-to-the-end-of-DRAM-and-inc.patch \
+    file://0004-plat-ti-Add-DRA72x-platform-flavor.patch \
+    file://0005-plat-ti-Add-AM57xx-EVM-platform-flavor.patch \
 "
 
 do_compile() {
@@ -29,7 +29,8 @@ do_compile() {
         oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=$flavor
         ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
             ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
-            mv tee.bin.signed $flavor.optee; \
+            normfl=`echo $flavor | tr "_" "-"`
+            mv tee.bin.signed $normfl.optee; \
         )
     done
 }
