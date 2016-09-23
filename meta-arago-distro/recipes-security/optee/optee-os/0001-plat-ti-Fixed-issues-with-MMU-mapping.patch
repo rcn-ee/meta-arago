@@ -1,4 +1,4 @@
-From b5bd9af7136d8ffefc732cf5602eb7927a947f2b Mon Sep 17 00:00:00 2001
+From 60914b0195e17e25c8cf7abf4a125f48699681b2 Mon Sep 17 00:00:00 2001
 From: Harinarayan Bhatta <harinarayan@ti.com>
 Date: Wed, 10 Aug 2016 11:13:53 +0530
 Subject: [PATCH 1/5] plat-ti: Fixed issues with MMU mapping

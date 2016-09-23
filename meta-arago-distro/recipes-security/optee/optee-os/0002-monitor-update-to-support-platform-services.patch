@@ -1,4 +1,4 @@
-From 0b5ff7f704573b19eae4184535045b4f8124956d Mon Sep 17 00:00:00 2001
+From 0cfabf5d6c20c8d91db026561db6c4624a1e7c3a Mon Sep 17 00:00:00 2001
 From: Daniel Allred <d-allred@ti.com>
 Date: Wed, 19 Aug 2015 16:01:26 -0500
 Subject: [PATCH 2/5] monitor: update to support platform services

@@ -1,4 +1,4 @@
-From 7f5fd58d527534aebbb10e0db96eb8575da6919f Mon Sep 17 00:00:00 2001
+From 4bcc24cc6761851b8c4d397165f7e55f99771029 Mon Sep 17 00:00:00 2001
 From: "Andrew F. Davis" <afd@ti.com>
 Date: Fri, 9 Sep 2016 08:13:48 -0500
 Subject: [PATCH 3/5] plat-ti: Move load address to the end of DRAM and
@@ -7,7 +7,7 @@ Subject: [PATCH 3/5] plat-ti: Move load address to the end of DRAM and
 The load address of OPTEE is, by default in U-Boot, the end of DRAM.
 For DRA7xx EVM this is 0xe0000000. Make this change here.
 
-We also move and expand the shared memory allocation to 2MB as suggested
+We also move and expand the shared memory allocation as suggested
 by the comment above the definition.
 
 Signed-off-by: Andrew F. Davis <afd@ti.com>
@@ -16,7 +16,7 @@ Signed-off-by: Andrew F. Davis <afd@ti.com>
  1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/core/arch/arm/plat-ti/platform_config.h b/core/arch/arm/plat-ti/platform_config.h
-index 107219f..8b52540 100644
+index 107219f..606aab3 100644
 --- a/core/arch/arm/plat-ti/platform_config.h
 +++ b/core/arch/arm/plat-ti/platform_config.h
 @@ -30,16 +30,16 @@
@@ -25,7 +25,7 @@ index 107219f..8b52540 100644
  
 -#define DRAM0_BASE		0x94C00000
 -#define DRAM0_SIZE		0x00800000
-+#define DRAM0_BASE		0xdeb00000
++#define DRAM0_BASE		0xde900000
 +#define DRAM0_SIZE		0x01500000
  
  #ifdef CFG_WITH_PAGER
@@ -35,7 +35,7 @@ index 107219f..8b52540 100644
  /* Location of protected DDR on the DRA7xx platform */
 -#define TZDRAM_BASE		0x94D00000
 -#define TZDRAM_SIZE		0x00700000
-+#define TZDRAM_BASE		0xdeb00000
++#define TZDRAM_BASE		0xde900000
 +#define TZDRAM_SIZE		0x01300000
  
  #define CFG_TEE_CORE_NB_CORE	2
@@ -47,7 +47,7 @@ index 107219f..8b52540 100644
 -#define CFG_SHMEM_START		(DRAM0_BASE)
 -#define CFG_SHMEM_SIZE		0x100000
 +#define CFG_SHMEM_START		(DRAM0_BASE + 0x01300000)
-+#define CFG_SHMEM_SIZE		0x200000
++#define CFG_SHMEM_SIZE		0x400000
  
  #define CFG_TEE_RAM_VA_SIZE	(1024 * 1024)
  
