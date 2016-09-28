@@ -2,6 +2,8 @@ inherit kernel-uboot uboot-sign
 
 FITIMAGE_HASH_ALGO ?= "sha1"
 FITIMAGE_DTB_BY_NAME ?= "0"
+FITIMAGE_TEE_BY_NAME ?= "0"
+FITIMAGE_CONF_BY_NAME ?= "0"
 
 XZ_COMPRESSION_LEVEL ?= "-e -6"
 XZ_INTEGRITY_CHECK ?= "crc32"
@@ -36,6 +38,9 @@ python __anonymous () {
         if d.getVar('UBOOT_SIGN_ENABLE', True):
             uboot_pn = d.getVar('PREFERRED_PROVIDER_u-boot', True) or 'u-boot'
             d.appendVarFlag('do_assemble_fitimage', 'depends', ' %s:do_deploy' % uboot_pn)
+
+        if d.getVar('FITIMAGE_OPTEE', True):
+            d.appendVarFlag('do_assemble_fitimage', 'depends', ' optee-os:do_deploy')
 }
 
 # Options for the device tree compiler passed to mkimage '-D' feature:
@@ -89,7 +94,7 @@ EOF
 	;;
 	sectend)
 		cat << EOF >> ${1}
-	};
+        };
 EOF
 	;;
 	fitend)
@@ -162,6 +167,36 @@ EOF
 		cat << EOF >> ${1}
                         hash@1 {
                                 algo = "${dtb_csum}";
+                        };
+EOF
+	fi
+	cat << EOF >> ${1}
+                };
+EOF
+}
+
+#
+# Emit the fitImage ITS TEE section
+#
+# $1 ... .its filename
+# $2 ... Image counter/name
+# $3 ... Path to TEE image
+fitimage_emit_section_tee() {
+
+	tee_csum=${FITIMAGE_HASH_ALGO}
+
+	cat << EOF >> ${1}
+                ${2} {
+                        description = "OPTEE OS Image";
+                        data = /incbin/("${3}");
+                        type = "tee";
+                        arch = "${UBOOT_ARCH}";
+                        compression = "none";
+EOF
+	if test -n "${FITIMAGE_HASH_ALGO}"; then
+		cat << EOF >> ${1}
+                        hash@1 {
+                                algo = "${tee_csum}";
                         };
 EOF
 	fi
@@ -262,7 +297,11 @@ fitimage_emit_section_config() {
 	fi
 
 	# Test if we have any DTBs at all
-	conf_desc="Linux kernel"
+	if test -n "${FITIMAGE_TEE}"; then
+		conf_desc="Linux kernel, OPTEE OS Image"
+	else
+		conf_desc="Linux kernel"
+	fi
 	kernel_line="kernel = \"kernel@${2}\";"
 	fdt_line=""
 	ramdisk_line=""
@@ -282,54 +321,131 @@ fitimage_emit_section_config() {
 		setup_line="setup = \"setup@${5}\";"
 	fi
 
-	cat << EOF >> ${1}
-                default = "conf@1";
-                conf@1 {
+	if test -n "${FITIMAGE_TEE}"; then
+		teecount=1
+		for TEE in ${FITIMAGE_TEE}; do
+			DTB=`basename ${TEE} | sed 's,\.optee$,.dtb,g'`
+
+			if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
+				conf_name="${DTB}"
+			else
+				conf_name="conf@${teecount}"
+			fi
+
+			if [ "x${teecount}" = "x1" ]; then
+				cat << EOF >> ${1}
+                default = "${conf_name}";
+EOF
+			fi
+
+			cat << EOF >> ${1}
+                ${conf_name} {
                         description = "${conf_desc}";
-			${kernel_line}
-			${fdt_line}
-			${ramdisk_line}
-			${setup_line}
+                        ${kernel_line}
+                        fdt = "${DTB}";
+                        ${ramdisk_line}
+                        ${setup_line}
+                        loadables = "${TEE}";
 EOF
 
-	if test -n "${FITIMAGE_HASH_ALGO}"; then
-		cat << EOF >> ${1}
+			if test -n "${FITIMAGE_HASH_ALGO}"; then
+				cat << EOF >> ${1}
                         hash@1 {
                                 algo = "${conf_csum}";
                         };
 EOF
-	fi
+			fi
 
-	if [ ! -z "${conf_sign_keyname}" ] ; then
+			if [ ! -z "${conf_sign_keyname}" ] ; then
 
-		sign_line="sign-images = \"kernel\""
+				sign_line="sign-images = \"kernel\""
 
-		if [ -n "${3}" ]; then
-			sign_line="${sign_line}, \"fdt\""
-		fi
+				if [ -n "${3}" ]; then
+					sign_line="${sign_line}, \"fdt\""
+				fi
 
-		if [ -n "${4}" ]; then
-			sign_line="${sign_line}, \"ramdisk\""
-		fi
+				if [ -n "${4}" ]; then
+					sign_line="${sign_line}, \"ramdisk\""
+				fi
 
-		if [ -n "${5}" ]; then
-			sign_line="${sign_line}, \"setup\""
-		fi
+				if [ -n "${5}" ]; then
+					sign_line="${sign_line}, \"setup\""
+				fi
 
-		sign_line="${sign_line};"
+				sign_line="${sign_line};"
 
-		cat << EOF >> ${1}
+				cat << EOF >> ${1}
                         signature@1 {
                                 algo = "${conf_csum},rsa2048";
                                 key-name-hint = "${conf_sign_keyname}";
-				${sign_line}
+                                ${sign_line}
                         };
 EOF
-	fi
+			fi
 
-	cat << EOF >> ${1}
+			cat << EOF >> ${1}
                 };
 EOF
+
+			teecount=`expr ${teecount} + 1`
+		done
+	else
+
+		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
+			conf_name="${3}"
+		else
+			conf_name="conf@$1"
+		fi
+
+		cat << EOF >> ${1}
+                default = "${conf_name}";
+                ${conf_name} {
+                        description = "${conf_desc}";
+                        ${kernel_line}
+                        ${fdt_line}
+                        ${ramdisk_line}
+                        ${setup_line}
+EOF
+
+		if test -n "${FITIMAGE_HASH_ALGO}"; then
+			cat << EOF >> ${1}
+                        hash@1 {
+                                algo = "${conf_csum}";
+                        };
+EOF
+		fi
+
+		if [ ! -z "${conf_sign_keyname}" ] ; then
+
+			sign_line="sign-images = \"kernel\""
+
+			if [ -n "${3}" ]; then
+				sign_line="${sign_line}, \"fdt\""
+			fi
+
+			if [ -n "${4}" ]; then
+				sign_line="${sign_line}, \"ramdisk\""
+			fi
+
+			if [ -n "${5}" ]; then
+				sign_line="${sign_line}, \"setup\""
+			fi
+
+			sign_line="${sign_line};"
+
+			cat << EOF >> ${1}
+                        signature@1 {
+                                algo = "${conf_csum},rsa2048";
+                                key-name-hint = "${conf_sign_keyname}";
+                                ${sign_line}
+                        };
+EOF
+		fi
+
+		cat << EOF >> ${1}
+                };
+EOF
+	fi
 }
 
 #
@@ -380,6 +496,31 @@ fitimage_assemble() {
 				dtbref=${DTB}
 			fi
 			dtbcount=`expr ${dtbcount} + 1`
+		done
+	fi
+
+	#
+	# Step 2a: Prepare OP/TEE image section
+	#
+	if test -n "${FITIMAGE_TEE}"; then
+		mkdir -p ${B}/usr
+		teecount=1
+		for TEE in ${FITIMAGE_TEE}; do
+			rm -f ${B}/usr/${TEE}
+			if [ -e "${DEPLOY_DIR_IMAGE}/${TEE}" ]; then
+				cp ${DEPLOY_DIR_IMAGE}/${TEE} ${B}/usr/.
+			fi
+			TEE_PATH="usr/${TEE}"
+			fitimage_ti_secure ${TEE_PATH} ${TEE_PATH}.sec
+			if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
+				fitimage_emit_section_tee ${1} ${TEE} ${TEE_PATH}.sec
+			else
+				fitimage_emit_section_tee ${1} "tee@${teecount}" ${TEE_PATH}.sec
+			fi
+			if [ "x${teecount}" = "x1" ]; then
+				teeref=${TEE}
+			fi
+			teecount=`expr ${teecount} + 1`
 		done
 	fi
 
