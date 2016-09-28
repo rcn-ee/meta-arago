@@ -4,17 +4,17 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r4"
+PR = "r5"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
-DEPENDS += "zip-native alsa-lib"
+DEPENDS += "zip-native alsa-lib libaio"
 
 RDEPENDS_${PN} += "pm-qa serialcheck"
 
 inherit autotools-brokensep
 
-SRCREV = "b6972434f6136f60d41e6d14fa2a6b1eadacfa86"
+SRCREV = "ca4ad72628f7a4662238f553065e9780f8e71da7"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
