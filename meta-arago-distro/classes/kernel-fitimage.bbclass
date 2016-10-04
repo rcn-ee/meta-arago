@@ -296,16 +296,12 @@ fitimage_emit_section_config() {
 		conf_sign_keyname="${UBOOT_SIGN_KEYNAME}"
 	fi
 
-	# Test if we have any DTBs at all
-	if test -n "${FITIMAGE_TEE}"; then
-		conf_desc="Linux kernel, OPTEE OS Image"
-	else
-		conf_desc="Linux kernel"
-	fi
+	conf_desc="Linux kernel"
 	kernel_line="kernel = \"kernel@${2}\";"
 	fdt_line=""
 	ramdisk_line=""
 
+	# Test if we have any DTBs at all
 	if [ -n "${3}" ]; then
 		conf_desc="${conf_desc}, FDT blob"
 		fdt_line="fdt = \"${3}\";"
@@ -321,31 +317,47 @@ fitimage_emit_section_config() {
 		setup_line="setup = \"setup@${5}\";"
 	fi
 
-	if test -n "${FITIMAGE_TEE}"; then
-		teecount=1
-		for TEE in ${FITIMAGE_TEE}; do
-			DTB=`basename ${TEE} | sed 's,\.optee$,.dtb,g'`
+	dtbcount=1
+	for DTB in ${KERNEL_DEVICETREE}; do
 
-			if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
-				conf_name="${DTB}"
-			else
-				conf_name="conf@${teecount}"
-			fi
+		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
+			conf_name="${DTB}"
+		else
+			conf_name="conf@${dtbcount}"
+		fi
 
-			if [ "x${teecount}" = "x1" ]; then
-				cat << EOF >> ${1}
+		if [ "x${dtbcount}" = "x1" ]; then
+			cat << EOF >> ${1}
                 default = "${conf_name}";
 EOF
-			fi
+		fi
+
+		if test -n "${FITIMAGE_TEE}"; then
+			teecount=1
+			for TEE in ${FITIMAGE_TEE}; do
+				teename=`basename ${TEE} ".optee"`
+				loadables_line=""
+				final_conf_desc="${conf_desc}"
+				if [ "${DTB#$teename}" != "${DTB}" ]; then
+					loadables_line="loadables = \"${TEE}\";"
+					final_conf_desc="${conf_desc}, OPTEE OS Image"
+					break
+				fi
+				teecount=`expr ${teecount} + 1`
+			done
+		else
+			loadables_line=""
+			final_conf_desc="${conf_desc}"
+		fi
 
 			cat << EOF >> ${1}
                 ${conf_name} {
-                        description = "${conf_desc}";
+                        description = "${final_conf_desc}";
                         ${kernel_line}
                         fdt = "${DTB}";
                         ${ramdisk_line}
                         ${setup_line}
-                        loadables = "${TEE}";
+                        ${loadables_line}
 EOF
 
 			if test -n "${FITIMAGE_HASH_ALGO}"; then
@@ -387,65 +399,8 @@ EOF
                 };
 EOF
 
-			teecount=`expr ${teecount} + 1`
+		dtbcount=`expr ${dtbcount} + 1`
 		done
-	else
-
-		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
-			conf_name="${3}"
-		else
-			conf_name="conf@$1"
-		fi
-
-		cat << EOF >> ${1}
-                default = "${conf_name}";
-                ${conf_name} {
-                        description = "${conf_desc}";
-                        ${kernel_line}
-                        ${fdt_line}
-                        ${ramdisk_line}
-                        ${setup_line}
-EOF
-
-		if test -n "${FITIMAGE_HASH_ALGO}"; then
-			cat << EOF >> ${1}
-                        hash@1 {
-                                algo = "${conf_csum}";
-                        };
-EOF
-		fi
-
-		if [ ! -z "${conf_sign_keyname}" ] ; then
-
-			sign_line="sign-images = \"kernel\""
-
-			if [ -n "${3}" ]; then
-				sign_line="${sign_line}, \"fdt\""
-			fi
-
-			if [ -n "${4}" ]; then
-				sign_line="${sign_line}, \"ramdisk\""
-			fi
-
-			if [ -n "${5}" ]; then
-				sign_line="${sign_line}, \"setup\""
-			fi
-
-			sign_line="${sign_line};"
-
-			cat << EOF >> ${1}
-                        signature@1 {
-                                algo = "${conf_csum},rsa2048";
-                                key-name-hint = "${conf_sign_keyname}";
-                                ${sign_line}
-                        };
-EOF
-		fi
-
-		cat << EOF >> ${1}
-                };
-EOF
-	fi
 }
 
 #
