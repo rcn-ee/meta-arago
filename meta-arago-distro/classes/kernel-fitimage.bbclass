@@ -473,18 +473,7 @@ fitimage_assemble() {
 	fitimage_emit_section_kernel ${1} "${kernelcount}" linux.bin.sec "${linux_comp}"
 
 	#
-	# Step 2: Prepare a ramdisk section.
-	#
-	if [ "x${ramdiskcount}" = "x1" ] ; then
-		copy_initramfs
-		RAMDISK_FILE="usr/${INITRAMFS_IMAGE}-${MACHINE}.cpio"
-		xz -f -k -c ${XZ_COMPRESSION_LEVEL} ${XZ_THREADS} --check=${XZ_INTEGRITY_CHECK} ${RAMDISK_FILE} > ${RAMDISK_FILE}.xz
-		fitimage_ti_secure ${RAMDISK_FILE}.xz ${RAMDISK_FILE}.xz.sec
-		fitimage_emit_section_ramdisk ${1} "${ramdiskcount}" ${RAMDISK_FILE}.xz.sec
-	fi
-
-	#
-	# Step 3: Prepare a DTB image section
+	# Step 2: Prepare a DTB image section
 	#
 	if test -n "${KERNEL_DEVICETREE}"; then
 		dtbcount=1
@@ -511,7 +500,7 @@ fitimage_assemble() {
 	fi
 
 	#
-	# Step 4: Prepare OP/TEE image section
+	# Step 2a: Prepare OP/TEE image section
 	#
 	if test -n "${FITIMAGE_TEE}"; then
 		mkdir -p ${B}/usr
@@ -536,11 +525,22 @@ fitimage_assemble() {
 	fi
 
 	#
-	# Step 5: Prepare a setup section. (For x86)
+	# Step 3: Prepare a setup section. (For x86)
 	#
 	if test -e arch/${ARCH}/boot/setup.bin ; then
 		setupcount=1
 		fitimage_emit_section_setup ${1} "${setupcount}" arch/${ARCH}/boot/setup.bin
+	fi
+
+	#
+	# Step 4: Prepare a ramdisk section.
+	#
+	if [ "x${ramdiskcount}" = "x1" ] ; then
+		copy_initramfs
+		RAMDISK_FILE="usr/${INITRAMFS_IMAGE}-${MACHINE}.cpio"
+		xz -f -k -c ${XZ_COMPRESSION_LEVEL} ${XZ_THREADS} --check=${XZ_INTEGRITY_CHECK} ${RAMDISK_FILE} > ${RAMDISK_FILE}.xz
+		fitimage_ti_secure ${RAMDISK_FILE}.xz ${RAMDISK_FILE}.xz.sec
+		fitimage_emit_section_ramdisk ${1} "${ramdiskcount}" ${RAMDISK_FILE}.xz.sec
 	fi
 
 	fitimage_emit_section_maint ${1} sectend
@@ -552,7 +552,7 @@ fitimage_assemble() {
 	fi
 
 	#
-	# Step 6: Prepare a configurations section
+	# Step 5: Prepare a configurations section
 	#
 	fitimage_emit_section_maint ${1} confstart
 
@@ -567,7 +567,7 @@ fitimage_assemble() {
 	fitimage_emit_section_maint ${1} fitend
 
 	#
-	# Step 7: Assemble the image
+	# Step 6: Assemble the image
 	#
 	uboot-mkimage \
 		${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
