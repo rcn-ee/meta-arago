@@ -6,8 +6,8 @@ DEPENDS += "libav libdce libdrm libgbm ti-sgx-ddk-um wayland"
 
 inherit autotools pkgconfig
 
-PR = "r15"
-SRCREV = "a30dd9a5fc1ae7cdfb8c17a4685efb7eaf693ddc"
+PR = "r18"
+SRCREV = "e4a2932a836c54f4a20b4be9d541d11d3a246a31"
 
 SRC_URI = "git://git.ti.com/glsdk/omapdrmtest.git;protocol=git \
 "
