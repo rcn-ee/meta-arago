@@ -1,4 +1,4 @@
-PR_append = ".arago1"
+PR_append = ".arago2"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
@@ -8,9 +8,10 @@ SRC_URI += "file://bluez4-fix-synchronization-between-bluetoothd-and-dr.patch \
 "
 # udev 150-170 provide its on hid2hci tool and udev rules for it. Therefore,
 # disabling hid2hci from bluez4.
-EXTRA_OECONF := "${@oe_filter_out('--enable-hid2hci', '${EXTRA_OECONF}', d)}"
 
-EXTRA_OECONF := "${@'${EXTRA_OECONF}'.replace('--disable-hidd', '--enable-hidd')}"
+EXTRA_OECONF_remove = "--enable-hid2hci"
+EXTRA_OECONF_remove = "--disable-hidd"
+EXTRA_OECONF_append = " --enable-hid"
 
 DEPENDS += "libsndfile1"
 
