@@ -328,9 +328,9 @@ addtask create_srcipk after do_patch before do_configure
 
 python () {
     if d.getVar('do_compileconfigs', False):
-	deps = d.getVarFlag('do_compileconfigs', 'deps') or []
-	deps.append('do_create_srcipk')
-	d.setVarFlag('do_compileconfigs', 'deps', deps)
+        deps = d.getVarFlag('do_compileconfigs', 'deps') or []
+        deps.append('do_create_srcipk')
+        d.setVarFlag('do_compileconfigs', 'deps', deps)
 }
 
 #Add source packages to list of packages OE knows about
