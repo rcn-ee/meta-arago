@@ -80,7 +80,7 @@ UTILS_append_k2e = " \
     dsptop \
 "
 
-UTILS_append_k2g-evm = " \
+UTILS_append_k2g = " \
     canutils \
     pru-icss \
 "

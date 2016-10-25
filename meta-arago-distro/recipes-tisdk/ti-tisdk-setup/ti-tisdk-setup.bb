@@ -14,7 +14,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SDCARD_SCRIPT = " create-sdcard.sh"
 SDCARD_SCRIPT_keystone = ""
-SDCARD_SCRIPT_k2g-evm = " create-sdcard.sh"
+SDCARD_SCRIPT_k2g = " create-sdcard.sh"
 
 SETUP_SCRIPTS = " common.sh \
                   setup-host-check.sh \
@@ -36,7 +36,7 @@ UBOOT_ENV_ti43x = "setup-uboot-env-am43x.sh"
 UBOOT_ENV_omap5-evm = "setup-uboot-env-omap5.sh"
 UBOOT_ENV_am57xx-evm = "setup-uboot-env-am57xx-evm.sh"
 UBOOT_ENV_keystone = "setup-uboot-env-keystone.sh"
-UBOOT_ENV_k2g-evm = "setup-uboot-env-k2g-evm.sh"
+UBOOT_ENV_k2g = "setup-uboot-env-k2g-evm.sh"
 UBOOT_ENV = "setup-uboot-unknown.sh"
 
 do_install () {

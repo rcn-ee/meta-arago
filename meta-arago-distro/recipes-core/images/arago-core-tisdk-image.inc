@@ -27,7 +27,7 @@ DTB_FILTER_ti43x = "am43"
 DTB_FILTER_k2hk-evm = "k2hk"
 DTB_FILTER_k2l-evm = "k2l"
 DTB_FILTER_k2e = "k2e"
-DTB_FILTER_k2g-evm = "k2g"
+DTB_FILTER_k2g = "k2g"
 
 # List of target side images to build for the SDK
 TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image"
