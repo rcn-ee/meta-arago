@@ -122,7 +122,7 @@ UTILS_append_dra7xx = " canutils-dev \
                         elfutils-dev \
                         elfutils-staticdev \
 "
-UTILS_append_k2g-evm = " canutils-dev"
+UTILS_append_k2g = " canutils-dev"
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " cmem-dev"

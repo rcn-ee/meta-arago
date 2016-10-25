@@ -46,13 +46,13 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/monitor"
 S_dra7xx = "${WORKDIR}/git/monitor_vayu"
-S_k2g-evm = "${WORKDIR}/git/monitor_vayu"
+S_k2g = "${WORKDIR}/git/monitor_vayu"
 
 BUILD_TARGET_k2hk-evm = "ARM_K2H"
 BUILD_TARGET_k2l-evm  = "ARM_K2L"
-BUILD_TARGET_k2e  = "ARM_K2E"
-BUILD_TARGET_dra7xx   = "ARM_AM57"
-BUILD_TARGET_k2g-evm  = "ARM_K2G"
+BUILD_TARGET_k2e = "ARM_K2E"
+BUILD_TARGET_dra7xx = "ARM_AM57"
+BUILD_TARGET_k2g = "ARM_K2G"
 
 EXTRA_OECMAKE += " -DCROSS_COMPILE=TRUE \
                    -DOCL_MONITOR_DIR=${S} \
