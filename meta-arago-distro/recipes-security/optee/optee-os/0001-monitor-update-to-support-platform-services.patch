@@ -1,11 +1,10 @@
-From 0cfabf5d6c20c8d91db026561db6c4624a1e7c3a Mon Sep 17 00:00:00 2001
+From c8b358a0870c4cd63039d40a4cd68a632c18c9d6 Mon Sep 17 00:00:00 2001
 From: Daniel Allred <d-allred@ti.com>
 Date: Wed, 19 Aug 2015 16:01:26 -0500
-Subject: [PATCH 2/5] monitor: update to support platform services
+Subject: [PATCH 1/5] monitor: update to support platform services
 
-Added the capability for a platform to plugin
-its own services, often legacy services for
-compatibility purposes. Added these services
+Added the capability for a platform to plugin its own services,
+often legacy services for compatibility purposes. Added these services
 for the dra7xx platform.
 
 Signed-off-by: Daniel Allred <d-allred@ti.com>
@@ -22,7 +21,7 @@ Signed-off-by: Daniel Allred <d-allred@ti.com>
 
 diff --git a/core/arch/arm/plat-ti/api_monitor_index.h b/core/arch/arm/plat-ti/api_monitor_index.h
 new file mode 100644
-index 0000000..b06fb2c
+index 0000000..bc93a62
 --- /dev/null
 +++ b/core/arch/arm/plat-ti/api_monitor_index.h
 @@ -0,0 +1,54 @@
@@ -56,33 +55,33 @@ index 0000000..b06fb2c
 +#ifndef __API_MONITOR_INDEX_H__
 +#define __API_MONITOR_INDEX_H__
 +
-+// Number of APIs
-+#define NB_MAX_API_MONITOR    10
++/* Number of APIs */
++#define NB_MAX_API_MONITOR 10
 +
-+// Base Index of APIs
-+#define API_MONITOR_BASE_INDEX    0x00000100
++/* Base Index of APIs */
++#define API_MONITOR_BASE_INDEX 0x00000100
 +
-+// HyperVisor Start
-+#define API_MONITOR_HYP_STARTHYPERVISOR_INDEX      API_MONITOR_BASE_INDEX + 0x00000002
-+// Caches cleaning
-+#define API_MONITOR_CACHES_CLEAN_INDEX             API_MONITOR_BASE_INDEX + 0x00000003
-+// Write the L2 Cache Controller Auxiliary Control
-+#define API_MONITOR_L2ACTLR_SETREGISTER_INDEX      API_MONITOR_BASE_INDEX + 0x00000004
-+// Set the Data and Tag RAM Latency
-+#define API_MONITOR_L2CACHE_SETLATENCY_INDEX       API_MONITOR_BASE_INDEX + 0x00000005
-+// L2 Cache Prefetch Control Register
-+#define API_MONITOR_L2PFR_SETREGISTER_INDEX        API_MONITOR_BASE_INDEX + 0x00000006
-+// Set Auxiliary Control Register
-+#define API_MONITOR_ACTLR_SETREGISTER_INDEX        API_MONITOR_BASE_INDEX + 0x00000007
-+// AMBA IF mode
-+#define API_MONITOR_WUGEN_MPU_SETAMBAIF_INDEX      API_MONITOR_BASE_INDEX + 0x00000008
-+// Timer CNTFRQ register set
-+#define API_MONITOR_TIMER_SETCNTFRQ_INDEX          API_MONITOR_BASE_INDEX + 0x00000009
++/* HyperVisor Start */
++#define API_MONITOR_HYP_STARTHYPERVISOR_INDEX      (API_MONITOR_BASE_INDEX + 0x00000002)
++/* Caches cleaning */
++#define API_MONITOR_CACHES_CLEAN_INDEX             (API_MONITOR_BASE_INDEX + 0x00000003)
++/* Write the L2 Cache Controller Auxiliary Control */
++#define API_MONITOR_L2ACTLR_SETREGISTER_INDEX      (API_MONITOR_BASE_INDEX + 0x00000004)
++/* Set the Data and Tag RAM Latency */
++#define API_MONITOR_L2CACHE_SETLATENCY_INDEX       (API_MONITOR_BASE_INDEX + 0x00000005)
++/* L2 Cache Prefetch Control Register */
++#define API_MONITOR_L2PFR_SETREGISTER_INDEX        (API_MONITOR_BASE_INDEX + 0x00000006)
++/* Set Auxiliary Control Register */
++#define API_MONITOR_ACTLR_SETREGISTER_INDEX        (API_MONITOR_BASE_INDEX + 0x00000007)
++/* AMBA IF mode */
++#define API_MONITOR_WUGEN_MPU_SETAMBAIF_INDEX      (API_MONITOR_BASE_INDEX + 0x00000008)
++/* Timer CNTFRQ register set */
++#define API_MONITOR_TIMER_SETCNTFRQ_INDEX          (API_MONITOR_BASE_INDEX + 0x00000009)
 +
-+#endif // __API_MONITOR_INDEX_H__
++#endif /* __API_MONITOR_INDEX_H__ */
 diff --git a/core/arch/arm/plat-ti/sm_platform_handler.S b/core/arch/arm/plat-ti/sm_platform_handler.S
 new file mode 100644
-index 0000000..ffaeae4
+index 0000000..da5921a
 --- /dev/null
 +++ b/core/arch/arm/plat-ti/sm_platform_handler.S
 @@ -0,0 +1,79 @@
@@ -143,7 +142,7 @@ index 0000000..ffaeae4
 +	cmp	r12, #0x200
 +	bxhs	lr
 +
-+	/* Pop the complete stack, not going back to the calling fuction */
++	/* Pop the complete stack, not going back to the calling function */
 +	pop	{lr}
 +	pop	{r0-r3}
 +
@@ -228,5 +227,5 @@ index 7de8434..ddfb97a 100644
  #endif /*SM_PRIVATE_H*/
  
 -- 
-2.9.3
+2.7.4
 
