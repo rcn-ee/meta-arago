@@ -1,10 +1,10 @@
-From 7f02156690e01573ae1ffe27593cd2031cb8ce77 Mon Sep 17 00:00:00 2001
+From b647852a366191836e27e75810d968fad0e4a0ca Mon Sep 17 00:00:00 2001
 From: "Andrew F. Davis" <afd@ti.com>
-Date: Fri, 9 Sep 2016 10:00:57 -0500
-Subject: [PATCH 5/5] plat-ti: Add AM57xx EVM platform flavor
+Date: Tue, 11 Oct 2016 11:22:53 -0500
+Subject: [PATCH 4/5] plat-ti: Add DRA71x EVM platform flavor
 
-The AM57xx EVM flavor is based on the DRA7x EVM exept that is has more
-memory and uses a different UART port. Add this EVM here.
+The DRA71x EVM flavor is based on the DRA72x EVM exept that is uses
+the DRA71x SoC. Add this EVM here.
 
 Signed-off-by: Andrew F. Davis <afd@ti.com>
 ---
@@ -12,30 +12,30 @@ Signed-off-by: Andrew F. Davis <afd@ti.com>
  1 file changed, 23 insertions(+)
 
 diff --git a/core/arch/arm/plat-ti/platform_config.h b/core/arch/arm/plat-ti/platform_config.h
-index 045cb1a..559cd9e 100644
+index fdfe3ac..045cb1a 100644
 --- a/core/arch/arm/plat-ti/platform_config.h
 +++ b/core/arch/arm/plat-ti/platform_config.h
-@@ -97,6 +97,29 @@
+@@ -74,6 +74,29 @@
  #define GIC_BASE            0x48211000
  #define SECRAM_BASE         0x40200000
  
-+#elif defined(PLATFORM_FLAVOR_am57xx_evm)
++#elif defined(PLATFORM_FLAVOR_dra71_evm)
 +
-+#define DRAM0_BASE		0xfe900000
++#define DRAM0_BASE		0xfd900000
 +#define DRAM0_SIZE		0x01700000
 +
 +#ifdef CFG_WITH_PAGER
 +#error Pager not supported on this platform
 +#endif /*CFG_WITH_PAGER*/
 +
-+/* Location of protected DDR on the AM57xx EVM */
-+#define TZDRAM_BASE		0xfe900000
++/* Location of protected DDR on the DRA71x EVM */
++#define TZDRAM_BASE		0xfd900000
 +#define TZDRAM_SIZE		0x01300000
 +
-+#define CFG_TEE_CORE_NB_CORE	2
++#define CFG_TEE_CORE_NB_CORE	1
 +
-+/* UART3 */
-+#define CONSOLE_UART_BASE		0x48020000
++/* UART1 */
++#define CONSOLE_UART_BASE		0x4806A000
 +#define CONSOLE_UART_CLK_IN_HZ	48000000
 +#define UART_BAUDRATE			115200
 +
