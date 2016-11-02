@@ -1,10 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago2"
+PR_append = ".arago3"
 
 is_armv7 = "1"
 
-SRCREV = "bfdfbe74610fc692ddedf45d5f2da520cebccb83"
+SRCREV = "8dceff9b18e7c2e0cb879ea458e85a1806dff447"
 
 EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX}  \
                 CROSS_COMPILE_ta_arm32=${HOST_PREFIX}  \
