@@ -1,0 +1,43 @@
+From 15be5bf09e5a0a979a926806ca8591500783482b Mon Sep 17 00:00:00 2001
+From: Harinarayan Bhatta <harinarayan@ti.com>
+Date: Wed, 10 Aug 2016 11:13:53 +0530
+Subject: [PATCH 1/6] plat-ti: Fixed issues with MMU mapping
+
+Signed-off-by: Harinarayan Bhatta <harinarayan@ti.com>
+---
+ core/arch/arm/plat-ti/main.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/core/arch/arm/plat-ti/main.c b/core/arch/arm/plat-ti/main.c
+index fe2a1d2..8c26503 100644
+--- a/core/arch/arm/plat-ti/main.c
++++ b/core/arch/arm/plat-ti/main.c
+@@ -77,7 +77,7 @@ static vaddr_t console_base(void)
+ 
+ 	if (cpu_mmu_enabled()) {
+ 		if (!va)
+-			va = phys_to_virt(CONSOLE_UART_BASE, MEM_AREA_IO_SEC);
++			va = phys_to_virt(CONSOLE_UART_BASE, MEM_AREA_IO_NSEC);
+ 		return (vaddr_t)va;
+ 	}
+ 	return CONSOLE_UART_BASE;
+@@ -130,12 +130,13 @@ struct plat_nsec_ctx {
+ 
+ void init_sec_mon(unsigned long nsec_entry)
+ {
+-	struct plat_nsec_ctx *plat_ctx = (struct plat_nsec_ctx *)nsec_entry;
++	struct plat_nsec_ctx *plat_ctx = (struct plat_nsec_ctx *)
++		(phys_to_virt(nsec_entry, MEM_AREA_IO_SEC));
+ 	struct sm_nsec_ctx *nsec_ctx;
+ 
+ 	/* Invalidate cache to fetch data from external memory */
+-	cache_maintenance_l1(DCACHE_AREA_INVALIDATE, (void *)nsec_entry,
+-		sizeof(struct plat_nsec_ctx));
++	cache_maintenance_l1(DCACHE_AREA_INVALIDATE, (void *)plat_ctx,
++		sizeof(*plat_ctx));
+ 
+ 	/* Initialize secure monitor */
+ 	nsec_ctx = sm_get_nsec_ctx();
+-- 
+2.7.4
+
