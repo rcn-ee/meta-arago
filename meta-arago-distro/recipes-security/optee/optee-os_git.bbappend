@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago3"
+PR_append = ".arago4"
 
 is_armv7 = "1"
 
@@ -14,11 +14,12 @@ EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX}  \
 "
 
 SRC_URI += " \
-    file://0001-monitor-update-to-support-platform-services.patch \
-    file://0002-plat-ti-Move-load-address-to-the-end-of-DRAM-and-inc.patch \
-    file://0003-plat-ti-Add-DRA72x-platform-flavor.patch \
-    file://0004-plat-ti-Add-DRA71x-EVM-platform-flavor.patch \
-    file://0005-plat-ti-Add-AM57xx-EVM-platform-flavor.patch \
+    file://0001-plat-ti-Fixed-issues-with-MMU-mapping.patch \
+    file://0002-monitor-update-to-support-platform-services.patch \
+    file://0003-plat-ti-Move-load-address-to-the-end-of-DRAM-and-inc.patch \
+    file://0004-plat-ti-Add-DRA72x-platform-flavor.patch \
+    file://0005-plat-ti-Add-DRA71x-EVM-platform-flavor.patch \
+    file://0006-plat-ti-Add-AM57xx-EVM-platform-flavor.patch \
 "
 
 do_compile() {

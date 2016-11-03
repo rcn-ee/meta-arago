@@ -1,7 +1,7 @@
 From 35e2a7332239b143a1e9331bad10b2a908c483b4 Mon Sep 17 00:00:00 2001
 From: "Andrew F. Davis" <afd@ti.com>
 Date: Fri, 9 Sep 2016 09:54:57 -0500
-Subject: [PATCH 3/5] plat-ti: Add DRA72x platform flavor
+Subject: [PATCH 4/6] plat-ti: Add DRA72x platform flavor
 
 The DRA72x EVM is based on the single core variant of the DRA7xx
 platform. Add this EVM here. We also change the flavor name to
