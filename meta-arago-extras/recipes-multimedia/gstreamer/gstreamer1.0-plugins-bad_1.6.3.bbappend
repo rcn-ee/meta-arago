@@ -21,9 +21,11 @@ DEPENDS_append_ti33x = " \
 "
 
 SRC_URI_append_ti43x = " \
+    file://0001-gstwaylandsink-Add-mouse-drag-and-drop-support.patch \
 "
 
 SRC_URI_append_ti33x = " \
+    file://0001-gstwaylandsink-Add-mouse-drag-and-drop-support.patch \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -38,4 +40,4 @@ S = "${WORKDIR}/git"
 SRCREV_omap-a15 = "aec06528aca416c7b2c77db5b6dcb24907728ef7"
 SRCREV = "d0160ca810be30bf2b2e7681f5047933402efb52"
 
-PR = "r22"
+PR = "r23"
