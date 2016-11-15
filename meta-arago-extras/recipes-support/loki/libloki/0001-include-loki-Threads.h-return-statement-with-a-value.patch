@@ -1,0 +1,36 @@
+From 18a569d3d8106bac85fdf127edf70292113edc2c Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 14 Nov 2016 19:41:28 -0500
+Subject: [PATCH] include/loki/Threads.h: return-statement with a value, in
+ function returning 'void'
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ include/loki/Threads.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/loki/Threads.h b/include/loki/Threads.h
+index cb44f09..983e573 100644
+--- a/include/loki/Threads.h
++++ b/include/loki/Threads.h
+@@ -251,7 +251,7 @@
+             ::pthread_mutex_lock( &atomic_mutex_ );                      \
+             lval = val;                                                  \
+             ::pthread_mutex_unlock( &atomic_mutex_ );                    \
+-            return lval;                                                 \
++            return;                                                      \
+         }                                                                \
+                                                                          \
+         static void AtomicAssign(IntType& lval, volatile const IntType& val) \
+@@ -259,7 +259,7 @@
+             ::pthread_mutex_lock( &atomic_mutex_ );                      \
+             lval = val;                                                  \
+             ::pthread_mutex_unlock( &atomic_mutex_ );                    \
+-            return lval;                                                 \
++            return;                                                      \
+         }                                                                \
+                                                                          \
+         static IntType AtomicIncrement(volatile IntType& lval, const IntType compare, bool & matches ) \
+-- 
+2.7.4
+
