@@ -1,0 +1,27 @@
+From 490b7998a15487356a9a80531db030583f13f3a9 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 14 Nov 2016 19:55:08 -0500
+Subject: [PATCH] test/Function/FunctionTest.cpp: reference to
+ 'bad_function_call' is ambiguous
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ test/Function/FunctionTest.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/Function/FunctionTest.cpp b/test/Function/FunctionTest.cpp
+index 5106eeb..c9a338b 100644
+--- a/test/Function/FunctionTest.cpp
++++ b/test/Function/FunctionTest.cpp
+@@ -754,7 +754,7 @@ static void test_exception()
+         f(5, 4);
+         BOOST_CHECK(false);
+     }
+-    catch(bad_function_call)
++    catch(Loki::bad_function_call)
+     {
+         // okay
+     }
+-- 
+2.7.4
+
