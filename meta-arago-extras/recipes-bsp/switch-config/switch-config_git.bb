@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://switch-config.c;beginline=1;endline=14;md5=659ff9658cbaba3110b81804af60de75"
 
 PV = "2.0"
-PR = "r1"
+PR = "r2"
 
 BRANCH ?= "v4.1"
 SRCREV = "669334329dff132c4a093351d48252b12e995b6c"
@@ -12,7 +12,7 @@ SRC_URI = "git://git.ti.com/switch-config/switch-config.git;protocol=git;branch=
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}""
 
 do_configure() {
 	sed 's|-I$(KBUILD_OUTPUT)/usr/include|${TOOLCHAIN_OPTIONS} -I.|' -i ${S}/Makefile
