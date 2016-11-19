@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=1;endline=21;md5=adc05a1903d3f107f85
 
 PV = "R8.6+git${SRCPV}"
 
-PR = "r4"
+PR = "r5"
 
 # Tag: R8.6
 SRCREV = "cf8965aad73764022669647fa33852558a657930"
@@ -12,7 +12,7 @@ SRC_URI = "git://git.ti.com/wilink8-wlan/18xx-ti-utils.git"
 
 S = "${WORKDIR}/git/wlconf"
 
-EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc"
+EXTRA_OEMAKE = "CC="${CC}""
 
 do_install() {
 	install -d ${D}${bindir}
