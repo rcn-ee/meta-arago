@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -39,6 +39,7 @@ QT5_ESSENTIALS = "\
     qtwebkit-qmlplugins \
     qtquick1-plugins \
     qtquick1-qmlplugins \
+    qtwebengine-qmlplugins \
 "
 
 RDEPENDS_${PN} = "\
