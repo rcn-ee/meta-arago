@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r54"
+PR = "r55"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -54,10 +54,10 @@ UTILS_append_omap-a15 = " mmc-utils \
                           uio-module-drv-test \
 "
 
+#                        glsdk-example-apps
 UTILS_append_dra7xx = " canutils \
                         dsptop \
                         gdbc6x \
-                        glsdk-example-apps \
 "
 
 UTILS_append_keystone = " \
