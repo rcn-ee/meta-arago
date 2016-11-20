@@ -2,6 +2,8 @@
 TCMODE = "default"
 TCLIBC = "glibc"
 
+LIBCEXTENSION = "${@['', '-gnu'][(d.getVar('ABIEXTENSION', True) or '') != '']}"
+
 # Match some of the external vars
 TOOLCHAIN_SYS := "${TARGET_SYS}"
 TOOLCHAIN_PREFIX := "${TARGET_PREFIX}"
