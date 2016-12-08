@@ -1,8 +1,8 @@
-DESCRIPTION = "TI OpenMP-Acc example applications"
+SUMMARY = "TI OpenMP-Acc example applications"
 
 include openmpacc.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 DEPENDS = "openmpacc clacc-native clocl-native ti-cgt6x-native"
 RDEPENDS_${PN} += "opencl-runtime"
@@ -43,6 +43,19 @@ python do_unpack_append() {
 EXTRA_OEMAKE = " TARGET_ROOTDIR=${STAGING_DIR_HOST} \
                  TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \
 "
+
+MKFILELIST = "vecadd/Makefile vecadd_complex/Makefile dsplib_fft/Makefile \
+null/Makefile dspheap/Makefile target_implicit_map/Makefile printf_debug/Makefile \
+edmamgr/Makefile vecadd_t/Makefile target_orphan_call/Makefile target_update/Makefile \
+edmabw/Makefile sub_section/Makefile vecadd_lib/Makefile local/Makefile"
+
+do_configure() {
+    sed "s|arm-linux-gnueabihf-gcc|${CC}|g" -i make.inc
+    sed "s|arm-linux-gnueabihf-g++|${CXX}|g" -i make.inc
+    for f in ${MKFILELIST}; do
+        sed "s|-fopenmp|-fopenmp ${TUNE_CCARGS}${TOOLCHAIN_OPTIONS}|g" -i $f
+    done
+}
 
 do_compile() {
     oe_runmake
