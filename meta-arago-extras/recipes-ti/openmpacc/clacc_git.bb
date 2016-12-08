@@ -1,8 +1,8 @@
-DESCRIPTION = "TI OpenMP-Acc C compiler"
+SUMMARY = "TI OpenMP-Acc C compiler"
 
 include openmpacc.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 DEPENDS = "boost elfutils"
 RDEPENDS_${PN} += "clocl"
@@ -22,6 +22,11 @@ EXTRA_OEMAKE = " -C ${S}/clacc \
                   ${TARGET} \
                   CXX="${CXX}" \
 "
+
+do_configure() {
+    sed "s|arm-linux-gnueabihf-gcc|${TOOLCHAIN_PREFIX}gcc|g" -i clacc/clacc.h
+    sed "s|arm-linux-gnueabihf-g++|${TOOLCHAIN_PREFIX}g++|g" -i clacc/clacc.h
+}
 
 do_compile() {
     oe_runmake

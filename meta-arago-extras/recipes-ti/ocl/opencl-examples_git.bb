@@ -1,10 +1,10 @@
-DESCRIPTION = "TI OpenCL example applications"
+SUMMARY = "TI OpenCL example applications"
 HOMEPAGE = "http://software-dl.ti.com/mctools/docs/opencl/intro.html"
 LICENSE = "BSD"
 
 include ocl.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -55,8 +55,12 @@ EXTRA_OEMAKE = " TARGET_ROOTDIR=${STAGING_DIR_HOST} \
                  TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \
 "
 
+do_configure() {
+    sed "s|arm-linux-gnueabihf-g++|${CXX}|g" -i make.inc
+}
+
 do_compile() {
-    oe_runmake
+    oe_runmake CC="${CC}" CPP="${CPP}" CXX="${CXX}"
 }
 
 do_install() {
