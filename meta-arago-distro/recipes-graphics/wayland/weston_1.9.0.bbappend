@@ -2,7 +2,7 @@
 PACKAGECONFIG[fbdev] = "--enable-fbdev-compositor WESTON_NATIVE_BACKEND="fbdev-backend.so",--disable-fbdev-compositor,udev mtdev"
 PACKAGECONFIG[kms] = "--enable-drm-compositor,--disable-drm-compositor,drm udev libgbm mtdev"
 
-PR_append = ".arago15"
+PR_append = ".arago16"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
@@ -16,4 +16,5 @@ SRC_URI += " \
 	file://0001-udev-seat-restrict-udev-enumeration-to-card0.patch \
 	file://0001-Add-soc-performance-monitor-utilites.patch \
 	file://0001-compositor-drm-support-RGB565-with-pixman-renderer.patch \
+	file://0001-compositor-drm-fix-hotplug-weston-termination-proble.patch \
 "
