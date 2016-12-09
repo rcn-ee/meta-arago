@@ -1,10 +1,14 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago4"
+PR_append = ".arago5"
 
 is_armv7 = "1"
 
-SRCREV = "8dceff9b18e7c2e0cb879ea458e85a1806dff447"
+SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
+           file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
+"
+BRANCH = "ti_optee_os"
+SRCREV = "f41d1cfddf3cba6eb3ff91c399bf6059eaa6297e"
 
 EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX}  \
                 CROSS_COMPILE_ta_arm32=${HOST_PREFIX}  \
@@ -13,27 +17,15 @@ EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX}  \
                 CFG_TEE_TA_LOG_LEVEL=0 \
 "
 
-SRC_URI += " \
-    file://0001-plat-ti-Fixed-issues-with-MMU-mapping.patch \
-    file://0002-monitor-update-to-support-platform-services.patch \
-    file://0003-plat-ti-Move-load-address-to-the-end-of-DRAM-and-inc.patch \
-    file://0004-plat-ti-Add-DRA72x-platform-flavor.patch \
-    file://0005-plat-ti-Add-DRA71x-EVM-platform-flavor.patch \
-    file://0006-plat-ti-Add-AM57xx-EVM-platform-flavor.patch \
-"
-
 do_compile() {
     unset LDFLAGS
     export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
-    for flavor in ${OPTEEFLAVOR}; do
-        oe_runmake clean PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=$flavor
-        oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=$flavor
-        ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
-            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
-            normfl=`echo $flavor | tr "_" "-"`
-            mv tee.bin.signed $normfl.optee; \
-        )
-    done
+    oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
+    ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
+        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
+        normfl=`echo ${OPTEEFLAVOR} | tr "_" "-"`
+        mv tee.bin.signed $normfl.optee; \
+    )
 }
 
 do_install() {
