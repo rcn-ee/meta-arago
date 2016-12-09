@@ -332,19 +332,9 @@ fitimage_emit_section_config() {
 EOF
 		fi
 
-		if test -n "${FITIMAGE_TEE}"; then
-			teecount=1
-			for TEE in ${FITIMAGE_TEE}; do
-				teename=`basename ${TEE} ".optee"`
-				loadables_line=""
-				final_conf_desc="${conf_desc}"
-				if [ "${DTB#$teename}" != "${DTB}" ]; then
-					loadables_line="loadables = \"${TEE}\";"
-					final_conf_desc="${conf_desc}, OPTEE OS Image"
-					break
-				fi
-				teecount=`expr ${teecount} + 1`
-			done
+		if test -n "${OPTEEFLAVOR}"; then
+			loadables_line="loadables = \"${OPTEEFLAVOR}.optee\";"
+			final_conf_desc="${conf_desc}, OPTEE OS Image"
 		else
 			loadables_line=""
 			final_conf_desc="${conf_desc}"
