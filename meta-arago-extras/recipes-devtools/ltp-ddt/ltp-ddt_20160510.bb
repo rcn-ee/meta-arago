@@ -14,7 +14,7 @@ RDEPENDS_${PN} += "pm-qa serialcheck"
 
 inherit autotools-brokensep
 
-SRCREV = "47734bc63a139d341656784769472a7db88e713f"
+SRCREV = "a45af5cba34a1eda75ec55b3259ca05d83dad9b6"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
