@@ -289,6 +289,7 @@ EOF
 # $3 ... DTB image ID/name
 # $4 ... ramdisk ID
 # $5 ... config ID
+# $6 ... tee ID/name
 fitimage_emit_section_config() {
 
 	conf_csum=${FITIMAGE_HASH_ALGO}
@@ -317,6 +318,14 @@ fitimage_emit_section_config() {
 		setup_line="setup = \"setup@${5}\";"
 	fi
 
+	if [ -n "${6}" -a -n "${OPTEEFLAVOR}" ]; then
+		loadables_line="loadables = \"${6}\";"
+		final_conf_desc="${conf_desc}, OPTEE OS Image"
+	else
+		loadables_line=""
+		final_conf_desc="${conf_desc}"
+	fi
+
 	dtbcount=1
 	for DTB in ${KERNEL_DEVICETREE}; do
 
@@ -330,14 +339,6 @@ fitimage_emit_section_config() {
 			cat << EOF >> ${1}
                 default = "${conf_name}";
 EOF
-		fi
-
-		if test -n "${OPTEEFLAVOR}"; then
-			loadables_line="loadables = \"${OPTEEFLAVOR}.optee\";"
-			final_conf_desc="${conf_desc}, OPTEE OS Image"
-		else
-			loadables_line=""
-			final_conf_desc="${conf_desc}"
 		fi
 
 			cat << EOF >> ${1}
@@ -404,6 +405,7 @@ fitimage_assemble() {
 	dtbcount=""
 	ramdiskcount=${3}
 	setupcount=""
+	teecount=1
 	rm -f ${1} arch/${ARCH}/boot/${2}
 
 	fitimage_emit_fit_header ${1}
@@ -447,26 +449,19 @@ fitimage_assemble() {
 	#
 	# Step 2a: Prepare OP/TEE image section
 	#
-	if test -n "${FITIMAGE_TEE}"; then
+	if test -n "${OPTEEFLAVOR}"; then
 		mkdir -p ${B}/usr
-		teecount=1
-		for TEE in ${FITIMAGE_TEE}; do
-			rm -f ${B}/usr/${TEE}
-			if [ -e "${DEPLOY_DIR_IMAGE}/${TEE}" ]; then
-				cp ${DEPLOY_DIR_IMAGE}/${TEE} ${B}/usr/.
-			fi
-			TEE_PATH="usr/${TEE}"
-			fitimage_ti_secure ${TEE_PATH} ${TEE_PATH}.sec
-			if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
-				fitimage_emit_section_tee ${1} ${TEE} ${TEE_PATH}.sec
-			else
-				fitimage_emit_section_tee ${1} "tee@${teecount}" ${TEE_PATH}.sec
-			fi
-			if [ "x${teecount}" = "x1" ]; then
-				teeref=${TEE}
-			fi
-			teecount=`expr ${teecount} + 1`
-		done
+		rm -f ${B}/usr/${OPTEEFLAVOR}
+		if [ -e "${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}" ]; then
+			cp ${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR} ${B}/usr/.
+		fi
+		TEE_PATH="usr/${OPTEEFLAVOR}"
+		fitimage_ti_secure ${TEE_PATH} ${TEE_PATH}.sec
+		if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
+			fitimage_emit_section_tee ${1} ${OPTEEFLAVOR}.optee ${TEE_PATH}.sec
+		else
+			fitimage_emit_section_tee ${1} "tee@${teecount}" ${TEE_PATH}.sec
+		fi
 	fi
 
 	#
@@ -501,11 +496,15 @@ fitimage_assemble() {
 	#
 	fitimage_emit_section_maint ${1} confstart
 
-	if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
-		fitimage_emit_section_config ${1} "${kernelcount}" "${dtbref}" "${ramdiskcount}" "${setupcount}"
-	else
-		fitimage_emit_section_config ${1} "${kernelcount}" "fdt@${dtbcount}" "${ramdiskcount}" "${setupcount}"
+	if [ "x${FITIMAGE_DTB_BY_NAME}" != "x1" ] ; then
+		dtbref="fdt@${dtbcount}"
 	fi
+	if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
+		teeref="${OPTEEFLAVOR}.optee"
+	else
+		teeref="tee@${teecount}"
+	fi
+	fitimage_emit_section_config ${1} "${kernelcount}" "${dtbref}" "${ramdiskcount}" "${setupcount}" "${teeref}"
 
 	fitimage_emit_section_maint ${1} sectend
 
