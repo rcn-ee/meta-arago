@@ -451,11 +451,11 @@ fitimage_assemble() {
 	#
 	if test -n "${OPTEEFLAVOR}"; then
 		mkdir -p ${B}/usr
-		rm -f ${B}/usr/${OPTEEFLAVOR}
-		if [ -e "${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}" ]; then
-			cp ${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR} ${B}/usr/.
+		rm -f ${B}/usr/${OPTEEFLAVOR}.optee
+		if [ -e "${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}.optee" ]; then
+			cp ${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}.optee ${B}/usr/.
 		fi
-		TEE_PATH="usr/${OPTEEFLAVOR}"
+		TEE_PATH="usr/${OPTEEFLAVOR}.optee"
 		fitimage_ti_secure ${TEE_PATH} ${TEE_PATH}.sec
 		if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
 			fitimage_emit_section_tee ${1} ${OPTEEFLAVOR}.optee ${TEE_PATH}.sec
