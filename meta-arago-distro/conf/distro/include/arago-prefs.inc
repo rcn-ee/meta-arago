@@ -1,18 +1,3 @@
-# Set *target* toolchain preferences at global distro level.
-# Cross and SDK toolchain preferences are set in toolchain-*.inc files
-GCCVERSION ?= "linaro-5.3%"
-BINUVERSION ?= "linaro-2.25%"
-GLIBCVERSION ?= "2.23%"
-GLIBCINITVERSION ?= "2.23%"
-LINUXLIBCVERSION ?= "4.4"
-
-PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
-PREFERRED_VERSION_binutils ?= "${BINUVERSION}"
-PREFERRED_VERSION_linux-libc-headers ?= "${LINUXLIBCVERSION}"
-PREFERRED_VERSION_glibc ?= "${GLIBCVERSION}"
-PREFERRED_VERSION_glibc-locale ?= "${GLIBCVERSION}"
-PREFERRED_VERSION_glibc-initial ?= "${GLIBCINITVERSION}"
-
 # Set preferred Qt5 versions. Different namespace from Qt4, so no conflict
 include conf/distro/include/qt5-versions.inc
 
