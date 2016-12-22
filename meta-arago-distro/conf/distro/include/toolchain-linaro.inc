@@ -28,14 +28,15 @@ PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "gdb-cross-can
 PREFERRED_PROVIDER_libgcc = "external-linaro-toolchain"
 PREFERRED_PROVIDER_gcc-runtime = "external-linaro-toolchain"
 
-SDKGCCVERSION ?= "linaro-5.3%"
-SDKBINUVERSION ?= "linaro-2.25%"
-SDKGLIBCVERSION ?= "2.23%"
+# Set Cross and SDK toolchain preferences
+SDKGCCVERSION ?= "linaro-6.2%"
+SDKBINUVERSION ?= "linaro-2.27%"
+SDKGLIBCVERSION ?= "2.24%"
 SDKLINUXLIBCVERSION ?= "4.4%"
 
-PREFERRED_VERSION_gcc-crosssdk-${SDK_ARCH} ?= "${SDKGCCVERSION}"
-PREFERRED_VERSION_gcc-crosssdk-initial-${SDK_ARCH} ?= "${SDKGCCVERSION}"
-PREFERRED_VERSION_binutils-crosssdk-${SDK_ARCH} ?= "${SDKBINUVERSION}"
+PREFERRED_VERSION_gcc-crosssdk-${SDK_SYS} ?= "${SDKGCCVERSION}"
+PREFERRED_VERSION_gcc-crosssdk-initial-${SDK_SYS} ?= "${SDKGCCVERSION}"
+PREFERRED_VERSION_binutils-crosssdk-${SDK_SYS} ?= "${SDKBINUVERSION}"
 
 PREFERRED_VERSION_nativesdk-gcc-runtime ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_nativesdk-libgcc ?= "${SDKGCCVERSION}"
@@ -43,3 +44,18 @@ PREFERRED_VERSION_nativesdk-libgcc-initial ?= "${SDKGCCVERSION}"
 PREFERRED_VERSION_nativesdk-linux-libc-headers ?= "${SDKLINUXLIBCVERSION}"
 PREFERRED_VERSION_nativesdk-glibc ?= "${SDKGLIBCVERSION}"
 PREFERRED_VERSION_nativesdk-glibc-initial ?= "${SDKGLIBCVERSION}"
+
+# Set target toolchain preferences to match Cross/SDK by default
+# Can be overwritten globally, if needed
+GCCVERSION ?= "linaro-6.2%"
+BINUVERSION ?= "linaro-2.27%"
+GLIBCVERSION ?= "2.24%"
+GLIBCINITVERSION ?= "2.24%"
+LINUXLIBCVERSION ?= "4.4"
+
+PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
+PREFERRED_VERSION_binutils ?= "${BINUVERSION}"
+PREFERRED_VERSION_linux-libc-headers ?= "${LINUXLIBCVERSION}"
+PREFERRED_VERSION_glibc ?= "${GLIBCVERSION}"
+PREFERRED_VERSION_glibc-locale ?= "${GLIBCVERSION}"
+PREFERRED_VERSION_glibc-initial ?= "${GLIBCINITVERSION}"
