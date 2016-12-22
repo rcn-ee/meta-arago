@@ -57,7 +57,7 @@ pkg_postinst_kernel-devicetree () {
 	cd /${KERNEL_IMAGEDEST}
 	for DTB in ${KERNEL_DEVICETREE}
 	do
-		DTB_BASE_NAME=`basename ${DTB} | awk -F "." '{print $1}'`
+		DTB_BASE_NAME=`basename ${DTB} .dtb`
 		DTB_SYMLINK_NAME=`echo ${KERNEL_IMAGE_SYMLINK_NAME} | sed "s/${MACHINE}/${DTB_BASE_NAME}/g"`
 		update-alternatives --install /${KERNEL_IMAGEDEST}/${DTB_BASE_NAME}.dtb ${DTB_BASE_NAME}.dtb /boot/devicetree-${DTB_SYMLINK_NAME}.dtb ${KERNEL_PRIORITY} || true
 	done
@@ -67,7 +67,7 @@ pkg_postrm_kernel-devicetree () {
 	cd /${KERNEL_IMAGEDEST}
 	for DTB in ${KERNEL_DEVICETREE}
 	do
-		DTB_BASE_NAME=`basename ${DTB} | awk -F "." '{print $1}'`
+		DTB_BASE_NAME=`basename ${DTB} .dtb`
 		DTB_SYMLINK_NAME=`echo ${KERNEL_IMAGE_SYMLINK_NAME} | sed "s/${MACHINE}/${DTB_BASE_NAME}/g"`
 		update-alternatives --remove ${DTB_BASE_NAME}.dtb /boot/devicetree-${DTB_SYMLINK_NAME}.dtb ${KERNEL_PRIORITY} || true
 	done
