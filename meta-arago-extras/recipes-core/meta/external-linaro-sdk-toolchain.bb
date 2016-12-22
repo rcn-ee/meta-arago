@@ -2,8 +2,9 @@ inherit cross-canadian
 
 require external-linaro-bfd-version.inc
 
-PR = "r5"
+PR = "r6"
 
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 INHIBIT_DEFAULT_DEPS = "1"
