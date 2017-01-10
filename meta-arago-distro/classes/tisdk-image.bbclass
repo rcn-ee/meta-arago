@@ -168,11 +168,11 @@ Your company is responsible for confirming the applicable license terms for any 
 
 <h2><b>Export Information</b></h2>
 <p>
-ECCN for Software included in this release: 5D002 License Exception TSU
+ECCN for Software included in this release: Publicly Available
 </p>
 
 <p>
-ECCN for Technology (e.g., user documentation, specifications) included in this release: 5D002 License Exception TSU
+ECCN for Technology (e.g., user documentation, specifications) included in this release: Publicly Available
 </p>
 
 <h2><b>Manifest</b></h2>
