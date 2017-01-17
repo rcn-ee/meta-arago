@@ -1,20 +1,21 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago6"
+PR_append = ".arago7"
 
 is_armv7 = "1"
 
 SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
            file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
 "
-BRANCH = "ti_optee_os-next"
-SRCREV = "8573c0500487bd341aa5b37870ac92fc54292914"
+BRANCH = "ti_optee_os"
+SRCREV = "4556015010dbf648d236a72857e927317b0f6438"
 
 EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX}  \
                 CROSS_COMPILE_ta_arm32=${HOST_PREFIX}  \
                 ta-targets=ta_arm32 \
                 LIBGCC_LOCATE_CFLAGS=--sysroot=${STAGING_DIR_HOST} \
                 CFG_TEE_TA_LOG_LEVEL=0 \
+                CFG_TEE_CORE_LOG_LEVEL=2 \
 "
 
 do_compile() {
