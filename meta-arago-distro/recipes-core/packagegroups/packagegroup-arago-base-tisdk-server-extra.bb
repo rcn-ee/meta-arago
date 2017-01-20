@@ -1,7 +1,7 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r14"
+PR = "r15"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -114,31 +114,35 @@ ARAGO_TI_KEYSTONE_PKGS = "\
 
 ARAGO_TI_PKGS = ""
 ARAGO_TI_PKGS_append_keystone = " ${ARAGO_TI_KEYSTONE_PKGS}"
+
+# Disable netapi due to libnl and xfrm conflict
+#    netapi
+#    netapi-test
 ARAGO_TI_PKGS_append_k2l-evm = "\
     dfe-lld \
     iqn2-lld \
-    netapi \
-    netapi-test \
     hplib \
     nwal-lld \
     "
 
+# Disable netapi due to libnl and xfrm conflict
+#    netapi
+#    netapi-test
 ARAGO_TI_PKGS_append_k2hk-evm = "\
     srio-lld \
     mmap-lld \
     hyplnk-lld \
     aif2-lld \
-    netapi \
-    netapi-test \
     hplib \
     nwal-lld \
     "
 
+# Disable netapi due to libnl and xfrm conflict
+#    netapi
+#    netapi-test
 ARAGO_TI_PKGS_append_k2e = "\
     mmap-lld \
     hyplnk-lld \
-    netapi \
-    netapi-test \
     hplib \
     nwal-lld \
     "
