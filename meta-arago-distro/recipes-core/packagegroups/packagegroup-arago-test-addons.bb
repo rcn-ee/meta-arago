@@ -1,7 +1,7 @@
 DESCRIPTION = "Task to install additional utilities/demos for test image"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r12"
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -20,6 +20,8 @@ TEST_ADDONS_TI_append_omap-a15 = " \
     cmem-test \
     "
 
+# Disable ipsecmgr due to libnl and xfrm conflict
+#    ipsecmgr
 TEST_ADDONS_TI_append_keystone = " \
     mpm-transport-test \
     multiprocmgr-test \
@@ -33,7 +35,6 @@ TEST_ADDONS_TI_append_keystone = " \
     sa-lld-test \
     traceframework-test \
     udma-test \
-    ipsecmgr \
     cmem-test \
     "
 
@@ -44,6 +45,8 @@ TEST_ADDONS_TI_append_keystone = " \
 #    ipc-transport-qmss-test
 #    netapi-test
 
+# Disable netapi due to libnl and xfrm conflict
+#    netapi-test
 TEST_ADDONS_TI_append_k2hk-evm = " \
     srio-lld-test \
     ipc-transport-srio-test \
@@ -54,9 +57,10 @@ TEST_ADDONS_TI_append_k2hk-evm = " \
     nwal-lld-test \
     hplib-test \
     nwal-lld \
-    netapi-test \
     "
 
+# Disable netapi due to libnl and xfrm conflict
+#    netapi-test
 TEST_ADDONS_TI_append_k2l-evm = " \
     dfe-lld-test \
     iqn2-lld-test \
@@ -64,9 +68,10 @@ TEST_ADDONS_TI_append_k2l-evm = " \
     hplib-test \
     nwal-lld \
     ipc-transport-qmss-test \
-    netapi-test \
     "
 
+# Disable netapi due to libnl and xfrm conflict
+#    netapi-test
 TEST_ADDONS_TI_append_k2e = " \
     mmap-lld-test \
     hyplnk-lld-test \
@@ -74,7 +79,6 @@ TEST_ADDONS_TI_append_k2e = " \
     hplib-test \
     nwal-lld \
     ipc-transport-qmss-test \
-    netapi-test \
     "
 
 RDEPENDS_${PN} = "\
