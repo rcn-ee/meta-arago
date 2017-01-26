@@ -1,13 +1,13 @@
 DESCRIPTION = "Task to install wireless headers and libraries into the SDK"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
 BLUETOOTH_STACK = "\
-    bluez4-dev \
+    bluez5-dev \
 "
 
 CONNECTIVITY_RDEPENDS = ""
