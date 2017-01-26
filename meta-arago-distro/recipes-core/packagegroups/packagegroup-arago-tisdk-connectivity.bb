@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r35"
+PR = "r36"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -12,8 +12,6 @@ WLAN_COMMON = "\
     wireless-tools \
     iw \
     softap-udhcpd-config \
-    obexd \
-    obex-client \
     pulseaudio \
     pulseaudio-server \
     pulseaudio-module-loopback \
@@ -31,6 +29,7 @@ WLAN_COMMON = "\
 
 FIRMWARE_AND_DRIVERS = "\
     wl18xx-firmware \
+    bt-firmware \
 "
 
 DEMO_APPS = "\
@@ -38,9 +37,10 @@ DEMO_APPS = "\
 "
 
 BLUETOOTH_STACK = "\
-    bluez4 \
-    bluez4-agent \
-    bluez-hcidump \
+    bluez5 \
+    bluez5-obex \
+    bluez5-noinst-tools \
+    bluez5-testtools \
     uim \
 "
 
@@ -56,7 +56,6 @@ CONNECTIVITY_RDEPENDS_append_ti33x = "\
     ${DEMO_APPS} \
     ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
-    bt-firmware \
 "
 
 CONNECTIVITY_RDEPENDS_append_ti43x = "\
@@ -70,7 +69,6 @@ CONNECTIVITY_RDEPENDS_append_dra7xx = "\
     ${WLAN_COMMON} \
     ${BLUETOOTH_STACK} \
     ${FIRMWARE_AND_DRIVERS} \
-    bt-firmware \
 "
 
 RDEPENDS_${PN} = "\
