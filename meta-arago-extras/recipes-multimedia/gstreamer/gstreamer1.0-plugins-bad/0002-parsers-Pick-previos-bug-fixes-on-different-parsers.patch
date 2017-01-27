@@ -1,0 +1,146 @@
+From c748e947ff35c4137178aef9bf229e0c67952982 Mon Sep 17 00:00:00 2001
+From: Pooja Prajod <a0132412@ti.com>
+Date: Fri, 20 Jan 2017 14:57:29 +0530
+Subject: [PATCH 2/5] parsers: Pick previos bug fixes on different parsers
+
+The following bug fixes which were previously identified are picked :
+1. Increase rank for vc1parse and jpegparse
+2. Modify h264 and mpeg4 parsers to interpolate pts
+3. Fix create() width and height calculation on h264parse
+
+Signed-off-by: Pooja Prajod <a0132412@ti.com>
+---
+ gst/jpegformat/gstjpegformat.c        |  2 +-
+ gst/jpegformat/gstjpegparse.c         |  2 +-
+ gst/videoparsers/gsth264parse.c       | 22 +++++++---------------
+ gst/videoparsers/gstmpeg4videoparse.c |  2 +-
+ gst/videoparsers/gstmpegvideoparse.c  |  2 +-
+ gst/videoparsers/plugin.c             |  2 +-
+ 6 files changed, 12 insertions(+), 20 deletions(-)
+
+diff --git a/gst/jpegformat/gstjpegformat.c b/gst/jpegformat/gstjpegformat.c
+index b410466..ecb9311 100644
+--- a/gst/jpegformat/gstjpegformat.c
++++ b/gst/jpegformat/gstjpegformat.c
+@@ -30,7 +30,7 @@
+ static gboolean
+ plugin_init (GstPlugin * plugin)
+ {
+-  if (!gst_element_register (plugin, "jpegparse", GST_RANK_NONE,
++  if (!gst_element_register (plugin, "jpegparse", GST_RANK_PRIMARY + 2,
+           GST_TYPE_JPEG_PARSE))
+     return FALSE;
+   if (!gst_element_register (plugin, "jifmux", GST_RANK_SECONDARY,
+diff --git a/gst/jpegformat/gstjpegparse.c b/gst/jpegformat/gstjpegparse.c
+index 77e53a6..5bfba7b 100644
+--- a/gst/jpegformat/gstjpegparse.c
++++ b/gst/jpegformat/gstjpegparse.c
+@@ -151,7 +151,7 @@ gst_jpeg_parse_class_init (GstJpegParseClass * klass)
+ 
+   gst_element_class_set_static_metadata (gstelement_class,
+       "JPEG stream parser",
+-      "Video/Parser",
++      "Codec/Parser/Video",
+       "Parse JPEG images into single-frame buffers",
+       "Arnout Vandecappelle (Essensium/Mind) <arnout@mind.be>");
+ 
+diff --git a/gst/videoparsers/gsth264parse.c b/gst/videoparsers/gsth264parse.c
+index 05b6b75..6fe2914 100644
+--- a/gst/videoparsers/gsth264parse.c
++++ b/gst/videoparsers/gsth264parse.c
+@@ -162,7 +162,7 @@ static void
+ gst_h264_parse_init (GstH264Parse * h264parse)
+ {
+   h264parse->frame_out = gst_adapter_new ();
+-  gst_base_parse_set_pts_interpolation (GST_BASE_PARSE (h264parse), FALSE);
++  gst_base_parse_set_pts_interpolation (GST_BASE_PARSE (h264parse), TRUE);
+   GST_PAD_SET_ACCEPT_INTERSECT (GST_BASE_PARSE_SINK_PAD (h264parse));
+   GST_PAD_SET_ACCEPT_TEMPLATE (GST_BASE_PARSE_SINK_PAD (h264parse));
+ }
+@@ -1722,13 +1722,8 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
+     gint fps_num, fps_den;
+     gint par_n, par_d;
+ 
+-    if (sps->frame_cropping_flag) {
+-      crop_width = sps->crop_rect_width;
+-      crop_height = sps->crop_rect_height;
+-    } else {
+-      crop_width = sps->width;
+-      crop_height = sps->height;
+-    }
++    crop_width = (sps->crop_rect_width > sps->width)? sps->crop_rect_width: sps->width;
++    crop_height = (sps->crop_rect_height > sps->height)? sps->crop_rect_height: sps->height;
+ 
+     if (G_UNLIKELY (h264parse->width != crop_width ||
+             h264parse->height != crop_height)) {
+@@ -1762,7 +1757,7 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
+     }
+ 
+     if (G_UNLIKELY (modified || h264parse->update_caps)) {
+-      gint width, height;
++      gint width=0, height=0;
+       GstClockTime latency;
+ 
+       const gchar *caps_mview_mode = NULL;
+@@ -1774,16 +1769,13 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
+ 
+       caps = gst_caps_copy (sink_caps);
+ 
+-      /* sps should give this but upstream overrides */
+       if (s && gst_structure_has_field (s, "width"))
+         gst_structure_get_int (s, "width", &width);
+-      else
+-        width = h264parse->width;
+-
++      width = (width > h264parse->width)? width: h264parse->width;
++     
+       if (s && gst_structure_has_field (s, "height"))
+         gst_structure_get_int (s, "height", &height);
+-      else
+-        height = h264parse->height;
++      height = (height > h264parse->height)? height: h264parse->height;
+ 
+       if (s == NULL ||
+           !gst_structure_get_fraction (s, "pixel-aspect-ratio", &par_n,
+diff --git a/gst/videoparsers/gstmpeg4videoparse.c b/gst/videoparsers/gstmpeg4videoparse.c
+index a1fd3b2..7912254 100644
+--- a/gst/videoparsers/gstmpeg4videoparse.c
++++ b/gst/videoparsers/gstmpeg4videoparse.c
+@@ -185,7 +185,7 @@ gst_mpeg4vparse_init (GstMpeg4VParse * parse)
+   parse->interval = DEFAULT_CONFIG_INTERVAL;
+   parse->last_report = GST_CLOCK_TIME_NONE;
+ 
+-  gst_base_parse_set_pts_interpolation (GST_BASE_PARSE (parse), FALSE);
++  gst_base_parse_set_pts_interpolation (GST_BASE_PARSE (parse), TRUE);
+   GST_PAD_SET_ACCEPT_INTERSECT (GST_BASE_PARSE_SINK_PAD (parse));
+   GST_PAD_SET_ACCEPT_TEMPLATE (GST_BASE_PARSE_SINK_PAD (parse));
+ }
+diff --git a/gst/videoparsers/gstmpegvideoparse.c b/gst/videoparsers/gstmpegvideoparse.c
+index bf71a3e..f203cca 100644
+--- a/gst/videoparsers/gstmpegvideoparse.c
++++ b/gst/videoparsers/gstmpegvideoparse.c
+@@ -175,7 +175,7 @@ gst_mpegv_parse_init (GstMpegvParse * parse)
+ {
+   parse->config_flags = FLAG_NONE;
+ 
+-  gst_base_parse_set_pts_interpolation (GST_BASE_PARSE (parse), FALSE);
++  gst_base_parse_set_pts_interpolation (GST_BASE_PARSE (parse), TRUE);
+   GST_PAD_SET_ACCEPT_INTERSECT (GST_BASE_PARSE_SINK_PAD (parse));
+   GST_PAD_SET_ACCEPT_TEMPLATE (GST_BASE_PARSE_SINK_PAD (parse));
+ }
+diff --git a/gst/videoparsers/plugin.c b/gst/videoparsers/plugin.c
+index 79d1df6..fb866b5 100644
+--- a/gst/videoparsers/plugin.c
++++ b/gst/videoparsers/plugin.c
+@@ -51,7 +51,7 @@ plugin_init (GstPlugin * plugin)
+   ret |= gst_element_register (plugin, "h265parse",
+       GST_RANK_SECONDARY, GST_TYPE_H265_PARSE);
+   ret |= gst_element_register (plugin, "vc1parse",
+-      GST_RANK_NONE, GST_TYPE_VC1_PARSE);
++      GST_RANK_PRIMARY + 2, GST_TYPE_VC1_PARSE);
+ 
+   return ret;
+ }
+-- 
+1.9.1
+
