@@ -1,0 +1,1592 @@
+From 44ba6f9839a410e981c9c941f099316ebfac2659 Mon Sep 17 00:00:00 2001
+From: Pooja Prajod <a0132412@ti.com>
+Date: Fri, 20 Jan 2017 16:18:22 +0530
+Subject: [PATCH 3/5] gstkmssink: Add support for KMS based sink
+
+The following features are enabled:
+1. Add support for kmssink
+2. Fix memory leak by using API's that do not hold
+   reference to GstMemory
+3. Restrict the number of buffers that will be allocated
+   by kmssink bufferpool
+4. Use Atomic mode setting instead of SetPlane
+5. Store encoder and plane data as static data to enable
+   same process looping usecase
+6. Handle usecase where display is disabled by default
+
+Signed-off-by: Pooja Prajod <a0132412@ti.com>
+---
+ configure.ac               |  14 +
+ sys/Makefile.am            |  10 +-
+ sys/kms/Makefile.am        |  28 ++
+ sys/kms/gstdrmutils.c      | 347 +++++++++++++++++++++
+ sys/kms/gstdrmutils.h      |  50 +++
+ sys/kms/gstkmsbufferpriv.c | 121 ++++++++
+ sys/kms/gstkmsbufferpriv.h |  64 ++++
+ sys/kms/gstkmssink.c       | 740 +++++++++++++++++++++++++++++++++++++++++++++
+ sys/kms/gstkmssink.h       |  92 ++++++
+ 9 files changed, 1464 insertions(+), 2 deletions(-)
+ create mode 100644 sys/kms/Makefile.am
+ create mode 100644 sys/kms/gstdrmutils.c
+ create mode 100644 sys/kms/gstdrmutils.h
+ create mode 100644 sys/kms/gstkmsbufferpriv.c
+ create mode 100644 sys/kms/gstkmsbufferpriv.h
+ create mode 100644 sys/kms/gstkmssink.c
+ create mode 100644 sys/kms/gstkmssink.h
+
+diff --git a/configure.ac b/configure.ac
+index e254605..9fdfbc7 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2324,6 +2324,18 @@ AG_GST_CHECK_FEATURE(KATE, [Kate], kate, [
+   AC_SUBST(TIGER_LIBS)
+ ],,,[AM_CONDITIONAL(USE_TIGER, false)])
+ 
++	
++	
++dnl *** kms ***
++translit(dnm, m, l) AM_CONDITIONAL(USE_KMS, true)
++AG_GST_CHECK_FEATURE(KMS, [kmssink], kms, [
++PKG_CHECK_MODULES([DRM], [libdrm libdrm_omap], HAVE_KMS=yes, HAVE_KMS=no)
++PKG_CHECK_MODULES(LIBDCE, [libdce >= 1.0.0], HAVE_KMS=yes, HAVE_KMS=no)
++AC_SUBST(DRM_CFLAGS)
++AC_SUBST(DRM_LIBS)
++])
++
++
+ dnl *** ladspa ***
+ translit(dnm, m, l) AM_CONDITIONAL(USE_LADSPA, true)
+ AG_GST_CHECK_FEATURE(LADSPA, [ladspa], ladspa, [
+@@ -3383,6 +3395,7 @@ AM_CONDITIONAL(USE_GTK3_GL, false)
+ AM_CONDITIONAL(USE_HLS, false)
+ AM_CONDITIONAL(USE_KATE, false)
+ AM_CONDITIONAL(USE_TIGER, false)
++AM_CONDITIONAL(USE_KMS, false)
+ AM_CONDITIONAL(USE_LADSPA, false)
+ AM_CONDITIONAL(USE_LV2, false)
+ AM_CONDITIONAL(USE_LIBDE265, false)
+@@ -3632,6 +3645,7 @@ sys/fbdev/Makefile
+ sys/linsys/Makefile
+ sys/nvenc/Makefile
+ sys/opensles/Makefile
++sys/kms/Makefile
+ sys/shm/Makefile
+ sys/tinyalsa/Makefile
+ sys/uvch264/Makefile
+diff --git a/sys/Makefile.am b/sys/Makefile.am
+index 32f79fb..325b4af 100644
+--- a/sys/Makefile.am
++++ b/sys/Makefile.am
+@@ -87,6 +87,12 @@ PVR_DIR=pvr2d
+ else
+ PVR_DIR=
+ endif
++	
++if USE_KMS
++KMS_DIR=kms
++else
++KMS_DIR=
++endif
+ 
+ if USE_SHM
+ SHM_DIR=shm
+@@ -148,10 +154,10 @@ else
+ TINYALSA_DIR=
+ endif
+ 
+-SUBDIRS = $(ACM_DIR) $(ANDROID_MEDIA_DIR) $(APPLE_MEDIA_DIR) $(AVC_DIR) $(BLUEZ_DIR) $(D3DVIDEOSINK_DIR) $(DECKLINK_DIR) $(DIRECTSOUND_DIR) $(WINKS_DIR) $(DVB_DIR) $(FBDEV_DIR) $(LINSYS_DIR) $(OPENSLES_DIR) $(PVR_DIR) $(SHM_DIR) $(UVCH264_DIR) $(VCD_DIR) $(VDPAU_DIR) $(WININET_DIR) $(WINSCREENCAP_DIR) $(WASAPI_DIR) $(NVENC_DIR) $(TINYALSA_DIR)
++SUBDIRS = $(ACM_DIR) $(ANDROID_MEDIA_DIR) $(APPLE_MEDIA_DIR) $(AVC_DIR) $(BLUEZ_DIR) $(D3DVIDEOSINK_DIR) $(DECKLINK_DIR) $(DIRECTSOUND_DIR) $(WINKS_DIR) $(DVB_DIR) $(FBDEV_DIR) $(LINSYS_DIR) $(OPENSLES_DIR) $(PVR_DIR) $(KMS_DIR) $(SHM_DIR) $(UVCH264_DIR) $(VCD_DIR) $(VDPAU_DIR) $(WININET_DIR) $(WINSCREENCAP_DIR) $(WASAPI_DIR) $(NVENC_DIR) $(TINYALSA_DIR)
+ 
+ DIST_SUBDIRS = acmenc acmmp3dec androidmedia applemedia applemedia-nonpublic avc bluez d3dvideosink decklink directsound dvb linsys fbdev dshowdecwrapper dshowsrcwrapper dshowvideosink \
+-		opensles pvr2d shm uvch264 vcd vdpau wasapi wininet winks winscreencap \
++		opensles pvr2d kms shm uvch264 vcd vdpau wasapi wininet winks winscreencap \
+ 		nvenc tinyalsa
+ 
+ include $(top_srcdir)/common/parallel-subdirs.mak
+diff --git a/sys/kms/Makefile.am b/sys/kms/Makefile.am
+new file mode 100644
+index 0000000..6d56073
+--- /dev/null
++++ b/sys/kms/Makefile.am
+@@ -0,0 +1,28 @@
++plugin_LTLIBRARIES = libgstkmssink.la
++
++libgstkmssink_la_SOURCES = \
++	gstkmssink.c \
++	gstkmsbufferpriv.c \
++	gstdrmutils.c
++
++libgstkmssink_la_CFLAGS = \
++	$(GST_PLUGINS_BAD_CFLAGS) \
++	$(GST_PLUGINS_BASE_CFLAGS) \
++	$(GST_BASE_CFLAGS) \
++	$(LIBDCE_CFLAGS) \
++	$(GST_CFLAGS) \
++	$(DRM_CFLAGS)
++
++libgstkmssink_la_LIBADD = \
++	$(GST_PLUGINS_BASE_LIBS) \
++	$(GST_BASE_LIBS) \
++	$(GST_LIBS) \
++	$(LIBDCE_LIBS) \
++	$(DRM_LIBS) \
++	-lgstvideo-$(GST_API_VERSION) \
++	$(top_builddir)/gst-libs/gst/drm/libgstdrm-$(GST_API_VERSION).la
++
++libgstkmssink_la_LDFLAGS = $(GST_PLUGIN_LDFLAGS)
++libgstkmssink_la_LIBTOOLFLAGS = --tag=disable-static
++
++noinst_HEADERS = gstkmssink.h gstdrmutils.h gstkmsbufferpriv.h
+diff --git a/sys/kms/gstdrmutils.c b/sys/kms/gstdrmutils.c
+new file mode 100644
+index 0000000..0e67a48
+--- /dev/null
++++ b/sys/kms/gstdrmutils.c
+@@ -0,0 +1,347 @@
++/* GStreamer
++ *
++ * Copyright (C) 2012 Texas Instruments
++ * Copyright (C) 2012 Collabora Ltd
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
++ * Boston, MA 02111-1307, USA.
++ */
++
++#include <gst/gst.h>
++#include "gstdrmutils.h"
++
++static int stored_enc = 0;
++static drmModeEncoder *enc;
++static struct plane_data *stored_plane;
++
++GST_DEBUG_CATEGORY_EXTERN (gst_debug_kms_sink);
++#define GST_CAT_DEFAULT gst_debug_kms_sink
++
++void
++gst_drm_connector_cleanup (int fd, struct connector *c)
++{
++  if (c->connector) {
++    drmModeFreeConnector (c->connector);
++    c->connector = NULL;
++  }
++
++  if (c->fb_id) {
++    drmModeRmFB (fd, c->fb_id);
++    c->fb_id = 0;
++  }
++  if (c->fb_bo) {
++    omap_bo_del (c->fb_bo);
++    c->fb_bo = NULL;
++  }
++}
++
++
++static gboolean
++gst_drm_connector_find_mode_and_plane_helper (int fd,
++    struct omap_device *dev, int width, int height,
++    drmModeRes * resources, drmModePlaneRes * plane_resources,
++    struct connector *c)
++{
++  int i, best_area = 0, ret;
++  struct drm_set_client_cap req;
++  unsigned int j;
++  int32_t crtc;
++
++  gst_drm_connector_cleanup (fd, c);
++
++  req.capability = DRM_CLIENT_CAP_ATOMIC;
++  req.value = 1;
++  ret = ioctl(fd, DRM_IOCTL_SET_CLIENT_CAP, &req);
++  if(ret < 0) {
++    GST_DEBUG("drm set atomic cap failed");
++    goto fail;
++  }
++
++  /* First, find the connector & mode */
++  c->connector = drmModeGetConnector (fd, c->id);
++  if (!c->connector)
++    goto error_no_connector;
++
++  if (!c->connector->count_modes)
++    goto error_no_mode;
++
++  /* just look for the highest resolution: */
++  for (i = 0; i < c->connector->count_modes; i++) {
++    drmModeModeInfo *mode = &c->connector->modes[i];
++    int area = mode->hdisplay * mode->vdisplay;
++
++    if (area > best_area) {
++      c->mode = mode;
++      best_area = area;
++    }
++  }
++
++  if (c->mode == NULL) {
++    /* XXX: just pick the first available mode. Not sure this is correct... */
++    c->mode = &c->connector->modes[0];
++#if 0
++    goto error_no_mode;
++#endif
++  }
++
++  /* Now get the encoder */
++
++  if (stored_enc) {
++    c->encoder = enc;
++    c->connector->encoder_id = stored_enc;
++  } else {
++    c->encoder = drmModeGetEncoder (fd, c->connector->encoder_id);
++    enc = c->encoder;
++    stored_enc = c->connector->encoder_id;
++  }
++
++  if (!c->encoder) {
++    for (i = 0; i < c->connector->count_encoders; ++i) {
++       c->encoder = drmModeGetEncoder(fd, c->connector->encoders[i]);
++       if (!c->encoder) {
++          GST_DEBUG ("Cannot retrieve encoder %u:%u (%d): %m\n",
++              i, c->connector->encoders[i], errno);
++          continue;
++       }
++       /* iterate all global CRTCs */
++       for (j = 0; j < resources->count_crtcs; ++j) {
++          /* check whether this CRTC works with the encoder */
++          if (!(c->encoder->possible_crtcs & (1 << j)))
++             continue;
++          crtc = resources->crtcs[j];
++          break;
++       }
++      if (crtc >= 0) {
++         enc = c->encoder;
++         stored_enc = c->connector->encoder_id;
++         c->crtc = crtc;
++         goto found_encoder;
++      }
++    }
++  }
++
++found_encoder:
++
++  if (!c->encoder)
++    goto error_no_encoder;
++
++  if (c->crtc == -1)
++    c->crtc = c->encoder->crtc_id;
++
++  /* and figure out which crtc index it is: */
++  c->pipe = -1;
++  for (i = 0; i < resources->count_crtcs; i++) {
++    if (c->crtc == (int) resources->crtcs[i]) {
++      c->pipe = i;
++      break;
++    }
++  }
++
++  if (c->pipe == -1)
++    goto error_no_crtc;
++
++  if (stored_plane) {
++    c->pdata = stored_plane;
++  } else {
++
++    c->pdata = calloc(sizeof(struct plane_data), 1);
++    for (i = 0; i < plane_resources->count_planes; i++) {
++      drmModePlane *plane = drmModeGetPlane (fd, plane_resources->planes[i]);
++      int propc;
++      if (plane->possible_crtcs & (1 << c->pipe)) {
++        drmModeObjectPropertiesPtr props = drmModeObjectGetProperties(fd, plane_resources->planes[i], DRM_MODE_OBJECT_PLANE);
++        for(propc = 0; propc < props->count_props; propc++) {
++          drmModePropertyPtr prop = drmModeGetProperty(fd, props->props[propc]);
++          if(strcmp(prop->name, "FB_ID") == 0)
++            c->pdata[0].fb_id_property = props->props[propc];
++        }
++        c->pdata[0].plane = plane_resources->planes[i];
++        stored_plane = c->pdata;
++        break;
++      }
++    }
++    if (stored_plane == NULL)
++      goto error_no_plane;
++  }
++  c->fb_bo = omap_bo_new (dev, best_area * 2, OMAP_BO_WC);
++  if (c->fb_bo) {
++    uint32_t fourcc = DRM_FORMAT_RGB565;
++    uint32_t handles[4] = { omap_bo_handle (c->fb_bo) };
++    uint32_t pitches[4] = { c->mode->hdisplay * 2 };
++    uint32_t offsets[4] = { 0 };
++    ret = drmModeAddFB2 (fd, c->mode->hdisplay, c->mode->vdisplay,
++        fourcc, handles, pitches, offsets, &c->fb_id, 0);
++    if (ret) {
++      GST_DEBUG ("RGB565 AddFb2 failed");
++    }
++  }
++
++  /* now set the desired mode: */
++  ret = drmModeSetCrtc (fd, c->crtc, c->fb_id, 0, 0, &c->id, 1, c->mode);
++  if (ret) {
++    GST_DEBUG ("SetCrtc failed");
++  }
++
++  return TRUE;
++
++fail:
++  gst_drm_connector_cleanup (fd, c);
++
++  return FALSE;
++
++error_no_connector:
++  GST_DEBUG ("could not get connector %s", strerror (errno));
++  goto fail;
++
++error_no_mode:
++  GST_DEBUG ("could not find mode %dx%d (count_modes %d)",
++      width, height, c->connector->count_modes);
++  goto fail;
++
++error_no_encoder:
++  GST_DEBUG ("could not get encoder: %s", strerror (errno));
++  goto fail;
++
++error_no_crtc:
++  GST_DEBUG ("couldn't find a crtc");
++  goto fail;
++
++error_no_plane:
++  GST_DEBUG ("couldn't find a plane");
++  goto fail;
++}
++
++gboolean
++gst_drm_connector_find_mode_and_plane (int fd,
++    struct omap_device *dev, int width, int height,
++    drmModeRes * resources, drmModePlaneRes * plane_resources,
++    struct connector *c)
++{
++  int i;
++  gboolean found = FALSE;
++
++  /* First, find the connector & mode */
++  if (c->id == 0) {
++    /* Any connector */
++    GST_DEBUG ("Any connector, %d available", resources->count_connectors);
++    for (i = 0; i < resources->count_connectors; i++) {
++      GST_DEBUG ("  %d", resources->connectors[i]);
++    }
++    for (i = 0; i < resources->count_connectors; i++) {
++      GST_DEBUG ("Trying connector %d: %d", i, resources->connectors[i]);
++      c->id = resources->connectors[i];
++      if (gst_drm_connector_find_mode_and_plane_helper (fd, dev, width, height,
++              resources, plane_resources, c)) {
++        GST_DEBUG ("Found suitable connector");
++        found = TRUE;
++        break;
++      }
++      GST_DEBUG ("Connector not suitable");
++    }
++  } else {
++    /* A specific connector */
++    GST_DEBUG ("Connector %d", c->id);
++    found =
++        gst_drm_connector_find_mode_and_plane_helper (fd, dev, width, height,
++        resources, plane_resources, c);
++  }
++
++  return found;
++}
++
++/* table nicked off libdrm's modetest.c */
++/* *INDENT-OFF* */
++static const struct {
++  int type_id;
++  const char *type_name;
++} connector_type_names[] = {
++  { DRM_MODE_CONNECTOR_Unknown, "unknown" },
++  { DRM_MODE_CONNECTOR_VGA, "VGA" },
++  { DRM_MODE_CONNECTOR_DVII, "DVI-I" },
++  { DRM_MODE_CONNECTOR_DVID, "DVI-D" },
++  { DRM_MODE_CONNECTOR_DVIA, "DVI-A" },
++  { DRM_MODE_CONNECTOR_Composite, "composite" },
++  { DRM_MODE_CONNECTOR_SVIDEO, "s-video" },
++  { DRM_MODE_CONNECTOR_LVDS, "LVDS" },
++  { DRM_MODE_CONNECTOR_Component, "component" },
++  { DRM_MODE_CONNECTOR_9PinDIN, "9-pin-DIN" },
++  { DRM_MODE_CONNECTOR_DisplayPort, "displayport" },
++  { DRM_MODE_CONNECTOR_HDMIA, "HDMI-A" },
++  { DRM_MODE_CONNECTOR_HDMIB, "HDMI-B" },
++  { DRM_MODE_CONNECTOR_TV, "TV" },
++  { DRM_MODE_CONNECTOR_eDP, "embedded-displayport" },
++};
++/* *INDENT-ON* */
++
++gboolean
++gst_drm_connector_find_mode_and_plane_by_name (int fd,
++    struct omap_device * dev, int width, int height,
++    drmModeRes * resources, drmModePlaneRes * plane_resources,
++    struct connector * c, const char *name)
++{
++  int i, n;
++  char tmp[64];
++  const char *type_name;
++  int found[G_N_ELEMENTS (connector_type_names)] = { 0 };
++
++  /* Find connector from name */
++  for (i = 0; i < resources->count_connectors; i++) {
++    GST_DEBUG ("Trying connector %d: %d", i, resources->connectors[i]);
++    c->id = resources->connectors[i];
++    c->connector = drmModeGetConnector (fd, c->id);
++    if (!c->connector)
++      continue;
++
++    /* Find type name from this connector */
++    for (n = 0; n < G_N_ELEMENTS (connector_type_names); n++)
++      if (connector_type_names[n].type_id == c->connector->connector_type)
++        break;
++    if (n == G_N_ELEMENTS (connector_type_names))
++      continue;
++
++    type_name = connector_type_names[n].type_name;
++    GST_DEBUG ("Connector %d has type %s", i, type_name);
++    ++found[n];
++
++    drmModeFreeConnector (c->connector);
++    c->connector = NULL;
++
++    /* Try a few different matches, such as modetest and xrandr
++       output, and also a indexless one matching first found */
++    snprintf (tmp, sizeof (tmp), "%s-%u", type_name, found[n]);
++    if (!g_ascii_strcasecmp (tmp, name))
++      goto found;
++    snprintf (tmp, sizeof (tmp), "%s%u", type_name, found[n]);
++    if (!g_ascii_strcasecmp (tmp, name))
++      goto found;
++    if (!g_ascii_strcasecmp (name, type_name))
++      goto found;
++
++    continue;
++
++  found:
++    if (gst_drm_connector_find_mode_and_plane_helper (fd, dev, width, height,
++            resources, plane_resources, c)) {
++      GST_DEBUG ("Found suitable connector");
++      return TRUE;
++    }
++    GST_DEBUG ("Connector not suitable");
++  }
++
++  return FALSE;
++}
+diff --git a/sys/kms/gstdrmutils.h b/sys/kms/gstdrmutils.h
+new file mode 100644
+index 0000000..ebc5fc6
+--- /dev/null
++++ b/sys/kms/gstdrmutils.h
+@@ -0,0 +1,50 @@
++#ifndef __GST_DRMUTILS_H__
++#define __GST_DRMUTILS_H__
++
++#include <fcntl.h>
++#include <xf86drm.h>
++#include <stdio.h>
++#include <stdint.h>
++#include <stdlib.h>
++#include <string.h>
++#include <errno.h>
++#include <unistd.h>
++#include <assert.h>
++#include <libdrm/drm.h>
++#include <libdrm/drm_mode.h>
++#include <xf86drmMode.h>
++#include <omap_drm.h>
++#include <omap_drmif.h>
++#include <drm_fourcc.h>
++#include <gst/gst.h>
++#include <sys/ioctl.h>
++
++struct plane_data {
++	int plane;
++	int fb_id_property;
++};
++
++struct connector {
++	uint32_t id;
++	char mode_str[64];
++	drmModeConnector *connector;
++	drmModeModeInfo *mode;
++	drmModeEncoder *encoder;
++	uint32_t fb_id;
++	struct omap_bo *fb_bo;
++	int crtc;
++	int pipe;
++        struct plane_data *pdata;
++};
++
++void gst_drm_connector_cleanup (int fd, struct connector * c);
++gboolean gst_drm_connector_find_mode_and_plane (int fd,
++    struct omap_device * dev, int width, int height,
++    drmModeRes * resources, drmModePlaneRes * plane_resources,
++    struct connector *c);
++gboolean gst_drm_connector_find_mode_and_plane_by_name (int fd,
++    struct omap_device *dev, int width, int height,
++    drmModeRes * resources, drmModePlaneRes * plane_resources,
++    struct connector *c, const char *name);
++
++#endif /* __GST_DRMUTILS_H__ */
+diff --git a/sys/kms/gstkmsbufferpriv.c b/sys/kms/gstkmsbufferpriv.c
+new file mode 100644
+index 0000000..172a4c3
+--- /dev/null
++++ b/sys/kms/gstkmsbufferpriv.c
+@@ -0,0 +1,121 @@
++/*
++ * GStreamer
++ *
++ * Copyright (C) 2012 Texas Instruments
++ * Copyright (C) 2012 Collabora Ltd
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ *  Rob Clark <rob.clark@linaro.org>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation
++ * version 2.1 of the License.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ */
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include <stdint.h>
++#include <gst/gst.h>
++#include <gst/allocators/allocators.h>
++
++#include <omap_drm.h>
++#include <omap_drmif.h>
++#include <xf86drmMode.h>
++
++#include "gstkmssink.h"
++#include "gstkmsbufferpriv.h"
++
++static int
++create_fb (GstKMSBufferPriv * priv, GstKMSSink * sink)
++{
++  /* TODO get format, etc from caps.. and query device for
++   * supported formats, and make this all more flexible to
++   * cope with various formats:
++   */
++  uint32_t fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
++
++  uint32_t handles[4] = {
++    omap_bo_handle (priv->bo), omap_bo_handle (priv->bo),
++  };
++  uint32_t pitches[4] = {
++    GST_ROUND_UP_4 (sink->input_width), GST_ROUND_UP_4 (sink->input_width),
++  };
++  uint32_t offsets[4] = {
++    0, pitches[0] * sink->input_height
++  };
++
++  return drmModeAddFB2 (priv->fd, sink->input_width, sink->input_height,
++      fourcc, handles, pitches, offsets, &priv->fb_id, 0);
++}
++
++/**
++ * gst_kms_buffer_priv:
++ * @sink: a #GstKMSSink
++ * @buf: a pointer to #GstBuffer
++ *
++ * Checks if the @buf has a GstMetaDmaBuf metadata set. If it doesn't we return a NULL
++ * indicating its not a dmabuf buffer. We maintain a hashtable with dmabuf fd as key and 
++ * the GstKMSBufferPriv structure as value
++ *
++ * Returns: the #GstKMSBufferPriv
++ *
++ * Since: 1.2.?
++ */
++GstKMSBufferPriv *
++gst_kms_buffer_priv (GstKMSSink * sink, GstBuffer * buf)
++{
++    struct omap_bo *bo;
++    int fd;
++    int fd_copy;
++    GstKMSBufferPriv * priv;
++    GstMemory *mem;
++
++    /* if it isn't a dmabuf buffer that we can import, then there
++     * is nothing we can do with it:
++     */
++    mem = gst_buffer_peek_memory (buf, 0);
++    fd_copy = gst_fd_memory_get_fd (mem); 
++    if (fd_copy < 0) {
++      GST_DEBUG_OBJECT (sink, "not importing non dmabuf buffer");
++      return NULL;
++    }
++
++    /* lookup the hashtable with fd as key. If present return bo & buffer structure */
++    priv = g_hash_table_lookup (sink->kmsbufferpriv, (gpointer)fd_copy);
++    if(priv) {
++       return priv;
++     }
++
++    priv = g_malloc0 (sizeof (GstKMSBufferPriv));
++    bo = omap_bo_from_dmabuf (sink->dev, fd_copy);
++    fd = sink->fd;
++
++      priv->bo = bo;
++      priv->fd = fd;
++
++    if (create_fb (priv, sink)) {
++      GST_WARNING_OBJECT (sink, "could not create framebuffer: %s",
++          strerror (errno));
++      g_free(priv);
++      return NULL;
++    }
++
++    /* if fd not present, write to hash table fd and the corresponding priv. */
++    g_hash_table_insert(sink->kmsbufferpriv, (gpointer)fd_copy, priv); 
++   
++  
++  return priv;
++}
+diff --git a/sys/kms/gstkmsbufferpriv.h b/sys/kms/gstkmsbufferpriv.h
+new file mode 100644
+index 0000000..a1070da
+--- /dev/null
++++ b/sys/kms/gstkmsbufferpriv.h
+@@ -0,0 +1,64 @@
++/*
++ * GStreamer
++ *
++ * Copyright (C) 2012 Texas Instruments
++ * Copyright (C) 2012 Collabora Ltd
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ *  Rob Clark <rob.clark@linaro.org>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation
++ * version 2.1 of the License.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ */
++
++#ifndef __GSTKMSBUFFERPRIV_H__
++#define __GSTKMSBUFFERPRIV_H__
++
++#include <stdint.h>
++#include <gst/gst.h>
++
++G_BEGIN_DECLS
++
++/*
++ * per-buffer private data so kmssink can attach a drm_framebuffer
++ * handle (fb_id) to a buffer, which gets deleted when the buffer
++ * is finalized
++ */
++
++#define GST_TYPE_KMS_BUFFER_PRIV      \
++  (gst_kms_buffer_priv_get_type ())
++#define GST_KMS_BUFFER_PRIV(obj)      \
++  (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_KMS_BUFFER_PRIV, GstKMSBufferPriv))
++#define GST_IS_KMS_BUFFER_PRIV(obj)     \
++  (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_KMS_BUFFER_PRIV))
++
++
++typedef struct
++{
++  struct omap_bo *bo;
++  int fd;
++  uint32_t fb_id;
++}GstKMSBufferPriv;
++
++
++GType gst_kms_buffer_priv_get_type (void);
++
++/* Returns a GstKMSBufferPriv, if it has a dmabuf fd metadata */
++GstKMSBufferPriv * gst_kms_buffer_priv (GstKMSSink *sink, GstBuffer * buf);
++
++G_END_DECLS
++
++
++#endif /* __GSTKMSBUFFERPRIV_H__ */
+diff --git a/sys/kms/gstkmssink.c b/sys/kms/gstkmssink.c
+new file mode 100644
+index 0000000..17e6407
+--- /dev/null
++++ b/sys/kms/gstkmssink.c
+@@ -0,0 +1,740 @@
++/* GStreamer
++ * Copyright (C) 2012 Texas Instruments
++ * Copyright (C) 2012 Collabora Ltd
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
++ * Boston, MA 02111-1307, USA.
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ */
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include "gstkmssink.h"
++#include "gstkmsbufferpriv.h"
++
++#include <libdce.h>
++#include <omap_drm.h>
++#include <omap_drmif.h>
++#include <xf86drmMode.h>
++
++static int drm_fd = -1;
++static struct omap_device *drm_dev;
++static int once =1;
++
++GST_DEBUG_CATEGORY (gst_debug_kms_sink);
++#define GST_CAT_DEFAULT gst_debug_kms_sink
++
++G_DEFINE_TYPE (GstKMSSink, gst_kms_sink, GST_TYPE_VIDEO_SINK);
++
++static void gst_kms_sink_reset (GstKMSSink * sink);
++
++static GstStaticPadTemplate gst_kms_sink_template_factory =
++GST_STATIC_PAD_TEMPLATE ("sink",
++    GST_PAD_SINK,
++    GST_PAD_ALWAYS,
++    GST_STATIC_CAPS (GST_VIDEO_CAPS_MAKE("NV12"))
++    );
++
++enum
++{
++  PROP_0,
++  PROP_PIXEL_ASPECT_RATIO,
++  PROP_FORCE_ASPECT_RATIO,
++  PROP_SCALE,
++  PROP_CONNECTOR,
++  PROP_CONNECTOR_NAME,
++};
++
++
++static inline void
++display_bufs_queue (GstKMSSink * sink, GstBuffer * buf)
++{
++  int i;
++  for (i = 0; i < (NUM_DISPLAY_BUFS - 1); i++)
++    gst_buffer_replace (&sink->display_bufs[i], sink->display_bufs[i + 1]);
++  gst_buffer_replace (&sink->display_bufs[i], buf);
++}
++
++static inline void
++display_bufs_free (GstKMSSink * sink)
++{
++  int i;
++  for (i = 0; i < NUM_DISPLAY_BUFS; i++)
++    gst_buffer_replace (&sink->display_bufs[i], NULL);
++}
++
++static gboolean
++gst_kms_sink_calculate_aspect_ratio (GstKMSSink * sink, gint width,
++    gint height, gint video_par_n, gint video_par_d)
++{
++  guint calculated_par_n;
++  guint calculated_par_d;
++
++  if (!gst_video_calculate_display_ratio (&calculated_par_n, &calculated_par_d,
++          width, height, video_par_n, video_par_d, 1, 1)) {
++    GST_ELEMENT_ERROR (sink, CORE, NEGOTIATION, (NULL),
++        ("Error calculating the output display ratio of the video."));
++    return FALSE;
++  }
++  GST_DEBUG_OBJECT (sink,
++      "video width/height: %dx%d, calculated display ratio: %d/%d",
++      width, height, calculated_par_n, calculated_par_d);
++
++  /* now find a width x height that respects this display ratio.
++   * prefer those that have one of w/h the same as the incoming video
++   * using wd / hd = calculated_pad_n / calculated_par_d */
++
++  /* start with same height, because of interlaced video */
++  /* check hd / calculated_par_d is an integer scale factor, and scale wd with the PAR */
++  if (height % calculated_par_d == 0) {
++    GST_DEBUG_OBJECT (sink, "keeping video height");
++    GST_VIDEO_SINK_WIDTH (sink) = (guint)
++        gst_util_uint64_scale_int (height, calculated_par_n, calculated_par_d);
++    GST_VIDEO_SINK_HEIGHT (sink) = height;
++  } else if (width % calculated_par_n == 0) {
++    GST_DEBUG_OBJECT (sink, "keeping video width");
++    GST_VIDEO_SINK_WIDTH (sink) = width;
++    GST_VIDEO_SINK_HEIGHT (sink) = (guint)
++        gst_util_uint64_scale_int (width, calculated_par_d, calculated_par_n);
++  } else {
++    GST_DEBUG_OBJECT (sink, "approximating while keeping video height");
++    GST_VIDEO_SINK_WIDTH (sink) = (guint)
++        gst_util_uint64_scale_int (height, calculated_par_n, calculated_par_d);
++    GST_VIDEO_SINK_HEIGHT (sink) = height;
++  }
++  GST_DEBUG_OBJECT (sink, "scaling to %dx%d",
++      GST_VIDEO_SINK_WIDTH (sink), GST_VIDEO_SINK_HEIGHT (sink));
++
++  return TRUE;
++}
++
++static gboolean
++gst_kms_sink_setcaps (GstBaseSink * bsink, GstCaps * caps)
++{
++  GstKMSSink *sink;
++  gboolean ret = TRUE;
++  gint width, height;
++  gint fps_n, fps_d;
++  gint par_n, par_d;
++  GstVideoFormat format;
++  GstVideoInfo info;
++  GstStructure *conf;
++  GstStructure *s;
++  int size;
++
++  sink = GST_KMS_SINK (bsink);
++
++  ret = gst_video_info_from_caps (&info, caps);
++  format = GST_VIDEO_INFO_FORMAT(&info);
++  width = GST_VIDEO_INFO_WIDTH(&info);
++  height = GST_VIDEO_INFO_HEIGHT(&info);
++  fps_n = GST_VIDEO_INFO_FPS_N(&info);
++  fps_d = GST_VIDEO_INFO_FPS_D(&info);
++  par_n = GST_VIDEO_INFO_PAR_N(&info);
++  par_d = GST_VIDEO_INFO_PAR_D(&info);
++
++  if (!ret)
++    return FALSE;
++
++  if (width <= 0 || height <= 0) {
++    GST_ELEMENT_ERROR (sink, CORE, NEGOTIATION, (NULL),
++        ("Invalid image size."));
++    return FALSE;
++  }
++
++  sink->format = format;
++  sink->par_n = par_n;
++  sink->par_d = par_d;
++  sink->src_rect.x = sink->src_rect.y = 0;
++  sink->src_rect.w = width;
++  sink->src_rect.h = height;
++  sink->input_width = width;
++  sink->input_height = height;
++  size = info.size;
++
++  if (!sink->pool) {
++    GstAllocator *allocator;
++
++    allocator = gst_drm_allocator_get ();
++    sink->pool = gst_buffer_pool_new ();
++    conf = gst_buffer_pool_get_config (GST_BUFFER_POOL(sink->pool));
++    gst_buffer_pool_config_set_params (conf, caps, size, 0, 0);
++    gst_buffer_pool_config_set_allocator (conf, allocator, NULL);
++    gst_buffer_pool_set_config (GST_BUFFER_POOL(sink->pool), conf);
++    if (allocator)
++      gst_object_unref (allocator);
++  }
++
++  sink->conn.crtc = -1;
++  return TRUE;
++}
++
++static void
++gst_kms_sink_get_times (GstBaseSink * bsink, GstBuffer * buf,
++    GstClockTime * start, GstClockTime * end)
++{
++  GstKMSSink *sink;
++
++  sink = GST_KMS_SINK (bsink);
++
++  if (GST_BUFFER_PTS_IS_VALID (buf)) {
++    *start = GST_BUFFER_PTS (buf);
++    if (GST_BUFFER_DURATION_IS_VALID (buf)) {
++      *end = *start + GST_BUFFER_DURATION (buf);
++    } else {
++      if (sink->fps_n > 0) {
++        *end = *start +
++            gst_util_uint64_scale_int (GST_SECOND, sink->fps_d, sink->fps_n);
++      }
++    }
++  }
++}
++
++
++static void page_flip_handler(int fd, unsigned int frame,
++                  unsigned int sec, unsigned int usec, void *data)
++{
++        int *waiting_for_flip = data;
++        *waiting_for_flip = 0;
++}
++
++
++static GstFlowReturn
++gst_kms_sink_show_frame (GstVideoSink * vsink, GstBuffer * inbuf)
++{
++  GstKMSSink *sink = GST_KMS_SINK (vsink);
++  GstBuffer *buf = NULL;
++  GstKMSBufferPriv *priv;
++  GstFlowReturn flow_ret = GST_FLOW_OK;
++  int ret = 0;
++  gint width, height;
++  GstVideoRectangle *c = &sink->src_rect;
++  int waiting_for_flip = 1;
++
++  fd_set fds;
++  drmEventContext evctx = {
++                          .version = DRM_EVENT_CONTEXT_VERSION,
++                          .vblank_handler = 0,
++                          .page_flip_handler = page_flip_handler,
++                           };
++
++  g_mutex_lock (&sink->render_lock);
++  GstVideoCropMeta* crop = gst_buffer_get_video_crop_meta (inbuf);
++  if (crop){
++    c->y = crop->y;
++    c->x = crop->x;
++
++    if (crop->width >= 0) {
++      width = crop->width;
++    } else {
++      width = sink->input_width;
++    }
++    if (crop->height >= 0){
++      height = crop->height;
++    } else {
++      height = sink->input_height;
++    }
++  } else {
++    width = sink->input_width;
++    height = sink->input_height;
++  }
++
++  c->w = width;
++  c->h = height;
++
++
++  if (!gst_kms_sink_calculate_aspect_ratio (sink, width, height,
++              sink->par_n, sink->par_d))
++    GST_DEBUG_OBJECT (sink, "calculate aspect ratio failed");
++
++
++  GST_INFO_OBJECT (sink, "enter");
++
++  if (sink->conn.crtc == -1) {
++    if (sink->conn_name) {
++      if (!gst_drm_connector_find_mode_and_plane_by_name (sink->fd,
++              sink->dev, sink->src_rect.w, sink->src_rect.h,
++              sink->resources, sink->plane_resources, &sink->conn,
++              sink->conn_name))
++        goto connector_not_found;
++    } else {
++      sink->conn.id = sink->conn_id;
++      if (!gst_drm_connector_find_mode_and_plane (sink->fd,
++              sink->dev, sink->src_rect.w, sink->src_rect.h,
++              sink->resources, sink->plane_resources, &sink->conn))
++        goto connector_not_found;
++    }
++   once = 1;
++  }
++
++  priv = gst_kms_buffer_priv (sink, inbuf);
++
++  if (priv) {
++    buf = inbuf;
++  } else {
++    GST_LOG_OBJECT (sink, "not a KMS buffer, slow-path!");
++    gst_buffer_pool_acquire_buffer (sink->pool, &buf, NULL);
++    if (buf) {
++      GST_BUFFER_PTS (buf) = GST_BUFFER_PTS (inbuf);
++      GST_BUFFER_DURATION (buf) = GST_BUFFER_DURATION (inbuf);
++      gst_buffer_copy_into (buf, inbuf, GST_BUFFER_COPY_DEEP, 0 ,-1);
++      priv = gst_kms_buffer_priv (sink, buf);
++    }
++    if (!priv)
++      goto add_fb2_failed;
++  }
++  
++ if (once) {
++    once = 0;
++    static  GstVideoRectangle dest = { 0 };
++    dest.w = sink->conn.mode->hdisplay;
++    dest.h = sink->conn.mode->vdisplay;
++
++    gst_video_sink_center_rect (sink->src_rect, dest, &sink->dst_rect,
++        sink->scale);
++    ret = drmModeSetPlane (sink->fd, sink->conn.pdata[0].plane,
++        sink->conn.crtc, priv->fb_id, 0,
++        sink->dst_rect.x, sink->dst_rect.y, sink->dst_rect.w, sink->dst_rect.h,
++        sink->src_rect.x << 16, sink->src_rect.y << 16,
++        sink->src_rect.w << 16, sink->src_rect.h << 16);
++    if (ret)
++      goto set_plane_failed;
++  }
++
++  drmModeAtomicReqPtr m_req = drmModeAtomicAlloc();
++
++  drmModeAtomicAddProperty(m_req, sink->conn.pdata[0].plane,
++			sink->conn.pdata[0].fb_id_property,
++			priv->fb_id);
++
++  drmModeAtomicCommit(sink->fd, m_req, DRM_MODE_ATOMIC_TEST_ONLY, 0);
++  drmModeAtomicCommit(sink->fd, m_req, DRM_MODE_PAGE_FLIP_EVENT | DRM_MODE_ATOMIC_NONBLOCK, &waiting_for_flip);
++  drmModeAtomicFree(m_req);
++
++  while (waiting_for_flip) {
++    FD_ZERO(&fds);
++    FD_SET(sink->fd, &fds);
++    int err;
++    err = select(sink->fd + 1, &fds, NULL, NULL, NULL);
++    if (err < 0) {
++      GST_ERROR_OBJECT (sink,"select err: %s\n", strerror(errno));
++      flow_ret = GST_FLOW_ERROR;
++      goto out;
++    }
++    if (FD_ISSET(sink->fd, &fds)) {
++      drmHandleEvent(sink->fd, &evctx);
++    }
++  }
++
++  display_bufs_queue (sink, buf);
++
++out:
++  GST_INFO_OBJECT (sink, "exit");
++  if (buf != inbuf)
++    gst_buffer_unref (buf);
++  g_mutex_unlock (&sink->render_lock);
++  return flow_ret;
++
++add_fb2_failed:
++  GST_ELEMENT_ERROR (sink, RESOURCE, FAILED,
++      (NULL), ("drmModeAddFB2 failed: %s (%d)", strerror (errno), errno));
++  flow_ret = GST_FLOW_ERROR;
++  goto out;
++
++set_plane_failed:
++  GST_ELEMENT_ERROR (sink, RESOURCE, FAILED,
++      (NULL), ("drmModeSetPlane failed: %s (%d)", strerror (errno), errno));
++  flow_ret = GST_FLOW_ERROR;
++  goto out;
++
++connector_not_found:
++  GST_ELEMENT_ERROR (sink, RESOURCE, NOT_FOUND,
++      (NULL), ("connector not found", strerror (errno), errno));
++  goto out;
++}
++
++
++static gboolean
++gst_kms_sink_event (GstBaseSink * bsink, GstEvent * event)
++{
++  GstKMSSink *sink = GST_KMS_SINK (bsink);
++
++  switch (GST_EVENT_TYPE (event)) {
++    default:
++      break;
++  }
++  if (GST_BASE_SINK_CLASS (gst_kms_sink_parent_class)->event)
++    return GST_BASE_SINK_CLASS (gst_kms_sink_parent_class)->event (bsink,
++        event);
++  else
++    return TRUE;
++}
++
++static void
++gst_kms_sink_set_property (GObject * object, guint prop_id,
++    const GValue * value, GParamSpec * pspec)
++{
++  GstKMSSink *sink;
++
++  g_return_if_fail (GST_IS_KMS_SINK (object));
++
++  sink = GST_KMS_SINK (object);
++
++  switch (prop_id) {
++    case PROP_FORCE_ASPECT_RATIO:
++      sink->keep_aspect = g_value_get_boolean (value);
++      break;
++    case PROP_SCALE:
++      sink->scale = g_value_get_boolean (value);
++      break;
++    case PROP_CONNECTOR:
++      sink->conn_id = g_value_get_uint (value);
++      break;
++    case PROP_CONNECTOR_NAME:
++      g_free (sink->conn_name);
++      sink->conn_name = g_strdup (g_value_get_string (value));
++      break;
++    case PROP_PIXEL_ASPECT_RATIO:
++    {
++      GValue *tmp;
++
++      tmp = g_new0 (GValue, 1);
++      g_value_init (tmp, GST_TYPE_FRACTION);
++
++      if (!g_value_transform (value, tmp)) {
++        GST_WARNING_OBJECT (sink, "Could not transform string to aspect ratio");
++      } else {
++        sink->par_n = gst_value_get_fraction_numerator (tmp);
++        sink->par_d = gst_value_get_fraction_denominator (tmp);
++        GST_DEBUG_OBJECT (sink, "set PAR to %d/%d", sink->par_n, sink->par_d);
++      }
++      g_free (tmp);
++    }
++      break;
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void
++gst_kms_sink_get_property (GObject * object, guint prop_id,
++    GValue * value, GParamSpec * pspec)
++{
++  GstKMSSink *sink;
++
++  g_return_if_fail (GST_IS_KMS_SINK (object));
++
++  sink = GST_KMS_SINK (object);
++
++  switch (prop_id) {
++    case PROP_FORCE_ASPECT_RATIO:
++      g_value_set_boolean (value, sink->keep_aspect);
++      break;
++    case PROP_SCALE:
++      g_value_set_boolean (value, sink->scale);
++      break;
++    case PROP_CONNECTOR:
++      g_value_set_uint (value, sink->conn.id);
++      break;
++    case PROP_PIXEL_ASPECT_RATIO:
++    {
++      char *v = g_strdup_printf ("%d/%d", sink->par_n, sink->par_d);
++      g_value_take_string (value, v);
++      break;
++    }
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void
++gst_kms_sink_reset (GstKMSSink * sink)
++{
++  GST_DEBUG_OBJECT (sink, "reset");
++
++  if (sink->fd != -1) {
++    gst_drm_connector_cleanup (sink->fd, &sink->conn);
++  }
++  memset (&sink->conn, 0, sizeof (struct connector));
++
++  display_bufs_free (sink);
++  
++ if (sink->pool) {
++    gst_buffer_pool_set_active (GST_BUFFER_POOL(sink->pool), FALSE);
++    gst_object_unref(sink->pool);
++    sink->pool = NULL;
++  }
++
++  if (sink->plane_resources) {
++    drmModeFreePlaneResources (sink->plane_resources);
++    sink->plane_resources = NULL;
++  }
++
++  if (sink->resources) {
++    drmModeFreeResources (sink->resources);
++    sink->resources = NULL;
++  }
++
++  sink->par_n = sink->par_d = 1;
++  sink->src_rect.x = 0;
++  sink->src_rect.y = 0;
++  sink->src_rect.w = 0;
++  sink->src_rect.h = 0;
++  sink->input_width = 0;
++  sink->input_height = 0;
++  sink->format = GST_VIDEO_FORMAT_UNKNOWN;
++
++  memset (&sink->src_rect, 0, sizeof (GstVideoRectangle));
++  memset (&sink->dst_rect, 0, sizeof (GstVideoRectangle));
++}
++
++static gboolean
++gst_kms_sink_start (GstBaseSink * bsink)
++{
++  GstKMSSink *sink;
++
++  sink = GST_KMS_SINK (bsink);
++
++  drm_dev = dce_init ();
++  if (drm_dev == NULL)
++    goto device_failed;
++  else {
++    sink->dev = drm_dev;
++    sink->fd = dce_get_fd ();
++    drm_fd = dce_get_fd ();
++  }
++
++  sink->resources = drmModeGetResources (sink->fd);
++  if (sink->resources == NULL)
++    goto resources_failed;
++
++  sink->plane_resources = drmModeGetPlaneResources (sink->fd);
++  if (sink->plane_resources == NULL)
++    goto plane_resources_failed;
++
++  return TRUE;
++
++fail:
++  gst_kms_sink_reset (sink);
++  return FALSE;
++
++device_failed:
++  GST_ELEMENT_ERROR (sink, RESOURCE, FAILED,
++      (NULL), ("omap_device_new failed"));
++  goto fail;
++
++resources_failed:
++  GST_ELEMENT_ERROR (sink, RESOURCE, FAILED,
++      (NULL), ("drmModeGetResources failed: %s (%d)", strerror (errno), errno));
++  goto fail;
++
++plane_resources_failed:
++  GST_ELEMENT_ERROR (sink, RESOURCE, FAILED,
++      (NULL), ("drmModeGetPlaneResources failed: %s (%d)",
++          strerror (errno), errno));
++  goto fail;
++}
++
++static gboolean
++gst_kms_sink_stop (GstBaseSink * bsink)
++{
++  GstKMSSink *sink;
++
++  sink = GST_KMS_SINK (bsink);
++  gst_kms_sink_reset (sink);
++
++  return TRUE;
++}
++
++
++static gboolean
++gst_kms_sink_propose_allocation (GstBaseSink * bsink, GstQuery * query)
++{
++  GstKMSSink *sink;
++  GstStructure *conf;
++  GstCaps *caps;
++  guint size;
++  gboolean need_pool;
++  GstStructure *s;
++  int num_buffers = 0;
++
++
++  sink = GST_KMS_SINK (bsink);
++
++  GST_DEBUG_OBJECT (sink, "begin");
++
++  gst_query_parse_allocation (query, &caps, &need_pool);
++
++  if (G_UNLIKELY (!caps)) {
++    GST_WARNING_OBJECT (sink, "have no caps, doing fallback allocation");
++    return FALSE;
++  }
++
++  if (need_pool) {
++    GstVideoInfo info;
++  
++    if (!gst_video_info_from_caps (&info, caps))
++      goto invalid_caps;
++
++    GST_LOG_OBJECT (sink,
++        "a bufferpool was requested with caps %" GST_PTR_FORMAT, caps);
++
++    /* We already have a pool after set_caps */
++    if (sink->pool) {
++      GstStructure *config;
++      int min,max;
++      config = gst_buffer_pool_get_config (sink->pool);
++      gst_buffer_pool_config_get_params (config, NULL, &size, &min, &max);
++      gst_structure_free (config);
++    
++      gst_query_add_allocation_pool (query, sink->pool, size, min, max);
++      gst_query_add_allocation_param (query, gst_drm_allocator_get (), NULL);
++      return TRUE;
++   } else {
++     GST_LOG_OBJECT (sink, "No bufferpool available");
++     return FALSE;
++   }
++  }
++ 
++
++invalid_caps:
++  GST_DEBUG_OBJECT (sink, "invalid caps specified");
++  return FALSE;
++}
++
++static void
++gst_kms_sink_finalize (GObject * object)
++{
++  GstKMSSink *sink;
++
++  sink = GST_KMS_SINK (object);
++  g_mutex_clear (&sink->render_lock);
++  g_free (sink->conn_name);
++  if (sink->kmsbufferpriv){
++    g_hash_table_destroy (sink->kmsbufferpriv);
++    sink->kmsbufferpriv = NULL;
++  gst_kms_sink_reset (sink);
++}
++
++  G_OBJECT_CLASS (gst_kms_sink_parent_class)->finalize (object);
++}
++
++static void
++kmsbufferpriv_free_func (GstKMSBufferPriv *priv)
++{
++  drmModeRmFB (priv->fd, priv->fb_id);
++  omap_bo_del (priv->bo);
++  g_free(priv);
++}
++
++
++static void
++gst_kms_sink_init (GstKMSSink * sink)
++{
++  sink->fd = -1;
++  gst_kms_sink_reset (sink);
++  sink->kmsbufferpriv = g_hash_table_new_full (g_direct_hash, g_direct_equal,
++      NULL, (GDestroyNotify) kmsbufferpriv_free_func);
++  g_mutex_init (&sink->render_lock);
++}
++
++static void
++gst_kms_sink_class_init (GstKMSSinkClass * klass)
++{
++  GObjectClass *gobject_class;
++  GstElementClass *gstelement_class;
++  GstBaseSinkClass *gstbasesink_class;
++  GstVideoSinkClass *videosink_class;
++
++  gobject_class = (GObjectClass *) klass;
++  gstelement_class = (GstElementClass *) klass;
++  gstbasesink_class = (GstBaseSinkClass *) klass;
++  videosink_class = (GstVideoSinkClass *) klass;
++
++  gobject_class->finalize = gst_kms_sink_finalize;
++  gobject_class->set_property = gst_kms_sink_set_property;
++  gobject_class->get_property = gst_kms_sink_get_property;
++
++  g_object_class_install_property (gobject_class, PROP_FORCE_ASPECT_RATIO,
++      g_param_spec_boolean ("force-aspect-ratio", "Force aspect ratio",
++          "When enabled, reverse caps negotiation (scaling) will respect "
++          "original aspect ratio", FALSE,
++          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
++  g_object_class_install_property (gobject_class, PROP_PIXEL_ASPECT_RATIO,
++      g_param_spec_string ("pixel-aspect-ratio", "Pixel Aspect Ratio",
++          "The pixel aspect ratio of the device", "1/1",
++          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
++  g_object_class_install_property (gobject_class, PROP_SCALE,
++      g_param_spec_boolean ("scale", "Scale",
++          "When true, scale to render fullscreen", FALSE,
++          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
++  g_object_class_install_property (gobject_class, PROP_CONNECTOR,
++      g_param_spec_uint ("connector", "Connector",
++          "DRM connector id (0 for automatic selection)", 0, G_MAXUINT32, 0,
++          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT));
++  g_object_class_install_property (gobject_class, PROP_CONNECTOR_NAME,
++      g_param_spec_string ("connector-name", "Connector name",
++          "DRM connector name (alternative to the connector property, "
++          "use $type$index, $type-$index, or $type)", "",
++          G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
++
++  gst_element_class_set_details_simple (gstelement_class,
++      "Video sink", "Sink/Video",
++      "A video sink using the linux kernel mode setting API",
++      "Alessandro Decina <alessandro.d@gmail.com>");
++
++  gst_element_class_add_pad_template (gstelement_class,
++      gst_static_pad_template_get (&gst_kms_sink_template_factory));
++
++  gstbasesink_class->set_caps = GST_DEBUG_FUNCPTR (gst_kms_sink_setcaps);
++  gstbasesink_class->get_times = GST_DEBUG_FUNCPTR (gst_kms_sink_get_times);
++  gstbasesink_class->event = GST_DEBUG_FUNCPTR (gst_kms_sink_event);
++  gstbasesink_class->start = GST_DEBUG_FUNCPTR (gst_kms_sink_start);
++  gstbasesink_class->stop = GST_DEBUG_FUNCPTR (gst_kms_sink_stop);
++  gstbasesink_class->propose_allocation = GST_DEBUG_FUNCPTR (gst_kms_sink_propose_allocation);
++
++  /* disable preroll as it's called before GST_CROP_EVENT has been received, so
++   * we end up configuring the wrong mode... (based on padded caps)
++   */
++  gstbasesink_class->preroll = NULL;
++  videosink_class->show_frame = GST_DEBUG_FUNCPTR (gst_kms_sink_show_frame);
++}
++
++static gboolean
++plugin_init (GstPlugin * plugin)
++{
++  if (!gst_element_register (plugin, "kmssink",
++          GST_RANK_PRIMARY + 1, GST_TYPE_KMS_SINK))
++    return FALSE;
++
++  GST_DEBUG_CATEGORY_INIT (gst_debug_kms_sink, "kmssink", 0, "kmssink element");
++
++  return TRUE;
++}
++
++GST_PLUGIN_DEFINE (GST_VERSION_MAJOR,
++    GST_VERSION_MINOR,
++    kms,
++    "KMS video output element",
++    plugin_init, VERSION, GST_LICENSE, GST_PACKAGE_NAME, GST_PACKAGE_ORIGIN)
+diff --git a/sys/kms/gstkmssink.h b/sys/kms/gstkmssink.h
+new file mode 100644
+index 0000000..9f76839
+--- /dev/null
++++ b/sys/kms/gstkmssink.h
+@@ -0,0 +1,92 @@
++/* GStreamer
++ *
++ * Copyright (C) 2012 Texas Instruments 
++ * Copyright (C) 2012 Collabora Ltd
++ *
++ * Authors:
++ *  Alessandro Decina <alessandro.decina@collabora.co.uk>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
++ * Boston, MA 02111-1307, USA.
++ */
++
++#ifndef __GST_KMS_SINK_H__
++#define __GST_KMS_SINK_H__
++
++#include <gst/video/video.h>
++#include <gst/video/gstvideosink.h>
++#include <gst/drm/gstdrmallocator.h>
++
++#include <stdio.h>
++#include <stdint.h>
++#include <stdlib.h>
++#include <string.h>
++#include <errno.h>
++#include <unistd.h>
++#include <assert.h>
++
++#include "gstdrmutils.h"
++
++G_BEGIN_DECLS
++#define GST_TYPE_KMS_SINK \
++  (gst_kms_sink_get_type())
++#define GST_KMS_SINK(obj) \
++  (G_TYPE_CHECK_INSTANCE_CAST((obj), GST_TYPE_KMS_SINK, GstKMSSink))
++#define GST_KMS_SINK_CLASS(klass) \
++  (G_TYPE_CHECK_CLASS_CAST((klass), GST_TYPE_KMS_SINK, GstKMSSinkClass))
++#define GST_IS_KMS_SINK(obj) \
++  (G_TYPE_CHECK_INSTANCE_TYPE((obj), GST_TYPE_KMS_SINK))
++#define GST_IS_KMS_SINK_CLASS(klass) \
++  (G_TYPE_CHECK_CLASS_TYPE((klass), GST_TYPE_KMS_SINK))
++typedef struct _GstKMSSink GstKMSSink;
++typedef struct _GstKMSSinkClass GstKMSSinkClass;
++
++#define NUM_DISPLAY_BUFS 1
++
++struct _GstKMSSink
++{
++  GstVideoSink videosink;
++  gint input_width, input_height;
++  GstVideoFormat format;
++  gint par_n, par_d;
++  gint fps_n, fps_d;
++  gboolean keep_aspect;
++  GstVideoRectangle src_rect;
++  GstVideoRectangle dst_rect;
++  int fd;
++  struct omap_device *dev;
++  drmModeRes *resources;
++  drmModePlaneRes *plane_resources;
++  struct connector conn;
++  uint32_t conn_id;
++  char *conn_name;
++  drmModePlane *plane;
++  GstBufferPool *pool;
++  GHashTable *kmsbufferpriv;
++  /* current displayed buffer and last displayed buffer: */
++  GstBuffer *display_bufs[NUM_DISPLAY_BUFS];
++  gboolean scale;
++  GMutex render_lock;
++};
++
++struct _GstKMSSinkClass
++{
++  GstVideoSinkClass parent_class;
++};
++
++GType gst_kms_sink_get_type (void);
++
++G_END_DECLS
++#endif /* __GST_KMS_SINK_H__ */
+-- 
+1.9.1
+
