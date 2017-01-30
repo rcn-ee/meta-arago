@@ -8,16 +8,18 @@ DEPENDS = "ti-gc320-libs"
 BRANCH = "ti-${PV}"
 
 SRC_URI = "git://git.ti.com/graphics/ti-gc320-test.git;protocol=git;branch=${BRANCH}"
-SRCREV = "d8df0699308179b20d4a0ce69972db92eca914af"
-PR = "r1"
+SRCREV = "53207f8e360a3336276b62066a1d8a9e923de17e"
+PR = "r2"
 
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += "AQROOT=${S}/tests/src -f makefile.linux TOOLCHAIN_PATH=${TOOLCHAIN_PATH} CROSS_COMPILE=${TARGET_PREFIX} ARCH_TYPE=${TARGET_ARCH} CPU_TYPE=cortex-a15 VIVANTE_SDK_INC=${S}/sdk/include VIVANTE_SDK_LIB=${STAGING_DIR_TARGET}/usr/lib DESTDIR=${D} TARGET_PRODUCT=${TARGET_PRODUCT} LIBDIR=${libdir} SDK_DIR=${S}/build/tests/ EGL_API_FB=1"
 
 do_install() {
-	cd ${S}/tests/src/test/hal/common/UnitTest
-    oe_runmake install
+	cd ${S}/tests/src/test/hal/common/UnitTest/galUtil
+	oe_runmake install
+	cd ${S}/tests/src/test/hal/common/UnitTest/units/gal2D/clear
+	oe_runmake install
 	cd ${S}/tests/src/test/hal/common/UnitTest/galRunTest2
 	oe_runmake install
 
