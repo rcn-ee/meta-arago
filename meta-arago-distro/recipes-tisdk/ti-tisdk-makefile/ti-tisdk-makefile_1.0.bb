@@ -46,9 +46,10 @@ SRC_URI = "\
     file://Makefile_ipsecmgr-mod \
     file://Makefile_openmpacc-examples \
     file://Makefile_linalg-examples \
+    file://Makefile_ti-gc320-driver \
 "
 
-PR = "r75"
+PR = "r76"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -114,6 +115,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ti-sgx-ddk-km \
                               cmem-mod \
                               pru-icss \
+                              ti-gc320-driver \
 "
 MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
