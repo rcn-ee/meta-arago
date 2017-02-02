@@ -116,13 +116,13 @@ FILES_libgomp-dev += "\
 #    to the release schedule - http://www.gnu.org/software/gdb/schedule/
 # binutils version 2.17 was the last one under GPL version 2 (or later), according
 #    to the published releases - http://ftp.gnu.org/gnu/binutils/
-ELT_LIC_LIBC := "LGPLv2.1+"
-ELT_LIC_GCC := "${@["GPLv3+", "GPLv2+"][elt_get_gcc_version(d) <= "4.2.1"]}"
-ELT_LIC_RLE := "${@["GPLv3+ with GCC RLE", "GPLv2+ with GCC RLE"][elt_get_gcc_version(d) <= "4.3.3"]}"
-ELT_LIC_GDB := "${@["GPLv3+", "GPLv2+"][elt_get_gdb_version(d) <= "6.6"]}"
-#ELT_LIC_BFD := "${@["GPLv3+", "GPLv2+"][elt_get_bfd_version(d) <= "2.17"]}"
+ELT_LIC_LIBC := "LGPL-2.1"
+ELT_LIC_GCC := "${@["GPL-3", "GPL-2"][elt_get_gcc_version(d) <= "4.2.1"]}"
+ELT_LIC_RLE := "${@["GPL-3-with-GCC-exception", "GPL-2-with-GCC-exception"][elt_get_gcc_version(d) <= "4.3.3"]}"
+ELT_LIC_GDB := "${@["GPL-3", "GPL-2"][elt_get_gdb_version(d) <= "6.6"]}"
+#ELT_LIC_BFD := "${@["GPL-3", "GPL-2"][elt_get_bfd_version(d) <= "2.17"]}"
 
-LICENSE = "${ELT_LIC_LIBC}"
+LICENSE = "${ELT_LIC_LIBC}&${ELT_LIC_GCC}&${ELT_LIC_RLE}&${ELT_LIC_GDB}"
 LICENSE_ldd = "${ELT_LIC_LIBC}"
 LICENSE_glibc = "${ELT_LIC_LIBC}"
 LICENSE_glibc-thread-db = "${ELT_LIC_LIBC}"
