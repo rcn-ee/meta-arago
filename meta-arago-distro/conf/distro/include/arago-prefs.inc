@@ -23,11 +23,6 @@ PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"
 PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_KERNEL_SUFFIX}"
-PREFERRED_VERSION_linux-ti-staging = "4.4%"
-
-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-staging"
-PREFERRED_PROVIDER_u-boot = "u-boot-ti-staging"
-PREFERRED_VERSION_u-boot-ti-staging = "2016.05%"
 
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 
