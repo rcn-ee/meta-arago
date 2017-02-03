@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r61"
+PR = "r62"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -37,7 +37,6 @@ MATRIX_TOUCH_APPS = " \
     matrix-gui-touch-demos \
 "
 
-
 MATRIX_QT_APPS_keystone = ""
 
 MATRIX_SGX_DEMOS = " \
@@ -58,7 +57,8 @@ MATRIX_OPENCL_APPS = " \
 "
 
 MATRIX_OPENCL_APPS_append_dra7xx = " \
-    ${@bb.utils.contains('MACHINE_FEATURES','opencl','matrix-video-analytics-opencv-opencl-opengl-demo','',d)} \
+    matrix-video-analytics-opencv-opencl-opengl-demo \
+    matrix-machinevision-demo-dlp3dscanner \
 "
 
 MATRIX_APPS = ""
@@ -109,7 +109,6 @@ MATRIX_APPS_append_omap-a15 = "     \
 
 MATRIX_APPS_append_dra7xx += " \
     matrix-multimedia-demo-dsp66imgproc \
-    matrix-machinevision-demo-dlp3dscanner \
 "
 
 MATRIX_APPS_append_keystone = " \
