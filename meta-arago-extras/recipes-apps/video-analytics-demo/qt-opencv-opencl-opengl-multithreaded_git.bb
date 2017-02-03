@@ -9,12 +9,12 @@ DEPENDS += "opencv opencl virtual/egl ti-cgt6x-native clocl-native dsplib-c66x"
 COMPATIBLE_MACHINE = "dra7xx"
 
 PV = "1.3.3"
-PR = "r1"
+PR = "r2"
 
 BRANCH = "master"
 SRC_URI = "git://git.ti.com/apps/qt-opencv-opencl-opengl-multithreaded.git;protocol=git;branch=${BRANCH}"
 
-SRCREV = "f679a74230dbf7ace66ef06f79e02ac9abfc7d58"
+SRCREV = "a5dad4fbb470e526f6058095cf08a01f51abb02d"
 
 S = "${WORKDIR}/git"
 
@@ -23,6 +23,8 @@ inherit qt-provider
 export TARGET_ROOTDIR = "${STAGING_DIR_HOST}"
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 export TI_DSPLIB_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/ti-dsplib-c66x-tree"
+
+CXXFLAGS_append = " -DOCV_NATIVE "
 
 do_compile() {
     cd ${S}
