@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,11 +11,18 @@ MULTIMEDIA = ""
 MULTIMEDIA_append_ti43x = " \
     dual-camera-demo-src \
     image-gallery-src \
+    barcode-roi-src \
 "
+
+MULTIMEDIA_append_ti33x = " barcode-roi-src"
+
+MULTIMEDIA_append_omap-a15 = " barcode-roi-src"
 
 MULTIMEDIA_append_dra7xx = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'opencl', 'qt-opencv-opencl-opengl-multithreaded-src', '', d)} \
 "
+
+MULTIMEDIA_append_keystone = " barcode-roi-src"
 
 #Demo doesn't work on 3.14
 # ${@base_conditional('QT_PROVIDER', 'qt5', '', 'dual-camera-demo-src image-gallery-src', d)}
