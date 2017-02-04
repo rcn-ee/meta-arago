@@ -1,0 +1,19 @@
+# barcode-roi build targets
+
+barcode-roi:
+	@echo =============================
+	@echo    Building Barcode ROI
+	@echo =============================
+	@cd example-applications; cd `find . -name "*barcode-roi*"`; make -f Makefile.build release
+
+barcode-roi_clean:
+	@echo =============================
+	@echo    Cleaning Barcode ROI
+	@echo =============================
+	@cd example-applications; cd `find . -name "*barcode-roi*"`; make -f Makefile.build clean
+
+barcode-roi_install:
+	@echo ================================================
+	@echo   Installing Barcode ROI - Release version
+	@echo ================================================
+	@cd example-applications; cd `find . -name "*barcode-roi*"`; make -f Makefile.build install
