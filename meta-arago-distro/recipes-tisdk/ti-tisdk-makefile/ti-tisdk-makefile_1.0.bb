@@ -47,9 +47,10 @@ SRC_URI = "\
     file://Makefile_openmpacc-examples \
     file://Makefile_linalg-examples \
     file://Makefile_ti-gc320-driver \
+    file://Makefile_barcode-roi \
 "
 
-PR = "r76"
+PR = "r77"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -88,6 +89,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            cryptodev \
                            ti-sgx-ddk-km \
                            pru-icss \
+                           barcode-roi \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
@@ -98,6 +100,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            image-gallery \
                            ti-sgx-ddk-km \
                            pru-icss \
+                           barcode-roi \
 "
 
 MAKEFILES_append_dra7xx = " cryptodev \
@@ -116,6 +119,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               cmem-mod \
                               pru-icss \
                               ti-gc320-driver \
+                              barcode-roi \
 "
 MAKEFILES_append_am180x-evm = " pru \
                                 u-boot-legacy \
@@ -130,6 +134,7 @@ MAKEFILES_append_keystone = " u-boot-spl \
                               hplib-mod \
                               uio-module-drv \
                               ipsecmgr-mod \
+                              barcode-roi \
 "
 
 MAKEFILES_append_k2hk-evm = " opencl-examples \
