@@ -36,12 +36,11 @@ case "$1" in
 	echo ' ' >> ipaddr
         echo '#>>>>> LCD 12' >> ipaddr
         echo 'IP Address:' >> ipaddr
-        cat ipaddr
         wait
         sleep 1
 
-        echo `ifconfig | grep 'inet addr:' | grep -v '127.0.0.1' | cut -d: -f2 | awk '{print $1}'` > ipaddr
-        cat ipaddr
+        echo `ifconfig | grep 'inet addr:' | grep -v '127.0.0.1' | cut -d: -f2 | awk '{print $1}'` >> ipaddr
+        cat ipaddr > /dev/ttyS0
         wait
         sleep 1
     ;;
