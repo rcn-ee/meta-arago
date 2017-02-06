@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "file://init"
 
-PR = "r5"
+PR = "r6"
 
 S = "${WORKDIR}"
 
