@@ -19,8 +19,8 @@ do_install_append() {
 	install -m 0755 mkvol_bad ${D}${sbindir}/
 	install -m 0755 mkvol_paral ${D}${sbindir}/
 	install -m 0755 rsvol ${D}${sbindir}/
-	install -m 0755 tests/ubi-tests/runtests.sh ${D}${sbindir}/
-	install -m 0755 tests/ubi-tests/stress-test.sh ${D}${sbindir}/
+	install -m 0755 tests/ubi-tests/runubitests.sh ${D}${sbindir}/
+	install -m 0755 tests/ubi-tests/ubi-stress-test.sh ${D}${sbindir}/
 }
 
 PACKAGES =+ "mtd-utils-ubifs-tests"
@@ -36,6 +36,6 @@ ${sbindir}/mkvol_basic \
 ${sbindir}/mkvol_bad \
 ${sbindir}/mkvol_paral \
 ${sbindir}/rsvol \
-${sbindir}/runtests.sh \
-${sbindir}/stress-test.sh \
+${sbindir}/runubitests.sh \
+${sbindir}/ubi-stress-test.sh \
 "
