@@ -12,10 +12,11 @@ UTILS = " \
     oprofile-example-src \
 "
 
+# ti-pru-sw-edma-driver is currently broken
 # Add pru and profibus sources for omapl138 devices
-UTILS_append_am180x-evm = " \
-    ti-pru-sw-examples-src \
-"
+#UTILS_append_am180x-evm = " \
+#    ti-pru-sw-examples-src \
+#"
 
 UTILS_append_omap-a15 = " \
     omapconf-src \

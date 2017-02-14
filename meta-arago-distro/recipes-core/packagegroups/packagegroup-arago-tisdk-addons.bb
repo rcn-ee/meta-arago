@@ -108,6 +108,10 @@ EXTRA_PACKAGES = " \
     protobuf \
 "
 
+EXTRA_PACKAGES_omapl138 = " \
+    protobuf \
+"
+
 RDEPENDS_${PN} = "\
     ${UTILS} \
     ${UTILS_UBOOT_FW} \
