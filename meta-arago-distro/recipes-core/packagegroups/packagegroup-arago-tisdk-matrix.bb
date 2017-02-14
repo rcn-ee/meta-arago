@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r62"
+PR = "r63"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -17,6 +17,7 @@ MATRIX_GUI = "               \
 "
 
 MATRIX_GUI_keystone = ""
+MATRIX_GUI_omapl138 = ""
 
 MATRIX_COMMON_APPS = "              \
     matrix-gui-armbenchmarks-demos  \
@@ -38,6 +39,7 @@ MATRIX_TOUCH_APPS = " \
 "
 
 MATRIX_QT_APPS_keystone = ""
+MATRIX_QT_APPS_omapl138 = ""
 
 MATRIX_SGX_DEMOS = " \
     matrix-3d-demo-chameleon \

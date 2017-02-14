@@ -11,6 +11,7 @@ MULTIMEDIA = " \
 "
 
 MULTIMEDIA_keystone = ""
+MULTIMEDIA_omapl138 = ""
 
 MULTIMEDIA_append_ti43x = " \
     dual-camera-demo \

@@ -11,6 +11,7 @@ QT_TOOLCHAIN_TARGET = "\
 "
 
 QT_TOOLCHAIN_TARGET_keystone = ""
+QT_TOOLCHAIN_TARGET_omapl138 = ""
 
 TISDK_TOOLCHAIN_BASE_TARGET = "\
     packagegroup-arago-tisdk-multimedia-sdk-target \

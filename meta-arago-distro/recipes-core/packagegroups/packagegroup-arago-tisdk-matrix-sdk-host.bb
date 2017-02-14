@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install Matrix v2 and associated applications sources in the SDK"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -12,6 +12,7 @@ MATRIX_GUI = " \
 "
 
 MATRIX_GUI_keystone = ""
+MATRIX_GUI_omapl138 = ""
 
 RDEPENDS_${PN} = "\
     matrix-gui-src \
