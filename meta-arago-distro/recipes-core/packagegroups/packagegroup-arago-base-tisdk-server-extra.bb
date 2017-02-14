@@ -104,6 +104,8 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     pktlib \
     cppi-lld \
     ipsecmgr-mod \
+    k2-initramfs \
+    parse-ip \
     "
 
 # The following packages are not yet ready for k2g-evm
@@ -178,6 +180,4 @@ RDEPENDS_${PN} = "\
     file \
     libbz2 \
     boost \
-    k2-initramfs \
-    parse-ip \
     "
