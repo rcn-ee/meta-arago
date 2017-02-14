@@ -3,6 +3,8 @@ TCMODE = "external-linaro"
 TCLIBC = "external-linaro-toolchain"
 
 ELT_TARGET_SYS = "arm-linux-gnueabihf"
+ELT_TARGET_SYS_armv5 = "arm-linux-gnueabi"
+ELT_TARGET_SYS_aarch64 = "aarch64-linux-gnu"
 TARGET_VENDOR = ""
 
 PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-linaro-toolchain"
