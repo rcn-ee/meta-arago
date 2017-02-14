@@ -54,6 +54,7 @@ do_install(){
 
 GUIDEPS = "matrix-gui-browser refresh-screen"
 GUIDEPS_keystone = ""
+GUIDEPS_omapl138 = ""
 
 RDEPENDS_${PN} += "matrix-lighttpd-config lighttpd lighttpd-module-cgi lighttpd-module-compress lighttpd-module-expire php php-cgi php-cli ${GUIDEPS}"
 
