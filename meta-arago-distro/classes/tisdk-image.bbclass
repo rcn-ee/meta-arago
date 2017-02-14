@@ -731,6 +731,9 @@ tisdk_image_build () {
     elif [ -e ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin ]
     then
         cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin ${prebuilt_dir}/
+    elif [ -e ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.ais ]
+    then
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.ais ${prebuilt_dir}/
     else
         echo "Could not find the u-boot image"
         return 1
