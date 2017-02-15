@@ -1,4 +1,4 @@
-PR = "r0"
+PR = "r1"
 
 BRANCH = "tiopencvrelease_3.1"
 
@@ -15,13 +15,16 @@ SRCREV_opencv = "b4f54ac48ced0ade8223eafab9cd3ad6dbb1b515"
 
 DEPENDS_remove_keystone = "qtbase"
 
-PACKAGECONFIG_append_am57xx-evm= " opencl"
-PACKAGECONFIG_append_dra7xx-evm= " opencl"
-PACKAGECONFIG_append_keystone = " opencl"
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+PACKAGECONFIG_append_dra7xx = " opencl"
+PACKAGECONFIG_append_keystone = " opencl"
+PACKAGECONFIG_append_dra7xx = "${@bb.utils.contains("DISTRO_FEATURES", "wayland", " qtwayland", "", d)}"
+
+inherit cmake_qt5
+
 PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON -DCMAKE_CXX_FLAGS_RELEASE="${CMAKE_CXX_FLAGS_RELEASE} -DCV_TIOPENCL -DCV_TIOPENCL_ENABLE_PROGRAM_COUNT -DMAX_PROGRAM_HASH_SIZE=50" -DCMAKE_C_FLAGS_RELEASE="${CMAKE_C_FLAGS_RELEASE} -DCV_TIOPENCL -DCV_TIOPENCL_ENABLE_PROGRAM_COUNT -DMAX_PROGRAM_HASH_SIZE=50" -DWITH_OPENCLAMDFFT=OFF -DWITH_OPENCLAMDBLAS=OFF,-DWITH_OPENCL=OFF,cmem opencl,"
+PACKAGECONFIG[qtwayland] = "-DWITH_QT=ON,-DWITH_QT=OFF,qtwayland,"
 
 do_install_append() {
     install -d ${D}${datadir}/OpenCV/samples/bin/
