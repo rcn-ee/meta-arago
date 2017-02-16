@@ -1,9 +1,9 @@
 require recipes-kernel/linux-libc-headers/linux-libc-headers.inc
 
-PR_append = ".arago1"
+PR_append = ".arago2"
 
 BRANCH = "ti-lsk-linux-4.9.y"
-SRCREV = "b4aa954ead9260eaf7138755fc9d062a9f4630eb"
+SRCREV = "1c74e8801cf58a30394ae92236895599f2c77253"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
