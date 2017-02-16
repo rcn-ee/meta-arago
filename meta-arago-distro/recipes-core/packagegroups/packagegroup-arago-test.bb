@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r45"
+PR = "r46"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -25,7 +25,6 @@ ARAGO_TEST = "\
     v4l-utils \
     smcroute \
     rwmem \
-    cpuburn-neon \
     pulseaudio-misc \
     kselftests \
     cpuset \
@@ -34,7 +33,15 @@ ARAGO_TEST = "\
     pcitest \
     "
 
-ARAGO_TI_TEST = "\
+ARAGO_TEST_append_armv7a = " \
+    cpuburn-neon \
+"
+
+ARAGO_TEST_append_armv7ve = " \
+    cpuburn-neon \
+"
+
+ARAGO_TI_TEST = " \
     ltp-ddt \
     input-utils \
     cpuloadgen \
