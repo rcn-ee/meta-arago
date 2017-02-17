@@ -61,6 +61,18 @@ MATRIX_OPENCL_APPS_append_dra7xx = " \
     matrix-machinevision-demo-dlp3dscanner \
 "
 
+MATRIX_OPENCV_ARM_ONLY_APPS = " \
+     matrix-machinevision-demo-barcoderoi \
+"
+
+MATRIX_OPENCV_OPENCL_APPS = " \
+    matrix-machinevision-demo-barcoderoi-f2f \
+"
+
+MATRIX_OPENCV_OPENCL_APPS_omap-a15 = " \
+     matrix-machinevision-demo-barcoderoi \
+"
+
 MATRIX_APPS = ""
 
 MATRIX_APPS_append_ti33x = "        \
@@ -76,6 +88,8 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-gui-pm-demos-governor    \
                                     \
     matrix-gui-ethernet-demos       \
+                                    \
+    ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
 MATRIX_APPS_append_ti43x = "        \
@@ -91,6 +105,8 @@ MATRIX_APPS_append_ti43x = "        \
                                     \
     matrix-gui-apps-dual-camera     \
     matrix-gui-apps-image-gallery   \
+                                    \
+    ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
@@ -126,4 +142,5 @@ RDEPENDS_${PN} = "        \
     ${MATRIX_APPS}        \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx',"${MATRIX_SGX_DEMOS}",'',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','opencl',"${MATRIX_OPENCL_APPS}",'',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','opencl',"${MATRIX_OPENCV_OPENCL_APPS}",'',d)} \
 "
