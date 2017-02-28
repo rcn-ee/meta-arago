@@ -50,7 +50,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r78"
+PR = "r79"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -109,6 +109,7 @@ MAKEFILES_append_dra7xx = " cryptodev \
                             opencl-examples \
                             openmpacc-examples \
                             qt-opencv-opencl-opengl-multithreaded \
+                            linalg-examples \
 "
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
