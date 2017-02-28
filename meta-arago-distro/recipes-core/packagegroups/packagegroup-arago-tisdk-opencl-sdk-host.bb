@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for OpenCL/MP apps and demos"
 LICENSE = "MIT"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -12,6 +12,10 @@ UTILS = " \
 "
 
 UTILS_append_k2hk-evm = " \
+    linalg-examples-src \
+"
+
+UTILS_append_dra7xx = " \
     linalg-examples-src \
 "
 

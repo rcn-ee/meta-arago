@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install OpenCL/MP and related components"
 LICENSE = "MIT"
-PR = "r1"
+PR = "r2"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -20,6 +20,10 @@ EXTRA_PKGS = " \
 "
 
 EXTRA_PKGS_append_k2hk-evm = " \
+    linalg-examples \
+"
+
+EXTRA_PKGS_append_dra7xx = " \
     linalg-examples \
 "
 

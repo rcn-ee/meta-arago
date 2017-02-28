@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries of OpenCL/MP and related components"
 LICENSE = "MIT"
-PR = "r1"
+PR = "r2"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -13,6 +13,10 @@ UTILS = " \
 "
 
 UTILS_append_k2hk-evm = " \
+    linalg-dev \
+"
+
+UTILS_append_dra7xx = " \
     linalg-dev \
 "
 
