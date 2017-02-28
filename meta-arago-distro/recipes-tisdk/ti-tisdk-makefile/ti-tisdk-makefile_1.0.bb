@@ -109,6 +109,7 @@ MAKEFILES_append_dra7xx = " cryptodev \
                             opencl-examples \
                             openmpacc-examples \
                             qt-opencv-opencl-opengl-multithreaded \
+                            linalg-examples \
 "
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
