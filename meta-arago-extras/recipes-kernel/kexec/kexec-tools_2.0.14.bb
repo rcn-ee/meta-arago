@@ -4,10 +4,10 @@ EXTRA_OECONF = " --with-zlib=yes"
 
 S = "${WORKDIR}/git"
 
-PV = "2.0.12+2.0.13pre"
+PV = "2.0.14"
 
-BRANCH="master"
-SRCREV = "4db7f295d59651ead1f7632198fe8c113a2e8890"
+BRANCH = "master"
+SRCREV = "69291dbef14f02b5b97d44220412b02a9fa7b5eb"
 
 SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git;protocol=git;branch=${BRANCH}"
 
