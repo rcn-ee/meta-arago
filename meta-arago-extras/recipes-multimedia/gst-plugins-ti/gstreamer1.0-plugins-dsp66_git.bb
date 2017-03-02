@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2827f94fc0a1adeff4d9702e97ce2979"
 
 SRC_URI = "git://git.ti.com/processor-sdk/gst-plugin-dsp66.git;protocol=git;branch=master"
-SRCREV = "0db24f44b49ad673bcebce5d25a63ea41551ebec"
+SRCREV = "0abedafadbed693592804f23482a9447d81b2dbf"
 
 S = "${WORKDIR}/git"
 
@@ -14,7 +14,7 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base opencl ti-cgt6x-native clocl-n
 
 inherit autotools-brokensep pkgconfig gettext
 
-PR = "r0"
+PR = "r1"
 
 RDEPENDS_${PN} += " opencl-runtime"
 
