@@ -20,7 +20,7 @@ MULTIMEDIA_append_ti43x = " \
 
 MULTIMEDIA_append_dra7xx = " \
     hevc-arm-decoder \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'opencl', 'qt-opencv-opencl-opengl-multithreaded-dev', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'qt-opencv-opencl-opengl-multithreaded-dev', '', d)} \
 "
 
 MULTIMEDIA_append_omap5-evm = " \

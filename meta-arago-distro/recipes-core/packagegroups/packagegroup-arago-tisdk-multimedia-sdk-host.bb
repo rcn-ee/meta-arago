@@ -19,7 +19,7 @@ MULTIMEDIA_append_ti33x = " barcode-roi-src"
 MULTIMEDIA_append_omap-a15 = " barcode-roi-src"
 
 MULTIMEDIA_append_dra7xx = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'opencl', 'qt-opencv-opencl-opengl-multithreaded-src', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'qt-opencv-opencl-opengl-multithreaded-src', '', d)} \
 "
 
 MULTIMEDIA_append_keystone = " barcode-roi-src"
