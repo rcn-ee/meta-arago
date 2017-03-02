@@ -1,7 +1,7 @@
 ARAGO_TISDK_IMAGE = "processor-sdk-linux-image"
 
 # Set CMEM reserved memory region
-RESERVE_CMEM = "${@bb.utils.contains('MACHINE_FEATURES','opencl','1','0',d)}"
+RESERVE_CMEM = "${@bb.utils.contains('MACHINE_FEATURES','dsp','1','0',d)}"
 CMEM_BASE_omap-a15 ?= "a0000000"
 CMEM_SIZE_omap-a15 ?= "08000000"
 

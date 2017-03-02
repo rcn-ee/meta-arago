@@ -14,7 +14,7 @@ MULTIMEDIA_append_ti43x = " \
 "
 
 MULTIMEDIA_append_dra7xx = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'opencl', 'qt-opencv-opencl-opengl-multithreaded-src', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'qt-opencv-opencl-opengl-multithreaded-src', '', d)} \
 "
 
 #Demo doesn't work on 3.14
