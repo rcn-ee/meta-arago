@@ -1,0 +1,26 @@
+From b93a24a4df81abfffb8e275970a98736dd42d4f5 Mon Sep 17 00:00:00 2001
+From: Keerthy <j-keerthy@ti.com>
+Date: Tue, 28 Feb 2017 10:44:45 +0530
+Subject: [PATCH] HACK: TO get kexec up on dra7
+
+Signed-off-by: Keerthy <j-keerthy@ti.com>
+---
+ kexec/arch/arm/kexec-zImage-arm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kexec/arch/arm/kexec-zImage-arm.c b/kexec/arch/arm/kexec-zImage-arm.c
+index 7f02b93..9907496 100644
+--- a/kexec/arch/arm/kexec-zImage-arm.c
++++ b/kexec/arch/arm/kexec-zImage-arm.c
+@@ -572,7 +572,7 @@ int zImage_arm_load(int argc, char **argv, const char *buf, off_t len,
+ 		 * is 4, and just to be safe, place ramdisk after that.
+ 		 * Note that we must include space for the compressed
+ 		 * image here as well. */
+-		initrd_base = kernel_base + _ALIGN(len * 5, getpagesize());
++		initrd_base = kernel_base + _ALIGN(len * 6, getpagesize());
+ 	}
+ 
+ 	if (use_atags) {
+-- 
+1.9.1
+
