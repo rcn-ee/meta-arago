@@ -81,11 +81,6 @@ ARAGO_SECURE_STORAGE = "\
     engine-pkcs11 \
     "
 
-# Disable cmem (and deps) due to 4.9 kernel
-#    cmem
-#    cmem-mod
-#    multiprocmgr
-#    mpm-transport
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
     uio-module-drv \
@@ -96,7 +91,11 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     cuia \
     edma3-lld \
     srss-tc \
+    cmem \
+    cmem-mod \
     ti-ipc \
+    mpm-transport \
+    multiprocmgr \
     rm-lld \
     demo-image-proc \
     pa-lld \

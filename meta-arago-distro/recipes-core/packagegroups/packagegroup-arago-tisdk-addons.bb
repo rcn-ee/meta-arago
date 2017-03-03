@@ -89,16 +89,13 @@ UTILS_append_k2g = " \
 "
 
 EXTRA_LIBS = ""
-
-# Disable cmem due to 4.9 kernel
-#    cmem
 EXTRA_LIBS_append_omap-a15 = " \
+    cmem \
     uio-module-drv \
 "
 
-# Disable cmem due to 4.9 kernel
-#    cmem
 EXTRA_LIBS_append_keystone = " \
+    cmem \
     uio-module-drv \
 "
 

@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r30"
+PR = "r29"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -34,9 +34,8 @@ UTILS_append_ti43x = " \
 
 EXTRA_LIBS = ""
 
-# Disable cmem due to 4.9 kernel
-#    cmem-mod-src
 EXTRA_LIBS_append_omap-a15 = " \
+    cmem-mod-src \
     pru-icss-src \
 "
 
@@ -47,9 +46,8 @@ EXTRA_LIBS_append_dra7xx = " \
 
 # Disable ipsecmgr due to libnl and xfrm conflict
 #    ipsecmgr-mod-src
-# Disable cmem due to 4.9 kernel
-#    cmem-mod-src
 EXTRA_LIBS_append_keystone = " \
+    cmem-mod-src \
     uio-module-drv-src \
     hplib-mod-src \
 "

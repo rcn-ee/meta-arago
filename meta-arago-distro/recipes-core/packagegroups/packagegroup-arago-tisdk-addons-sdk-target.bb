@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r35"
+PR = "r34"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -33,17 +33,10 @@ TI_SECURE_STORAGE_DEV = "\
 #	ipsecmgr-staticdev
 #	libnl-xfrm-dev
 #	libnl-xfrm-staticdev
-# Disable cmem (and deps) due to 4.9 kernel breakage
-#	cmem-dev
-#	cmem-staticdev
-#	multiprocmgr-dev
-#	multiprocmgr-staticdev
-#	mpm-transport-dev
-#	mpm-transport-staticdev
-#	ipc-transport-qmss-dev
-#	ipc-transport-qmss-staticdev
 EXTRA_LIBS_append_keystone = "\
 	${TI_SECURE_STORAGE_DEV} \
+	cmem-dev \
+	cmem-staticdev \
 	udma-dev \
 	udma-staticdev \
 	traceframework-dev \
@@ -67,10 +60,16 @@ EXTRA_LIBS_append_keystone = "\
 	libnl-staticdev \
 	ti-ipc-dev \
 	ti-ipc-staticdev \
+	multiprocmgr-dev \
+	multiprocmgr-staticdev \
+	mpm-transport-dev \
+	mpm-transport-staticdev \
 	edma3-lld-dev \
 	edma3-lld-staticdev \
 	lksctp-tools-dev \
 	lksctp-tools-staticdev \
+	ipc-transport-qmss-dev \
+	ipc-transport-qmss-staticdev \
 	"
 
 # Disable netapi due to libnl and xfrm conflict
@@ -90,12 +89,11 @@ EXTRA_LIBS_append_k2l-evm = "\
 # Disable netapi due to libnl and xfrm conflict
 #	netapi-dev
 #	netapi-staticdev
-# Disable cmem (and deps) due to 4.9 kernel breakage
-#	ipc-transport-srio-dev
-#	ipc-transport-srio-staticdev
 EXTRA_LIBS_append_k2hk-evm = "\
 	srio-lld-dev \
 	srio-lld-staticdev \
+	ipc-transport-srio-dev \
+	ipc-transport-srio-staticdev \
 	mmap-lld \
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
@@ -131,7 +129,7 @@ UTILS_append_dra7xx = " canutils-dev \
 UTILS_append_k2g = " canutils-dev"
 
 EXTRA_LIBS = ""
-#EXTRA_LIBS_append_omap-a15 = " cmem-dev"
+EXTRA_LIBS_append_omap-a15 = " cmem-dev"
 EXTRA_LIBS_append_dra7xx = " libulm-dev \
                              libulm-staticdev \
                              gdbserver-c6x-dev \
