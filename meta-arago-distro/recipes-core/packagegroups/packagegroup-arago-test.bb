@@ -10,7 +10,6 @@ ARAGO_TEST = "\
     bonnie++ \
     hdparm \
     iozone3 \
-    iperf \
     lmbench \
     rt-tests \
     evtest \
