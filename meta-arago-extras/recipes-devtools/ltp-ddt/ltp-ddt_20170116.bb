@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r10"
+PR = "r11"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
@@ -14,11 +14,10 @@ RDEPENDS_${PN} += "pm-qa serialcheck"
 
 inherit autotools-brokensep
 
-SRCREV = "429d12779e28e1997f656db19c5bf73edf9e9365"
+SRCREV = "7b43afae8b931541388b0a7e6f65d7ceb6d01b3e"
 BRANCH ?= "master"
 
-SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
-    file://0029-trace_shed-Fix-build-with-musl.patch"
+SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
