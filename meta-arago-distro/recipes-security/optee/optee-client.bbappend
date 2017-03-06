@@ -4,4 +4,4 @@ SRC_URI = "git://git.ti.com/optee/ti-optee-client.git;branch=${BRANCH} \
            file://tee-supplicant.service"
 
 BRANCH = "ti_optee_client"
-SRCREV = "d507b84f82db4c8a85429e1fe255bfbe7b239856"
+SRCREV = "1df4046bd729e866743454a18a71e72228e585fd"
