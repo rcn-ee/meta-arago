@@ -740,9 +740,12 @@ tisdk_image_build () {
     fi
 
     # Copy the Kernel image if it exists
-    if [ -e ${DEPLOY_DIR_IMAGE}/[uz]Image-${MACHINE}.bin ]
+    if [ -e ${DEPLOY_DIR_IMAGE}/zImage-${MACHINE}.bin ]
     then
-        cp ${DEPLOY_DIR_IMAGE}/[uz]Image-${MACHINE}.bin ${prebuilt_dir}/
+        cp ${DEPLOY_DIR_IMAGE}/zImage-${MACHINE}.bin ${prebuilt_dir}/
+    elif [ -e ${DEPLOY_DIR_IMAGE}/uImage-${MACHINE}.bin ]
+    then
+        cp ${DEPLOY_DIR_IMAGE}/uImage-${MACHINE}.bin ${prebuilt_dir}/
     else
         echo "Could not find the Kernel image"
         return 1
