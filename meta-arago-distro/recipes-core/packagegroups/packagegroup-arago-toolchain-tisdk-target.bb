@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to build and install header and libs into the sdk"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,7 +19,10 @@ TISDK_TOOLCHAIN_BASE_TARGET = "\
     packagegroup-arago-tisdk-crypto-sdk-target \
 "
 
-TISDK_TOOLCHAIN_BASE_TARGET_keystone = "packagegroup-arago-standalone-sdk-target"
+TISDK_TOOLCHAIN_BASE_TARGET_keystone = "\
+    packagegroup-arago-standalone-sdk-target \
+    packagegroup-arago-tisdk-multimedia-sdk-target \
+"
 
 RDEPENDS_${PN} = "\
     ${QT_TOOLCHAIN_TARGET} \
