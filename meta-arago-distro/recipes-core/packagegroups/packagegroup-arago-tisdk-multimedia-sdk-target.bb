@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to build and install header and libs into sdk"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -18,7 +18,11 @@ MULTIMEDIA_append_ti33x = " barcode-roi-dev"
 MULTIMEDIA_append_ti43x = " barcode-roi-dev"
 MULTIMEDIA_append_omap-a15 = " barcode-roi-dev"
 
-MULTIMEDIA_append_keystone = " barcode-roi-dev"
+MULTIMEDIA_append_keystone = " \
+    hevc-arm-decoder-dev \
+    hevc-arm-decoder-staticdev \
+    barcode-roi-dev \
+"
 
 RDEPENDS_${PN} = "\
     ${MULTIMEDIA} \
