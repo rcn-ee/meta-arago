@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r20"
+PR = "r21"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -10,8 +10,10 @@ MULTIMEDIA = " \
     amsdk-av-files \
 "
 
-MULTIMEDIA_keystone = ""
 MULTIMEDIA_omapl138 = ""
+MULTIMEDIA_append_keystone = " \
+    hevc-arm-decoder \
+"
 
 MULTIMEDIA_append_ti43x = " \
     dual-camera-demo \
