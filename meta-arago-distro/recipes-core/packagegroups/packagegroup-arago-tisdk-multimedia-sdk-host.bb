@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -16,7 +16,11 @@ MULTIMEDIA_append_ti43x = " \
 
 MULTIMEDIA_append_ti33x = " barcode-roi-src"
 
-MULTIMEDIA_append_omap-a15 = " barcode-roi-src"
+MULTIMEDIA_append_omap-a15 = " \
+    dual-camera-demo-src \
+    image-gallery-src \
+    barcode-roi-src \
+"
 
 MULTIMEDIA_append_dra7xx = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'qt-opencv-opencl-opengl-multithreaded-src', '', d)} \
