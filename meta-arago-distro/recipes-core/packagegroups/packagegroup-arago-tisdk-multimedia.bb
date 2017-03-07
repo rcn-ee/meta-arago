@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -13,6 +13,11 @@ MULTIMEDIA = " \
 MULTIMEDIA_keystone = ""
 
 MULTIMEDIA_append_ti43x = " \
+    dual-camera-demo \
+    image-gallery \
+"
+
+MULTIMEDIA_append_omap-a15 = " \
     dual-camera-demo \
     image-gallery \
 "
