@@ -1,0 +1,67 @@
+From 1d875e3526357f6d2bb66ee07605f4d4271d5710 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 7 Mar 2017 15:22:41 -0500
+Subject: [PATCH] libva: adjust paths in headers to include libva prefix
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ third_party/libva/va/va.h          | 22 +++++++++++-----------
+ third_party/libva/va/va_dec_jpeg.h |  2 +-
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/third_party/libva/va/va.h b/third_party/libva/va/va.h
+index 88fde4e..10b2e0b 100644
+--- a/third_party/libva/va/va.h
++++ b/third_party/libva/va/va.h
+@@ -80,7 +80,7 @@
+ 
+ #include <stddef.h>
+ #include <stdint.h>
+-#include <va/va_version.h>
++#include <libva/va/va_version.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -2836,16 +2836,16 @@ typedef struct _VAPictureHEVC
+  */
+ #define VA_PICTURE_HEVC_RPS_LT_CURR             0x00000040
+ 
+-#include <va/va_dec_hevc.h>
+-#include <va/va_dec_jpeg.h>
+-#include <va/va_dec_vp8.h>
+-#include <va/va_dec_vp9.h>
+-#include <va/va_enc_hevc.h>
+-#include <va/va_enc_h264.h>
+-#include <va/va_enc_jpeg.h>
+-#include <va/va_enc_mpeg2.h>
+-#include <va/va_enc_vp8.h>
+-#include <va/va_vpp.h>
++#include <libva/va/va_dec_hevc.h>
++#include <libva/va/va_dec_jpeg.h>
++#include <libva/va/va_dec_vp8.h>
++#include <libva/va/va_dec_vp9.h>
++#include <libva/va/va_enc_hevc.h>
++#include <libva/va/va_enc_h264.h>
++#include <libva/va/va_enc_jpeg.h>
++#include <libva/va/va_enc_mpeg2.h>
++#include <libva/va/va_enc_vp8.h>
++#include <libva/va/va_vpp.h>
+ 
+ /**@}*/
+ 
+diff --git a/third_party/libva/va/va_dec_jpeg.h b/third_party/libva/va/va_dec_jpeg.h
+index 644ce3b..c177aef 100644
+--- a/third_party/libva/va/va_dec_jpeg.h
++++ b/third_party/libva/va/va_dec_jpeg.h
+@@ -36,7 +36,7 @@
+ extern "C" {
+ #endif
+ 
+-#include <va/va.h>
++#include <libva/va/va.h>
+ 
+ /**
+  * \defgroup api_dec_jpeg JPEG decoding API
+-- 
+2.7.4
+
