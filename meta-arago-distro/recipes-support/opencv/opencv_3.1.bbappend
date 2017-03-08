@@ -1,4 +1,4 @@
-PR = "r1"
+PR = "r2"
 
 BRANCH = "tiopencvrelease_3.1"
 
@@ -17,9 +17,12 @@ DEPENDS_remove_keystone = "qtbase"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGECONFIG_append_dra7xx = " opencl"
-PACKAGECONFIG_append_keystone = " opencl"
-PACKAGECONFIG_append_dra7xx = "${@bb.utils.contains("DISTRO_FEATURES", "wayland", " qtwayland", "", d)}"
+PACKAGECONFIG_QTWAYLAND = "${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland", "", d)}"
+PACKAGECONFIG_QTWAYLAND_keystone = ""
+
+PACKAGECONFIG_append = " ${PACKAGECONFIG_QTWAYLAND} \
+                         ${@bb.utils.contains('MACHINE_FEATURES','opencl','opencl', '', d)} \
+"
 
 inherit cmake_qt5
 
