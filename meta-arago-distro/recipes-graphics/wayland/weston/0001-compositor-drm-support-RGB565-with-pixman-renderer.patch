@@ -1,6 +1,6 @@
-From 4d81723304c8260a295ed8be50e9b6cc6cc45543 Mon Sep 17 00:00:00 2001
+From 91b452fa515b94928d32af6e1b1b0405469747fd Mon Sep 17 00:00:00 2001
 From: Tomi Valkeinen <tomi.valkeinen@ti.com>
-Date: Sat, 13 Aug 2016 21:30:23 -0400
+Date: Wed, 8 Mar 2017 13:05:38 -0500
 Subject: [PATCH] compositor-drm: support RGB565 with pixman renderer
 
 At the moment only XRGB8888 is supported when using pixman renderer.
@@ -15,10 +15,10 @@ Signed-off-by: Daniel Stone <daniels@collabora.com>
  1 file changed, 55 insertions(+), 7 deletions(-)
 
 diff --git a/src/compositor-drm.c b/src/compositor-drm.c
-index a06c98a..6485b39 100644
+index fd89627..443b69a 100644
 --- a/src/compositor-drm.c
 +++ b/src/compositor-drm.c
-@@ -270,10 +270,12 @@ drm_fb_destroy_callback(struct gbm_bo *bo, void *data)
+@@ -262,10 +262,12 @@ drm_fb_destroy_callback(struct gbm_bo *bo, void *data)
  }
  
  static struct drm_fb *
@@ -32,7 +32,7 @@ index a06c98a..6485b39 100644
  
  	struct drm_mode_create_dumb create_arg;
  	struct drm_mode_destroy_dumb destroy_arg;
-@@ -283,8 +285,20 @@ drm_fb_create_dumb(struct drm_backend *b, unsigned width, unsigned height)
+@@ -275,8 +277,20 @@ drm_fb_create_dumb(struct drm_backend *b, unsigned width, unsigned height)
  	if (!fb)
  		return NULL;
  
@@ -54,7 +54,7 @@ index a06c98a..6485b39 100644
  	create_arg.width = width;
  	create_arg.height = height;
  
-@@ -297,8 +311,29 @@ drm_fb_create_dumb(struct drm_backend *b, unsigned width, unsigned height)
+@@ -289,8 +303,29 @@ drm_fb_create_dumb(struct drm_backend *b, unsigned width, unsigned height)
  	fb->size = create_arg.size;
  	fb->fd = b->drm.fd;
  
@@ -86,11 +86,11 @@ index a06c98a..6485b39 100644
  	if (ret)
  		goto err_bo;
  
-@@ -1874,17 +1909,30 @@ drm_output_init_pixman(struct drm_output *output, struct drm_backend *b)
+@@ -1879,17 +1914,30 @@ drm_output_init_pixman(struct drm_output *output, struct drm_backend *b)
  {
  	int w = output->base.current_mode->width;
  	int h = output->base.current_mode->height;
-+	uint32_t format = output->format;
++	uint32_t format = output->gbm_format;
 +	uint32_t pixman_format;
  	unsigned int i;
  
