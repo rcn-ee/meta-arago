@@ -3,7 +3,7 @@ opencl-examples:
 	@echo =====================================
 	@echo     Building the OpenCL Examples
 	@echo =====================================
-	@cd example-applications; cd `find . -name "*opencl-examples*"`; . $(ENV_SETUP); make TARGET_ROOTDIR=$(SDK_PATH_TARGET) TI_OCL_CGT_INSTALL=$(SDK_PATH_TARGET)/usr/share/ti/cgt-c6x
+	@cd example-applications; cd `find . -name "*opencl-examples*"`; . $(ENV_SETUP); make TARGET_ROOTDIR=$(SDK_PATH_TARGET) TI_OCL_CGT_INSTALL=$(SDK_PATH_TARGET)/usr/share/ti/cgt-c6x EXAMPLE_SET=EXCLUDE_PERSISTENT
 
 opencl-examples_install:
 	@echo =======================================
