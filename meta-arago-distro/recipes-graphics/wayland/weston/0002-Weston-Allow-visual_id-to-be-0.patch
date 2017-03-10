@@ -1,7 +1,7 @@
-From 27cf7d0c260fa4754a021e9f6f92f83e2c99f5f4 Mon Sep 17 00:00:00 2001
+From 5b5de6a814b43ca023a92b85b407b3d061dbc64f Mon Sep 17 00:00:00 2001
 From: Eric Ruei <e-ruei1@ti.com>
-Date: Mon, 11 Jan 2016 11:59:19 -0500
-Subject: [PATCH 2/2] Weston1.9.0: Allow visual_id to be 0
+Date: Thu, 9 Mar 2017 14:32:24 -0500
+Subject: [PATCH 2/4] Weston: Allow visual_id to be 0
 
 The inquiry of visual id from egl API eglGetConfigAttrib(EGL_NATIVE_VISUAL_ID)
 is an optional feature. The visual id will be set to 0 if this feature is
@@ -14,10 +14,10 @@ Signed-off-by: Eric Ruei <e-ruei1@ti.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/gl-renderer.c b/src/gl-renderer.c
-index d7231f4..e1b925e 100644
+index 23c0cd7..4c1f170 100644
 --- a/src/gl-renderer.c
 +++ b/src/gl-renderer.c
-@@ -2194,7 +2194,7 @@ match_config_to_visual(EGLDisplay egl_display,
+@@ -2462,7 +2462,7 @@ match_config_to_visual(EGLDisplay egl_display,
  				&id))
  			continue;
  
