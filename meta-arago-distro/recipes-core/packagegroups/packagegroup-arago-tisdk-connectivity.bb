@@ -42,6 +42,7 @@ BLUETOOTH_STACK = "\
     bluez5-noinst-tools \
     bluez5-testtools \
     uim \
+    bt-enable \
 "
 
 CONNECTIVITY_RDEPENDS = " \
