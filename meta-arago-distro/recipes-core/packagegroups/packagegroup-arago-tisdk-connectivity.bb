@@ -29,7 +29,7 @@ WLAN_COMMON = "\
 
 FIRMWARE_AND_DRIVERS = "\
     wl18xx-fw \
-    bt-firmware \
+    bt-fw \
 "
 
 DEMO_APPS = "\
