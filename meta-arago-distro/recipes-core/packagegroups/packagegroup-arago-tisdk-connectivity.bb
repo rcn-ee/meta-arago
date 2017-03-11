@@ -20,7 +20,7 @@ WLAN_COMMON = "\
     wpa-supplicant-wl18xx \
     crda \
     hostap-daemon-wl18xx \
-    ti-wifi-utils-wl18xx \
+    wl18xx-calibrator \
     wl18xx-target-scripts \
 "
 
