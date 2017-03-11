@@ -28,7 +28,7 @@ WLAN_COMMON = "\
 #    netperf
 
 FIRMWARE_AND_DRIVERS = "\
-    wl18xx-firmware \
+    wl18xx-fw \
     bt-firmware \
 "
 

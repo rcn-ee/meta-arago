@@ -100,8 +100,8 @@ SRCIPK_INSTALL_DIR_pn-omap3-sgx-modules = "board-support/extra-drivers/sgx-modul
 CREATE_SRCIPK_pn-ti-compat-wireless-wl18xx = "1"
 SRCIPK_INSTALL_DIR_pn-ti-compat-wireless-wl18xx = "board-support/extra-drivers/${PN}-${PV}"
 
-CREATE_SRCIPK_pn-wl18xx-firmware = "1"
-SRCIPK_INSTALL_DIR_pn-wl18xx-firmware = "board-support/extra-drivers/${PN}-${PV}"
+CREATE_SRCIPK_pn-wl18xx-fw = "1"
+SRCIPK_INSTALL_DIR_pn-wl18xx-fw = "board-support/extra-drivers/${PN}-${PV}"
 
 CREATE_SRCIPK_pn-wl1271-wlan-cli = "1"
 SRCIPK_INSTALL_DIR_pn-wl1271-wlan-cli = "example-applications/wlan"
