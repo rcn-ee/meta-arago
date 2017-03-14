@@ -7,13 +7,14 @@ DEPENDS = "ffmpeg libdce libdrm libgbm ti-sgx-ddk-um wayland"
 
 inherit autotools pkgconfig
 
-PR = "r19"
-SRCREV = "47bbb6b2ec48bbee35f9dc7192c05e48fd1a2589"
+PR = "r21"
+SRCREV = "809e72b2c5ebe45bb7ba13bcfe964b1ef69f98f0"
 
 EXTRA_OEMAKE = "CC="${CC}""
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 SRC_URI = "git://git.ti.com/glsdk/omapdrmtest.git;protocol=git \
-           file://0001-configure.ac-also-check-for-libavcodec-library.patch"
+           file://0001-configure.ac-also-check-for-libavcodec-library.patch \
+"
 
 S = "${WORKDIR}/git"
