@@ -40,6 +40,7 @@ QT5_ESSENTIALS = "\
     qtquick1-plugins \
     qtquick1-qmlplugins \
     qtwebengine-qmlplugins \
+    liberation-fonts \
 "
 
 RDEPENDS_${PN} = "\
