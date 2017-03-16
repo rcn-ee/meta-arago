@@ -17,5 +17,6 @@ RDEPENDS_${PN} = "\
     nativesdk-libtool \
     nativesdk-python-distutils \
     nativesdk-git \
+    nativesdk-cmake \
     ${EXTRA_TOOLS} \
     "
