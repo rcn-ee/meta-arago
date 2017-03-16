@@ -10,14 +10,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools pkgconfig
 
-PR = "r5"
-SRCREV = "1c8a0d26c5b1918432fd94d2ac9894b3dcdb2814"
+PR = "r7"
+SRCREV = "0fa27a594fd3290644f5666eac62dc570f26f866"
 
 SRC_URI = "git://git.ti.com/glsdk/kmscube.git;protocol=git"
 
 SRC_URI_append = " \
-    file://0001-kmscube.c-init_drm-select-the-current-CRTC-display-m.patch \
-    file://0001-kmscube.c-init_drm-enable-AM3-support.patch \
 "
 
 S = "${WORKDIR}/git"
