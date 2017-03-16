@@ -3,6 +3,7 @@ HOMEPAGE = "http://software-dl.ti.com/mctools/docs/opencl/intro.html"
 LICENSE = "BSD"
 
 include ocl.inc
+require recipes-ti/includes/ti-paths.inc
 
 PR = "${INC_PR}.0"
 
@@ -10,6 +11,10 @@ COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "opencl ti-cgt6x-native clocl-native"
+
+OCL_PERSISTENT_DEPENDS = "ti-xdctools ti-ipc-rtos ti-sysbios"
+
+DEPENDS_append_dra7xx = " ${OCL_PERSISTENT_DEPENDS}"
 
 RDEPENDS_${PN} += " opencl-runtime"
 RDEPENDS_${PN}-dev += " libgomp-dev"
@@ -39,6 +44,17 @@ OCL_EXAMPLE_LIST = " buffer \
                      timeout \
 "
 
+OCL_PERSISTENT_EXAMPLE_LIST = " persistent_clock_concurrent \
+                                persistent_clock_spanning \
+                                persistent_common \
+                                persistent_kernel_timeout \
+                                persistent_messageq_concurrent \
+                                persistent_task_concurrent \
+                                persistent_task_spanning \
+"
+
+OCL_EXAMPLE_LIST_append_dra7xx = " ${OCL_PERSISTENT_EXAMPLE_LIST}"
+
 python do_unpack_append() {
     import shutil
 
@@ -56,6 +72,10 @@ python do_unpack_append() {
 EXTRA_OEMAKE = " TARGET_ROOTDIR=${STAGING_DIR_HOST} \
                  TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \
 "
+
+export XDC_DIR = "${XDC_INSTALL_DIR}/packages"
+export IPC_DIR = "${IPC_INSTALL_DIR}/packages"
+export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}/packages"
 
 do_compile() {
     oe_runmake
