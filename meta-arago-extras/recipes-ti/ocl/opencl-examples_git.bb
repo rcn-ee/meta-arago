@@ -35,6 +35,8 @@ OCL_EXAMPLE_LIST = " buffer \
                      vecadd_openmp \
                      vecadd_openmp_t \
                      dgemm \
+                     abort_exit \
+                     timeout \
 "
 
 python do_unpack_append() {

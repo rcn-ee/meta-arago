@@ -6,7 +6,7 @@ include ocl.inc
 
 PR = "${INC_PR}.0"
 
-inherit cmake
+inherit cmake systemd
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -57,6 +57,16 @@ EXTRA_OECMAKE += " -DBUILD_TARGET=${OCL_BUILD_TARGET} -DBUILD_OUTPUT=lib -DENABL
 
 EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} LINUX_DEVKIT_ROOT=${STAGING_DIR_HOST}"
 export KERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
+
+MCTD = "${S}/mct-daemon/ti-mct-daemon.service.k2x"
+MCTD_dra7xx = "${S}/mct-daemon/ti-mct-daemon.service.am57x"
+
+do_install_append() {
+    install -d ${D}${systemd_system_unitdir}
+    install -m0644 ${MCTD} ${D}${systemd_system_unitdir}/ti-mct-daemon.service
+}
+
+SYSTEMD_SERVICE_${PN} = "ti-mct-daemon.service"
 
 FILES_${PN} += " \
     ${datadir}/ti/opencl/* \
