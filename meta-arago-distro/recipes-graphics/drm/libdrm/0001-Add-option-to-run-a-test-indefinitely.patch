@@ -1,6 +1,6 @@
-From ca0a8795495a3b99c841e5a91dfa5de5c56758c6 Mon Sep 17 00:00:00 2001
+From babcb3f7fdc53c25f2c525eea1704498a19c126d Mon Sep 17 00:00:00 2001
 From: Alejandro Hernandez <ajhernandez@ti.com>
-Date: Tue, 23 Sep 2014 09:30:24 -0400
+Date: Wed, 15 Mar 2017 14:25:20 -0400
 Subject: [PATCH] Add option to run a test indefinitely
 
 This patch adds option -t to the modetest cli. When this option is
@@ -10,16 +10,15 @@ was not able to run in ltp-ddt because ltp-ddt sends data to stdin
 when a test is run
 
 Signed-off-by: Alejandro Hernandez <ajhernandez@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- tests/modetest/modetest.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ tests/modetest/modetest.c | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/tests/modetest/modetest.c b/tests/modetest/modetest.c
-index 22e3e81..a74e39a 100644
+index 21d5438..76685da 100644
 --- a/tests/modetest/modetest.c
 +++ b/tests/modetest/modetest.c
-@@ -1181,7 +1181,7 @@ static void clear_cursors(struct device *dev)
+@@ -1186,7 +1186,7 @@ static void clear_cursors(struct device *dev)
  		bo_destroy(dev->mode.cursor_bo);
  }
  
@@ -28,16 +27,16 @@ index 22e3e81..a74e39a 100644
  {
  	uint32_t handles[4] = {0}, pitches[4] = {0}, offsets[4] = {0};
  	unsigned int other_fb_id;
-@@ -1258,7 +1258,7 @@ static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned
- 			fprintf(stderr, "select timed out or error (ret %d)\n",
- 				ret);
- 			continue;
--		} else if (FD_ISSET(0, &fds)) {
-+		} else if (!dont_stop && FD_ISSET(0, &fds)) {
- 			break;
- 		}
- #endif
-@@ -1492,7 +1492,7 @@ static int pipe_resolve_connectors(struct device *dev, struct pipe_arg *pipe)
+@@ -1255,7 +1255,7 @@ static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned
+ 		fd_set fds;
+ 
+ 		FD_ZERO(&fds);
+-		FD_SET(0, &fds);
++		if (!dont_stop) FD_SET(0, &fds);
+ 		FD_SET(dev->fd, &fds);
+ 		ret = select(dev->fd + 1, &fds, NULL, NULL, &timeout);
+ 
+@@ -1497,7 +1497,7 @@ static int pipe_resolve_connectors(struct device *dev, struct pipe_arg *pipe)
  	return 0;
  }
  
@@ -46,7 +45,7 @@ index 22e3e81..a74e39a 100644
  
  int main(int argc, char **argv)
  {
-@@ -1507,6 +1507,7 @@ int main(int argc, char **argv)
+@@ -1512,6 +1512,7 @@ int main(int argc, char **argv)
  	char *module = NULL;
  	unsigned int i;
  	unsigned int count = 0, plane_count = 0;
@@ -54,17 +53,18 @@ index 22e3e81..a74e39a 100644
  	unsigned int prop_count = 0;
  	struct pipe_arg *pipe_args = NULL;
  	struct plane_arg *plane_args = NULL;
-@@ -1594,6 +1595,9 @@ int main(int argc, char **argv)
+@@ -1599,6 +1600,10 @@ int main(int argc, char **argv)
  
  			prop_count++;
  			break;
-+		case 't':
++                case 't':
 +			dont_stop = 1;
++			setvbuf(stdout, (char *)NULL, _IOLBF, 0);
 +			break;
  		default:
  			usage(argv[0]);
  			break;
-@@ -1666,7 +1670,7 @@ int main(int argc, char **argv)
+@@ -1671,7 +1676,7 @@ int main(int argc, char **argv)
  			set_cursors(&dev, pipe_args, count);
  
  		if (test_vsync)
@@ -74,5 +74,5 @@ index 22e3e81..a74e39a 100644
  		if (drop_master)
  			drmDropMaster(dev.fd);
 -- 
-2.2.0
+1.9.1
 
