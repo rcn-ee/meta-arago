@@ -11,7 +11,7 @@ inherit cmake systemd
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES += " ${PN}-runtime"
+PACKAGES =+ "${PN}-runtime"
 
 DEPENDS = " ocl-gl-headers \
             opencl-monitor \
@@ -38,7 +38,6 @@ RDEPENDS_${PN}-dev += " ocl-gl-headers-dev opencl-monitor"
 RDEPENDS_${PN}-runtime += " ${PN} opencl-monitor clocl ti-cgt6x"
 
 ALLOW_EMPTY_${PN}-runtime = "1"
-
 
 S = "${WORKDIR}/git/host"
 
@@ -67,6 +66,8 @@ do_install_append() {
 }
 
 SYSTEMD_SERVICE_${PN} = "ti-mct-daemon.service"
+
+FILES_${PN}-runtime += "${bindir}"
 
 FILES_${PN} += " \
     ${datadir}/ti/opencl/* \
