@@ -21,10 +21,12 @@ DEPENDS_append_ti33x = " \
 
 SRC_URI_append_omap-a15 = " \
     file://0001-kmssink-remove-DCE-dependencies.patch \
+    file://0002-kmssink-add-YUYV-support.patch \
 "
 
 SRC_URI_append_ti43x = " \
     file://0001-kmssink-remove-DCE-dependencies.patch \
+    file://0002-kmssink-add-YUYV-support.patch \
 "
 
 SRC_URI_append_ti33x = " \
