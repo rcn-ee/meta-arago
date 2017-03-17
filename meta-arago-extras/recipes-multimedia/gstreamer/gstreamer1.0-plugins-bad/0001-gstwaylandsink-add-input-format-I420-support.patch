@@ -1,0 +1,89 @@
+From 4d04ea92f196b9e0880917cf029a95c9ebef0ea9 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Wed, 22 Feb 2017 10:49:01 -0500
+Subject: [PATCH] gstwaylandsink: add input format I420 support
+
+The software-based video decoder produces the output in I420 format. To display
+the output without additional ARM MHz consumed in video format conversion,
+the function gst_wl_memory_construct_wl_buffer is enhanced to support I420 format.
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ ext/wayland/wldrm.c | 41 ++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 34 insertions(+), 7 deletions(-)
+
+diff --git a/ext/wayland/wldrm.c b/ext/wayland/wldrm.c
+index 8f2c393..cb2b0f2 100644
+--- a/ext/wayland/wldrm.c
++++ b/ext/wayland/wldrm.c
+@@ -5,33 +5,60 @@
+ #include <omap_drmif.h>
+ #include <wayland-client.h>
+ 
++GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
++#define GST_CAT_DEFAULT gstwayland_debug
++
++
+ struct wl_buffer *
+ gst_wl_drm_memory_construct_wl_buffer (GstMemory * mem, GstWlDisplay * display,
+     const GstVideoInfo * info)
+ {
+   gint video_width = GST_VIDEO_INFO_WIDTH (info);
+   gint video_height = GST_VIDEO_INFO_HEIGHT (info);
++  GstVideoFormat format = GST_VIDEO_INFO_FORMAT (info);
+   int fd = -1;
+   struct omap_bo *bo;
+   struct wl_buffer *buffer;
+-
+-  /* TODO get format, etc from caps.. and query device for
+-   * supported formats, and make this all more flexible to
+-   * cope with various formats:
+-   */
+-  uint32_t fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
++  uint32_t fourcc;
+   uint32_t name;
+   /* note: wayland and mesa use the terminology:
+    *    stride - rowstride in bytes
+    *    pitch  - rowstride in pixels
+    */
+   uint32_t strides[3] = {
+-    GST_ROUND_UP_4 (video_width), GST_ROUND_UP_4 (video_width), 0,
++    GST_ROUND_UP_4 (video_width), 0, 0,
+   };
+   uint32_t offsets[3] = {
+     0, strides[0] * video_height, 0
+   };
+ 
++  if (format == GST_VIDEO_FORMAT_NV12)
++  {
++    /* NV12 */
++    fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
++    strides[1] = GST_ROUND_UP_4 (video_width);
++  }
++  else if(format == GST_VIDEO_FORMAT_I420)
++  {
++    /* YUV420 */
++    fourcc = GST_MAKE_FOURCC ('Y', 'U', '1', '2');
++    strides[1] = strides[2] = GST_ROUND_UP_4 (video_width/2);
++    offsets[2] = offsets[1] + strides[1] * video_height/2;
++  }
++  else
++  {
++
++    GST_DEBUG ("Unsupported video format: %d", format);
++    /*
++     * There are two xRGB frames with width and height = 1 required in the begining of a video stream.
++     * If we consider them as errot, then it will case libwayland-clent.so crashes
++     * due to invalid error handling.
++     * Consider them as NV12 until we can figure out a better solution
++     */
++    fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
++    strides[1] = GST_ROUND_UP_4 (video_width);
++  }
++
+   fd = gst_fd_memory_get_fd (mem);
+ 
+   if (fd < 0 ) {
+-- 
+1.9.1
+
