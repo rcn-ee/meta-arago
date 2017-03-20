@@ -130,18 +130,6 @@ SRCIPK_PRESERVE_GIT_pn-u-boot-keystone = "true"
 CREATE_SRCIPK_pn-u-boot-dra7xx = "1"
 SRCIPK_INSTALL_DIR_pn-u-boot-dra7xx = "board-support/u-boot-${PV}-${PR}"
 
-CREATE_SRCIPK_pn-u-boot-am180x = "1"
-SRCIPK_INSTALL_DIR_pn-u-boot-am180x = "board-support/u-boot-${UVER}-psp${PSPREL}"
-
-CREATE_SRCIPK_pn-u-boot-am37x = "1"
-SRCIPK_INSTALL_DIR_pn-u-boot-am37x = "board-support/u-boot-${UVER}-psp${PSPREL}"
-
-CREATE_SRCIPK_pn-u-boot-am33x = "1"
-SRCIPK_INSTALL_DIR_pn-u-boot-am33x = "board-support/u-boot-${UVER}-psp${PSPREL}"
-
-CREATE_SRCIPK_pn-u-boot-am3517 = "1"
-SRCIPK_INSTALL_DIR_pn-u-boot-am3517 = "board-support/u-boot-${UVER}-psp${PSPREL}"
-
 CREATE_SRCIPK_pn-linux-ti-staging = "1"
 SRCIPK_INSTALL_DIR_pn-linux-ti-staging = "board-support/linux-${PV}${KERNEL_LOCALVERSION}"
 SRCIPK_PRESERVE_GIT_pn-linux-ti-staging = "true"
@@ -167,12 +155,6 @@ CREATE_SRCIPK_pn-linux-keystone = "1"
 SRCIPK_INSTALL_DIR_pn-linux-keystone = "board-support/linux-${PV}"
 SRCIPK_PRESERVE_GIT_pn-linux-keystone = "true"
 
-CREATE_SRCIPK_pn-linux-omapl138-psp = "1"
-SRCIPK_INSTALL_DIR_pn-linux-omapl138-psp = "board-support/linux-${KVER}-psp${PSPREL}"
-
-CREATE_SRCIPK_pn-linux-omap-psp = "1"
-SRCIPK_INSTALL_DIR_pn-linux-omap-psp = "board-support/linux-${KVER}-psp${PSPREL}"
-
 CREATE_SRCIPK_pn-linux-am335x-psp = "1"
 SRCIPK_INSTALL_DIR_pn-linux-am335x-psp = "board-support/linux-${KVER}"
 
@@ -184,12 +166,6 @@ SRCIPK_INSTALL_DIR_pn-linux = "board-support/linux-${PV}"
 
 CREATE_SRCIPK_pn-linux-omap4 = "1"
 SRCIPK_INSTALL_DIR_pn-linux-omap4 = "board-support/linux-${PV}"
-
-CREATE_SRCIPK_pn-linux-davinci = "1"
-SRCIPK_INSTALL_DIR_pn-linux-davinci = "board-support/linux-${KVER}-psp${PSPREL}"
-
-CREATE_SRCIPK_pn-linux-omapl1 = "1"
-SRCIPK_INSTALL_DIR_pn-linux-omapl1 = "board-support/linux-${KVER}-psp${PSPREL}"
 
 CREATE_SRCIPK_pn-cryptodev-module = "1"
 SRCIPK_INSTALL_DIR_pn-cryptodev-module = "board-support/extra-drivers/cryptodev-module-${PV}"
