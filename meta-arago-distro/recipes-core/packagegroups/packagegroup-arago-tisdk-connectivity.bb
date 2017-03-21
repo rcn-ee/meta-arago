@@ -6,6 +6,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
+# Disabled in master:
+#    crda
 # WLAN support packages.
 # These are the packages that all platforms use for WLAN support
 WLAN_COMMON = "\
@@ -18,7 +20,6 @@ WLAN_COMMON = "\
     eventdump \
     wlconf \
     wpa-supplicant-wl18xx \
-    crda \
     hostap-daemon-wl18xx \
     wl18xx-calibrator \
     wl18xx-target-scripts \
