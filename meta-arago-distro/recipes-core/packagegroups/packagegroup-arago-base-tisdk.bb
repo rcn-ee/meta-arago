@@ -23,7 +23,7 @@ RDEPENDS_${PN} = "\
     libxml2 \
     libpcre \
     iptables \
-    iperf \
+    iperf3 \
     arago-gpl-notice \
     arago-feed-config \
     nfs-utils-client \
