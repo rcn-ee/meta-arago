@@ -28,12 +28,13 @@ PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 
 # Setting PREFERRED_VERSIONS due to selecting a specific version of a library or
 # application that does not have a GPLv3 license
-PREFERRED_VERSION_gdbm = "1.8.3"
 PREFERRED_VERSION_crda = "3.18"
 PREFERRED_VERSION_obex = "0.34"
-PREFERRED_VERSION_bash = "3.2.57"
-PREFERRED_VERSION_gettext = "0.16.1"
-PREFERRED_VERSION_elfutils = "0.148"
+# These old GPLv2 versions are no longer in OE-Core
+#PREFERRED_VERSION_gdbm = "1.8.3"
+#PREFERRED_VERSION_bash = "3.2.57"
+#PREFERRED_VERSION_gettext = "0.16.1"
+#PREFERRED_VERSION_elfutils = "0.148"
 
 PREFERRED_PROVIDER_libnl-xfrm = "libnl"
 
