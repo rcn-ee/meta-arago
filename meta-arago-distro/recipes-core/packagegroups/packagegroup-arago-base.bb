@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 ARAGO_ALSA_BASE = "\
-    alsa-lib \
+    libasound \
     alsa-utils-aplay \
     "
 
