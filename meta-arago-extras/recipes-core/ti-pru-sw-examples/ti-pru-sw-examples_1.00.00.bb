@@ -7,7 +7,7 @@ RDEPENDS_${PN} = "ti-pru-sw-edma-driver"
 PR = "r0"
 PV_append = "+svn${SRCPV}"
 
-COMPATIBLE_MACHINE = "am180x-evm"
+COMPATIBLE_MACHINE = "omapl138"
 
 SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;protocol=https;user=anonymous;pswd=''"
 

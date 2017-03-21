@@ -122,8 +122,8 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ti-gc320-driver \
                               barcode-roi \
 "
-MAKEFILES_append_am180x-evm = " pru \
-                                u-boot-legacy \
+MAKEFILES_append_omapl138 = " pru \
+                              u-boot-legacy \
 "
 
 MAKEFILES_append_keystone = " u-boot-spl \
