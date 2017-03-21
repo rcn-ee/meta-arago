@@ -2,6 +2,8 @@
 
 require arago-image.inc
 
+# Disbaled in master due to php breakage
+#    packagegroup-arago-tisdk-matrix
 IMAGE_INSTALL += "\
     packagegroup-arago-base \
     packagegroup-arago-console \
@@ -14,7 +16,6 @@ IMAGE_INSTALL += "\
     ${@bb.utils.contains('MACHINE_FEATURES','dsp','packagegroup-arago-tisdk-opencl-extra','',d)} \
     packagegroup-arago-tisdk-connectivity \
     packagegroup-arago-tisdk-crypto \
-    packagegroup-arago-tisdk-matrix \
     packagegroup-arago-tisdk-multimedia \
     packagegroup-arago-tisdk-amsdk \
     packagegroup-arago-tisdk-addons \
