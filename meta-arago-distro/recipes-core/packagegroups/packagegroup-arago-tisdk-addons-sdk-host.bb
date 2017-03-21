@@ -14,7 +14,7 @@ UTILS = " \
 
 # ti-pru-sw-edma-driver is currently broken
 # Add pru and profibus sources for omapl138 devices
-#UTILS_append_am180x-evm = " \
+#UTILS_append_omapl138 = " \
 #    ti-pru-sw-examples-src \
 #"
 
