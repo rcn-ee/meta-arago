@@ -8,7 +8,6 @@ PACKAGECONFIG_append_ti43x = " ${@bb.utils.contains('DISTRO_FEATURES','wayland',
 PACKAGECONFIG_append_ti33x = " ${@bb.utils.contains('DISTRO_FEATURES','wayland','wayland','',d)}"
 
 DEPENDS_append_omap-a15 = " \
-    libdce \
     libdrm \
 "
 
@@ -21,7 +20,11 @@ DEPENDS_append_ti33x = " \
 "
 
 SRC_URI_append_ti43x = " \
-    file://0001-gstwaylandsink-Add-mouse-drag-and-drop-support.patch \
+    file://0001-gstdrmallocator-Add-DRM-allocator-support.patch \
+    file://0002-parsers-Pick-previos-bug-fixes-on-different-parsers.patch \
+    file://0003-gstkmssink-Add-support-for-KMS-based-sink.patch \
+    file://0004-gstwaylandsink-Add-DRM-support-on-waylandsink.patch \
+    file://0002-kmssink-remove-DCE-dependencies.patch \
 "
 
 SRC_URI_append_ti33x = " \
@@ -33,6 +36,7 @@ SRC_URI_append_omap-a15 = " \
     file://0002-parsers-Pick-previos-bug-fixes-on-different-parsers.patch \
     file://0003-gstkmssink-Add-support-for-KMS-based-sink.patch \
     file://0004-gstwaylandsink-Add-DRM-support-on-waylandsink.patch \
+    file://0002-kmssink-remove-DCE-dependencies.patch \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
