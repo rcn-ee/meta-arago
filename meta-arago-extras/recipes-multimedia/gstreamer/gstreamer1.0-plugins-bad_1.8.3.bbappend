@@ -25,6 +25,7 @@ SRC_URI_append_ti43x = " \
     file://0003-gstkmssink-Add-support-for-KMS-based-sink.patch \
     file://0004-gstwaylandsink-Add-DRM-support-on-waylandsink.patch \
     file://0002-kmssink-remove-DCE-dependencies.patch \
+    file://0003-kmssink-add-YUYV-support.patch \
 "
 
 SRC_URI_append_ti33x = " \
@@ -37,6 +38,7 @@ SRC_URI_append_omap-a15 = " \
     file://0003-gstkmssink-Add-support-for-KMS-based-sink.patch \
     file://0004-gstwaylandsink-Add-DRM-support-on-waylandsink.patch \
     file://0002-kmssink-remove-DCE-dependencies.patch \
+    file://0003-kmssink-add-YUYV-support.patch \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
