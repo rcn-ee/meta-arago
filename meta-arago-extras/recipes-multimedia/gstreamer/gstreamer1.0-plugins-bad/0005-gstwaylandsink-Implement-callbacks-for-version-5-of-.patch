@@ -1,0 +1,65 @@
+From adfc38273882a102d25fc420adc82b3f225588f9 Mon Sep 17 00:00:00 2001
+From: Pooja Prajod <a0132412@ti.com>
+Date: Mon, 27 Mar 2017 18:27:06 +0530
+Subject: [PATCH] gstwaylandsink: Implement callbacks for version 5 of
+ wl_pointer
+
+Few extra callbacks are required for wl_pointer listener
+with the newer weston. Without the extra dummy callbacks
+the pipelines results in segfault.
+
+Signed-off-by: Pooja Prajod <a0132412@ti.com>
+---
+ ext/wayland/wldisplay.c | 22 +++++++++++++++++++++-
+ 1 file changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/ext/wayland/wldisplay.c b/ext/wayland/wldisplay.c
+index 2f58fd2..54acfdb 100644
+--- a/ext/wayland/wldisplay.c
++++ b/ext/wayland/wldisplay.c
+@@ -326,12 +326,25 @@ pointer_handle_axis (void *data, struct wl_pointer *pointer,
+ {
+ }
+ 
++static void pointer_frame(void *data, struct wl_pointer *wl_pointer)
++{
++}
++static void pointer_axis_source(void *data, struct wl_pointer *wl_pointer, uint32_t axis_source)
++{
++}
++void pointer_axis_stop(void *data, struct wl_pointer *wl_pointer, uint32_t time, uint32_t axis)
++{
++}
++
+ static const struct wl_pointer_listener pointer_listener = {
+   pointer_handle_enter,
+   pointer_handle_leave,
+   pointer_handle_motion,
+   pointer_handle_button,
+   pointer_handle_axis,
++  pointer_frame,
++  pointer_axis_source,
++  pointer_axis_stop
+ };
+ 
+ static void
+@@ -508,8 +521,15 @@ registry_handle_global (void *data, struct wl_registry *registry,
+   }
+ }
+ 
++static void
++registry_handle_global_remove(void *data, struct wl_registry *registry,
++                uint32_t name)
++{
++}
++
+ static const struct wl_registry_listener registry_listener = {
+-  registry_handle_global
++  registry_handle_global,
++  registry_handle_global_remove
+ };
+ 
+ static gpointer
+-- 
+1.9.1
+
