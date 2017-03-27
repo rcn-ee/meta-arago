@@ -10,22 +10,27 @@ require recipes-ti/includes/arago-paths.inc
 require recipes-ti/includes/ti-staging.inc
 
 BRANCH = "master"
-SRC_URI = "git://git.ti.com/dense-linear-algebra-libraries/linalg.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/dense-linear-algebra-libraries/linalg.git;protocol=git;branch=${BRANCH} \
+file://0001-Makefile-fix-toolchain-variables.patch \
+"
 LIC_FILES_CHKSUM = "file://src/ti/linalg/docs/LINALG_1.2.0_manifest.html;md5=f30895e41e5947c3439b1ad4cf4c8555"
 SRCREV = "01960b319783b29aacf12b2a72606b28d657b78e"
 
-DEPENDS = "common-csl-ip \
-           libarch \
-           ti-xdctools \
-           ti-ipc-rtos \
-           ti-sysbios \
-           ti-cgt6x-native \
-           ti-xdais \
-           ti-framework-components \
-           libulm \
-           openmp-rtos \
-           opencl \
-           clocl-native \
+DEPENDS = " \
+common-csl-ip \
+libarch \
+ti-xdctools \
+ti-ipc-rtos \
+ti-sysbios \
+ti-cgt6x-native \
+ti-xdais \
+ti-framework-components \
+libulm \
+openmp-rtos \
+opencl \
+clocl-native \
+doxygen-native \
+zip-native \
 "
 
 export TI_OCL_INSTALL_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/opencl"
