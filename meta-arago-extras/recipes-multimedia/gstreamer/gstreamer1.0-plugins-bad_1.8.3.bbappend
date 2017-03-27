@@ -41,8 +41,9 @@ SRC_URI_append_omap-a15 = " \
     file://0002-kmssink-remove-DCE-dependencies.patch \
     file://0003-kmssink-add-YUYV-support.patch \
     file://0001-gstwaylandsink-add-input-format-I420-support.patch \
+    file://0005-gstwaylandsink-Implement-callbacks-for-version-5-of-.patch \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR = "r3"
+PR = "r4"
