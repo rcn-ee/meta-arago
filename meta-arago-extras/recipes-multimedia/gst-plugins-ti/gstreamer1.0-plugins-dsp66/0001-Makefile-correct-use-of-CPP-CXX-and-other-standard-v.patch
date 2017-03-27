@@ -1,0 +1,89 @@
+From 145964aa34bc2cbf1499de6e14de80a7c2d7e935 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Sun, 26 Mar 2017 15:12:44 -0400
+Subject: [PATCH] Makefile: correct use of CPP/CXX and other standard variables
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ src/kernels/make.inc         | 16 +++++++---------
+ src/kernels/oclconv/Makefile |  7 +++----
+ 2 files changed, 10 insertions(+), 13 deletions(-)
+
+diff --git a/src/kernels/make.inc b/src/kernels/make.inc
+index 797e64b..f1475a3 100644
+--- a/src/kernels/make.inc
++++ b/src/kernels/make.inc
+@@ -4,7 +4,6 @@ DSP_INCLUDE += -I$(TARGET_ROOTDIR)/usr/share/ti/opencl
+ TI_IMGLIB_DIR=${TARGET_ROOTDIR}/usr/share/ti/ti-imglib-c66x-tree
+ TI_VLIB_DIR=${TARGET_ROOTDIR}/usr/share/ti/ti-vlib-c66x-tree
+ 
+-CPP   = g++ 
+ CL6X  = cl6x -mv6600 --abi=eabi $(DSP_INCLUDE)
+ CLOCL = clocl
+ 
+@@ -16,9 +15,9 @@ UNAME_M :=$(shell uname -m)
+ # If TI_OCL_INSTALL is set, setup make from that location
+ # ----------------------------------------------------------------------------
+ ifneq ($(TI_OCL_INSTALL),)
+-    CPP        = g++
+-    CPP_FLAGS += -I$(TI_OCL_INSTALL)/usr/include
+-    LD_FLAGS  += -L$(TI_OCL_INSTALL)/usr/lib 
++    CXX        = g++
++    CXXFLAGS += -I$(TI_OCL_INSTALL)/usr/include
++    LDFLAGS  += -L$(TI_OCL_INSTALL)/usr/lib
+     LIBS      += -lbfd
+ 
+ # ----------------------------------------------------------------------------
+@@ -38,20 +37,19 @@ else ifneq (,$(findstring 86, $(UNAME_M)))
+ 
+     # gcc ARM cross compiler will not, by default, search the host's
+     # /usr/include.  Explicitly specify here to find dependent vendor headers
+-    cross: override CPP = arm-linux-gnueabihf-g++ 
+-    cross: CPP_FLAGS += -I$(TARGET_ROOTDIR)/usr/include -idirafter /usr/include
++    cross: CXXFLAGS += -I$(TARGET_ROOTDIR)/usr/include -idirafter /usr/include
+ 
+     # If cross-compilineg, provide path to dependent ARM libraries on the 
+     # target filesystem
+-    cross: LD_FLAGS = -L$(TARGET_ROOTDIR)/lib -L$(TARGET_ROOTDIR)/usr/lib -Wl,-rpath-link,$(TARGET_ROOTDIR)/lib -Wl,-rpath-link,$(TARGET_ROOTDIR)/usr/lib 
++    cross: LDFLAGS = -L$(TARGET_ROOTDIR)/lib -L$(TARGET_ROOTDIR)/usr/lib -Wl,-rpath-link,$(TARGET_ROOTDIR)/lib -Wl,-rpath-link,$(TARGET_ROOTDIR)/usr/lib
+ endif
+ 
+ %.o: %.cpp
+-	@$(CPP) -c $(CPP_FLAGS) $<
++	@$(CXX) -c $(CXXFLAGS) $<
+ 	@echo Compiling $<
+ 
+ %.o: %.c
+-	@$(CPP) -c $(CPP_FLAGS) $<
++	@$(CXX) -c $(CXXFLAGS) $<
+ 	@echo Compiling $<
+ 
+ %.obj: %.c
+diff --git a/src/kernels/oclconv/Makefile b/src/kernels/oclconv/Makefile
+index e271670..c3774f8 100644
+--- a/src/kernels/oclconv/Makefile
++++ b/src/kernels/oclconv/Makefile
+@@ -1,12 +1,12 @@
+ EXE         = liboclconv.so
+-CPP_FLAGS   = -O3 -shared -fPIC -L.
++CXXFLAGS   = -O3 -shared -fPIC -L.
+ CLOCL_FLAGS = 
+ include ../make.inc
+ 
+ all: ${EXE}
+ 
+-$(EXE): oclconv.o 
+-	@$(CPP) $(CPP_FLAGS) oclconv.o $(LD_FLAGS) $(LIBS) -o $@
++$(EXE): oclconv.o
++	@$(CXX) $(CXXFLAGS) oclconv.o $(LDFLAGS) $(LIBS) -o $@
+ 
+ oclconv.o: conv.dsp_h
+ 
+@@ -16,4 +16,3 @@ conv.dsp_h: conv.cl ${TI_IMGLIB_DIR}/lib/imglib.ae66 ${TI_VLIB_DIR}/packages/ti/
+ 
+ install:
+ 	  mkdir -p  ${DESTDIR}/usr/lib && install -m 755 ${EXE} ${DESTDIR}/usr/lib/.
+-
+-- 
+2.7.4
+
