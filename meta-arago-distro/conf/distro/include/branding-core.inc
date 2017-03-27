@@ -10,3 +10,7 @@ ALTERNATIVE_PRIORITY_pn-opencl-monitor = "1"
 
 # Raise priority for sample IPC FW images
 ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
+
+# Temporarily disable "mmip" machine feature for all SOCs while building
+# latest code base, until it is fixed for gstreamer > 1.10
+MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('mmip', '')}"
