@@ -1,0 +1,38 @@
+From 764b18a591c0e64adb7d5e5147c6a9afef2111d3 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Sun, 26 Mar 2017 14:14:49 -0400
+Subject: [PATCH] makefile.linux.def: relax assignment of CC and other tools
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ tests/src/makefile.linux.def | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/tests/src/makefile.linux.def b/tests/src/makefile.linux.def
+index 4904717..d229a5a 100755
+--- a/tests/src/makefile.linux.def
++++ b/tests/src/makefile.linux.def
+@@ -91,13 +91,13 @@ ifeq ($(USE_ARMCC),1)
+ 	LD     := $(CROSS_COMPILE)link
+ else
+ 	CROSS_COMPILE ?= arm-none-linux-gnueabi-
+-	CC     := $(CROSS_COMPILE)gcc
+-	CXX    := $(CROSS_COMPILE)g++
+-	AR     := $(CROSS_COMPILE)ar
+-	AS     := $(CROSS_COMPILE)as
+-	LD     := $(CROSS_COMPILE)ld
+-	RANLIB := $(CROSS_COMPILE)ranlib
+-	STRIP  := $(CROSS_COMPILE)strip
++	CC     ?= $(CROSS_COMPILE)gcc
++	CXX    ?= $(CROSS_COMPILE)g++
++	AR     ?= $(CROSS_COMPILE)ar
++	AS     ?= $(CROSS_COMPILE)as
++	LD     ?= $(CROSS_COMPILE)ld
++	RANLIB ?= $(CROSS_COMPILE)ranlib
++	STRIP  ?= $(CROSS_COMPILE)strip
+ endif
+ 
+ ################################################################
+-- 
+2.7.4
+

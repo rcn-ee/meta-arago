@@ -7,7 +7,9 @@ DEPENDS = "ti-gc320-libs"
 
 BRANCH = "ti-${PV}"
 
-SRC_URI = "git://git.ti.com/graphics/ti-gc320-test.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/graphics/ti-gc320-test.git;protocol=git;branch=${BRANCH} \
+file://0001-makefile.linux.def-relax-assignment-of-CC-and-other-.patch \
+"
 SRCREV = "53207f8e360a3336276b62066a1d8a9e923de17e"
 PR = "r2"
 
@@ -30,4 +32,5 @@ do_install() {
 	done
 }
 
-INSANE_SKIP_${PN} += "ldflags"
+INSANE_SKIP_${PN} += "ldflags already-stripped libdir"
+INSANE_SKIP_${PN}-dbg += "libdir"
