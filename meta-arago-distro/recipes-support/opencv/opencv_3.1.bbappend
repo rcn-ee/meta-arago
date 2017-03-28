@@ -1,4 +1,4 @@
-PR = "r2"
+PR = "r3"
 
 BRANCH = "tiopencvrelease_3.1"
 
@@ -11,7 +11,7 @@ SRC_URI_append += "\
      file://setupEnv.sh \
 "
 
-SRCREV_opencv = "b4f54ac48ced0ade8223eafab9cd3ad6dbb1b515"
+SRCREV_opencv = "ffb1eb48afbb1888670f461135c023dcdb6c9aca"
 
 DEPENDS_remove_keystone = "qtbase"
 
