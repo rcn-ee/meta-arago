@@ -1,0 +1,64 @@
+From 54378094d58c79a9d5ff6c1cc17d7bfd9c497dab Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Wed, 29 Mar 2017 13:09:05 -0400
+Subject: [PATCH] Makefile: pass PARALLEL_MAKE variable to overwrite -j8
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ src/ti/linalg/Makefile | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/src/ti/linalg/Makefile b/src/ti/linalg/Makefile
+index 90b8ef4..8d8e338 100644
+--- a/src/ti/linalg/Makefile
++++ b/src/ti/linalg/Makefile
+@@ -13,6 +13,8 @@ CLAPACK_HEADERS =$(LINALG_CLAPACK_DIR)/INCLUDE/blaswrap.h
+ CLAPACK_HEADERS+=$(LINALG_CLAPACK_DIR)/INCLUDE/clapack.h  
+ CLAPACK_HEADERS+=$(LINALG_CLAPACK_DIR)/INCLUDE/f2c.h  
+ 
++PARALLEL_MAKE ?= "-j8"
++
+ ifneq (,$(findstring DSP,$(MAKECMDGOALS)))
+ 
+ ifeq ($(LIBOS),LIB_RTOS)
+@@ -52,7 +54,7 @@ endif
+ DSPlibs:
+ 	cd $(LINALG_CBLAS_DIR); make arch=C66 alllib  || exit 1; \
+ 	cd ../$(LINALG_BLIS_DIR); ./configure -p install/$(BLIS_CFG) c66x; \
+-	make -j8 MEM_MODEL=$(MEM_MODEL) TARGET=$(TARGET) LIBOS=$(LIBOS) NUM_DSP_CORES=$(NUM_DSP_CORES) || exit 1; make install; \
++	make $(PARALLEL_MAKE) MEM_MODEL=$(MEM_MODEL) TARGET=$(TARGET) LIBOS=$(LIBOS) NUM_DSP_CORES=$(NUM_DSP_CORES) || exit 1; make install; \
+ 	cd ../$(LINALG_TICBLAS_DIR)/src; make MEM_MODEL=$(MEM_MODEL) TARGET=$(TARGET) LIBOS=$(LIBOS) NUM_DSP_CORES=$(NUM_DSP_CORES) || exit 1; cd ../lib; \
+ 	echo "combining BLIS, CBLAS, and TICBLAS libraries into one: libcblas.ae66"; \
+ 	rm -rf blas_objs blis_objs; mkdir blas_objs blis_objs; cd blis_objs; ar x ../../../blis/install/$(BLIS_CFG)/lib/libblis.ae66; chmod +rw *; \
+@@ -63,8 +65,8 @@ DSPlibs:
+ # Build ARM code for ARM+DSP platforms
+ ARMlibs:
+ 	cd $(LINALG_CBLAS_DIR); make arch=ARM alllib || exit 1; \
+-	cd ../$(LINALG_BLIS_DIR); ./configure -p install/arm cortex-a15; make -j8 NUM_ARM_CORES=$(NUM_ARM_CORES) || exit 1; make install; \
+-	cd ../$(LINALG_CLAPACK_DIR); make f2clib || exit 1; make cblaswrap || exit 1; cd SRC; make -j8 || exit 1; cd ..
++	cd ../$(LINALG_BLIS_DIR); ./configure -p install/arm cortex-a15; make $(PARALLEL_MAKE) NUM_ARM_CORES=$(NUM_ARM_CORES) || exit 1; make install; \
++	cd ../$(LINALG_CLAPACK_DIR); make f2clib || exit 1; make cblaswrap || exit 1; cd SRC; make $(PARALLEL_MAKE) || exit 1; cd ..
+ 
+ # Build host-callable libraries for ARM+DSP platforms. 
+ # BLAS has a single archive: libcblas_armplusdsp.a, which includes:
+@@ -91,7 +93,7 @@ ARMplusDSP: DSPlibs ARMlibs
+ cleanDSPlibs:
+ 	rm -f lib/*
+ 	cd $(LINALG_CBLAS_DIR); make arch=C66 clean; \
+-	cd ../$(LINALG_BLIS_DIR); ./configure -p install/$(BLIS_CFG) c66x; make -j8 clean; rm -r install/$(BLIS_CFG); \
++	cd ../$(LINALG_BLIS_DIR); ./configure -p install/$(BLIS_CFG) c66x; make $(PARALLEL_MAKE) clean; rm -r install/$(BLIS_CFG); \
+ 	cd ../$(LINALG_TICBLAS_DIR)/src; make clean; 
+ 
+ cleanARMlibs:
+@@ -103,7 +105,7 @@ cleanARMlibs:
+ 
+ BLIStest:
+ 	cd $(LINALG_BLIS_DIR); ./configure -p install/arm cortex-a15; \
+-	cd testsuite; make lib=OpenCLCBLAS -j8 
++	cd testsuite; make lib=OpenCLCBLAS $(PARALLEL_MAKE)
+ 
+ BLIStestDSP:
+ 	cd $(LINALG_BLIS_DIR); ./configure -p install/$(BLIS_CFG) c66x; \
+-- 
+2.7.4
+
