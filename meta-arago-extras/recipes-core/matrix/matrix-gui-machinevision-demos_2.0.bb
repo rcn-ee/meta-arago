@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require recipes-core/matrix/matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 
 inherit allarch
 
@@ -17,6 +17,7 @@ FILES_${PN} += "${MATRIX_BASE_DIR}/*"
 PACKAGES = "matrix-machinevision-demo-dlp3dscanner \
             matrix-machinevision-demo-barcoderoi \
             matrix-machinevision-demo-barcoderoi-f2f \
+            matrix-machinevision-demo-simplepeopletracking \
 "
 
 RDEPENDS_matrix-machinevision-demo-dlp3dscanner_dra7xx = " \
@@ -34,6 +35,10 @@ RDEPENDS_matrix-machinevision-demo-barcoderoi-f2f = " \
     barcode-roi \
 "
 
+RDEPENDS_matrix-machinevision-demo-simplepeopletracking = " \
+    ${MACHINEVISION_RDEPENDS} \
+"
+
 FILES_matrix-machinevision-demo-dlp3dscanner    = "${MATRIX_APP_DIR}/machinevision_dlp_3d_scanner/*"
 FILES_matrix-machinevision-demo-dlp3dscanner   += "${bindir}/runDlp3DScanner.sh"
 
@@ -41,3 +46,6 @@ FILES_matrix-machinevision-demo-barcoderoi    = "${MATRIX_APP_DIR}/machinevision
 FILES_matrix-machinevision-demo-barcoderoi   += "${bindir}/runBarcodeRoi.sh"
 FILES_matrix-machinevision-demo-barcoderoi-f2f = "${MATRIX_APP_DIR}/machinevision_barcode_roi_f2f/*"
 FILES_matrix-machinevision-demo-barcoderoi-f2f += "${bindir}/runBarcodeRoiSave2File.sh"
+
+FILES_matrix-machinevision-demo-simplepeopletracking   = "${MATRIX_APP_DIR}/machinevision_simple_people_tracking/*"
+FILES_matrix-machinevision-demo-simplepeopletracking   += "${bindir}/runSimplePeopleTracking.sh"
