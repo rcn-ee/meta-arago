@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r34"
+PR = "r35"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -144,7 +144,13 @@ EXTRA_LIBS_append_k2e = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
 
+EXTRA_PACKAGES = ""
+EXTRA_PACKAGES_append_ti33x = " voxelsdk-dev"
+EXTRA_PACKAGES_append_ti43x = " voxelsdk-dev"
+EXTRA_PACKAGES_append_omap-a15 = " voxelsdk-dev"
+
 RDEPENDS_${PN} = "\
     ${UTILS} \
     ${EXTRA_LIBS} \
+    ${EXTRA_PACKAGES} \
 "

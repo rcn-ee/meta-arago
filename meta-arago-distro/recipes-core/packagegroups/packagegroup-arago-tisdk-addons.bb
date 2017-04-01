@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r58"
+PR = "r59"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -114,6 +114,10 @@ EXTRA_PACKAGES = " \
 EXTRA_PACKAGES_omapl138 = " \
     protobuf \
 "
+
+EXTRA_PACKAGES_append_ti33x = " voxelsdk"
+EXTRA_PACKAGES_append_ti43x = " voxelsdk"
+EXTRA_PACKAGES_append_omap-a15 = " voxelsdk"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
