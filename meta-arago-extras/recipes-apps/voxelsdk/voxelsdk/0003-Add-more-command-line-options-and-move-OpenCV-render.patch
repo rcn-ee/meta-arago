@@ -1,0 +1,324 @@
+From 29cc2430579eb257d9e1ac1caf0b4515278fd375 Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <d-senicic1@ti.com>
+Date: Mon, 13 Mar 2017 19:51:30 -0400
+Subject: [PATCH] Add more command line options and move OpenCV rendering to
+ main thread
+
+Signed-off-by: Djordje Senicic <d-senicic1@ti.com>
+---
+ Demos/Horus.cpp                | 98 +++++++++++++++++++++++++-----------------
+ Demos/SimplePeopleTracking.cpp | 91 ++++++++++++++++++++++++++++++++-------
+ Demos/TOFApp.cpp               | 14 +++---
+ 3 files changed, 139 insertions(+), 64 deletions(-)
+
+diff --git a/Demos/Horus.cpp b/Demos/Horus.cpp
+index e0181af..de1837e 100644
+--- a/Demos/Horus.cpp
++++ b/Demos/Horus.cpp
+@@ -24,6 +24,12 @@
+ #include <stdlib.h>
+ 
+ extern int skipped_frames;
++extern pthread_mutex_t main_thread_image_mtx;
++extern Mat app_image[];
++extern int main_thread_image_rd;
++extern int main_thread_image_wr;
++extern int main_thread_image_cnt;
++extern char show_image;
+ 
+ Horus::Horus(int w, int h) : TOFApp(w, h)
+ {
+@@ -126,10 +132,9 @@ bool Horus::isPerson(vector<cv::Point> &contour, Mat dMat)
+    return rc;
+ }
+ 
+-static int draw_throttle = 0;
+-
+ void Horus::update(Frame *frame)
+ {
++   Mat drawing;
+    vector< vector<cv::Point> > contours;
+    vector<Vec4i> hierarchy;
+    RNG rng(12345);
+@@ -147,51 +152,66 @@ void Horus::update(Frame *frame)
+ 
+       // Apply amplitude gain
+       _iMat = (float)_ampGain*_iMat;
++      if(show_image == 'p')
++      { //Skip below processing if we are not detecting people!
++        // Update background as required
++        if (!_setBackground) {
++           _dMat.copyTo(_bkgndMat);
++           _setBackground = true;
++           cout << endl << "Updated background" << endl;
++        }
+ 
+-      // Update background as required
+-      if (!_setBackground) {
+-         _dMat.copyTo(_bkgndMat);
+-         _setBackground = true;
+-         cout << endl << "Updated background" << endl;
+-      }
+-
+-      // Find foreground by subtraction 
+-      Mat fMat = _bkgndMat-_dMat;
++        // Find foreground by subtraction 
++        Mat fMat = _bkgndMat-_dMat;
+ 
+-      // Convert to binary image based on amplitude and depth thresholds
+-      clipBackground(fMat, _iMat, (float)_depthThresh/100.0, (float)_ampThresh/100.0);
+-      fMat.convertTo(_bMat, CV_8U, 255.0);
++        // Convert to binary image based on amplitude and depth thresholds
++        clipBackground(fMat, _iMat, (float)_depthThresh/100.0, (float)_ampThresh/100.0);
++        fMat.convertTo(_bMat, CV_8U, 255.0);
+ 
+-      // Apply morphological open to clean up image
+-      Mat morphMat = _bMat.clone();
+-      Mat element = getStructuringElement( 0, Size(3,3), cv::Point(1,1) );
+-      morphologyEx(_bMat, morphMat, 2, element);
++        // Apply morphological open to clean up image
++        Mat morphMat = _bMat.clone();
++        Mat element = getStructuringElement( 0, Size(3,3), cv::Point(1,1) );
++        morphologyEx(_bMat, morphMat, 2, element);
+ 
+-      // Find all contours
+-      findContours(morphMat, contours, hierarchy, CV_RETR_TREE, 
+-                             CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
++        // Find all contours
++        findContours(morphMat, contours, hierarchy, CV_RETR_TREE, 
++                               CV_CHAIN_APPROX_SIMPLE, cv::Point(0,0));
+ 
+-      // Draw contours that meet a "person" requirement
+-      Mat drawing = Mat::zeros(_iMat.size(), CV_8UC3);
+-      cvtColor(_iMat, drawing, CV_GRAY2RGB);
++        // Draw contours that meet a "person" requirement
++        drawing = Mat::zeros(_iMat.size(), CV_8UC3);
++        cvtColor(_iMat, drawing, CV_GRAY2RGB);
+       
+-      int peopleCount = 0;
+-      for ( int i = 0; i < contours.size(); i++ ) { 
+-         if (isPerson(contours[i], _dMat)) {  
+-            peopleCount++;
+-            drawContours( drawing, contours, i, Scalar(0, 0, 255), 2, 8, vector<Vec4i>(), 0, cv::Point() ); 
+-         }
++        int peopleCount = 0;
++        for ( int i = 0; i < contours.size(); i++ ) { 
++           if (isPerson(contours[i], _dMat)) {  
++              peopleCount++;
++              drawContours( drawing, contours, i, Scalar(0, 0, 255), 2, 8, vector<Vec4i>(), 0, cv::Point() ); 
++           }
++        }
++        putText(drawing, "Cnt="+to_string(peopleCount), cv::Point(40, 30), FONT_HERSHEY_PLAIN, 1, Scalar(255, 0, 0));
+       }
+-      putText(drawing, "Cnt="+to_string(peopleCount), cv::Point(40, 30), FONT_HERSHEY_PLAIN, 1, Scalar(255, 0, 0));
+-      if(skipped_frames == 0) {
+-        imshow("Draw", drawing);
+-      } else {
+-        if((draw_throttle % skipped_frames) == 0) {
+-          char file_name[80];
+-          sprintf (file_name, "draw%03d.png", draw_throttle / skipped_frames);
+-          imwrite (file_name, drawing);
++
++      if(main_thread_image_cnt < 2)
++      {
++        switch (show_image) 
++        {
++          case 'i':
++            _iMat.copyTo(app_image[main_thread_image_wr]);
++            putText(app_image[main_thread_image_wr], "Ampl Map", cv::Point(30, 20), FONT_HERSHEY_PLAIN, 1, Scalar(255, 0, 0));
++            break;
++          case 'd':
++            _dMat.copyTo(app_image[main_thread_image_wr]);
++            putText(app_image[main_thread_image_wr], "Dist Map", cv::Point(30, 20), FONT_HERSHEY_PLAIN, 1, Scalar(255, 0, 0));
++            break;
++          default:
++            drawing.copyTo(app_image[main_thread_image_wr]);
++            break;
+         }
+-        draw_throttle ++;
++        pthread_mutex_lock(&main_thread_image_mtx);
++          main_thread_image_wr ++;
++          main_thread_image_wr %= 2;
++          main_thread_image_cnt ++;
++        pthread_mutex_unlock(&main_thread_image_mtx);
+       }
+    }
+ }
+diff --git a/Demos/SimplePeopleTracking.cpp b/Demos/SimplePeopleTracking.cpp
+index 8c6e9d4..1eb8e16 100644
+--- a/Demos/SimplePeopleTracking.cpp
++++ b/Demos/SimplePeopleTracking.cpp
+@@ -1,6 +1,18 @@
+ #include "Horus.h"
++#include <getopt.h>
+ 
+ int skipped_frames = 0;
++int resolution_width = 160, resolution_height = 120;
++//Variables for communication between main and application thread
++pthread_mutex_t main_thread_image_mtx;
++int main_thread_image_rd = 0;
++int main_thread_image_wr = 0;
++int main_thread_image_cnt = 0;
++int acq_fps = 30;
++char show_image = 'p'; //By default, detect people
++int fps = 30;
++
++Mat app_image[2];
+ 
+ int getkey() {
+     int character;
+@@ -27,29 +39,58 @@ int getkey() {
+ 
+ #define TOF_FRAME_TYPE		DepthCamera::FRAME_XYZI_POINT_CLOUD_FRAME
+ 
++void print_usage(void)
++{
++  printf ("\nFollwoing command line options available:");
++  printf ("\n  -s <decimal value>");
++  printf ("\n   If you want to run demo without keyboard, provide 'skipped_frames' as argument (e.g. SimplePeopleTracking -s 30)!");
++  printf ("\n   Images with the result of processing are saved in PNG files. This test always stops after 10 image files recorded\n");
++  printf ("\n -w <resolution witdh,  default is 160, another resolution possible is 320x240>");
++  printf ("\n -h <resolution height, default is 120, another respolution possible is 320x240>");
++  printf ("\n -i <present image of amplitudes, grey-scale like image - default is detection of people>");
++  printf ("\n -d <present distance map - default is detection of people>");
++  printf ("\n -f <set fps with integer value, 30 is default, 10, 15, 25 are another options to try>"); 
++  printf ("\n-----------\n");
++}
++
+ int main(int argc, char *argv[])
+ {
+-int ii = 0;
+-   int key;
++   int ii = 0, draw_throttle = 0;
++   int key, c_opt;
+    bool done = false;
+-   Mat bImg;
+-
+-   if(argc > 1) skipped_frames = atoi(argv[1]);
+-   else {
+-     printf ("\nIf you want to run demo without keyboard, provide 'skipped_frames' as argument (e.g. SimplePeopleTracking 30)!");
+-     printf ("\nImages with the result of processing are saved in PNG files. This test always stops after 15 seconds\n");
++   Mat bImg, locImg;
++  
++   while ((c_opt = getopt(argc, argv,"s:w:h:f:id")) != -1) {
++        switch (c_opt) {
++             case 's' : skipped_frames = atoi(optarg); 
++                 break;
++             case 'w' : resolution_width = atoi(optarg);
++                 break;
++             case 'h' : resolution_height = atoi(optarg);
++                 break;
++             case 'f' : acq_fps = atoi(optarg);
++                 break;
++             case 'i' : show_image = 'i';
++                 break;
++             case 'd' : show_image = 'd';
++                 break;
++             default: print_usage(); 
++                 exit(EXIT_FAILURE);
++        }
+    }
++   printf ("\nUsing following parameters: skipped_frames=%d width=%d height=%d mode=%c fps=%d. Use '-?' to get help.\n", 
++           skipped_frames, resolution_width, resolution_height, show_image, acq_fps);
+ 
+-   //Horus eye(320, 240);
+-   Horus eye(160, 120);
+-   //Horus eye(80, 60);
++   Horus eye(resolution_width, resolution_height);
+    
+    if (!eye.connect(TOF_FRAME_TYPE)) {
+       cout << "Cannot connect" << endl;
+       return -1;
+    }
+    eye.start();
+-   while (!done) {
++   
++   while (!done)
++   {
+      if(skipped_frames == 0)
+      {
+        char key = getkey();
+@@ -57,11 +98,29 @@ int ii = 0;
+           done = true;
+        else if (key == 'b') 
+           eye.resetBackground();
+-     } else {    
+-       usleep(100000);
+-       ii ++;
+-       if(ii == 150) done = true;
+      }
++     //Exchange data with the applicaiton thread
++     if(main_thread_image_cnt > 0)
++     { //imshow() does not work reliable if being ran from non-main thread
++       locImg = app_image[main_thread_image_rd];
++       if(skipped_frames)
++       {
++         if((draw_throttle % skipped_frames) == 0) {
++           char file_name[80];
++           sprintf (file_name, "draw%03d.png", draw_throttle / skipped_frames);
++           imwrite (file_name, locImg);
++           std::cout << "Write file:" << file_name << std::endl << std::flush;
++         }
++         draw_throttle ++;
++         if(draw_throttle >= (10 * skipped_frames)) done = true; //Collect 10 image files only in batch mode
++       } else imshow ("Draw", locImg);
++       pthread_mutex_lock(&main_thread_image_mtx);
++         main_thread_image_rd ++;
++         main_thread_image_rd %= 2;
++         main_thread_image_cnt --;
++       pthread_mutex_unlock(&main_thread_image_mtx);
++     }  
++     waitKey(20);
+    }
+ 
+ err_exit:
+diff --git a/Demos/TOFApp.cpp b/Demos/TOFApp.cpp
+index 1c9c0cd..cb41286 100644
+--- a/Demos/TOFApp.cpp
++++ b/Demos/TOFApp.cpp
+@@ -22,7 +22,7 @@
+ #define FRAME_QUEUE_SZ		3
+ 
+ extern int skipped_frames;
+-
++extern int acq_fps;
+ // Frame callback
+ static deque<Voxel::Frame *> qFrame; 
+ static pthread_mutex_t gmtx;
+@@ -166,11 +166,7 @@ void *TOFApp::eventLoop(void *p)
+       }
+ 
+       done = !app->_isRunning;   
+-      if(skipped_frames == 0) {
+-        waitKey(app->_loopDelay);
+-      } else {
+-        usleep(10000);
+-      }
++      usleep(10000);
+    }
+    
+    app->disconnect();
+@@ -196,9 +192,9 @@ void TOFApp::Init(int w, int h)
+    _isConnected = false;
+    _dimen.width = w;
+    _dimen.height = h;
+-   _frate.numerator = 30;
++   _frate.numerator = acq_fps; //30
+    _frate.denominator = 1;
+-   _loopDelay = 66;
++   _loopDelay = (int)(1000 / acq_fps);
+    _illum_power = 60;
+    _intg = 20;
+    _profile = "MetrilusLongRange";
+@@ -219,7 +215,7 @@ bool TOFApp::connect(DepthCamera::FrameType frmType)
+    else 
+       return false;
+ 
+-   #if 0   //Enable this to list all the profiles that are supported by the camera
++   #if 1   //Enable this to list all the profiles that are supported by the camera
+    cout << "List of Profiles:" << endl;
+    auto &names = _depthCamera->configFile.getCameraProfileNames();
+   
+-- 
+1.9.1
+

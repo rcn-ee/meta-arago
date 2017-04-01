@@ -1,0 +1,37 @@
+From a800f446d9c976f6fb11f4d601cc386bbdce59e1 Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <d-senicic1@ti.com>
+Date: Wed, 22 Feb 2017 14:14:52 -0500
+Subject: [PATCH] Fix SWIG support
+
+Signed-off-by: Djordje Senicic <d-senicic1@ti.com>
+---
+ Voxel/SWIG/CMakeLists.txt | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/Voxel/SWIG/CMakeLists.txt b/Voxel/SWIG/CMakeLists.txt
+index a4f6d53..f4070ac 100644
+--- a/Voxel/SWIG/CMakeLists.txt
++++ b/Voxel/SWIG/CMakeLists.txt
+@@ -1,10 +1,11 @@
+-SET(GENERATE_PYTHON_BINDINGS "FALSE" CACHE BOOL "Controls generation of Python bindings")
++SET(GENERATE_PYTHON_BINDINGS "TRUE" CACHE BOOL "Controls generation of Python bindings")
+ 
+ IF(${GENERATE_PYTHON_BINDINGS})
+ 
+ FIND_PACKAGE(SWIG REQUIRED)
+ INCLUDE(${SWIG_USE_FILE})
+ 
++SET(Python_ADDITIONAL_VERSIONS 2.7)
+ FIND_PACKAGE(PythonLibs)
+ INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
+ 
+@@ -46,4 +47,4 @@ install(FILES
+   DESTINATION lib/python2.7
+   COMPONENT voxel_python
+ )
+-ENDIF()
+\ No newline at end of file
++ENDIF()
+-- 
+1.9.1
+

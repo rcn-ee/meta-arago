@@ -1,0 +1,41 @@
+From 63e830023a77749cb6ec78f5ada1d94c9713f935 Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <d-senicic1@ti.com>
+Date: Tue, 21 Mar 2017 21:05:42 -0400
+Subject: [PATCH] Platform specific op_clk_freq setting
+
+Signed-off-by: Djordje Senicic <d-senicic1@ti.com>
+---
+ Demos/TOFApp.cpp | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/Demos/TOFApp.cpp b/Demos/TOFApp.cpp
+index cb41286..e6ff8fe 100644
+--- a/Demos/TOFApp.cpp
++++ b/Demos/TOFApp.cpp
+@@ -215,7 +215,7 @@ bool TOFApp::connect(DepthCamera::FrameType frmType)
+    else 
+       return false;
+ 
+-   #if 1   //Enable this to list all the profiles that are supported by the camera
++   #if 0   //Enable this to list all the profiles that are supported by the camera
+    cout << "List of Profiles:" << endl;
+    auto &names = _depthCamera->configFile.getCameraProfileNames();
+   
+@@ -248,6 +248,14 @@ bool TOFApp::connect(DepthCamera::FrameType frmType)
+    _depthCamera->registerCallback(_frameType, frameCallback);
+    _depthCamera->setFrameSize(_dimen);
+    _depthCamera->setFrameRate(_frate);
++#ifdef SET_OPCLK 
++   _depthCamera->set("op_clk_freq", 1);
++   cout << endl << "Set op_clk_freq!" << endl;
++#endif
++#ifdef RESET_OPCLK 
++   _depthCamera->set("op_clk_freq", 0);
++   cout << endl << "Reset op_clk_freq!" << endl;
++#endif
+ 
+    VideoMode m;
+   
+-- 
+1.9.1
+

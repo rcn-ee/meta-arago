@@ -1,0 +1,56 @@
+From 1cd1dcb71beb151fe0ae1cbd0a037d4b8b035973 Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <d-senicic1@ti.com>
+Date: Mon, 27 Mar 2017 20:39:26 -0400
+Subject: [PATCH] Add exit on screen touch - using left mouse button click
+ event
+
+---
+ Demos/SimplePeopleTracking.cpp | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
+
+diff --git a/Demos/SimplePeopleTracking.cpp b/Demos/SimplePeopleTracking.cpp
+index 1eb8e16..2ea6240 100644
+--- a/Demos/SimplePeopleTracking.cpp
++++ b/Demos/SimplePeopleTracking.cpp
+@@ -37,6 +37,20 @@ int getkey() {
+     return character;
+ }
+ 
++void cbmouse (int event, int x, int y, int flags, void *userdata)
++{
++    if(event == EVENT_LBUTTONDOWN) 
++    {
++       cout << "Left mouse button click detected. Exit application!" << endl << flush;
++       exit (0);
++    }
++    if(event == EVENT_RBUTTONDOWN) 
++    {
++       cout << "Right mouse button click detected. Exit application!" << endl << flush;
++       exit (0);
++    }
++}
++
+ #define TOF_FRAME_TYPE		DepthCamera::FRAME_XYZI_POINT_CLOUD_FRAME
+ 
+ void print_usage(void)
+@@ -88,7 +102,7 @@ int main(int argc, char *argv[])
+       return -1;
+    }
+    eye.start();
+-   
++   setMouseCallback ("Draw", cbmouse, NULL); //Set mouse click callback to allow exit with no keyboard attached    
+    while (!done)
+    {
+      if(skipped_frames == 0)
+@@ -120,7 +134,7 @@ int main(int argc, char *argv[])
+          main_thread_image_cnt --;
+        pthread_mutex_unlock(&main_thread_image_mtx);
+      }  
+-     waitKey(20);
++     waitKey(10);
+    }
+ 
+ err_exit:
+-- 
+1.9.1
+

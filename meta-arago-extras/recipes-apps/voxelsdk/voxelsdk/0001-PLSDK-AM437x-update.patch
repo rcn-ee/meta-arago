@@ -1,0 +1,73 @@
+From 9ef95f0defcd7215b3d514e7fb7321cd299882cd Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <d-senicic1@ti.com>
+Date: Wed, 22 Feb 2017 12:21:07 -0500
+Subject: [PATCH] PLSDK AM437x update
+
+Signed-off-by: Djordje Senicic <d-senicic1@ti.com>
+---
+ CMakeLists.txt                  | 11 ++++++++++-
+ Voxel/CMakeLists.txt            |  2 +-
+ Voxel/SWIG/standard_container.i |  5 +++--
+ 3 files changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ed7a015..a187c96 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,9 +26,18 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+   SET(ARM_PLATFORM 1)
+   
+   if(ARM_PLATFORM)
+-    add_definitions(-mtune=arm7 -mfpu=neon-vfpv4 -mfloat-abi=hard -pthread -std=c++11 -fPIC -ffast-math)
++#    add_definitions(-mtune=arm7 -mfpu=neon-vfpv4 -mfloat-abi=hard -pthread -std=c++11 -fPIC -ffast-math)
+     #-DARM_OPT to enable arm optimizaions
+     ADD_DEFINITIONS(-DARM_OPT)
++#OK:
++#add_definitions(-mtune=arm7 -mfloat-abi=hard -pthread -std=c++11 -fPIC -ffast-math)
++#OK:
++#add_definitions(-ffast-math -mcpu=cortex-a9 -mfloat-abi=hard -mfpu=neon-fp16 -fPIC -pthread -std=c++11)
++#OK:
++#add_definitions(-ffast-math -mcpu=cortex-a9 -mfloat-abi=hard -mfpu=neon -fPIC -pthread -std=c++11)
++
++add_definitions(-mtune=arm7 -mfpu=neon -mfloat-abi=hard -pthread -std=c++11 -fPIC -ffast-math)
++
+     ADD_DEFINITIONS(-DCOMMON_OPT)
+ 
+   else()
+diff --git a/Voxel/CMakeLists.txt b/Voxel/CMakeLists.txt
+index ae98e81..74528d8 100644
+--- a/Voxel/CMakeLists.txt
++++ b/Voxel/CMakeLists.txt
+@@ -149,7 +149,7 @@ install(FILES
+   COMPONENT voxel_dev
+ )
+ 
+-#add_subdirectory(SWIG)
++add_subdirectory(SWIG)
+ 
+ IF(LINUX)
+   set(CPACK_COMPONENTS_ALL voxel)
+diff --git a/Voxel/SWIG/standard_container.i b/Voxel/SWIG/standard_container.i
+index f61e342..1d2cb66 100644
+--- a/Voxel/SWIG/standard_container.i
++++ b/Voxel/SWIG/standard_container.i
+@@ -113,7 +113,7 @@
+   
+ %enddef
+ 
+-
++#if SWIG_VERSION < 0x030008
+ //
+ // Ignore member methods for Type with no default constructor
+ //
+@@ -124,4 +124,5 @@
+ %feature("ignore") std::deque<Type >::resize(size_type size);
+ %feature("ignore") std::list<Type >::list(size_type size);
+ %feature("ignore") std::list<Type >::resize(size_type size);
+-%enddef
+\ No newline at end of file
++%enddef
++#endif
+-- 
+1.9.1
+
