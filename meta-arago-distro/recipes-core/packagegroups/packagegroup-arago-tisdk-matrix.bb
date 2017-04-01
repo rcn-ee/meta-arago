@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r64"
+PR = "r65"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -65,6 +65,7 @@ MATRIX_OPENCL_APPS_append_dra7xx = " \
 
 MATRIX_OPENCV_ARM_ONLY_APPS = " \
      matrix-machinevision-demo-barcoderoi \
+     matrix-machinevision-demo-simplepeopletracking \
 "
 
 MATRIX_OPENCV_OPENCL_APPS = " \
@@ -73,6 +74,7 @@ MATRIX_OPENCV_OPENCL_APPS = " \
 
 MATRIX_OPENCV_OPENCL_APPS_omap-a15 = " \
      matrix-machinevision-demo-barcoderoi \
+     matrix-machinevision-demo-simplepeopletracking \
 "
 
 MATRIX_APPS = ""
