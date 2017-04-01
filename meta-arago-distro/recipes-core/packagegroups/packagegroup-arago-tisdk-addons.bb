@@ -117,6 +117,10 @@ EXTRA_PACKAGES_omapl138 = " \
     protobuf \
 "
 
+EXTRA_PACKAGES_append_ti33x = " voxelsdk"
+EXTRA_PACKAGES_append_ti43x = " voxelsdk"
+EXTRA_PACKAGES_append_omap-a15 = " voxelsdk"
+
 RDEPENDS_${PN} = "\
     ${UTILS} \
     ${UTILS_UBOOT_FW} \
