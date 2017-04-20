@@ -1,0 +1,69 @@
+From 0d164d686147d2d3b08cd79ef9930f62ff8d528b Mon Sep 17 00:00:00 2001
+From: Ramprasad N <x0038811@ti.com>
+Date: Thu, 20 Apr 2017 13:30:31 +0530
+Subject: [PATCH 2/2] layer-add-surfaces: surface-layer management
+
+This patch prevents surfaces from getting added to a new layer
+if they are already registered to an existing layer.
+
+Signed-off-by: Ramprasad N <x0038811@ti.com>
+Reviewed-by: Karthik Ramanan <a0393906@ti.com>
+---
+ .../layer-add-surfaces/src/layer-add-surfaces.c    | 35 ++++++++++++++++++++--
+ 1 file changed, 33 insertions(+), 2 deletions(-)
+
+diff --git a/ivi-layermanagement-examples/layer-add-surfaces/src/layer-add-surfaces.c b/ivi-layermanagement-examples/layer-add-surfaces/src/layer-add-surfaces.c
+index 46d7d15..cc76117 100644
+--- a/ivi-layermanagement-examples/layer-add-surfaces/src/layer-add-surfaces.c
++++ b/ivi-layermanagement-examples/layer-add-surfaces/src/layer-add-surfaces.c
+@@ -59,14 +59,45 @@ static void surfaceCallbackFunction(t_ilm_uint id, struct ilmSurfaceProperties*
+         configure_ilm_surface(id, sp->origSourceWidth, sp->origSourceHeight);
+     }
+ }
+-
+ static void callbackFunction(ilmObjectType object, t_ilm_uint id, t_ilm_bool created, void *user_data)
+ {
+     (void)user_data;
+     struct ilmSurfaceProperties sp;
++    t_ilm_int llength, slength, i, j;
++    t_ilm_uint* layerIDs = NULL;
++    t_ilm_uint* surfaceIDs = NULL;
++    t_ilm_bool addRequired = ILM_TRUE;
+ 
+     if (object == ILM_SURFACE) {
+-        if (created) {
++        ilm_getLayerIDs(&llength, &layerIDs);
++
++        if(llength > 1) {
++            for(i=0; i < llength; i++) {
++                if(layerIDs[i] != layer) {
++                    ilm_getSurfaceIDsOnLayer(layerIDs[i], &slength, &surfaceIDs);
++                    for(j=0; j < slength; j++){
++                        if(surfaceIDs[j] == id){
++                            addRequired = ILM_FALSE;
++                            printf("surface %d is already attached to layer %d\n", id, layerIDs[i]);
++                        }
++
++                    }
++
++                    if(surfaceIDs) {
++                        free(surfaceIDs);
++                    }
++
++                }
++
++            }
++
++        }
++
++        if(layerIDs) {
++            free(layerIDs);
++        }
++
++        if (created && addRequired) {
+             if (number_of_surfaces > 0) {
+                 number_of_surfaces--;
+                 printf("surface                : %d created\n",id);
+-- 
+1.9.1
+
