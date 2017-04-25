@@ -47,7 +47,7 @@ TEST_ADDONS_TI_append_keystone = " \
 
 # Disable netapi due to libnl and xfrm conflict
 #    netapi-test
-TEST_ADDONS_TI_append_k2hk-evm = " \
+TEST_ADDONS_TI_append_k2hk = " \
     srio-lld-test \
     ipc-transport-srio-test \
     ipc-transport-qmss-test \

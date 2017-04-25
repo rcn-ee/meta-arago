@@ -130,7 +130,7 @@ ARAGO_TI_PKGS_append_k2l-evm = "\
 # Disable netapi due to libnl and xfrm conflict
 #    netapi
 #    netapi-test
-ARAGO_TI_PKGS_append_k2hk-evm = "\
+ARAGO_TI_PKGS_append_k2hk = "\
     srio-lld \
     mmap-lld \
     hyplnk-lld \

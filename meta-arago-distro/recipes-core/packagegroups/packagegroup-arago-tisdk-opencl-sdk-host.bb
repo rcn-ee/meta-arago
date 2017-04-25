@@ -11,7 +11,7 @@ UTILS = " \
     openmpacc-examples-src \
 "
 
-UTILS_append_k2hk-evm = " \
+UTILS_append_k2hk = " \
     linalg-examples-src \
 "
 

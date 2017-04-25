@@ -19,7 +19,7 @@ EXTRA_PKGS = " \
     python-pyopencl \
 "
 
-EXTRA_PKGS_append_k2hk-evm = " \
+EXTRA_PKGS_append_k2hk = " \
     linalg-examples \
 "
 

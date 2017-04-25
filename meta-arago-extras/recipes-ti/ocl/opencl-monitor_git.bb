@@ -23,7 +23,7 @@ DEPENDS = " ti-llvm3.6-native \
             openmp-rtos \
 "
 
-DEPENDS_append_k2hk-evm = " multiprocmgr-rtos \
+DEPENDS_append_k2hk = " multiprocmgr-rtos \
                             qmss-lld-rtos \
                             cppi-lld-rtos \
                             rm-lld-rtos \
@@ -46,7 +46,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/monitor"
 
-BUILD_TARGET_k2hk-evm = "ARM_K2H"
+BUILD_TARGET_k2hk = "ARM_K2H"
 BUILD_TARGET_k2l-evm  = "ARM_K2L"
 BUILD_TARGET_k2e = "ARM_K2E"
 BUILD_TARGET_dra7xx = "ARM_AM57"

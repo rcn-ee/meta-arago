@@ -89,7 +89,7 @@ EXTRA_LIBS_append_k2l-evm = "\
 # Disable netapi due to libnl and xfrm conflict
 #	netapi-dev
 #	netapi-staticdev
-EXTRA_LIBS_append_k2hk-evm = "\
+EXTRA_LIBS_append_k2hk = "\
 	srio-lld-dev \
 	srio-lld-staticdev \
 	ipc-transport-srio-dev \
@@ -134,7 +134,7 @@ EXTRA_LIBS_append_dra7xx = " libulm-dev \
                              libulm-staticdev \
                              gdbserver-c6x-dev \
 "
-EXTRA_LIBS_append_k2hk-evm = " libulm-staticdev \
+EXTRA_LIBS_append_k2hk = " libulm-staticdev \
                                gdbserver-c6x-dev \
 "
 EXTRA_LIBS_append_k2l-evm = " libulm-staticdev \
