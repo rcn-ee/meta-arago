@@ -68,7 +68,7 @@ UTILS_append_keystone = " \
     ti-ipc-rtos-fw \
 "
 
-UTILS_append_k2hk-evm = " \
+UTILS_append_k2hk = " \
     gdbc6x \
     dsptop \
 "

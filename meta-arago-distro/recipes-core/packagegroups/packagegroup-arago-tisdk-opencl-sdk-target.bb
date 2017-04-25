@@ -12,7 +12,7 @@ UTILS = " \
     python-pyopencl-dev \
 "
 
-UTILS_append_k2hk-evm = " \
+UTILS_append_k2hk = " \
     linalg-dev \
 "
 

@@ -3,9 +3,9 @@ DESCRIPTION = "TI Linear Algebra Library"
 include linalg.inc
 PR = "${INC_PR}.0"
 
-TARGET_k2hk-evm      = "SOC_K2H"
+TARGET_k2hk      = "SOC_K2H"
 TARGET_dra7xx        = "SOC_AM572x"
-MEM_MODEL_k2hk-evm   = "Large"
+MEM_MODEL_k2hk   = "Large"
 MEM_MODEL_dra7xx     = "Small"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

@@ -52,7 +52,7 @@ EXTRA_LIBS_append_keystone = " \
     hplib-mod-src \
 "
 
-EXTRA_LIBS_append_k2hk-evm = " \
+EXTRA_LIBS_append_k2hk = " \
     debugss-module-drv-src \
     gdbserverproxy-module-drv-src \
 "

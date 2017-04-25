@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://src/ti/linalg/docs/LINALG_1.2.0_manifest.html;md5=f30
 PV = "1_2_0_0"
 INC_PR = "r7"
 
-COMPATIBLE_MACHINE = "k2hk-evm|dra7xx"
+COMPATIBLE_MACHINE = "k2hk|dra7xx"
 
 require recipes-ti/includes/arago-paths.inc
 require recipes-ti/includes/ti-staging.inc
