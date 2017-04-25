@@ -3,4 +3,4 @@ PR_append = ".arago1"
 SRC_URI = "git://git.ti.com/optee/ti-optee-test.git;branch=${BRANCH}"
 
 BRANCH = "ti_optee_test"
-SRCREV = "ba271a6e3eb2bbb6996b5de73918216f64a9e077"
+SRCREV = "170a1ee60a98b407790d97dc682568981d344ca3"
