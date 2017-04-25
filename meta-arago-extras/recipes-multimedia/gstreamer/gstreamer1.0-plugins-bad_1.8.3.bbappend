@@ -27,10 +27,12 @@ SRC_URI_append_ti43x = " \
     file://0002-kmssink-remove-DCE-dependencies.patch \
     file://0003-kmssink-add-YUYV-support.patch \
     file://0001-gstwaylandsink-add-input-format-I420-support.patch \
+    file://0005-gstwaylandsink-Implement-callbacks-for-version-5-of-.patch \
 "
 
 SRC_URI_append_ti33x = " \
     file://0001-gstwaylandsink-Add-mouse-drag-and-drop-support.patch \
+    file://0005-gstwaylandsink-Implement-callbacks-for-version-5-of-.patch \
 "
 
 SRC_URI_append_omap-a15 = " \
