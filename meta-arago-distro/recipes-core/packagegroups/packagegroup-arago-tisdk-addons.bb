@@ -57,6 +57,8 @@ UTILS_append_omap-a15 = " mmc-utils \
                           uio-module-drv-test \
 "
 
+UTILS_append_omapl138 = " ti-ipc-rtos-fw"
+
 UTILS_append_dra7xx = " canutils \
                         dsptop \
                         gdbc6x \
