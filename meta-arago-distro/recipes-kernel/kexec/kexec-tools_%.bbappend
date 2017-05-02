@@ -1,5 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago0"
+PR_append = ".arago1"
 
-SRC_URI_append_dra7xx = "file://0001-HACK-TO-get-kexec-up-on-dra7.patch"
+SRC_URI += "file://0001-HACK-TO-get-kexec-up-on-dra7.patch"
