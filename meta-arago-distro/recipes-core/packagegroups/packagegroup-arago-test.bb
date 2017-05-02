@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r46"
+PR = "r47"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -45,6 +45,7 @@ ARAGO_TI_TEST = " \
     input-utils \
     cpuloadgen \
     timestamping \
+    uvc-gadget \
     "
 
 ARAGO_TI_TEST_append_ti33x = " \
