@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r47"
+PR = "r48"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -62,6 +62,10 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     "
 
 ARAGO_TI_TEST_append_keystone = " \
+    ti-ipc-test \
+    "
+
+ARAGO_TI_TEST_append_omapl138 = " \
     ti-ipc-test \
     "
 
