@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r35"
+PR = "r36"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -58,8 +58,6 @@ EXTRA_LIBS_append_keystone = "\
 	pktlib-staticdev \
 	libnl-dev \
 	libnl-staticdev \
-	ti-ipc-dev \
-	ti-ipc-staticdev \
 	multiprocmgr-dev \
 	multiprocmgr-staticdev \
 	mpm-transport-dev \
@@ -148,6 +146,15 @@ EXTRA_PACKAGES = ""
 EXTRA_PACKAGES_append_ti33x = " voxelsdk-dev"
 EXTRA_PACKAGES_append_ti43x = " voxelsdk-dev"
 EXTRA_PACKAGES_append_omap-a15 = " voxelsdk-dev"
+
+IPCDEV = " \
+	ti-ipc-dev \
+	ti-ipc-staticdev \
+"
+
+EXTRA_PACKAGES_append_omap-a15 = " ${IPCDEV}"
+EXTRA_PACKAGES_append_keystone = " ${IPCDEV}"
+EXTRA_PACKAGES_append_omapl138 = " ${IPCDEV}"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
