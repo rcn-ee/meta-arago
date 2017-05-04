@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r11"
+PR = "r12"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -39,6 +39,8 @@ QT5_ESSENTIALS = "\
     qtwebkit-qmlplugins \
     qtquick1-plugins \
     qtquick1-qmlplugins \
+    qtquickcontrols-qmlplugins \
+    qtquickcontrols2-qmlplugins \
     qtwebengine-qmlplugins \
     liberation-fonts \
 "
