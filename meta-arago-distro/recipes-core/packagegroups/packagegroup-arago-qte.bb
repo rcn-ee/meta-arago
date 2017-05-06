@@ -41,6 +41,9 @@ QT5_ESSENTIALS = "\
     qtquick1-qmlplugins \
     qtquickcontrols-qmlplugins \
     qtquickcontrols2-qmlplugins \
+    qtgraphicaleffects-qmlplugins \
+    qtvirtualkeyboard-plugins \
+    qtvirtualkeyboard-qmlplugins \
     qtwebengine-qmlplugins \
     liberation-fonts \
 "
