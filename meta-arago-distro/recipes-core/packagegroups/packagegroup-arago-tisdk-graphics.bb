@@ -4,11 +4,11 @@ PR = "r16"
 
 inherit packagegroup
 
+#    wayland-ivi-extension
 GRAPHICS_WESTON = "\
     weston \
     weston-init \
     weston-examples \
-    wayland-ivi-extension \
 "
 
 GRAPHICS_RDEPENDS = "\
