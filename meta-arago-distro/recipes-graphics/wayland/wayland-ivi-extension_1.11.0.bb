@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=http \
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "weston virtual/libgles2 pixman"
+DEPENDS = "weston virtual/libgles2 pixman wayland-native"
 
 inherit cmake
 
