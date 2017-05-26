@@ -1,0 +1,47 @@
+From 7e2a1b06447693c588a0608cef22636bc6edb466 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Thu, 25 May 2017 16:55:38 -0400
+Subject: [PATCH 2/3] qtwebengine: set default logging level back to LOG_FATAL
+
+Suppress info, warning and error messages by default to be consistent
+with QT5.6.2 behavior
+
+Upstream-Status: Inappropriate
+It is clear that this workaround reverses the course of QT, but we do need
+this change as described above.
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ src/core/content_main_delegate_qt.cpp | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/src/core/content_main_delegate_qt.cpp b/src/core/content_main_delegate_qt.cpp
+index 8bd07ef..6d8cfb1 100644
+--- a/src/core/content_main_delegate_qt.cpp
++++ b/src/core/content_main_delegate_qt.cpp
+@@ -111,14 +111,21 @@ void ContentMainDelegateQt::PreSandboxStartup()
+     settings.logging_dest = DetermineLogMode(*parsedCommandLine);
+     logging::InitLogging(settings);
+ 
++    // Suppress info, warning and error messages per default.
++    int logLevel = logging::LOG_FATAL;
++
+     if (logging::GetMinLogLevel() >= logging::LOG_INFO) {
+         if (parsedCommandLine->HasSwitch(switches::kLoggingLevel)) {
+             std::string logLevelValue = parsedCommandLine->GetSwitchValueASCII(switches::kLoggingLevel);
+             int level = 0;
+             if (base::StringToInt(logLevelValue, &level) && level >= logging::LOG_INFO && level < logging::LOG_NUM_SEVERITIES)
+-                logging::SetMinLogLevel(level);
++                logLevel = level;
++                //logging::SetMinLogLevel(level);
+         }
+     }
++
++    logging::SetMinLogLevel(logLevel);
++
+ }
+ 
+ content::ContentBrowserClient *ContentMainDelegateQt::CreateContentBrowserClient()
+-- 
+1.9.1
+
