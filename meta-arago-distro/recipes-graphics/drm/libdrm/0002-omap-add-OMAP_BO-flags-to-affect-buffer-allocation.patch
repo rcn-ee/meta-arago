@@ -1,0 +1,59 @@
+From 2473eabe24af25dd2127c5e84048f90e4ded000c Mon Sep 17 00:00:00 2001
+From: Tomi Valkeinen <tomi.valkeinen@ti.com>
+Date: Thu, 18 May 2017 10:37:11 +0300
+Subject: [PATCH 2/2] omap: add OMAP_BO flags to affect buffer allocation
+
+Import the kernel header changes from "drm/omap: add OMAP_BO flags to
+affect buffer allocation".
+
+On SoCs with TILER, we have to ways to allocate buffers: normal
+dma_alloc or via TILER (which basically functions as an IOMMU). TILER
+can map 128MB at a time, and we only map the TILER buffers when they are
+used (i.e. not at alloc time). If TILER is present, omapdrm always
+uses TILER.
+
+There are use cases that require lots of big buffers that are being used
+at the same time by different IPs. At the moment the userspace has a
+hard maximum of 128MB.
+
+This patch adds three new flags that can be used by the userspace to
+solve the situation:
+
+OMAP_BO_MEM_CONTIG: The driver will use dma_alloc to get the memory.
+This can be used to avoid TILER if the userspace knows it needs more
+than 128M of memory at the same time.
+
+OMAP_BO_MEM_TILER: The driver will use TILER to get the memory. There's
+nto much use for this flag at the moment, but it's here for
+completeness.
+
+OMAP_BO_MEM_PIN: The driver will pin the memory at alloc time, and keep
+it pinned. This can be used to 1) get an error at alloc time if TILER
+space is full, and 2) get rid of the constant pin/unpin operations which
+may have some effect on performance.
+
+If none of the flags are given, the behavior is the same as currently.
+
+Upstream-Status: Pending
+Signed-off-by: Tomi Valkeinen <tomi.valkeinen@ti.com>
+---
+ omap/omap_drm.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/omap/omap_drm.h b/omap/omap_drm.h
+index 9c6c0e4..d991b85 100644
+--- a/omap/omap_drm.h
++++ b/omap/omap_drm.h
+@@ -52,6 +52,9 @@ struct drm_omap_get_base {
+ #define OMAP_BO_SCANOUT		0x00000001	/* scanout capable (phys contiguous) */
+ #define OMAP_BO_CACHE_MASK	0x00000006	/* cache type mask, see cache modes */
+ #define OMAP_BO_TILED_MASK	0x00000f00	/* tiled mapping mask, see tiled modes */
++#define OMAP_BO_MEM_CONTIG	0x00000008	/* only use contiguous dma mem */
++#define OMAP_BO_MEM_TILER	0x00000010	/* only use TILER mem */
++#define OMAP_BO_MEM_PIN		0x00000020	/* pin the buffer when allocating */
+ 
+ /* cache modes */
+ #define OMAP_BO_CACHED		0x00000000	/* default */
+-- 
+2.7.4
+
