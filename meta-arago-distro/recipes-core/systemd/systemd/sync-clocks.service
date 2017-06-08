@@ -3,14 +3,12 @@ Description=Synchronize System and HW clocks
 DefaultDependencies=no
 Wants=sysinit.target
 Conflicts=shutdown.target
-After=systemd-timesyncd.service
-Before=sysinit.target shutdown.target
+After=getty.target
 
 [Service]
 Type=oneshot
-RemainAfterExit=yes
 ExecStart=/sbin/hwclock --systohc
 StandardOutput=syslog
 
 [Install]
-WantedBy=sysinit.target
+WantedBy=multi-user.target
