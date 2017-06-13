@@ -24,6 +24,8 @@ QT5_DEMOS = "\
     qtscript-examples \
     qtsvg-examples \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-examples', '', d)} \
+    qtwebbrowser \
+    qtwebbrowser-examples \
     qtwebengine-examples \
     qtwebkit-examples-examples \
 "
