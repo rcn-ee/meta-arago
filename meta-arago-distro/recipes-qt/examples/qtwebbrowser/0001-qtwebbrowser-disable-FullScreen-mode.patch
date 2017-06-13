@@ -1,0 +1,32 @@
+From 720056bbce57184c1f352abb160942dbff2c1cd0 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Tue, 6 Jun 2017 14:40:08 -0400
+Subject: [PATCH] qtwebbrowser: disable FullScreen mode
+
+We need to disable full-screen mode because there is no way to exit
+when the browser is launched from matrix-gui
+
+Upstream-Status: Inappropriate
+It is a TI-specific workaround per matrix-gui operation
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ src/main.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/main.cpp b/src/main.cpp
+index 2181f15..5f146b6 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -101,7 +101,7 @@ int main(int argc, char **argv)
+     if (view.size().isEmpty())
+         view.setGeometry(0, 0, 800, 600);
+ #else
+-    view.showFullScreen();
++    view.show();
+ #endif
+ 
+     app.exec();
+-- 
+1.9.1
+
