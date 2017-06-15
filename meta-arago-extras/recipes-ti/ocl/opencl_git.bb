@@ -28,6 +28,7 @@ DEPENDS = " ocl-gl-headers \
             pkgconfig-native \
             libulm \
             elfutils \
+            json-c \
 "
 
 DEPENDS_append_dra7xx   = " ti-ipc virtual/kernel"
