@@ -13,6 +13,7 @@ OPTEE_PKGS = " \
 "
 
 OPTEE_DEPS = ""
+OPTEE_DEPS_am437x-hs-evm = "${OPTEE_PKGS}"
 OPTEE_DEPS_am57xx-hs-evm = "${OPTEE_PKGS}"
 OPTEE_DEPS_dra7xx-hs-evm = "${OPTEE_PKGS}"
 
