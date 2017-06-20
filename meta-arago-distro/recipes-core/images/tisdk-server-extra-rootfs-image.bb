@@ -5,6 +5,7 @@ IMAGE_INSTALL += "\
     packagegroup-arago-tisdk-addons-extra \
     ${@bb.utils.contains('MACHINE_FEATURES','dsp','packagegroup-arago-tisdk-opencl-extra','',d)} \
     packagegroup-arago-tisdk-multimedia \
+    packagegroup-arago-tisdk-matrix-extra \
 "
 
 export IMAGE_BASENAME = "tisdk-server-extra-rootfs-image"
