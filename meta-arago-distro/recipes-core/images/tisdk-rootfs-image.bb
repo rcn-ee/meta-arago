@@ -2,8 +2,9 @@
 
 require arago-image.inc
 
-# Disbaled in master due to php breakage
+# Disabled in master due to php breakage
 #    packagegroup-arago-tisdk-matrix
+#    packagegroup-arago-tisdk-matrix-extra \
 IMAGE_INSTALL += "\
     packagegroup-arago-base \
     packagegroup-arago-console \
