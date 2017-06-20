@@ -1,10 +1,12 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r65"
+PR = "r66"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
+
+PACKAGES =+ "${PN}-extra"
 
 MATRIX_ESSENTIALS = "        \
     matrix-gui               \
@@ -147,5 +149,8 @@ RDEPENDS_${PN} = "        \
     ${MATRIX_APPS}        \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx',"${MATRIX_SGX_DEMOS}",'',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','dsp',"${MATRIX_OPENCL_APPS}",'',d)} \
+"
+
+RDEPENDS_${PN}-extra = " \
     ${@bb.utils.contains('MACHINE_FEATURES','dsp',"${MATRIX_OPENCV_OPENCL_APPS}",'',d)} \
 "
