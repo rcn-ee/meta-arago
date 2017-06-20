@@ -15,6 +15,7 @@ IMAGE_INSTALL += "\
     packagegroup-arago-tisdk-connectivity \
     packagegroup-arago-tisdk-crypto \
     packagegroup-arago-tisdk-matrix \
+    packagegroup-arago-tisdk-matrix-extra \
     packagegroup-arago-tisdk-multimedia \
     packagegroup-arago-tisdk-amsdk \
     packagegroup-arago-tisdk-addons \
