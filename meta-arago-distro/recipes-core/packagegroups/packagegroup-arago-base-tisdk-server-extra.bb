@@ -104,7 +104,7 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     pktlib \
     cppi-lld \
     ipsecmgr-mod \
-    k2-initramfs \
+    k2-fw-initrd \
     parse-ip \
     "
 
