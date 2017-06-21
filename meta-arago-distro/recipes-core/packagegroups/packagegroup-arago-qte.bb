@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,7 +28,6 @@ QT4_ESSENTIALS = "\
 
 QT5_ESSENTIALS = "\
     qtbase-plugins \
-    qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
     qtlocation-plugins \
     qtlocation-qmlplugins \
