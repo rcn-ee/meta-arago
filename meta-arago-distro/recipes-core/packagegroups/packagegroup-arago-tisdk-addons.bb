@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r60"
+PR = "r61"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -37,6 +37,8 @@ UTILS_append_ti33x = " mmc-utils \
                        canutils \
                        switch-config \
                        pru-icss \
+                       uio-module-drv-test \
+                       uio-test-pruss \
 "
 
 UTILS_append_ti43x = " mmc-utils \
@@ -44,6 +46,8 @@ UTILS_append_ti43x = " mmc-utils \
                        switch-config \
                        libdrm-omap \
                        pru-icss \
+                       uio-module-drv-test \
+                       uio-test-pruss \
 "
 
 UTILS_append_omap-a15 = " mmc-utils \
@@ -98,6 +102,14 @@ EXTRA_LIBS_append_omap-a15 = " \
 
 EXTRA_LIBS_append_keystone = " \
     cmem \
+    uio-module-drv \
+"
+
+EXTRA_LIBS_append_ti43x = " \
+    uio-module-drv \
+"
+
+EXTRA_LIBS_append_ti33x = " \
     uio-module-drv \
 "
 
