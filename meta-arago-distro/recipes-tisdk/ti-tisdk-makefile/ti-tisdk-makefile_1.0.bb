@@ -50,7 +50,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r81"
+PR = "r82"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -90,6 +90,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            ti-sgx-ddk-km \
                            pru-icss \
                            barcode-roi \
+                           uio-module-drv \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
@@ -101,6 +102,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            ti-sgx-ddk-km \
                            pru-icss \
                            barcode-roi \
+                           uio-module-drv \
 "
 
 MAKEFILES_append_dra7xx = " cryptodev \
@@ -121,6 +123,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               pru-icss \
                               ti-gc320-driver \
                               barcode-roi \
+                              uio-module-drv \
 "
 MAKEFILES_append_omapl138 = " pru \
                               u-boot-legacy \
