@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r29"
+PR = "r30"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -37,11 +37,20 @@ EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " \
     cmem-mod-src \
     pru-icss-src \
+    uio-module-drv-src \
 "
 
 EXTRA_LIBS_append_dra7xx = " \
     debugss-module-drv-src \
     gdbserverproxy-module-drv-src \
+"
+
+EXTRA_LIBS_append_ti33x = " \
+    uio-module-drv-src \
+"
+
+EXTRA_LIBS_append_ti43x = " \
+    uio-module-drv-src \
 "
 
 # Disable ipsecmgr due to libnl and xfrm conflict
