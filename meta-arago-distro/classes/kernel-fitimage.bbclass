@@ -39,7 +39,7 @@ python __anonymous () {
             uboot_pn = d.getVar('PREFERRED_PROVIDER_u-boot', True) or 'u-boot'
             d.appendVarFlag('do_assemble_fitimage', 'depends', ' %s:do_deploy' % uboot_pn)
 
-        if d.getVar('FITIMAGE_OPTEE', True):
+        if d.getVar('OPTEEMACHINE', True):
             d.appendVarFlag('do_assemble_fitimage', 'depends', ' optee-os:do_deploy')
 }
 
