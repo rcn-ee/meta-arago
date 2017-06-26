@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r61"
+PR = "r62"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -131,7 +131,10 @@ EXTRA_PACKAGES_omapl138 = " \
 
 EXTRA_PACKAGES_append_ti33x = " voxelsdk"
 EXTRA_PACKAGES_append_ti43x = " voxelsdk"
-EXTRA_PACKAGES_append_omap-a15 = " voxelsdk"
+EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
+                                   big-data-ipc-demo-linux \
+                                   big-data-ipc-demo-linux-firmware \
+"
 
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_keystone = " ti-ipc-examples-linux"
