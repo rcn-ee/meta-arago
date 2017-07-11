@@ -5,4 +5,6 @@ OZONE_WAYLAND_EXTRA_PATCHES = " \
 	file://0001-libva-adjust-paths-in-headers-to-include-libva-prefi.patch \
 "
 
+USEGOLD = ""
+
 DEPENDS += "gperf-native"
