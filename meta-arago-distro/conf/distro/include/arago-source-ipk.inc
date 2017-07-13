@@ -362,3 +362,6 @@ SRCIPK_INSTALL_DIR_pn-imglib-c66x = "component-sources/imglib_c66x_${PV}"
 
 CREATE_SRCIPK_pn-vlib-c66x = "1"
 SRCIPK_INSTALL_DIR_pn-vlib-c66x = "component-sources/vlib_c66x_${PV}"
+
+CREATE_SRCIPK_pn-big-data-ipc-demo-linux = "1"
+SRCIPK_INSTALL_DIR_pn-big-data-ipc-demo-linux = "example-applications/${PN}-${PV}"
