@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r36"
+PR = "r37"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -12,9 +12,6 @@ WLAN_COMMON = "\
     wireless-tools \
     iw \
     softap-udhcpd-config \
-    pulseaudio \
-    pulseaudio-server \
-    pulseaudio-module-loopback \
     eventdump \
     wlconf \
     wpa-supplicant-wl18xx \
@@ -43,6 +40,15 @@ BLUETOOTH_STACK = "\
     bluez5-testtools \
     uim \
     bt-enable \
+    pulseaudio \
+    pulseaudio-server \
+    pulseaudio-module-loopback \
+    pulseaudio-module-bluetooth-discover \
+    pulseaudio-module-bluetooth-policy \
+    pulseaudio-module-bluez5-device \
+    pulseaudio-module-bluez5-discover \
+    pulseaudio-lib-bluez5-util \
+    sbc \
 "
 
 CONNECTIVITY_RDEPENDS = " \
