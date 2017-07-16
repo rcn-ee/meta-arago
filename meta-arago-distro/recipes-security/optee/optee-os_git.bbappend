@@ -29,6 +29,16 @@ do_compile() {
         normfl=`echo ${OPTEEFLAVOR} | tr "_" "-"`
         mv tee.bin.signed $normfl.optee; \
     )
+
+    if [ "${OPTEEPAGER}" = "y" ]; then
+        oe_runmake clean PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
+        oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR} CFG_WITH_PAGER=y
+        ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
+            ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
+            normfl=`echo ${OPTEEFLAVOR} | tr "_" "-"`
+            mv tee.bin.signed $normfl-pager.optee; \
+        )
+    fi
 }
 
 do_install() {
