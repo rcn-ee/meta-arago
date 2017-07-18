@@ -20,6 +20,8 @@
 function bten_335_evm {
 	echo 117 > /sys/class/gpio/export
 	echo out > /sys/class/gpio/gpio117/direction
+	echo 0 > /sys/class/gpio/gpio117/value
+	sleep 1
 	echo 1 > /sys/class/gpio/gpio117/value
 	echo "Done enabling BT"
 
@@ -37,6 +39,8 @@ function bten_335_evm {
 function bten_437_evm {
 	echo 16 > /sys/class/gpio/export
 	echo out > /sys/class/gpio/gpio16/direction
+	echo 0 > /sys/class/gpio/gpio16/value
+	sleep 1
 	echo 1 > /sys/class/gpio/gpio16/value
 	echo "Done enabling BT"
 
@@ -51,16 +55,37 @@ function bten_437_evm {
 	echo $baud_rate >> /home/root/tibt/config
 }
 
-function bten_57x_idk {
+function bten_57x_evm {
 	echo 132 > /sys/class/gpio/export
 	echo out > /sys/class/gpio/gpio132/direction
+	echo 0 > /sys/class/gpio/gpio132/value
+	sleep 1
 	echo 1 > /sys/class/gpio/gpio132/value
 	echo "Done enabling BT"
 
-	local gpio="nshutdown_gpio=16"
+	local gpio="nshutdown_gpio=132"
 	local tty="tty=/dev/ttyS7"
 	local flow="flow_cntrl=1"
-	local baud_rate="baud_rate=3686400"
+	local baud_rate="baud_rate=3000000"
+	mkdir /home/root/tibt
+	echo $gpio > /home/root/tibt/config
+	echo $tty >> /home/root/tibt/config
+	echo $flow >> /home/root/tibt/config
+	echo $baud_rate >> /home/root/tibt/config
+}
+
+function bten_43x_epos_evm {
+	echo 21 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio21/direction
+	echo 0 > /sys/class/gpio/gpio21/value
+	sleep 1
+	echo 1 > /sys/class/gpio/gpio21/value
+	echo "Done enabling BT"
+
+	local gpio="nshutdown_gpio=21"
+	local tty="tty=/dev/ttyS3"
+	local flow="flow_cntrl=1"
+	local baud_rate="baud_rate=3000000"
 	mkdir /home/root/tibt
 	echo $gpio > /home/root/tibt/config
 	echo $tty >> /home/root/tibt/config
@@ -84,12 +109,15 @@ then
 			echo "success"
 			bten_437_evm
 		fi
-	elif [ `echo $b | grep -c "IDK"` -gt 0 ]
-	then
-		if [ `echo $b | grep -c "57"` -gt 0 ]
+		if [ `echo $b | grep -c "572"` -gt 0 ]
 		then
 			echo "success"
-			bten_57x_idk
+			bten_57x_evm
+		fi
+		if [ `echo $b | grep -c "EPOS"` -gt 0 ]
+		then
+			echo "success"
+			bten_43x_epos_evm
 		fi
 	else
 		echo "Not TI EVM board"

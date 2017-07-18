@@ -7,6 +7,8 @@ SRC_URI = " \
 	file://bt-enable.service \
 "
 
+PR = "r1"
+
 S = "${WORKDIR}"
 
 INITSCRIPT_NAME = "bt-enable.sh"
