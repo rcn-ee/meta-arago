@@ -2,7 +2,7 @@ inherit cross-canadian
 
 require external-linaro-bfd-version.inc
 
-PR = "r7"
+PR = "r8"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
@@ -33,6 +33,10 @@ PACKAGES = "\
 	binutils-cross-canadian-arm \
 "
 
+# Don't need the extra target triplet in the new SDK dir structure
+bindir = "${exec_prefix}/bin"
+libdir = "${exec_prefix}/lib"
+libexecdir = "${exec_prefix}/libexec"
 datadir = "${exec_prefix}/share"
 gcclibdir = "${libdir}/gcc"
 
