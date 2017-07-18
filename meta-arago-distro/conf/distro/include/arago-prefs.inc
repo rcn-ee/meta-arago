@@ -24,6 +24,10 @@ PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_KERNEL_SUFFIX}"
 
+# For TI devices with only baremetal/TI RTOS support
+PREFERRED_PROVIDER_virtual/kernel_c66x = "linux-dummy"
+PREFERRED_PROVIDER_virtual/kernel_omapl137 = "linux-dummy"
+
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 
 # Setting PREFERRED_VERSIONS due to selecting a specific version of a library or
