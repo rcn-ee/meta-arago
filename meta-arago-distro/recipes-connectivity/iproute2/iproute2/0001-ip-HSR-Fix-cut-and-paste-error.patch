@@ -1,0 +1,27 @@
+From 3f586aee3d617b1281d5c535caafd9f09d06f5fb Mon Sep 17 00:00:00 2001
+From: Ralf Baechle <ralf@linux-mips.org>
+Date: Mon, 6 Feb 2017 21:47:35 +0100
+Subject: [PATCH 1/2] ip: HSR: Fix cut and paste error
+
+Fixes: 5c0aec93a516 ("ip: Add HSR support")
+Signed-off-by: Ralf Baechle <ralf@linux-mips.org>
+---
+ ip/iplink_hsr.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
+index cb744eb..696b2c9 100644
+--- a/ip/iplink_hsr.c
++++ b/ip/iplink_hsr.c
+@@ -144,7 +144,7 @@ static void hsr_print_help(struct link_util *lu, int argc, char **argv,
+ 
+ struct link_util hsr_link_util = {
+ 	.id		= "hsr",
+-	.maxattr	= IFLA_VLAN_MAX,
++	.maxattr	= IFLA_HSR_MAX,
+ 	.parse_opt	= hsr_parse_opt,
+ 	.print_opt	= hsr_print_opt,
+ 	.print_help	= hsr_print_help,
+-- 
+1.9.1
+
