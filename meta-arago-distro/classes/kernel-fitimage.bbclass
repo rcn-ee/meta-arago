@@ -578,7 +578,7 @@ kernel_do_deploy_append() {
 		cd ${B}
 		echo "Copying fit-image.its source file..."
 		install -m 0644 fit-image.its ${DEPLOYDIR}/${FITIMAGE_ITS_IMAGE}
-		install -m 0644 linux.bin ${DEPLOYDIR}/${FITIMAGE_ITB_IMAGE}
+		install -m 0644 arch/${ARCH}/boot/fitImage ${DEPLOYDIR}/${FITIMAGE_ITB_IMAGE}
 
 		if [ -n "${INITRAMFS_IMAGE}" ]; then
 			echo "Copying fit-image-${INITRAMFS_IMAGE}.its source file..."
