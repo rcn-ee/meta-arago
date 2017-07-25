@@ -319,10 +319,18 @@ fitimage_emit_section_config() {
 	fi
 
 	if [ -n "${6}" -a -n "${OPTEEFLAVOR}" ]; then
-		loadables_line="loadables = \"${6}\";"
+		if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ]; then
+			loadables_line="loadables = \"${6}.optee\";"
+			loadables_pager_line="loadables = \"${6}-pager.optee\";"
+		else
+			loadables_line="loadables = \"tee@${6}\";"
+			nextnum=`expr ${6} + 1`
+			loadables_pager_line="loadables = \"tee@${nextnum}\";"
+		fi
 		final_conf_desc="${conf_desc}, OPTEE OS Image"
 	else
 		loadables_line=""
+		loadables_pager_line=""
 		final_conf_desc="${conf_desc}"
 	fi
 
@@ -341,6 +349,7 @@ fitimage_emit_section_config() {
 EOF
 		fi
 
+# Generate a single configuration section
 			cat << EOF >> ${1}
                 ${conf_name} {
                         description = "${final_conf_desc}";
@@ -389,9 +398,69 @@ EOF
 			cat << EOF >> ${1}
                 };
 EOF
+# End single config section
+
+# Generate a single "pager" configuration section
+		if [ "${OPTEEPAGER}" = "y" ]; then
+			if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
+				conf_name="${DTB}-pager"
+			else
+				conf_name="conf@${dtbcount}"
+			fi
+
+			cat << EOF >> ${1}
+                ${conf_name} {
+                        description = "${final_conf_desc}";
+                        ${kernel_line}
+                        fdt = "${DTB}";
+                        ${ramdisk_line}
+                        ${setup_line}
+                        ${loadables_pager_line}
+EOF
+
+			if test -n "${FITIMAGE_HASH_ALGO}"; then
+				cat << EOF >> ${1}
+                        hash@1 {
+                                algo = "${conf_csum}";
+                        };
+EOF
+			fi
+
+			if [ ! -z "${conf_sign_keyname}" ] ; then
+
+				sign_line="sign-images = \"kernel\""
+
+				if [ -n "${3}" ]; then
+					sign_line="${sign_line}, \"fdt\""
+				fi
+
+				if [ -n "${4}" ]; then
+					sign_line="${sign_line}, \"ramdisk\""
+				fi
+
+				if [ -n "${5}" ]; then
+					sign_line="${sign_line}, \"setup\""
+				fi
+
+				sign_line="${sign_line};"
+
+				cat << EOF >> ${1}
+                        signature@1 {
+                                algo = "${conf_csum},rsa2048";
+                                key-name-hint = "${conf_sign_keyname}";
+                                ${sign_line}
+                        };
+EOF
+			fi
+
+			cat << EOF >> ${1}
+                };
+EOF
+		fi
+# End single config section
 
 		dtbcount=`expr ${dtbcount} + 1`
-		done
+	done
 }
 
 #
@@ -462,6 +531,21 @@ fitimage_assemble() {
 		else
 			fitimage_emit_section_tee ${1} "tee@${teecount}" ${TEE_PATH}.sec
 		fi
+
+		if [ "${OPTEEPAGER}" = "y" ]; then
+			teecount=`expr ${teecount} + 1`
+			rm -f ${B}/usr/${OPTEEFLAVOR}-pager.optee
+			if [ -e "${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}-pager.optee" ]; then
+				cp ${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}-pager.optee ${B}/usr/.
+			fi
+			TEE_PATH="usr/${OPTEEFLAVOR}-pager.optee"
+			fitimage_ti_secure ${TEE_PATH} ${TEE_PATH}.sec
+			if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
+				fitimage_emit_section_tee ${1} ${OPTEEFLAVOR}-pager.optee ${TEE_PATH}.sec
+			else
+				fitimage_emit_section_tee ${1} "tee@${teecount}" ${TEE_PATH}.sec
+			fi
+		fi
 	fi
 
 	#
@@ -490,6 +574,7 @@ fitimage_assemble() {
 	if test -n "${dtbcount}"; then
 		dtbcount=1
 	fi
+	teecount=1
 
 	#
 	# Step 5: Prepare a configurations section
@@ -500,9 +585,9 @@ fitimage_assemble() {
 		dtbref="fdt@${dtbcount}"
 	fi
 	if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
-		teeref="${OPTEEFLAVOR}.optee"
+		teeref="${OPTEEFLAVOR}"
 	else
-		teeref="tee@${teecount}"
+		teeref="${teecount}"
 	fi
 	fitimage_emit_section_config ${1} "${kernelcount}" "${dtbref}" "${ramdiskcount}" "${setupcount}" "${teeref}"
 
