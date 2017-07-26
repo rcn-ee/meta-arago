@@ -1,6 +1,6 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r18"
+PR = "r19"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,11 +11,6 @@ OPTEE_PKGS = " \
     optee-client \
     optee-test \
 "
-
-OPTEE_DEPS = ""
-OPTEE_DEPS_am437x-hs-evm = "${OPTEE_PKGS}"
-OPTEE_DEPS_am57xx-hs-evm = "${OPTEE_PKGS}"
-OPTEE_DEPS_dra7xx-hs-evm = "${OPTEE_PKGS}"
 
 RDEPENDS_${PN} = "\
     dbus \
@@ -29,5 +24,5 @@ RDEPENDS_${PN} = "\
     arago-feed-config \
     nfs-utils-client \
     cifs-utils \
-    ${OPTEE_DEPS} \
+    ${@base_conditional('OPTEEMACHINE', 'ti', "${OPTEE_PKGS}", "", d)} \
 "
