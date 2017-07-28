@@ -299,13 +299,11 @@ fitimage_emit_section_config() {
 
 	conf_desc="Linux kernel"
 	kernel_line="kernel = \"kernel@${2}\";"
-	fdt_line=""
 	ramdisk_line=""
 
 	# Test if we have any DTBs at all
 	if [ -n "${3}" ]; then
 		conf_desc="${conf_desc}, FDT blob"
-		fdt_line="fdt = \"${3}\";"
 	fi
 
 	if [ -n "${4}" ]; then
@@ -343,6 +341,12 @@ fitimage_emit_section_config() {
 			conf_name="conf@${dtbcount}"
 		fi
 
+		if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
+			fdt_line="fdt = \"${DTB}\";"
+		else
+			fdt_line="fdt = \"fdt@${dtbcount}\";"
+		fi
+
 		if [ "x${dtbcount}" = "x1" ]; then
 			cat << EOF >> ${1}
                 default = "${conf_name}";
@@ -354,7 +358,7 @@ EOF
                 ${conf_name} {
                         description = "${final_conf_desc}";
                         ${kernel_line}
-                        fdt = "${DTB}";
+                        ${fdt_line}
                         ${ramdisk_line}
                         ${setup_line}
                         ${loadables_line}
@@ -412,7 +416,7 @@ EOF
                 ${conf_name} {
                         description = "${final_conf_desc}";
                         ${kernel_line}
-                        fdt = "${DTB}";
+                        ${fdt_line}
                         ${ramdisk_line}
                         ${setup_line}
                         ${loadables_pager_line}
