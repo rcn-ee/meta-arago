@@ -12,12 +12,11 @@ S = "${WORKDIR}/git"
 inherit autotools pkgconfig
 
 SRC_URI = "git://git.ti.com/glsdk/example-applications.git;protocol=git \
-	file://0001-Makefile-fix-library-linking-issues.patch \
 "
 
-SRCREV="f7562ecf76c559972205d7faaa3b50bdb43de238"
+SRCREV="491b3129a5c5267d72aba8878b50731f27356d3a"
 
-PR = "r49"
+PR = "r50"
 
 do_install_append () {
     install -d ${D}${sysconfdir}/glsdkstatcoll
