@@ -7,8 +7,8 @@ DEPENDS = "ffmpeg libdce libdrm libgbm ti-sgx-ddk-um wayland"
 
 inherit autotools pkgconfig
 
-PR = "r23"
-SRCREV = "7e63575f149d1a5a4a052d6211131676d4ccc655"
+PR = "r24"
+SRCREV = "6a2c2afc36348421e0d73300151ec675f58a893a"
 
 EXTRA_OEMAKE = "CC="${CC}""
 TARGET_CC_ARCH += "${LDFLAGS}"
