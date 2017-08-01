@@ -10,7 +10,7 @@ IMAGE_INSTALL += "\
     packagegroup-arago-console \
     packagegroup-arago-base-tisdk \
     packagegroup-arago-test \
-    systemd-initramfs \
+    ${VIRTUAL-RUNTIME_initramfs} \
     "
 
 export IMAGE_BASENAME = "arago-base-tisdk-image"
