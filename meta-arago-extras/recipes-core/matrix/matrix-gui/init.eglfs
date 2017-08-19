@@ -5,11 +5,8 @@ GUI_OPTS="http://localhost:80/ __MATRIX_FLAGS__"
 PIDFILE="/var/run/matrix-gui-2.0.pid"
 
 # Important System Environment Variables
-SCRIPTS=/etc/profile.d/*.sh
-
-for f in $SCRIPTS
-do
-    source $f
+for sh in /etc/profile.d/*.sh ; do
+    [ -r "$sh" ] && . "$sh"
 done
 
 test -x "$matrixgui" || exit 0
