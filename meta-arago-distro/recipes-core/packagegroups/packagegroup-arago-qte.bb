@@ -46,6 +46,8 @@ QT5_ESSENTIALS = "\
     qtvirtualkeyboard-qmlplugins \
     qtwebengine-qmlplugins \
     liberation-fonts \
+    qtconnectivity \
+    qtconnectivity-qmlplugins \
 "
 
 RDEPENDS_${PN} = "\
