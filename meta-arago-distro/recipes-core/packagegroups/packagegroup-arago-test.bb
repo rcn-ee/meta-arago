@@ -1,6 +1,6 @@
 DESCRIPTION = "Extended task to get System Test specific apps"
 LICENSE = "MIT"
-PR = "r48"
+PR = "r49"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -18,6 +18,7 @@ ARAGO_TEST = "\
     libdrm-tests \
     powertop \
     stress \
+    stress-ng \
     yavta \
     rng-tools \
     perf \
