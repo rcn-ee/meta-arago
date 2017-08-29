@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r37"
+PR = "r38"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -57,6 +57,7 @@ CONNECTIVITY_RDEPENDS = " \
     iptables \
     iproute2 \
     iproute2-tc \
+    net-snmp \
 "
 
 CONNECTIVITY_RDEPENDS_append_ti33x = "\
