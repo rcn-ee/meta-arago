@@ -35,6 +35,7 @@ SUBMENUS = " arm_submenu \
              machinevision_submenu \
              touch_submenu \
              browser_submenu \
+	     hmi_submenu \
 "
 
 do_install(){
@@ -68,6 +69,7 @@ PACKAGES += " ${PN}-arm \
               ${PN}-machinevision \
               ${PN}-touch \
               ${PN}-browser \
+              ${PN}-hmi \
 "
 
 # Make sure app images has been installed
@@ -96,3 +98,4 @@ FILES_${PN}-videoanalytics = "${MATRIX_APP_DIR}/videoanalytics_submenu/*"
 FILES_${PN}-machinevision = "${MATRIX_APP_DIR}/machinevision_submenu/*"
 FILES_${PN}-touch = "${MATRIX_APP_DIR}/touch_submenu/*"
 FILES_${PN}-browser = "${MATRIX_APP_DIR}/browser_submenu/*"
+FILES_${PN}-hmi = "${MATRIX_APP_DIR}/hmi_submenu/*"
