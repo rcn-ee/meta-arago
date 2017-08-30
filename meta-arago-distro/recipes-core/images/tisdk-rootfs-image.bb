@@ -20,6 +20,7 @@ IMAGE_INSTALL += "\
     packagegroup-arago-tisdk-amsdk \
     packagegroup-arago-tisdk-addons \
     packagegroup-arago-tisdk-addons-extra \
+    packagegroup-arago-tisdk-hmi \
     "
 
 export IMAGE_BASENAME = "tisdk-rootfs-image"
