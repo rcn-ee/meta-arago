@@ -67,6 +67,9 @@ SRCIPK_INSTALL_DIR_pn-qt-tstat = "example-applications/${PN}-${PV}"
 CREATE_SRCIPK_pn-dual-camera-demo = "1"
 SRCIPK_INSTALL_DIR_pn-dual-camera-demo = "example-applications/${PN}-${PV}"
 
+CREATE_SRCIPK_pn-evse-hmi = "1"
+SRCIPK_INSTALL_DIR_pn-evse-hmi = "example-applications/${PN}-${PV}"
+
 CREATE_SRCIPK_pn-image-gallery = "1"
 SRCIPK_INSTALL_DIR_pn-image-gallery = "example-applications/${PN}"
 
