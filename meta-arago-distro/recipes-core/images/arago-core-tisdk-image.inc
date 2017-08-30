@@ -60,6 +60,7 @@ IMAGE_INSTALL = "\
     packagegroup-arago-tisdk-crypto-sdk-host \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx','packagegroup-arago-tisdk-graphics-sdk-host','',d)} \
     packagegroup-arago-tisdk-multimedia-sdk-host \
+    packagegroup-arago-tisdk-hmi-sdk-host \
     packagegroup-arago-tisdk-amsdk-sdk-host${ARAGO_KERNEL_SUFFIX} \
     ${IMAGE_INSTALL_QT} \
 "
