@@ -95,6 +95,8 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     matrix-gui-ethernet-demos       \
                                     \
+    matrix-hmi-demo-evse            \
+                                    \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
@@ -112,12 +114,16 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-gui-apps-dual-camera     \
     matrix-gui-apps-image-gallery   \
                                     \
+    matrix-hmi-demo-evse            \
+                                    \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-h265dec  \
+    matrix-hmi-demo-evse            \
+                                    \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264dec','matrix-multimedia-demo-h264dec',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264enc','',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdmjpegenc','',d)} \
