@@ -50,7 +50,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r82"
+PR = "r83"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -58,6 +58,7 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
 "
 
 MAKEFILES_MATRIX_GUI_keystone = ""
+MAKEFILES_MATRIX_GUI_omapl138 = ""
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -125,8 +126,8 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               barcode-roi \
                               uio-module-drv \
 "
-MAKEFILES_append_omapl138 = " pru \
-                              u-boot-legacy \
+MAKEFILES_append_omapl138 = " linux-dtbs \
+                              u-boot-spl \
 "
 
 MAKEFILES_append_keystone = " u-boot-spl \
