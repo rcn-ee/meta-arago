@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r36"
+PR = "r37"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -118,13 +118,13 @@ EXTRA_LIBS_append_k2e = "\
 	nwal-lld-staticdev \
 "
 
-UTILS_append_ti33x = " canutils-dev"
-UTILS_append_ti43x = " canutils-dev"
-UTILS_append_dra7xx = " canutils-dev \
+UTILS_append_ti33x = " can-utils-dev"
+UTILS_append_ti43x = " can-utils-dev"
+UTILS_append_dra7xx = " can-utils-dev \
                         elfutils-dev \
                         elfutils-staticdev \
 "
-UTILS_append_k2g = " canutils-dev"
+UTILS_append_k2g = " can-utils-dev"
 
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " cmem-dev"
