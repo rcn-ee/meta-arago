@@ -9,9 +9,9 @@ inherit qt-provider
 # Make sure that QT font libraries have been installed
 RDEPENDS_${PN} += "${QT_RDEPENDS_FONTS}"
 
-DEPENDS += "${QT_DEPENDS_WEBKIT}"
+DEPENDS += "${QT_DEPENDS_WEBENGINE}"
 
-PR = "r14"
+PR = "r15"
 
 QT4_SRCREV = "83019b46fb3dec1a12667d251d35ba8682953a79"
 QT5_SRCREV = "d3ecf8d0dff3e4f901d588ea0dfe485733dfc9dc"
