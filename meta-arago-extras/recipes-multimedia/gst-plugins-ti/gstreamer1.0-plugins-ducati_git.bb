@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 require gstreamer1.0-plugins-ti.inc
 
-PR = "${INC_PR}.26"
-SRCREV = "c8f6051ac3dff629aa00c22667fcc33cb1cfd074"
+PR = "${INC_PR}.27"
+SRCREV = "7205d7cb75944e816622d5daca88804819ff16d3"
 
 BRANCH ?= "master"
 
