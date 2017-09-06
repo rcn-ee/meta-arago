@@ -35,9 +35,6 @@ QT5_ESSENTIALS = "\
     qtmultimedia-qmlplugins \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-plugins', '', d)} \
     qt3d-qmlplugins \
-    qtwebkit-qmlplugins \
-    qtquick1-plugins \
-    qtquick1-qmlplugins \
     qtquickcontrols-qmlplugins \
     qtquickcontrols2-qmlplugins \
     qtgraphicaleffects-qmlplugins \
