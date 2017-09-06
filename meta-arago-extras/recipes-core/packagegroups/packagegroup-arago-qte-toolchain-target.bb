@@ -1,7 +1,7 @@
 DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
 
-PR = "r11"
+PR = "r12"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -47,7 +47,6 @@ QT5_DEV = " \
         qtbase-mkspecs \
         qtdeclarative-mkspecs \
         qtscript-mkspecs \
-        qtwebkit-mkspecs \
         qt3d-mkspecs \
         qtlocation-mkspecs \
         qtsensors-mkspecs \
@@ -57,13 +56,11 @@ QT5_DEV = " \
         qtbase-staticdev \
         qtdeclarative-dev \
         qtscript-dev \
-        qtwebkit-dev \
         qt3d-dev \
         qtlocation-dev \
         qtsensors-dev \
         qtsvg-dev \
         qtxmlpatterns-dev \
-        qtquick1-dev \
         qtwebengine-mkspecs \
         qtwebengine-dev \
 "

@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -36,9 +36,6 @@ QT5_ESSENTIALS = "\
     qtmultimedia-qmlplugins \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-plugins', '', d)} \
     qt3d-qmlplugins \
-    qtwebkit-qmlplugins \
-    qtquick1-plugins \
-    qtquick1-qmlplugins \
     qtquickcontrols-qmlplugins \
     qtquickcontrols2-qmlplugins \
     qtgraphicaleffects-qmlplugins \
