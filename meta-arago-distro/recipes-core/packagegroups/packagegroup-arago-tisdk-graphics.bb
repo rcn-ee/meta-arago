@@ -1,14 +1,18 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r16"
+PR = "r17"
 
 inherit packagegroup
 
 #    wayland-ivi-extension
-GRAPHICS_WESTON = "\
+GRAPHICS_WAYLAND = "\
     weston \
     weston-init \
     weston-examples \
+"
+
+GRAPHICS_WAYLAND_append_omap-a15 = "\
+    chromium-wayland \
 "
 
 GRAPHICS_RDEPENDS = "\
@@ -17,7 +21,6 @@ GRAPHICS_RDEPENDS = "\
     ti-sgx-ddk-um \
 "
 
-
 GRAPHICS_RDEPENDS_append_omap-a15 = "\
     ti-gc320-tests \
     ti-gc320-driver \
@@ -25,6 +28,6 @@ GRAPHICS_RDEPENDS_append_omap-a15 = "\
 "
 
 RDEPENDS_${PN} = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', "${GRAPHICS_WESTON}", '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', "${GRAPHICS_WAYLAND}", '', d)} \
     ${GRAPHICS_RDEPENDS} \
 "
