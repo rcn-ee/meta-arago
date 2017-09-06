@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r62"
+PR = "r63"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -34,7 +34,7 @@ UTILS_UBOOT_FW = "u-boot-fw-utils"
 UTILS_UBOOT_FW_keystone = ""
 
 UTILS_append_ti33x = " mmc-utils \
-                       canutils \
+                       can-utils \
                        switch-config \
                        pru-icss \
                        uio-module-drv-test \
@@ -42,7 +42,7 @@ UTILS_append_ti33x = " mmc-utils \
 "
 
 UTILS_append_ti43x = " mmc-utils \
-                       canutils \
+                       can-utils \
                        switch-config \
                        libdrm-omap \
                        pru-icss \
@@ -63,7 +63,7 @@ UTILS_append_omap-a15 = " mmc-utils \
 
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
-UTILS_append_dra7xx = " canutils \
+UTILS_append_dra7xx = " can-utils \
                         dsptop \
                         gdbc6x \
                         glsdk-example-apps \
@@ -90,7 +90,7 @@ UTILS_append_k2e = " \
 "
 
 UTILS_append_k2g = " \
-    canutils \
+    can-utils \
     pru-icss \
 "
 
