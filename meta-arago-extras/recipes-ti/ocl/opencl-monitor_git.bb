@@ -20,6 +20,7 @@ DEPENDS = " ti-llvm3.6-native \
             ti-framework-components \
             libulm \
             gdbserver-c6x \
+            libaet \
             openmp-rtos \
 "
 
@@ -72,6 +73,7 @@ export MPM_DIR = "${MPM_INSTALL_DIR}"
 export OMP_DIR = "${OMP_INSTALL_DIR}"
 export ULM_DIR ="${STAGING_DIR_TARGET}/usr/share/ti/ulm"
 export GDB_SERVER_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/gdbc6x"
+export AET_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/ctoolslib/aet"
 export X86_LLVM_DIR = "${STAGING_DIR_NATIVE}/usr"
 export XDCPATH = "${S};${IPC_DIR}/packages;${BIOS_DIR}/packages;${EDMA3LLD_DIR}/packages;${FC_DIR}/packages;${XDAIS_DIR}/packages"
 
