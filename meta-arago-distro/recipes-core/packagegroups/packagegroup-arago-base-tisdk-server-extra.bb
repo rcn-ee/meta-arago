@@ -97,7 +97,6 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     mpm-transport \
     multiprocmgr \
     rm-lld \
-    demo-image-proc \
     pa-lld \
     qmss-lld \
     hplib-mod \
