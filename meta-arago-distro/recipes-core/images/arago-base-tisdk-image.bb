@@ -4,6 +4,7 @@
 require arago-image.inc
 
 IMAGE_FSTYPES += "cpio.xz"
+IMAGE_FSTYPES_append_dra7xx = " ubifs ubi"
 
 IMAGE_INSTALL += "\
     packagegroup-arago-base \
