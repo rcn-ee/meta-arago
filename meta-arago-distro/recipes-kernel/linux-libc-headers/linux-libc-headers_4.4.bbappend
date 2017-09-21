@@ -1,7 +1,7 @@
-PR_append = ".arago0"
+PR_append = ".arago1"
 
 BRANCH = "ti-lsk-linux-4.4.y"
-SRCREV = "6580f85400b48d55d06f11d6b75c056399123a72"
+SRCREV = "2612ef5805db717f9818f06786e863d3b1a7f87e"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
