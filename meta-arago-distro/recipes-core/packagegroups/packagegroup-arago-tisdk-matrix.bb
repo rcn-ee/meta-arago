@@ -96,6 +96,7 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-gui-ethernet-demos       \
                                     \
     matrix-hmi-demo-evse            \
+    matrix-hmi-demo-protection-relays \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
