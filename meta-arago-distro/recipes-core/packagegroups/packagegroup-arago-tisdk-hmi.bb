@@ -12,6 +12,7 @@ HMI = " \
 
 HMI_append_ti33x = " \
     evse-hmi \
+    protection-relays-hmi \
 "
 
 HMI_append_ti43x = " \
