@@ -20,15 +20,9 @@ DEPENDS_append_ti33x = " \
 "
 
 SRC_URI_append_omap-a15 = " \
-    file://0001-kmssink-remove-DCE-dependencies.patch \
-    file://0002-kmssink-add-YUYV-support.patch \
-    file://0001-gstwaylandsink-add-input-format-I420-support.patch \
 "
 
 SRC_URI_append_ti43x = " \
-    file://0001-kmssink-remove-DCE-dependencies.patch \
-    file://0002-kmssink-add-YUYV-support.patch \
-    file://0001-gstwaylandsink-add-input-format-I420-support.patch \
 "
 
 SRC_URI_append_ti33x = " \
@@ -44,8 +38,8 @@ SRC_URI = "git://git.ti.com/glsdk/gstreamer1-0-plugins-bad.git;protocol=git;bran
 
 S = "${WORKDIR}/git"
 
-SRCREV_omap-a15 = "eb41f1c8fde05f87587c83d157835e3b2d19a298"
-SRCREV_ti43x = "eb41f1c8fde05f87587c83d157835e3b2d19a298"
+SRCREV_omap-a15 = "3a5a7f778b3c3259faab04748e7b10f0fd696aab"
+SRCREV_ti43x = "3a5a7f778b3c3259faab04748e7b10f0fd696aab"
 SRCREV = "d0160ca810be30bf2b2e7681f5047933402efb52"
 
-PR = "r25"
+PR = "r27"
