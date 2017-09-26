@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r63"
+PR = "r64"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -92,6 +92,7 @@ UTILS_append_k2e = " \
 UTILS_append_k2g = " \
     can-utils \
     pru-icss \
+    uio-test-pruss \
 "
 
 EXTRA_LIBS = ""
