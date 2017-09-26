@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r64"
+PR = "r65"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -124,6 +124,7 @@ EXTRA_PACKAGES = " \
     nodejs \
     nodejs-npm \
     protobuf \
+    ccief-basic \
 "
 
 EXTRA_PACKAGES_omapl138 = " \
