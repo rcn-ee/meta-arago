@@ -73,17 +73,9 @@ EXTRA_OEMAKE = " TARGET_ROOTDIR=${STAGING_DIR_HOST} \
                  TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \
 "
 
-do_configure() {
-    sed "s|arm-linux-gnueabihf-g++|${CXX}|g" -i make.inc
-}
-
 export XDC_DIR = "${XDC_INSTALL_DIR}/packages"
 export IPC_DIR = "${IPC_INSTALL_DIR}/packages"
 export BIOS_DIR = "${SYSBIOS_INSTALL_DIR}/packages"
-
-do_compile() {
-    oe_runmake CC="${CC}" CPP="${CPP}" CXX="${CXX}"
-}
 
 do_install() {
     install -d ${D}${datadir}/ti/examples/opencl
