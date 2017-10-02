@@ -1,4 +1,4 @@
-PR_append = ".arago4"
+PR_append = ".arago5"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
@@ -14,9 +14,6 @@ SRC_URI_append = " \
     file://30-wlan.network \
     file://60-usb.network \
     file://sync-clocks.service \
-    file://0001-libsystemd-network-ipv4ll-probe-conflict-counter.patch \
-    file://0002-libsystemd-network-sd-ipv4ll-Wrapper-to-restart-addr.patch \
-    file://0003-libsystemd-network-sd-ipv4ll-acquire-new-address-aft.patch \
 "
 
 do_install_append() {
