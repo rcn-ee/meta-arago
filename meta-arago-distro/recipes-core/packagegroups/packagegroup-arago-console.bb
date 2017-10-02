@@ -61,7 +61,7 @@ ARAGO_UTILS = "\
 
 ARAGO_SDK_PREREQ = "\
     zlib \
-    libpng12 \
+    libpng \
     jpeg \
     jpeg-tools \
     freetype \
