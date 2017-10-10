@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r16"
+PR = "r18"
 
 inherit packagegroup
 
@@ -23,7 +23,12 @@ GRAPHICS_RDEPENDS_append_omap-a15 = "\
     ti-gc320-libs  \
 "
 
+GRAPHICS_DISPLAY_UTILS = "\
+    glsdk-util-scripts \
+"
+
 RDEPENDS_${PN} = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', "${GRAPHICS_WESTON}", '', d)} \
     ${GRAPHICS_RDEPENDS} \
+    ${GRAPHICS_DISPLAY_UTILS} \
 "
