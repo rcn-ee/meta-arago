@@ -10,8 +10,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools pkgconfig
 
-PR = "r5"
-SRCREV = "0fa27a594fd3290644f5666eac62dc570f26f866"
+PR = "r6"
+SRCREV = "24e94f583119896b3ab8ecc7b35c7de3160dcb1f"
 
 SRC_URI = "git://git.ti.com/glsdk/kmscube.git;protocol=git"
 
