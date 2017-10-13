@@ -18,6 +18,8 @@ inherit allarch update-rc.d systemd
 
 SYSTEMD_SERVICE_${PN} = "bt-enable.service"
 
+RDEPENDS_${PN} += "bash"
+
 do_install () {
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 bt-enable.sh ${D}${sysconfdir}/init.d/
