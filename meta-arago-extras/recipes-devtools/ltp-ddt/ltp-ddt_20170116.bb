@@ -10,7 +10,7 @@ PV_append = "+git${SRCPV}"
 PROVIDES += "ltp"
 DEPENDS += "zip-native alsa-lib libaio"
 
-RDEPENDS_${PN} += "pm-qa serialcheck"
+RDEPENDS_${PN} += "pm-qa serialcheck gawk perl python3-core"
 
 inherit autotools-brokensep
 
