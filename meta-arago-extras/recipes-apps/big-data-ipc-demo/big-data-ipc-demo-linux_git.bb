@@ -8,6 +8,7 @@ DEPENDS = "ti-ipc \
            ti-sysbios \
            ti-ipc-rtos \
            cmem \
+           ti-cgt6x-native \
 "
 
 EXTRA_OEMAKE = "\
