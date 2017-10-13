@@ -18,6 +18,7 @@ SRCREV = "a2617f07fdbf19df6ca7333ffbecec1e3e71792c"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
+SRC_URI += "file://0001-dirtyc0w-Include-stdint.h.patch"
 
 S = "${WORKDIR}/git"
 
