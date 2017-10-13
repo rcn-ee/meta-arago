@@ -73,7 +73,7 @@ PACKAGES += " ${PN}-arm \
 "
 
 # Make sure app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images"
+RDEPENDS_${PN} += "matrix-gui-apps-images bash"
 
 # Add the files for each submenu package
 FILES_${PN}-arm = "${MATRIX_APP_DIR}/arm_submenu/*"
