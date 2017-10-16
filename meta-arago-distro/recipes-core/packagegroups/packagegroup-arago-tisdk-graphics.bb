@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r18"
+PR = "r19"
 
 inherit packagegroup
 
@@ -22,6 +22,13 @@ GRAPHICS_RDEPENDS = "\
     glmark2 \
 "
 
+GRAPHICS_DISPLAY_UTILS = "\
+"
+
+GRAPHICS_DISPLAY_UTILS_append_omap-a15  = "\
+    glsdk-util-scripts \
+"
+
 GRAPHICS_RDEPENDS_append_omap-a15 = "\
     ti-gc320-tests \
     ti-gc320-driver \
@@ -31,4 +38,5 @@ GRAPHICS_RDEPENDS_append_omap-a15 = "\
 RDEPENDS_${PN} = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', "${GRAPHICS_WAYLAND}", '', d)} \
     ${GRAPHICS_RDEPENDS} \
+    ${GRAPHICS_DISPLAY_UTILS} \
 "
