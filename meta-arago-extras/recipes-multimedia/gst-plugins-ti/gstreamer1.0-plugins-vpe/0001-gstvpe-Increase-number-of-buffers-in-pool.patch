@@ -1,0 +1,30 @@
+From 4fe4beaa1498e27878bf04020aef0099c17f2262 Mon Sep 17 00:00:00 2001
+From: Pooja Prajod <a0132412@ti.com>
+Date: Mon, 29 May 2017 14:21:03 +0530
+Subject: [PATCH 3/3] gstvpe: Increase number of buffers in pool
+
+The number of buffers in pool calculation has been
+changed in ducati decoder as part of bug fix.
+Make the change in vpe to match the calculation.
+
+Signed-off-by: Pooja Prajod <a0132412@ti.com>
+---
+ src/gstvpe.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/gstvpe.c b/src/gstvpe.c
+index aab3af1..d795d4c 100644
+--- a/src/gstvpe.c
++++ b/src/gstvpe.c
+@@ -556,7 +556,7 @@ gst_vpe_init_input_bufs (GstVpe * self, GstCaps * input_caps)
+   if (self->num_input_buffers) {
+     min_num_input_buffers = self->num_input_buffers;
+   } else if (self->input_max_ref_frames) {
+-    min_num_input_buffers = MAX (4, self->input_max_ref_frames);
++    min_num_input_buffers = MAX (6, self->input_max_ref_frames);
+   } else {
+     min_num_input_buffers = DEFAULT_NUM_INBUFS;
+   }
+-- 
+1.9.1
+
