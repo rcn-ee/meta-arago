@@ -36,7 +36,7 @@ MULTIMEDIA_append_omap5-evm = " \
 ACCEL_FW = ""
 
 ACCEL_FW_append_am57xx-evm = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw dspdce-fw', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
 "
 
 ACCEL_FW_append_omap5-evm = " \
@@ -44,7 +44,7 @@ ACCEL_FW_append_omap5-evm = " \
 "
 
 ACCEL_FW_append_dra7xx-evm = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw dspdce-fw', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
     vis \
 "
 
