@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r28"
+PR = "r29"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
@@ -14,7 +14,7 @@ RDEPENDS_${PN} += "pm-qa serialcheck gawk perl python3-core"
 
 inherit autotools-brokensep
 
-SRCREV = "10bd2c40c21569b2ce6f47a7e3ad874655a7c310"
+SRCREV = "ea64df36bc1f411bdcd20bf4057206f9e0cb7e52"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
