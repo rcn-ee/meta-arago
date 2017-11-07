@@ -56,3 +56,4 @@ do_install () {
 }
 
 FILES_${PN} += "setup.sh"
+RDEPENDS_${PN} += "bash"
