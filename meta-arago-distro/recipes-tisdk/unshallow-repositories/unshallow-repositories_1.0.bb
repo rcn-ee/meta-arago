@@ -13,3 +13,4 @@ do_install () {
 }
 
 FILES_${PN} = "/*"
+RDEPENDS_${PN} += "bash"
