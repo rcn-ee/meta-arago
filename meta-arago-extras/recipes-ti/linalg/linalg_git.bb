@@ -23,3 +23,5 @@ FILES_${PN}-dev += "${LINALG_INSTALL_DIR_RECIPE}"
 
 INSANE_SKIP_${PN}-dev = "arch staticdev"
 ALLOW_EMPTY_${PN} = "1"
+
+RDEPENDS_${PN}-dev += "bash perl"
