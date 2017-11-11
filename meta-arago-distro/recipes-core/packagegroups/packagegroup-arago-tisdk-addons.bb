@@ -10,6 +10,10 @@ PACKAGES =+ "${PN}-extra"
 
 #    dt
 
+# Disable due to gcc 7.2 failure in pybind11
+#    kms++
+#    kms++-python
+
 UTILS = " \
     am-sysinfo \
     gdbserver \
@@ -21,8 +25,6 @@ UTILS = " \
     openssh-sftp-server \
     ptpd \
     libdrm-kms \
-    kms++ \
-    kms++-python \
     ${@bb.utils.contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
     stream \
     strongswan \
