@@ -1,17 +1,14 @@
-From c245063217c7c27c3b324c1faba3b69b50c50fd1 Mon Sep 17 00:00:00 2001
+From cd61c6eec1fc9d86484d529bfe42da7a00a1534a Mon Sep 17 00:00:00 2001
 From: Murali Karicheri <m-karicheri2@ti.com>
 Date: Wed, 12 Apr 2017 16:23:37 -0400
-Subject: [PATCH 2/2] add support for prp similar to hsr
+Subject: [PATCH] add support for prp similar to hsr
 
 prp protocol is similar to hsr in many aspects and this patch add a
 command type prp to create prp interface using two slave interfaces
 similar to hsr
 
 Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
-
-Conflicts:
-	include/linux/if_link.h
-	ip/Makefile
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
  include/linux/if_link.h |  14 ++++-
  ip/Makefile             |   2 +-
@@ -20,10 +17,10 @@ Conflicts:
  create mode 100644 ip/iplink_prp.c
 
 diff --git a/include/linux/if_link.h b/include/linux/if_link.h
-index 20965c9..6b9b59b 100644
+index b0bdbd6..41c1e91 100644
 --- a/include/linux/if_link.h
 +++ b/include/linux/if_link.h
-@@ -810,7 +810,6 @@ enum {
+@@ -814,7 +814,6 @@ enum {
  
  
  /* HSR section */
@@ -31,7 +28,7 @@ index 20965c9..6b9b59b 100644
  enum {
  	IFLA_HSR_UNSPEC,
  	IFLA_HSR_SLAVE1,
-@@ -821,7 +820,6 @@ enum {
+@@ -825,7 +824,6 @@ enum {
  	IFLA_HSR_VERSION,		/* HSR version */
  	__IFLA_HSR_MAX,
  };
@@ -39,7 +36,7 @@ index 20965c9..6b9b59b 100644
  #define IFLA_HSR_MAX (__IFLA_HSR_MAX - 1)
  
  /* STATS section */
-@@ -881,4 +879,16 @@ enum {
+@@ -890,4 +888,16 @@ enum {
  
  #define IFLA_XDP_MAX (__IFLA_XDP_MAX - 1)
  
@@ -57,18 +54,18 @@ index 20965c9..6b9b59b 100644
 +
  #endif /* _LINUX_IF_LINK_H */
 diff --git a/ip/Makefile b/ip/Makefile
-index 86c8cdc..95f0fa5 100644
+index 035d42c..9836e64 100644
 --- a/ip/Makefile
 +++ b/ip/Makefile
-@@ -6,7 +6,7 @@ IPOBJ=ip.o ipaddress.o ipaddrlabel.o iproute.o iprule.o ipnetns.o \
+@@ -7,7 +7,7 @@ IPOBJ=ip.o ipaddress.o ipaddrlabel.o iproute.o iprule.o ipnetns.o \
      iplink_macvlan.o ipl2tp.o link_vti.o link_vti6.o \
      iplink_vxlan.o tcp_metrics.o iplink_ipoib.o ipnetconf.o link_ip6tnl.o \
      link_iptnl.o link_gre6.o iplink_bond.o iplink_bond_slave.o iplink_hsr.o \
 -    iplink_bridge.o iplink_bridge_slave.o ipfou.o iplink_ipvlan.o \
 +    iplink_prp.o iplink_bridge.o iplink_bridge_slave.o ipfou.o iplink_ipvlan.o \
-     iplink_geneve.o iplink_vrf.o iproute_lwtunnel.o ipmacsec.o ipila.o
+     iplink_geneve.o iplink_vrf.o iproute_lwtunnel.o ipmacsec.o ipila.o \
+     ipvrf.o iplink_xstats.o
  
- RTMONOBJ=rtmon.o
 diff --git a/ip/iplink_prp.c b/ip/iplink_prp.c
 new file mode 100644
 index 0000000..c1e5a3b
@@ -217,5 +214,5 @@ index 0000000..c1e5a3b
 +	.print_help	= prp_print_help,
 +};
 -- 
-1.9.1
+2.7.4
 
