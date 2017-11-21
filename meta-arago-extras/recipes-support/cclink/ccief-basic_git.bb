@@ -3,13 +3,13 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://CCIEF-BASIC_Master/library/include/SLMP.h;beginline=1;endline=34;md5=9bcca1b46fb3c83966c242e5afa3c352"
 
 PV = "1.0"
-PR = "r0"
+PR = "r1"
 
 CCIEF-BASIC_GIT_URI = "git://git.ti.com/processor-sdk/cclink.git"
 CCIEF-BASIC_GIT_PROTOCOL = "git"
 CCIEF-BASIC_GIT_BRANCH = "master"
 
-CCIEF-BASIC_SRCREV = "8b4f9aea6550ff563d21ff3979aa6e7cdc708998"
+CCIEF-BASIC_SRCREV = "ec2a42e61c85c6a5e858438c590b052f2e780d6f"
 
 BRANCH = "${CCIEF-BASIC_GIT_BRANCH}"
 SRC_URI = "${CCIEF-BASIC_GIT_URI};protocol=${CCIEF-BASIC_GIT_PROTOCOL};branch=${BRANCH}"
