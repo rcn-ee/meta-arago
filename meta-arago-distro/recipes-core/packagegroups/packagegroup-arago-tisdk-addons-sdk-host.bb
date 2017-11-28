@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r31"
+PR = "r32"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -51,6 +51,7 @@ EXTRA_LIBS_append_ti33x = " \
 "
 
 EXTRA_LIBS_append_ti43x = " \
+    cmem-mod-src \
     uio-module-drv-src \
 "
 

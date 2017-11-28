@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r37"
+PR = "r38"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -127,6 +127,10 @@ UTILS_append_dra7xx = " can-utils-dev \
 UTILS_append_k2g = " can-utils-dev"
 
 EXTRA_LIBS = ""
+EXTRA_LIBS_append_ti43x = "\
+    cmem-dev \
+    cmem-staticdev \
+"
 EXTRA_LIBS_append_omap-a15 = " cmem-dev"
 EXTRA_LIBS_append_dra7xx = " libulm-dev \
                              libulm-staticdev \

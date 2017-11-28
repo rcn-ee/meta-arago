@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r65"
+PR = "r66"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -107,6 +107,7 @@ EXTRA_LIBS_append_keystone = " \
 "
 
 EXTRA_LIBS_append_ti43x = " \
+    cmem \
     uio-module-drv \
 "
 
