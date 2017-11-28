@@ -50,7 +50,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r83"
+PR = "r84"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -101,6 +101,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            dual-camera-demo \
                            image-gallery \
                            ti-sgx-ddk-km \
+                           cmem-mod \
                            pru-icss \
                            barcode-roi \
                            uio-module-drv \
