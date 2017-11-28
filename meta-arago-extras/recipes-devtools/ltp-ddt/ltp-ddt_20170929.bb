@@ -4,25 +4,53 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r29"
+PR = "r0"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
-DEPENDS += "zip-native alsa-lib libaio"
+DEPENDS = "alsa-lib attr libaio libcap acl openssl zip-native"
 
-RDEPENDS_${PN} += "pm-qa serialcheck gawk perl python3-core"
+RDEPENDS_${PN} = "\
+    acl \
+    at \
+    attr \
+    bash \
+    cpio \
+    cronie \
+    curl \
+    e2fsprogs-mke2fs \
+    expect \
+    gawk \
+    gzip \
+    iproute2 \
+    ldd \
+    libaio \
+    logrotate \
+    perl \
+    pm-qa \
+    python-core \
+    serialcheck \
+    unzip \
+    util-linux \
+    which \
+"
 
 inherit autotools-brokensep
 
-SRCREV = "ea64df36bc1f411bdcd20bf4057206f9e0cb7e52"
+SRCREV = "feec63612a16bb48cd1da698ca794d25ff03bedc"
 BRANCH ?= "master"
 
-SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
-SRC_URI += "file://0001-dirtyc0w-Include-stdint.h.patch"
+SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
+    file://0003-Add-knob-to-control-tirpc-support.patch \
+    file://0001-dirtyc0w-Include-stdint.h.patch \
+"
 
 S = "${WORKDIR}/git"
 
 LTPROOT = "/opt/ltp"
+
+# disable TI RPC (Transport-Independent RPC) due to missing dependency
+EXTRA_OECONF += " --without-tirpc"
 
 EXTRA_OEMAKE_append = " \
     prefix=${LTPROOT} \
@@ -51,17 +79,15 @@ FILES_${PN}-dbg += " \
     ${LTPROOT}/testcases/realtime/*/*/.debug \
 "
 
-FILES_${PN}-staticdev += "${LTPROOT}/lib"
+FILES_${PN}-staticdev += "${LTPROOT}/lib ${LTPROOT}/lib/libmem.a ${LTPROOT}/testcases/data/nm01/lib.a"
 FILES_${PN} += "${LTPROOT}/*"
-
-# The makefiles make excessive use of make -C and several include testcases.mk
-# which triggers a build of the syscall header. To reproduce, build ltp,
-# then delete the header, then "make -j XX" and watch regen.sh run multiple
-# times. Its easier to generate this once here instead.
-do_compile_prepend () {
-    ( make -C ${B}/testcases/kernel include/linux_syscall_numbers.h )
-}
 
 do_install() {
     oe_runmake install
 }
+
+# Avoid file dependency scans, as LTP checks for things that may or may not
+# exist on the running system.  For instance it has specific checks for
+# csh and ksh which are not typically part of OpenEmbedded systems (but
+# can be added via additional layers.)
+SKIP_FILEDEPS_${PN} = '1'
