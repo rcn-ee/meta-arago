@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r3"
+PR = "r4"
 PV_append = "+git${SRCPV}"
 
 PROVIDES += "ltp"
@@ -42,7 +42,6 @@ BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
     file://0003-Add-knob-to-control-tirpc-support.patch \
-    file://0001-dirtyc0w-Include-stdint.h.patch \
 "
 
 S = "${WORKDIR}/git"
