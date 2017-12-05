@@ -1,9 +1,9 @@
 SUMMARY = "Seamless operability between C++11 and Python"
 HOMEPAGE = "https://github.com/wjakob/pybind11"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1e9383cd3e97753d7dd6067d079519ea"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5399ae4d93a67b891d79b1e1cbfa4593"
 PR = "r0"
 
-SRC_URI = "https://pypi.python.org/packages/89/0b/f3a25633e49be5fae17ed2c7751c8106a08199db70e3c82e8cc043388ba9/pybind11-1.8.1.tar.gz"
-SRC_URI[md5sum] = "67845d8fd89a1c400dc7c61ccdee14d6"
-SRC_URI[sha256sum] = "358d4b7d8c38cd1dde66064178c6bbaaa2c479a44e67e642820fe0f329a4fff8"
+SRC_URI = "https://pypi.python.org/packages/c9/f7/fc9c44bf088d942c71b04646891034036a63e5bd00daff1c9a377e0f5a9f/pybind11-2.2.1.tar.gz"
+SRC_URI[md5sum] = "f454d8991f47befe56d4126df861fc96"
+SRC_URI[sha256sum] = "a96a924fae6e2721efbf24f47561284fd1ea0b655619a8621c4423036183b824"
