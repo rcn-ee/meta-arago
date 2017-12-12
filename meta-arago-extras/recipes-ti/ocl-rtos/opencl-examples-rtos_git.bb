@@ -5,7 +5,7 @@ LICENSE = "BSD"
 require recipes-ti/ocl/ocl.inc
 require recipes-ti/includes/arago-paths.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 COMPATIBLE_MACHINE = "omap-a15"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -33,7 +33,7 @@ OCL_EXAMPLE_LIST = " abort_exit \
                      sgemm \
                      edmamgr \
                      vecadd_openmp \
-		     vecadd_openmp_t \
+                     vecadd_openmp_t \
 "
 
 RELEASE_TARGET = ""
@@ -42,7 +42,6 @@ RELEASE_TARGET_omap-a15 = "am57xx"
 export BIOS_INSTALL_DIR = "${SYSBIOS_INSTALL_DIR}"
 export DESTDIR="${OCL_RTOS_INSTALL_DIR}/ti-opencl-rtos-${RELEASE_TARGET}-${PV}"
 export TI_OCL_INSTALL = "${DESTDIR}/packages/ti/opencl"
-
 
 python do_unpack_append() {
     import shutil
@@ -58,7 +57,6 @@ python do_unpack_append() {
     for example in d.getVar("OCL_EXAMPLE_LIST", True).split():
         shutil.copytree(os.path.join(git_dir,example), os.path.join(s,example))
 }
-
 
 EXTRA_OEMAKE = "BUILD_OS=SYS_BIOS \
                 TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \
@@ -83,15 +81,3 @@ do_install() {
         cp -rv ${B}/${ocl_example}/* ${DESTDIR}/examples/${ocl_example}
     done
 }
-
-CM_NAME = "OpenCL"
-CM_VERSION = "${PV}"
-CM_ROOT_DIR = "opencl_rtos_${RELEASE_TARGET}_${@'${PV}'.replace('.', '_')}"
-CM_DESCRIPTION = "OpenCL is a framework for writing programs that execute across heterogeneous systems"
-
-deltask do_create_srcipk
-addtask create_srcipk after do_install before do_package
-
-CREATE_SRCIPK = "1"
-SRCIPK_SRC_DIR = "${DESTDIR}"
-SRCIPK_INSTALL_DIR = "${CM_ROOT_DIR}"
