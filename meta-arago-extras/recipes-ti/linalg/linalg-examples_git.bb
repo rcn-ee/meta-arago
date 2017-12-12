@@ -32,7 +32,3 @@ FILES_${PN}-dbg += "\
 "
 
 INSANE_SKIP_${PN} = "arch ldflags textrel"
-
-CREATE_SRCIPK = "1"
-SRCIPK_INSTALL_DIR = "example-applications/${PN}-${PV}"
-SRCIPK_SRC_DIR = "${EXAMPLES_ROOT}"
