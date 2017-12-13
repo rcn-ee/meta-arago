@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 inherit packagegroup
 
@@ -15,11 +15,12 @@ GRAPHICS_WAYLAND_append_omap-a15 = "\
     chromium-wayland \
 "
 
+# Temporarily disable glmark2 due to gcc7/gles? issues
+#    glmark2
 GRAPHICS_RDEPENDS = "\
     libgbm \
     ti-sgx-ddk-km \
     ti-sgx-ddk-um \
-    glmark2 \
 "
 
 GRAPHICS_DISPLAY_UTILS = "\
