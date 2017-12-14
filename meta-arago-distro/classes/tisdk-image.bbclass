@@ -649,7 +649,7 @@ generate_sw_manifest() {
 
 ROOTFS_PREPROCESS_COMMAND += "tisdk_image_setup; "
 ROOTFS_POSTPROCESS_COMMAND += "tisdk_image_build; "
-IMAGE_PREPROCESS_COMMAND += "tisdk_image_cleanup; "
+IMAGE_PREPROCESS_COMMAND_append = "tisdk_image_cleanup; "
 
 # Create the SDK image.  We will re-use the rootfs_ipk_do_rootfs functionality
 # to install a given list of packages using opkg.
