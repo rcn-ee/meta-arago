@@ -22,4 +22,5 @@ do_configure() {
 
 do_install_append() {
 	rm -rf ${D}${localstatedir}/run
+	rm -rf ${D}${localstatedir}/lock
 }
