@@ -1,3 +1,5 @@
+TOOLCHAIN_PATH ??= "${STAGING_BINDIR_TOOLCHAIN}"
+
 def elt_get_bfd_version(d):
 	import subprocess,os,bb
 	if os.path.exists(d.getVar('TOOLCHAIN_PATH', d, 1)+'/bin/'+d.getVar('TARGET_PREFIX', d, 1)+'as'):
