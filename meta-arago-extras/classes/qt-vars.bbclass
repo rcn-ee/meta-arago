@@ -1,6 +1,6 @@
 # Class to define many useful variables that differ between Qt4 and Qt5
 
-QT_PROVIDER ?= "qt4e"
+QT_PROVIDER ?= "qt5"
 
 # Build-time dependencies - those are now separate modules in Qt5 and
 # require separate dependencies, unlike Qt4 that provides everything
