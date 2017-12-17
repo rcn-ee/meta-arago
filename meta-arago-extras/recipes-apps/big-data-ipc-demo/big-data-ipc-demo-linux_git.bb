@@ -4,7 +4,7 @@ require recipes-ti/includes/ti-paths.inc
 require big-data-ipc-demo.inc
 
 DEPENDS = "ti-ipc \
-           ti-xdctools \
+           ti-xdctools-native \
            ti-sysbios \
            ti-ipc-rtos \
            cmem \

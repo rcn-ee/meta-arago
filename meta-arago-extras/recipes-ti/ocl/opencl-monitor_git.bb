@@ -11,7 +11,7 @@ inherit cmake update-alternatives
 
 DEPENDS = " ti-llvm3.6-native \
             common-csl-ip-rtos \
-            ti-xdctools \
+            ti-xdctools-native \
             ti-ipc-rtos \
             ti-sysbios \
             ti-cgt6x-native \

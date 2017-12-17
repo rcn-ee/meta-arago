@@ -22,7 +22,7 @@ SRCREV = "01960b319783b29aacf12b2a72606b28d657b78e"
 DEPENDS = " \
 	common-csl-ip \
 	libarch \
-	ti-xdctools \
+	ti-xdctools-native \
 	ti-ipc-rtos \
 	ti-sysbios \
 	ti-cgt6x-native \
