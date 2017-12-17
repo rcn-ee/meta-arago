@@ -18,7 +18,7 @@ DEPENDS = "cmake-native \
            libloki \
            gcc-arm-none-eabi-native \
            ti-sysbios \
-           ti-xdctools \
+           ti-xdctools-native \
            ti-ipc-rtos  \
            opencl-monitor-rtos  \
            clocl-rtos-native  \
