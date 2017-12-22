@@ -73,7 +73,6 @@ do_compile() {
         -DARM_LLVM_DIR=${ARM_LLVM_DIR} \
         -DOCL_VERSION=${PV} ../git/host;
     make install
-    make -C eclipse install
     make -C packages install
     cd ..
 }
