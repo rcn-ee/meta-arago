@@ -12,7 +12,7 @@ S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 
-DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base opencl ti-cgt6x-native clocl-native imglib-c66x vlib-c66x"
+DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base opencl ti-cgt6x-native clocl-native imglib-c66x vlib-c66x gettext-native"
 
 inherit autotools-brokensep pkgconfig gettext
 
