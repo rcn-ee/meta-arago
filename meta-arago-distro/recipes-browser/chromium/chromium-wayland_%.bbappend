@@ -7,4 +7,4 @@ OZONE_WAYLAND_EXTRA_PATCHES = " \
 
 USEGOLD = ""
 
-DEPENDS += "gperf-native"
+DEPENDS += "gperf-native bison-native"
