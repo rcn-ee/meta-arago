@@ -18,6 +18,11 @@ PACKAGES =+ "libgcc-dev"
 
 RDEPENDS_${PN}-utils = ""
 
+RDEPENDS_tzcode += "bash"
+RDEPENDS_ldd += "bash"
+RDEPENDS_libasan += "libstdc++"
+RDEPENDS_libubsan += "libstdc++"
+
 PKGV = "${ELT_VER_LIBC}"
 PKGV_glibc-thread-db = "${ELT_VER_LIBC}"
 
