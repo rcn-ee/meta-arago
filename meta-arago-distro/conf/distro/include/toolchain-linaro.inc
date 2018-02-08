@@ -26,11 +26,6 @@ TOOLCHAIN_PREFIX := "${TOOLCHAIN_SYS}-"
 
 PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-linaro-toolchain"
 
-# Use specific libc headers instead of ones provided by toolchain
-PREFERRED_PROVIDER_linux-libc-headers_forcevariable = "linux-libc-headers"
-PREFERRED_PROVIDER_linux-libc-headers-dev_forcevariable = "linux-libc-headers"
-PREFERRED_PROVIDER_virtual/linux-libc-headers_forcevariable = "linux-libc-headers"
-
 PREFERRED_PROVIDER_gcc-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-linaro-sdk-toolchain"
 PREFERRED_PROVIDER_binutils-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-linaro-sdk-toolchain"
 #PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "external-linaro-sdk-toolchain"
