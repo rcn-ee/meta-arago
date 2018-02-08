@@ -88,6 +88,14 @@ FILES_libstdc++-dev += "\
 	/include/c++ \
 "
 
+FILES_${PN}-dbg_remove = "${base_libdir}/debug"
+
+FILES_libstdc++-dbg = "\
+	${base_libdir}/debug/libstdc++*.* \
+"
+
+PRIVATE_LIBS_libstdc++-dbg = "libstdc++.so.6"
+
 FILES_libgomp-dev += "\
 	${libdir}/gcc/${TARGET_SYS}/${ELT_VER_GCC}/include/omp.h \
 	${libdir}/gcc/${ELT_TARGET_SYS} \
