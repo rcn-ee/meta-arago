@@ -9,6 +9,8 @@ ALLOW_EMPTY_libgomp = "1"
 
 PR_append = ".arago36"
 
+PROVIDES += "virtual/libc-locale"
+
 RPROVIDES_${PN}-staticdev += "glibc-staticdev"
 
 PACKAGES := "${@oe_filter_out('libgcc-dev', '${PACKAGES}', d)}"
