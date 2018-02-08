@@ -2,16 +2,29 @@
 TCMODE = "external-linaro"
 TCLIBC = "external-linaro-toolchain"
 
-ELT_TARGET_SYS = "arm-linux-gnueabihf"
-ELT_TARGET_SYS_armv5 = "arm-linux-gnueabi"
-ELT_TARGET_SYS_aarch64 = "aarch64-linux-gnu"
+ELT_TARGET_SYS_ARMV5 ?= "arm-linux-gnueabi"
+ELT_TARGET_SYS_ARMV7 ?= "arm-linux-gnueabihf"
+ELT_TARGET_SYS_ARMV8 ?= "aarch64-linux-gnu"
+
+ELT_TARGET_SYS_arm = "${ELT_TARGET_SYS_ARMV5}"
+ELT_TARGET_SYS_armv7a = "${ELT_TARGET_SYS_ARMV7}"
+ELT_TARGET_SYS_aarch64 = "${ELT_TARGET_SYS_ARMV8}"
+
 TARGET_VENDOR = ""
 
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-linaro-toolchain"
+TOOLCHAIN_BASE ?= "/opt"
+TOOLCHAIN_PATH_ARMV5 ?= "${TOOLCHAIN_BASE}/gcc-linaro-7.2.1-ti2018.00-armv5-x86_64_${ELT_TARGET_SYS_ARMV5}"
+TOOLCHAIN_PATH_ARMV7 ?= "${TOOLCHAIN_BASE}/gcc-linaro-7.2.1-2017.11-x86_64_${ELT_TARGET_SYS_ARMV7}"
+TOOLCHAIN_PATH_ARMV8 ?= "${TOOLCHAIN_BASE}/gcc-linaro-7.2.1-2017.11-x86_64_${ELT_TARGET_SYS_ARMV8}"
 
-# Set some vars to help locate the toolchain automatically from PATH
+TOOLCHAIN_PATH_arm = "${TOOLCHAIN_PATH_ARMV5}"
+TOOLCHAIN_PATH_armv7a = "${TOOLCHAIN_PATH_ARMV7}"
+TOOLCHAIN_PATH_aarch64 = "${TOOLCHAIN_PATH_ARMV8}"
+
 TOOLCHAIN_SYS := "${ELT_TARGET_SYS}"
 TOOLCHAIN_PREFIX := "${TOOLCHAIN_SYS}-"
+
+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-linaro-toolchain"
 
 # Use specific libc headers instead of ones provided by toolchain
 PREFERRED_PROVIDER_linux-libc-headers_forcevariable = "linux-libc-headers"
