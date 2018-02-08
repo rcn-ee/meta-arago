@@ -26,8 +26,6 @@ PACKAGES =+ "libgcc-dev"
 
 DEPENDS += "${@base_conditional('PREFERRED_PROVIDER_linux-libc-headers', 'external-linaro-toolchain', '', 'linux-libc-headers', d)}"
 
-DEPENDS += "external-linaro-toolchain-cross-${TARGET_ARCH}"
-
 RDEPENDS_${PN}-utils = ""
 
 PKGV = "${ELT_VER_LIBC}"
