@@ -46,3 +46,5 @@ do_install() {
 FILES_${PN} += "\
     ${datadir}/ti/*  \
 "
+
+INSANE_SKIP_${PN} += "ldflags"
