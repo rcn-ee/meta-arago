@@ -247,7 +247,7 @@ do_install () {
 
     if [ "$?" == "0" ]
     then
-        sed -i -e "s/__KERNEL_DEVICETREE__/${KERNEL_DEVICETREE}/" ${D}/Makefile
+        sed -i -e "s|__KERNEL_DEVICETREE__|${KERNEL_DEVICETREE}|" ${D}/Makefile
         sed -i -e "s/__DTB_DEPEND__/linux-dtbs/" ${D}/Makefile
         sed -i -e "s/__DTB_DEPEND_INSTALL__/linux-dtbs_install/" ${D}/Makefile
     else
