@@ -32,7 +32,7 @@ EXTRA_OECMAKE += "-DDISTROFEATURE=ExcludePCL -DCMAKE_BUILD_TYPE=Debug -DPYTHON_I
 
 inherit pkgconfig cmake pythonnative python-dir
 
-DEPENDS = "libusb1 udev opencv boost python python-dev swig swig-native"
+DEPENDS = "libusb1 udev opencv boost python swig swig-native"
 
 RDEPENDS_${PN} = "libusb1 udev opencv"
 
