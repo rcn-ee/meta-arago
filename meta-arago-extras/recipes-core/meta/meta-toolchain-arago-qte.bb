@@ -1,6 +1,6 @@
 # Qt Embedded toolchain
 TOOLCHAIN_HOST_TASK ?= "nativesdk-packagegroup-arago-qte-toolchain-host"
-TOOLCHAIN_TARGET_TASK ?= "${@base_conditional('QT_PROVIDER', 'qt5', 'packagegroup-arago-qt5-toolchain-target', 'packagegroup-arago-qte-toolchain-target', d)}"
+TOOLCHAIN_TARGET_TASK ?= "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'packagegroup-arago-qt5-toolchain-target', 'packagegroup-arago-qte-toolchain-target', d)}"
 TOOLCHAIN_SUFFIX ?= "-qte-sdk"
 
 require meta-toolchain-arago.bb
@@ -8,11 +8,11 @@ require meta-toolchain-arago.bb
 PR = "r19"
 
 # There could be qt5, qt4e and qt4x11 providers, but we don't support qt4x11 for now
-QT_DIR_NAME = "${@base_conditional('QT_PROVIDER', 'qt5', 'qt5', 'qtopia', d)}"
-QT_BIN_PREFIX = "${@base_conditional('QT_PROVIDER', 'qt5', "${QT_DIR_NAME}/", '', d)}"
-QT_BIN_SUFFIX = "${@base_conditional('QT_PROVIDER', 'qt5', '', '4', d)}"
-QT_MKSPECS_LOCATION = "${@base_conditional('QT_PROVIDER', 'qt5', "${libdir}", "${datadir}", d)}"
-QT_MKSPECS_DIR = "${@base_conditional('QT_PROVIDER', 'qt5', "linux-oe-g++", "linux-gnueabi-oe-g++", d)}"
+QT_DIR_NAME = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'qt5', 'qtopia', d)}"
+QT_BIN_PREFIX = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT_DIR_NAME}/", '', d)}"
+QT_BIN_SUFFIX = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', '4', d)}"
+QT_MKSPECS_LOCATION = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${libdir}", "${datadir}", d)}"
+QT_MKSPECS_DIR = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', "linux-oe-g++", "linux-gnueabi-oe-g++", d)}"
 
 toolchain_create_sdk_env_script_append() {
 	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}/${QT_DIR_NAME}:$PATH' >> $script

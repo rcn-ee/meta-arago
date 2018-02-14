@@ -29,6 +29,6 @@ RDEPENDS_${PN} = "\
     ${UBOOT_SRC} \
     ${KERNEL_SRC} \
     ${BOOT_MONITOR} \
-    ${@base_conditional('KERNEL_SHADOW_CLONE_ENABLED','true','unshallow-repositories','',d)} \
+    ${@oe.utils.conditional('KERNEL_SHADOW_CLONE_ENABLED','true','unshallow-repositories','',d)} \
     tisdk-install \
 "

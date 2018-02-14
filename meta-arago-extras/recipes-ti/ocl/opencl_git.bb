@@ -68,7 +68,7 @@ do_install_append() {
 }
 
 SYSTEMD_SERVICE_${PN} = "ti-mct-daemon.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "${@base_conditional("RESERVE_CMEM", "1", "enable", "disable", d)}"
+SYSTEMD_AUTO_ENABLE_${PN} = "${@oe.utils.conditional("RESERVE_CMEM", "1", "enable", "disable", d)}"
 
 FILES_${PN}-runtime += "${bindir}"
 

@@ -13,7 +13,7 @@ PROVIDES += "virtual/libc-locale"
 
 RPROVIDES_${PN}-staticdev += "glibc-staticdev"
 
-PACKAGES := "${@oe_filter_out('libgcc-dev', '${PACKAGES}', d)}"
+PACKAGES := "${@oe.utils.str_filter_out('libgcc-dev', '${PACKAGES}', d)}"
 PACKAGES =+ "libgcc-dev"
 
 RDEPENDS_${PN}-utils = ""
@@ -26,7 +26,7 @@ RDEPENDS_libubsan += "libstdc++"
 PKGV = "${ELT_VER_LIBC}"
 PKGV_glibc-thread-db = "${ELT_VER_LIBC}"
 
-FILES_${PN} = "${libc_baselibs} ${libexecdir}/* ${@base_conditional('USE_LDCONFIG', '1', '${base_sbindir}/ldconfig ${sysconfdir}/ld.so.conf', '', d)}"
+FILES_${PN} = "${libc_baselibs} ${libexecdir}/* ${@oe.utils.conditional('USE_LDCONFIG', '1', '${base_sbindir}/ldconfig ${sysconfdir}/ld.so.conf', '', d)}"
 FILES_${PN} += "\
 	${libdir}/bin \
 	${libdir}/locale \

@@ -29,7 +29,7 @@ MULTIMEDIA_append_dra7xx = " \
 MULTIMEDIA_append_keystone = " barcode-roi-src"
 
 #Demo doesn't work on 3.14
-# ${@base_conditional('QT_PROVIDER', 'qt5', '', 'dual-camera-demo-src image-gallery-src', d)}
+# ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'dual-camera-demo-src image-gallery-src', d)}
 
 RDEPENDS_${PN} = "\
     ${MULTIMEDIA} \

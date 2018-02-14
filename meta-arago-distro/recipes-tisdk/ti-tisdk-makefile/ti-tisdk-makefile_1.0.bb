@@ -54,7 +54,7 @@ PR = "r84"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
-                        ${@base_conditional('QT_PROVIDER', 'qt5', '', 'qt-tstat', d)} \
+                        ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'qt-tstat', d)} \
 "
 
 MAKEFILES_MATRIX_GUI_keystone = ""
@@ -70,7 +70,7 @@ MAKEFILES_COMMON = "linux \
 MAKEFILES = ""
 
 # This example application should not be used when using non-SGX
-QUICK_PLAYGROUND = "${@base_conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','quick-playground','', d)}"
+QUICK_PLAYGROUND = "${@oe.utils.conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','quick-playground','', d)}"
 
 # Add device specific make targets
 
@@ -187,13 +187,13 @@ PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
 # If it's not defined at all, like for zImage case
 UBOOT_LOADADDRESS ?= "0"
 
-KERNEL_BUILD_CMDS = "${@base_conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
+KERNEL_BUILD_CMDS = "${@oe.utils.conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
 
 DEFCONFIG = "tisdk_${MACHINE}${ARAGO_KERNEL_SUFFIX}_defconfig"
 
 AMSDK_DEFCONFIG = "singlecore-omap2plus_defconfig"
 
-DEFCONFIG := "${@base_conditional('ARAGO_BRAND','amsdk','${AMSDK_DEFCONFIG}','${DEFCONFIG}',d)}"
+DEFCONFIG := "${@oe.utils.conditional('ARAGO_BRAND','amsdk','${AMSDK_DEFCONFIG}','${DEFCONFIG}',d)}"
 
 # This step will stitch together the final Makefile based on the supported
 # make targets.

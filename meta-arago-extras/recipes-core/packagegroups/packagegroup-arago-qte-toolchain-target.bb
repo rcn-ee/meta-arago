@@ -38,7 +38,7 @@ QT4_DEV = " \
         libqt-embeddedxmlpatterns4-dev \
         libqt-embeddedmultimedia4-dev \
         libqt-embeddeddeclarative4-dev \
-        ${@base_conditional('ARAGO_QT_PROVIDER', 'qt4-embedded-gles','${QT4_SGX_SUPPORT}', '', d)} \
+        ${@oe.utils.conditional('ARAGO_QT_PROVIDER', 'qt4-embedded-gles','${QT4_SGX_SUPPORT}', '', d)} \
 "
 
 QT5_DEV = " \
@@ -66,5 +66,5 @@ QT5_DEV = " \
 "
 
 RDEPENDS_${PN} += " \
-        ${@base_conditional('QT_PROVIDER', 'qt5', "${QT5_DEV}", "${QT4_DEV}", d)} \
+        ${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT5_DEV}", "${QT4_DEV}", d)} \
 "

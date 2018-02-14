@@ -9,7 +9,7 @@ inherit packagegroup
 QT4_DEMOS = "\
     qt4-embedded-examples \
     qt4-embedded-demos \
-    ${@base_conditional('ARAGO_QT_PROVIDER', 'qt4-embedded-gles', 'quick-playground', '', d)} \
+    ${@oe.utils.conditional('ARAGO_QT_PROVIDER', 'qt4-embedded-gles', 'quick-playground', '', d)} \
     qt-tstat \
 "
 
@@ -34,6 +34,6 @@ QT_DEMOS = "\
 
 RDEPENDS_${PN} = "\
     packagegroup-arago-qte \
-    ${@base_conditional('QT_PROVIDER', 'qt5', "${QT5_DEMOS}", "${QT4_DEMOS}", d)} \
+    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT5_DEMOS}", "${QT4_DEMOS}", d)} \
     ${QT_DEMOS} \
 "

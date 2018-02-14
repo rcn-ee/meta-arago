@@ -21,7 +21,7 @@ SRC_URI = "git://git.ti.com/sitara-linux/dual-camera-demo.git;protocol=git;branc
 
 S = "${WORKDIR}/git"
 
-DEMO_SCRIPT = "${@base_conditional('QT_PROVIDER', 'qt5', 'dual_camera_qt5.sh', 'dual_camera_qt4.sh', d)}"
+DEMO_SCRIPT = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'dual_camera_qt5.sh', 'dual_camera_qt4.sh', d)}"
 
 inherit qt-provider
 

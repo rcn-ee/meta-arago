@@ -24,5 +24,5 @@ RDEPENDS_${PN} = "\
     arago-feed-config \
     nfs-utils-client \
     cifs-utils \
-    ${@base_conditional('OPTEEMACHINE', 'ti', "${OPTEE_PKGS}", "", d)} \
+    ${@oe.utils.conditional('OPTEEMACHINE', 'ti', "${OPTEE_PKGS}", "", d)} \
 "

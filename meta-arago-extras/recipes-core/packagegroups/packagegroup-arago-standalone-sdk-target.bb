@@ -20,17 +20,17 @@ RDEPENDS_${PN} = "\
     curl-dev \
     i2c-tools-dev \
     freetype-dev \
-    ${@base_conditional('PREFERRED_PROVIDER_jpeg', 'libjpeg-turbo', 'libjpeg-turbo-dev', 'jpeg-dev', d)}  \
+    ${@oe.utils.conditional('PREFERRED_PROVIDER_jpeg', 'libjpeg-turbo', 'libjpeg-turbo-dev', 'jpeg-dev', d)}  \
     lzo-dev \
     opkg-dev \
     libpng-dev \
     readline-dev \
-    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'tslib-dev', d)} \
+    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'tslib-dev', d)} \
     libusb-compat-dev \
     libusb1-dev \
     zlib-dev \
     ncurses-dev \
     opkg-dev \
     util-linux-dev \
-    ${@base_conditional('TCMODE', 'external-linaro', 'libgomp-dev', '', d)} \
+    ${@oe.utils.conditional('TCMODE', 'external-linaro', 'libgomp-dev', '', d)} \
     "
