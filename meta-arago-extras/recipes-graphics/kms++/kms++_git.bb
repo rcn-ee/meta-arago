@@ -14,7 +14,7 @@ DEPENDS = "drm python3-pybind11"
 
 PACKAGES =+ "${PN}-python"
 
-RDEPENDS_${PN}-python += "python3-core python3-enum"
+RDEPENDS_${PN}-python += "python3-core"
 
 FILES_${PN}-python += "${libdir}/python*/site-packages"
 
