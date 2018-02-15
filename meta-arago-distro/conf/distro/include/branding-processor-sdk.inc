@@ -36,3 +36,7 @@ SRCIPK_CUSTOM_GIT_MESSAGE_pn-u-boot-ti-staging = "${SRCIPK_GIT_COMMIT_MESSAGE}"
 # Temporarily disable "mmip" machine feature for all SOCs while building
 # latest code base, until it is fixed for gstreamer 1.12
 MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('mmip', '')}"
+
+# Temporarily disable "sgx" machine feature for all SOCs while building
+# latest code base, until it is fixed for kernel 4.14
+MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('sgx', '')}"
