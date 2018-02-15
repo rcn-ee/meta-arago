@@ -1,6 +1,8 @@
 # Include file for common build settings for TI GStreamer plugins
 DEPENDS += "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad libdrm libdce"
 
+USE_NLS = "yes"
+
 inherit autotools-brokensep pkgconfig gettext
 
 INC_PR = "r2"
