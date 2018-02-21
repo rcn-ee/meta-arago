@@ -11,7 +11,7 @@ SRC_URI_append += "\
      file://setupEnv.sh \
 "
 
-SRCREV_opencv = "4458601eb2766461f2f9da0d2527ff25ecb20284"
+SRCREV_opencv = "9b88e8c746e531a1b4cc61e5235e4e747c319945"
 
 DEPENDS_remove_keystone = "qtbase"
 
