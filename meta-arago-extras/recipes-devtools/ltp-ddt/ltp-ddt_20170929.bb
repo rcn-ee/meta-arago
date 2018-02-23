@@ -33,6 +33,7 @@ RDEPENDS_${PN} = "\
     unzip \
     util-linux \
     which \
+    libgcc\
 "
 
 inherit autotools-brokensep
