@@ -6,7 +6,7 @@ LICENSE = "BSD"
 HOMEPAGE = "http://www.acme.com/software/thttpd/"
 PR ="r0"
 
-LIC_FILES_CHKSUM = "file://thttpd.c;beginline=1;endline=26;md5=0c5762c2c34dcbe9eb18815516502872"
+LIC_FILES_CHKSUM = "file://thttpd.c;beginline=1;endline=26;md5=525c6428ecff95f4e71d5b3c88a34fff"
 SRC_URI = "http://www.acme.com/software/thttpd/thttpd-${PV}.tar.gz \
 	   file://install.patch \
 	   file://acinclude.m4 \
@@ -39,5 +39,5 @@ do_install_append () {
 }
 
 
-SRC_URI[md5sum] = "156b249b3b0bcd48b06badd2db0d56c5"
-SRC_URI[sha256sum] = "07719b08b1cff6a21c08697a7bcb4395425b07ee753106262fb62a03a7d32360"
+SRC_URI[md5sum] = "f5747680740dfbf8fc73a4fd82c754bb"
+SRC_URI[sha256sum] = "8552f929d4ede26cb193411c1208168e169dda24ee9eb1da8f8da4f4f8e10328"
