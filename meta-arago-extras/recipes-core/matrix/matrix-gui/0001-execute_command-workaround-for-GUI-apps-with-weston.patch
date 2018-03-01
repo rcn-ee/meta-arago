@@ -1,27 +1,27 @@
-From 9169773b546cfea3c829b3c5e79c68c7979ceea4 Mon Sep 17 00:00:00 2001
-From: Jacob Stiffler <j-stiffler@ti.com>
-Date: Sat, 13 Aug 2016 13:27:30 -0400
+From 9647ddc10dc9424b1433db2f8184268523d829da Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Wed, 28 Feb 2018 12:20:32 -0500
 Subject: [PATCH] execute_command: workaround for GUI apps with weston
 
 * For all GUI apps, shutdown matrix before launching
   - This is needed since matrix is launched fullscreen, and another
     GUI app may get hidden behind matrix with no way to recover.
-* For MM and 3D apps, shutdown weston before launching
-  - These apps use KMS sink, which collides with weston.
+* For MM and 3D and null window apps, shutdown weston before launching
+  - These apps use KMS sink or DRM, which collides with weston
 
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
- execute_command.sh |   34 +++++++++++++++++++++++++++++++++-
- generate.php       |    2 ++
- run_script.php     |    2 +-
- 3 files changed, 36 insertions(+), 2 deletions(-)
+ execute_command.sh | 39 ++++++++++++++++++++++++++++++++++++++-
+ generate.php       |  4 ++++
+ run_script.php     | 10 +++++++++-
+ 3 files changed, 51 insertions(+), 2 deletions(-)
 
 diff --git a/execute_command.sh b/execute_command.sh
-index 2be1278..b8d98a5 100755
+index 325dcb9..180e71f 100755
 --- a/execute_command.sh
 +++ b/execute_command.sh
-@@ -59,7 +59,17 @@ do
+@@ -63,7 +63,22 @@ do
  	outputfilename=$item 
    fi
  
@@ -36,11 +36,16 @@ index 2be1278..b8d98a5 100755
 +    category=$item
 +  fi
 +
-+  if [ $i -gt 3 ]
++  if [ $i -eq 4 ]
++  then
++    win_type=$item
++  fi
++
++  if [ $i -gt 4 ]
    then
      touch "lock/"$item
  
-@@ -68,10 +78,32 @@ do
+@@ -72,10 +87,32 @@ do
  
  done
  
@@ -48,7 +53,7 @@ index 2be1278..b8d98a5 100755
 +then
 +  /etc/init.d/matrix-gui-2.0 stop
 +
-+  if [ $category == 3d -o $category == multimedia -o $category == touch ]
++  if [ $category == 3d -o $category == multimedia -o $category == touch -o $win_type == null ]
 +  then
 +    /etc/init.d/weston stop
 +    sleep 1
@@ -61,7 +66,7 @@ index 2be1278..b8d98a5 100755
  
 +if [ $program_type == gui ]
 +then
-+  if [ $category == 3d -o $category == multimedia -o $category == touch ]
++  if [ $category == 3d -o $category == multimedia -o $category == touch -o $win_type == null ]
 +  then
 +    /etc/init.d/weston start
 +    sleep 1
@@ -74,31 +79,48 @@ index 2be1278..b8d98a5 100755
  echo "_?!!MATRIX_SCRIPT_COMPLETED!!?_" >> "tmp/"$outputfilename
  
 diff --git a/generate.php b/generate.php
-index 10cfed4..7c08282 100644
+index 10cfed4..cd88dd3 100644
 --- a/generate.php
 +++ b/generate.php
-@@ -105,6 +105,8 @@ for($x = 0;$x<count($contents)&&strlen($contents[$x])>0;$x++)
+@@ -105,6 +105,10 @@ for($x = 0;$x<count($contents)&&strlen($contents[$x])>0;$x++)
  		$top["Description_Link"] = get_contents("X-MATRIX-Description",$dotdesktop);
  
  		$top["Lock"] = get_contents("X-MATRIX-LOCK",$dotdesktop);
 +
 +		$top["Category"] = get_contents("Categories",$dotdesktop);
++
++		$top["WinType"] = get_contents("WinType",$dotdesktop);
  	} 
  
  	if($category == -1)
 diff --git a/run_script.php b/run_script.php
-index 9dd7a10..1481b17 100644
+index 9dd7a10..d34a286 100644
 --- a/run_script.php
 +++ b/run_script.php
-@@ -91,7 +91,7 @@ if($currently_locked==false)
+@@ -55,6 +55,7 @@ $submenu = isset($_GET["submenu"]) == true ? $_GET["submenu"] : "main_menu" ;
+ $found_app = get_application($var,$submenu,$_GET["app"]);
+ 
+ $lock_list = $found_app["Lock"];
++$win_type = $found_app["WinType"];
+ 
+ //Verify that there is a lock specified for this application
+ if($lock_list != -1 )
+@@ -91,7 +92,14 @@ if($currently_locked==false)
  	$random_string = strval(rand());
  	$random_string .= strval(rand());
  
 -	$script_command = "./execute_command.sh \"".addslashes($script_link). "\" ".$random_string.".txt ".$lock_list;
-+	$script_command = "./execute_command.sh \"".addslashes($script_link). "\" ".$random_string.".txt \"".$found_app["ProgramType"]."\" \"".$found_app["Category"]."\" ".$lock_list;
++        if($win_type != -1 )
++	{
++		$script_command = "./execute_command.sh \"".addslashes($script_link). "\" ".$random_string.".txt \"".$found_app["ProgramType"]."\" \"".$found_app["Category"]."\" \"".$found_app["WinType"]."\"  ".$lock_list;
++	}
++	else
++	{
++		$script_command = "./execute_command.sh \"".addslashes($script_link). "\" ".$random_string.".txt \"".$found_app["ProgramType"]."\" \"".$found_app["Category"]."\"  \"wayland\" ".$lock_list;
++	}
  
  	$last_line = system($script_command." > /dev/null 2>/dev/null & ", $retval);
  }
 -- 
-1.7.9.5
+1.9.1
 
