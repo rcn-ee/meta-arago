@@ -50,11 +50,11 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r84"
+PR = "r85"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
-                        ${@base_conditional('QT_PROVIDER', 'qt5', '', 'qt-tstat', d)} \
+                        qt-tstat \
 "
 
 MAKEFILES_MATRIX_GUI_keystone = ""
