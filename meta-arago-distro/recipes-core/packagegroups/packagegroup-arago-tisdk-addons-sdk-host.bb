@@ -57,10 +57,11 @@ EXTRA_LIBS_append_ti43x = " \
 
 # Disable ipsecmgr due to libnl and xfrm conflict
 #    ipsecmgr-mod-src
+# Disable hplib-mod-srv due to K4.14 breakage
+#    hplib-mod-src
 EXTRA_LIBS_append_keystone = " \
     cmem-mod-src \
     uio-module-drv-src \
-    hplib-mod-src \
 "
 
 EXTRA_LIBS_append_k2hk = " \

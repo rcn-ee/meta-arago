@@ -73,20 +73,26 @@ EXTRA_LIBS_append_keystone = "\
 # Disable netapi due to libnl and xfrm conflict
 #	netapi-dev
 #	netapi-staticdev
+# Disable hplib-dev/staticdev,nwal-lld due to hplib-mod breakage against K4.14
+#	hplib-dev
+#	hplib-staticdev
+#	nwal-lld-dev
+#	nwal-lld-staticdev
 EXTRA_LIBS_append_k2l-evm = "\
 	dfe-lld-dev \
 	dfe-lld-staticdev \
 	iqn2-lld-dev \
 	iqn2-lld-staticdev \
-	hplib-dev \
-	hplib-staticdev \
-	nwal-lld-dev \
-	nwal-lld-staticdev \
 	"
 
 # Disable netapi due to libnl and xfrm conflict
 #	netapi-dev
 #	netapi-staticdev
+# Disable hplib-dev/staticdev,nwal-lld due to hplib-mod breakage against K4.14
+#	hplib-dev
+#	hplib-staticdev
+#	nwal-lld-dev
+#	nwal-lld-staticdev
 EXTRA_LIBS_append_k2hk = "\
 	srio-lld-dev \
 	srio-lld-staticdev \
@@ -96,10 +102,6 @@ EXTRA_LIBS_append_k2hk = "\
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
 	hyplnk-lld-staticdev \
-	hplib-dev \
-	hplib-staticdev \
-	nwal-lld-dev \
-	nwal-lld-staticdev \
 	aif2-lld-dev \
 	aif2-lld-staticdev \
 	"
@@ -107,15 +109,16 @@ EXTRA_LIBS_append_k2hk = "\
 # Disable netapi due to libnl and xfrm conflict
 #	netapi-dev
 #	netapi-staticdev
+# Disable hplib-dev/staticdev,nwal-lld due to hplib-mod breakage against K4.14
+#	hplib-dev
+#	hplib-staticdev
+#	nwal-lld-dev
+#	nwal-lld-staticdev
 EXTRA_LIBS_append_k2e = "\
 	mmap-lld \
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
 	hyplnk-lld-staticdev \
-	hplib-dev \
-	hplib-staticdev \
-	nwal-lld-dev \
-	nwal-lld-staticdev \
 "
 
 UTILS_append_ti33x = " can-utils-dev"
