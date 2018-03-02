@@ -17,7 +17,7 @@ require recipes-core/llvm/llvm.inc
 
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=47e311aa9caedd1b3abf098bd7814d1d"
 
-DEPENDS += "libxml2"
+DEPENDS += "libxml2 groff-native"
 DEPENDS_append_class-target = " valgrind"
 
 LLVM_DIR = "ti-llvm${PV}"
