@@ -81,6 +81,10 @@ ARAGO_SECURE_STORAGE = "\
     engine-pkcs11 \
     "
 
+# ipsecmgr has been disabled for a while
+# disable ipsecmgr-mod,hplib-mod due to K4.14 API changes
+#    ipsecmgr-mod
+#    hplib-mod
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
     uio-module-drv \
@@ -99,10 +103,8 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     rm-lld \
     pa-lld \
     qmss-lld \
-    hplib-mod \
     pktlib \
     cppi-lld \
-    ipsecmgr-mod \
     k2-fw-initrd \
     parse-ip \
     "
@@ -119,33 +121,36 @@ ARAGO_TI_PKGS_append_keystone = " ${ARAGO_TI_KEYSTONE_PKGS}"
 # Disable netapi due to libnl and xfrm conflict
 #    netapi
 #    netapi-test
+# Disable hplib,nwal-lld as hplib-mod is broken against K4.14
+#    hplib
+#    nwal-lld
 ARAGO_TI_PKGS_append_k2l-evm = "\
     dfe-lld \
     iqn2-lld \
-    hplib \
-    nwal-lld \
     "
 
 # Disable netapi due to libnl and xfrm conflict
 #    netapi
 #    netapi-test
+# Disable hplib,nwal-lld as hplib-mod is broken against K4.14
+#    hplib
+#    nwal-lld
 ARAGO_TI_PKGS_append_k2hk = "\
     srio-lld \
     mmap-lld \
     hyplnk-lld \
     aif2-lld \
-    hplib \
-    nwal-lld \
     "
 
 # Disable netapi due to libnl and xfrm conflict
 #    netapi
 #    netapi-test
+# Disable hplib,nwal-lld as hplib-mod is broken against K4.14
+#    hplib
+#    nwal-lld
 ARAGO_TI_PKGS_append_k2e = "\
     mmap-lld \
     hyplnk-lld \
-    hplib \
-    nwal-lld \
     "
 
 #    recovery-kernel

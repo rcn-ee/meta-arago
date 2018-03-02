@@ -51,6 +51,10 @@ TEST_ADDONS_TI_append_keystone = " \
 
 # Disable netapi due to libnl and xfrm conflict
 #    netapi-test
+# Disable hplib-test,nwal-lld due to hplib-mod breakage against K4.14
+#    hplib-test
+#    nwal-lld-test
+#    nwal-lld
 TEST_ADDONS_TI_append_k2hk = " \
     srio-lld-test \
     ipc-transport-srio-test \
@@ -58,30 +62,29 @@ TEST_ADDONS_TI_append_k2hk = " \
     hyplnk-lld-test \
     mmap-lld-test \
     aif2-lld-test \
-    nwal-lld-test \
-    hplib-test \
-    nwal-lld \
     "
 
 # Disable netapi due to libnl and xfrm conflict
 #    netapi-test
+# Disable hplib-test,nwal-lld due to hplib-mod breakage against K4.14
+#    hplib-test
+#    nwal-lld-test
+#    nwal-lld
 TEST_ADDONS_TI_append_k2l-evm = " \
     dfe-lld-test \
     iqn2-lld-test \
-    nwal-lld-test \
-    hplib-test \
-    nwal-lld \
     ipc-transport-qmss-test \
     "
 
 # Disable netapi due to libnl and xfrm conflict
 #    netapi-test
+# Disable hplib-test,nwal-lld due to hplib-mod breakage against K4.14
+#    hplib-test
+#    nwal-lld-test
+#    nwal-lld
 TEST_ADDONS_TI_append_k2e = " \
     mmap-lld-test \
     hyplnk-lld-test \
-    nwal-lld-test \
-    hplib-test \
-    nwal-lld \
     ipc-transport-qmss-test \
     "
 
