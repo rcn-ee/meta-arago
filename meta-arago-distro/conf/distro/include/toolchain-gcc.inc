@@ -15,7 +15,7 @@ PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "gdb-cross-can
 # Set Cross and SDK toolchain preferences
 SDKGCCVERSION ?= "7.3%"
 SDKBINUVERSION ?= "2.30%"
-SDKGLIBCVERSION ?= "2.26%"
+SDKGLIBCVERSION ?= "2.27%"
 SDKLINUXLIBCVERSION ?= "4.9%"
 
 PREFERRED_VERSION_gcc-crosssdk-${SDK_SYS} ?= "${SDKGCCVERSION}"
@@ -33,8 +33,8 @@ PREFERRED_VERSION_nativesdk-glibc-initial ?= "${SDKGLIBCVERSION}"
 # Can be overwritten globally, if needed
 GCCVERSION ?= "7.3%"
 BINUVERSION ?= "2.30%"
-GLIBCVERSION ?= "2.26%"
-GLIBCINITVERSION ?= "2.26%"
+GLIBCVERSION ?= "2.27%"
+GLIBCINITVERSION ?= "2.27%"
 LINUXLIBCVERSION ?= "4.9%"
 
 PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
