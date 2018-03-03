@@ -23,7 +23,7 @@ SRC_URI = "git://git.ti.com/apps/thermostat-demo.git;protocol=git;branch=${BRANC
 
 S = "${WORKDIR}/git/"
 
-DESKTOP_FILE = "${@base_conditional('QT_PROVIDER', 'qt5', 'thermostat_demo_qt5.desktop', 'thermostat_demo.desktop', d)}"
+DESKTOP_FILE = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'thermostat_demo_qt5.desktop', 'thermostat_demo.desktop', d)}"
 
 
 do_install() {
@@ -36,6 +36,6 @@ do_install() {
 
 PACKAGES += "matrix-gui-thermostat-demo"
 
-RDEPENDS_matrix-gui-thermostat-demo += "matrix-gui-apps-images ${@base_conditional('QT_PROVIDER', 'qt5', 'matrix-gui-submenus-qt5', 'matrix-gui-submenus-qt4', d)}"
+RDEPENDS_matrix-gui-thermostat-demo += "matrix-gui-apps-images ${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'matrix-gui-submenus-qt5', 'matrix-gui-submenus-qt4', d)}"
 
 FILES_matrix-gui-thermostat-demo += "${MATRIX_APP_DIR}/*"
