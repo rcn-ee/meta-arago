@@ -17,7 +17,7 @@ PR = "r10"
 DEPENDS += "${QT_DEPENDS_SVG} ${QT_DEPENDS_SCRIPT}"
 
 BRANCH ?= "master"
-SRCREV = "3429dfc4333f11b9022e3aa6fd2850c5093777f9"
+SRCREV = "665bff9a7bc0dbf82f9d6a58ff2778c03fe04fd1"
 
 SRC_URI = "git://git.ti.com/apps/thermostat-demo.git;protocol=git;branch=${BRANCH}"
 
