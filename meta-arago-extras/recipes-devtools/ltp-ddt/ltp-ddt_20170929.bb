@@ -34,6 +34,7 @@ RDEPENDS_${PN} = "\
     util-linux \
     which \
     libgcc\
+    memtester\
 "
 
 inherit autotools-brokensep
