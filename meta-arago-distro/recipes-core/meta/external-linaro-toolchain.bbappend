@@ -3,8 +3,8 @@
 # on linux-libc-headers creates circular dependencies now. Mostly
 # duplication of code from corresponding recipe.
 
-BRANCH = "ti-lsk-linux-4.9.y"
-SRCREV = "1c74e8801cf58a30394ae92236895599f2c77253"
+BRANCH = "ti-lsk-linux-4.14.y"
+SRCREV = "57341df0b46c6be612d7487fb0a1df8b056449d8"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
