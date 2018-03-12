@@ -1,7 +1,7 @@
-From 8958bf21960a475d2933e688d0da9a0d2186d509 Mon Sep 17 00:00:00 2001
-From: Eric Ruei <e-ruei1@ti.com>
-Date: Thu, 9 Mar 2017 14:34:18 -0500
-Subject: [PATCH 4/4] Weston: Fix touch screen crash issue
+From 60250e9dc57fe56148c8a24bba107bce8a873fb4 Mon Sep 17 00:00:00 2001
+From: Karthik Ramanan <a0393906@ti.com>
+Date: Mon, 12 Mar 2018 10:56:28 +0530
+Subject: [PATCH 4/4] weston: Fix touch screen crash issue
 
 Touch screen operation causes the weston to crash with segment fault sometimes.
 The crash occurs when the coordinate (x,y) passed to the weston input module
@@ -9,16 +9,19 @@ is outside the view window, hence the weston compositor is not able to pick
 up a display view and there is no code to detect this condition at function
 notify_touch().
 
+Upstream status: pending
+
 Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
- src/input.c | 6 ++++++
+ libweston/input.c | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/src/input.c b/src/input.c
-index 8fe898c..0f72d23 100644
---- a/src/input.c
-+++ b/src/input.c
-@@ -1848,6 +1848,12 @@ notify_touch(struct weston_seat *seat, uint32_t time, int touch_id,
+diff --git a/libweston/input.c b/libweston/input.c
+index 4fedc55..bcb2f28 100644
+--- a/libweston/input.c
++++ b/libweston/input.c
+@@ -2185,6 +2185,12 @@ notify_touch(struct weston_seat *seat, uint32_t time, int touch_id,
  		 * until all touch points are up again. */
  		if (touch->num_tp == 1) {
  			ev = weston_compositor_pick_view(ec, x, y, &sx, &sy);
