@@ -19,11 +19,13 @@ PACKAGES = "matrix-hmi-demo-evse \
 "
 
 RDEPENDS_matrix-hmi-demo-evse = " \
+    bash \
     ${HMI_RDEPENDS} \
     evse-hmi \
 "
 
 RDEPENDS_matrix-hmi-demo-protection-relays = " \
+    bash \
     ${HMI_RDEPENDS} \
     protection-relays-hmi \
 "
