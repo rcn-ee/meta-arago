@@ -29,7 +29,7 @@ case "$1" in
     ;;
   stop)
     echo -n "Stopping telnet daemon"
-    start-stop-daemon --stop --quiet --pidfile /var/run/telnetd.pid
+    start-stop-daemon --stop --quiet --exec $telnetd
     echo "."
     ;;
   *)
