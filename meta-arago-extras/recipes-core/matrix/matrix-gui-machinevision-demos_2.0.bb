@@ -5,7 +5,7 @@ require recipes-core/matrix/matrix-gui-apps-git.inc
 
 PR = "${INC_PR}.3"
 
-inherit allarch
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/machinevision_apps"
 
@@ -20,8 +20,11 @@ PACKAGES = "matrix-machinevision-demo-dlp3dscanner \
             matrix-machinevision-demo-simplepeopletracking \
 "
 
-RDEPENDS_matrix-machinevision-demo-dlp3dscanner_dra7xx = " \
+RDEPENDS_matrix-machinevision-demo-dlp3dscanner = " \
     ${MACHINEVISION_RDEPENDS} \
+"
+
+RDEPENDS_matrix-machinevision-demo-dlp3dscanner_append_dra7xx = " \
     point-cloud-viewer \
 "
 
