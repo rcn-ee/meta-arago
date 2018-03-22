@@ -21,6 +21,7 @@ DEPENDS_append_ti33x = " \
 
 SRC_URI_append_ti43x = " \
     file://0001-gstdrmallocator-Add-DRM-allocator-support.patch \
+    file://0002-parsers-bug-fixes-on-parsers.patch \
 "
 
 SRC_URI_append_ti33x = " \
@@ -28,8 +29,9 @@ SRC_URI_append_ti33x = " \
 
 SRC_URI_append_omap-a15 = " \
     file://0001-gstdrmallocator-Add-DRM-allocator-support.patch \
+    file://0002-parsers-bug-fixes-on-parsers.patch \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR = "r1"
+PR = "r2"
