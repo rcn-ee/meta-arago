@@ -33,9 +33,5 @@ SRCIPK_SHALLOW_DEPTH_pn-linux-ti-staging = "400"
 SRCIPK_CUSTOM_GIT_BRANCH_pn-u-boot-ti-staging = "processor-sdk-local"
 SRCIPK_CUSTOM_GIT_MESSAGE_pn-u-boot-ti-staging = "${SRCIPK_GIT_COMMIT_MESSAGE}"
 
-# Temporarily disable "mmip" machine feature for all SOCs while building
-# latest code base, until it is fixed for gstreamer 1.12
-MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('mmip', '')}"
-
 # Temporarily disable UBI images for K2 "server" rootfs due to size
 IMAGE_FSTYPES_remove_pn-tisdk-server-rootfs-image = "ubi ubifs"
