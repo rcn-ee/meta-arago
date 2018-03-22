@@ -24,6 +24,7 @@ SRC_URI_append_ti43x = " \
     file://0001-gstdrmallocator-Add-DRM-allocator-support.patch \
     file://0002-parsers-bug-fixes-on-parsers.patch \
     file://0003-kmssink-Add-omapdrm-in-the-list-of-driver-modules.patch \
+    file://0004-waylandsink-Add-drm-support-in-waylandsink.patch \
 "
 
 SRC_URI_append_ti33x = " \
@@ -33,8 +34,9 @@ SRC_URI_append_omap-a15 = " \
     file://0001-gstdrmallocator-Add-DRM-allocator-support.patch \
     file://0002-parsers-bug-fixes-on-parsers.patch \
     file://0003-kmssink-Add-omapdrm-in-the-list-of-driver-modules.patch \
+    file://0004-waylandsink-Add-drm-support-in-waylandsink.patch \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR = "r3"
+PR = "r4"
