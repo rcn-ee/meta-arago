@@ -1,0 +1,33 @@
+From 4a8ae45e17e1e2d6299353cc871e9427617fa12d Mon Sep 17 00:00:00 2001
+From: Ramprasad N <x0038811@ti.com>
+Date: Tue, 20 Mar 2018 19:05:18 +0530
+Subject: [PATCH] gstvpe: Populate the output structure with progressive
+
+playbin shows performance drop with waylandsink due
+to frame-copy of frame buffers. The caps between vpe and
+videoconverter don't match hence this results in frame-copy.
+By setting the interlace-mode capabilities match and
+all components will be configured to pass through mode.
+
+Signed-off-by: Ramprasad N <x0038811@ti.com>
+---
+ src/gstvpe.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/gstvpe.c b/src/gstvpe.c
+index d795d4c..219e5e3 100644
+--- a/src/gstvpe.c
++++ b/src/gstvpe.c
+@@ -237,6 +237,9 @@ gst_vpe_set_output_caps (GstVpe * self)
+       "width", G_TYPE_INT, self->output_width,
+       "height", G_TYPE_INT, self->output_height, NULL);
+ 
++  gst_structure_set (out_s, "interlace-mode", G_TYPE_STRING,
++                   "progressive", NULL);
++
+   if (gst_structure_get_fraction (s, "pixel-aspect-ratio",
+           &par_width, &par_height))
+     gst_structure_set (out_s, "pixel-aspect-ratio", GST_TYPE_FRACTION,
+-- 
+1.9.1
+
