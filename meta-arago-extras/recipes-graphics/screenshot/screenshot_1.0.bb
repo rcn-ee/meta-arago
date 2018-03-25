@@ -23,3 +23,5 @@ do_compile() {
 do_install() {
     make DESTDIR=${D} install
 }
+
+INSANE_SKIP_${PN} = "ldflags"
