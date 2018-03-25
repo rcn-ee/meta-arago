@@ -16,9 +16,10 @@ COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x"
 S = "${WORKDIR}/git"
 
 do_install () {
+    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
     install -d ${D}/opt/img-powervr-sdk
-    cp -ar ${S}/targetfs/PVRHub ${D}/opt/img-powervr-sdk
-    cp -ar ${S}/targetfs/PVRScopeDeveloper ${D}/opt/img-powervr-sdk
+    cp ${CP_ARGS} ${S}/targetfs/PVRHub ${D}/opt/img-powervr-sdk
+    cp ${CP_ARGS} ${S}/targetfs/PVRScopeDeveloper ${D}/opt/img-powervr-sdk
 
     install -d ${D}${bindir}/SGX/demos/Raw/
     install -d ${D}${bindir}/SGX/demos/Wayland/
@@ -38,9 +39,11 @@ do_install () {
     install -m 755 ${S}/targetfs/Examples/Advanced/Wayland/OGLES2FilmTV ${D}${bindir}/SGX/demos/Wayland/
 }
 
+RDEPENDS_${PN} = "ti-sgx-ddk-um"
+
 INHIBIT_PACKAGE_STRIP = "1"
 
-INSANE_SKIP_${PN} += "dev-so staticdev"
+INSANE_SKIP_${PN} += "dev-so staticdev already-stripped ldflags"
 
 FILES_${PN} += " \
     /opt/img-powervr-sdk/PVRHub/* \
