@@ -12,3 +12,5 @@ do_install() {
     install -d ${D}${bindir}
     install -m 0755 posix-smp-demo-linux-armv7 ${D}${bindir}
 }
+
+INSANE_SKIP_${PN} = "ldflags"
