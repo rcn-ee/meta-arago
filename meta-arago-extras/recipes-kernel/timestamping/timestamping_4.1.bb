@@ -20,3 +20,5 @@ do_install () {
 	install -d ${D}${bindir}
 	install -m 0755 ${S}/Documentation/networking/timestamping/timestamping ${D}${bindir}
 }
+
+INSANE_SKIP_${PN} = "ldflags"
