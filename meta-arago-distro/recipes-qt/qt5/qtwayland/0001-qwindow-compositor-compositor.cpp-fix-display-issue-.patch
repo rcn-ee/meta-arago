@@ -1,0 +1,42 @@
+From b63395a9ff48b1a60fdb7efb7c439f42f1d8c459 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Wed, 28 Mar 2018 17:36:44 -0400
+Subject: [PATCH] qwindow-compositor: compositor.cpp: fix display issue for
+ AM3/4
+
+On OpenGL ES 2 core implementation, only GL_CLAMP_TO_EDGE parameter is
+supported as wrap mode for NPOT (non power of two dimension) textures.
+However, the default parameter is GL_REPEAT.
+An extension OES_texture_npot adds the support of other GL_REPEAT
+and GL_MIRRORED_REPEAT to the wrap. However, many openGLES2 cores do
+not support this extension. Therefore, it is much safer to specify the
+wrap mode as GL_CLAMP_TO_EDGE.
+
+Note: This patch is for QT5.7.1 (morty) only because the qtwayland has been
+re-implemented at QT5.9.
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ examples/wayland/qwindow-compositor/compositor.cpp | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/examples/wayland/qwindow-compositor/compositor.cpp b/examples/wayland/qwindow-compositor/compositor.cpp
+index c60ecc6..ced0014 100644
+--- a/examples/wayland/qwindow-compositor/compositor.cpp
++++ b/examples/wayland/qwindow-compositor/compositor.cpp
+@@ -81,8 +81,11 @@ GLuint View::getTexture(GLenum *target)
+             glGenTextures(1, &m_texture);
+ 
+         glBindTexture(m_textureTarget, m_texture);
+-        if (buf.isShm())
++        if (buf.isShm()) {
+             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
++            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++	}
+         buf.bindToTexture();
+     }
+ 
+-- 
+1.9.1
+
