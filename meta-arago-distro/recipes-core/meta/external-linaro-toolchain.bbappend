@@ -10,6 +10,9 @@ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
 SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH}"
 
+PKGV_linux-libc-headers-dev = "4.14"
+PKGV_linux-libc-headers = "4.14"
+
 inherit kernel-arch pkgconfig multilib_header
 
 EXTRA_OEMAKE = " HOSTCC="${BUILD_CC}" HOSTCPP="${BUILD_CPP}""
@@ -23,11 +26,11 @@ do_install_append() {
 	cd ${WORKDIR}/git
 	oe_runmake headers_install INSTALL_HDR_PATH=${B}${exec_prefix}
 
-	# The ..install.cmd conflicts between various configure runs
-	find ${B}${includedir} -name ..install.cmd | xargs rm -f
-
 	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 	cp ${CP_ARGS} ${B}${includedir} ${D}${exec_prefix}
+
+	# The ..install.cmd conflicts between various configure runs
+	find ${D}${exec_prefix} -name ..install.cmd | xargs rm -f
 }
 
 do_install_append_aarch64 () {
