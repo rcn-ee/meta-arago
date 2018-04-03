@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r66"
+PR = "r67"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -116,6 +116,7 @@ EXTRA_LIBS_append_ti33x = " \
 "
 
 DEVTOOLS = " \
+    linux-libc-headers-dev \
     packagegroup-core-buildessential \
     packagegroup-core-tools-debug \
     git \
