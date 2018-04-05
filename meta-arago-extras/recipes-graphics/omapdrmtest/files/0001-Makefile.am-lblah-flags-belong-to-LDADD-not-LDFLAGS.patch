@@ -1,0 +1,28 @@
+From 315652fa73555b71b7f1d0c77357f824c432c882 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Wed, 4 Apr 2018 20:09:54 -0400
+Subject: [PATCH] Makefile.am: -lblah flags belong to LDADD, not LDFLAGS
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ Makefile.am | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 99f4036..7ac6146 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -26,9 +26,8 @@ if ENABLE_DCE
+ bin_PROGRAMS += viddec3test copycodectest yuvcopytest videnc2test
+ endif
+ 
+-LDADD_COMMON = util/libutil.la @DRM_LIBS@ @DCE_LIBS@ @GBM_LIBS@ @EGL_LIBS@ @GLES2_LIBS@
++LDADD_COMMON = util/libutil.la @DRM_LIBS@ @DCE_LIBS@ @GBM_LIBS@ @EGL_LIBS@ @GLES2_LIBS@ -lm -lavcodec -lpthread
+ AM_CFLAGS = @DRM_CFLAGS@ @DCE_CFLAGS@ @GBM_CFLAGS@ @EGL_CFLAGS@ @GLES2_CFLAGS@ @WARN_CFLAGS@ -I$(top_srcdir)/util
+-LDFLAGS = -lm -lavcodec -lpthread
+ 
+ fliptest_SOURCES = fliptest.c
+ fliptest_LDADD = $(LDADD_COMMON)
+-- 
+2.7.4
+

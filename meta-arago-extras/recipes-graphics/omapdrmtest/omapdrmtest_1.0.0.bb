@@ -14,6 +14,7 @@ EXTRA_OEMAKE = "CC="${CC}""
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 SRC_URI = "git://git.ti.com/glsdk/omapdrmtest.git;protocol=git \
+        file://0001-Makefile.am-lblah-flags-belong-to-LDADD-not-LDFLAGS.patch \
 "
 
 S = "${WORKDIR}/git"
