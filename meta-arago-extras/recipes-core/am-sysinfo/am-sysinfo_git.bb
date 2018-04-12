@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e7
 
 SECTION = "system"
 
-PACKAGE_STRIP = "no"
 PR = "r10"
 
 BRANCH ?= "master"
@@ -26,3 +25,5 @@ do_install() {
 	install -d ${D}/${bindir}
 	install -m 0755 ${S}/mem_util/Release/mem_util ${D}/${bindir}
 }
+
+INSANE_SKIP_${PN} = "ldflags"
