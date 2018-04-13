@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "7b25a185122ed739eab040b77f101f866d33f77c4f64cae95d60213787
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-RDEPENDS_${PN} = "glfw3 opencv"
+RDEPENDS_${PN} = "glfw opencv"
 
 do_install() {
     install -d ${D}${bindir}

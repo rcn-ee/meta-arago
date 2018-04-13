@@ -1,0 +1,27 @@
+From c6e30af80018f7a6fc7b8b0e810718f4bd646cf6 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Thu, 12 Apr 2018 12:29:39 -0400
+Subject: [PATCH] HACK: CMakeList.txt: remove check for Wayland-Egl, provided
+ by SGX libs
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1f5d6ef..eaf780f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -266,7 +266,7 @@ if (_GLFW_WAYLAND)
+     find_package(ECM REQUIRED NO_MODULE)
+     list(APPEND CMAKE_MODULE_PATH "${ECM_MODULE_PATH}")
+ 
+-    find_package(Wayland REQUIRED Client Cursor Egl)
++    find_package(Wayland REQUIRED Client Cursor)
+     find_package(WaylandScanner REQUIRED)
+     find_package(WaylandProtocols 1.12 REQUIRED)
+ 
+-- 
+2.7.4
+
