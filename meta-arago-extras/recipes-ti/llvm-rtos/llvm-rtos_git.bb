@@ -24,7 +24,7 @@ RELEASE_TARGET_omap-a15 = "am57xx"
 CLEANBROKEN = "1"
 
 export LLVM_SRC_DIR="${S}"
-export LLVM_INSTALL_DIR="${LLVM_RTOS_INSTALL_DIR}"
+export LLVM_INSTALL_DIR="${D}${LLVM_RTOS_INSTALL_DIR_RECIPE}"
 
 do_compile() {
     unset LDFLAGS
@@ -41,16 +41,25 @@ do_compile() {
 
     make -C build.sysbios LLVMSupport LLVMCore LLVMBitReader ${PARALLEL_MAKE}
 
-    cd build.sysbios; make -f include/llvm/Makefile install/local; cd ..
-
 }
 
 do_install() {
-    install -d ${LLVM_RTOS_INSTALL_DIR}/bin
-    install -m 755 ${S}/build.sysbios/build.native/bin/llvm-config ${LLVM_RTOS_INSTALL_DIR}/bin/llvm-config-host
+    cd build.sysbios; make -f include/llvm/Makefile install/local; cd ..
 
-    install -d ${LLVM_RTOS_INSTALL_DIR}/lib
+    install -d ${D}${LLVM_RTOS_INSTALL_DIR_RECIPE}/bin
+    install -m 755 ${S}/build.sysbios/build.native/bin/llvm-config ${D}${LLVM_RTOS_INSTALL_DIR_RECIPE}/bin/llvm-config-host
+
+    install -d ${D}${LLVM_RTOS_INSTALL_DIR_RECIPE}/lib
     for libfile in ${S}/build.sysbios/lib/*.a; do
-        install -m 644 ${libfile} ${LLVM_RTOS_INSTALL_DIR}/lib
+        install -m 644 ${libfile} ${D}${LLVM_RTOS_INSTALL_DIR_RECIPE}/lib
     done
 }
+
+FILES_${PN} += "${LLVM_RTOS_INSTALL_DIR_RECIPE}"
+
+# This package contains one x86-64 executable and a few static libraries
+INSANE_SKIP_${PN} = "arch file-rdeps staticdev"
+
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_SYSROOT_STRIP = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
