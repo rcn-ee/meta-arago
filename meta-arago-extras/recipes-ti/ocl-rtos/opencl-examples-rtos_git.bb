@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "omap-a15"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "opencl-rtos ti-cgt6x-native clocl-rtos-native opencl-monitor-rtos \
-           clocl-win \
+           clocl-win gcc-arm-none-eabi-native ti-xdctools-native ti-sysbios \
 "
 
 S = "${WORKDIR}/git/opencl_example_src"
@@ -66,7 +66,7 @@ do_compile() {
     unset LDFLAGS
     unset TARGET_LDFLAGS
 
-    oe_runmake
+    oe_runmake CLOCL=${STAGING_DIR_NATIVE}/usr/share/ti/ti-opencl-rtos-tree/bin/x86/clocl
 }
 
 do_install() {
