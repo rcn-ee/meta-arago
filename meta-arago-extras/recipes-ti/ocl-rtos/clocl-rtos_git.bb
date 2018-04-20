@@ -17,7 +17,7 @@ TARGET_class-target = "am57xx"
 TARGET_class-native = "x86"
 
 export WANT_LLVM_RELEASE = "3.6-ti"
-export DESTDIR="${OCL_RTOS_INSTALL_DIR}"
+export DESTDIR="${D}${OCL_RTOS_INSTALL_DIR_RECIPE}"
 export LDFLAGS="${BUILD_LDFLAGS}"
 export CXXFLAGS="${BUILD_CFLAGS}"
 
