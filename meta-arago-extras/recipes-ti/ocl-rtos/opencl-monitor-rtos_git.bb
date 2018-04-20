@@ -20,6 +20,7 @@ DEPENDS = " ti-llvm3.6-native \
             ti-framework-components \
             libaet \
             openmp-rtos \
+            gcc-arm-none-eabi-native \
 "
 
 COMPATIBLE_MACHINE = "omap-a15"
@@ -55,10 +56,10 @@ export GDB_SERVER_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/gdbc6x"
 export AET_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/ctoolslib/aet"
 export X86_LLVM_DIR = "${STAGING_DIR_NATIVE}/usr"
 export XDCPATH = "${S};${IPC_DIR}/packages;${BIOS_DIR}/packages;${EDMA3LLD_DIR}/packages;${FC_DIR}/packages;${XDAIS_DIR}/packages"
-export DESTDIR="${OCL_RTOS_INSTALL_DIR}/ti-opencl-rtos-${RELEASE_TARGET}-${PV}/packages/ti/opencl"
+export DESTDIR="${D}${OCL_RTOS_INSTALL_DIR_RECIPE}/ti-opencl-rtos-${RELEASE_TARGET}-${PV}/packages/ti/opencl"
 
 do_install() {
     oe_runmake install
-    install -d ${DESTDIR}/platforms/am57x_rtos
-    cp -r ${S}/../packages/ti/opencl/platforms/am57x_rtos/* ${DESTDIR}/platforms/am57x_rtos/
 }
+
+FILES_${PN} += "${OCL_RTOS_INSTALL_DIR_RECIPE}"
