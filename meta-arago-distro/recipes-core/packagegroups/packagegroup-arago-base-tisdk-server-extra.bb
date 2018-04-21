@@ -124,7 +124,7 @@ ARAGO_TI_PKGS_append_keystone = " ${ARAGO_TI_KEYSTONE_PKGS}"
 # Disable hplib,nwal-lld as hplib-mod is broken against K4.14
 #    hplib
 #    nwal-lld
-ARAGO_TI_PKGS_append_k2l-evm = "\
+ARAGO_TI_PKGS_append_k2l = "\
     dfe-lld \
     iqn2-lld \
     "

@@ -70,7 +70,7 @@ TEST_ADDONS_TI_append_k2hk = " \
 #    hplib-test
 #    nwal-lld-test
 #    nwal-lld
-TEST_ADDONS_TI_append_k2l-evm = " \
+TEST_ADDONS_TI_append_k2l = " \
     dfe-lld-test \
     iqn2-lld-test \
     ipc-transport-qmss-test \

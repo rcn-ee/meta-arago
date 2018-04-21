@@ -78,7 +78,7 @@ EXTRA_LIBS_append_keystone = "\
 #	hplib-staticdev
 #	nwal-lld-dev
 #	nwal-lld-staticdev
-EXTRA_LIBS_append_k2l-evm = "\
+EXTRA_LIBS_append_k2l = "\
 	dfe-lld-dev \
 	dfe-lld-staticdev \
 	iqn2-lld-dev \
@@ -142,7 +142,7 @@ EXTRA_LIBS_append_dra7xx = " libulm-dev \
 EXTRA_LIBS_append_k2hk = " libulm-staticdev \
                                gdbserver-c6x-dev \
 "
-EXTRA_LIBS_append_k2l-evm = " libulm-staticdev \
+EXTRA_LIBS_append_k2l = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
 EXTRA_LIBS_append_k2e = " libulm-staticdev \

@@ -150,7 +150,7 @@ MAKEFILES_append_k2hk = " opencl-examples \
                               linalg-examples \
 "
 
-MAKEFILES_append_k2l-evm = " opencl-examples \
+MAKEFILES_append_k2l = " opencl-examples \
                              gdbserverproxy-module-drv \
                              debugss-module-drv \
                              openmpacc-examples \
