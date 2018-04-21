@@ -35,9 +35,13 @@ DEPENDS_append_dra7xx   = " ti-ipc virtual/kernel"
 DEPENDS_append_keystone = " mpm-transport multiprocmgr"
 DEPENDS_remove_k2g = " libulm"
 
+MONITORS                      = " opencl-monitor"
+MONITORS_append_am57xx-evm    = " opencl-monitor-ipu"
+MONITORS_append_am57xx-hs-evm = " opencl-monitor-ipu"
+
 RDEPENDS_${PN} += " bash"
 RDEPENDS_${PN}-dev += " ocl-gl-headers-dev opencl-monitor"
-RDEPENDS_${PN}-runtime += " ${PN} opencl-monitor clocl ti-cgt6x"
+RDEPENDS_${PN}-runtime += " ${PN} ${MONITORS} clocl ti-cgt6x"
 
 ALLOW_EMPTY_${PN}-runtime = "1"
 

@@ -5,7 +5,7 @@ LICENSE = "BSD"
 include ocl.inc
 require recipes-ti/includes/ti-paths.inc
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.0"
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -22,26 +22,29 @@ RDEPENDS_${PN}-dev += " libgomp-dev"
 S = "${WORKDIR}/git/opencl_example_src"
 B = "${S}"
 
-OCL_EXAMPLE_LIST = " buffer \
+OCL_EXAMPLE_LIST = " abort_exit \
+                     buffer \
                      ccode \
+                     conv1d \
+                     dgemm \
+                     dspheap \
                      dsplib_fft \
+                     edmamgr \
                      float_compute \
+                     matmpy \
+                     monte_carlo \
                      null \
                      offline \
                      offline_embed \
-                     platforms \
-                     simple \
-                     vecadd \
-                     matmpy \
-                     monte_carlo \
                      ooo_callback \
-                     edmamgr \
+                     platforms \
                      sgemm \
+                     simple \
+                     timeout \
+                     vecadd \
                      vecadd_openmp \
                      vecadd_openmp_t \
-                     dgemm \
-                     abort_exit \
-                     timeout \
+                     vecadd_subdevice \
 "
 
 OCL_PERSISTENT_EXAMPLE_LIST = " persistent_clock_concurrent \
@@ -54,6 +57,12 @@ OCL_PERSISTENT_EXAMPLE_LIST = " persistent_clock_concurrent \
 "
 
 OCL_EXAMPLE_LIST_append_dra7xx = " ${OCL_PERSISTENT_EXAMPLE_LIST}"
+
+OCL_MPAX_EXAMPLE_LIST = " vecadd_mpax \
+                          vecadd_mpax_openmp \
+"
+
+OCL_EXAMPLE_LIST_append_k2hk = " ${OCL_MPAX_EXAMPLE_LIST}"
 
 python do_unpack_append() {
     import shutil
