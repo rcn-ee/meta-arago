@@ -32,6 +32,9 @@ DTB_FILTER_omapl138 = "da850"
 # List of target side images to build for the SDK
 TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image"
 
+# dra71 lcard requires an initramfs with modules for NFS boot
+TARGET_IMAGES_append_dra7xx-evm = " netboot-initrd"
+
 # Some devices do not support display and use a server image instead
 TARGET_IMAGES_keystone = "arago-base-tisdk-image tisdk-server-rootfs-image tisdk-server-extra-rootfs-image"
 TARGET_IMAGES_omapl138 = "arago-base-tisdk-image tisdk-server-rootfs-image tisdk-server-extra-rootfs-image"
