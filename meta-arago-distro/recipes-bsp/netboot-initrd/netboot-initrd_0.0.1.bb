@@ -40,7 +40,7 @@ IMAGE_LINGUAS = ""
 # To further reduce the size of the rootfs, remove the /boot directory from the final image
 # this is usually done by adding RDEPENDS_kernel-base = "" in the configuration file. In our case we can't use
 # this method. Instead we just wipe out the content of "/boot" before creating the image.
-ROOTFS_POSTPROCESS_COMMAND += 'empty_boot_dir'
+ROOTFS_POSTPROCESS_COMMAND += "empty_boot_dir; "
 empty_boot_dir () {
 	rm -rf ${IMAGE_ROOTFS}/boot/*
 }
