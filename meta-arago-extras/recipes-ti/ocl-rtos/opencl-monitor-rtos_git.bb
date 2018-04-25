@@ -63,3 +63,4 @@ do_install() {
 }
 
 FILES_${PN} += "${OCL_RTOS_INSTALL_DIR_RECIPE}"
+INSANE_SKIP_${PN} = "arch"
