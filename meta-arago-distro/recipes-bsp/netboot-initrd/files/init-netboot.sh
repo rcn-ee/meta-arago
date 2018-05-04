@@ -124,9 +124,17 @@ fi
 configure_eth_dev $ip_info
 parse_server_info $server_info ip path options
 
+#default options: "nolock"
+if [ -z "$options" ] ; then
+	options="nolock"
+fi
+
+#busybox mount doesn't recognize 'v3' as a valid option. replace it with nfsvers=3
+options=$(echo $options | sed 's/\<v3\>/nfsvers=3/g')
+
 # mount NFS drive
 mkdir /newroot
-mount -t nfs -o nolock,rw,$options $ip:$path /newroot
+mount -t nfs -o $options $ip:$path /newroot
 
 # switch root. new root is the NFS mount
 exec switch_root /newroot /sbin/init
