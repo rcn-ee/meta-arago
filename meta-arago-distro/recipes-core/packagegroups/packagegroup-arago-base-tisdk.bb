@@ -1,6 +1,6 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r19"
+PR = "r20"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,7 +19,7 @@ RDEPENDS_${PN} = "\
     libxml2 \
     libpcre \
     iptables \
-    iperf3 \
+    iperf \
     arago-gpl-notice \
     arago-feed-config \
     nfs-utils-client \
