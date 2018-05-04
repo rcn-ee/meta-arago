@@ -13,8 +13,8 @@ beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
 
 read_args() {
     for arg in $2; do
-        optarg=`expr "x$arg" : 'x[^=]*=\(.*\)'`
-        if beginswith $1 $arg ; then
+        if beginswith "$1=" $arg ; then
+		optarg=`expr "x$arg" : 'x[^=]*=\(.*\)'`
 		echo  $optarg
 		break
 	fi
