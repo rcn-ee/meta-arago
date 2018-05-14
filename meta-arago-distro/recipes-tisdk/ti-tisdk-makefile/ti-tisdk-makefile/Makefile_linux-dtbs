@@ -4,7 +4,9 @@ linux-dtbs:
 	@echo     Building the Linux Kernel DTBs
 	@echo =====================================
 	$(MAKE) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) $(DEFCONFIG)
-	$(MAKE) -j $(MAKE_JOBS) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) __KERNEL_DEVICETREE__
+	@for DTB in __KERNEL_DEVICETREE__; do \
+		$(MAKE) -j $(MAKE_JOBS) -C $(LINUXKERNEL_INSTALL_DIR) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) $$DTB; \
+	done
 
 linux-dtbs_install:
 	@echo =======================================
