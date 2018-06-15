@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PR_append = ".arago7"
 
-PV = "2.6.0+git${SRCPV}"
+PV="2.6.0+git${SRCPV}"
 
 is_armv7 = "1"
 
@@ -24,7 +24,7 @@ do_compile() {
     unset LDFLAGS
     export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
     oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
-    ( cd out/arm-plat-${OPTEEMACHINE}/core/; \
+    ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
         ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
         normfl=`echo ${OPTEEFLAVOR} | tr "_" "-"`
         mv tee.bin.signed $normfl.optee; \
@@ -33,7 +33,7 @@ do_compile() {
     if [ "${OPTEEPAGER}" = "y" ]; then
         oe_runmake clean PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
         oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR} CFG_WITH_PAGER=y
-        ( cd out/arm-plat-${OPTEEMACHINE}/core/; \
+        ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
             ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
             normfl=`echo ${OPTEEFLAVOR} | tr "_" "-"`
             mv tee.bin.signed $normfl-pager.optee; \
@@ -44,18 +44,18 @@ do_compile() {
 do_install() {
     #install core on boot directory
     install -d ${D}/boot
-    install -m 644 ${B}/out/arm-plat-${OPTEEMACHINE}/core/*.optee ${D}/boot
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${D}/boot
 
     #install TA devkit
     install -d ${D}/usr/include/optee/export-user_ta/
-    for f in  ${B}/out/arm-plat-${OPTEEMACHINE}/export-ta_${OPTEE_ARCH}/* ; do
+    for f in  ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/export-ta_${OPTEE_ARCH}/* ; do
         cp -aR $f ${D}/usr/include/optee/export-user_ta/
     done
 }
 
 do_deploy() {
     install -d ${DEPLOYDIR}
-    install -m 644 ${B}/out/arm-plat-${OPTEEMACHINE}/core/*.optee ${DEPLOYDIR}
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${DEPLOYDIR}
 }
 
 FILES_${PN} = "/boot"
