@@ -9,8 +9,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/iperf2/${BP}.tar.gz \
         file://0002-fix-bool-size-m4.patch \
 "
 
-SRC_URI[md5sum] = "097cf0754bc1afa165975c06a91e6906"
-SRC_URI[sha256sum] = "7fe4348dcca313b74e0aa9c34a8ccd713b84a5615b8578f4aa94cedce9891ef2"
+SRC_URI[md5sum] = "c63766d275b4537f419db096b9dfe4dc"
+SRC_URI[sha256sum] = "b7d650d07c6bb0e357b5938a20e4ac33876012fddb952299c5d321e6958da5d2"
 
 S = "${WORKDIR}/${BP}"
 
