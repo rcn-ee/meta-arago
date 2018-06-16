@@ -7,7 +7,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 OPTEE_PKGS = " \
-    optee-os \
     optee-client \
     optee-test \
 "
