@@ -1,27 +1,42 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago7"
+PR_append = ".arago0"
 
-PV="2.6.0+git${SRCPV}"
+PV = "3.1.0+git${SRCPV}"
 
 is_armv7 = "1"
+is_armv7_aarch64 = "0"
 
 SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
            file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
 "
-BRANCH = "ti_optee_os"
-SRCREV = "f918b24d27744d682e6f2c7fa91828a7b818b5a0"
+BRANCH = "master"
+SRCREV = "940a24375ba5357d34fea7196dba48eadaee9abd"
 
-EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX}  \
-                CROSS_COMPILE_ta_arm32=${HOST_PREFIX}  \
+EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX} \
+                CROSS_COMPILE_ta_arm32=${HOST_PREFIX} \
+                NOWERROR=1 \
                 ta-targets=ta_arm32 \
                 LIBGCC_LOCATE_CFLAGS=--sysroot=${STAGING_DIR_HOST} \
                 CFG_TEE_TA_LOG_LEVEL=0 \
                 CFG_TEE_CORE_LOG_LEVEL=2 \
 "
 
+EXTRA_OEMAKE_append_aarch64 = " \
+                CFG_ARM64_core=y \
+                CROSS_COMPILE_ta_arm64=${HOST_PREFIX} \
+                ta-targets=ta_arm64 \
+"
+
+CFLAGS[unexport] = "1"
+LDFLAGS[unexport] = "1"
+CPPFLAGS[unexport] = "1"
+AS[unexport] = "1"
+LD[unexport] = "1"
+
+do_configure[noexec] = "1"
+
 do_compile() {
-    unset LDFLAGS
     export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
     oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
     ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
@@ -41,10 +56,18 @@ do_compile() {
     fi
 }
 
+do_compile_aarch64() {
+    oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
+    ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
+        mv tee-pager.bin bl32.bin; \
+    )
+}
+
 do_install() {
     #install core on boot directory
     install -d ${D}/boot
-    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${D}/boot
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${D}/boot || true
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/bl32.bin ${D}/boot || true
 
     #install TA devkit
     install -d ${D}/usr/include/optee/export-user_ta/
@@ -55,7 +78,9 @@ do_install() {
 
 do_deploy() {
     install -d ${DEPLOYDIR}
-    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${DEPLOYDIR}
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${DEPLOYDIR} || true
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/bl32.bin ${DEPLOYDIR} || true
 }
 
 FILES_${PN} = "/boot"
+SYSROOT_DIRS += "/boot"
