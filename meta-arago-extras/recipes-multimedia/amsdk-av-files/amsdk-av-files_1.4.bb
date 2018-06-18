@@ -5,7 +5,6 @@ SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://Multimedia_Data_Files_Manifest.doc;md5=da0727f80b90422138535dfffc36cd1a"
 PR = "r1"
 
-COMPATIBLE_MACHINE = "(omap3|ti33x|ti43x|omap-a15|keystone)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 VIDEO_FILES = "video_480p "
