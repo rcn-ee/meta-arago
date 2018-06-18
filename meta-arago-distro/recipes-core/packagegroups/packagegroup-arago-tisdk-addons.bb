@@ -32,6 +32,7 @@ UTILS = " \
 
 UTILS_UBOOT_FW = "u-boot-fw-utils"
 UTILS_UBOOT_FW_keystone = ""
+UTILS_UBOOT_FW_k3 = ""
 
 UTILS_append_ti33x = " mmc-utils \
                        can-utils \
