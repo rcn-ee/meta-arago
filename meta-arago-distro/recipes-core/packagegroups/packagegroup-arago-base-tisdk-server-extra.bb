@@ -153,6 +153,12 @@ ARAGO_TI_PKGS_append_k2e = "\
     hyplnk-lld \
     "
 
+ARAGO_VTUN = "\
+    vtun \
+"
+# vtun does not support aarch64
+ARAGO_VTUN_aarch64 = ""
+
 #    recovery-kernel
 RDEPENDS_${PN} = "\
     ${ARAGO_LIBNL} \
@@ -160,6 +166,7 @@ RDEPENDS_${PN} = "\
     ${ARAGO_NDISC6} \
     ${ARAGO_PYTHON} \
     ${ARAGO_TI_PKGS} \
+    ${ARAGO_VTUN} \
     ptpd \
     vsftpd \
     syslog-ng \
@@ -170,7 +177,6 @@ RDEPENDS_${PN} = "\
     lksctp-tools \
     lksctp-tools-utils \
     libdnet \
-    vtun \
     bridge-utils \
     ebtables \
     rng-tools \
