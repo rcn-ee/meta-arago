@@ -378,7 +378,7 @@ sw_manifest_toolchain_host() {
 # Create the target side toolchain components table.  These are components on
 # the host but intended for the target.
 sw_manifest_toolchain_target() {
-    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/*-linux-gnueabi*/var/lib/opkg/info"
+    opkg_dir="${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}/sysroots/${ARMPKGARCH}*-linux*/var/lib/opkg/info"
 
     sw_manifest_table_header "GPLv3 Development Libraries Installed on Host" "This table describes GPLv3 software libraries and headers that are installed on the development host and used during the development of software to run on the target. Customers should be careful when linking against these libraries to make sure they are complying with the license(s) of the library"
 
@@ -746,6 +746,9 @@ tisdk_image_build () {
     elif [ -e ${DEPLOY_DIR_IMAGE}/uImage-${MACHINE}.bin ]
     then
         cp ${DEPLOY_DIR_IMAGE}/uImage-${MACHINE}.bin ${prebuilt_dir}/
+    elif [ -e ${DEPLOY_DIR_IMAGE}/Image-${MACHINE}.bin ]
+    then
+        cp ${DEPLOY_DIR_IMAGE}/Image-${MACHINE}.bin ${prebuilt_dir}/
     else
         echo "Could not find the Kernel image"
         return 1
