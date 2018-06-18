@@ -1,0 +1,26 @@
+PACKAGECONFIG_append_k3 = " optee"
+
+CROSS_COMPILE_V7 = "${ELT_TARGET_SYS_ARMV7}-"
+PATH_prepend = "${TOOLCHAIN_PATH_ARMV7}/bin:"
+
+UBOOT_R8_BINARY = "tiboot3.bin"
+UBOOT_R8_IMAGE = "tiboot3-${MACHINE}-${PV}-${PR}.bin"
+UBOOT_R8_SYMLINK = "tiboot3-${MACHINE}.bin"
+
+do_compile_append_am65xx-evm() {
+	# Build R8 side now
+	make ${PARALLEL_MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_V7} CC="${CROSS_COMPILE_V7}gcc ${TOOLCHAIN_OPTIONS}" V=1 HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}" -C ${S} O=${B} am65x_evm_r5_defconfig
+	make ${PARALLEL_MAKE} ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_V7} CC="${CROSS_COMPILE_V7}gcc ${TOOLCHAIN_OPTIONS}" V=1 HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}" -C ${S} O=${B} SYSFW=${SYSFW_FILE} ${UBOOT_MAKE_TARGET}
+}
+
+do_install_append_am65xx-evm() {
+	install -m 644 ${B}/${UBOOT_R8_BINARY} ${D}/boot/${UBOOT_R8_IMAGE}
+	ln -sf ${UBOOT_R8_IMAGE} ${D}/boot/${UBOOT_R8_BINARY}
+}
+
+do_deploy_append_am65xx-evm() {
+	install ${B}/${UBOOT_R8_BINARY} ${DEPLOYDIR}/${UBOOT_R8_IMAGE}
+	rm -f ${DEPLOYDIR}/${UBOOT_R8_BINARY} ${DEPLOYDIR}/${UBOOT_R8_SYMLINK}
+	ln -sf ${UBOOT_R8_IMAGE} ${DEPLOYDIR}/${UBOOT_R8_BINARY}
+	ln -sf ${UBOOT_R8_IMAGE} ${DEPLOYDIR}/${UBOOT_R8_SYMLINK}
+}
