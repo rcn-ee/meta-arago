@@ -11,6 +11,7 @@ MULTIMEDIA = " \
 "
 
 MULTIMEDIA_omapl138 = ""
+MULTIMEDIA_k3 = ""
 MULTIMEDIA_append_keystone = " \
     hevc-arm-decoder \
 "
