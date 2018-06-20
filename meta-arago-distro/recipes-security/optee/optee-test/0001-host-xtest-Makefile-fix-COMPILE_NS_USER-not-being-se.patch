@@ -1,0 +1,52 @@
+From 001c6b560ccd4f66dc4b623e8b2c3f93bd2cab43 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 19 Jun 2018 14:11:18 -0400
+Subject: [PATCH] host/xtest/Makefile: fix COMPILE_NS_USER not being set by
+ default
+
+The build for TI ARM32 platforms attempts linking with aarch64 libcrypto.a
+and breaks, even when CFG_ARM32_core is set in the optee-os TA devkit.
+
+Fix it by moving setting of COMPILE_NS_USER based on CFG_ARM32_core outside
+of ifdef CFG_GP_PACKAGE_PATH, as it's also needed for CFG_TA_MBEDTLS
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ host/xtest/Makefile | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/host/xtest/Makefile b/host/xtest/Makefile
+index 47d24c2..2073cf6 100644
+--- a/host/xtest/Makefile
++++ b/host/xtest/Makefile
+@@ -24,6 +24,13 @@ OBJCOPY		?= $(CROSS_COMPILE)objcopy
+ OBJDUMP		?= $(CROSS_COMPILE)objdump
+ READELF		?= $(CROSS_COMPILE)readelf
+ 
++# by default, the client application is compiled as the kernel of optee-os
++ifeq ($(CFG_ARM32_core),y)
++COMPILE_NS_USER ?= 32
++else
++COMPILE_NS_USER ?= 64
++endif
++
+ # OpenSSL is used by GP tests series 8500 and Mbed TLS test 8103
+ ifneq (,$(filter y,$(CFG_GP_PACKAGE_PATH) $(CFG_TA_MBEDTLS)))
+ CFLAGS += -I../openssl/include -DOPENSSL_FOUND=1
+@@ -122,13 +129,6 @@ CFLAGS += -I../../ta/GP_TTA_check_OpenSession_with_4_parameters
+ CFLAGS += -I../../ta/GP_TTA_testingClientAPI
+ 
+ 
+-# by default, the client application is compiled as the kernel of optee-os
+-ifeq ($(CFG_ARM32_core),y)
+-COMPILE_NS_USER ?= 32
+-else
+-COMPILE_NS_USER ?= 64
+-endif
+-
+ endif
+ 
+ TA_DIR ?= /lib/optee_armtz
+-- 
+2.7.4
+
