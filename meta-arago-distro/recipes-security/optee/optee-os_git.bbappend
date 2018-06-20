@@ -13,19 +13,17 @@ SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
 BRANCH = "master"
 SRCREV = "940a24375ba5357d34fea7196dba48eadaee9abd"
 
+ARMCORE = "CFG_ARM32_core=y ta-targets=ta_arm32"
+ARMCORE_aarch64 = "CFG_ARM64_core=y ta-targets=ta_arm64"
+
 EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX} \
                 CROSS_COMPILE_ta_arm32=${HOST_PREFIX} \
+                CROSS_COMPILE_ta_arm64=${HOST_PREFIX} \
                 NOWERROR=1 \
-                ta-targets=ta_arm32 \
                 LIBGCC_LOCATE_CFLAGS=--sysroot=${STAGING_DIR_HOST} \
                 CFG_TEE_TA_LOG_LEVEL=0 \
                 CFG_TEE_CORE_LOG_LEVEL=2 \
-"
-
-EXTRA_OEMAKE_append_aarch64 = " \
-                CFG_ARM64_core=y \
-                CROSS_COMPILE_ta_arm64=${HOST_PREFIX} \
-                ta-targets=ta_arm64 \
+                ${ARMCORE} \
 "
 
 CFLAGS[unexport] = "1"
