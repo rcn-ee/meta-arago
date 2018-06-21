@@ -38,8 +38,8 @@ SRC_URI = "git://git.ti.com/glsdk/gstreamer1-0-plugins-bad.git;protocol=git;bran
 
 S = "${WORKDIR}/git"
 
-SRCREV_omap-a15 = "3a5a7f778b3c3259faab04748e7b10f0fd696aab"
+SRCREV_omap-a15 = "9a1cd733fa57e1eace21524456b652087d04168e"
 SRCREV_ti43x = "3a5a7f778b3c3259faab04748e7b10f0fd696aab"
 SRCREV = "d0160ca810be30bf2b2e7681f5047933402efb52"
 
-PR = "r27"
+PR = "r29"
