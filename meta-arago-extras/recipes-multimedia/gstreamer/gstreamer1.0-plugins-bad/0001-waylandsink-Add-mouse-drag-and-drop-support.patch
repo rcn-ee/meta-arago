@@ -1,0 +1,426 @@
+From d78e29c70505e5a9bab8152436f5e5a9d4192687 Mon Sep 17 00:00:00 2001
+From: Ramprasad N <x0038811@ti.com>
+Date: Wed, 28 Mar 2018 13:01:06 +0530
+Subject: [PATCH] waylandsink: Add mouse drag and drop support
+
+Signed-off-by: Ramprasad N <x0038811@ti.com>
+---
+ ext/wayland/wldisplay.c | 321 +++++++++++++++++++++++++++++++++++++++++++++++-
+ ext/wayland/wldisplay.h |   5 +
+ ext/wayland/wlwindow.c  |   3 +-
+ 3 files changed, 327 insertions(+), 2 deletions(-)
+
+diff --git a/ext/wayland/wldisplay.c b/ext/wayland/wldisplay.c
+index 39782bc..248afa7 100644
+--- a/ext/wayland/wldisplay.c
++++ b/ext/wayland/wldisplay.c
+@@ -22,18 +22,47 @@
+ #include <config.h>
+ #endif
+ 
++#include <stdlib.h>
++#include <stdio.h>
++
+ #include "wldisplay.h"
+ #include "wlbuffer.h"
++#include "wlwindow.h"
++
+ #include "wlvideoformat.h"
++#include <wayland-client-protocol.h>
+ 
++#include <unistd.h>
+ #include <errno.h>
++#include <linux/input.h>
+ 
+ GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
+ #define GST_CAT_DEFAULT gstwayland_debug
+ 
+ G_DEFINE_TYPE (GstWlDisplay, gst_wl_display, G_TYPE_OBJECT);
+ 
++struct touch_point
++{
++  int32_t id;
++  struct wl_list link;
++};
++
++struct input
++{
++  GstWlDisplay *display;
++  struct wl_seat *seat;
++  struct wl_pointer *pointer;
++  struct wl_touch *touch;
++  struct wl_list touch_point_list;
++  GstWlWindow *pointer_focus;
++  GstWlWindow *touch_focus;
++  struct wl_list link;
++  GstWlWindow *grab;
++};
++
+ static void gst_wl_display_finalize (GObject * gobject);
++static void input_grab (struct input *input, GstWlWindow *window);
++static void input_ungrab (struct input *input);
+ 
+ static void
+ gst_wl_display_class_init (GstWlDisplayClass * klass)
+@@ -51,6 +80,53 @@ gst_wl_display_init (GstWlDisplay * self)
+   self->buffers = g_hash_table_new (g_direct_hash, g_direct_equal);
+   g_mutex_init (&self->buffers_mutex);
+ }
++static void
++input_grab (struct input *input, GstWlWindow *window)
++{
++  input->grab = window;
++}
++
++static void
++input_ungrab (struct input *input)
++{
++  input->grab = NULL;
++}
++
++static void
++input_remove_pointer_focus (struct input *input)
++{
++  GstWlWindow *window = input->pointer_focus;
++
++  if (!window)
++    return;
++
++  input->pointer_focus = NULL;
++}
++
++static void
++input_destroy (struct input *input)
++{
++  input_remove_pointer_focus (input);
++
++  if (input->display->seat_version >= 3) {
++    if (input->pointer)
++      wl_pointer_release (input->pointer);
++  }
++
++  wl_list_remove (&input->link);
++  wl_seat_destroy (input->seat);
++  free (input);
++}
++
++static void
++display_destroy_inputs (GstWlDisplay *display)
++{
++  struct input *tmp;
++  struct input *input;
++
++  wl_list_for_each_safe (input, tmp, &display->input_list, link)
++      input_destroy (input);
++}
+ 
+ static void
+ gst_wl_display_finalize (GObject * gobject)
+@@ -152,6 +228,239 @@ shm_format (void *data, struct wl_shm *wl_shm, uint32_t format)
+ static const struct wl_shm_listener shm_listener = {
+   shm_format
+ };
++static void
++pointer_handle_enter (void *data, struct wl_pointer *pointer,
++    uint32_t serial, struct wl_surface *surface,
++    wl_fixed_t sx_w, wl_fixed_t sy_w)
++{
++  struct input *input = data;
++
++  if (!surface) {
++    /* enter event for a window we've just destroyed */
++    return;
++  }
++
++  input->display->serial = serial;
++  input->pointer_focus = wl_surface_get_user_data (surface);
++}
++
++static void
++pointer_handle_leave (void *data, struct wl_pointer *pointer,
++    uint32_t serial, struct wl_surface *surface)
++{
++  struct input *input = data;
++
++  input_remove_pointer_focus (input);
++}
++
++static void
++pointer_handle_motion (void *data, struct wl_pointer *pointer,
++    uint32_t time, wl_fixed_t sx_w, wl_fixed_t sy_w)
++{
++  struct input *input = data;
++  GstWlWindow *window = input->pointer_focus;
++
++  if (!window)
++    return;
++
++  if (input->grab)
++    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++        input->display->serial);
++
++}
++
++static void
++pointer_handle_button (void *data, struct wl_pointer *pointer, uint32_t serial,
++    uint32_t time, uint32_t button, uint32_t state_w)
++{
++  struct input *input = data;
++  enum wl_pointer_button_state state = state_w;
++  input->display->serial = serial;
++
++  if (button == BTN_LEFT) {
++    if (state == WL_POINTER_BUTTON_STATE_PRESSED)
++      input_grab (input, input->pointer_focus);
++
++    if (input->grab && state == WL_POINTER_BUTTON_STATE_RELEASED)
++      input_ungrab (input);
++  }
++
++  if (input->grab)
++    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++        input->display->serial);
++}
++
++static void
++pointer_handle_axis (void *data, struct wl_pointer *pointer,
++    uint32_t time, uint32_t axis, wl_fixed_t value)
++{
++}
++
++static void pointer_frame(void *data, struct wl_pointer *wl_pointer)
++{
++}
++
++static void pointer_axis_source(void *data, struct wl_pointer *wl_pointer, uint32_t axis_source)
++{
++}
++static void pointer_axis_stop(void *data, struct wl_pointer *wl_pointer, uint32_t time, uint32_t axis)
++{
++}
++
++static const struct wl_pointer_listener pointer_listener = {
++  pointer_handle_enter,
++  pointer_handle_leave,
++  pointer_handle_motion,
++  pointer_handle_button,
++  pointer_handle_axis,
++  pointer_frame,
++  pointer_axis_source,
++  pointer_axis_stop
++
++};
++
++static void
++touch_handle_down (void *data, struct wl_touch *wl_touch,
++    uint32_t serial, uint32_t time, struct wl_surface *surface,
++    int32_t id, wl_fixed_t x_w, wl_fixed_t y_w)
++{
++  struct input *input = data;
++  struct touch_point *tp;
++
++  input->display->serial = serial;
++  input->touch_focus = wl_surface_get_user_data (surface);
++  if (!input->touch_focus) {
++    return;
++  }
++
++  tp = malloc (sizeof *tp);
++  if (tp) {
++    tp->id = id;
++    wl_list_insert (&input->touch_point_list, &tp->link);
++    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++        serial);
++  }
++}
++
++static void
++touch_handle_motion (void *data, struct wl_touch *wl_touch,
++    uint32_t time, int32_t id, wl_fixed_t x_w, wl_fixed_t y_w)
++{
++  struct input *input = data;
++  struct touch_point *tp;
++
++  if (!input->touch_focus) {
++    return;
++  }
++  wl_list_for_each (tp, &input->touch_point_list, link) {
++    if (tp->id != id)
++      continue;
++
++    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++        input->display->serial);
++
++    return;
++  }
++}
++
++static void
++touch_handle_frame (void *data, struct wl_touch *wl_touch)
++{
++}
++
++static void
++touch_handle_cancel (void *data, struct wl_touch *wl_touch)
++{
++}
++
++static void
++touch_handle_up (void *data, struct wl_touch *wl_touch,
++    uint32_t serial, uint32_t time, int32_t id)
++{
++  struct input *input = data;
++  struct touch_point *tp, *tmp;
++
++  if (!input->touch_focus) {
++    return;
++  }
++
++  wl_list_for_each_safe (tp, tmp, &input->touch_point_list, link) {
++    if (tp->id != id)
++      continue;
++
++    wl_list_remove (&tp->link);
++    free (tp);
++
++    return;
++  }
++}
++
++static const struct wl_touch_listener touch_listener = {
++  touch_handle_down,
++  touch_handle_up,
++  touch_handle_motion,
++  touch_handle_frame,
++  touch_handle_cancel,
++};
++
++static void
++seat_handle_capabilities (void *data, struct wl_seat *seat,
++    enum wl_seat_capability caps)
++{
++  struct input *input = data;
++
++  if ((caps & WL_SEAT_CAPABILITY_POINTER) && !input->pointer) {
++    input->pointer = wl_seat_get_pointer (seat);
++    wl_pointer_set_user_data (input->pointer, input);
++    wl_pointer_add_listener (input->pointer, &pointer_listener, input);
++  } else if (!(caps & WL_SEAT_CAPABILITY_POINTER) && input->pointer) {
++    wl_pointer_destroy (input->pointer);
++    input->pointer = NULL;
++  }
++
++  if ((caps & WL_SEAT_CAPABILITY_TOUCH) && !input->touch) {
++    input->touch = wl_seat_get_touch (seat);
++    wl_touch_set_user_data (input->touch, input);
++    wl_touch_add_listener (input->touch, &touch_listener, input);
++  } else if (!(caps & WL_SEAT_CAPABILITY_TOUCH) && input->touch) {
++    wl_touch_destroy (input->touch);
++    input->touch = NULL;
++  }
++}
++
++static void
++seat_handle_name (void *data, struct wl_seat *seat, const char *name)
++{
++
++}
++
++static const struct wl_seat_listener seat_listener = {
++  seat_handle_capabilities,
++  seat_handle_name
++};
++
++static void
++display_add_input (GstWlDisplay *d, uint32_t id)
++{
++  struct input *input;
++
++  input = calloc (1, sizeof (*input));
++  if (input == NULL) {
++    fprintf (stderr, "%s: out of memory\n", "gst-wayland-sink");
++    exit (EXIT_FAILURE);
++  }
++  input->display = d;
++  input->seat = wl_registry_bind (d->registry, id, &wl_seat_interface,
++      MAX (d->seat_version, 3));
++  input->touch_focus = NULL;
++  input->pointer_focus = NULL;
++  wl_list_init (&input->touch_point_list);
++  wl_list_insert (d->input_list.prev, &input->link);
++
++  wl_seat_add_listener (input->seat, &seat_listener, input);
++  wl_seat_set_user_data (input->seat, input);
++
++}
+ 
+ static void
+ dmabuf_format (void *data, struct zwp_linux_dmabuf_v1 *zwp_linux_dmabuf,
+@@ -228,6 +537,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
+   } else if (g_strcmp0 (interface, "wl_shm") == 0) {
+     self->shm = wl_registry_bind (registry, id, &wl_shm_interface, 1);
+     wl_shm_add_listener (self->shm, &shm_listener, self);
++  } else if (g_strcmp0 (interface, "wl_seat") == 0) {
++    self->seat_version = version;
++    display_add_input (self, id);
+   } else if (g_strcmp0 (interface, "wp_viewporter") == 0) {
+     self->viewporter =
+         wl_registry_bind (registry, id, &wp_viewporter_interface, 1);
+@@ -237,9 +549,15 @@ registry_handle_global (void *data, struct wl_registry *registry,
+     zwp_linux_dmabuf_v1_add_listener (self->dmabuf, &dmabuf_listener, self);
+   }
+ }
++static void
++registry_handle_global_remove(void *data, struct wl_registry *registry,
++                uint32_t name)
++{
++}
+ 
+ static const struct wl_registry_listener registry_listener = {
+-  registry_handle_global
++  registry_handle_global,
++  registry_handle_global_remove
+ };
+ 
+ static gpointer
+@@ -310,6 +628,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+   self->own_display = take_ownership;
+ 
+   self->queue = wl_display_create_queue (self->display);
++  wl_list_init (&self->input_list);
+   self->registry = wl_display_get_registry (self->display);
+   wl_proxy_set_queue ((struct wl_proxy *) self->registry, self->queue);
+   wl_registry_add_listener (self->registry, &registry_listener, self);
+diff --git a/ext/wayland/wldisplay.h b/ext/wayland/wldisplay.h
+index 7c89212..d60b368 100644
+--- a/ext/wayland/wldisplay.h
++++ b/ext/wayland/wldisplay.h
+@@ -66,6 +66,11 @@ struct _GstWlDisplay
+   GMutex buffers_mutex;
+   GHashTable *buffers;
+   gboolean shutting_down;
++
++  struct wl_list input_list;
++  int seat_version;
++  uint32_t serial;
++
+ };
+ 
+ struct _GstWlDisplayClass
+diff --git a/ext/wayland/wlwindow.c b/ext/wayland/wlwindow.c
+index d08ed87..12ef2e3 100644
+--- a/ext/wayland/wlwindow.c
++++ b/ext/wayland/wlwindow.c
+@@ -120,7 +120,8 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
+ 
+   window->area_surface = wl_compositor_create_surface (display->compositor);
+   window->video_surface = wl_compositor_create_surface (display->compositor);
+-
++  wl_surface_set_user_data (window->area_surface, window);
++  wl_surface_set_user_data (window->video_surface, window);
+   wl_proxy_set_queue ((struct wl_proxy *) window->area_surface, display->queue);
+   wl_proxy_set_queue ((struct wl_proxy *) window->video_surface,
+       display->queue);
+-- 
+1.9.1
+
