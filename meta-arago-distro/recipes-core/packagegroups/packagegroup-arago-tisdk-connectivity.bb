@@ -11,7 +11,6 @@ inherit packagegroup
 # WLAN support packages.
 # These are the packages that all platforms use for WLAN support
 WLAN_COMMON = "\
-    wireless-tools \
     iw \
     softap-udhcpd-config \
     eventdump \
