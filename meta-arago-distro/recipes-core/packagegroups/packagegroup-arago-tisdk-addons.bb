@@ -19,6 +19,7 @@ UTILS = " \
     arm-benchmarks \
     dropbear \
     openssh-sftp-server \
+    netkit-ftp \
     ptpd \
     libdrm-kms \
     kms++ \
