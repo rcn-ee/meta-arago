@@ -3,12 +3,12 @@ u-boot-spl: u-boot
 u-boot-spl_clean: u-boot_clean
 u-boot-spl_install: u-boot_install
 
-u-boot: linux-dtbs
+u-boot:
 	@echo ===================================
 	@echo    Building U-boot
 	@echo ===================================
 	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) $(UBOOT_MACHINE)
-	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) DTC=$(LINUXKERNEL_INSTALL_DIR)/scripts/dtc/dtc
+	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) CONFIG_MKIMAGE_DTC_PATH=$(TI_SDK_PATH)/board-support/u-boot-*/scripts/dtc/dtc
 
 u-boot_clean:
 	@echo ===================================
