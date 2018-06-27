@@ -6,7 +6,7 @@ DEPLOY_SPL_NAME_k2l = ""
 DEPLOY_SPL_NAME_k2e = ""
 # Only unset it for HS device, as k2g GP does provide MLO/SPL
 DEPLOY_SPL_NAME_k2g-hs-evm = ""
-DEPLOY_SPL_NAME_k3 = "tispl.bin"
+DEPLOY_SPL_NAME_k3 = "tispl.bin tiboot3.bin"
 
 ARAGO_TISDK_IMAGE ?= "arago-core-tisdk-image"
 export IMAGE_BASENAME = "${ARAGO_TISDK_IMAGE}"
