@@ -4,11 +4,11 @@ PR = "r20"
 
 inherit packagegroup
 
-#    wayland-ivi-extension
 GRAPHICS_WAYLAND = "\
     weston \
     weston-init \
     weston-examples \
+    wayland-ivi-extension \
 "
 
 GRAPHICS_WAYLAND_append_omap-a15 = "\
