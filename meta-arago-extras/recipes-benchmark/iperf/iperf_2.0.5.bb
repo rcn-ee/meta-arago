@@ -8,6 +8,7 @@ SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
             file://iperf-2.0.5_ManPage.patch \
             file://0001-fix-out-of-tree-config.patch \
             file://0002-fix-bool-size-m4.patch \
+            file://0001-headers.h-remove-math.h-include-that-breaks-aarch64.patch \
           "
 
 SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
