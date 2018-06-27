@@ -59,6 +59,7 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
 
 MAKEFILES_MATRIX_GUI_keystone = ""
 MAKEFILES_MATRIX_GUI_omapl138 = ""
+MAKEFILES_MATRIX_GUI_k3 = ""
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -162,6 +163,10 @@ MAKEFILES_append_k2e = " opencl-examples \
                              openmpacc-examples \
 "
 
+MAKEFILES_append_k3 = " u-boot-spl \
+                        linux-dtbs \
+"
+
 # Use this to export kernel arch to ARCH
 #
 # We need to be very careful here. This class will also overwrite UBOOT_ARCH
@@ -169,7 +174,8 @@ MAKEFILES_append_k2e = " opencl-examples \
 inherit kernel-arch
 
 # Use ARCH format expected by the makefile
-PLATFORM_ARCH = "armv7-a"
+PLATFORM_ARCH = "${ARMPKGARCH}"
+PLATFORM_ARCH_arm = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
 
 TARGET_PRODUCT = "jacinto6evm"
@@ -193,7 +199,7 @@ PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
 # If it's not defined at all, like for zImage case
 UBOOT_LOADADDRESS ?= "0"
 
-KERNEL_BUILD_CMDS = "${@base_conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS} uImage','zImage',d)}"
+KERNEL_BUILD_CMDS = "${@base_conditional('KERNEL_IMAGETYPE','uImage','LOADADDR=${UBOOT_LOADADDRESS}','',d)} ${KERNEL_IMAGETYPE}"
 
 DEFCONFIG = "tisdk_${MACHINE}${ARAGO_KERNEL_SUFFIX}_defconfig"
 
