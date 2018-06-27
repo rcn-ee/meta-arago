@@ -50,7 +50,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r86"
+PR = "r87"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -162,6 +162,12 @@ MAKEFILES_append_k2e = " opencl-examples \
                              openmpacc-examples \
 "
 
+# Use this to export kernel arch to ARCH
+#
+# We need to be very careful here. This class will also overwrite UBOOT_ARCH
+# even though it may be set in the machine configuration.
+inherit kernel-arch
+
 # Use ARCH format expected by the makefile
 PLATFORM_ARCH = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
@@ -234,6 +240,7 @@ do_install () {
         sed -i -e "s/__INSTALL_TARGETS__/$install_targets/" ${D}/Makefile
     fi
 
+    sed -i -e "s/__KERNEL_ARCH__/${ARCH}/" ${D}/Makefile
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
     sed -i -e "s/__SDKMACHINE__/${SDKMACHINE}/g" ${D}/Makefile
 
