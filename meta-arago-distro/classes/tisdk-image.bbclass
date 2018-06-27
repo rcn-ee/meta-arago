@@ -859,12 +859,23 @@ tisdk_image_build () {
     cp ${WORKDIR}/opkg.conf ${IMAGE_ROOTFS}/etc/
 }
 
+TISDK_IMAGE_CLEANUP_DIRS ?= "var etc lib boot dev home media mnt proc run sbin sys tmp usr"
+TISDK_IMAGE_CLEANUP_FILES ?= "bin/bash bin/bash.bash bin/sh"
+
 tisdk_image_cleanup () {
+    # Some extra files are now pulled in by the general image class, so remove
+    # them.
+    for file in ${TISDK_IMAGE_CLEANUP_FILES}
+    do
+        [ ! -f ${IMAGE_ROOTFS}/$file ] || rm -f ${IMAGE_ROOTFS}/$file
+    done
+
     # Move the var/etc directories which contains the opkg data used for the
     # manifest (and maybe one day for online updates) to a hidden directory.
-    mv ${IMAGE_ROOTFS}/var ${IMAGE_ROOTFS}/.var
-    mv ${IMAGE_ROOTFS}/etc ${IMAGE_ROOTFS}/.etc
-    mv ${IMAGE_ROOTFS}/lib ${IMAGE_ROOTFS}/.lib
+    for dir in ${TISDK_IMAGE_CLEANUP_DIRS}
+    do
+        [ ! -d ${IMAGE_ROOTFS}/$dir ] || mv ${IMAGE_ROOTFS}/$dir ${IMAGE_ROOTFS}/.$dir
+    done
 }
 
 license_create_manifest() {
