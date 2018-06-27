@@ -772,17 +772,17 @@ tisdk_image_build () {
         done
     fi
 
-    if [ "${DEPLOY_SPL_NAME}" != "" ]
-    then
+    for spl_name in ${DEPLOY_SPL_NAME}
+    do
         # Copy the SPL image if it exists
-        if [ -e ${DEPLOY_DIR_IMAGE}/${DEPLOY_SPL_NAME} ]
+        if [ -e ${DEPLOY_DIR_IMAGE}/$spl_name ]
         then
-            cp ${DEPLOY_DIR_IMAGE}/${DEPLOY_SPL_NAME} ${prebuilt_dir}/
+            cp ${DEPLOY_DIR_IMAGE}/$spl_name ${prebuilt_dir}/
         else
-            echo "Could not find the SPL image"
+            echo "Could not find the SPL image \"$spl_name\""
             return 1
         fi
-    fi
+    done
 
     if [ "${DEPLOY_SPL_UART_NAME}" != "" ]
     then
