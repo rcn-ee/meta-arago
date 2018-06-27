@@ -1,0 +1,40 @@
+From c9d104a51f4f62e157f01e1fd47f534aa22a9d81 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 26 Jun 2018 15:55:31 -0400
+Subject: [PATCH] headers.h: remove math.h include that breaks aarch64
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| In file included from .../aarch64-linux-gnu/include/c++/7.2.1/cmath:42:0,
+|                  from .../aarch64-linux-gnu/include/c++/7.2.1/math.h:36,
+|                  from ../../iperf-2.0.5/include/headers.h:85,
+|                  from ../../iperf-2.0.5/include/Timestamp.hpp:63,
+|                  from ../../iperf-2.0.5/compat/delay.cpp:53:
+| .../aarch64-linux-gnu/include/c++/7.2.1/bits/cpp_type_traits.h:205:12: error: redefinition of ‘struct std::__is_integer<int>’
+|      struct __is_integer<int>
+|             ^~~~~~~~~~~~~~~~~
+| .../aarch64-linux-gnu/include/c++/7.2.1/bits/cpp_type_traits.h:138:12: note: previous definition of ‘struct std::__is_integer<int>’
+|      struct __is_integer<bool>
+|             ^~~~~~~~~~~~~~~~~~
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ include/headers.h | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/include/headers.h b/include/headers.h
+index 4667bfe..7e5efd7 100644
+--- a/include/headers.h
++++ b/include/headers.h
+@@ -82,7 +82,6 @@
+ #include <errno.h>
+ #include <string.h>
+ #include <time.h>
+-#include <math.h>
+ 
+ #ifdef WIN32
+ 
+-- 
+2.7.4
+
