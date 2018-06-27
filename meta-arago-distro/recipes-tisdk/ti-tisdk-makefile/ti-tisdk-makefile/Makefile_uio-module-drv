@@ -4,7 +4,7 @@ uio-module-drv: linux
 	@echo ================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "uio-module-drv*"`; \
-	make ARCH=arm KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)
+	make ARCH=__KERNEL_ARCH__ KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)
 
 uio-module-drv_clean:
 	@echo ================================
@@ -12,7 +12,7 @@ uio-module-drv_clean:
 	@echo ================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "uio-module-drv*"`; \
-	make ARCH=arm KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) clean
+	make ARCH=__KERNEL_ARCH__ KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) clean
 
 uio-module-drv_install:
 	@echo ================================
@@ -25,4 +25,4 @@ uio-module-drv_install:
 	fi
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "uio-module-drv*"`; \
-	make ARCH=arm  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) modules_install
+	make ARCH=__KERNEL_ARCH__  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) modules_install

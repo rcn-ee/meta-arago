@@ -4,7 +4,7 @@ cryptodev: linux
 	@echo ================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "cryptodev*"`; \
-	make ARCH=arm KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR)
+	make ARCH=__KERNEL_ARCH__ KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR)
 
 cryptodev_clean:
 	@echo ================================
@@ -12,7 +12,7 @@ cryptodev_clean:
 	@echo ================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "cryptodev*"`; \
-	make ARCH=arm KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR) clean
+	make ARCH=__KERNEL_ARCH__ KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR) clean
 
 cryptodev_install:
 	@echo ================================
@@ -25,4 +25,4 @@ cryptodev_install:
 	fi
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "cryptodev*"`; \
-	make ARCH=arm  KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) install
+	make ARCH=__KERNEL_ARCH__  KERNEL_DIR=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) install
