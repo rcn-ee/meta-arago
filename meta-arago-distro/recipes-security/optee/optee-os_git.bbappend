@@ -58,6 +58,7 @@ do_compile_aarch64() {
     oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
     ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
         mv tee-pager.bin bl32.bin; \
+        mv tee.elf bl32.elf; \
     )
 }
 
@@ -66,6 +67,7 @@ do_install() {
     install -d ${D}/boot
     install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${D}/boot || true
     install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/bl32.bin ${D}/boot || true
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/bl32.elf ${D}/boot || true
 
     #install TA devkit
     install -d ${D}/usr/include/optee/export-user_ta/
@@ -78,6 +80,7 @@ do_deploy() {
     install -d ${DEPLOYDIR}
     install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/*.optee ${DEPLOYDIR} || true
     install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/bl32.bin ${DEPLOYDIR} || true
+    install -m 644 ${B}/out/arm-plat-${OPTEEOUTPUTMACHINE}/core/bl32.elf ${DEPLOYDIR} || true
 }
 
 FILES_${PN} = "/boot"
