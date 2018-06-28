@@ -6,7 +6,7 @@ CONFIG_NAME ?= "tisdk_${MACHINE}${ARAGO_KERNEL_SUFFIX}_defconfig"
 # do_compile_prepend so that we can pick up any changes to the
 # defconfig thay may have been done by the sanitizer code.
 do_configure_append() {
-    cp ${B}/.config ${S}/arch/arm/configs/${CONFIG_NAME}
+    cp ${B}/.config ${S}/arch/${ARCH}/configs/${CONFIG_NAME}
 }
 
 # Move create_srcipk task so that the release defconfig is included.
