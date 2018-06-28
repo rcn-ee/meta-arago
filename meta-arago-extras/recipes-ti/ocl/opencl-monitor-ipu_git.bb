@@ -3,7 +3,7 @@ HOMEPAGE = "http://software-dl.ti.com/mctools/docs/opencl/intro.html"
 LICENSE = "BSD"
 
 include ocl.inc
-require recipes-ti/includes/ti-paths.inc
+require recipes-ti/includes/arago-paths.inc
 
 PR = "${INC_PR}.0"
 
@@ -17,6 +17,7 @@ DEPENDS = " common-csl-ip-rtos \
             ti-pdk-build-rtos \
             ti-cgt-arm-native \
             util-linux-native \
+            opencl-tidl-fw \
 "
 
 COMPATIBLE_MACHINE = "am57xx-evm|am57xx-hs-evm"
@@ -38,6 +39,7 @@ export XDC_DIR = "${XDC_INSTALL_DIR}"
 export TI_OCL_M4_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/ti-cgt-arm"
 export CSL_LIB_M4 = "${PDK_DIR}/packages/ti/csl/lib/am572x/m4/release/ti.csl.aem4"
 export PM_HAL_LIB_M4 = "$(PDK_DIR)/packages/ti/drv/pm/lib/am572x/m4/release/pm_hal.aem4"
+export OCL_TIDL_FW_DIR = "${OCL_TIDL_FW_INSTALL_DIR}"
 
 ALTERNATIVE_${PN} = "dra7-ipu1-fw.xem4"
 ALTERNATIVE_LINK_NAME[dra7-ipu1-fw.xem4] = "${base_libdir}/firmware/dra7-ipu1-fw.xem4"

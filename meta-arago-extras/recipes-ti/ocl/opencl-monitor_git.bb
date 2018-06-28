@@ -3,7 +3,7 @@ HOMEPAGE = "http://software-dl.ti.com/mctools/docs/opencl/intro.html"
 LICENSE = "BSD"
 
 include ocl.inc
-require recipes-ti/includes/ti-paths.inc
+require recipes-ti/includes/arago-paths.inc
 
 PR = "${INC_PR}.0"
 
@@ -42,6 +42,9 @@ DEPENDS_append_k2e  = " multiprocmgr-rtos \
                             rm-lld-rtos \
 "
 
+DEPENDS_append_dra7xx = " opencl-tidl-fw \
+"
+
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -75,6 +78,7 @@ export GDB_SERVER_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/gdbc6x"
 export AET_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/ctoolslib/aet"
 export X86_LLVM_DIR = "${STAGING_DIR_NATIVE}/usr"
 export XDCPATH = "${S};${IPC_DIR}/packages;${BIOS_DIR}/packages;${EDMA3LLD_DIR}/packages;${FC_DIR}/packages;${XDAIS_DIR}/packages"
+export OCL_TIDL_FW_DIR = "${OCL_TIDL_FW_INSTALL_DIR}"
 
 do_install_append_dra7xx() {
 	for i in 1 2; do mv ${D}${base_libdir}/firmware/dra7-dsp$i-fw.xe66 ${D}${base_libdir}/firmware/dra7-dsp$i-fw.xe66.${BPN}; done
