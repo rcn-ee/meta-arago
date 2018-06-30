@@ -52,6 +52,9 @@ EXTRA_TISDK_FILES ?= ""
 # Variable to specify the name of SPL
 DEPLOY_SPL_NAME ?= "MLO-${MACHINE}"
 
+# Add generic method of adding prebuilt-images
+DEPLOY_IMAGES_NAME ?= ""
+
 # Variable to specify the name of SPL/UART
 DEPLOY_SPL_UART_NAME ?= "u-boot-spl.bin-${MACHINE}"
 
@@ -780,6 +783,17 @@ tisdk_image_build () {
             cp ${DEPLOY_DIR_IMAGE}/$spl_name ${prebuilt_dir}/
         else
             echo "Could not find the SPL image \"$spl_name\""
+            return 1
+        fi
+    done
+
+    for image_name in ${DEPLOY_IMAGES_NAME}
+    do
+        if [ -e ${DEPLOY_DIR_IMAGE}/$image_name ]
+        then
+            cp ${DEPLOY_DIR_IMAGE}/$image_name ${prebuilt_dir}/
+        else
+            echo "Could not find image \"$image_name\""
             return 1
         fi
     done
