@@ -57,8 +57,8 @@ do_compile() {
 do_compile_aarch64() {
     oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
     ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
-        mv tee-pager.bin bl32.bin; \
-        mv tee.elf bl32.elf; \
+        cp tee-pager.bin bl32.bin; \
+        cp tee.elf bl32.elf; \
     )
 }
 
