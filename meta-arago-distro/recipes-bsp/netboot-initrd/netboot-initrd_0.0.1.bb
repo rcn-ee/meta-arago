@@ -25,8 +25,7 @@ IMAGE_INSTALL = "\
   "
 
 # add the required kernel modules
-IMAGE_INSTALL += "${@' '.join(['kernel-module-'+x for x in d.getVar('NETBOOT_KERNEL_MODULES',d,1).split()])}"
-
+IMAGE_INSTALL += "${@' '.join(['kernel-module-'+x for x in d.getVar('NETBOOT_KERNEL_MODULES').split()])}"
 
 # Reduce the size of the rootfs by removing features
 

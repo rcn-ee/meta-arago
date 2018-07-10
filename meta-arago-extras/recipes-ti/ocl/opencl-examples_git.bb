@@ -68,12 +68,12 @@ python do_unpack_append() {
     import shutil
 
     git_dir = d.expand("${WORKDIR}/git/examples")
-    s = d.getVar("S", True)
+    s = d.getVar("S")
 
     os.makedirs(s)
     shutil.copy(os.path.join(git_dir,"Makefile"),s)
     shutil.copy(os.path.join(git_dir,"make.inc"),s)
-    for example in d.getVar("OCL_EXAMPLE_LIST", True).split():
+    for example in d.getVar("OCL_EXAMPLE_LIST").split():
         shutil.copytree(os.path.join(git_dir,example), os.path.join(s,example))
 }
 
