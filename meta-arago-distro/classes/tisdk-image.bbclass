@@ -81,12 +81,12 @@ def string_set(iterable):
 
 # Add a dependency for the do_rootfs function that will force us to build
 # the TARGET_IMAGES first so that they will be available for packaging.
-do_rootfs[depends] += "${@string_set('%s:do_image_complete' % pn for pn in (d.getVar("TARGET_IMAGES", True) or "").split())}"
+do_rootfs[depends] += "${@string_set('%s:do_image_complete' % pn for pn in (d.getVar("TARGET_IMAGES") or "").split())}"
 
 # Add a dependency for the do_populate_sdk function of the TIDSK_TOOLCHAIN
 # variable which will force us to build the toolchain first so that it will be
 # available for packaging
-do_rootfs[depends] += "${@string_set('%s:do_populate_sdk' % pn for pn in (d.getVar("TISDK_TOOLCHAIN", True) or "").split())}"
+do_rootfs[depends] += "${@string_set('%s:do_populate_sdk' % pn for pn in (d.getVar("TISDK_TOOLCHAIN") or "").split())}"
 
 do_rootfs[nostamp] = "1"
 do_rootfs[lockfiles] += "${IMAGE_ROOTFS}.lock"
@@ -670,7 +670,7 @@ fakeroot python do_rootfs () {
 fakeroot python do_image () {
     from oe.utils import execute_pre_post_process
 
-    pre_process_cmds = d.getVar("IMAGE_PREPROCESS_COMMAND", True)
+    pre_process_cmds = d.getVar("IMAGE_PREPROCESS_COMMAND")
 
     execute_pre_post_process(d, pre_process_cmds)
 }
@@ -681,7 +681,7 @@ addtask do_image after do_rootfs before do_build
 fakeroot python do_image_complete () {
     from oe.utils import execute_pre_post_process
 
-    post_process_cmds = d.getVar("IMAGE_POSTPROCESS_COMMAND", True)
+    post_process_cmds = d.getVar("IMAGE_POSTPROCESS_COMMAND")
 
     execute_pre_post_process(d, post_process_cmds)
 }

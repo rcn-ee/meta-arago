@@ -23,8 +23,8 @@ SRC_URI += "\
 python do_patch_append() {
     import shutil
 
-    work_dir = d.getVar("WORKDIR", True)
-    s = d.getVar("S", True)
+    work_dir = d.getVar("WORKDIR")
+    s = d.getVar("S")
 
     if not bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d):
         shutil.copy(os.path.join(work_dir,"quit.png"),os.path.join(s,"examples/widgets/animation/animatedtiles/images/"))
