@@ -1,4 +1,4 @@
-PV = "1.0.0.0"
+PV = "1.0.0.2"
 INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://tidl_api_manifest.html;md5=ae816cc40db02fe06193212437ad00e8"
@@ -8,4 +8,4 @@ GIT_PROTOCOL = "git"
 BRANCH = "master"
 
 SRC_URI = "${GIT_URI};protocol=${GIT_PROTOCOL};branch=${BRANCH}"
-SRCREV = "d6326ad29c9ed4b79ebf3e0f588f247ed2cf3d2e"
+SRCREV = "8bad8d86fd89fd8c482aa10ab89f3049337a9ca2"

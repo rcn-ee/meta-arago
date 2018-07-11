@@ -329,6 +329,10 @@ SRCIPK_INSTALL_DIR_pn-opencl-examples = "example-applications/${PN}-${PV}"
 CREATE_SRCIPK_pn-openmpacc-examples = "1"
 SRCIPK_INSTALL_DIR_pn-openmpacc-examples = "example-applications/${PN}-${PV}"
 
+CREATE_SRCIPK_pn-tidl-examples = "1"
+SRCIPK_INSTALL_DIR_pn-tidl-examples = "example-applications/${PN}-${PV}"
+SRCIPK_SRC_DIR_pn-tidl-examples = "${S}/examples"
+
 CREATE_SRCIPK_pn-qt-opencv-opencl-opengl-multithreaded = "1"
 SRCIPK_INSTALL_DIR_pn-qt-opencv-opencl-opengl-multithreaded = "example-applications/${PN}-${PV}"
 

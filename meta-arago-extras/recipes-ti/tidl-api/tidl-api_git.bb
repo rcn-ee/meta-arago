@@ -1,5 +1,5 @@
-SUMMARY = "TIDL API examples"
-DESCRIPTION = "Examples of TIDL API. Refer TIDL API User's Guide for details."
+SUMMARY = "TIDL API"
+DESCRIPTION = "TIDL API header and library. Refer TIDL API User's Guide for details."
 HOMEPAGE = "http://software-dl.ti.com/mctools/docs/tidl-api/intro.html"
 LICENSE = "BSD"
 
@@ -12,19 +12,19 @@ COMPATIBLE_MACHINE = "am57xx-evm|am57xx-hs-evm"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "opencv \
-           clocl-native \
+           opencl \
+           opencl-monitor \
            ti-cgt6x-native \
-           tidl-api \
+           clocl-native \
 "
 
-RDEPENDS_${PN} += "tidl-api \
-                   opencl-runtime \
+RDEPENDS_${PN} += "opencl-runtime \
                    opencv \
 "
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = " -C ${S}/examples \
+EXTRA_OEMAKE = " -C ${S}/tidl_api \
                  TARGET_ROOTDIR=${STAGING_DIR_HOST} \
                  TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \
 "
@@ -39,8 +39,11 @@ TIDL_INSTALL_DIR = "${datadir}/ti/tidl"
 
 do_install() {
     install -d ${D}${TIDL_INSTALL_DIR}
-    install -d ${D}${TIDL_INSTALL_DIR}/examples
-    cp ${CP_ARGS} ${S}/examples/* ${D}${TIDL_INSTALL_DIR}/examples/
+    install -d ${D}${TIDL_INSTALL_DIR}/tidl_api
+    install -d ${D}${TIDL_INSTALL_DIR}/viewer
+    cp ${CP_ARGS} ${S}/tidl_api/* ${D}${TIDL_INSTALL_DIR}/tidl_api/
+    cp ${CP_ARGS} ${S}/viewer/* ${D}${TIDL_INSTALL_DIR}/viewer/
+    install ${S}/readme.md ${D}${TIDL_INSTALL_DIR}/
 }
 
 FILES_${PN} += "\
