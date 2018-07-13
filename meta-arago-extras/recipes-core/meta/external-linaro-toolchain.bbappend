@@ -26,7 +26,7 @@ RDEPENDS_libubsan += "libstdc++"
 PKGV = "${ELT_VER_LIBC}"
 PKGV_glibc-thread-db = "${ELT_VER_LIBC}"
 
-FILES_${PN} = "${libc_baselibs} ${libexecdir}/* ${@oe.utils.conditional('USE_LDCONFIG', '1', '${base_sbindir}/ldconfig ${sysconfdir}/ld.so.conf', '', d)}"
+FILES_${PN} = "${libc_baselibs} ${libexecdir}/* ${@bb.utils.contains('DISTRO_FEATURES', 'ldconfig', '${base_sbindir}/ldconfig ${sysconfdir}/ld.so.conf', '', d)}"
 FILES_${PN} += "\
 	${libdir}/bin \
 	${libdir}/locale \
