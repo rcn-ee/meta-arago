@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r69"
+PR = "r70"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -142,6 +142,9 @@ MATRIX_APPS_append_omap-a15 = "     \
 
 MATRIX_APPS_append_dra7xx += " \
     matrix-multimedia-demo-dsp66imgproc \
+    matrix-tidl-demo-staticimg \
+    matrix-tidl-demo-pnexamples \
+    matrix-tidl-demo-livecam \
 "
 
 MATRIX_APPS_append_keystone = " \
