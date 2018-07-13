@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r67"
+PR = "r68"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -61,6 +61,10 @@ UTILS_append_omap-a15 = " mmc-utils \
                           ti-ipc-rtos-fw \
                           uio-test-pruss \
                           uio-module-drv-test \
+"
+
+UTILS_append_k3 = " mmc-utils \
+                    pru-icss \
 "
 
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"

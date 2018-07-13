@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r32"
+PR = "r33"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -32,11 +32,14 @@ UTILS_append_ti43x = " \
     pru-icss-src \
 "
 
+UTILS_append_k3 = " \
+    pru-icss-src \
+"
+
 EXTRA_LIBS = ""
 
 EXTRA_LIBS_append_omap-a15 = " \
     cmem-mod-src \
-    pru-icss-src \
     uio-module-drv-src \
     big-data-ipc-demo-linux-src \
 "
