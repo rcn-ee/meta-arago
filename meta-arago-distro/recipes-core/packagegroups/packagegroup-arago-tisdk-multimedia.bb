@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r21"
+PR = "r22"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -41,6 +41,10 @@ ACCEL_FW_append_am57xx-evm = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
 "
 
+ACCEL_FW_append_am57xx-hs-evm = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
+"
+
 ACCEL_FW_append_omap5-evm = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
 "
@@ -48,6 +52,10 @@ ACCEL_FW_append_omap5-evm = " \
 ACCEL_FW_append_dra7xx-evm = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
     vis \
+"
+
+ACCEL_FW_append_dra7xx-hs-evm = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
 "
 
 RDEPENDS_${PN} = "\
