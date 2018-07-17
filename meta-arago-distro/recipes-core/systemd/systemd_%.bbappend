@@ -1,4 +1,4 @@
-PR_append = ".arago5"
+PR_append = ".arago6"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
@@ -11,6 +11,7 @@ SRC_URI_append = " \
     file://usb1-rules.sh \
     file://usb2-rules.sh \
     file://10-eth.network \
+    file://15-eth.network \
     file://30-wlan.network \
     file://60-usb.network \
     file://sync-clocks.service \
@@ -26,6 +27,7 @@ do_install_append() {
 
     install -d ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${WORKDIR}/10-eth.network ${D}${sysconfdir}/systemd/network/
+    install -m 0644 ${WORKDIR}/15-eth.network ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${WORKDIR}/30-wlan.network ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${WORKDIR}/60-usb.network ${D}${sysconfdir}/systemd/network/
 
