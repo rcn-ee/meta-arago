@@ -1,4 +1,4 @@
-PR_append = ".arago5"
+PR_append = ".arago6"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
@@ -7,10 +7,12 @@ USERADD_PARAM_${PN} += "--system -d / -M --shell /bin/nologin systemd-network;"
 USERADD_PARAM_${PN} += "--system -d / -M --shell /bin/nologin systemd-resolve;"
 
 SRC_URI_append = " \
+    file://0001-Add-a-RequiredForOnline-Link-attribute-for-.network-.patch \
     file://local.rules \
     file://usb1-rules.sh \
     file://usb2-rules.sh \
     file://10-eth.network \
+    file://15-eth.network \
     file://30-wlan.network \
     file://60-usb.network \
     file://sync-clocks.service \
@@ -26,6 +28,7 @@ do_install_append() {
 
     install -d ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${WORKDIR}/10-eth.network ${D}${sysconfdir}/systemd/network/
+    install -m 0644 ${WORKDIR}/15-eth.network ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${WORKDIR}/30-wlan.network ${D}${sysconfdir}/systemd/network/
     install -m 0644 ${WORKDIR}/60-usb.network ${D}${sysconfdir}/systemd/network/
 
