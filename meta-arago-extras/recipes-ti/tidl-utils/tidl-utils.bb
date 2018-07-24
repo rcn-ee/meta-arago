@@ -8,10 +8,10 @@ INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://docs/LICENSE.txt;md5=a93aa5af7a3bbbb6fb34c8df59efaa5c"
 
-RDEPENDS_${PN} += " tidl-api tidl-examples "
+RDEPENDS_${PN}_class-target += " tidl-api tidl-examples "
 
 SRC_URI = "git://git.ti.com/tidl/tidl-utils.git;protocol=git;branch=master"
-SRCREV = "93f66d2c53960b13b7e7f20208ee205f727aaf28"
+SRCREV = "994d90ae583610673d9d39086ca5e84027a9c56e"
 
 PR = "${INC_PR}.0"
 
