@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r68"
+PR = "r69"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -149,6 +149,11 @@ EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_keystone = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
+
+EXTRA_PACKAGES_append_am335x-evm = " pruss-lld-apps"
+EXTRA_PACKAGES_append_am437x-evm = " pruss-lld-apps"
+EXTRA_PACKAGES_append_am57xx-evm = " pruss-lld-apps"
+EXTRA_PACKAGES_append_k2g-evm  = " pruss-lld-apps"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
