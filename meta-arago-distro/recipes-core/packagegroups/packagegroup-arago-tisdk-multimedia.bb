@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r22"
+PR = "r23"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,7 +11,6 @@ MULTIMEDIA = " \
 "
 
 MULTIMEDIA_omapl138 = ""
-MULTIMEDIA_k3 = ""
 MULTIMEDIA_append_keystone = " \
     hevc-arm-decoder \
 "
