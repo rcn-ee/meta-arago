@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.8"
+PR = "${INC_PR}.9"
 
 S = "${WORKDIR}/git/3d_apps"
 
@@ -41,6 +41,10 @@ PACKAGES_append_ti33x = " \
             matrix-3d-demo-kmscube \
 "
 
+PACKAGES_append_k3 = " \
+            matrix-3d-demo-kmscube \
+"
+
 MATRIX_3D_DEMO_SGX_QAF_PARAM = "1000"
 
 do_install_prepend() {
@@ -53,6 +57,7 @@ do_install_prepend() {
 3D_DEMOS_RDEPENDS_omap-a15 = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
 3D_DEMOS_RDEPENDS_ti43x    = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
 3D_DEMOS_RDEPENDS_ti33x    = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
+3D_DEMOS_RDEPENDS_k3       = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
 
 RDEPENDS_matrix-3d-demo-chameleon = "${3D_DEMOS_RDEPENDS}"
 RDEPENDS_matrix-3d-demo-coverflow = "${3D_DEMOS_RDEPENDS}"
