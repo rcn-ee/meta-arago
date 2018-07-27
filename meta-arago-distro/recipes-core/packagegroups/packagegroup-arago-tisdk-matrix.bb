@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r70"
+PR = "r71"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -20,7 +20,6 @@ MATRIX_GUI = "               \
 
 MATRIX_GUI_keystone = ""
 MATRIX_GUI_omapl138 = ""
-MATRIX_GUI_k3 = ""
 
 MATRIX_COMMON_APPS = "              \
     matrix-gui-armbenchmarks-demos  \
@@ -43,7 +42,6 @@ MATRIX_TOUCH_APPS = " \
 
 MATRIX_QT_APPS_keystone = ""
 MATRIX_QT_APPS_omapl138 = ""
-MATRIX_QT_APPS_k3 = ""
 
 MATRIX_SGX_DEMOS = " \
     matrix-3d-demo-chameleon \
@@ -139,6 +137,24 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-gui-generic-pm           \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
+    ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','sgx',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
+"
+
+MATRIX_APPS_append_k3 = "           \
+    matrix-multimedia-demo-aac      \
+    matrix-multimedia-demo-audiocapture \
+    matrix-multimedia-demo-h264dec  \
+    matrix-multimedia-demo-h265dec  \
+    matrix-multimedia-demo-mpeg4aacdec \
+    matrix-multimedia-demo-mpeg4dec \
+                                    \
+    matrix-gui-generic-pm           \
+    matrix-gui-clocks               \
+    matrix-gui-pm-demos-governor    \
+                                    \
+    matrix-hmi-demo-evse            \
+                                    \
+    ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
     ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','sgx',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
 "
 
