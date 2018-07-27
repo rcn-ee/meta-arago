@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://kmscube.c;beginline=1;endline=23;md5=e760965096e52da8
 
 DEPENDS = "libdrm libgbm ti-sgx-ddk-um"
 
-COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15"
+COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools pkgconfig
 
-PR = "r9"
+PR = "r10"
 SRCREV = "3e9807ddcf2b4e8ccf711cdaf851752ec40d7904"
 
 SRC_URI = "git://git.ti.com/glsdk/kmscube.git;protocol=git"
