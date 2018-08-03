@@ -19,7 +19,7 @@ ARMCORE_aarch64 = "CFG_ARM64_core=y ta-targets=ta_arm64"
 EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX} \
                 CROSS_COMPILE_ta_arm32=${HOST_PREFIX} \
                 CROSS_COMPILE_ta_arm64=${HOST_PREFIX} \
-                NOWERROR=1 \
+                NOWERROR=1 V=1 \
                 LIBGCC_LOCATE_CFLAGS=--sysroot=${STAGING_DIR_HOST} \
                 CFG_TEE_TA_LOG_LEVEL=0 \
                 CFG_TEE_CORE_LOG_LEVEL=2 \
@@ -44,7 +44,8 @@ do_compile() {
     )
 
     if [ "${OPTEEPAGER}" = "y" ]; then
-        oe_runmake clean PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
+#        oe_runmake clean PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
+        rm -rf out/
         oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR} CFG_WITH_PAGER=y
         ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
             ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee.bin tee.bin.signed; \
