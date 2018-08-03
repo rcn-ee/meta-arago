@@ -7,15 +7,16 @@ PKG_${PN}-dbg = "${PN}-dbg"
 
 COMPATIBLE_MACHINE = "k3"
 
-SYSFW_VER = "2018.06"
+SYSFW_VER = "2018.07"
 SYSFW_BIN_am65xx-evm = "ti-sci-firmware-am6x-gp.bin"
+SYSFW_DL_am65xx-evm = "ti-sci-firmware-am6x-gp-${SYSFW_VER}.bin"
 
 SRC_URI += " \
 	file://gen_x509_cert.sh \
-	http://lcpd.gt.design.ti.com/sysfw/${SYSFW_VER}/${SYSFW_BIN};name=sysfw"
+	http://lcpd.gt.design.ti.com/sysfw/${SYSFW_VER}/${SYSFW_BIN};name=sysfw;downloadfilename=${SYSFW_DL}"
 
-SRC_URI[sysfw.md5sum] = "384a5240572a0c648a991326797fed05"
-SRC_URI[sysfw.sha256sum] = "8a0ef9bc9d21510169e8d656d2872228a8f0e703b0b25437c227a42738d45579"
+SRC_URI[sysfw.md5sum] = "368fc9e9b2113b0d25bae901d521c638"
+SRC_URI[sysfw.sha256sum] = "7ed6262ce8a1171eb10a89845d6007ea5e54d80647c6af57434d10d4ded8d80b"
 
 CROSS_COMPILE_V7 = "${ELT_TARGET_SYS_ARMV7}-"
 PATH_prepend = "${TOOLCHAIN_PATH_ARMV7}/bin:"
@@ -32,7 +33,7 @@ UBOOT_SYMLINK = "tiboot3-${MACHINE}.bin"
 SPL_BINARY_k3 = ""
 
 do_configure_append() {
-	${WORKDIR}/gen_x509_cert.sh -m rom -c m3 -b ${WORKDIR}/${SYSFW_BIN} -o ${WORKDIR}/sysfw.bin -l 0x40000
+	${WORKDIR}/gen_x509_cert.sh -m rom -c m3 -b ${WORKDIR}/${SYSFW_DL} -o ${WORKDIR}/sysfw.bin -l 0x40000
 }
 
 do_install_append() {
