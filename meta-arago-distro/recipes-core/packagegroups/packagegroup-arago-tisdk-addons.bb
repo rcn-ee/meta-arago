@@ -15,7 +15,6 @@ UTILS = " \
     gdbserver \
     oprofile \
     nbench-byte \
-    trace-cmd \
     arm-benchmarks \
     dropbear \
     openssh-sftp-server \
