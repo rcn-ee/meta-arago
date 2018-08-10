@@ -8,4 +8,4 @@ GIT_PROTOCOL = "git"
 BRANCH = "master"
 
 SRC_URI = "${GIT_URI};protocol=${GIT_PROTOCOL};branch=${BRANCH}"
-SRCREV = "8bad8d86fd89fd8c482aa10ab89f3049337a9ca2"
+SRCREV = "06585057d0f47bb930647123557bc5a1506dabda"
