@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
-PR = "r14"
+PR = "r15"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -15,6 +15,8 @@ MULTIMEDIA_append_ti43x = " \
 "
 
 MULTIMEDIA_append_ti33x = " barcode-roi-src"
+
+MULTIMEDIA_append_k3 = " barcode-roi-src"
 
 MULTIMEDIA_append_omap-a15 = " \
     dual-camera-demo-src \
