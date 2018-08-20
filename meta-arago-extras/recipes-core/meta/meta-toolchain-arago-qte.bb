@@ -1,6 +1,6 @@
 # Qt Embedded toolchain
 TOOLCHAIN_HOST_TASK ?= "nativesdk-packagegroup-arago-qte-toolchain-host"
-TOOLCHAIN_TARGET_TASK ?= "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'packagegroup-arago-qt5-toolchain-target', 'packagegroup-arago-qte-toolchain-target', d)}"
+TOOLCHAIN_TARGET_TASK ?= "packagegroup-arago-qte-toolchain-target"
 TOOLCHAIN_SUFFIX ?= "-qte-sdk"
 
 require meta-toolchain-arago.bb
