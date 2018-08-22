@@ -1,0 +1,61 @@
+From d4c8511b845de02271b6dcf57a6edbf01f3f1905 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Tue, 21 Aug 2018 11:07:13 -0400
+Subject: [PATCH] gdkglcontext-wayland.c: cleanup the parameters of egl API
+ calls when GLES is used
+
+eglBindAPI: use EGL_OPENGL_ES_API instead of EGL_OPENGL_API
+eglChooseConfig: need to specify EGL_OPENGL_ES2_BIT as EGL_RENDERABLE_TYPE
+
+Upstream-Status: Pending
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ gdk/wayland/gdkglcontext-wayland.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/gdk/wayland/gdkglcontext-wayland.c b/gdk/wayland/gdkglcontext-wayland.c
+index 254900d..3361eb3 100644
+--- a/gdk/wayland/gdkglcontext-wayland.c
++++ b/gdk/wayland/gdkglcontext-wayland.c
+@@ -314,6 +314,7 @@ gdk_wayland_display_init_gl (GdkDisplay *display)
+   GdkWaylandDisplay *display_wayland = GDK_WAYLAND_DISPLAY (display);
+   EGLint major, minor;
+   EGLDisplay dpy;
++  gboolean use_es = (_gdk_gl_flags & GDK_GL_GLES) != 0 ;
+ 
+   if (display_wayland->have_egl)
+     return TRUE;
+@@ -326,7 +327,7 @@ gdk_wayland_display_init_gl (GdkDisplay *display)
+   if (!eglInitialize (dpy, &major, &minor))
+     return FALSE;
+ 
+-  if (!eglBindAPI (EGL_OPENGL_API))
++  if (!eglBindAPI (use_es?EGL_OPENGL_ES_API:EGL_OPENGL_API))
+     return FALSE;
+ 
+   display_wayland->egl_display = dpy;
+@@ -379,6 +380,7 @@ find_eglconfig_for_window (GdkWindow  *window,
+   EGLint count;
+   EGLConfig *configs, chosen_config;
+   gboolean use_rgba;
++  gboolean use_es = (_gdk_gl_flags & GDK_GL_GLES) != 0 ;
+ 
+   int i = 0;
+ 
+@@ -395,6 +397,12 @@ find_eglconfig_for_window (GdkWindow  *window,
+   attrs[i++] = EGL_BLUE_SIZE;
+   attrs[i++] = 1;
+ 
++  if (use_es)
++    {
++      attrs[i++] = EGL_RENDERABLE_TYPE;
++      attrs[i++] = EGL_OPENGL_ES2_BIT;
++    }
++
+   use_rgba = (visual == gdk_screen_get_rgba_visual (gdk_display_get_default_screen (display)));
+ 
+   if (use_rgba)
+-- 
+1.9.1
+
