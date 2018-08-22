@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to build and install header and libs into the sdk"
 LICENSE = "MIT"
-PR = "r12"
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,6 +11,12 @@ QT_TOOLCHAIN_TARGET = "\
 "
 QT_TOOLCHAIN_TARGET_keystone = ""
 QT_TOOLCHAIN_TARGET_omapl138 = ""
+
+GTK_TOOLCHAIN_TARGET = "\
+    packagegroup-arago-gtk-sdk-target \
+"
+GTK_TOOLCHAIN_TARGET_keystone = ""
+GTK_TOOLCHAIN_TARGET_omapl138 = ""
 
 TISDK_TOOLCHAIN_BASE_TARGET = "\
     packagegroup-arago-standalone-sdk-target \
@@ -26,6 +32,7 @@ TISDK_TOOLCHAIN_EXTRA_TARGET_omapl138 = ""
 
 RDEPENDS_${PN} = "\
     ${QT_TOOLCHAIN_TARGET} \
+    ${GTK_TOOLCHAIN_TARGET} \
     ${TISDK_TOOLCHAIN_BASE_TARGET} \
     ${TISDK_TOOLCHAIN_EXTRA_TARGET} \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx','packagegroup-arago-tisdk-graphics-sdk-target','',d)} \
