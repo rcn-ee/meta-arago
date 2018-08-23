@@ -14,9 +14,9 @@ inherit autotools pkgconfig
 SRC_URI = "git://git.ti.com/glsdk/example-applications.git;protocol=git \
 "
 
-SRCREV="6197386b99383849fbf7c1017d2420742860a88c"
+SRCREV="52466430609c402a9f1c0667ccf727d096336d0d"
 
-PR = "r51"
+PR = "r52"
 
 do_install_append () {
     install -d ${D}${sysconfdir}/glsdkstatcoll
