@@ -768,7 +768,7 @@ tisdk_image_build () {
     #       The \| is important for delimiting these values.
     if [ "${DTB_FILTER}" != "unknown" ]
     then
-        for f in `find ${DEPLOY_DIR_IMAGE} -type l -regex ".*\(${DTB_FILTER}\).*\.dtb"`
+        for f in `find ${DEPLOY_DIR_IMAGE} -type l -regex ".*\(${DTB_FILTER}\).*\.dtbo?"`
         do
             dtb_file=`basename $f | sed s/.Image-//`
             cp $f ${prebuilt_dir}/${dtb_file}
