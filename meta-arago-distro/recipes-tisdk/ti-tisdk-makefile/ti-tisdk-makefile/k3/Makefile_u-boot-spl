@@ -1,0 +1,61 @@
+
+# u-boot build targets
+u-boot-spl: u-boot
+u-boot-spl_clean: u-boot_clean
+u-boot-spl_install: u-boot_install
+
+UBOOT_A53_BUILD_DIR=$(TI_SDK_PATH)/board-support/u-boot_build/a53
+UBOOT_R5_BUILD_DIR=$(TI_SDK_PATH)/board-support/u-boot_build/r5
+
+UBOOT_ATF=$(TI_SDK_PATH)/board-support/prebuilt-images/bl31.bin
+UBOOT_TEE=$(TI_SDK_PATH)/board-support/prebuilt-images/bl32.bin
+UBOOT_SYSFW=$(TI_SDK_PATH)/board-support/prebuilt-images/sysfw.bin
+
+u-boot: u-boot-a53 u-boot-r5
+u-boot_clean: u-boot-a53_clean u-boot-r5_clean
+
+u-boot-a53:
+	@echo ===================================
+	@echo    Building U-boot for A53
+	@echo ===================================
+	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) \
+		 $(UBOOT_MACHINE) O=$(UBOOT_A53_BUILD_DIR)
+	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) \
+		CONFIG_MKIMAGE_DTC_PATH=$(UBOOT_A53_BUILD_DIR)/scripts/dtc/dtc \
+		ATF=$(UBOOT_ATF) TEE=$(UBOOT_TEE) \
+		O=$(UBOOT_A53_BUILD_DIR)
+
+u-boot-a53_clean:
+	@echo ===================================
+	@echo    Cleaining U-boot for A53
+	@echo ===================================
+	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) \
+		O=$(UBOOT_A53_BUILD_DIR) distclean
+	@rm -rf $(UBOOT_A53_BUILD_DIR)
+
+
+u-boot-r5:
+	@echo ===================================
+	@echo    Building U-boot for R5
+	@echo ===================================
+	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) \
+		 $(UBOOT_MACHINE_R5) O=$(UBOOT_R5_BUILD_DIR)
+	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) \
+		CONFIG_MKIMAGE_DTC_PATH=$(UBOOT_R5_BUILD_DIR)/scripts/dtc/dtc \
+		SYSFW=$(UBOOT_SYSFW) \
+		O=$(UBOOT_R5_BUILD_DIR)
+
+u-boot-r5_clean:
+	@echo ===================================
+	@echo    Cleaining U-boot for R5
+	@echo ===================================
+	$(MAKE) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) \
+		O=$(UBOOT_R5_BUILD_DIR) distclean
+	@rm -rf $(UBOOT_R5_BUILD_DIR)
+
+u-boot_install:
+	@echo ===================================
+	@echo    Installing U-boot
+	@echo ===================================
+	@echo "Nothing to do"
+
