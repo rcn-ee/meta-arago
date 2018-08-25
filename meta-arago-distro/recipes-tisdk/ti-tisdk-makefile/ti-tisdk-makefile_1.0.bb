@@ -50,7 +50,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r87"
+PR = "r88"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -59,7 +59,6 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
 
 MAKEFILES_MATRIX_GUI_keystone = ""
 MAKEFILES_MATRIX_GUI_omapl138 = ""
-MAKEFILES_MATRIX_GUI_k3 = ""
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -165,6 +164,9 @@ MAKEFILES_append_k2e = " opencl-examples \
 
 MAKEFILES_append_k3 = " u-boot-spl \
                         linux-dtbs \
+                        barcode-roi \
+                        cryptodev \
+                        ti-sgx-ddk-km \
 "
 
 # Use this to export kernel arch to ARCH
