@@ -282,6 +282,15 @@ do_install () {
 
 }
 
+do_install_append_k3() {
+    cat >> ${D}/Rules.make << __EOF__
+
+# Add CROSS_COMPILE and UBOOT_MACHINE for the R5
+export CROSS_COMPILE_ARMV7=\$(LINUX_DEVKIT_PATH)/sysroots/${SDKMACHINE}-arago-linux/usr/bin/arm-linux-gnueabihf-
+UBOOT_MACHINE_R5=am65x_evm_r5_defconfig
+__EOF__
+}
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FILES_${PN} = "/*"
