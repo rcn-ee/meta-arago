@@ -249,6 +249,7 @@ do_install () {
     fi
 
     sed -i -e "s/__KERNEL_ARCH__/${ARCH}/" ${D}/Makefile
+    sed -i -e "s/__KERNEL_IMAGE_TYPE__/${KERNEL_IMAGE_TYPE}/" ${D}/Makefile
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
     sed -i -e "s/__SDKMACHINE__/${SDKMACHINE}/g" ${D}/Makefile
 

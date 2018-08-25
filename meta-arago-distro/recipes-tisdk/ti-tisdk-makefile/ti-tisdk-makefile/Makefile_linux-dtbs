@@ -18,7 +18,7 @@ linux-dtbs_install:
 		exit 1; \
 	fi
 	install -d $(DESTDIR)/boot
-	@cp -f $(LINUXKERNEL_INSTALL_DIR)/arch/arm/boot/dts/*.dtb $(DESTDIR)/boot/
+	@cp -f `find $(LINUXKERNEL_INSTALL_DIR)/arch/__KERNEL_ARCH__/boot/dts/ -regex '.*\.dtbo?'` $(DESTDIR)/boot/
 
 linux-dtbs_clean:
 	@echo =======================================
