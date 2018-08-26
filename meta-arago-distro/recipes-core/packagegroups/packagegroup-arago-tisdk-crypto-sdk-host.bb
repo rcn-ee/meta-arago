@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install crypto sources in SDK"
 LICENSE = "MIT"
-PR = "r10"
+PR = "r11"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -16,6 +16,7 @@ CRYPTO_RDEPENDS_append_ti33x = " cryptodev-module-src"
 CRYPTO_RDEPENDS_append_ti43x = " cryptodev-module-src"
 CRYPTO_RDEPENDS_append_dra7xx = " cryptodev-module-src"
 CRYPTO_RDEPENDS_append_keystone = " cryptodev-module-src"
+CRYPTO_RDEPENDS_append_k3 = " cryptodev-module-src"
 
 RDEPENDS_${PN} = "\
     ${CRYPTO_RDEPENDS} \
