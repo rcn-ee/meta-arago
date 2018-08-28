@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r20"
+PR = "r21"
 
 inherit packagegroup
 
@@ -12,6 +12,10 @@ GRAPHICS_WAYLAND = "\
 "
 
 GRAPHICS_WAYLAND_append_omap-a15 = "\
+    chromium-wayland \
+"
+
+GRAPHICS_WAYLAND_append_k3 = "\
     chromium-wayland \
 "
 
