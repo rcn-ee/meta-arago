@@ -37,6 +37,7 @@ SRC_URI = "\
     file://Makefile_debugss-module-drv \
     file://Makefile_gdbserverproxy-module-drv \
     file://Makefile_ti-sgx-ddk-km \
+    file://Makefile_ti-sgx-ddk-km-k3 \
     file://Makefile_opencl-examples \
     file://Makefile_boot-monitor \
     file://Makefile_hplib-mod \
@@ -50,7 +51,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r90"
+PR = "r91"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -168,7 +169,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
                         linux-dtbs \
                         barcode-roi \
                         cryptodev \
-                        ti-sgx-ddk-km \
+                        ti-sgx-ddk-km-k3 \
                         pru-icss \
 "
 
@@ -186,6 +187,7 @@ PLATFORM_ARCH_omapl138 = "armv5te"
 TARGET_PRODUCT = "jacinto6evm"
 TARGET_PRODUCT_ti33x = "ti335x"
 TARGET_PRODUCT_ti43x = "ti437x"
+TARGET_PRODUCT_k3 = "ti654x"
 
 PLATFORM_DEBUGSS = ""
 PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
