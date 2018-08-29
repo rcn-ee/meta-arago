@@ -1,7 +1,7 @@
 DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
 
-PR = "r12"
+PR = "r13"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -61,6 +61,16 @@ QT5_DEV = " \
         qtsensors-dev \
         qtsvg-dev \
         qtxmlpatterns-dev \
+        qtwebengine-mkspecs \
+        qtwebengine-dev \
+"
+
+QT5_DEV_append_k3 = " \
+        qtwebkit-mkspecs \
+        qtwebkit-dev \
+"
+
+QT5_DEV_remove_k3 = " \
         qtwebengine-mkspecs \
         qtwebengine-dev \
 "
