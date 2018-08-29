@@ -71,3 +71,15 @@ pru-icss_install_am572x: pru-icss_install_common
 		done; \
 	done
 
+pru-icss_install_k2g: pru-icss_install_common
+	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	install -m 0644 ./examples/k2g/PRU_Halt/gen/PRU_Halt.out \
+		$(DESTDIR)/lib/firmware/pru; \
+	for i in 0 1; \
+	do \
+		for j in 0 1; \
+		do \
+			install -m 0644 ./examples/k2g/PRU_RPMsg_Echo_Interrupt$${i}_$${j}/gen/PRU_RPMsg_Echo_Interrupt$${i}_$${j}.out \
+				$(DESTDIR)/lib/firmware/pru; \
+		done; \
+	done
