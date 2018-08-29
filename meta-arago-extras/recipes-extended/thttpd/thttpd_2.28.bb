@@ -6,6 +6,8 @@ LICENSE = "BSD"
 HOMEPAGE = "http://www.acme.com/software/thttpd/"
 PR ="r0"
 
+DEPENDS += "virtual/crypt"
+
 LIC_FILES_CHKSUM = "file://thttpd.c;beginline=1;endline=26;md5=525c6428ecff95f4e71d5b3c88a34fff"
 SRC_URI = "http://www.acme.com/software/thttpd/thttpd-${PV}.tar.gz \
 	   file://install.patch \
