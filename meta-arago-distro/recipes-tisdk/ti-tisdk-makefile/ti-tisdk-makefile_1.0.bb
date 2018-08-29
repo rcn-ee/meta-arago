@@ -50,7 +50,7 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
 "
 
-PR = "r89"
+PR = "r90"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -169,6 +169,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
                         barcode-roi \
                         cryptodev \
                         ti-sgx-ddk-km \
+                        pru-icss \
 "
 
 # Use this to export kernel arch to ARCH
@@ -199,6 +200,7 @@ PRU_ICSS_INSTALL_TARGET_ti33x = "pru-icss_install_am335x"
 PRU_ICSS_INSTALL_TARGET_ti43x = "pru-icss_install_am437x"
 PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
 PRU_ICSS_INSTALL_TARGET_k2g = "pru-icss_install_k2g"
+PRU_ICSS_INSTALL_TARGET_k3 = "pru-icss_install_am65x"
 
 
 # If it's not defined at all, like for zImage case
