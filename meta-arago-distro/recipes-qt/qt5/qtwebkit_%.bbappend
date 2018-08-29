@@ -7,4 +7,6 @@ SRC_URI += " \
 	file://WebCore.pri.patch \
 "
 
-PR_append = ".arago4"
+PR_append = ".arago5"
+
+DEPENDS += "flex-native bison-native"
