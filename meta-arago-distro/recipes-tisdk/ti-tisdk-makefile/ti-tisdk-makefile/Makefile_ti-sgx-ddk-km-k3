@@ -1,0 +1,25 @@
+# ti-sgx-ddk-km module for k3
+ti-sgx-ddk-km-k3: linux
+	@echo ================================
+	@echo      Building ti-sgx-ddk-km
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "ti-sgx-ddk-km*" -type d`; \
+	make -C ./eurasia_km/eurasiacon/build/linux2/omap_linux ARCH=__KERNEL_ARCH__ TARGET_PRODUCT=__TARGET_PRODUCT__ KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) WINDOW_SYSTEM=nulldrmws
+
+ti-sgx-ddk-km-k3_clean:
+	@echo ================================
+	@echo      Cleaning ti-sgx-ddk-km
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "ti-sgx-ddk-km*" -type d`; \
+	make -C ./eurasia_km/eurasiacon/build/linux2/omap_linux ARCH=__KERNEL_ARCH__ KERNELDIR=$(LINUXKERNEL_INSTALL_DIR) WINDOW_SYSTEM=nulldrmws clean
+
+ti-sgx-ddk-km-k3_install:
+	@echo ================================
+	@echo      Installing ti-sgx-ddk-km
+	@echo ================================
+	@cd board-support/extra-drivers; \
+	cd `find . -maxdepth 1 -name "ti-sgx-ddk-km*" -type d`; \
+	cd ./eurasia_km/eurasiacon/binary_omap_linux_nulldrmws_release/target_aarch64/kbuild; \
+	make -C $(LINUXKERNEL_INSTALL_DIR) SUBDIRS=`pwd` INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) modules_install
