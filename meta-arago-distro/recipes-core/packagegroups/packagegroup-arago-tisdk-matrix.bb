@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r72"
+PR = "r73"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -154,7 +154,6 @@ MATRIX_APPS_append_k3 = "           \
     matrix-hmi-demo-evse            \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
-    ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','sgx',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
 "
 
 MATRIX_APPS_append_dra7xx += " \
