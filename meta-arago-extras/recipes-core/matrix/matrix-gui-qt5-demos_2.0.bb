@@ -3,9 +3,13 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 inherit allarch
+
+SRC_URI_append_k3 = " \
+           file://0001-qt5_broswer-use-webkit-browser-instead-of-webengine-.patch;pnum=2 \
+"
 
 S = "${WORKDIR}/git/qt5_apps"
 
