@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r13"
+PR = "r14"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -44,6 +44,13 @@ QT5_ESSENTIALS = "\
     liberation-fonts \
     qtconnectivity \
     qtconnectivity-qmlplugins \
+"
+
+QT5_ESSENTIALS_append_k3 = "\
+    qtwebkit-qmlplugins \
+"
+QT5_ESSENTIALS_remove_k3 = "\
+    qtwebengine-qmlplugins \
 "
 
 RDEPENDS_${PN} = "\
