@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r33"
+PR = "r34"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -29,6 +29,10 @@ UTILS_append_ti33x = " \
 "
 
 UTILS_append_ti43x = " \
+    pru-icss-src \
+"
+
+UTILS_append_k2g = " \
     pru-icss-src \
 "
 
