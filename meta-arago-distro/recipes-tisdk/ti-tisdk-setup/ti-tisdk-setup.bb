@@ -2,10 +2,10 @@ DESCRIPTION = "Package containing scripts to setup the development host and targ
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://setup.sh;beginline=3;endline=31;md5=fc4b04a33df6d892c9f4d4a9d92b945e"
 
-PR = "r35"
+PR = "r36"
 
 BRANCH ?= "master"
-SRCREV = "c6517247c9bc5564bbe63d7322314010ac28b1c3"
+SRCREV = "81862f79b19bf4f312555863d247de88921a019b"
 SRC_URI = "git://arago-project.org/git/projects/tisdk-setup-scripts.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
@@ -15,6 +15,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 SDCARD_SCRIPT = " create-sdcard.sh"
 SDCARD_SCRIPT_keystone = ""
 SDCARD_SCRIPT_k2g = " create-sdcard.sh"
+SDCARD_SCRIPT_k3 = " k3/create-sdcard.sh"
 
 SETUP_SCRIPTS = " common.sh \
                   setup-host-check.sh \
