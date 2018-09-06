@@ -66,6 +66,7 @@ UTILS_append_omap-a15 = " mmc-utils \
 UTILS_append_k3 = " mmc-utils \
                     parted \
                     pru-icss \
+                    ti-ipc-rtos-fw \
 "
 
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
