@@ -150,6 +150,7 @@ EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_keystone = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
+EXTRA_PACKAGES_append_k3 = " ti-ipc-examples-linux"
 
 EXTRA_PACKAGES_append_am335x-evm = " pruss-lld-apps"
 EXTRA_PACKAGES_append_am437x-evm = " pruss-lld-apps"
