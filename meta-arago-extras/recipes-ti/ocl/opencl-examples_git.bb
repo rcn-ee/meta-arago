@@ -1,5 +1,5 @@
 SUMMARY = "TI OpenCL example applications"
-HOMEPAGE = "http://software-dl.ti.com/mctools/docs/opencl/intro.html"
+HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/opencl/index.html"
 LICENSE = "BSD"
 
 include ocl.inc
