@@ -1,6 +1,6 @@
 SUMMARY = "TIDL Network Viewer"
 DESCRIPTION = "TIDL Network viewer using dot and graphviz"
-HOMEPAGE = "http://software-dl.ti.com/mctools/docs/tidl-api/intro.html"
+HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/tidl-api/intro.html"
 LICENSE = "BSD"
 
 include tidl-api.inc
