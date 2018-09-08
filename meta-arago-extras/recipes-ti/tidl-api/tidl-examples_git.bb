@@ -1,6 +1,6 @@
 SUMMARY = "TIDL API examples"
 DESCRIPTION = "Examples of TIDL API. Refer TIDL API User's Guide for details."
-HOMEPAGE = "http://software-dl.ti.com/mctools/docs/tidl-api/intro.html"
+HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/tidl-api/intro.html"
 LICENSE = "BSD"
 
 include tidl-api.inc
