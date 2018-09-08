@@ -1,5 +1,5 @@
 DESCRIPTION = "TI OpenCL M4/IPU device firmware for AM57x"
-HOMEPAGE = "http://software-dl.ti.com/mctools/docs/opencl/intro.html"
+HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/opencl/index.html"
 LICENSE = "BSD"
 
 include ocl.inc
