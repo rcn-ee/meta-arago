@@ -161,6 +161,9 @@ MATRIX_APPS_append_dra7xx += " \
     matrix-tidl-demo-staticimg \
     matrix-tidl-demo-pnexamples \
     matrix-tidl-demo-livecam \
+    matrix-tidl-demo-livecam-lg2 \
+    matrix-tidl-demo-staticimg-lg2 \
+    matrix-tidl-demo-staticimg-dsponly \
 "
 
 MATRIX_APPS_append_keystone = " \
