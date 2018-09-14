@@ -65,6 +65,7 @@ UTILS_append_omap-a15 = " mmc-utils \
 
 UTILS_append_k3 = " mmc-utils \
                     parted \
+                    switch-config \
                     pru-icss \
                     ti-ipc-rtos-fw \
 "
