@@ -19,6 +19,7 @@ RDEPENDS_${PN} = "\
     libpcre \
     iptables \
     iperf \
+    iperf3 \
     arago-gpl-notice \
     arago-feed-config \
     nfs-utils-client \
