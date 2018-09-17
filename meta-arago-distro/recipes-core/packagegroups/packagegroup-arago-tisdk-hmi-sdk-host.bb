@@ -1,6 +1,6 @@
 SUMMARY = "Task to add HMI related sources into the SDK"
 LICENSE = "MIT"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,6 +19,10 @@ HMI_append_ti33x = " \
 
 
 HMI_append_omap-a15 = " \
+    evse-hmi-src \
+"
+
+HMI_append_k3 = " \
     evse-hmi-src \
 "
 
