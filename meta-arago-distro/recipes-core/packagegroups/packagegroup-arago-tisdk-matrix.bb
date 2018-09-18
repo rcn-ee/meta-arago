@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r74"
+PR = "r75"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -153,10 +153,6 @@ MATRIX_APPS_append_k3 = "           \
     matrix-multimedia-demo-h264dec  \
     matrix-multimedia-demo-mpeg4aacdec \
     matrix-multimedia-demo-mpeg4dec \
-                                    \
-    matrix-gui-generic-pm           \
-    matrix-gui-clocks               \
-    matrix-gui-pm-demos-governor    \
                                     \
     matrix-hmi-demo-evse            \
                                     \
