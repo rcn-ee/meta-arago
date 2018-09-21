@@ -40,6 +40,14 @@ case "$1" in
             chmod 0700 $XDG_RUNTIME_DIR
         fi
 
+        echo "Starting Weston"
+
+        if [ ! -d "/dev/input" ]; then
+            echo "Waiting for input device..."
+            killproc weston
+            sleep 3
+        fi
+
         openvt -c 4 -f runWeston
 
         # If there's no touchscreen device available, done
