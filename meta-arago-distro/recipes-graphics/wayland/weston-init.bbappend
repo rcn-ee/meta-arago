@@ -1,4 +1,4 @@
-PR_append = ".arago8"
+PR_append = ".arago9"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
