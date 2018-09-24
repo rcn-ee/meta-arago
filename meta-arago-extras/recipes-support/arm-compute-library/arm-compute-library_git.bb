@@ -29,20 +29,30 @@ LIBS += "-larmpl_lp64_mp"
 do_install() {
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 
-    install -d ${D}${libdir}
+    install -m 0755 -d ${D}${libdir}
     for lib in ${S}/build/*.so
     do
-        install -m 0644 $lib ${D}${libdir}
+        install -m 0755 $lib ${D}${libdir}
     done
+
+    # Install 'example' and benchmark executables
+    install -d ${D}${bindir}
+    find ${S}/build/examples/ -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${bindir} \;
+    cp $CP_ARGS ${S}/build/tests/arm_compute_benchmark ${D}${bindir}
 
     # Install built source package as expected by ARMNN
     install -d ${D}${datadir}/${BPN}
     cp $CP_ARGS ${S}/. ${D}${datadir}/${BPN}
 }
 
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+INSANE_SKIP_${PN} = "ldflags"
 INSANE_SKIP_${PN}-dev = "dev-elf ldflags"
 
 PACKAGES =+ "${PN}-source"
+FILES_${PN} += "${bindir}/*"
+FILES_${PN} += "${libdir}/*.so"
 FILES_${PN}-source = "${datadir}/${BPN}"
 INSANE_SKIP_${PN}-source = "ldflags libdir staticdev"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
