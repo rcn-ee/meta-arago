@@ -150,9 +150,18 @@ EXTRA_LIBS_append_k2e = " libulm-staticdev \
 "
 
 EXTRA_PACKAGES = ""
-EXTRA_PACKAGES_append_ti33x = " voxelsdk-dev"
-EXTRA_PACKAGES_append_ti43x = " voxelsdk-dev"
-EXTRA_PACKAGES_append_omap-a15 = " voxelsdk-dev"
+EXTRA_PACKAGES_append_ti33x = " voxelsdk-dev \
+                                arm-compute-library-dev \
+                                armnn-dev \
+"
+EXTRA_PACKAGES_append_ti43x = " voxelsdk-dev \
+                                arm-compute-library-dev \
+                                armnn-dev \
+"
+EXTRA_PACKAGES_append_omap-a15 = " voxelsdk-dev \
+                                arm-compute-library-dev \
+                                armnn-dev \
+"
 
 IPCDEV = " \
 	ti-ipc-dev \
