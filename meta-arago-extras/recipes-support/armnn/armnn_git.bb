@@ -27,6 +27,8 @@ DEPENDS = " \
     armnn-tensorflow \
 "
 
+RDEPENDS_${PN} = " arm-compute-library protobuf boost "
+
 EXTRA_OECMAKE=" \
     -DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF \
     -DARMCOMPUTE_ROOT=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
@@ -39,8 +41,20 @@ EXTRA_OECMAKE=" \
     -DTHIRD_PARTY_INCLUDE_DIRS=${STAGING_DIR_HOST}${includedir} \
 "
 
+do_install_append() {
+    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+    install -d ${D}${bindir}
+    find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${bindir} \;
+    cp $CP_ARGS ${WORKDIR}/build/UnitTests  ${D}${bindir}
+    chrpath -d ${D}${bindir}/*
+}
+
 CXXFLAGS += "-fopenmp"
 LIBS += "-larmpl_lp64_mp"
 
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+FILES_${PN} += "{bindir}/*"
+FILES_${PN} += "{libdir}/*"
 FILES_${PN}-dev += "{libdir}/cmake/*"
 INSANE_SKIP_${PN}-dev = "dev-elf"
