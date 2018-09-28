@@ -7,14 +7,14 @@ POSIX_SMP_GIT_URI = "git://git.ti.com/keystone-demos/posix-smp.git"
 POSIX_SMP_GIT_PROTOCOL = "git"
 POSIX_SMP_GIT_BRANCH = "master"
 
-# Below commit ID corresponds to "DEV.POSIX-SMP.01.01.00.01"
-POSIX_SMP_SRCREV = "99834751f63f8f418e659b251f10e8e13b900881"
+# Below commit ID corresponds to "DEV.POSIX-SMP.01.01.00.02B"
+POSIX_SMP_SRCREV = "339039e281586a79c5b04fac6c2ae84eb30c0576"
 
 BRANCH = "${POSIX_SMP_GIT_BRANCH}"
 SRC_URI = "${POSIX_SMP_GIT_URI};protocol=${POSIX_SMP_GIT_PROTOCOL};branch=${BRANCH}"
 
 SRCREV = "${POSIX_SMP_SRCREV}"
-PV = "01.01.00.01"
+PV = "01.01.00.02B"
 INC_PR = "r0"
 
 S = "${WORKDIR}/git"
