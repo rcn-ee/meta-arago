@@ -1,0 +1,65 @@
+From b893b6e581785fd4a458d5cf1a8178e858636db2 Mon Sep 17 00:00:00 2001
+From: Murali Karicheri <m-karicheri2@ti.com>
+Date: Thu, 27 Sep 2018 11:56:00 -0400
+Subject: [PATCH 1/2] hsr/prp: disable display for vlan params in ip -d link
+ command
+
+Seeing a crash with ip -d link command for prp. Disable it for now
+as a trial to check if that is causing the segmentation fault
+for prp. These values are not coming from kernel anyways. So it
+doesn't correctly display it currently. So this has no impact on
+the functionality. Can add it later once kernel provide the right
+values in the response.
+
+Upstream-Status: Pending
+
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ ip/iplink_hsr.c | 9 ---------
+ ip/iplink_prp.c | 9 ---------
+ 2 files changed, 18 deletions(-)
+
+diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
+index 34e91679..e713cb7b 100644
+--- a/ip/iplink_hsr.c
++++ b/ip/iplink_hsr.c
+@@ -180,15 +180,6 @@ static void hsr_print_opt(struct link_util *lu, FILE *f, struct rtattr *tb[])
+ 				    RTA_PAYLOAD(tb[IFLA_HSR_SUPERVISION_ADDR]),
+ 				    ARPHRD_VOID,
+ 				    b1, sizeof(b1)));
+-	if (tb[IFLA_HSR_SV_VID])
+-		fprintf(f, "SV_VID %d ",
+-			rta_getattr_u16(tb[IFLA_HSR_SV_VID]));
+-	if (tb[IFLA_HSR_SV_PCP])
+-		fprintf(f, "SV_PCP %d ",
+-			rta_getattr_u8(tb[IFLA_HSR_SV_PCP]));
+-	if (tb[IFLA_HSR_SV_CFI])
+-		fprintf(f, "SV_CFI %d ",
+-			rta_getattr_u8(tb[IFLA_HSR_SV_CFI]));
+ }
+ 
+ static void hsr_print_help(struct link_util *lu, int argc, char **argv,
+diff --git a/ip/iplink_prp.c b/ip/iplink_prp.c
+index e25ae82d..b09528a5 100644
+--- a/ip/iplink_prp.c
++++ b/ip/iplink_prp.c
+@@ -170,15 +170,6 @@ static void prp_print_opt(struct link_util *lu, FILE *f, struct rtattr *tb[])
+ 				    RTA_PAYLOAD(tb[IFLA_PRP_SUPERVISION_ADDR]),
+ 				    ARPHRD_VOID,
+ 				    b1, sizeof(b1)));
+-	if (tb[IFLA_PRP_SV_VID])
+-		fprintf(f, "SV_VID %d ",
+-			rta_getattr_u16(tb[IFLA_PRP_SV_VID]));
+-	if (tb[IFLA_PRP_SV_PCP])
+-		fprintf(f, "SV_PCP %d ",
+-			rta_getattr_u8(tb[IFLA_PRP_SV_PCP]));
+-	if (tb[IFLA_PRP_SV_CFI])
+-		fprintf(f, "SV_CFI %d ",
+-			rta_getattr_u8(tb[IFLA_PRP_SV_CFI]));
+ }
+ 
+ static void prp_print_help(struct link_util *lu, int argc, char **argv,
+-- 
+2.17.0
+
+

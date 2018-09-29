@@ -1,0 +1,31 @@
+From 755328f9c9d45149cad1a8e6c371d2020b99f18e Mon Sep 17 00:00:00 2001
+From: Murali Karicheri <m-karicheri2@ti.com>
+Date: Thu, 27 Sep 2018 14:54:48 -0400
+Subject: [PATCH 2/2] prp: invalid maxattr
+
+Fix the cut and paste error of using IFLA_VLAN_MAX instead of IFLA_PRP_MAX.
+
+Upstream-Status: Pending
+
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ ip/iplink_prp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ip/iplink_prp.c b/ip/iplink_prp.c
+index b09528a5..beef603b 100644
+--- a/ip/iplink_prp.c
++++ b/ip/iplink_prp.c
+@@ -180,7 +180,7 @@ static void prp_print_help(struct link_util *lu, int argc, char **argv,
+ 
+ struct link_util prp_link_util = {
+ 	.id		= "prp",
+-	.maxattr	= IFLA_VLAN_MAX,
++	.maxattr	= IFLA_PRP_MAX,
+ 	.parse_opt	= prp_parse_opt,
+ 	.print_opt	= prp_print_opt,
+ 	.print_help	= prp_print_help,
+-- 
+2.17.0
+
+
