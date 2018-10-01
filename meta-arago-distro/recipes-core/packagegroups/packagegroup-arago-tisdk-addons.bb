@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r69"
+PR = "r70"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -63,6 +63,7 @@ UTILS_append_omap-a15 = " mmc-utils \
 "
 
 UTILS_append_k3 = " mmc-utils \
+                    can-utils \
                     parted \
                     switch-config \
                     pru-icss \
