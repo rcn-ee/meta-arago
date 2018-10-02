@@ -3,10 +3,12 @@ DESCRIPTION = "Small image capable of mounting a newtwork root filesystem (NFS)"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
+PR = "r1"
+
 inherit core-image image_types
 
 #by default include the kernel modules necessary to use a ASIX USB/Ethernet adapter
-NETBOOT_KERNEL_MODULES ?= "dwc3 dwc3-omap asix xhci-plat-hcd extcon-usb-gpio"
+NETBOOT_KERNEL_MODULES ?= "dwc3 dwc3-omap asix xhci-plat-hcd extcon-usb-gpio phy-omap-usb2"
 
 export IMAGE_BASENAME = "netboot-initramfs"
 
