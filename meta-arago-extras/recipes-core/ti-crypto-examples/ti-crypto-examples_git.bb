@@ -3,7 +3,7 @@ HOMEPAGE = "http://arago-project.org/git/projects/?p=crypto-example-apps.git;a=s
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://AES/aes_256.c;beginline=9;endline=35;md5=8edbb4dee965d2f2eb5ca2822addcae5"
 SECTION = "console"
-DEPENDS += "openssl"
+DEPENDS += "openssl10"
 
 PR = "r7"
 
