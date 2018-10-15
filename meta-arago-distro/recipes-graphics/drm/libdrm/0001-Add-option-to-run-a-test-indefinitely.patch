@@ -1,4 +1,4 @@
-From babcb3f7fdc53c25f2c525eea1704498a19c126d Mon Sep 17 00:00:00 2001
+From eed389c68118fd673a462d7ac6738a1fe3aec217 Mon Sep 17 00:00:00 2001
 From: Alejandro Hernandez <ajhernandez@ti.com>
 Date: Wed, 15 Mar 2017 14:25:20 -0400
 Subject: [PATCH] Add option to run a test indefinitely
@@ -10,15 +10,16 @@ was not able to run in ltp-ddt because ltp-ddt sends data to stdin
 when a test is run
 
 Signed-off-by: Alejandro Hernandez <ajhernandez@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
  tests/modetest/modetest.c | 13 +++++++++----
  1 file changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/tests/modetest/modetest.c b/tests/modetest/modetest.c
-index 21d5438..76685da 100644
+index 975dcbc..654ce89 100644
 --- a/tests/modetest/modetest.c
 +++ b/tests/modetest/modetest.c
-@@ -1186,7 +1186,7 @@ static void clear_cursors(struct device *dev)
+@@ -1501,7 +1501,7 @@ static void clear_cursors(struct device *dev)
  		bo_destroy(dev->mode.cursor_bo);
  }
  
@@ -27,7 +28,7 @@ index 21d5438..76685da 100644
  {
  	uint32_t handles[4] = {0}, pitches[4] = {0}, offsets[4] = {0};
  	unsigned int other_fb_id;
-@@ -1255,7 +1255,7 @@ static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned
+@@ -1570,7 +1570,7 @@ static void test_page_flip(struct device *dev, struct pipe_arg *pipes, unsigned
  		fd_set fds;
  
  		FD_ZERO(&fds);
@@ -36,16 +37,16 @@ index 21d5438..76685da 100644
  		FD_SET(dev->fd, &fds);
  		ret = select(dev->fd + 1, &fds, NULL, NULL, &timeout);
  
-@@ -1497,7 +1497,7 @@ static int pipe_resolve_connectors(struct device *dev, struct pipe_arg *pipe)
+@@ -1818,7 +1818,7 @@ static int pipe_resolve_connectors(struct device *dev, struct pipe_arg *pipe)
  	return 0;
  }
  
--static char optstr[] = "cdD:efM:P:ps:Cvw:";
-+static char optstr[] = "cdD:efM:P:ps:Cvw:t";
+-static char optstr[] = "acdD:efM:P:ps:Cvw:";
++static char optstr[] = "acdD:efM:P:ps:Cvw:t";
  
  int main(int argc, char **argv)
  {
-@@ -1512,6 +1512,7 @@ int main(int argc, char **argv)
+@@ -1834,6 +1834,7 @@ int main(int argc, char **argv)
  	char *module = NULL;
  	unsigned int i;
  	unsigned int count = 0, plane_count = 0;
@@ -53,7 +54,7 @@ index 21d5438..76685da 100644
  	unsigned int prop_count = 0;
  	struct pipe_arg *pipe_args = NULL;
  	struct plane_arg *plane_args = NULL;
-@@ -1599,6 +1600,10 @@ int main(int argc, char **argv)
+@@ -1924,6 +1925,10 @@ int main(int argc, char **argv)
  
  			prop_count++;
  			break;
@@ -64,15 +65,15 @@ index 21d5438..76685da 100644
  		default:
  			usage(argv[0]);
  			break;
-@@ -1671,7 +1676,7 @@ int main(int argc, char **argv)
- 			set_cursors(&dev, pipe_args, count);
+@@ -2075,7 +2080,7 @@ int main(int argc, char **argv)
+ 				set_cursors(&dev, pipe_args, count);
  
- 		if (test_vsync)
--			test_page_flip(&dev, pipe_args, count);
-+			test_page_flip(&dev, pipe_args, count, dont_stop);
+ 			if (test_vsync)
+-				test_page_flip(&dev, pipe_args, count);
++				test_page_flip(&dev, pipe_args, count, dont_stop);
  
- 		if (drop_master)
- 			drmDropMaster(dev.fd);
+ 			if (drop_master)
+ 				drmDropMaster(dev.fd);
 -- 
-1.9.1
+2.7.4
 
