@@ -5,7 +5,7 @@ HOMEPAGE = "http://hostap.epitest.fi"
 DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
 SECTION = "kernel/userland"
 
-DEPENDS = "libnl openssl"
+DEPENDS = "libnl openssl10"
 
 # Since this is a TI customized version of hostap-daemon do not make this the
 # default
@@ -13,7 +13,7 @@ DEFAULT_PREFERENCE = "-1"
 
 PR = "r6"
 
-inherit update-rc.d
+inherit update-rc.d pkgconfig
 INITSCRIPT_NAME="hostapd"
 
 CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
