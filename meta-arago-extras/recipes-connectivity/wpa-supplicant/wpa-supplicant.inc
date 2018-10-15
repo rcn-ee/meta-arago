@@ -7,7 +7,9 @@ BUGTRACKER = "http://hostap.epitest.fi/bugz/"
 SECTION = "network"
 LICENSE = "GPLv2 | BSD"
 
-DEPENDS = "gnutls dbus libnl openssl libgcrypt"
+inherit pkgconfig
+
+DEPENDS = "gnutls dbus libnl openssl10 libgcrypt"
 RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 
 # To prevent users from accidently picking up this customized version of
