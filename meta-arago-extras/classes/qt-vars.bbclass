@@ -13,5 +13,5 @@ QT_DEPENDS_WEBENGINE = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'qtwebengi
 
 # Run-time dependencies
 QT_RDEPENDS_FONTS = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'qt4-embedded-fonts', d)}"
-QT_RDEPENDS_NATIVESDK_TOOLS = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'nativesdk-qtbase-tools nativesdk-qttools', 'nativesdk-qt4-tools', d)}"
+QT_RDEPENDS_NATIVESDK_TOOLS = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'nativesdk-qtbase nativesdk-qttools', 'nativesdk-qt4-tools', d)}"
 QT_RDEPENDS_MKSPECS = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'qtbase-mkspecs', 'qt4-embedded-mkspecs', d)}"
