@@ -9,7 +9,7 @@ SRC_URI = " \
     git://github.com/ARM-software/ComputeLibrary.git;branch=${BRANCH} \
 "
 
-PV  = "18.05"
+PV = "18.05"
 
 BRANCH = "master"
 SRCREV = "e2542c9f35ca427286822cd0c9296f49914f78b0"
@@ -17,12 +17,14 @@ SRCREV = "e2542c9f35ca427286822cd0c9296f49914f78b0"
 S = "${WORKDIR}/git"
 
 do_compile_prepend() {
+    sed -i 's/arm-linux-gnueabihf-/${TOOLCHAIN_SYS}-/' SConstruct
+    sed -i "s#env.Append(LINKFLAGS = \['-fopenmp'\])#env.Append(LINKFLAGS = \['-fopenmp','--sysroot=${STAGING_DIR_TARGET}'\])#" SConstruct
     unset CC CXX
 }
 
 inherit scons
 
-EXTRA_OESCONS = "arch=armv7a extra_cxx_flags="-fPIC" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0"
+EXTRA_OESCONS = "arch=armv7a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept ${TOOLCHAIN_OPTIONS}" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0"
 
 LIBS += "-larmpl_lp64_mp"
 
