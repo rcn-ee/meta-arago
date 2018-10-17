@@ -40,6 +40,7 @@ SRC_URI = " \
   ${LLVM_GIT_URI};protocol=${LLVM_GIT_PROTOCOL};branch=${LLVM_GIT_BRANCH};destsuffix=${LLVM_GIT_DESTSUFFIX};name=${LLVM_GIT_NAME} \
   ${CLANG_GIT_URI};protocol=${CLANG_GIT_PROTOCOL};branch=${CLANG_GIT_BRANCH};destsuffix=${CLANG_GIT_DESTSUFFIX};name=${CLANG_GIT_NAME} \
   file://0001-configure-Do-not-check-build-executable-extension.patch \
+  file://0001-llvm-IR-ValueMap.h-unique_ptr-conversion-to-bool-ope.patch \
 "
 
 SRCREV_${LLVM_GIT_NAME} = "${LLVM_GIT_SRCREV}"
