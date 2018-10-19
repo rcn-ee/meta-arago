@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "k3"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "463b1b4a50e8e361fa333f87caf74d2e05bc0a82"
+SRCREV = "1e03f08e89bee6d29ffd25782f5ce45b1b4bf1e6"
 
 BRANCH ?= "ti-linux-firmware-4.1.y"
 
