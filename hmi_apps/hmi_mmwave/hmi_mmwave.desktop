@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=MmWave Gesture Controlled HMI
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/multimedia-icon.png
+Exec=/usr/bin/runHmiMmWave.sh
+Type=Application
+ProgramType=gui
+Categories=hmi
+X-MATRIX-Lock=hmi_mmwave_lock
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/hmi_mmwave/desc_hmi_mmwave.html
