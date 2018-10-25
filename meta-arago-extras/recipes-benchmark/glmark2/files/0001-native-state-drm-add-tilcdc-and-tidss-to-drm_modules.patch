@@ -1,0 +1,28 @@
+From b533b3a738b49aa8ca0ad31a3a1ae7e62f0cc883 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Thu, 18 Oct 2018 14:06:24 -0400
+Subject: [PATCH] native-state-drm: add tilcdc and tidss to drm_modules list
+
+Upstream-Status: Pending
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ src/native-state-drm.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/native-state-drm.cpp b/src/native-state-drm.cpp
+index 5f4699f..ef369b0 100644
+--- a/src/native-state-drm.cpp
++++ b/src/native-state-drm.cpp
+@@ -207,6 +207,8 @@ NativeStateDRM::init()
+         "radeon",
+         "vmgfx",
+         "omapdrm",
++        "tilcdc",
++        "tidss",
+         "exynos",
+         "pl111",
+         "vc4",
+-- 
+1.9.1
+
