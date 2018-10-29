@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r39"
+PR = "r40"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -29,6 +29,7 @@ FIRMWARE_AND_DRIVERS = "\
     bt-fw \
     linux-firmware-iwlwifi-8000c \
     linux-firmware-iwlwifi-8265 \
+    linux-firmware-iwlwifi-3160-17 \
 "
 
 DEMO_APPS = "\
