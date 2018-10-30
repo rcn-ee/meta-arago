@@ -20,7 +20,7 @@ SRC_URI = " \
 	git://git.ti.com/processor-firmware/system-firmware-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
 "
 
-SRCREV_imggen = "8641afac31fae30472edcef797d17d66a335f960"
+SRCREV_imggen = "3cbf4003060ead508653e2ec8f25c59bbe813e74"
 SRCREV_FORMAT = "imggen"
 
 S = "${WORKDIR}/git"
