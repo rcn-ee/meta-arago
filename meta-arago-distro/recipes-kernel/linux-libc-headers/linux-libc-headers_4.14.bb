@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 PR_append = ".arago0"
 
 BRANCH = "ti-lsk-linux-4.14.y"
-SRCREV = "3bacc614e300e497679bdd7d2759f486e713f373"
+SRCREV = "3e50654361c34b75784ab7c8c9aa8e96b3a37fc1"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
