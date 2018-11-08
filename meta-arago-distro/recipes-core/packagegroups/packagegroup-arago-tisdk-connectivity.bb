@@ -1,13 +1,11 @@
 DESCRIPTION = "Task to install wireless packages into the target FS"
 LICENSE = "MIT"
-PR = "r40"
+PR = "r41"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-# Disabled in master:
-#    crda
 # WLAN support packages.
 # These are the packages that all platforms use for WLAN support
 WLAN_COMMON = "\
@@ -15,34 +13,24 @@ WLAN_COMMON = "\
     softap-udhcpd-config \
     eventdump \
     wlconf \
-    wpa-supplicant-wl18xx \
-    hostap-daemon-wl18xx \
-    wl18xx-calibrator \
-    wl18xx-target-scripts \
-"
-
-# netperf has non-standard license, needs verifying
-#    netperf
-
-FIRMWARE_AND_DRIVERS = "\
-    wl18xx-fw \
-    bt-fw \
     linux-firmware-iwlwifi-8000c \
     linux-firmware-iwlwifi-8265 \
     linux-firmware-iwlwifi-3160-17 \
 "
 
-DEMO_APPS = "\
-    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
+WLAN_TI = "\
+    wpa-supplicant-wl18xx \
+    hostap-daemon-wl18xx \
+    wl18xx-calibrator \
+    wl18xx-target-scripts \
+    wl18xx-fw \
 "
 
-BLUETOOTH_STACK = "\
+BT_COMMON = "\
     bluez5 \
     bluez5-obex \
     bluez5-noinst-tools \
     bluez5-testtools \
-    uim \
-    bt-enable \
     pulseaudio \
     pulseaudio-server \
     pulseaudio-module-loopback \
@@ -52,6 +40,16 @@ BLUETOOTH_STACK = "\
     pulseaudio-module-bluez5-discover \
     pulseaudio-lib-bluez5-util \
     sbc \
+"
+
+BT_TI = "\
+    uim \
+    bt-enable \
+    bt-fw \
+"
+
+DEMO_APPS = "\
+    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
 "
 
 CONNECTIVITY_RDEPENDS = " \
@@ -64,22 +62,30 @@ CONNECTIVITY_RDEPENDS = " \
 
 CONNECTIVITY_RDEPENDS_append_ti33x = "\
     ${WLAN_COMMON} \
+    ${WLAN_TI} \
+    ${BT_COMMON} \
+    ${BT_TI} \
     ${DEMO_APPS} \
-    ${BLUETOOTH_STACK} \
-    ${FIRMWARE_AND_DRIVERS} \
 "
 
 CONNECTIVITY_RDEPENDS_append_ti43x = "\
     ${WLAN_COMMON} \
+    ${WLAN_TI} \
+    ${BT_COMMON} \
+    ${BT_TI} \
     ${DEMO_APPS} \
-    ${BLUETOOTH_STACK} \
-    ${FIRMWARE_AND_DRIVERS} \
 "
 
 CONNECTIVITY_RDEPENDS_append_dra7xx = "\
     ${WLAN_COMMON} \
-    ${BLUETOOTH_STACK} \
-    ${FIRMWARE_AND_DRIVERS} \
+    ${WLAN_TI} \
+    ${BT_COMMON} \
+    ${BT_TI} \
+"
+
+CONNECTIVITY_RDEPENDS_append_k3 = "\
+    ${WLAN_COMMON} \
+    ${BT_COMMON} \
 "
 
 RDEPENDS_${PN} = "\
