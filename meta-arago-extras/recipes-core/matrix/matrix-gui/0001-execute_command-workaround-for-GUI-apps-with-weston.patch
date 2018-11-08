@@ -1,6 +1,6 @@
-From 9647ddc10dc9424b1433db2f8184268523d829da Mon Sep 17 00:00:00 2001
-From: Eric Ruei <e-ruei1@ti.com>
-Date: Wed, 28 Feb 2018 12:20:32 -0500
+From 156ce8d8d9ee1b614b0079e1e9506af1835bdab7 Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Wed, 7 Nov 2018 15:48:47 -0500
 Subject: [PATCH] execute_command: workaround for GUI apps with weston
 
 * For all GUI apps, shutdown matrix before launching
@@ -8,17 +8,18 @@ Subject: [PATCH] execute_command: workaround for GUI apps with weston
     GUI app may get hidden behind matrix with no way to recover.
 * For MM and 3D and null window apps, shutdown weston before launching
   - These apps use KMS sink or DRM, which collides with weston
-
+  - Wait 1 second to make sure the application freeing all SGX resources
+    prior to weston shutdown
 Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
 Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
- execute_command.sh | 39 ++++++++++++++++++++++++++++++++++++++-
+ execute_command.sh | 40 +++++++++++++++++++++++++++++++++++++++-
  generate.php       |  4 ++++
  run_script.php     | 10 +++++++++-
- 3 files changed, 51 insertions(+), 2 deletions(-)
+ 3 files changed, 52 insertions(+), 2 deletions(-)
 
 diff --git a/execute_command.sh b/execute_command.sh
-index 325dcb9..180e71f 100755
+index 325dcb9..b8bb6da 100755
 --- a/execute_command.sh
 +++ b/execute_command.sh
 @@ -63,7 +63,22 @@ do
@@ -45,7 +46,7 @@ index 325dcb9..180e71f 100755
    then
      touch "lock/"$item
  
-@@ -72,10 +87,32 @@ do
+@@ -72,10 +87,33 @@ do
  
  done
  
@@ -55,6 +56,7 @@ index 325dcb9..180e71f 100755
 +
 +  if [ $category == 3d -o $category == multimedia -o $category == touch -o $win_type == null ]
 +  then
++    sleep 1
 +    /etc/init.d/weston stop
 +    sleep 1
 +  fi
