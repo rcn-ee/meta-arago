@@ -11,9 +11,9 @@ COMPATIBLE_MACHINE = "k3"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "cbb37f282017cb5b6bf42c26c0b5a5a8b818ec9e"
+SRCREV = "7a6ce28348a99d2ad08a6cb2b36450d73bfccc80"
 
-BRANCH ?= "ti-firmware-next"
+BRANCH ?= "ti-linux-firmware-4.1.y"
 
 SRC_URI = " \
 	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
