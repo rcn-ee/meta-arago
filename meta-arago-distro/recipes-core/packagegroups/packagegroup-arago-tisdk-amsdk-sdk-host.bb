@@ -21,7 +21,7 @@ BOOT_MONITOR_keystone = "boot-monitor-src"
 EXTRA_FILES = ""
 EXTRA_FILES_ti43x = "tisdk-uenv"
 EXTRA_FILES_omap-a15 = "tisdk-readme tisdk-uenv"
-EXTRA_FILES_k3 = "tisdk-readme tisdk-uenv"
+EXTRA_FILES_k3 = "tisdk-readme tisdk-uenv ti-sci-fw-src"
 
 RDEPENDS_${PN} = "\
     ti-tisdk-setup \
