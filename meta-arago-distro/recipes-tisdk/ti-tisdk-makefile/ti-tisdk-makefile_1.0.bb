@@ -49,9 +49,10 @@ SRC_URI = "\
     file://Makefile_linalg-examples \
     file://Makefile_ti-gc320-driver \
     file://Makefile_barcode-roi \
+    file://Makefile_sysfw-image \
 "
 
-PR = "r91"
+PR = "r92"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -171,6 +172,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
                         cryptodev \
                         ti-sgx-ddk-km-k3 \
                         pru-icss \
+                        sysfw-image \
 "
 
 # Use this to export kernel arch to ARCH
