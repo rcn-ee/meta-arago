@@ -1,0 +1,21 @@
+
+# Depend on linux-dtbs for the dtc utility
+system-firmware-image: linux-dtbs
+	@echo =============================
+	@echo    Building SYSFW Image
+	@echo =============================
+	@cd board-support; cd `find . -name "*system-firmware-image*"`; \
+		make SYSFW_DL_URL="" SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/ti-sci-firmware-am65x-gp.bin CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) PATH=$(PATH):$(LINUXKERNEL_INSTALL_DIR)/scripts/dtc
+
+system-firmware-image_clean:
+	@echo =============================
+	@echo    Cleaning SYSFW Image
+	@echo =============================
+	@cd board-support; cd `find . -name "*system-firmware-image*"`; make clean
+
+system-firmware-image_install:
+	@echo =============================
+	@echo   Installing SYSFW Image
+	@echo =============================
+	@echo "Nothing to do"
+
