@@ -41,8 +41,6 @@ u-boot-r5:
 	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) \
 		 $(UBOOT_MACHINE_R5) O=$(UBOOT_R5_BUILD_DIR)
 	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) \
-		CONFIG_MKIMAGE_DTC_PATH=$(UBOOT_R5_BUILD_DIR)/scripts/dtc/dtc \
-		SYSFW=$(UBOOT_SYSFW) \
 		O=$(UBOOT_R5_BUILD_DIR)
 
 u-boot-r5_clean:
