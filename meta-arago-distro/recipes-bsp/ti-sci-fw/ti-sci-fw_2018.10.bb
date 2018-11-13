@@ -53,6 +53,8 @@ do_deploy () {
 	install -m 644 ${WORKDIR}/imggen/${SYSFW_BINARY} ${DEPLOYDIR}/${SYSFW_IMAGE}
 	rm -f ${DEPLOYDIR}/${SYSFW_BINARY}
 	ln -sf ${SYSFW_IMAGE} ${DEPLOYDIR}/${SYSFW_BINARY}
+
+        install -m 644 ${S}/ti-sysfw/${SYSFW_TISCI} ${DEPLOYDIR}/${SYSFW_TISCI}
 }
 
 addtask deploy before do_build after do_compile
