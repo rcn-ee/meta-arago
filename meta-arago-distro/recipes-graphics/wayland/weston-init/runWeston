@@ -18,7 +18,7 @@ cat << EOF
 
 
 
-        Please wait... Weston is loading
+                                        Please wait...
 
 
 
@@ -26,11 +26,10 @@ cat << EOF
 
 
 
-Note: If you see that the display is stuck on this message
-for more than 5 seconds, Weston probably failed to run.
-Weston will not run without input devices such as
-touchscreen or a mouse. Please check your setup and
-attach an input device, and reboot.
+
+
+
+
 
 
 
