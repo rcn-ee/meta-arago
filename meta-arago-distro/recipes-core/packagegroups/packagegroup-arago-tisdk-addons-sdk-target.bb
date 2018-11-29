@@ -1,12 +1,15 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r39"
+PR = "r40"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-UTILS = "libdrm-dev"
+UTILS = "libdrm-dev \
+         open62541-dev \
+         open62541-staticdev \
+         "
 
 UTILS_append_keystone = "\
 	kernel-dev \

@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r70"
+PR = "r71"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,6 +28,8 @@ UTILS = " \
     strongswan \
     kexec \
     kdump \
+    open62541-examples \
+    open62541-tests \
 "
 
 UTILS_UBOOT_FW = "u-boot-fw-utils"
