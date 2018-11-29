@@ -1,0 +1,52 @@
+From da2b9a741c3116a7774989f6338976c00a4c0496 Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Wed, 28 Nov 2018 14:31:22 -0500
+Subject: [PATCH] examples: client: allow configurable server
+
+* Enable a remote server URL to be provided as an argument.
+* Default to localhost if no arguments are provided.
+
+Upstream-Status: Pending
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ examples/client.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/examples/client.c b/examples/client.c
+index c3147b7..90ab1c7 100644
+--- a/examples/client.c
++++ b/examples/client.c
+@@ -25,12 +25,17 @@ nodeIter(UA_NodeId childId, UA_Boolean isInverse, UA_NodeId referenceTypeId, voi
+ }
+ 
+ int main(int argc, char *argv[]) {
++    char *ua_server = "opc.tcp://localhost:4840";
++    if(argc > 1) {
++        ua_server = argv[1];
++    }
++
+     UA_Client *client = UA_Client_new(UA_ClientConfig_default);
+ 
+     /* Listing endpoints */
+     UA_EndpointDescription* endpointArray = NULL;
+     size_t endpointArraySize = 0;
+-    UA_StatusCode retval = UA_Client_getEndpoints(client, "opc.tcp://localhost:4840",
++    UA_StatusCode retval = UA_Client_getEndpoints(client, ua_server,
+                                                   &endpointArraySize, &endpointArray);
+     if(retval != UA_STATUSCODE_GOOD) {
+         UA_Array_delete(endpointArray, endpointArraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
+@@ -46,8 +51,8 @@ int main(int argc, char *argv[]) {
+     UA_Array_delete(endpointArray,endpointArraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
+ 
+     /* Connect to a server */
+-    /* anonymous connect would be: retval = UA_Client_connect(client, "opc.tcp://localhost:4840"); */
+-    retval = UA_Client_connect_username(client, "opc.tcp://localhost:4840", "user1", "password");
++    /* anonymous connect would be: retval = UA_Client_connect(client, ua_server); */
++    retval = UA_Client_connect_username(client, ua_server, "user1", "password");
+     if(retval != UA_STATUSCODE_GOOD) {
+         UA_Client_delete(client);
+         return (int)retval;
+-- 
+2.7.4
+
