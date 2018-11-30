@@ -1,6 +1,6 @@
 # patch version at the end needs to be in double digits
 PV = "1.1.17.01"
-INC_PR = "r0"
+INC_PR = "r1"
 
 LIC_FILES_CHKSUM = "file://../debian/copyright;md5=2e3965a73a8a49c23836467266120dff"
 
