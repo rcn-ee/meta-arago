@@ -25,6 +25,7 @@ QT5_DEMOS = "\
     qtwebbrowser \
     qtwebbrowser-examples \
     qtwebengine-examples \
+    qtserialport-examples \
 "
 
 QT5_DEMOS_append_k3 = " qtwebkit-examples-examples"
