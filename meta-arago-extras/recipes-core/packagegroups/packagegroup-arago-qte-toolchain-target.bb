@@ -63,6 +63,8 @@ QT5_DEV = " \
         qtxmlpatterns-dev \
         qtwebengine-mkspecs \
         qtwebengine-dev \
+        qtserialport-mkspecs \
+        qtserialport-dev  \
 "
 
 QT5_DEV_append_k3 = " \
