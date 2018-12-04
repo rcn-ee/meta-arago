@@ -110,6 +110,7 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     matrix-hmi-demo-evse            \
     matrix-hmi-demo-protection-relays \
+    matrix-hmi-demo-mmwavegesture   \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
@@ -132,6 +133,7 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-gui-apps-image-gallery   \
                                     \
     matrix-hmi-demo-evse            \
+    matrix-hmi-demo-mmwavegesture   \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
@@ -143,6 +145,7 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-multimedia-demo-audiocapture \
     matrix-multimedia-demo-h265dec  \
     matrix-hmi-demo-evse            \
+    matrix-hmi-demo-mmwavegesture   \
                                     \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264dec','matrix-multimedia-demo-h264dec',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264enc','',d)} \
@@ -167,6 +170,7 @@ MATRIX_APPS_append_k3 = "           \
     matrix-multimedia-demo-mpeg4dec \
                                     \
     matrix-hmi-demo-evse            \
+    matrix-hmi-demo-mmwavegesture   \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
