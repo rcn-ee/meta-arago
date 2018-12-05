@@ -1,0 +1,37 @@
+From 012d21f475e1a004c2a7f688835a1b5416c3b8b6 Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 17:20:10 -0500
+Subject: [PATCH 11/11] add TI benchmark test group
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ tests/framework/printers/PrettyPrinter.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/framework/printers/PrettyPrinter.cpp b/tests/framework/printers/PrettyPrinter.cpp
+index 3181951..2222286 100644
+--- a/tests/framework/printers/PrettyPrinter.cpp
++++ b/tests/framework/printers/PrettyPrinter.cpp
+@@ -83,7 +83,7 @@ void PrettyPrinter::print_run_footer()
+ 
+ void PrettyPrinter::print_test_header(const TestInfo &info)
+ {
+-    *_stream << begin_color("2") << "Running [" << info.id << "] '" << info.name << "'" << end_color() << "\n";
++    *_stream << begin_color("2") << "Running [" << info.id << "] '" << info.name << "'" << end_color() << "	";
+ }
+ 
+ void PrettyPrinter::print_test_footer()
+@@ -125,7 +125,7 @@ void PrettyPrinter::print_measurements(const Profiler::MeasurementsMap &measurem
+         InstrumentsStats stats(instrument.second);
+ 
+         *_stream << "    ";
+-        *_stream << "AVG=" << stats.mean() << " " << stats.max().unit();
++        *_stream << "AVG=	" << stats.mean() << "	" << stats.max().unit();
+         if(instrument.second.size() > 1)
+         {
+             *_stream << ", STDDEV=" << arithmetic_to_string(stats.relative_standard_deviation(), 2) << " %";
+-- 
+1.9.1
+

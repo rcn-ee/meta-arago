@@ -1,0 +1,71 @@
+From 39ebc12e4de88a7839e33755c65cb9b9f0e8535f Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 17:17:19 -0500
+Subject: [PATCH 02/11] add TI benchmark test group
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ .../squeezenet/SqueezeNetConvolutionLayerDataset.h | 45 ++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+
+diff --git a/tests/datasets/system_tests/squeezenet/SqueezeNetConvolutionLayerDataset.h b/tests/datasets/system_tests/squeezenet/SqueezeNetConvolutionLayerDataset.h
+index f98d90a..cba37eb 100644
+--- a/tests/datasets/system_tests/squeezenet/SqueezeNetConvolutionLayerDataset.h
++++ b/tests/datasets/system_tests/squeezenet/SqueezeNetConvolutionLayerDataset.h
+@@ -96,6 +96,51 @@ public:
+         add_config(TensorShape(13U, 13U, 512U), TensorShape(1U, 1U, 512U, 1000U), TensorShape(1000U), TensorShape(13U, 13U, 1000U), PadStrideInfo(1, 1, 0, 0));
+     }
+ };
++
++class TISqueezeNetConvolutionLayerDataset final : public ConvolutionLayerDataset
++{
++public:
++    TISqueezeNetConvolutionLayerDataset()
++    {
++        // conv1
++        add_config(TensorShape(227U, 227U, 3U), TensorShape(3U, 3U, 3U, 64U), TensorShape(64U), TensorShape(114U, 114U, 64U), PadStrideInfo(2, 2, 0, 0));
++        // fire2/squeeze1x1
++        add_config(TensorShape(57U, 57U, 64U), TensorShape(1U, 1U, 64U, 16U), TensorShape(16U), TensorShape(57U, 57U, 16U), PadStrideInfo(1, 1, 0, 0));
++        // fire2/expand1x1, fire3/expand1x1
++        add_config(TensorShape(57U, 57U, 16U), TensorShape(1U, 1U, 16U, 64U), TensorShape(64U), TensorShape(57U, 57U, 64U), PadStrideInfo(1, 1, 0, 0));
++        // fire2/expand3x3, fire3/expand3x3
++        add_config(TensorShape(57U, 57U, 16U), TensorShape(3U, 3U, 16U, 64U), TensorShape(64U), TensorShape(57U, 57U, 64U), PadStrideInfo(1, 1, 1, 1));
++        // fire3/squeeze1x1
++        add_config(TensorShape(57U, 57U, 128U), TensorShape(1U, 1U, 128U, 16U), TensorShape(16U), TensorShape(57U, 57U, 16U), PadStrideInfo(1, 1, 0, 0));
++        // fire4/squeeze1x1
++        add_config(TensorShape(28U, 28U, 128U), TensorShape(1U, 1U, 128U, 32U), TensorShape(32U), TensorShape(28U, 28U, 32U), PadStrideInfo(1, 1, 0, 0));
++        // fire4/expand1x1, fire5/expand1x1
++        add_config(TensorShape(28U, 28U, 32U), TensorShape(1U, 1U, 32U, 128U), TensorShape(128U), TensorShape(28U, 28U, 128U), PadStrideInfo(1, 1, 0, 0));
++        // fire4/expand3x3, fire5/expand3x3
++        add_config(TensorShape(28U, 28U, 32U), TensorShape(3U, 3U, 32U, 128U), TensorShape(128U), TensorShape(28U, 28U, 128U), PadStrideInfo(1, 1, 1, 1));
++        // fire5/squeeze1x1
++        add_config(TensorShape(28U, 28U, 256U), TensorShape(1U, 1U, 256U, 32U), TensorShape(32U), TensorShape(28U, 28U, 32U), PadStrideInfo(1, 1, 0, 0));
++        // fire6/squeeze1x1
++        add_config(TensorShape(14U, 14U, 256U), TensorShape(1U, 1U, 256U, 48U), TensorShape(48U), TensorShape(14U, 14U, 48U), PadStrideInfo(1, 1, 0, 0));
++        // fire6/expand1x1, fire7/expand1x1
++        add_config(TensorShape(14U, 14U, 48U), TensorShape(1U, 1U, 48U, 192U), TensorShape(192U), TensorShape(14U, 14U, 192U), PadStrideInfo(1, 1, 0, 0));
++        // fire6/expand3x3, fire7/expand3x3
++        add_config(TensorShape(14U, 14U, 48U), TensorShape(3U, 3U, 48U, 192U), TensorShape(192U), TensorShape(14U, 14U, 192U), PadStrideInfo(1, 1, 1, 1));
++        // fire7/squeeze1x1
++        add_config(TensorShape(14U, 14U, 384U), TensorShape(1U, 1U, 384U, 48U), TensorShape(48U), TensorShape(14U, 14U, 48U), PadStrideInfo(1, 1, 0, 0));
++        // fire8/squeeze1x1
++        add_config(TensorShape(14U, 14U, 384U), TensorShape(1U, 1U, 384U, 64U), TensorShape(64U), TensorShape(14U, 14U, 64U), PadStrideInfo(1, 1, 0, 0));
++        // fire8/expand1x1, fire9/expand1x1
++        add_config(TensorShape(14U, 14U, 64U), TensorShape(1U, 1U, 64U, 256U), TensorShape(256U), TensorShape(14U, 14U, 256U), PadStrideInfo(1, 1, 0, 0));
++        // fire8/expand3x3, fire9/expand3x3
++        add_config(TensorShape(14U, 14U, 64U), TensorShape(3U, 3U, 64U, 256U), TensorShape(256U), TensorShape(14U, 14U, 256U), PadStrideInfo(1, 1, 1, 1));
++        // fire9/squeeze1x1
++        add_config(TensorShape(14U, 14U, 512U), TensorShape(1U, 1U, 512U, 64U), TensorShape(64U), TensorShape(14U, 14U, 64U), PadStrideInfo(1, 1, 0, 0));
++        // conv10
++        add_config(TensorShape(14U, 14U, 512U), TensorShape(1U, 1U, 512U, 1000U), TensorShape(1000U), TensorShape(14U, 14U, 1000U), PadStrideInfo(1, 1, 0, 0));
++    }
++};
++
+ } // namespace datasets
+ } // namespace test
+ } // namespace arm_compute
+-- 
+1.9.1
+

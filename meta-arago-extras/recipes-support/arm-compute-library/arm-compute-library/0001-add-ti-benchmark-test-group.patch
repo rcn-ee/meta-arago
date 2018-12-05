@@ -1,0 +1,61 @@
+From 497a8abf760dbd9be715dfe6abf81c670fc85912 Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 17:16:33 -0500
+Subject: [PATCH 01/11] add TI benchmark test group
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ .../squeezenet/SqueezeNetActivationLayerDataset.h  | 35 ++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+diff --git a/tests/datasets/system_tests/squeezenet/SqueezeNetActivationLayerDataset.h b/tests/datasets/system_tests/squeezenet/SqueezeNetActivationLayerDataset.h
+index 7f4bf4d..a66f473 100644
+--- a/tests/datasets/system_tests/squeezenet/SqueezeNetActivationLayerDataset.h
++++ b/tests/datasets/system_tests/squeezenet/SqueezeNetActivationLayerDataset.h
+@@ -71,6 +71,41 @@ public:
+     SqueezeNetActivationLayerDataset(SqueezeNetActivationLayerDataset &&) = default;
+     ~SqueezeNetActivationLayerDataset()                                   = default;
+ };
++class TISqueezeNetActivationLayerDataset final : public
++    framework::dataset::CartesianProductDataset<framework::dataset::InitializerListDataset<TensorShape>, framework::dataset::SingletonDataset<ActivationLayerInfo>>
++{
++public:
++    TISqueezeNetActivationLayerDataset()
++        : CartesianProductDataset
++    {
++        framework::dataset::make("Shape", { // relu_conv1
++            TensorShape(114U, 114U, 64U),
++            // fire2/relu_squeeze1x1, fire3/relu_squeeze1x1
++            TensorShape(57U, 57U, 16U),
++            // fire2/relu_expand1x1, fire2/relu_expand3x3, fire3/relu_expand1x1, fire3/relu_expand3x3
++            TensorShape(57U, 57U, 64U),
++            // fire4/relu_squeeze1x1, fire5/relu_squeeze1x1
++            TensorShape(28U, 28U, 32U),
++            // fire4/relu_expand1x1, fire4/relu_expand3x3, fire5/relu_expand1x1, fire5/relu_expand3x3
++            TensorShape(28U, 28U, 128U),
++            // fire6/relu_squeeze1x1, fire7/relu_squeeze1x1
++            TensorShape(14U, 14U, 48U),
++            // fire6/relu_expand1x1, fire6/relu_expand3x3, fire7/relu_expand1x1, fire7/relu_expand3x3
++            TensorShape(14U, 14U, 192U),
++            // fire8/relu_squeeze1x1, fire9/relu_squeeze1x1
++            TensorShape(14U, 14U, 64U),
++            // fire8/relu_expand1x1, fire8/relu_expand3x3, fire9/relu_expand1x1, fire9/relu_expand3x3
++            TensorShape(14U, 14U, 256U),
++            // relu_conv10
++            TensorShape(14U, 14U, 1000U) }),
++        framework::dataset::make("Info", ActivationLayerInfo(ActivationLayerInfo::ActivationFunction::RELU))
++    }
++    {
++    }
++    TISqueezeNetActivationLayerDataset(TISqueezeNetActivationLayerDataset &&) = default;
++    ~TISqueezeNetActivationLayerDataset()                                   = default;
++};
++
+ } // namespace datasets
+ } // namespace test
+ } // namespace arm_compute
+-- 
+1.9.1
+
