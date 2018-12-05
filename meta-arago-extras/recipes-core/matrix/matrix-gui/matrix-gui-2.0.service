@@ -1,9 +1,17 @@
 [Unit]
 Description=Matrix GUI
 After=weston.service
+Requires=weston.service
+Before=graphical.target
 
 [Service]
 Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
 ExecStart=/etc/init.d/matrix-gui-2.0 start
 
 [Install]
