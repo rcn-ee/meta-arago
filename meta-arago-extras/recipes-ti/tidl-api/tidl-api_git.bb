@@ -11,6 +11,8 @@ PR = "${INC_PR}.0"
 COMPATIBLE_MACHINE = "am57xx-evm|am57xx-hs-evm"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+inherit python3native
+
 DEPENDS = "opencv \
            opencl \
            opencl-monitor \

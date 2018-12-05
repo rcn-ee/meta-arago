@@ -15,11 +15,13 @@ DEPENDS = "opencv \
            clocl-native \
            ti-cgt6x-native \
            tidl-api \
+           json-c \
 "
 
 RDEPENDS_${PN} += "tidl-api \
                    opencl-runtime \
                    opencv \
+                   json-c \
 "
 
 S = "${WORKDIR}/git"
