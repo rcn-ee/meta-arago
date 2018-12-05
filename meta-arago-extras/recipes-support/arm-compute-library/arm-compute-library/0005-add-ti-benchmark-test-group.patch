@@ -1,0 +1,46 @@
+From 14ba479fe707af2575fac4d2780e31a10264d295 Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 17:18:32 -0500
+Subject: [PATCH 05/11] add TI benchmark test group
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ tests/benchmark/NEON/ConvolutionLayer.cpp | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/tests/benchmark/NEON/ConvolutionLayer.cpp b/tests/benchmark/NEON/ConvolutionLayer.cpp
+index ac27e7a..6cfb00d 100644
+--- a/tests/benchmark/NEON/ConvolutionLayer.cpp
++++ b/tests/benchmark/NEON/ConvolutionLayer.cpp
+@@ -52,9 +52,10 @@ namespace
+ {
+ #ifdef __ARM_FEATURE_FP16_VECTOR_ARITHMETIC
+ const auto data_types = framework::dataset::make("DataType", { DataType::F16, DataType::F32, DataType::QASYMM8 });
++const auto data_types_tibenchmark = framework::dataset::make("DataType", { DataType::F32 });
+ #else /* __ARM_FEATURE_FP16_VECTOR_ARITHMETIC */
+ const auto data_types = framework::dataset::make("DataType", { DataType::F32, DataType::QASYMM8 });
+-
++const auto data_types_tibenchmark = framework::dataset::make("DataType", { DataType::F32 });
+ #endif /* __ARM_FEATURE_FP16_VECTOR_ARITHMETIC */
+ } // namespace
+ 
+@@ -197,6 +198,14 @@ REGISTER_FIXTURE_DATA_TEST_CASE(SqueezeNetWinogradLayer, NEWinogradConvolutionLa
+ 
+ TEST_SUITE_END()
+ TEST_SUITE_END()
++
++TEST_SUITE(TIBENCHMARK_INCEPTIONNET)
++REGISTER_FIXTURE_DATA_TEST_CASE(GoogLeNetInceptionV1ConvolutionLayer, NEGEMMConvolutionLayerFixture, framework::DatasetMode::ALL,
++                                framework::dataset::combine(framework::dataset::combine(framework::dataset::combine(datasets::GoogLeNetInceptionV1ConvolutionLayerDataset(),
++                                                                                                                    framework::dataset::make("ActivationInfo", ActivationLayerInfo(ActivationLayerInfo::ActivationFunction::RELU))),
++                                                                                        data_types_tibenchmark),
++                                                            framework::dataset::make("Batches", 1)));
++TEST_SUITE_END()
+ } // namespace benchmark
+ } // namespace test
+ } // namespace arm_compute
+-- 
+1.9.1
+

@@ -1,0 +1,44 @@
+From e8c375920cd21e6e151aabaa88b68358296bbe87 Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 17:19:10 -0500
+Subject: [PATCH 07/11] add TI benchmark test group
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ tests/benchmark/NEON/FullyConnectedLayer.cpp | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/tests/benchmark/NEON/FullyConnectedLayer.cpp b/tests/benchmark/NEON/FullyConnectedLayer.cpp
+index d0fb04f..9ee852d 100644
+--- a/tests/benchmark/NEON/FullyConnectedLayer.cpp
++++ b/tests/benchmark/NEON/FullyConnectedLayer.cpp
+@@ -47,8 +47,10 @@ namespace
+ {
+ #ifdef __ARM_FEATURE_FP16_VECTOR_ARITHMETIC
+ const auto data_types = framework::dataset::make("DataType", { DataType::F16, DataType::F32 });
++const auto data_types_tibenchmark = framework::dataset::make("DataType", { DataType::F32 });
+ #else  /* __ARM_FEATURE_FP16_VECTOR_ARITHMETIC */
+ const auto data_types = framework::dataset::make("DataType", { DataType::F32 });
++const auto data_types_tibenchmark = framework::dataset::make("DataType", { DataType::F32 });
+ #endif /* __ARM_FEATURE_FP16_VECTOR_ARITHMETIC */
+ } // namespace
+ 
+@@ -108,6 +110,13 @@ REGISTER_FIXTURE_DATA_TEST_CASE(GoogLeNetInceptionV4FullyConnectedLayer, NEFully
+                                                             framework::dataset::make("Batches", { 4, 8 })));
+ TEST_SUITE_END()
+ TEST_SUITE_END()
++TEST_SUITE(TIBENCHMARK_INCEPTIONNET)
++REGISTER_FIXTURE_DATA_TEST_CASE(GoogLeNetInceptionV1FullyConnectedLayer, NEFullyConnectedLayerFixture, framework::DatasetMode::ALL,
++                                framework::dataset::combine(framework::dataset::combine(datasets::GoogLeNetInceptionV1FullyConnectedLayerDataset(),
++                                                                                        data_types_tibenchmark),
++                                                            framework::dataset::make("Batches", 1)));
++TEST_SUITE_END()
++
+ } // namespace benchmark
+ } // namespace test
+ } // namespace arm_compute
+-- 
+1.9.1
+

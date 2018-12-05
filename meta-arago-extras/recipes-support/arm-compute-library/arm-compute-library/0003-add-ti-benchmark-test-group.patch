@@ -1,0 +1,39 @@
+From 8c433526117e4aa5480efdbe5718ee54e9de2ff5 Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 17:17:43 -0500
+Subject: [PATCH 03/11] add TI benchmark test group
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ .../system_tests/squeezenet/SqueezeNetPoolingLayerDataset.h | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/tests/datasets/system_tests/squeezenet/SqueezeNetPoolingLayerDataset.h b/tests/datasets/system_tests/squeezenet/SqueezeNetPoolingLayerDataset.h
+index 9518ce5..a168d29 100644
+--- a/tests/datasets/system_tests/squeezenet/SqueezeNetPoolingLayerDataset.h
++++ b/tests/datasets/system_tests/squeezenet/SqueezeNetPoolingLayerDataset.h
+@@ -50,6 +50,19 @@ public:
+         add_config(TensorShape(27U, 27U, 256U), PoolingLayerInfo(PoolingType::MAX, 3, PadStrideInfo(2, 2, 0, 0, DimensionRoundingType::CEIL)));
+     }
+ };
++class TISqueezeNetPoolingLayerDataset final : public PoolingLayerDataset
++{
++public:
++    TISqueezeNetPoolingLayerDataset()
++    {
++        // pool1
++        add_config(TensorShape(114U, 114U, 64U), PoolingLayerInfo(PoolingType::MAX, 3, PadStrideInfo(2, 2, 0, 0, DimensionRoundingType::CEIL)));
++        // pool3
++        add_config(TensorShape(57U, 57U, 128U), PoolingLayerInfo(PoolingType::MAX, 3, PadStrideInfo(2, 2, 0, 0, DimensionRoundingType::CEIL)));
++        // pool5
++        add_config(TensorShape(28U, 28U, 256U), PoolingLayerInfo(PoolingType::MAX, 3, PadStrideInfo(2, 2, 0, 0, DimensionRoundingType::CEIL)));
++    }
++};
+ } // namespace datasets
+ } // namespace test
+ } // namespace arm_compute
+-- 
+1.9.1
+

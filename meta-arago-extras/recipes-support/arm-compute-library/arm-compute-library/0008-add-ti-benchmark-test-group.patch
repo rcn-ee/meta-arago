@@ -1,0 +1,31 @@
+From d657c798ec32c6a0f08384f725f3b8601d035300 Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 17:19:26 -0500
+Subject: [PATCH 08/11] add TI benchmark test group
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ tests/benchmark/NEON/GEMMLowp.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/tests/benchmark/NEON/GEMMLowp.cpp b/tests/benchmark/NEON/GEMMLowp.cpp
+index 4b13f31..c2c6bdf 100644
+--- a/tests/benchmark/NEON/GEMMLowp.cpp
++++ b/tests/benchmark/NEON/GEMMLowp.cpp
+@@ -50,6 +50,11 @@ REGISTER_FIXTURE_DATA_TEST_CASE(MatrixMultiplyGEMMLowp, NEGEMMLowpFixture, frame
+ REGISTER_FIXTURE_DATA_TEST_CASE(GoogleNetGEMMLowp, NEGEMMLowpFixture, framework::DatasetMode::NIGHTLY, datasets::GoogleNetGEMMDataset());
+ 
+ TEST_SUITE_END()
++
++TEST_SUITE(TIBENCHMARK_INCEPTIONNET)
++REGISTER_FIXTURE_DATA_TEST_CASE(GoogLeNetInceptionV1GEMMLowp, NEGEMMLowpFixture, framework::DatasetMode::ALL, datasets::GoogLeNetInceptionV1GEMMDataset());
++TEST_SUITE_END()
++
+ } // namespace benchmark
+ } // namespace test
+ } // namespace arm_compute
+-- 
+1.9.1
+
