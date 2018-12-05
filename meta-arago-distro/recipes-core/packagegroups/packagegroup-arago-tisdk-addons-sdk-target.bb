@@ -166,6 +166,9 @@ EXTRA_PACKAGES_append_omap-a15 = " voxelsdk-dev \
                                 arm-compute-library-dev \
                                 armnn-dev \
 "
+EXTRA_PACKAGES_append_k3 = " arm-compute-library-dev \
+                             armnn-dev \
+"
 
 IPCDEV = " \
 	ti-ipc-dev \

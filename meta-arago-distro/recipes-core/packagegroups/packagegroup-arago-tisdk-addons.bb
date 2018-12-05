@@ -161,6 +161,10 @@ EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
                                    armnn \
 "
 
+EXTRA_PACKAGES_append_k3 = " arm-compute-library \
+                             armnn \
+"
+
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_keystone = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
