@@ -49,7 +49,7 @@ BT_TI = "\
 "
 
 DEMO_APPS = "\
-    ${@base_conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
+    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
 "
 
 CONNECTIVITY_RDEPENDS = " \
