@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r75"
+PR = "r76"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -106,6 +106,9 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-hmi-demo-protection-relays \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
+                                    \
+    matrix-armnn-demo-staticimg     \
+    matrix-armnn-demo-livecam       \
 "
 
 MATRIX_APPS_append_ti43x = "        \
@@ -126,6 +129,9 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-hmi-demo-evse            \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
+                                    \
+    matrix-armnn-demo-staticimg     \
+    matrix-armnn-demo-livecam       \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
@@ -145,6 +151,9 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
     ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','sgx',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
+                                \
+    matrix-armnn-demo-staticimg \
+    matrix-armnn-demo-livecam   \
 "
 
 MATRIX_APPS_append_k3 = "           \
@@ -157,6 +166,9 @@ MATRIX_APPS_append_k3 = "           \
     matrix-hmi-demo-evse            \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
+                                    \
+    matrix-armnn-demo-staticimg     \
+    matrix-armnn-demo-livecam       \
 "
 
 MATRIX_APPS_append_dra7xx += " \
