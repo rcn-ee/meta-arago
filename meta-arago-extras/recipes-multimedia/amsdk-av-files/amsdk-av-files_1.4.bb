@@ -1,9 +1,9 @@
 DESCRIPTION = "AMSDK multimedia support files"
-HOMEPAGE = "https://gforge.ti.com/gf/project/am_multimedia/"
+HOMEPAGE = "https://git.ti.com/processor-sdk/amsdk-av-files/"
 LICENSE = "CC-BY-NC-ND-3.0 & CC-BY-3.0"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://Multimedia_Data_Files_Manifest.doc;md5=da0727f80b90422138535dfffc36cd1a"
-PR = "r1"
+LIC_FILES_CHKSUM = "file://Multimedia_Data_Files_Manifest.doc;md5=fe154d291c69c51495a5bb4a456403b5"
+PR = "r2"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -19,12 +19,16 @@ VIDEO_FILES_append_dra7xx      = "video_wvga \
                                   video_1080p \
                                   video_720p \
                                   video_yuv"
+VIDEO_FILES_append_k3          = "video_720p"
 
 VIDEO_FILES_keystone = "video_720p "
 
-SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/1279/7769/amsdk-av-files_${PV}.tar.gz;name=avfilestarball"
+BRANCH = "master"
 
-S = "${WORKDIR}/amsdk-av-files"
+SRC_URI = "git://git.ti.com/processor-sdk/amsdk-av-files.git;protocol=git;branch=${BRANCH}"
+SRCREV = "1b73009090265328ebaf1b6c880dfeccae5a8f19"
+
+S = "${WORKDIR}/git"
 
 do_compile() {
     :
@@ -42,5 +46,3 @@ do_install() {
 
 FILES_${PN} += "${datadir}/ti/*"
 
-SRC_URI[avfilestarball.md5sum] = "29a2f8b5f41f49e30bbe9cf53eb06c5a"
-SRC_URI[avfilestarball.sha256sum] = "64dde10d03156d480c6f38494c9503e73878fa0a8d5009182ed43b0e926b5569"
