@@ -1,18 +1,21 @@
 DESCRIPTION = "Point cloud viewer"
-HOMEPAGE = "https://gforge.ti.com/gf/project/am_multimedia"
+HOMEPAGE = "https://git.ti.com/processor-sdk/point-cloud-viewer/"
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM := "file://PointCloudViewer_manifest.html;md5=7ea694db2dd8d82fd91a18cab8c2c2db"
 
-PR = "r0"
+PR = "r1"
 
 COMPATIBLE_MACHINE = "dra7xx"
 
-SRC_URI = "https://gforge.ti.com/gf/download/frsrelease/1304/7978/${PN}-${PV}.tar.gz"
+BRANCH = "master"
 
-SRC_URI[md5sum] = "b4a49f1998397efb7c33299a7aeec386"
-SRC_URI[sha256sum] = "7b25a185122ed739eab040b77f101f866d33f77c4f64cae95d60213787228f17"
+SRC_URI = "git://git.ti.com/processor-sdk/point-cloud-viewer.git;protocol=git;branch=${BRANCH}"
 
-S = "${WORKDIR}/${PN}-${PV}"
+SRCREV = "ac8f7a8334b6458676810349ab84f718ecd16975"
+
+PV = "2.0"
+
+S = "${WORKDIR}/git"
 
 RDEPENDS_${PN} = "glfw3 opencv"
 
