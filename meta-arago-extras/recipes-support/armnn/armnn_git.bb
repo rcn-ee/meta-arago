@@ -5,6 +5,7 @@ LICENSE = "MIT & Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
                     file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
+PR = "r1"
 PV = "18.08"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
