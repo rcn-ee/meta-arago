@@ -13,6 +13,7 @@ EXTRA_TI_TOOLS = " \
     nativesdk-clacc \
     nativesdk-open62541-examples \
     nativesdk-open62541-tests \
+    nativesdk-tidl-import \
 "
 
 RDEPENDS_${PN} = "\
