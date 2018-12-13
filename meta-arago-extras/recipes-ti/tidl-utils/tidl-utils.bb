@@ -3,15 +3,14 @@ DESCRIPTION = "TIDL Utilities for standalone simulation and importing / translat
 HOMEPAGE = "http://software-dl.ti.com/processor-sdk-linux/esd/docs/latest/linux/Foundational_Components.html#tidl"
 LICENSE = "TI-TFL"
 
-PV = "1.0.0.0"
+require ./tidl-utils.inc
+
+PV = "1.0.0.1"
 INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://docs/LICENSE.txt;md5=a93aa5af7a3bbbb6fb34c8df59efaa5c"
 
-RDEPENDS_${PN}_class-target += " tidl-api tidl-examples "
-
-SRC_URI = "git://git.ti.com/tidl/tidl-utils.git;protocol=git;branch=master"
-SRCREV = "994d90ae583610673d9d39086ca5e84027a9c56e"
+RDEPENDS_${PN}_class-target += "tidl-api tidl-examples"
 
 PR = "${INC_PR}.0"
 
@@ -21,7 +20,7 @@ TARGET_class-target = "arm"
 TARGET_class-native = "x86"
 TARGET_class-nativesdk = "x86"
 
-CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+CP_ARGS = "-Prf --preserve=mode,timestamps --no-preserve=ownership"
 
 do_install() {
   install -d ${D}${bindir}
@@ -32,9 +31,9 @@ do_install() {
   cp ${CP_ARGS} ${S}/docs/* ${D}${datadir}/ti/tidl/utils/docs/.
 }
 
-FILES_${PN} += " ${datadir}/ti/tidl/utils \
-                 ${bindir} "
+FILES_${PN} += "${datadir}/ti/tidl/utils \
+                ${bindir}"
 
 BBCLASSEXTEND = "native nativesdk"
 
-INSANE_SKIP_${PN} += "build-deps ldflags already-stripped "
+INSANE_SKIP_${PN} += "build-deps ldflags already-stripped"
