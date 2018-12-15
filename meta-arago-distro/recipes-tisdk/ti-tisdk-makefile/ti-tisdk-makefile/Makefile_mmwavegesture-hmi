@@ -1,0 +1,24 @@
+# mmWave Gesture HMI build targets
+mmwavegesture-hmi:
+	@echo ================================
+	@echo    Building mmWave Gesture HMI Demo
+	@echo ================================
+	@cd example-applications; cd `find . -name "*mmwavegesture-hmi*"`; make -f Makefile.build
+
+mmwavegesture-hmi_clean:
+	@echo ================================
+	@echo    Building mmWave Gesture HMI Demo
+	@echo ================================
+	@cd example-applications; cd `find . -name "*mmwavegesture-hmi*"`; make -f Makefile.build clean
+
+mmwavegesture-hmi_install:
+	@echo ===================================================
+	@echo   Installing mmWave Gesture HMI Demo - Release version
+	@echo ===================================================
+	@cd example-applications; cd `find . -name "*mmwavegesture-hmi*"`; make -f Makefile.build install
+
+mmwavegesture-hmi_install_debug:
+	@echo =================================================
+	@echo   Installing mmWave Gesture HMI Demo - Debug version
+	@echo =================================================
+	@cd example-applications; cd `find . -name "*mmwavegesture-hmi*"`; make -f Makefile.build install_debug
