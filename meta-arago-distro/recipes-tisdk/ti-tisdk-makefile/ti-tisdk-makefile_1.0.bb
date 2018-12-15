@@ -50,9 +50,10 @@ SRC_URI = "\
     file://Makefile_ti-gc320-driver \
     file://Makefile_barcode-roi \
     file://Makefile_sysfw-image \
+    file://Makefile_mmwavegesture-hmi \
 "
 
-PR = "r92"
+PR = "r93"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -94,6 +95,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            pru-icss \
                            barcode-roi \
                            uio-module-drv \
+			   mmwavegesture-hmi \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
@@ -107,6 +109,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            pru-icss \
                            barcode-roi \
                            uio-module-drv \
+			   mmwavegesture-hmi \
 "
 
 MAKEFILES_append_dra7xx = " cryptodev \
@@ -128,6 +131,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               ti-gc320-driver \
                               barcode-roi \
                               uio-module-drv \
+			      mmwavegesture-hmi \
 "
 MAKEFILES_append_omapl138 = " linux-dtbs \
                               u-boot-spl \
@@ -173,6 +177,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
                         ti-sgx-ddk-km-k3 \
                         pru-icss \
                         sysfw-image \
+			mmwavegesture-hmi \
 "
 
 # Use this to export kernel arch to ARCH
