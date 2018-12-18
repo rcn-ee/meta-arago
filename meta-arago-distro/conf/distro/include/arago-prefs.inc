@@ -34,11 +34,6 @@ PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 # application that does not have a GPLv3 license
 PREFERRED_VERSION_crda = "3.18"
 PREFERRED_VERSION_obex = "0.34"
-# These old GPLv2 versions are no longer in OE-Core
-#PREFERRED_VERSION_gdbm = "1.8.3"
-#PREFERRED_VERSION_bash = "3.2.57"
-#PREFERRED_VERSION_gettext = "0.16.1"
-#PREFERRED_VERSION_elfutils = "0.148"
 
 PREFERRED_PROVIDER_libnl-xfrm = "libnl"
 
@@ -46,10 +41,3 @@ PREFERRED_PROVIDER_wpa-supplicant = "wpa-supplicant"
 PREFERRED_PROVIDER_wpa-supplicant_ti33x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_ti43x = "wpa-supplicant-wl18xx"
 PREFERRED_PROVIDER_wpa-supplicant_omap-a15 = "wpa-supplicant-wl18xx"
-
-PREFERRED_VERSION_gstreamer1.0 = "1.14.2"
-PREFERRED_VERSION_gstreamer1.0-plugins-ugly = "1.14.2"
-PREFERRED_VERSION_gstreamer1.0-libav = "1.14.2"
-PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.2"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad = "1.14.2"
-PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.2"
