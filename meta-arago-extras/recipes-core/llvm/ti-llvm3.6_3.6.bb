@@ -1,7 +1,7 @@
 DESCRIPTION = "LLVM 3.6 with support for TI C66x intrinsics"
-HOMEPAGE = "https://gitorious.design.ti.com/ocl/llvm33-src"
+HOMEPAGE = "https://git.ti.com/opencl/llvm"
 
-PR = "r6"
+PR = "r7"
 
 do_configure_prepend_class-native() {
     # Fix paths in llvm-config
@@ -27,20 +27,19 @@ LLVM_GIT_URI = "git://git.ti.com/opencl/llvm.git"
 LLVM_GIT_PROTOCOL = "git"
 LLVM_GIT_BRANCH = "release_36_ti"
 LLVM_GIT_DESTSUFFIX = "git"
-LLVM_GIT_SRCREV = "8ff2a35c586a3d3f624712e0943777613a017bc5"
+LLVM_GIT_SRCREV = "09780c6750b30da81e4a0a805aedf1699fbc37c7"
 
 CLANG_GIT_NAME = "clang"
 CLANG_GIT_URI = "git://git.ti.com/opencl/clang.git"
 CLANG_GIT_PROTOCOL = "git"
 CLANG_GIT_BRANCH = "release_36_ti"
 CLANG_GIT_DESTSUFFIX = "${LLVM_GIT_DESTSUFFIX}/tools/clang"
-CLANG_GIT_SRCREV = "1bffed84d31aa9271ef4c91301f833d103e94010"
+CLANG_GIT_SRCREV = "5b006f07bdc22b5ae6917eecdfe243908dd7b029"
 
 SRC_URI = " \
   ${LLVM_GIT_URI};protocol=${LLVM_GIT_PROTOCOL};branch=${LLVM_GIT_BRANCH};destsuffix=${LLVM_GIT_DESTSUFFIX};name=${LLVM_GIT_NAME} \
   ${CLANG_GIT_URI};protocol=${CLANG_GIT_PROTOCOL};branch=${CLANG_GIT_BRANCH};destsuffix=${CLANG_GIT_DESTSUFFIX};name=${CLANG_GIT_NAME} \
   file://0001-configure-Do-not-check-build-executable-extension.patch \
-  file://0001-llvm-IR-ValueMap.h-unique_ptr-conversion-to-bool-ope.patch \
 "
 
 SRCREV_${LLVM_GIT_NAME} = "${LLVM_GIT_SRCREV}"
