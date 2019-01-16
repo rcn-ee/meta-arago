@@ -1,20 +1,10 @@
 SUMMARY = "Host packages for a standalone Arago SDK or external toolchain"
-PR = "r17"
+PR = "r18"
 LICENSE = "MIT"
 
 inherit packagegroup nativesdk
 
 PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
-
-EXTRA_TI_TOOLS = " \
-    nativesdk-ti-cgt6x \
-    nativesdk-ti-cgt-pru \
-    nativesdk-clocl \
-    nativesdk-clacc \
-    nativesdk-open62541-examples \
-    nativesdk-open62541-tests \
-    nativesdk-tidl-import \
-"
 
 RDEPENDS_${PN} = "\
     nativesdk-pkgconfig \
@@ -28,5 +18,4 @@ RDEPENDS_${PN} = "\
     nativesdk-git \
     nativesdk-cmake \
     nativesdk-mtd-utils-ubifs \
-    ${EXTRA_TI_TOOLS} \
 "
