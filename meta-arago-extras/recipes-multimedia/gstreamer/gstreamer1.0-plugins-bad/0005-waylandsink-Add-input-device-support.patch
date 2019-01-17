@@ -1,6 +1,6 @@
-From ca8350db8bcf3179ebe52f54f27209046f62f8c5 Mon Sep 17 00:00:00 2001
+From df5bc9b78b4a1d6437ce2fab971680fe0a49928a Mon Sep 17 00:00:00 2001
 From: Ramprasad N <x0038811@ti.com>
-Date: Tue, 27 Mar 2018 18:29:45 +0530
+Date: Wed, 16 Jan 2019 14:47:01 -0500
 Subject: [PATCH 5/5] waylandsink: Add input device support
 
 Remove wldispay.h and wlwindow.h to avoid
@@ -13,14 +13,14 @@ Signed-off-by: Ramprasad N <x0038811@ti.com>
  ext/wayland/gstwaylandsink.h              |   3 +-
  ext/wayland/wlbuffer.c                    |   2 +-
  ext/wayland/wlbuffer.h                    |  67 -------
- ext/wayland/wldisplay-wlwindow-wlbuffer.h | 227 +++++++++++++++++++++++
+ ext/wayland/wldisplay-wlwindow-wlbuffer.h | 229 +++++++++++++++++++++++
  ext/wayland/wldisplay.c                   | 294 +++++++++++++++++++++++++++++-
  ext/wayland/wldisplay.h                   | 101 ----------
  ext/wayland/wldrm.c                       |   2 +-
  ext/wayland/wlshmallocator.h              |   2 +-
- ext/wayland/wlwindow.c                    |   5 +-
+ ext/wayland/wlwindow.c                    |   6 +-
  ext/wayland/wlwindow.h                    |  93 ----------
- 12 files changed, 526 insertions(+), 275 deletions(-)
+ 12 files changed, 529 insertions(+), 275 deletions(-)
  delete mode 100644 ext/wayland/wlbuffer.h
  create mode 100644 ext/wayland/wldisplay-wlwindow-wlbuffer.h
  delete mode 100644 ext/wayland/wldisplay.h
@@ -155,10 +155,10 @@ index cbb50f7..0000000
 -#endif /* __GST_WL_BUFFER_H__ */
 diff --git a/ext/wayland/wldisplay-wlwindow-wlbuffer.h b/ext/wayland/wldisplay-wlwindow-wlbuffer.h
 new file mode 100644
-index 0000000..c5d8ae5
+index 0000000..a89d0c0
 --- /dev/null
 +++ b/ext/wayland/wldisplay-wlwindow-wlbuffer.h
-@@ -0,0 +1,227 @@
+@@ -0,0 +1,229 @@
 +/* GStreamer Wayland video sink
 + *
 + * Copyright (C) 2014 Collabora Ltd.
@@ -186,6 +186,8 @@ index 0000000..c5d8ae5
 +#include <stdlib.h>
 +#include <stdio.h>
 +#include <gst/video/video.h>
++#include <gst/gstbuffer.h>
++#include <gst/drm/gstdrmallocator.h>
 +#include <wayland-client.h>
 +#include "viewporter-client-protocol.h"
 +#include "linux-dmabuf-unstable-v1-client-protocol.h"
@@ -863,10 +865,10 @@ index 07ae17f..2860fc3 100644
  G_BEGIN_DECLS
  
 diff --git a/ext/wayland/wlwindow.c b/ext/wayland/wlwindow.c
-index 20ef8bb..116dc55 100644
+index 20ef8bb..125cc85 100644
 --- a/ext/wayland/wlwindow.c
 +++ b/ext/wayland/wlwindow.c
-@@ -24,9 +24,8 @@
+@@ -24,9 +24,9 @@
  #include <config.h>
  #endif
  
@@ -874,10 +876,11 @@ index 20ef8bb..116dc55 100644
 +#include "wldisplay-wlwindow-wlbuffer.h"
  #include "wlshmallocator.h"
 -#include "wlbuffer.h"
++#include "wldrm.h"
  
  GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
  #define GST_CAT_DEFAULT gstwayland_debug
-@@ -120,6 +119,8 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
+@@ -120,6 +120,8 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
  
    window->area_surface = wl_compositor_create_surface (display->compositor);
    window->video_surface = wl_compositor_create_surface (display->compositor);
