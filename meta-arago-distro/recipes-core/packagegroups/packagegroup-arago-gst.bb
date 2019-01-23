@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add gstreamer and gstreamer plugins"
 LICENSE = "MIT"
-PR = "r17"
+PR = "r18"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -17,14 +17,18 @@ GSTREAMER_DEPS = " \
     gstreamer1.0-libav \
 "
 
+GSTREAMER_DSP = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'gstreamer1.0-plugins-dsp66', '', d)} \
+"
+
 GSTREAMER_DEPS_append_dra7xx = " \
     gstreamer1.0-plugins-hevc \
-    gstreamer1.0-plugins-dsp66 \
+    ${GSTREAMER_DSP} \
 "
 
 GSTREAMER_DEPS_append_keystone = " \
     gstreamer1.0-plugins-hevc \
-    gstreamer1.0-plugins-dsp66 \
+    ${GSTREAMER_DSP} \
 "
 
 GSTREAMER_ACCEL_MM = ""
