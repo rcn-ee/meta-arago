@@ -153,7 +153,8 @@ EXTRA_LIBS_append_k2e = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
 
-ARMNN_PACKAGES = "armnn-dev"
+ARMNN_PACKAGES = ""
+#ARMNN_PACKAGES = "armnn-dev"
 
 EXTRA_PACKAGES = ""
 EXTRA_PACKAGES_append_ti33x = " voxelsdk-dev \

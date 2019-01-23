@@ -86,10 +86,11 @@ MATRIX_OPENCV_OPENCL_APPS_omap-a15 = " \
      matrix-machinevision-demo-simplepeopletracking \
 "
 
-MATRIX_ARMNN_APPS = " \
-    matrix-armnn-demo-staticimg     \
-    matrix-armnn-demo-livecam       \
-"
+MATRIX_ARMNN_APPS = ""
+#MATRIX_ARMNN_APPS = " \
+#    matrix-armnn-demo-staticimg     \
+#    matrix-armnn-demo-livecam       \
+#"
 
 MATRIX_APPS = ""
 
