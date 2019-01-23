@@ -1,0 +1,30 @@
+From 0fcda9d85c96d5c39dffe21d3bdf01a038b911c9 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 22 Jan 2019 20:39:15 -0500
+Subject: [PATCH] configure.ac: stop using -export-symbols-regex
+
+The old regex is no longer correct for GStreamer 1.14.
+
+Bug-Debian: https://bugs.debian.org/894642
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index fee3161..8159c60 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -81,7 +81,7 @@ fi
+ AC_SUBST(plugindir)
+ 
+ dnl set proper LDFLAGS for plugins
+-GST_PLUGIN_LDFLAGS="-module -avoid-version -export-symbols-regex '^[_]*gst_plugin_desc\$\$' $GST_ALL_LDFLAGS"
++GST_PLUGIN_LDFLAGS="-module -avoid-version $GST_ALL_LDFLAGS"
+ AC_SUBST(GST_PLUGIN_LDFLAGS)
+ 
+ AC_CONFIG_FILES([Makefile src/Makefile])
+-- 
+2.7.4
+
