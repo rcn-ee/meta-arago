@@ -14,7 +14,7 @@ SRCREV = "0881fc8bc5b3c3411af7b69c3837a8b3a1fbedc5"
 
 S = "${WORKDIR}/git"
 
-DEPENDS += "qtbase qtquick1 qtserialport"
+DEPENDS += "qtbase qtdeclarative qtserialport"
 
 do_install() {
     install -d ${D}${bindir}
