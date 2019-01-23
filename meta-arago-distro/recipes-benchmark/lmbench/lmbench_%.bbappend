@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+DEPENDS += "libtirpc"
+
 INSANE_SKIP_${PN} += "ldflags"
 
 PR_append = ".arago3"
@@ -7,11 +9,10 @@ PR_append = ".arago3"
 SRC_URI += "file://0001-Makefile-Add-TI-SDK-Modifications.patch"
 
 EXTRA_OEMAKE = ""
+CFLAGS = "-I${STAGING_INCDIR}/tirpc"
+LDFLAGS = "-ltirpc"
 
 do_compile () {
-    unset CFLAGS
-    unset LDFLAGS
-    unset CPPFLAGS
     oe_runmake -C src
 }
 
