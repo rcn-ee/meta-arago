@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r72"
+PR = "r73"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -35,6 +35,10 @@ UTILS = " \
 UTILS_UBOOT_FW = "u-boot-fw-utils"
 UTILS_UBOOT_FW_keystone = ""
 UTILS_UBOOT_FW_k3 = ""
+
+UTILS_DSP = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'gdbc6x dsptop', '', d)} \
+"
 
 UTILS_append_ti33x = " mmc-utils \
                        can-utils \
@@ -75,8 +79,7 @@ UTILS_append_k3 = " mmc-utils \
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
 UTILS_append_dra7xx = " can-utils \
-                        dsptop \
-                        gdbc6x \
+                        ${UTILS_DSP} \
                         glsdk-example-apps \
 "
 
@@ -86,18 +89,15 @@ UTILS_append_keystone = " \
 "
 
 UTILS_append_k2hk = " \
-    gdbc6x \
-    dsptop \
+    ${UTILS_DSP} \
 "
 
 UTILS_append_k2l = " \
-    gdbc6x \
-    dsptop \
+    ${UTILS_DSP} \
 "
 
 UTILS_append_k2e = " \
-    gdbc6x \
-    dsptop \
+    ${UTILS_DSP} \
 "
 
 UTILS_append_k2g = " \
