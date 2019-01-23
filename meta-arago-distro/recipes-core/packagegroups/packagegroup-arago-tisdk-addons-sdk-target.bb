@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install headers and libraries related to addons into the SDK"
 LICENSE = "MIT"
-PR = "r40"
+PR = "r41"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -153,21 +153,23 @@ EXTRA_LIBS_append_k2e = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
 
+ARMNN_PACKAGES = "armnn-dev"
+
 EXTRA_PACKAGES = ""
 EXTRA_PACKAGES_append_ti33x = " voxelsdk-dev \
                                 arm-compute-library-dev \
-                                armnn-dev \
+                                ${ARMNN_PACKAGES} \
 "
 EXTRA_PACKAGES_append_ti43x = " voxelsdk-dev \
                                 arm-compute-library-dev \
-                                armnn-dev \
+                                ${ARMNN_PACKAGES} \
 "
 EXTRA_PACKAGES_append_omap-a15 = " voxelsdk-dev \
                                 arm-compute-library-dev \
-                                armnn-dev \
+                                ${ARMNN_PACKAGES} \
 "
 EXTRA_PACKAGES_append_k3 = " arm-compute-library-dev \
-                             armnn-dev \
+                             ${ARMNN_PACKAGES} \
 "
 
 IPCDEV = " \

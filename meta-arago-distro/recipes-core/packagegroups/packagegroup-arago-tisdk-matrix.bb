@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r76"
+PR = "r77"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -86,6 +86,11 @@ MATRIX_OPENCV_OPENCL_APPS_omap-a15 = " \
      matrix-machinevision-demo-simplepeopletracking \
 "
 
+MATRIX_ARMNN_APPS = " \
+    matrix-armnn-demo-staticimg     \
+    matrix-armnn-demo-livecam       \
+"
+
 MATRIX_APPS = ""
 
 MATRIX_APPS_append_ti33x = "        \
@@ -107,8 +112,7 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
-    matrix-armnn-demo-staticimg     \
-    matrix-armnn-demo-livecam       \
+    ${MATRIX_ARMNN_APPS}            \
 "
 
 MATRIX_APPS_append_ti43x = "        \
@@ -130,8 +134,7 @@ MATRIX_APPS_append_ti43x = "        \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
-    matrix-armnn-demo-staticimg     \
-    matrix-armnn-demo-livecam       \
+    ${MATRIX_ARMNN_APPS}            \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
@@ -152,8 +155,7 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-gui-pm-demos-governor    \
     ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','sgx',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
                                 \
-    matrix-armnn-demo-staticimg \
-    matrix-armnn-demo-livecam   \
+    ${MATRIX_ARMNN_APPS}            \
 "
 
 MATRIX_APPS_append_k3 = "           \
@@ -167,8 +169,7 @@ MATRIX_APPS_append_k3 = "           \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
-    matrix-armnn-demo-staticimg     \
-    matrix-armnn-demo-livecam       \
+    ${MATRIX_ARMNN_APPS}            \
 "
 
 MATRIX_APPS_append_dra7xx += " \

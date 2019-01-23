@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r71"
+PR = "r72"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -144,25 +144,27 @@ EXTRA_PACKAGES_omapl138 = " \
     protobuf \
 "
 
+ARMNN_PACKAGES = "armnn"
+
 EXTRA_PACKAGES_append_ti33x = " voxelsdk \
                                 arm-compute-library \
-                                armnn \
+                                ${ARMNN_PACKAGES} \
 "
 
 EXTRA_PACKAGES_append_ti43x = " voxelsdk \
                                 arm-compute-library \
-                                armnn \
+                                ${ARMNN_PACKAGES} \
 "
 
 EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
                                    big-data-ipc-demo-linux \
                                    big-data-ipc-demo-linux-firmware \
                                    arm-compute-library \
-                                   armnn \
+                                   ${ARMNN_PACKAGES} \
 "
 
 EXTRA_PACKAGES_append_k3 = " arm-compute-library \
-                             armnn \
+                             ${ARMNN_PACKAGES} \
 "
 
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
