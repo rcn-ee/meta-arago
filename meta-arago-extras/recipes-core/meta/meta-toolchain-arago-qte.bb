@@ -8,8 +8,8 @@ require meta-toolchain-arago.bb
 PR = "r19"
 
 # There could be qt5, qt4e and qt4x11 providers, but we don't support qt4x11 for now
-QT_DIR_NAME = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'qt5', 'qtopia', d)}"
-QT_BIN_PREFIX = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT_DIR_NAME}/", '', d)}"
+QT_DIR_NAME = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'qtopia', d)}"
+QT_BIN_PREFIX = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', '', d)}"
 QT_BIN_SUFFIX = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', '4', d)}"
 QT_MKSPECS_LOCATION = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${libdir}", "${datadir}", d)}"
 QT_MKSPECS_DIR = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', "linux-oe-g++", "linux-gnueabi-oe-g++", d)}"
