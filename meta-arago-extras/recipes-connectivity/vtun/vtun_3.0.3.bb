@@ -4,7 +4,7 @@ SECTION = "console/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://vtun.h;startline=1;endline=17;md5=9ac9e7fefca60c72400239e0de40cde8"
 
-DEPENDS = "zlib lzo openssl bison-native flex-native"
+DEPENDS = "zlib lzo openssl10 bison-native flex-native"
 
 SRC_URI = "http://downloads.sourceforge.net/project/vtun/vtun/${PV}/vtun-${PV}.tar.gz"
 
