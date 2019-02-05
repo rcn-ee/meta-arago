@@ -47,7 +47,7 @@ RDEPENDS_${PN} = "ti-sgx-ddk-um"
 
 INHIBIT_PACKAGE_STRIP = "1"
 
-INSANE_SKIP_${PN} += "dev-so staticdev already-stripped ldflags"
+INSANE_SKIP_${PN} += "dev-so staticdev already-stripped ldflags file-rdeps"
 
 FILES_${PN} += " \
     /opt/img-powervr-sdk/PVRHub/* \
