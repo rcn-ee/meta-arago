@@ -16,6 +16,7 @@ SRC_URI += " \
             file://0003-Add-more-command-line-options-and-move-OpenCV-render.patch;patchdir=${S} \
             file://0004-Platform-specific-op_clk_freq-setting.patch;patchdir=${S} \
             file://0005-Exit-on-window-touch-mouse-even-left-button-click.patch;patchdir=${S} \
+            file://0006-Include-people-count-report-in-stdout-for-testing.patch;patchdir=${S} \
            "
 
 S = "${WORKDIR}/git"
