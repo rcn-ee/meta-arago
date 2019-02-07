@@ -7,7 +7,8 @@ PKG_${PN}-dbg = "${PN}-dbg"
 
 COMPATIBLE_MACHINE = "k3"
 
-CROSS_COMPILE_V7 = "${ELT_TARGET_SYS_ARMV7}-"
+CROSS_COMPILE_V7 = "${@['${TARGET_SYS}-','${ELT_TARGET_SYS_ARMV7}-'][d.getVar('TOOLCHAIN_TYPE') == 'external' and d.getVar('TOOLCHAIN_BRAND') == 'linaro']}"
+CROSS_COMPILE_V7 = "${@['${TARGET_SYS}-','${EAT_TARGET_SYS_ARMV7}-'][d.getVar('TOOLCHAIN_TYPE') == 'external' and d.getVar('TOOLCHAIN_BRAND') == 'arm']}"
 PATH_prepend = "${TOOLCHAIN_PATH_ARMV7}/bin:"
 
 UBOOT_MACHINE_am65xx-evm = "am65x_evm_r5_defconfig"
