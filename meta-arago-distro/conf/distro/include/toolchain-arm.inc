@@ -46,7 +46,7 @@ PREFERRED_PROVIDER_gcc-runtime = "external-arm-toolchain"
 # Set Cross and SDK toolchain preferences
 SDKGCCVERSION ?= "arm-8.2%"
 SDKGDBVERSION ?= "8.2"
-SDKBINUVERSION ?= "arm-2.30%"
+SDKBINUVERSION ?= "2.31%"
 SDKGLIBCVERSION ?= "2.28%"
 SDKLINUXLIBCVERSION ?= "4.14%"
 
@@ -68,7 +68,7 @@ PREFERRED_VERSION_nativesdk-glibc-initial ?= "${SDKGLIBCVERSION}"
 # Can be overwritten globally, if needed
 GCCVERSION ?= "arm-8.2%"
 GDBVERSION ?= "8.2"
-BINUVERSION ?= "arm-2.30%"
+BINUVERSION ?= "2.31%"
 GLIBCVERSION ?= "2.28%"
 
 PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
