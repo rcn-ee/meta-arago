@@ -643,10 +643,16 @@ EOF
 # Generate the TI SW Manifest for the SDK image
 generate_sw_manifest() {
     sw_manifest_header
-    sw_manifest_toolchain_host
+    if [ "${TISDK_TOOLCHAIN}" != "" ]
+    then
+        sw_manifest_toolchain_host
+    fi
     sw_manifest_target
     sw_manifest_host
-    sw_manifest_toolchain_target
+    if [ "${TISDK_TOOLCHAIN}" != "" ]
+    then
+        sw_manifest_toolchain_target
+    fi
     sw_manifest_footer
 }
 
@@ -699,10 +705,13 @@ tisdk_image_setup () {
     mkdir -p ${IMAGE_ROOTFS}/var/lib/opkg
     mkdir -p ${IMAGE_ROOTFS}/lib
 
-    chmod 755 ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}*.sh
+    if [ -e ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ]
+    then
+        chmod 755 ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}*.sh
 
-    # Temporarily extract the toolchain sdk so we can read license information from it.
-    echo "${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}" | ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}*.sh
+        # Temporarily extract the toolchain sdk so we can read license information from it.
+        echo "${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}" | ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}*.sh
+    fi
 }
 
 tisdk_image_build () {
@@ -867,7 +876,10 @@ tisdk_image_build () {
 
     # Copy over the toolchain sdk installer an give it a simple name which
     # matches the traditional name within the SDK.
-    cp ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ${IMAGE_ROOTFS}/linux-devkit.sh
+    if [ -e ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ]
+    then
+        cp ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ${IMAGE_ROOTFS}/linux-devkit.sh
+    fi
 
     # Copy the opkg.conf used by the image to allow for future updates
     cp ${WORKDIR}/opkg.conf ${IMAGE_ROOTFS}/etc/
