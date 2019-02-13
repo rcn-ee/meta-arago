@@ -45,10 +45,10 @@ MATRIX_TOUCH_APPS = " \
 
 MATRIX_QT_APPS_keystone = ""
 MATRIX_QT_APPS_omapl138 = ""
-MATRIX_QT_APPS_remove_k3 = "matrix-qt5-demo-browser"
-MATRIX_QT_APPS_append_k3 = " \
-    matrix-qt5-demo-webkit-browser \
-"
+#MATRIX_QT_APPS_remove_k3 = "matrix-qt5-demo-browser"
+#MATRIX_QT_APPS_append_k3 = " \
+#    matrix-qt5-demo-webkit-browser \
+#"
 
 MATRIX_SGX_DEMOS = " \
     matrix-3d-demo-chameleon \

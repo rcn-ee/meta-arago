@@ -46,12 +46,12 @@ QT5_ESSENTIALS = "\
     qtconnectivity-qmlplugins \
 "
 
-QT5_ESSENTIALS_append_k3 = "\
-    qtwebkit-qmlplugins \
-"
-QT5_ESSENTIALS_remove_k3 = "\
-    qtwebengine-qmlplugins \
-"
+#QT5_ESSENTIALS_append_k3 = "\
+#    qtwebkit-qmlplugins \
+#"
+#QT5_ESSENTIALS_remove_k3 = "\
+#    qtwebengine-qmlplugins \
+#"
 
 RDEPENDS_${PN} = "\
     ${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT5_ESSENTIALS}", "${QT4_ESSENTIALS}", d)} \
