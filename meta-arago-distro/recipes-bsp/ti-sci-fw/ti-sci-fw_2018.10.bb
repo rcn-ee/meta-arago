@@ -13,7 +13,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRCREV = "7a6ce28348a99d2ad08a6cb2b36450d73bfccc80"
 
-BRANCH ?= "ti-linux-firmware-4.1.y"
+BRANCH ?= "ti-linux-firmware"
 
 SRC_URI = " \
 	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
