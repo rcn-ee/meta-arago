@@ -1,0 +1,52 @@
+From d267a3b19dc6070fcb632c855f0fd51ad3f19bdb Mon Sep 17 00:00:00 2001
+From: Ramprasad N <x0038811@ti.com>
+Date: Thu, 7 Feb 2019 12:23:20 +0530
+Subject: [PATCH] gstvpe:configure.ac stop using -export-symbols-regex
+
+The old regex is no longer correct for GStreamer 1.14.
+PACKAGE defined as vpeplugin generates a symbol
+gst_plugin_vpeplugin_get_desc in GST 1.14. But while loading the
+the plugin it is not able find this symbol and results in
+undefined symbol as --export-symbols option is no more supported.
+
+Rename PACKAGE to vpe to get the expected symbol
+gst_plugin_vpe_get_desc
+
+Signed-off-by: Ramprasad N <x0038811@ti.com>
+---
+ configure.ac | 2 +-
+ src/gstvpe.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 7c95086..10a91a6 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -135,7 +135,7 @@ AC_SUBST(GST_ALL_LDFLAGS)
+ 
+ dnl this really should only contain flags, not libs - they get added before
+ dnl whatevertarget_LIBS and -L flags here affect the rest of the linking
+-GST_PLUGIN_LDFLAGS="-module -avoid-version -export-symbols-regex '^[_]*gst_plugin_desc\$\$' $GST_ALL_LDFLAGS"
++GST_PLUGIN_LDFLAGS="-module -avoid-version $GST_ALL_LDFLAGS"
+ AC_SUBST(GST_PLUGIN_LDFLAGS)
+ 
+ AC_CONFIG_FILES([Makefile src/Makefile])
+diff --git a/src/gstvpe.c b/src/gstvpe.c
+index e5f9ade..42c4362 100644
+--- a/src/gstvpe.c
++++ b/src/gstvpe.c
+@@ -1219,9 +1219,9 @@ plugin_init (GstPlugin * plugin)
+  * compile this code. GST_PLUGIN_DEFINE needs PACKAGE to be defined.
+  */
+ #ifndef PACKAGE
+-#define PACKAGE "vpeplugin"
++#define PACKAGE "vpe"
+ #endif
+ 
+-GST_PLUGIN_DEFINE (GST_VERSION_MAJOR, GST_VERSION_MINOR, vpeplugin,
++GST_PLUGIN_DEFINE (GST_VERSION_MAJOR, GST_VERSION_MINOR, vpe,
+     "Hardware accelerated video porst-processing using TI VPE (V4L2-M2M) driver on DRA7x SoC",
+     plugin_init, VERSION, "LGPL", "GStreamer", "http://gstreamer.net/")
+-- 
+1.9.1
+
