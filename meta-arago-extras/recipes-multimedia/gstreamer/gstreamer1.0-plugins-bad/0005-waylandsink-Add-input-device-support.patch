@@ -1,0 +1,994 @@
+From ada9b45981854d5b2789f1394d158a91f24e1570 Mon Sep 17 00:00:00 2001
+From: Ramprasad N <x0038811@ti.com>
+Date: Wed, 6 Feb 2019 13:30:56 +0530
+Subject: [PATCH 5/5] waylandsink: Add input device support
+
+Remove wldispay.h and wlwindow.h to avoid
+circular dependency and create a single .h
+
+Signed-off-by: Ramprasad N <x0038811@ti.com>
+---
+ ext/wayland/Makefile.am                   |   4 +-
+ ext/wayland/gstwaylandsink.c              |   1 -
+ ext/wayland/gstwaylandsink.h              |   3 +-
+ ext/wayland/wlbuffer.c                    |   2 +-
+ ext/wayland/wlbuffer.h                    |  67 -------
+ ext/wayland/wldisplay-wlwindow-wlbuffer.h | 229 +++++++++++++++++++++++
+ ext/wayland/wldisplay.c                   | 294 +++++++++++++++++++++++++++++-
+ ext/wayland/wldisplay.h                   | 102 -----------
+ ext/wayland/wldrm.c                       |   2 +-
+ ext/wayland/wlshmallocator.h              |   2 +-
+ ext/wayland/wlwindow.c                    |   6 +-
+ ext/wayland/wlwindow.h                    |  93 ----------
+ 12 files changed, 529 insertions(+), 276 deletions(-)
+ delete mode 100644 ext/wayland/wlbuffer.h
+ create mode 100644 ext/wayland/wldisplay-wlwindow-wlbuffer.h
+ delete mode 100644 ext/wayland/wldisplay.h
+ delete mode 100644 ext/wayland/wlwindow.h
+
+diff --git a/ext/wayland/Makefile.am b/ext/wayland/Makefile.am
+index ebc9968..50d9808 100644
+--- a/ext/wayland/Makefile.am
++++ b/ext/wayland/Makefile.am
+@@ -42,9 +42,7 @@ noinst_HEADERS = \
+ 	gstwaylandsink.h \
+ 	wlshmallocator.h \
+ 	wldrm.h \
+-	wlbuffer.h \
+-	wldisplay.h \
+-	wlwindow.h \
++	wldisplay-wlwindow-wlbuffer.h \
+ 	wlvideoformat.h \
+ 	wllinuxdmabuf.h
+ 
+diff --git a/ext/wayland/gstwaylandsink.c b/ext/wayland/gstwaylandsink.c
+index f0aeea0..19ecf4d 100644
+--- a/ext/wayland/gstwaylandsink.c
++++ b/ext/wayland/gstwaylandsink.c
+@@ -43,7 +43,6 @@
+ 
+ #include "gstwaylandsink.h"
+ #include "wlvideoformat.h"
+-#include "wlbuffer.h"
+ #include "wlshmallocator.h"
+ #include "wllinuxdmabuf.h"
+ #include "wldrm.h"
+diff --git a/ext/wayland/gstwaylandsink.h b/ext/wayland/gstwaylandsink.h
+index a7123fb..195d4b3 100644
+--- a/ext/wayland/gstwaylandsink.h
++++ b/ext/wayland/gstwaylandsink.h
+@@ -27,8 +27,7 @@
+ 
+ #include <wayland-client.h>
+ 
+-#include "wldisplay.h"
+-#include "wlwindow.h"
++#include "wldisplay-wlwindow-wlbuffer.h"
+ 
+ G_BEGIN_DECLS
+ 
+diff --git a/ext/wayland/wlbuffer.c b/ext/wayland/wlbuffer.c
+index 4ac99ef..0e38d2e 100644
+--- a/ext/wayland/wlbuffer.c
++++ b/ext/wayland/wlbuffer.c
+@@ -76,7 +76,7 @@
+  * as soon as we remove the reference that GstWlDisplay holds.
+  */
+ 
+-#include "wlbuffer.h"
++#include "wldisplay-wlwindow-wlbuffer.h"
+ 
+ GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
+ #define GST_CAT_DEFAULT gstwayland_debug
+diff --git a/ext/wayland/wlbuffer.h b/ext/wayland/wlbuffer.h
+deleted file mode 100644
+index cbb50f7..0000000
+--- a/ext/wayland/wlbuffer.h
++++ /dev/null
+@@ -1,67 +0,0 @@
+-/* GStreamer Wayland video sink
+- *
+- * Copyright (C) 2014 Collabora Ltd.
+- *
+- * This library is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU Library General Public
+- * License as published by the Free Software Foundation; either
+- * version 2 of the License, or (at your option) any later version.
+- *
+- * This library is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+- * Library General Public License for more details.
+- *
+- * You should have received a copy of the GNU Library General Public
+- * License along with this library; if not, write to the Free
+- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+- * Boston, MA 02110-1301 USA.
+- */
+-
+-#ifndef __GST_WL_BUFFER_H__
+-#define __GST_WL_BUFFER_H__
+-
+-#include "wldisplay.h"
+-
+-G_BEGIN_DECLS
+-
+-#define GST_TYPE_WL_BUFFER                  (gst_wl_buffer_get_type ())
+-#define GST_WL_BUFFER(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_WL_BUFFER, GstWlBuffer))
+-#define GST_IS_WL_BUFFER(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_WL_BUFFER))
+-#define GST_WL_BUFFER_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_WL_BUFFER, GstWlBufferClass))
+-#define GST_IS_WL_BUFFER_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_WL_BUFFER))
+-#define GST_WL_BUFFER_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_WL_BUFFER, GstWlBufferClass))
+-
+-typedef struct _GstWlBuffer GstWlBuffer;
+-typedef struct _GstWlBufferClass GstWlBufferClass;
+-
+-struct _GstWlBuffer
+-{
+-  GObject parent_instance;
+-
+-  struct wl_buffer * wlbuffer;
+-  GstBuffer *gstbuffer;
+-
+-  GstWlDisplay *display;
+-
+-  gboolean used_by_compositor;
+-};
+-
+-struct _GstWlBufferClass
+-{
+-  GObjectClass parent_class;
+-};
+-
+-GType gst_wl_buffer_get_type (void);
+-
+-GstWlBuffer * gst_buffer_add_wl_buffer (GstBuffer * gstbuffer,
+-    struct wl_buffer * wlbuffer, GstWlDisplay * display);
+-GstWlBuffer * gst_buffer_get_wl_buffer (GstBuffer * gstbuffer);
+-
+-void gst_wl_buffer_force_release_and_unref (GstWlBuffer * self);
+-
+-void gst_wl_buffer_attach (GstWlBuffer * self, struct wl_surface *surface);
+-
+-G_END_DECLS
+-
+-#endif /* __GST_WL_BUFFER_H__ */
+diff --git a/ext/wayland/wldisplay-wlwindow-wlbuffer.h b/ext/wayland/wldisplay-wlwindow-wlbuffer.h
+new file mode 100644
+index 0000000..a89d0c0
+--- /dev/null
++++ b/ext/wayland/wldisplay-wlwindow-wlbuffer.h
+@@ -0,0 +1,229 @@
++/* GStreamer Wayland video sink
++ *
++ * Copyright (C) 2014 Collabora Ltd.
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
++ * Boston, MA 02110-1301 USA.
++ */
++
++#ifndef __GST_WL_DISPLAY_H__
++#define __GST_WL_DISPLAY_H__
++
++#include <gst/gst.h>
++#include <stdlib.h>
++#include <stdio.h>
++#include <gst/video/video.h>
++#include <gst/gstbuffer.h>
++#include <gst/drm/gstdrmallocator.h>
++#include <wayland-client.h>
++#include "viewporter-client-protocol.h"
++#include "linux-dmabuf-unstable-v1-client-protocol.h"
++
++G_BEGIN_DECLS
++
++#define GST_TYPE_WL_BUFFER                  (gst_wl_buffer_get_type ())
++#define GST_WL_BUFFER(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_WL_BUFFER, GstWlBuffer))
++#define GST_IS_WL_BUFFER(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_WL_BUFFER))
++#define GST_WL_BUFFER_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_WL_BUFFER, GstWlBufferClass))
++#define GST_IS_WL_BUFFER_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_WL_BUFFER))
++#define GST_WL_BUFFER_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_WL_BUFFER, GstWlBufferClass))
++
++
++#define GST_TYPE_WL_WINDOW                  (gst_wl_window_get_type ())
++#define GST_WL_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_WL_WINDOW, GstWlWindow))
++#define GST_IS_WL_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_WL_WINDOW))
++#define GST_WL_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_WL_WINDOW, GstWlWindowClass))
++#define GST_IS_WL_WINDOW_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_WL_WINDOW))
++#define GST_WL_WINDOW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_WL_WINDOW, GstWlWindowClass))
++
++
++#define GST_TYPE_WL_DISPLAY                  (gst_wl_display_get_type ())
++#define GST_WL_DISPLAY(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_WL_DISPLAY, GstWlDisplay))
++#define GST_IS_WL_DISPLAY(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_WL_DISPLAY))
++#define GST_WL_DISPLAY_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_WL_DISPLAY, GstWlDisplayClass))
++#define GST_IS_WL_DISPLAY_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_WL_DISPLAY))
++#define GST_WL_DISPLAY_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_WL_DISPLAY, GstWlDisplayClass))
++
++typedef struct _GstWlBuffer GstWlBuffer;
++typedef struct _GstWlBufferClass GstWlBufferClass;
++
++typedef struct _GstWlWindow GstWlWindow;
++typedef struct _GstWlWindowClass GstWlWindowClass;
++
++typedef struct _GstWlDisplay GstWlDisplay;
++typedef struct _GstWlDisplayClass GstWlDisplayClass;
++
++struct _GstWlBuffer
++{
++  GObject parent_instance;
++
++  struct wl_buffer * wlbuffer;
++  GstBuffer *gstbuffer;
++
++  GstWlDisplay *display;
++
++  gboolean used_by_compositor;
++};
++
++struct _GstWlBufferClass
++{
++  GObjectClass parent_class;
++};
++
++GType gst_wl_buffer_get_type (void);
++
++GstWlBuffer * gst_buffer_add_wl_buffer (GstBuffer * gstbuffer,
++    struct wl_buffer * wlbuffer, GstWlDisplay * display);
++GstWlBuffer * gst_buffer_get_wl_buffer (GstBuffer * gstbuffer);
++
++void gst_wl_buffer_force_release_and_unref (GstWlBuffer * self);
++
++void gst_wl_buffer_attach (GstWlBuffer * self, struct wl_surface *surface);
++
++
++struct _GstWlWindow
++{
++  GObject parent_instance;
++
++  GMutex *render_lock;
++
++  GstWlDisplay *display;
++  struct wl_surface *area_surface;
++  struct wl_subsurface *area_subsurface;
++  struct wp_viewport *area_viewport;
++  struct wl_surface *video_surface;
++  struct wl_subsurface *video_subsurface;
++  struct wp_viewport *video_viewport;
++  struct wl_shell_surface *shell_surface;
++
++  /* the size and position of the area_(sub)surface */
++  GstVideoRectangle render_rectangle;
++
++  /* the size and position of the video_subsurface */
++  GstVideoRectangle video_rectangle;
++
++  /* the size of the video in the buffers */
++  gint video_width, video_height;
++
++  /* this will be set when viewporter is available and black background has
++   * already been set on the area_subsurface */
++  gboolean no_border_update;
++
++};
++
++struct _GstWlWindowClass
++{
++  GObjectClass parent_class;
++};
++
++GType gst_wl_window_get_type (void);
++
++GstWlWindow *gst_wl_window_new_toplevel (GstWlDisplay * display,
++        const GstVideoInfo * info, GMutex * render_lock);
++GstWlWindow *gst_wl_window_new_in_surface (GstWlDisplay * display,
++        struct wl_surface * parent, GMutex * render_lock);
++
++GstWlDisplay *gst_wl_window_get_display (GstWlWindow * window);
++struct wl_surface *gst_wl_window_get_wl_surface (GstWlWindow * window);
++gboolean gst_wl_window_is_toplevel (GstWlWindow *window);
++
++void gst_wl_window_render (GstWlWindow * window, GstWlBuffer * buffer,
++        const GstVideoInfo * info);
++void gst_wl_window_set_render_rectangle (GstWlWindow * window, gint x, gint y,
++        gint w, gint h);
++
++struct touch_point
++{
++  int32_t id;
++  struct wl_list link;
++};
++
++struct input
++{
++  GstWlDisplay *display;
++  struct wl_seat *seat;
++  struct wl_pointer *pointer;
++  struct wl_touch *touch;
++  struct wl_list touch_point_list;
++  GstWlWindow *pointer_focus;
++  GstWlWindow *touch_focus;
++  struct wl_list link;
++  GstWlWindow *grab;
++};
++
++struct _GstWlDisplay
++{
++  GObject parent_instance;
++
++  /* public objects */
++  struct wl_display *display;
++  struct wl_event_queue *queue;
++
++  /* globals */
++  struct wl_registry *registry;
++  struct wl_compositor *compositor;
++  struct wl_subcompositor *subcompositor;
++  struct wl_shell *shell;
++  struct wl_shm *shm;
++  struct wl_drm *drm;
++  struct wp_viewporter *viewporter;
++  struct zwp_linux_dmabuf_v1 *dmabuf;
++  GArray *shm_formats;
++  GArray *dmabuf_formats;
++  GArray *drm_formats;
++
++  /* private */
++  gboolean own_display;
++  GThread *thread;
++  GstPoll *wl_fd_poll;
++
++  GMutex buffers_mutex;
++  GHashTable *buffers;
++  gboolean shutting_down;
++
++  int fd;
++  int authenticated;
++  gboolean use_drm;
++  gint scale_width, scale_height;
++  GstVideoCropMeta *crop;
++
++  struct wl_list input_list;
++  int seat_version;
++  uint32_t serial;
++};
++
++struct _GstWlDisplayClass
++{
++  GObjectClass parent_class;
++};
++
++GType gst_wl_display_get_type (void);
++
++GstWlDisplay *gst_wl_display_new (const gchar * name, GError ** error);
++GstWlDisplay *gst_wl_display_new_existing (struct wl_display * display,
++    gboolean take_ownership, GError ** error);
++
++/* see wlbuffer.c for explanation */
++void gst_wl_display_register_buffer (GstWlDisplay * self, gpointer buf);
++void gst_wl_display_unregister_buffer (GstWlDisplay * self, gpointer buf);
++
++gboolean gst_wl_display_check_format_for_shm (GstWlDisplay * display,
++    GstVideoFormat format);
++gboolean gst_wl_display_check_format_for_dmabuf (GstWlDisplay * display,
++    GstVideoFormat format);
++
++G_END_DECLS
++
++#endif /* __GST_WL_DISPLAY_H__ */
+diff --git a/ext/wayland/wldisplay.c b/ext/wayland/wldisplay.c
+index ac6637f..507efaf 100644
+--- a/ext/wayland/wldisplay.c
++++ b/ext/wayland/wldisplay.c
+@@ -21,15 +21,15 @@
+ #ifdef HAVE_CONFIG_H
+ #include <config.h>
+ #endif
+-
+-#include "wldisplay.h"
+-#include "wlbuffer.h"
++#include "wldisplay-wlwindow-wlbuffer.h"
+ #include "wlvideoformat.h"
+ 
+ #include "wayland-drm-client-protocol.h"
++#include <linux/input.h>
+ #include <fcntl.h>
+ #include <xf86drm.h>
+ #include <xf86drmMode.h>
++#include <unistd.h>
+ #include <errno.h>
+ 
+ GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
+@@ -58,6 +58,54 @@ gst_wl_display_init (GstWlDisplay * self)
+   self->use_drm = FALSE;
+   g_mutex_init (&self->buffers_mutex);
+ }
++static void
++input_grab (struct input *input, GstWlWindow *window)
++{
++	input->grab = window;
++}
++
++	static void
++input_ungrab (struct input *input)
++{
++	input->grab = NULL;
++}
++
++	static void
++input_remove_pointer_focus (struct input *input)
++{
++	GstWlWindow *window = input->pointer_focus;
++
++	if (!window)
++		return;
++
++	input->pointer_focus = NULL;
++}
++
++	static void
++input_destroy (struct input *input)
++{
++	input_remove_pointer_focus (input);
++
++	if (input->display->seat_version >= 3) {
++		if (input->pointer)
++			wl_pointer_release (input->pointer);
++	}
++
++	wl_list_remove (&input->link);
++	wl_seat_destroy (input->seat);
++	free (input);
++}
++
++	static void
++display_destroy_inputs (GstWlDisplay *display)
++{
++	struct input *tmp;
++	struct input *input;
++
++	wl_list_for_each_safe (input, tmp, &display->input_list, link)
++		input_destroy (input);
++}
++
+ 
+ static void
+ gst_wl_display_finalize (GObject * gobject)
+@@ -86,6 +134,8 @@ gst_wl_display_finalize (GObject * gobject)
+   g_hash_table_unref (self->buffers);
+   g_mutex_clear (&self->buffers_mutex);
+ 
++  display_destroy_inputs (self);
++
+   if(self->fd != -1)
+ 	close(self->fd);
+ 
+@@ -264,6 +314,240 @@ static const struct wl_drm_listener drm_listener = {
+ };
+  
+ static void
++pointer_handle_enter (void *data, struct wl_pointer *pointer,
++    uint32_t serial, struct wl_surface *surface,
++    wl_fixed_t sx_w, wl_fixed_t sy_w)
++{
++  struct input *input = data;
++
++  if (!surface) {
++    /* enter event for a window we've just destroyed */
++    return;
++  }
++
++  input->display->serial = serial;
++  input->pointer_focus = wl_surface_get_user_data (surface);
++}
++
++static void
++pointer_handle_leave (void *data, struct wl_pointer *pointer,
++    uint32_t serial, struct wl_surface *surface)
++{
++  struct input *input = data;
++
++  input_remove_pointer_focus (input);
++}
++
++static void
++pointer_handle_motion (void *data, struct wl_pointer *pointer,
++    uint32_t time, wl_fixed_t sx_w, wl_fixed_t sy_w)
++{
++  struct input *input = data;
++  GstWlWindow *window = input->pointer_focus;
++
++  if (!window)
++    return;
++
++  if (input->grab)
++    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++        input->display->serial);
++
++}
++
++static void
++pointer_handle_button (void *data, struct wl_pointer *pointer, uint32_t serial,
++    uint32_t time, uint32_t button, uint32_t state_w)
++{
++  struct input *input = data;
++  enum wl_pointer_button_state state = state_w;
++  input->display->serial = serial;
++
++  if (button == BTN_LEFT) {
++    if (state == WL_POINTER_BUTTON_STATE_PRESSED)
++      input_grab (input, input->pointer_focus);
++
++    if (input->grab && state == WL_POINTER_BUTTON_STATE_RELEASED)
++      input_ungrab (input);
++  }
++
++  if (input->grab)
++    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++        input->display->serial);
++}
++
++static void
++pointer_handle_axis (void *data, struct wl_pointer *pointer,
++    uint32_t time, uint32_t axis, wl_fixed_t value)
++{
++}
++
++static void pointer_frame(void *data, struct wl_pointer *wl_pointer)
++{
++}
++static void pointer_axis_source(void *data, struct wl_pointer *wl_pointer, uint32_t axis_source)
++{
++}
++static void pointer_axis_stop(void *data, struct wl_pointer *wl_pointer, uint32_t time, uint32_t axis)
++{
++}
++
++static const struct wl_pointer_listener pointer_listener = {
++  pointer_handle_enter,
++  pointer_handle_leave,
++  pointer_handle_motion,
++  pointer_handle_button,
++  pointer_handle_axis,
++  pointer_frame,
++  pointer_axis_source,
++  pointer_axis_stop
++};
++
++static void
++touch_handle_down (void *data, struct wl_touch *wl_touch,
++    uint32_t serial, uint32_t time, struct wl_surface *surface,
++    int32_t id, wl_fixed_t x_w, wl_fixed_t y_w)
++{
++  struct input *input = data;
++  struct touch_point *tp;
++
++  input->display->serial = serial;
++  input->touch_focus = wl_surface_get_user_data (surface);
++  if (!input->touch_focus) {
++    return;
++  }
++
++  tp = malloc (sizeof *tp);
++  if (tp) {
++    tp->id = id;
++    wl_list_insert (&input->touch_point_list, &tp->link);
++    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++        serial);
++  }
++}
++
++static void
++touch_handle_motion (void *data, struct wl_touch *wl_touch,
++    uint32_t time, int32_t id, wl_fixed_t x_w, wl_fixed_t y_w)
++{
++  struct input *input = data;
++  struct touch_point *tp;
++
++
++  if (!input->touch_focus) {
++    return;
++  }
++  wl_list_for_each (tp, &input->touch_point_list, link) {
++    if (tp->id != id)
++      continue;
++
++    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++        input->display->serial);
++
++    return;
++  }
++}
++
++static void
++touch_handle_frame (void *data, struct wl_touch *wl_touch)
++{
++}
++
++static void
++touch_handle_cancel (void *data, struct wl_touch *wl_touch)
++{
++}
++
++static void
++touch_handle_up (void *data, struct wl_touch *wl_touch,
++    uint32_t serial, uint32_t time, int32_t id)
++{
++  struct input *input = data;
++  struct touch_point *tp, *tmp;
++
++  if (!input->touch_focus) {
++    return;
++  }
++
++  wl_list_for_each_safe (tp, tmp, &input->touch_point_list, link) {
++    if (tp->id != id)
++      continue;
++
++    wl_list_remove (&tp->link);
++    free (tp);
++
++    return;
++  }
++}
++
++static const struct wl_touch_listener touch_listener = {
++  touch_handle_down,
++  touch_handle_up,
++  touch_handle_motion,
++  touch_handle_frame,
++  touch_handle_cancel,
++};
++
++static void
++seat_handle_capabilities (void *data, struct wl_seat *seat,
++    enum wl_seat_capability caps)
++{
++  struct input *input = data;
++
++  if ((caps & WL_SEAT_CAPABILITY_POINTER) && !input->pointer) {
++    input->pointer = wl_seat_get_pointer (seat);
++    wl_pointer_set_user_data (input->pointer, input);
++    wl_pointer_add_listener (input->pointer, &pointer_listener, input);
++  } else if (!(caps & WL_SEAT_CAPABILITY_POINTER) && input->pointer) {
++    wl_pointer_destroy (input->pointer);
++    input->pointer = NULL;
++  }
++
++  if ((caps & WL_SEAT_CAPABILITY_TOUCH) && !input->touch) {
++    input->touch = wl_seat_get_touch (seat);
++    wl_touch_set_user_data (input->touch, input);
++    wl_touch_add_listener (input->touch, &touch_listener, input);
++  } else if (!(caps & WL_SEAT_CAPABILITY_TOUCH) && input->touch) {
++    wl_touch_destroy (input->touch);
++    input->touch = NULL;
++  }
++}
++
++static void
++seat_handle_name (void *data, struct wl_seat *seat, const char *name)
++{
++
++}
++
++static const struct wl_seat_listener seat_listener = {
++  seat_handle_capabilities,
++  seat_handle_name
++};
++
++static void
++display_add_input (GstWlDisplay *d, uint32_t id)
++{
++  struct input *input;
++
++  input = calloc (1, sizeof (*input));
++  if (input == NULL) {
++    fprintf (stderr, "%s: out of memory\n", "gst-wayland-sink");
++    exit (EXIT_FAILURE);
++  }
++  input->display = d;
++  input->seat = wl_registry_bind (d->registry, id, &wl_seat_interface,
++      MAX (d->seat_version, 3));
++  input->touch_focus = NULL;
++  input->pointer_focus = NULL;
++  wl_list_init (&input->touch_point_list);
++  wl_list_insert (d->input_list.prev, &input->link);
++
++  wl_seat_add_listener (input->seat, &seat_listener, input);
++  wl_seat_set_user_data (input->seat, input);
++
++}
++
++
++static void
+ registry_handle_global (void *data, struct wl_registry *registry,
+     uint32_t id, const char *interface, uint32_t version)
+ {
+@@ -283,6 +567,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
+   } else if (g_strcmp0 (interface, "wl_drm") == 0) {
+     self->drm = wl_registry_bind (registry, id, &wl_drm_interface, 1);
+     wl_drm_add_listener (self->drm, &drm_listener, self);
++  } else if (g_strcmp0 (interface, "wl_seat") == 0) {
++    self->seat_version = version;
++    display_add_input (self, id);
+   } else if (g_strcmp0 (interface, "wp_viewporter") == 0) {
+     self->viewporter =
+         wl_registry_bind (registry, id, &wp_viewporter_interface, 1);
+@@ -365,6 +652,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+   self->own_display = take_ownership;
+ 
+   self->queue = wl_display_create_queue (self->display);
++  wl_list_init (&self->input_list);
+   self->registry = wl_display_get_registry (self->display);
+   wl_proxy_set_queue ((struct wl_proxy *) self->registry, self->queue);
+   wl_registry_add_listener (self->registry, &registry_listener, self);
+diff --git a/ext/wayland/wldisplay.h b/ext/wayland/wldisplay.h
+deleted file mode 100644
+index 1d3a49e..0000000
+--- a/ext/wayland/wldisplay.h
++++ /dev/null
+@@ -1,102 +0,0 @@
+-/* GStreamer Wayland video sink
+- *
+- * Copyright (C) 2014 Collabora Ltd.
+- *
+- * This library is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU Library General Public
+- * License as published by the Free Software Foundation; either
+- * version 2 of the License, or (at your option) any later version.
+- *
+- * This library is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+- * Library General Public License for more details.
+- *
+- * You should have received a copy of the GNU Library General Public
+- * License along with this library; if not, write to the Free
+- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+- * Boston, MA 02110-1301 USA.
+- */
+-
+-#ifndef __GST_WL_DISPLAY_H__
+-#define __GST_WL_DISPLAY_H__
+-
+-#include <gst/gst.h>
+-#include <gst/video/video.h>
+-#include <wayland-client.h>
+-#include "viewporter-client-protocol.h"
+-#include "linux-dmabuf-unstable-v1-client-protocol.h"
+-
+-G_BEGIN_DECLS
+-
+-#define GST_TYPE_WL_DISPLAY                  (gst_wl_display_get_type ())
+-#define GST_WL_DISPLAY(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_WL_DISPLAY, GstWlDisplay))
+-#define GST_IS_WL_DISPLAY(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_WL_DISPLAY))
+-#define GST_WL_DISPLAY_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_WL_DISPLAY, GstWlDisplayClass))
+-#define GST_IS_WL_DISPLAY_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_WL_DISPLAY))
+-#define GST_WL_DISPLAY_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_WL_DISPLAY, GstWlDisplayClass))
+-
+-typedef struct _GstWlDisplay GstWlDisplay;
+-typedef struct _GstWlDisplayClass GstWlDisplayClass;
+-
+-struct _GstWlDisplay
+-{
+-  GObject parent_instance;
+-
+-  /* public objects */
+-  struct wl_display *display;
+-  struct wl_event_queue *queue;
+-
+-  /* globals */
+-  struct wl_registry *registry;
+-  struct wl_compositor *compositor;
+-  struct wl_subcompositor *subcompositor;
+-  struct wl_shell *shell;
+-  struct wl_shm *shm;
+-  struct wl_drm *drm;
+-  struct wp_viewporter *viewporter;
+-  struct zwp_linux_dmabuf_v1 *dmabuf;
+-  GArray *shm_formats;
+-  GArray *dmabuf_formats;
+-  GArray *drm_formats;
+-
+-  /* private */
+-  gboolean own_display;
+-  GThread *thread;
+-  GstPoll *wl_fd_poll;
+-
+-  GMutex buffers_mutex;
+-  GHashTable *buffers;
+-  gboolean shutting_down;
+-
+-  int fd;
+-  int authenticated;
+-  gboolean use_drm;
+-  gint scale_width, scale_height;
+-  GstVideoCropMeta *crop;
+-
+-};
+-
+-struct _GstWlDisplayClass
+-{
+-  GObjectClass parent_class;
+-};
+-
+-GType gst_wl_display_get_type (void);
+-
+-GstWlDisplay *gst_wl_display_new (const gchar * name, GError ** error);
+-GstWlDisplay *gst_wl_display_new_existing (struct wl_display * display,
+-    gboolean take_ownership, GError ** error);
+-
+-/* see wlbuffer.c for explanation */
+-void gst_wl_display_register_buffer (GstWlDisplay * self, gpointer buf);
+-void gst_wl_display_unregister_buffer (GstWlDisplay * self, gpointer buf);
+-
+-gboolean gst_wl_display_check_format_for_shm (GstWlDisplay * display,
+-    GstVideoFormat format);
+-gboolean gst_wl_display_check_format_for_dmabuf (GstWlDisplay * display,
+-    GstVideoFormat format);
+-
+-G_END_DECLS
+-
+-#endif /* __GST_WL_DISPLAY_H__ */
+diff --git a/ext/wayland/wldrm.c b/ext/wayland/wldrm.c
+index 92f8e74..9aca9d5 100644
+--- a/ext/wayland/wldrm.c
++++ b/ext/wayland/wldrm.c
+@@ -1,4 +1,4 @@
+-#include "wldisplay.h"
++#include "wldisplay-wlwindow-wlbuffer.h"
+ #include <gst/drm/gstdrmallocator.h>
+ #include "wayland-drm-client-protocol.h"
+ #include <wayland-client.h>
+diff --git a/ext/wayland/wlshmallocator.h b/ext/wayland/wlshmallocator.h
+index 07ae17f..2860fc3 100644
+--- a/ext/wayland/wlshmallocator.h
++++ b/ext/wayland/wlshmallocator.h
+@@ -26,7 +26,7 @@
+ #include <gst/video/video.h>
+ #include <gst/allocators/allocators.h>
+ #include <wayland-client-protocol.h>
+-#include "wldisplay.h"
++#include "wldisplay-wlwindow-wlbuffer.h"
+ 
+ G_BEGIN_DECLS
+ 
+diff --git a/ext/wayland/wlwindow.c b/ext/wayland/wlwindow.c
+index e066ef2..efe246a 100644
+--- a/ext/wayland/wlwindow.c
++++ b/ext/wayland/wlwindow.c
+@@ -24,9 +24,9 @@
+ #include <config.h>
+ #endif
+ 
+-#include "wlwindow.h"
+ #include "wlshmallocator.h"
+-#include "wlbuffer.h"
++#include "wldisplay-wlwindow-wlbuffer.h"
++#include "wldrm.h"
+ 
+ GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
+ #define GST_CAT_DEFAULT gstwayland_debug
+@@ -120,6 +120,8 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
+ 
+   window->area_surface = wl_compositor_create_surface (display->compositor);
+   window->video_surface = wl_compositor_create_surface (display->compositor);
++  wl_surface_set_user_data (window->area_surface, window);
++  wl_surface_set_user_data (window->video_surface, window);
+ 
+   wl_proxy_set_queue ((struct wl_proxy *) window->area_surface, display->queue);
+   wl_proxy_set_queue ((struct wl_proxy *) window->video_surface,
+diff --git a/ext/wayland/wlwindow.h b/ext/wayland/wlwindow.h
+deleted file mode 100644
+index e247b4e..0000000
+--- a/ext/wayland/wlwindow.h
++++ /dev/null
+@@ -1,93 +0,0 @@
+-/* GStreamer Wayland video sink
+- *
+- * Copyright (C) 2014 Collabora Ltd.
+- *
+- * This library is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU Library General Public
+- * License as published by the Free Software Foundation; either
+- * version 2 of the License, or (at your option) any later version.
+- *
+- * This library is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+- * Library General Public License for more details.
+- *
+- * You should have received a copy of the GNU Library General Public
+- * License along with this library; if not, write to the Free
+- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+- * Boston, MA 02110-1301 USA.
+- */
+-
+-#ifndef __GST_WL_WINDOW_H__
+-#define __GST_WL_WINDOW_H__
+-
+-#include "wldisplay.h"
+-#include "wlbuffer.h"
+-#include <gst/video/video.h>
+-
+-G_BEGIN_DECLS
+-
+-#define GST_TYPE_WL_WINDOW                  (gst_wl_window_get_type ())
+-#define GST_WL_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_WL_WINDOW, GstWlWindow))
+-#define GST_IS_WL_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_WL_WINDOW))
+-#define GST_WL_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GST_TYPE_WL_WINDOW, GstWlWindowClass))
+-#define GST_IS_WL_WINDOW_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GST_TYPE_WL_WINDOW))
+-#define GST_WL_WINDOW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GST_TYPE_WL_WINDOW, GstWlWindowClass))
+-
+-typedef struct _GstWlWindow GstWlWindow;
+-typedef struct _GstWlWindowClass GstWlWindowClass;
+-
+-struct _GstWlWindow
+-{
+-  GObject parent_instance;
+-
+-  GMutex *render_lock;
+-
+-  GstWlDisplay *display;
+-  struct wl_surface *area_surface;
+-  struct wl_subsurface *area_subsurface;
+-  struct wp_viewport *area_viewport;
+-  struct wl_surface *video_surface;
+-  struct wl_subsurface *video_subsurface;
+-  struct wp_viewport *video_viewport;
+-  struct wl_shell_surface *shell_surface;
+-
+-  /* the size and position of the area_(sub)surface */
+-  GstVideoRectangle render_rectangle;
+-
+-  /* the size and position of the video_subsurface */
+-  GstVideoRectangle video_rectangle;
+-
+-  /* the size of the video in the buffers */
+-  gint video_width, video_height;
+-
+-  /* this will be set when viewporter is available and black background has
+-   * already been set on the area_subsurface */
+-  gboolean no_border_update;
+-
+-};
+-
+-struct _GstWlWindowClass
+-{
+-  GObjectClass parent_class;
+-};
+-
+-GType gst_wl_window_get_type (void);
+-
+-GstWlWindow *gst_wl_window_new_toplevel (GstWlDisplay * display,
+-        const GstVideoInfo * info, GMutex * render_lock);
+-GstWlWindow *gst_wl_window_new_in_surface (GstWlDisplay * display,
+-        struct wl_surface * parent, GMutex * render_lock);
+-
+-GstWlDisplay *gst_wl_window_get_display (GstWlWindow * window);
+-struct wl_surface *gst_wl_window_get_wl_surface (GstWlWindow * window);
+-gboolean gst_wl_window_is_toplevel (GstWlWindow *window);
+-
+-void gst_wl_window_render (GstWlWindow * window, GstWlBuffer * buffer,
+-        const GstVideoInfo * info);
+-void gst_wl_window_set_render_rectangle (GstWlWindow * window, gint x, gint y,
+-        gint w, gint h);
+-
+-G_END_DECLS
+-
+-#endif /* __GST_WL_WINDOW_H__ */
+-- 
+1.9.1
+
