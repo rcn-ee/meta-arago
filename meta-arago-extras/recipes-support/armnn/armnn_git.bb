@@ -5,12 +5,12 @@ LICENSE = "MIT & Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
                     file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-PR = "r1"
-PV = "18.08"
+PR = "r0"
+PV = "19.02"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
 BRANCH = "master"
-SRCREV = "c577f2c6a3b4ddb6ba87a882723c53a248afbeba"
+SRCREV = "0028d1b0ce5f4c2c6a6eb3c66f38111c21eb47a3"
 SRCREV_tidl-api = "7e9a3942ec38efd64d45e34c10cba2f2938f5618"
 
 SRCREV_FORMAT = "armnn"
@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
 inherit cmake
 
 SRC_URI = " \
-    git://github.com/ARM-software/armnn.git;name=armnn;branch=${BRANCH} \
+    git://review.mlplatform.org/ml/armnn;protocol=https;name=armnn;branch=${BRANCH} \
     file://0001-stdlib-issue-work-around.patch \
     file://0002-enable-use-of-boost-shared-library.patch \
     file://0003-add-more-test-command-line-arguments.patch \
@@ -42,6 +42,7 @@ DEPENDS = " \
     arm-compute-library \
     armnn-caffe \
     armnn-tensorflow \
+    armnn-onnx \
     opencv \
 "
 
@@ -52,7 +53,8 @@ EXTRA_OECMAKE=" \
     -DARMCOMPUTE_ROOT=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
     -DCAFFE_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-caffe \
     -DTF_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow \
-    -DBUILD_CAFFE_PARSER=1 -DBUILD_TF_PARSER=1 \
+    -DONNX_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-onnx \
+    -DBUILD_CAFFE_PARSER=1 -DBUILD_TF_PARSER=1 -DBUILD_ONNX_PARSER=1 \
     -DARMCOMPUTENEON=1 \
     -DBUILD_TESTS=1 -DPROFILING=1 \
     -DTHIRD_PARTY_INCLUDE_DIRS=${STAGING_DIR_HOST}${includedir} \
