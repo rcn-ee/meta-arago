@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=762a7ba8d2ddc3b38d88742fbaf0b62d"
 COMPATIBLE_MACHINE = "armv7a|aarch64"
 
 SRC_URI = " \
-    git://github.com/ARM-software/ComputeLibrary.git;branch=${BRANCH} \
+    git://review.mlplatform.org/ml/ComputeLibrary;protocol=https;branch=${BRANCH} \
     file://0001-add-ti-benchmark-test-group.patch \
     file://0002-add-ti-benchmark-test-group.patch \
     file://0003-add-ti-benchmark-test-group.patch \
@@ -19,12 +19,12 @@ SRC_URI = " \
     file://0010-add-ti-benchmark-test-group.patch \
     file://0011-add-ti-benchmark-test-group.patch \
 "
-
-PV = "18.08"
+PR = "r0"
+PV  = "19.02"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
 BRANCH = "master"
-SRCREV = "52ba29e936b8e711e8acdfe819e36f884d4f3fe1"
+SRCREV = "d9f9318cffba4051c4ca0ec2028819962bdc2b1c"
 
 S = "${WORKDIR}/git"
 
