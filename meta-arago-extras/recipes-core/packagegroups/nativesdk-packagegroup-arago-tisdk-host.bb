@@ -14,6 +14,7 @@ EXTRA_TI_TOOLS = " \
     nativesdk-open62541-examples \
     nativesdk-open62541-tests \
     nativesdk-tidl-import \
+    nativesdk-gcc-arm-none-eabi \
 "
 
 RDEPENDS_${PN} = "\
