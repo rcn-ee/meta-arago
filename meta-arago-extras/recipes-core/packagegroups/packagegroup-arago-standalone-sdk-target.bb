@@ -11,7 +11,7 @@ RDEPENDS_${PN} = "\
     libgcc-dev \
     libstdc++-dev \
     ${LIBC_DEPENDENCIES} \
-    glibc-staticdev \
+    ${@oe.utils.conditional('TCMODE', 'external-linaro', 'glibc-staticdev', '', d)} \
     linux-libc-headers-dev \
     gdbserver \
     alsa-dev \
