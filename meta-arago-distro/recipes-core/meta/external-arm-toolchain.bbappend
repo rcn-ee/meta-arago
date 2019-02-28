@@ -3,19 +3,21 @@
 # on linux-libc-headers creates circular dependencies now. Mostly
 # duplication of code from corresponding recipe.
 
-BRANCH = "ti-lsk-linux-4.14.y"
-SRCREV = "3e50654361c34b75784ab7c8c9aa8e96b3a37fc1"
+BRANCH = "ti-linux-4.19.y"
+SRCREV = "8de817772462078a064b70d368eeae3b92a31439"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
 SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH}"
 
-PKGV_linux-libc-headers-dev = "4.14"
-PKGV_linux-libc-headers = "4.14"
+PKGV_linux-libc-headers-dev = "4.19"
+PKGV_linux-libc-headers = "4.19"
 
 inherit kernel-arch pkgconfig multilib_header
 
 EXTRA_OEMAKE = " HOSTCC="${BUILD_CC}" HOSTCPP="${BUILD_CPP}""
+
+DEPENDS += "bison-native"
 
 do_configure_append() {
 	cd ${WORKDIR}/git
@@ -31,17 +33,4 @@ do_install_append() {
 
 	# The ..install.cmd conflicts between various configure runs
 	find ${D}${exec_prefix} -name ..install.cmd | xargs rm -f
-}
-
-do_install_append_aarch64 () {
-        do_install_asm_armmultilib
-}
-
-do_install_append_arm () {
-	do_install_asm_armmultilib
-}
-
-do_install_asm_armmultilib () {
-	oe_multilib_header asm/auxvec.h asm/bitsperlong.h asm/byteorder.h asm/fcntl.h asm/hwcap.h asm/ioctls.h asm/kvm.h asm/mman.h asm/param.h asm/perf_regs.h
-	oe_multilib_header asm/posix_types.h asm/ptrace.h  asm/setup.h  asm/sigcontext.h asm/siginfo.h asm/signal.h asm/stat.h  asm/statfs.h asm/swab.h  asm/types.h asm/unistd.h
 }
