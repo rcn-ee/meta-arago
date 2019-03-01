@@ -43,5 +43,5 @@ FILES_matrix-hmi-demo-evse  += "${bindir}/runHmiEvse.sh"
 FILES_matrix-hmi-demo-protection-relays   = "${MATRIX_APP_DIR}/hmi_protection_relays/*"
 FILES_matrix-hmi-demo-protection-relays  += "${bindir}/runHmiProtectionRelays.sh"
 
-FILES_matrix-hmi-demo-mmwavegesture    = "${MATRIX_APP_DIR}/hmi_mmwavgesture/*"
+FILES_matrix-hmi-demo-mmwavegesture    = "${MATRIX_APP_DIR}/hmi_mmwave/*"
 FILES_matrix-hmi-demo-mmwavegesture  += "${bindir}/runHmiMmWave.sh"
