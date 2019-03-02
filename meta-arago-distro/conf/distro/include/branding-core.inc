@@ -16,9 +16,5 @@ ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
 # latest code base, until it is fixed for gdbc6x, qt-openvc-opencl
 MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('dsp', '')}"
 
-# Temporarily disable "sgx" machine feature for all SOCs while building
-# latest code base, until it is fixed for kernel 4.19
-MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('sgx', '')}"
-
 # Temporarily disable UBI images for K2 "server" rootfs due to size
 IMAGE_FSTYPES_remove_pn-tisdk-server-rootfs-image = "ubi ubifs"
