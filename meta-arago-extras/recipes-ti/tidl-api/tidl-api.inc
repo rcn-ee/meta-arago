@@ -1,4 +1,4 @@
-PV = "1.2.2"
+PV = "1.3.0"
 INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://license.txt;md5=e3daeabffb9fc131a73f16d16cbdb118"
@@ -8,4 +8,4 @@ GIT_PROTOCOL = "git"
 BRANCH = "master"
 
 SRC_URI = "${GIT_URI};protocol=${GIT_PROTOCOL};branch=${BRANCH}"
-SRCREV = "139e105486ba7c7a8487cf237de37acbcbf80ed6"
+SRCREV = "785170685ca6a5c11876b05ddf74741c419393be"
