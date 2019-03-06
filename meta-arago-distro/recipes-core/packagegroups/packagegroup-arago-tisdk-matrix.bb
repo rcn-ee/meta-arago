@@ -183,6 +183,10 @@ MATRIX_APPS_append_dra7xx += " \
     matrix-tidl-demo-livecam-lg2 \
     matrix-tidl-demo-staticimg-lg2 \
     matrix-tidl-demo-staticimg-dsponly \
+    matrix-tidl-demo-objdet \
+    matrix-tidl-demo-objdet-livecam \
+    matrix-tidl-demo-segment \
+    matrix-tidl-demo-dogbreeds \
 "
 
 MATRIX_APPS_append_keystone = " \
