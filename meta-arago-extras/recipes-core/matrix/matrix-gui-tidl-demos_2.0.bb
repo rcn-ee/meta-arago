@@ -20,6 +20,10 @@ PACKAGES = "matrix-tidl-demo-staticimg \
             matrix-tidl-demo-pnexamples \
             matrix-tidl-demo-livecam \
             matrix-tidl-demo-livecam-lg2 \
+            matrix-tidl-demo-dogbreeds \
+            matrix-tidl-demo-objdet \
+            matrix-tidl-demo-objdet-livecam \
+            matrix-tidl-demo-segment \
             matrix-armnn-demo-staticimg \
             matrix-armnn-demo-livecam \
 "
@@ -48,6 +52,22 @@ RDEPENDS_matrix-tidl-demo-livecam-lg2 = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
+RDEPENDS_matrix-tidl-demo-dogbreeds = " \
+    ${TIDLDEMO_RDEPENDS} \
+"
+
+RDEPENDS_matrix-tidl-demo-objdet = " \
+    ${TIDLDEMO_RDEPENDS} \
+"
+
+RDEPENDS_matrix-tidl-demo-objdet-livecam = " \
+    ${TIDLDEMO_RDEPENDS} \
+"
+
+RDEPENDS_matrix-tidl-demo-segment = " \
+    ${TIDLDEMO_RDEPENDS} \
+"
+
 RDEPENDS_matrix-armnn-demo-staticimg = " \
     ${TIDLDEMO_RDEPENDS} \
 "
@@ -73,6 +93,18 @@ FILES_matrix-tidl-demo-livecam   += "${bindir}/runTidlLiveCam.sh"
 
 FILES_matrix-tidl-demo-livecam-lg2  = "${MATRIX_APP_DIR}/tidl_demo_livecam_lg2/*"
 FILES_matrix-tidl-demo-livecam-lg2  += "${bindir}/runTidlLiveCam_lg2.sh"
+
+FILES_matrix-tidl-demo-dogbreeds = "${MATRIX_APP_DIR}/tidl_demo_dogbreeds/*"
+FILES_matrix-tidl-demo-dogbreeds += "${bindir}/runTidlDogBreeds.sh"
+
+FILES_matrix-tidl-demo-objdet   = "${MATRIX_APP_DIR}/tidl_demo_objdet/*"
+FILES_matrix-tidl-demo-objdet   += "${bindir}/runTidlObjdet.sh"
+
+FILES_matrix-tidl-demo-objdet-livecam   = "${MATRIX_APP_DIR}/tidl_demo_objdet_livecam/*"
+FILES_matrix-tidl-demo-objdet-livecam   += "${bindir}/runTidlObjdet_livecam.sh"
+
+FILES_matrix-tidl-demo-segment   = "${MATRIX_APP_DIR}/tidl_demo_segment/*"
+FILES_matrix-tidl-demo-segment   += "${bindir}/runTidlSegment.sh"
 
 FILES_matrix-armnn-demo-staticimg = "${MATRIX_APP_DIR}/armnn_demo_staticimg/*"
 FILES_matrix-armnn-demo-staticimg += "${bindir}/runArmnnStaticImg.sh"
