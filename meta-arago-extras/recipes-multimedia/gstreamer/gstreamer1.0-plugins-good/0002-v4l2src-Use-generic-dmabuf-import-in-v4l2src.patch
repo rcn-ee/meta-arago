@@ -1,0 +1,45 @@
+From 4b46918c475040ae4218f2474e564accd953847a Mon Sep 17 00:00:00 2001
+From: Ramprasad N <x0038811@ti.com>
+Date: Thu, 22 Mar 2018 12:02:59 +0530
+Subject: [PATCH 2/2] v4l2src: Use generic dmabuf import in v4l2src
+
+In Gstreamer 1.12.2 dmabuf interpreation has got
+changed and it doesn't consider DRM Fds as dmabuf since
+they are not allocated from dmabuf allocator.
+Because of this dmabuf_import will fail for the usecase
+wher v4l2src imports drm buffers allocated from ducati.
+
+With earlier Gstreamer versions, gst_mem_is_dmabuf()
+used to consider if mem_type is DMABUF or not.
+
+Since both dmabuf and drmallocator are derived from
+fdallocator, a generic fd mechanism is used in this patch.
+
+Signed-off-by: Ramprasad N <x0038811@ti.com>
+---
+ sys/v4l2/gstv4l2allocator.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/sys/v4l2/gstv4l2allocator.c b/sys/v4l2/gstv4l2allocator.c
+index 7e0e7c2..21edd36 100644
+--- a/sys/v4l2/gstv4l2allocator.c
++++ b/sys/v4l2/gstv4l2allocator.c
+@@ -1073,12 +1073,13 @@ gst_v4l2_allocator_import_dmabuf (GstV4l2Allocator * allocator,
+     gint dmafd;
+     gsize size, offset, maxsize;
+ 
+-    if (!gst_is_dmabuf_memory (dma_mem[i]))
++    if (!gst_is_dmabuf_memory (dma_mem[i]) &&
++        !gst_memory_is_type (dma_mem[i], GST_ALLOCATOR_DMABUF))
+       goto not_dmabuf;
+ 
+     size = gst_memory_get_sizes (dma_mem[i], &offset, &maxsize);
+ 
+-    if ((dmafd = dup (gst_dmabuf_memory_get_fd (dma_mem[i]))) < 0)
++    if ((dmafd = dup (gst_fd_memory_get_fd (dma_mem[i]))) < 0)
+       goto dup_failed;
+ 
+     GST_LOG_OBJECT (allocator, "imported DMABUF as fd %i plane %d", dmafd, i);
+-- 
+1.9.1
+

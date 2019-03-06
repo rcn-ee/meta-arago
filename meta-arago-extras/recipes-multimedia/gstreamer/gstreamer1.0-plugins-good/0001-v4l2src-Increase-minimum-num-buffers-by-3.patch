@@ -1,0 +1,31 @@
+From b87857b69e7707e04ce8c0cb97e316d37d7fd297 Mon Sep 17 00:00:00 2001
+From: Ramprasad N <x0038811@ti.com>
+Date: Mon, 28 Jan 2019 13:19:30 +0530
+Subject: [PATCH 1/2] v4l2src: Increase minimum num buffers by 3
+
+v4l2src plugin allocates 5 buffers for the pipeline.
+To capture video in realtime the pipeline without frameloss,
+four buffers are not sufficient. Increase the
+number of buffers by 3 more.
+
+Signed-off-by: Ramprasad N <x0038811@ti.com>
+---
+ sys/v4l2/gstv4l2object.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
+index 124c778..211f835 100644
+--- a/sys/v4l2/gstv4l2object.c
++++ b/sys/v4l2/gstv4l2object.c
+@@ -4385,7 +4385,7 @@ gst_v4l2_object_decide_allocation (GstV4l2Object * obj, GstQuery * query)
+      * held by the decoder. We account 2 buffers for v4l2 so when one is being
+      * pushed downstream the other one can already be queued for the next
+      * frame. */
+-    own_min = min + obj->min_buffers + 2;
++    own_min = min + obj->min_buffers + 5;
+ 
+     /* If no allocation parameters where provided, allow for a little more
+      * buffers and enable copy threshold */
+-- 
+1.9.1
+
