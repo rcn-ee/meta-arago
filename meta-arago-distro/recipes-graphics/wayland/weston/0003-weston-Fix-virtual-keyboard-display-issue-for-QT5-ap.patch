@@ -1,7 +1,7 @@
-From 9c3cf93336b77a1eecc1d72ffec3b113161a822b Mon Sep 17 00:00:00 2001
-From: Karthik Ramanan <a0393906@ti.com>
-Date: Mon, 12 Mar 2018 10:54:45 +0530
-Subject: [PATCH 3/4] weston: Fix virtual keyboard display issue for QT5
+From 8034bc1862bbebb332e91917c6458ef8efb5b54e Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Fri, 8 Mar 2019 18:49:07 -0500
+Subject: [PATCH] weston: Fix virtual keyboard display issue for QT5 
  application
 
 The virtual keyboard does pop up as expected, however, it will never hide
@@ -20,20 +20,19 @@ becomes visible at the first time.
 Upstream status: Pending
 
 Signed-off-by: Eric Ruei <e-ruei1@ti.com>
-Signed-off-by: Karthik Ramanan <a0393906@ti.com>
 ---
  compositor/text-backend.c | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/compositor/text-backend.c b/compositor/text-backend.c
-index bf5c45c..d8b0bb1 100644
+index 664c36f..b610dfb 100644
 --- a/compositor/text-backend.c
 +++ b/compositor/text-backend.c
-@@ -340,6 +340,7 @@ text_input_show_input_panel(struct wl_client *client,
+@@ -349,6 +349,7 @@ text_input_show_input_panel(struct wl_client *client,
  			       text_input->surface);
  		wl_signal_emit(&ec->update_input_panel_signal,
  			       &text_input->cursor_rectangle);
-+		text_input->manager->current_panel = text_input;
++		text_input->manager->current_text_input = text_input;
  	}
  }
  
