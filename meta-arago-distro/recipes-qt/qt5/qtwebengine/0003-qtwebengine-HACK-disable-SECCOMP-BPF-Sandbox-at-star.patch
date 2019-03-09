@@ -1,6 +1,6 @@
-From 5e4eef86271cbb83d9a37e889485dc0fde9b8798 Mon Sep 17 00:00:00 2001
+From 77fc6e4391562a1f84d82b58319a73de08242797 Mon Sep 17 00:00:00 2001
 From: Eric Ruei <e-ruei1@ti.com>
-Date: Thu, 25 May 2017 17:00:43 -0400
+Date: Fri, 8 Mar 2019 18:17:06 -0500
 Subject: [PATCH 3/3] qtwebengine: HACK: disable SECCOMP-BPF Sandbox at startup
 
 SECCOMP-BPF Sandbox does not work due to unexpected FUTEX_UNLOCK_PI call
@@ -11,21 +11,19 @@ Upstream-Status: Inappropriate [HACK]
 
 Signed-off-by: Eric Ruei <e-ruei1@ti.com>
 ---
- src/core/web_engine_context.cpp | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ src/core/web_engine_context.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/src/core/web_engine_context.cpp b/src/core/web_engine_context.cpp
-index 39e11a9..ae51097 100644
+index 48e5bc4..9ba3fa4 100644
 --- a/src/core/web_engine_context.cpp
 +++ b/src/core/web_engine_context.cpp
-@@ -281,7 +281,9 @@ WebEngineContext::WebEngineContext()
- #if defined(Q_OS_WIN)
+@@ -347,6 +347,8 @@ WebEngineContext::WebEngineContext()
          parsedCommandLine->AppendSwitch(switches::kNoSandbox);
  #elif defined(Q_OS_LINUX)
--        parsedCommandLine->AppendSwitch(switches::kDisableSetuidSandbox);
-+        parsedCommandLine->AppendSwitch(switches::kDisableSetuidSandbox);
+         parsedCommandLine->AppendSwitch(service_manager::switches::kDisableSetuidSandbox);
 +        // HACK: disable seccomp filter sandbox for now because it does not work
-+        parsedCommandLine->AppendSwitch(switches::kDisableSeccompFilterSandbox);
++        parsedCommandLine->AppendSwitch(service_manager::switches::kDisableSeccompFilterSandbox);
  #endif
      } else {
          parsedCommandLine->AppendSwitch(switches::kNoSandbox);
