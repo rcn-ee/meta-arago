@@ -1,0 +1,64 @@
+From c04171fb423c16f1aa9ad31d6f95e95b54b6f26f Mon Sep 17 00:00:00 2001
+From: Jacob Stiffler <j-stiffler@ti.com>
+Date: Wed, 9 Jan 2019 08:31:27 -0500
+Subject: [PATCH] tests: fix typing of size_t in printf
+
+Upstream-Status: Pending
+
+Signed-off-by: Jacob Stiffler <j-stiffler@ti.com>
+---
+ tests/check_timer.c                         | 2 +-
+ tests/server/check_server_historical_data.c | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/tests/check_timer.c b/tests/check_timer.c
+index 051f1bc..1021cf4 100644
+--- a/tests/check_timer.c
++++ b/tests/check_timer.c
+@@ -52,7 +52,7 @@ START_TEST(benchmarkTimer) {
+     clock_t finish = clock();
+     double time_spent = (double)(finish - begin) / CLOCKS_PER_SEC;
+     printf("duration was %f s\n", time_spent);
+-    printf("%lu callbacks\n", count);
++    printf("%lu callbacks\n", (long unsigned)count);
+ 
+     UA_Timer_deleteMembers(&timer);
+ } END_TEST
+diff --git a/tests/server/check_server_historical_data.c b/tests/server/check_server_historical_data.c
+index 8f16089..0dfcba0 100644
+--- a/tests/server/check_server_historical_data.c
++++ b/tests/server/check_server_historical_data.c
+@@ -325,7 +325,7 @@ testHistoricalDataBackend(size_t maxResponseSize)
+     UA_UInt32 retval = 0;
+     size_t i = 0;
+     testTuple *current = &testRequests[i];
+-    fprintf(stderr, "Testing with maxResponseSize of %lu\n", maxResponseSize);
++    fprintf(stderr, "Testing with maxResponseSize of %lu\n", (long unsigned)maxResponseSize);
+     fprintf(stderr, "Start | End  | numValuesPerNode | returnBounds |ContPoint| {Expected}{Result} Result\n");
+     fprintf(stderr, "------+------+------------------+--------------+---------+----------------\n");
+     size_t j;
+@@ -372,7 +372,7 @@ testHistoricalDataBackend(size_t maxResponseSize)
+             ++counter;
+ 
+             if(response.resultsSize != 1) {
+-                fprintf(stderr, "ResultError:Size %lu %s", response.resultsSize, UA_StatusCode_name(response.responseHeader.serviceResult));
++                fprintf(stderr, "ResultError:Size %lu %s", (long unsigned)response.resultsSize, UA_StatusCode_name(response.responseHeader.serviceResult));
+                 readOk = false;
+                 UA_HistoryReadResponse_deleteMembers(&response);
+                 break;
+@@ -465,10 +465,10 @@ testHistoricalDataBackend(size_t maxResponseSize)
+         }
+         UA_ByteString_deleteMembers(&continuous);
+         if (!readOk) {
+-            fprintf(stderr, "} Fail (%lu requests)\n", counter);
++            fprintf(stderr, "} Fail (%lu requests)\n", (long unsigned)counter);
+             ++retval;
+         } else {
+-            fprintf(stderr, "} OK (%lu requests)\n", counter);
++            fprintf(stderr, "} OK (%lu requests)\n", (long unsigned)counter);
+         }
+         current = &testRequests[++i];
+     }
+-- 
+2.7.4
+
