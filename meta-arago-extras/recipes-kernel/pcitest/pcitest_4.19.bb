@@ -1,9 +1,9 @@
 SUMMARY = "Linux Kernel PCI test"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
-BRANCH = "ti-lsk-linux-4.9.y"
-SRCREV = "b4aa954ead9260eaf7138755fc9d062a9f4630eb"
+BRANCH = "ti-linux-4.19.y"
+SRCREV = "0584082b5f5c815faee33f5fc0a1c8bc3d77ebf7"
 SRC_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
