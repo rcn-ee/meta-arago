@@ -48,9 +48,6 @@ TOOLCHAIN_SUFFIX_keystone = "-tisdk-server"
 TISDK_TOOLCHAIN_omapl138 = "meta-toolchain-arago-tisdk-server"
 TOOLCHAIN_SUFFIX_omapl138 = "-tisdk-server"
 
-# Disable devkit for now due to arm toolchain issues
-TISDK_TOOLCHAIN_forcevariable = ""
-
 IMAGE_INSTALL_QT = "\
     packagegroup-arago-tisdk-qte-sdk-host \
 "
