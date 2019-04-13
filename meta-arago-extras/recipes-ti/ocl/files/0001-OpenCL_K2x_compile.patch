@@ -1,0 +1,12 @@
+diff --git a/host/src/core/dsp/tal/devmem_map_policy_mpm.cpp b/host/src/core/dsp/tal/devmem_map_policy_mpm.cpp
+index e5da9cc..182e5e3 100644
+--- a/host/src/core/dsp/tal/devmem_map_policy_mpm.cpp
++++ b/host/src/core/dsp/tal/devmem_map_policy_mpm.cpp
+@@ -91,6 +91,7 @@ void* DevMemMapPolicyMPM::Map (DSPDevicePtr64 dsp_addr,  uint32_t size) const
+     else
+         ReportError(ErrorType::Fatal,
+                     ErrorKind::TranslateAddressOutsideMappedAddressRange);
++    return 0;
+ }
+ 
+ void DevMemMapPolicyMPM::Unmap(void* host_addr, uint32_t size) const
