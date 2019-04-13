@@ -13,7 +13,9 @@ BPN = "external-arm-toolchain"
 INHIBIT_DEFAULT_DEPS = "1"
 INHIBIT_AUTOTOOLS_DEPS = "1"
 
+TGT_VER_GCC = "8.2.1"
+
 do_install() {
-	install -d ${D}${libdir}/gcc/${TARGET_SYS}/${EAT_VER_GCC}/include/
-	cp -a ${TOOLCHAIN_PATH}/lib/gcc/${EAT_TARGET_SYS}/${EAT_VER_GCC}/include/unwind.h ${D}/${libdir}/gcc/${TARGET_SYS}/${EAT_VER_GCC}/include/
+	install -d ${D}${libdir}/gcc/${TARGET_SYS}/${TGT_VER_GCC}/include/
+	cp -a ${TOOLCHAIN_PATH}/lib/gcc/${EAT_TARGET_SYS}/${EAT_VER_GCC}/include/unwind.h ${D}/${libdir}/gcc/${TARGET_SYS}/${TGT_VER_GCC}/include/
 }
