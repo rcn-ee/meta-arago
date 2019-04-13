@@ -3,8 +3,9 @@ HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/opencl/index.html"
 LICENSE = "BSD"
 
 include ocl.inc
+SRC_URI += "file://0001-OpenCL_K2x_compile.patch;patchdir=${WORKDIR}/git"
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 inherit cmake systemd
 
