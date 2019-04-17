@@ -74,6 +74,7 @@ UTILS_append_k3 = " mmc-utils \
                     switch-config \
                     pru-icss \
                     ti-ipc-rtos-fw \
+                    irqbalance \
 "
 
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
