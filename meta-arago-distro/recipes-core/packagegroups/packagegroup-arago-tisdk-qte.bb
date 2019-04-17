@@ -28,13 +28,13 @@ QT5_DEMOS = "\
     qtserialport-examples \
 "
 
-#QT5_DEMOS_append_k3 = " qtwebkit-examples-examples"
+QT5_DEMOS_append_k3 = " qtwebkit-examples-examples"
 
-#QT5_DEMOS_remove_k3 = "\
-#    qtwebbrowser \
-#    qtwebbrowser-examples \
-#    qtwebengine-examples \
-#"
+QT5_DEMOS_remove_k3 = "\
+    qtwebbrowser \
+    qtwebbrowser-examples \
+    qtwebengine-examples \
+"
 
 QT_DEMOS = "\
     qt-tstat \
