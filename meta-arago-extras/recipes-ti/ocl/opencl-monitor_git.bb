@@ -7,7 +7,7 @@ require recipes-ti/includes/arago-paths.inc
 
 PR = "${INC_PR}.0"
 
-inherit cmake update-alternatives
+inherit update-alternatives
 
 DEPENDS = " ti-llvm3.6-native \
             common-csl-ip-rtos \
@@ -56,13 +56,6 @@ BUILD_TARGET_k2l = "ARM_K2L"
 BUILD_TARGET_k2e = "ARM_K2E"
 BUILD_TARGET_k2g = "ARM_K2G"
 
-EXTRA_OECMAKE += " -DCROSS_COMPILE=TRUE \
-                   -DOCL_MONITOR_DIR=${S} \
-                   -DBUILD_OUTPUT=all \
-                   -DSHARE_PATH=${datadir}/ti \
-                   -DBUILD_TARGET=${BUILD_TARGET} \
-"
-
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 export PDK_DIR = "${PDK_INSTALL_DIR}"
 export IPC_DIR = "${IPC_INSTALL_DIR}"
@@ -79,9 +72,55 @@ export AET_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/ctoolslib/aet"
 export X86_LLVM_DIR = "${STAGING_DIR_NATIVE}/usr"
 export XDCPATH = "${S};${IPC_DIR}/packages;${BIOS_DIR}/packages;${EDMA3LLD_DIR}/packages;${FC_DIR}/packages;${XDAIS_DIR}/packages"
 export OCL_TIDL_FW_DIR = "${OCL_TIDL_FW_INSTALL_DIR}"
+export OCL_FPERMS = "664"
+export OCL_DPERMS = "775"
+export SHARE_PATH="${D}${datadir}/ti/opencl"
+
+EXTRA_OEMAKE += " BUILD_OS=linux \
+                  WORKING_DIRECTORY=${S} \
+                  BUILD_TARGET=${BUILD_TARGET} \
+"
+do_compile() {
+  oe_runmake -f Makefile
+}
+
+do_install() {
+    install -m ${OCL_DPERMS} -d ${SHARE_PATH}
+}
+
+install_dsp_objs() {
+    install -m ${OCL_FPERMS} monitor_${1}/dsp0.out ${SHARE_PATH}/dsp.out
+    install -m ${OCL_FPERMS} monitor_${1}/dsp0.syms.obj ${SHARE_PATH}/dsp_syms.obj
+    install -m ${OCL_FPERMS} monitor_${1}/dsp0.syms ${SHARE_PATH}/dsp.syms
+}
 
 do_install_append_dra7xx() {
-	for i in 1 2; do mv ${D}${base_libdir}/firmware/dra7-dsp$i-fw.xe66 ${D}${base_libdir}/firmware/dra7-dsp$i-fw.xe66.${BPN}; done
+    install_dsp_objs am57x
+    install -m ${OCL_DPERMS} -d ${D}${base_libdir}/firmware
+    install -m ${OCL_FPERMS} monitor_am57x/dsp0.out ${D}${base_libdir}/firmware/dra7-dsp1-fw.xe66.${BPN}
+    install -m ${OCL_FPERMS} monitor_am57x/dsp1.out ${D}${base_libdir}/firmware/dra7-dsp2-fw.xe66.${BPN}
+}
+
+do_install_append_k2hk() {
+    for i in {0..7}; do install -m ${OCL_FPERMS} monitor_evmk2h/dsp${i}.out ${SHARE_PATH}; done
+    install_dsp_objs evmk2h
+}
+
+do_install_append_k2l() {
+    for i in {0..3}; do install -m ${OCL_FPERMS} monitor_evmk2l/dsp${i}.out ${SHARE_PATH}; done
+    install_dsp_objs evmk2l
+}
+
+do_install_append_k2e() {
+    install -m ${OCL_FPERMS} monitor_evmk2e/dsp0.out ${SHARE_PATH}
+    install_dsp_objs evmk2e
+}
+
+do_install_append_k2g() {
+    install -m ${OCL_FPERMS} monitor_evmk2g/dsp0.out ${SHARE_PATH}
+    install -m ${OCL_FPERMS} monitor_evmk2g/dsp0.out ${SHARE_PATH}/dsp.out
+    install -m ${OCL_FPERMS} monitor_evmk2g/dsp.syms ${SHARE_PATH}
+    install -m ${OCL_FPERMS} monitor_evmk2g/dsp_syms.obj ${SHARE_PATH}
 }
 
 ALTERNATIVE_${PN}_dra7xx = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66"
