@@ -8,3 +8,5 @@ OZONE_WAYLAND_EXTRA_PATCHES = " \
 USEGOLD = ""
 
 DEPENDS += "gperf-native bison-native"
+
+FULL_OPTIMIZATION = "-O2 -pipe"
