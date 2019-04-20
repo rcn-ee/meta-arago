@@ -13,7 +13,7 @@ BPN = "external-arm-toolchain"
 INHIBIT_DEFAULT_DEPS = "1"
 INHIBIT_AUTOTOOLS_DEPS = "1"
 
-TGT_VER_GCC = "8.2.1"
+TGT_VER_GCC = "${EAT_VER_GCC}"
 
 do_install() {
 	install -d ${D}${libdir}/gcc/${TARGET_SYS}/${TGT_VER_GCC}/include/
