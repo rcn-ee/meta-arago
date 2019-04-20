@@ -11,13 +11,13 @@ GRAPHICS_WAYLAND = "\
     weston-examples \
 "
 
-#GRAPHICS_WAYLAND_append_omap-a15 = "\
-#    chromium-wayland \
-#"
+GRAPHICS_WAYLAND_append_omap-a15 = "\
+    chromium-wayland \
+"
 
-#GRAPHICS_WAYLAND_append_k3 = "\
-#    chromium-wayland \
-#"
+GRAPHICS_WAYLAND_append_k3 = "\
+    chromium-wayland \
+"
 
 GRAPHICS_RDEPENDS = "\
     libgbm \
