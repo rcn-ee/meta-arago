@@ -204,16 +204,16 @@ CREATE_SRCIPK_pn-ti-linux-driver-examples-omap3 = "1"
 SRCIPK_INSTALL_DIR_pn-ti-linux-driver-examples-omap3 = "example-applications/linux-driver-examples-${PV}"
 
 CREATE_SRCIPK_pn-ti-framework-components = "1"
-SRCIPK_INSTALL_DIR_pn-ti-framework-components = "component-sources/framework_components_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-framework-components = "component-sources/framework_components_${PV}"
 
 CREATE_SRCIPK_pn-ti-codec-engine = "1"
-SRCIPK_INSTALL_DIR_pn-ti-codec-engine = "component-sources/codec_engine_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-codec-engine = "component-sources/codec_engine_${PV}"
 
 CREATE_SRCIPK_pn-ti-codecs-omap3530 = "1"
 SRCIPK_INSTALL_DIR_pn-ti-codecs-omap3530 = "codecs-omap3530_${PV}"
 
 CREATE_SRCIPK_pn-ti-linuxutils = "1"
-SRCIPK_INSTALL_DIR_pn-ti-linuxutils = "component-sources/linuxutils_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-linuxutils = "component-sources/linuxutils_${PV}"
 
 CREATE_SRCIPK_pn-ti-xdctools = "1"
 SRCIPK_INSTALL_DIR_pn-ti-xdctools = "component-sources/xdctools_${PV}"
@@ -222,7 +222,7 @@ CREATE_SRCIPK_pn-ti-dmai = "1"
 SRCIPK_INSTALL_DIR_pn-ti-dmai = "dmai_${PV}"
 
 CREATE_SRCIPK_pn-ti-xdais = "1"
-SRCIPK_INSTALL_DIR_pn-ti-xdais = "component-sources/xdais_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-xdais = "component-sources/xdais_${PV}"
 
 CREATE_SRCIPK_pn-ti-local-power-manager = "1"
 SRCIPK_INSTALL_DIR_pn-ti-local-power-manager = "local-power-manager_${PV}"
@@ -264,7 +264,7 @@ CREATE_SRCIPK_pn-ti-dspbios = "1"
 SRCIPK_INSTALL_DIR_pn-ti-dspbios = "dspbios_${PV}"
 
 CREATE_SRCIPK_pn-ti-sysbios = "1"
-SRCIPK_INSTALL_DIR_pn-ti-sysbios = "component-sources/bios_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-sysbios = "component-sources/bios_${PV}"
 
 CREATE_SRCIPK_pn-ti-biosutils = "1"
 SRCIPK_INSTALL_DIR_pn-ti-biosutils = "biosutils_${PV}"
@@ -273,7 +273,7 @@ CREATE_SRCIPK_pn-ti-dsplink = "1"
 SRCIPK_INSTALL_DIR_pn-ti-dsplink = "dsplink_${PV}"
 
 CREATE_SRCIPK_pn-ti-syslink = "1"
-SRCIPK_INSTALL_DIR_pn-ti-syslink = "component-sources/syslink_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-syslink = "component-sources/syslink_${PV}"
 
 CREATE_SRCIPK_pn-ti-edma3lld = "1"
 SRCIPK_INSTALL_DIR_pn-ti-edma3lld = "component-sources/edma3lld_${PV}"
@@ -291,7 +291,7 @@ CREATE_SRCIPK_pn-ti-c6run = "1"
 SRCIPK_INSTALL_DIR_pn-ti-c6run = "component-sources/c6run_${PV}"
 
 CREATE_SRCIPK_pn-ti-osal = "1"
-SRCIPK_INSTALL_DIR_pn-ti-osal = "component-sources/osal_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-osal = "component-sources/osal_${PV}"
 
 CREATE_SRCIPK_pn-ti-ipc = "1"
 SRCIPK_INSTALL_DIR_pn-ti-ipc = "component-sources/ipc_${PV}"
@@ -306,7 +306,7 @@ CREATE_SRCIPK_pn-ti-omx = "1"
 SRCIPK_INSTALL_DIR_pn-ti-omx = "component-sources/omx_${PV}"
 
 CREATE_SRCIPK_pn-ti-uia = "1"
-SRCIPK_INSTALL_DIR_pn-ti-uia = "component-sources/uia_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-uia = "component-sources/uia_${PV}"
 
 CREATE_SRCIPK_pn-ti-media-controller-utils = "1"
 SRCIPK_INSTALL_DIR_pn-ti-media-controller-utils = "board-support/media-controller-utils_${PV}"
@@ -321,7 +321,7 @@ CREATE_SRCIPK_pn-ti-slog = "1"
 SRCIPK_INSTALL_DIR_pn-ti-slog = "component-sources/slog_${PV}"
 
 CREATE_SRCIPK_pn-ti-c674x-aaclcdec = "1"
-SRCIPK_INSTALL_DIR_pn-ti-c674x-aaclcdec = "component-sources/c674x-aaclcdec_${PV}${PVExtra}"
+SRCIPK_INSTALL_DIR_pn-ti-c674x-aaclcdec = "component-sources/c674x-aaclcdec_${PV}"
 
 CREATE_SRCIPK_pn-oe-layersetup = "1"
 SRCIPK_INSTALL_DIR_pn-oe-layersetup = "bin/oe-layersetup"
