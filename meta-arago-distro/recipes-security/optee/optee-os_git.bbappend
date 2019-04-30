@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
-PR_append = ".arago1"
+PR_append = ".arago2"
 
 PV = "3.5.0+git${SRCPV}"
 
@@ -12,8 +12,8 @@ is_armv7_aarch64 = "0"
 SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
            file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
 "
-BRANCH = "ti_optee_os"
-SRCREV = "b38f935200f67f9408d7c5d99fe703e5cc806c65"
+BRANCH = "ti-optee-os"
+SRCREV = "251f7c6325856a056e326f368c0b44ce277a5a36"
 
 ARMCORE = "CFG_ARM32_core=y ta-targets=ta_arm32"
 ARMCORE_aarch64 = "CFG_ARM64_core=y ta-targets=ta_arm64"
