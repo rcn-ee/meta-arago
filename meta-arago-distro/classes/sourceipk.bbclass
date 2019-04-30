@@ -47,6 +47,9 @@ CREATE_SRCIPK ?= "0"
 # Default installation prefix
 SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
 
+# Directory to preserve sources until they can be installed for packaging
+SRCIPK_STAGING_DIR = "${WORKDIR}/srcipk-staging"
+
 # Specify the directory of the sources
 SRCIPK_SRC_DIR ?= "${S}"
 
@@ -121,7 +124,7 @@ limit_git_history() {
     gitshallowclone="${WORKDIR}/temp-git-shallow-clone"
 
     # Change directory to the git repository to be safe
-    cd $tmp_dir/${SRCIPK_INSTALL_DIR}
+    cd ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}
 
     # Create a temporary directory to hold the shallow git clone
     mkdir -p $gitshallowclone
@@ -134,10 +137,10 @@ limit_git_history() {
 
     # remove original kernel clone since we will replace it with the shallow
     # clone
-    rm -rf $tmp_dir/${SRCIPK_INSTALL_DIR}/.git
+    rm -rf ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/.git
 
     # replace the original kernel git data with the shallow clone git data
-    mv $gitshallowclone/.git $tmp_dir/${SRCIPK_INSTALL_DIR}/
+    mv $gitshallowclone/.git ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/
     rm -rf $gitshallowclone
 
     # Remove the local remote
@@ -156,7 +159,7 @@ limit_git_history() {
 adjust_git() {
     orig_dir="$PWD"
 
-    cd $tmp_dir/${SRCIPK_INSTALL_DIR}
+    cd ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}
 
     if [ -d ".git" ]
     then
@@ -225,19 +228,8 @@ sourceipk_create_readme() {
     echo "      the \"patches\" directory" >> $readme
 }
 
-SRCIPK_DEPLOYSRC_DIR = "${WORKDIR}/deploy-src"
-
-SSTATETASKS += "do_create_srcipk"
-do_create_srcipk[sstate-inputdirs] = "${SRCIPK_DEPLOYSRC_DIR}"
-do_create_srcipk[sstate-outputdirs] = "${DEPLOY_DIR_IPK}"
-
-python do_create_srcipk_setscene () {
-    sstate_setscene(d)
-}
-addtask do_create_srcipk_setscene
-
-do_create_srcipk[dirs] = "${SRCIPK_DEPLOYSRC_DIR}"
-do_create_srcipk[cleandirs] = "${SRCIPK_DEPLOYSRC_DIR}"
+do_create_srcipk[dirs] = "${SRCIPK_SRC_DIR} ${SRCIPK_STAGING_DIR}"
+do_create_srcipk[cleandirs] = "${SRCIPK_STAGING_DIR}"
 do_create_srcipk[umask] = "022"
 
 # Create the source ipk file.  The ipk is manually created here instead
@@ -248,75 +240,32 @@ do_create_srcipk[umask] = "022"
 sourceipk_do_create_srcipk() {
     if [ ${CREATE_SRCIPK} != "0" ]
     then
-
-        tmp_dir="${WORKDIR}/sourceipk-tmp"
-        srcipk_dir="${WORKDIR}/sourceipk-data"
-        mkdir -p $tmp_dir/CONTROL
-        mkdir -p $srcipk_dir
-        control_file="$tmp_dir/CONTROL/control"
-
-        # Write the control file
-        echo "Package: ${PN}-src" > $control_file
-        echo "Version: ${PV}-${PR}" >> $control_file
-        echo "Description: Patched sources for ${PN}" >> $control_file
-        echo "Section: ${SRCIPK_SECTION}" >> $control_file
-        echo "Priority: Optional" >> $control_file
-        echo "Maintainer: ${MAINTAINER}" >> $control_file
-        echo "License: ${LICENSE}" >> $control_file
-        echo "Architecture: ${SRCIPK_PACKAGE_ARCH}" >> $control_file
-        srcuri="${SRC_URI}"
-        if [ "$srcuri" = "" ]
-        then
-            srcuri="OpenEmbedded"
-        fi
-        echo "Source: $srcuri" >> $control_file
-        #Write the control tarball
-        tar -C $tmp_dir/CONTROL --owner=0 --group=0 -czf $srcipk_dir/control.tar.gz .
-
-        # Get rid of temporary control file
-        rm -rf $tmp_dir/CONTROL
-
         # Copy sources for packaging
-        mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
+        mkdir -p ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}
         if [ -e ${SRCIPK_SRC_DIR} ]; then
             if [ "${SRCIPK_SRC_DIR}" = "${WORKDIR}" ]; then
-                excludes='--exclude ./temp --exclude ./sourceipk-tmp --exclude ./sourceipk-data'
+                excludes='--exclude ./temp --exclude ${SRCIPK_STAGING_DIR}'
             fi
-            tar -C ${SRCIPK_SRC_DIR} -cO $excludes . | tar -C $tmp_dir/${SRCIPK_INSTALL_DIR} -xpf -
+            tar -C ${SRCIPK_SRC_DIR} -cO $excludes . | tar -C ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR} -xpf -
         fi
 
         # Fix up patches/ directory to contain actual patches instead of symlinks
-        if [ -e $tmp_dir/${SRCIPK_INSTALL_DIR}/patches ]
+        if [ -e ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/patches ]
         then
-            mv $tmp_dir/${SRCIPK_INSTALL_DIR}/patches $tmp_dir/${SRCIPK_INSTALL_DIR}/patches-links
-            cp -rL $tmp_dir/${SRCIPK_INSTALL_DIR}/patches-links $tmp_dir/${SRCIPK_INSTALL_DIR}/patches
-            rm -rf $tmp_dir/${SRCIPK_INSTALL_DIR}/patches-links
+            mv ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/patches ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/patches-links
+            cp -rL ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/patches-links ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/patches
+            rm -rf ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/patches-links
         fi
 
         if [ ${SRCIPK_INCLUDE_EXTRAFILES} != "0" ]
         then
-            sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
-            cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
+            sourceipk_create_readme ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/
+            cp ${FILE} ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/
         fi
 
         # Adjust the git repository if there is one.  Do this adjustment
         # here so we don't have to modify the original sources.
         adjust_git
-
-        #Write the data tarball
-        tar -C $tmp_dir --owner=0 --group=0 -czf $srcipk_dir/data.tar.gz .
-
-        # Create the debian-binary file
-        echo "2.0" > $srcipk_dir/debian-binary
-
-        #Write the ipk file
-        mkdir -p ${SRCIPK_DEPLOYSRC_DIR}/${SRCIPK_PACKAGE_ARCH}
-        pkg_file=${SRCIPK_DEPLOYSRC_DIR}/${SRCIPK_PACKAGE_ARCH}/${PN}-src_${PV}-${PR}_${SRCIPK_PACKAGE_ARCH}.ipk
-        rm -f $pkg_file
-        ( cd $srcipk_dir && ar -crf $pkg_file ./debian-binary ./control.tar.gz ./data.tar.gz )
-
-        # Remove the temporary directory
-        rm -rf $tmp_dir
     fi
 }
 
@@ -335,3 +284,22 @@ python () {
 
 #Add source packages to list of packages OE knows about
 PACKAGES_DYNAMIC += "${PN}-src"
+
+# Do not perform any QA checks on sourceipk packages
+INSANE_SKIP_${PN}-src += "${@oe.utils.conditional("${CREATE_SRCIPK}", "0", "", "${ALL_QA}", d)}"
+
+python __anonymous () {
+    if d.getVar("CREATE_SRCIPK") != "0":
+        pn = d.getVar("PN")
+
+        d.appendVar('PACKAGES', ' %s-src' % (pn))
+        d.setVar('FILES_%s-src' % (pn), '${SRCIPK_INSTALL_DIR}')
+}
+
+PACKAGESPLITFUNCS_append = " ${@oe.utils.conditional('CREATE_SRCIPK','0','','populate_srcipk_package',d)}"
+populate_srcipk_package() {
+    install -d ${PKGDEST}/${PN}-src/${SRCIPK_INSTALL_DIR}
+    cp -Prf --preserve=mode,timestamps --no-preserve=ownership \
+        ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/. \
+        ${PKGDEST}/${PN}-src/${SRCIPK_INSTALL_DIR}
+}
