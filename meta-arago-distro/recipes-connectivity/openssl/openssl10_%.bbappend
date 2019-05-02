@@ -13,3 +13,15 @@ CRYPTODEV_AFALG_PATCHES = " \
 "
 
 SRC_URI += "${CRYPTODEV_AFALG_PATCHES}"
+
+# override this from upstream to preserve engine libs, binaries and config
+# w/o clashing with 1.1
+openssl_package_preprocess () {
+        for file in `find ${PKGD} -name *.h -o -name *.pc`; do
+                rm $file
+        done
+        rm ${PKGD}${libdir}/*.so
+        mv ${PKGD}${bindir}/openssl ${PKGD}${bindir}/openssl10
+        mv ${PKGD}${bindir}/c_rehash ${PKGD}${bindir}/c_rehash10
+        mv ${PKGD}${sysconfdir}/ssl/openssl.cnf ${PKGD}${sysconfdir}/ssl/openssl10.cnf
+}
