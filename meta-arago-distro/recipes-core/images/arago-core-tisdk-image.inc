@@ -55,15 +55,14 @@ IMAGE_INSTALL_QT = "\
 IMAGE_INSTALL_QT_keystone = ""
 IMAGE_INSTALL_QT_omapl138 = ""
 
-IMAGE_INSTALL = ""
-# Disable all "sdk-host" packagegroups due to issues installing "srcipk" packages
-#    packagegroup-arago-tisdk-addons-sdk-host \
-#    ${@bb.utils.contains('MACHINE_FEATURES','dsp','packagegroup-arago-tisdk-opencl-sdk-host','',d)} \
-#    packagegroup-arago-tisdk-crypto-sdk-host \
-#    ${@bb.utils.contains('MACHINE_FEATURES','sgx','packagegroup-arago-tisdk-graphics-sdk-host','',d)} \
-#    packagegroup-arago-tisdk-matrix-sdk-host \
-#    packagegroup-arago-tisdk-multimedia-sdk-host \
-#    packagegroup-arago-tisdk-hmi-sdk-host \
-#    packagegroup-arago-tisdk-amsdk-sdk-host${ARAGO_KERNEL_SUFFIX} \
-#    ${IMAGE_INSTALL_QT} \
-#"
+IMAGE_INSTALL = "\
+    packagegroup-arago-tisdk-addons-sdk-host \
+    ${@bb.utils.contains('MACHINE_FEATURES','dsp','packagegroup-arago-tisdk-opencl-sdk-host','',d)} \
+    packagegroup-arago-tisdk-crypto-sdk-host \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','packagegroup-arago-tisdk-graphics-sdk-host','',d)} \
+    packagegroup-arago-tisdk-matrix-sdk-host \
+    packagegroup-arago-tisdk-multimedia-sdk-host \
+    packagegroup-arago-tisdk-hmi-sdk-host \
+    packagegroup-arago-tisdk-amsdk-sdk-host${ARAGO_KERNEL_SUFFIX} \
+    ${IMAGE_INSTALL_QT} \
+"
