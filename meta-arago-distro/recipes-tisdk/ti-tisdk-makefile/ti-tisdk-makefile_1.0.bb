@@ -112,9 +112,9 @@ MAKEFILES_append_ti43x = " u-boot-spl \
 			   mmwavegesture-hmi \
 "
 
+#                            debugss-module-drv 
+#                            gdbserverproxy-module-drv 
 MAKEFILES_append_dra7xx = " cryptodev \
-                            debugss-module-drv \
-                            gdbserverproxy-module-drv \
                             opencl-examples \
                             openmpacc-examples \
                             qt-opencv-opencl-opengl-multithreaded \
@@ -149,22 +149,22 @@ MAKEFILES_append_keystone = " u-boot-spl \
                               barcode-roi \
 "
 
+#                              gdbserverproxy-module-drv 
+#                              debugss-module-drv 
 MAKEFILES_append_k2hk = " opencl-examples \
-                              gdbserverproxy-module-drv \
-                              debugss-module-drv \
                               openmpacc-examples \
                               linalg-examples \
 "
 
+#                             gdbserverproxy-module-drv 
+#                             debugss-module-drv 
 MAKEFILES_append_k2l = " opencl-examples \
-                             gdbserverproxy-module-drv \
-                             debugss-module-drv \
                              openmpacc-examples \
 "
 
+#                             gdbserverproxy-module-drv 
+#                             debugss-module-drv 
 MAKEFILES_append_k2e = " opencl-examples \
-                             gdbserverproxy-module-drv \
-                             debugss-module-drv \
                              openmpacc-examples \
 "
 

@@ -48,10 +48,10 @@ EXTRA_LIBS_append_omap-a15 = " \
     big-data-ipc-demo-linux-src \
 "
 
-EXTRA_LIBS_append_dra7xx = " \
-    debugss-module-drv-src \
-    gdbserverproxy-module-drv-src \
-"
+#EXTRA_LIBS_append_dra7xx = " \
+#    debugss-module-drv-src \
+#    gdbserverproxy-module-drv-src \
+#"
 
 EXTRA_LIBS_append_ti33x = " \
     uio-module-drv-src \
@@ -71,20 +71,20 @@ EXTRA_LIBS_append_keystone = " \
     uio-module-drv-src \
 "
 
-EXTRA_LIBS_append_k2hk = " \
-    debugss-module-drv-src \
-    gdbserverproxy-module-drv-src \
-"
+#EXTRA_LIBS_append_k2hk = " \
+#    debugss-module-drv-src \
+#    gdbserverproxy-module-drv-src \
+#"
 
-EXTRA_LIBS_append_k2l = " \
-    debugss-module-drv-src \
-    gdbserverproxy-module-drv-src \
-"
+#EXTRA_LIBS_append_k2l = " \
+#    debugss-module-drv-src \
+#    gdbserverproxy-module-drv-src \
+#"
 
-EXTRA_LIBS_append_k2e = " \
-    debugss-module-drv-src \
-    gdbserverproxy-module-drv-src \
-"
+#EXTRA_LIBS_append_k2e = " \
+#    debugss-module-drv-src \
+#    gdbserverproxy-module-drv-src \
+#"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
