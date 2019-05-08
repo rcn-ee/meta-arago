@@ -4,7 +4,7 @@ GLES_EXTRA_DEPS = "libdrm wayland"
 
 PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl ${GLES_EXTRA_DEPS}"
 
-PR_append = ".arago14"
+PR_append = ".arago15"
 
 QT_CONFIG_FLAGS += "-qpa ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', 'eglfs', d)}"
 
@@ -30,5 +30,14 @@ python do_patch_append() {
     if not bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d):
         shutil.copy(os.path.join(work_dir,"quit.png"),os.path.join(s,"examples/widgets/animation/animatedtiles/images/"))
 }
+
+# Add symbolic link qt5/examples for backward compatibility
+do_install_append () {
+
+    install -d ${D}${datadir}/qt5
+    ln -sf ../examples ${D}${datadir}/qt5/examples
+}
+
+FILES_${PN} += "${data}/qt5/*"
 
 RDEPENDS_${PN} += "${PN}-conf"
