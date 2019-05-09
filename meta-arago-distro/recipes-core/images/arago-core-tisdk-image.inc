@@ -28,7 +28,7 @@ DTB_FILTER_k2l = "k2l"
 DTB_FILTER_k2e = "k2e"
 DTB_FILTER_k2g = "k2g"
 DTB_FILTER_omapl138 = "da850"
-DTB_FILTER_am65xx-evm = "am65"
+DTB_FILTER_am65xx = "am65"
 
 # List of target side images to build for the SDK
 TARGET_IMAGES = "arago-base-tisdk-image tisdk-rootfs-image arago-tiny-image"
