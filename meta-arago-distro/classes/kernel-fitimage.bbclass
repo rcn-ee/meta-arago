@@ -1,6 +1,7 @@
 inherit kernel-uboot uboot-sign
 
 FITIMAGE_HASH_ALGO ?= "sha1"
+FITIMAGE_PACK_TEE ?= "0"
 FITIMAGE_DTB_BY_NAME ?= "0"
 FITIMAGE_TEE_BY_NAME ?= "0"
 FITIMAGE_CONF_BY_NAME ?= "0"
@@ -46,7 +47,7 @@ python __anonymous () {
             uboot_pn = d.getVar('PREFERRED_PROVIDER_u-boot') or 'u-boot'
             d.appendVarFlag('do_assemble_fitimage', 'depends', ' %s:do_deploy' % uboot_pn)
 
-        if d.getVar('OPTEEMACHINE'):
+        if d.getVar('FITIMAGE_PACK_TEE') == "1":
             d.appendVarFlag('do_assemble_fitimage', 'depends', ' optee-os:do_deploy')
 }
 
@@ -323,7 +324,7 @@ fitimage_emit_section_config() {
 		setup_line="setup = \"setup@${5}\";"
 	fi
 
-	if [ -n "${6}" -a -n "${OPTEEFLAVOR}" ]; then
+	if [ -n "${6}" -a "x${FITIMAGE_PACK_TEE}" = "x1" ]; then
 		if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ]; then
 			loadables_line="loadables = \"${6}.optee\";"
 			loadables_pager_line="loadables = \"${6}-pager.optee\";"
@@ -530,7 +531,7 @@ fitimage_assemble() {
 	#
 	# Step 2a: Prepare OP/TEE image section
 	#
-	if test -n "${OPTEEFLAVOR}"; then
+	if [ "x${FITIMAGE_PACK_TEE}" = "x1" ] ; then
 		mkdir -p ${B}/usr
 		rm -f ${B}/usr/${OPTEEFLAVOR}.optee
 		if [ -e "${DEPLOY_DIR_IMAGE}/${OPTEEFLAVOR}.optee" ]; then
