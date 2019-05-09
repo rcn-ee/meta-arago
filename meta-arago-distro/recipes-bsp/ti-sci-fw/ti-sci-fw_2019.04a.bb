@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "k3"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "77bd5534eb33c2f9654ab1b56fcdff4e8b7143e0"
+SRCREV = "b41c4f097ab6f341462645f76059f48f78bbd17e"
 
 BRANCH ?= "ti-linux-firmware"
 
@@ -20,7 +20,7 @@ SRC_URI = " \
 	git://git.ti.com/processor-firmware/system-firmware-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
 "
 
-SRCREV_imggen = "3cbf4003060ead508653e2ec8f25c59bbe813e74"
+SRCREV_imggen = "f68fe913c16f13a7e04f6f340de1c4f6cc561c10"
 SRCREV_FORMAT = "imggen"
 
 S = "${WORKDIR}/git"
