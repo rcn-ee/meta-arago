@@ -65,6 +65,16 @@ do_compile_aarch64() {
     )
 }
 
+do_compile_am65xx-hs-evm() {
+    export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
+    oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
+    ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
+        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee-pager.bin tee-pager.bin.signed; \
+        mv tee-pager.bin.signed ${B}/bl32.bin; \
+        cp tee.elf ${B}/bl32.elf; \
+    )
+}
+
 do_install() {
     #install core on boot directory
     install -d ${D}/boot
