@@ -16,8 +16,15 @@ python __anonymous () {
         depends = "%s u-boot-mkimage-native dtc-native" % depends
         d.setVar("DEPENDS", depends)
 
-        if d.getVar("UBOOT_ARCH") == "x86":
+        uarch = d.getVar("UBOOT_ARCH")
+        if uarch == "arm64":
+            replacementtype = "Image"
+        elif uarch == "mips":
+            replacementtype = "vmlinuz.bin"
+        elif uarch == "x86":
             replacementtype = "bzImage"
+        elif uarch == "microblaze":
+            replacementtype = "linux.bin"
         else:
             replacementtype = "zImage"
 
@@ -334,7 +341,7 @@ fitimage_emit_section_config() {
 
 	dtbcount=1
 	for DTB in ${KERNEL_DEVICETREE}; do
-
+		DTB=$(echo "${DTB}" | tr '/' '_')
 		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
 			conf_name="${DTB}"
 		else
@@ -506,6 +513,7 @@ fitimage_assemble() {
 			if [ ! -e "${DTB_PATH}" ]; then
 				DTB_PATH="arch/${ARCH}/boot/${DTB}"
 			fi
+			DTB=$(echo "${DTB}" | tr '/' '_')
 			fitimage_ti_secure ${DTB_PATH} ${DTB_PATH}.sec
 			if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
 				fitimage_emit_section_dtb ${1} ${DTB} ${DTB_PATH}.sec
