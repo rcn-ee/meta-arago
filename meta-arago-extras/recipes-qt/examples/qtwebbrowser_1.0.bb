@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS += "qtwebengine"
 PACKAGES += "${PN}-examples"
 
-PR = "r0"
+PR = "r1"
 
 BRANCH = "dev"
 SRCREV = "023733af5523a5ad84359926224fa106001215f4"
@@ -25,10 +25,10 @@ inherit qt-provider
 # Install qtwebbrowser under /usr/bin
 do_install() {
     install -d ${D}${bindir}
-    install -d ${D}${datadir}/qt5/examples/webengine/webbrowser/src
+    install -d ${D}${datadir}/examples/webengine/webbrowser/src
     install -m 0755 src/qtwebbrowser ${D}${bindir}/qtwebbrowser
-    cp -R --no-dereference --preserve=mode,links ${S}/* ${D}${datadir}/qt5/examples/webengine/webbrowser/.
+    cp -R --no-dereference --preserve=mode,links ${S}/* ${D}${datadir}/examples/webengine/webbrowser/.
 }
 
 FILES_${PN} +=  "${bindir}/qtwebbrowser"
-FILES_${PN}-examples +=  "${datadir}/qt5/examples/webengine/webbrowser/*"
+FILES_${PN}-examples +=  "${datadir}/examples/webengine/webbrowser/*"
