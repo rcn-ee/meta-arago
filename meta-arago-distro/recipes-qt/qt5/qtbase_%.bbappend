@@ -4,7 +4,7 @@ GLES_EXTRA_DEPS = "libdrm wayland"
 
 PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl ${GLES_EXTRA_DEPS}"
 
-PR_append = ".arago15"
+PR_append = ".arago16"
 
 QT_CONFIG_FLAGS += "-qpa ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', 'eglfs', d)}"
 
@@ -38,6 +38,7 @@ do_install_append () {
     ln -sf ../examples ${D}${datadir}/qt5/examples
 }
 
-FILES_${PN} += "${data}/qt5/*"
+FILES_${PN}-examples +=  "${datadir}/qt5/*"
+
 
 RDEPENDS_${PN} += "${PN}-conf"
