@@ -9,12 +9,12 @@ DEPENDS += "opencv opencl virtual/egl ti-cgt6x-native clocl-native dsplib-c66x"
 COMPATIBLE_MACHINE = "dra7xx"
 
 PV = "1.3.3"
-PR = "r2"
+PR = "r3"
 
 BRANCH = "master"
 SRC_URI = "git://git.ti.com/apps/qt-opencv-opencl-opengl-multithreaded.git;protocol=git;branch=${BRANCH}"
 
-SRCREV = "a5dad4fbb470e526f6058095cf08a01f51abb02d"
+SRCREV = "80051ec8befd921e40cfb74a49234ed045576bbc"
 
 S = "${WORKDIR}/git"
 
