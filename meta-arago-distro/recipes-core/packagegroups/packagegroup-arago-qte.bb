@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r14"
+PR = "r15"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -40,18 +40,18 @@ QT5_ESSENTIALS = "\
     qtgraphicaleffects-qmlplugins \
     qtvirtualkeyboard-plugins \
     qtvirtualkeyboard-qmlplugins \
-    qtwebengine-qmlplugins \
+    qtwebkit-qmlplugins \
     liberation-fonts \
     qtconnectivity \
     qtconnectivity-qmlplugins \
 "
 
-QT5_ESSENTIALS_append_k3 = "\
-    qtwebkit-qmlplugins \
-"
-QT5_ESSENTIALS_remove_k3 = "\
-    qtwebengine-qmlplugins \
-"
+#QT5_ESSENTIALS_append_k3 = "\
+#    qtwebkit-qmlplugins \
+#"
+#QT5_ESSENTIALS_remove_k3 = "\
+#    qtwebengine-qmlplugins \
+#"
 
 RDEPENDS_${PN} = "\
     ${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT5_ESSENTIALS}", "${QT4_ESSENTIALS}", d)} \
