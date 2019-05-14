@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r77"
+PR = "r78"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -33,7 +33,7 @@ MATRIX_COMMON_APPS = "              \
 
 MATRIX_QT_APPS = " \
     matrix-qt5-demo-animated \
-    matrix-qt5-demo-browser \
+    matrix-qt5-demo-webkit-browser \
     matrix-qt5-demo-calculator \
     matrix-qt5-demo-deform \
     matrix-gui-thermostat-demo \
@@ -45,10 +45,10 @@ MATRIX_TOUCH_APPS = " \
 
 MATRIX_QT_APPS_keystone = ""
 MATRIX_QT_APPS_omapl138 = ""
-MATRIX_QT_APPS_remove_k3 = "matrix-qt5-demo-browser"
-MATRIX_QT_APPS_append_k3 = " \
-    matrix-qt5-demo-webkit-browser \
-"
+#MATRIX_QT_APPS_remove_k3 = "matrix-qt5-demo-browser"
+#MATRIX_QT_APPS_append_k3 = " \
+#    matrix-qt5-demo-webkit-browser \
+#"
 
 MATRIX_SGX_DEMOS = " \
     matrix-3d-demo-chameleon \
