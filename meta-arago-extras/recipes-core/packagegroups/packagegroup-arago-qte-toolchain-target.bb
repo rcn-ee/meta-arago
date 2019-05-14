@@ -1,7 +1,7 @@
 DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
 
-PR = "r13"
+PR = "r14"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -61,21 +61,21 @@ QT5_DEV = " \
         qtsensors-dev \
         qtsvg-dev \
         qtxmlpatterns-dev \
-        qtwebengine-mkspecs \
-        qtwebengine-dev \
+        qtwebkit-mkspecs \
+        qtwebkit-dev \
         qtserialport-mkspecs \
         qtserialport-dev  \
 "
 
-QT5_DEV_append_k3 = " \
-        qtwebkit-mkspecs \
-        qtwebkit-dev \
-"
-
-QT5_DEV_remove_k3 = " \
-        qtwebengine-mkspecs \
-        qtwebengine-dev \
-"
+#QT5_DEV_append_k3 = " \
+#        qtwebkit-mkspecs \
+#        qtwebkit-dev \
+#"
+#
+#QT5_DEV_remove_k3 = " \
+#        qtwebengine-mkspecs \
+#        qtwebengine-dev \
+#"
 
 RDEPENDS_${PN} += " \
         ${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT5_DEV}", "${QT4_DEV}", d)} \
