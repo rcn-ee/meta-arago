@@ -8,6 +8,8 @@ SRC_URI += " \
 	file://GraphicsSurfaceGL_NoX.cpp.patch \
 "
 
-PR_append = ".arago5"
+PR_append = ".arago6"
+
+EXTRA_OECMAKE_append_k3 = " -DUSE_SYSTEM_MALLOC=ON"
 
 DEPENDS += "flex-native bison-native"
