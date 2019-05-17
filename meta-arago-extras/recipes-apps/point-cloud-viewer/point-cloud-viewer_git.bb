@@ -17,7 +17,7 @@ PV = "2.0"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "glfw opencv"
+RDEPENDS_${PN} = "glfw opencv libstdc++"
 
 do_install() {
     install -d ${D}${bindir}
