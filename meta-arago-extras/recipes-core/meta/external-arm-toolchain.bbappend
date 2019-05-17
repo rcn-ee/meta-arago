@@ -1,6 +1,11 @@
 ORIG_TARGET_SYS = "${TARGET_ARCH}${TARGET_VENDOR}${@['-' + d.getVar('TARGET_OS'), ''][d.getVar('TARGET_OS') == ('' or 'custom')]}"
 
 do_install_append() {
+	install -d ${D}${base_sbindir}
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/libc/${base_sbindir}/ldconfig ${D}${base_sbindir}/
+	install -d ${D}${sysconfdir}
+	echo -e "/lib\n/usr/lib" >> ${D}${sysconfdir}/ld.so.conf
+
 	if [ ${EAT_TARGET_SYS} != ${ORIG_TARGET_SYS} ]; then
 		ln -sf ${EAT_TARGET_SYS} ${D}${libdir}/${ORIG_TARGET_SYS}
 		ln -sf ${EAT_TARGET_SYS} ${D}${includedir}/c++/${EAT_VER_GCC}/${ORIG_TARGET_SYS}
