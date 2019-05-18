@@ -22,7 +22,7 @@ QT5_DEMOS = "\
     qtscript-examples \
     qtsvg-examples \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-examples', '', d)} \
-    qtwebkit-examples \
+    qtwebkit-examples-examples \
     qtserialport-examples \
 "
 
