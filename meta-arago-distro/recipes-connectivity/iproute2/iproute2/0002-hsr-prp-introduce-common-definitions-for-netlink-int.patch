@@ -1,0 +1,259 @@
+From d8a98010127fabf4898d6fca67d14c21ad7e1f62 Mon Sep 17 00:00:00 2001
+From: Murali Karicheri <m-karicheri2@ti.com>
+Date: Fri, 12 Apr 2019 10:11:28 -0400
+Subject: [PATCH 2/4] hsr/prp: introduce common definitions for netlink
+ interface
+
+HSR and PRP interfaces are setup in a similar way in kernel as
+the protocols shares many similar attributes. So introduce a common
+definitions for netlink interface and modify hsr/prp code to re-use
+the same.
+
+Upstream-Status: Pending
+
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ include/uapi/linux/if_link.h | 20 +++++++++++---------
+ ip/iplink_hsr.c              | 42 +++++++++++++++++++++---------------------
+ ip/iplink_prp.c              | 40 ++++++++++++++++++++--------------------
+ 3 files changed, 52 insertions(+), 50 deletions(-)
+
+diff --git a/include/uapi/linux/if_link.h b/include/uapi/linux/if_link.h
+index 5a6d728..ba78aaf 100644
+--- a/include/uapi/linux/if_link.h
++++ b/include/uapi/linux/if_link.h
+@@ -995,16 +995,18 @@ struct ifla_rmnet_flags {
+ 	__u32	mask;
+ };
+ 
+-/* PRP section */
++/* HSR-PRP section */
+ enum {
+-	IFLA_PRP_UNSPEC,
+-	IFLA_PRP_SLAVE1,
+-	IFLA_PRP_SLAVE2,
+-	IFLA_PRP_MULTICAST_SPEC,	/* Last byte of supervision addr */
+-	IFLA_PRP_SUPERVISION_ADDR,	/* Supervision frame multicast addr */
+-	IFLA_PRP_SEQ_NR,
+-	__IFLA_PRP_MAX,
++	IFLA_HSR_PRP_UNSPEC,
++	IFLA_HSR_PRP_SLAVE1,
++	IFLA_HSR_PRP_SLAVE2,
++	IFLA_HSR_PRP_SF_MC_ADDR_LSB,	/* Last byte of supervision addr */
++	IFLA_HSR_PRP_SF_MC_ADDR,	/* Supervision frame multicast addr */
++	IFLA_HSR_PRP_SEQ_NR,
++	IFLA_HSR_PRP_VERSION,		/* HSR version */
++	__IFLA_HSR_PRP_MAX,
+ };
+-#define IFLA_PRP_MAX (__IFLA_PRP_MAX - 1)
++
++#define IFLA_HSR_PRP_MAX (__IFLA_HSR_PRP_MAX - 1)
+ 
+ #endif /* _LINUX_IF_LINK_H */
+diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
+index c673ccf..1281e09 100644
+--- a/ip/iplink_hsr.c
++++ b/ip/iplink_hsr.c
+@@ -55,7 +55,7 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
+ 			NEXT_ARG();
+ 			if (get_u8(&multicast_spec, *argv, 0))
+ 				invarg("ADDR-BYTE is invalid", *argv);
+-			addattr_l(n, 1024, IFLA_HSR_MULTICAST_SPEC,
++			addattr_l(n, 1024, IFLA_HSR_PRP_SF_MC_ADDR_LSB,
+ 				  &multicast_spec, 1);
+ 		} else if (matches(*argv, "version") == 0) {
+ 			NEXT_ARG();
+@@ -69,13 +69,13 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
+ 			ifindex = ll_name_to_index(*argv);
+ 			if (ifindex == 0)
+ 				invarg("No such interface", *argv);
+-			addattr_l(n, 1024, IFLA_HSR_SLAVE1, &ifindex, 4);
++			addattr_l(n, 1024, IFLA_HSR_PRP_SLAVE1, &ifindex, 4);
+ 		} else if (matches(*argv, "slave2") == 0) {
+ 			NEXT_ARG();
+ 			ifindex = ll_name_to_index(*argv);
+ 			if (ifindex == 0)
+ 				invarg("No such interface", *argv);
+-			addattr_l(n, 1024, IFLA_HSR_SLAVE2, &ifindex, 4);
++			addattr_l(n, 1024, IFLA_HSR_PRP_SLAVE2, &ifindex, 4);
+ 		} else if (matches(*argv, "help") == 0) {
+ 			usage();
+ 			return -1;
+@@ -97,47 +97,47 @@ static void hsr_print_opt(struct link_util *lu, FILE *f, struct rtattr *tb[])
+ 	if (!tb)
+ 		return;
+ 
+-	if (tb[IFLA_HSR_SLAVE1] &&
+-	    RTA_PAYLOAD(tb[IFLA_HSR_SLAVE1]) < sizeof(__u32))
++	if (tb[IFLA_HSR_PRP_SLAVE1] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SLAVE1]) < sizeof(__u32))
+ 		return;
+-	if (tb[IFLA_HSR_SLAVE2] &&
+-	    RTA_PAYLOAD(tb[IFLA_HSR_SLAVE2]) < sizeof(__u32))
++	if (tb[IFLA_HSR_PRP_SLAVE2] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SLAVE2]) < sizeof(__u32))
+ 		return;
+-	if (tb[IFLA_HSR_SEQ_NR] &&
+-	    RTA_PAYLOAD(tb[IFLA_HSR_SEQ_NR]) < sizeof(__u16))
++	if (tb[IFLA_HSR_PRP_SEQ_NR] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SEQ_NR]) < sizeof(__u16))
+ 		return;
+-	if (tb[IFLA_HSR_SUPERVISION_ADDR] &&
+-	    RTA_PAYLOAD(tb[IFLA_HSR_SUPERVISION_ADDR]) < ETH_ALEN)
++	if (tb[IFLA_HSR_PRP_SF_MC_ADDR] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SF_MC_ADDR]) < ETH_ALEN)
+ 		return;
+ 
+-	if (tb[IFLA_HSR_SLAVE1])
++	if (tb[IFLA_HSR_PRP_SLAVE1])
+ 		print_string(PRINT_ANY,
+ 			     "slave1",
+ 			     "slave1 %s ",
+-			     ll_index_to_name(rta_getattr_u32(tb[IFLA_HSR_SLAVE1])));
++			     ll_index_to_name(rta_getattr_u32(tb[IFLA_HSR_PRP_SLAVE1])));
+ 	else
+ 		print_null(PRINT_ANY, "slave1", "slave1 %s ", "<none>");
+ 
+-	if (tb[IFLA_HSR_SLAVE2])
++	if (tb[IFLA_HSR_PRP_SLAVE2])
+ 		print_string(PRINT_ANY,
+ 			     "slave2",
+ 			     "slave2 %s ",
+-			     ll_index_to_name(rta_getattr_u32(tb[IFLA_HSR_SLAVE2])));
++			     ll_index_to_name(rta_getattr_u32(tb[IFLA_HSR_PRP_SLAVE2])));
+ 	else
+ 		print_null(PRINT_ANY, "slave2", "slave2 %s ", "<none>");
+ 
+-	if (tb[IFLA_HSR_SEQ_NR])
++	if (tb[IFLA_HSR_PRP_SEQ_NR])
+ 		print_int(PRINT_ANY,
+ 			  "seq_nr",
+ 			  "sequence %d ",
+-			  rta_getattr_u16(tb[IFLA_HSR_SEQ_NR]));
++			  rta_getattr_u16(tb[IFLA_HSR_PRP_SEQ_NR]));
+ 
+-	if (tb[IFLA_HSR_SUPERVISION_ADDR])
++	if (tb[IFLA_HSR_PRP_SF_MC_ADDR])
+ 		print_string(PRINT_ANY,
+ 			     "supervision_addr",
+ 			     "supervision %s ",
+-			     ll_addr_n2a(RTA_DATA(tb[IFLA_HSR_SUPERVISION_ADDR]),
+-					 RTA_PAYLOAD(tb[IFLA_HSR_SUPERVISION_ADDR]),
++			     ll_addr_n2a(RTA_DATA(tb[IFLA_HSR_PRP_SF_MC_ADDR]),
++					 RTA_PAYLOAD(tb[IFLA_HSR_PRP_SF_MC_ADDR]),
+ 					 ARPHRD_VOID,
+ 					 b1, sizeof(b1)));
+ }
+@@ -150,7 +150,7 @@ static void hsr_print_help(struct link_util *lu, int argc, char **argv,
+ 
+ struct link_util hsr_link_util = {
+ 	.id		= "hsr",
+-	.maxattr	= IFLA_HSR_MAX,
++	.maxattr	= IFLA_HSR_PRP_MAX,
+ 	.parse_opt	= hsr_parse_opt,
+ 	.print_opt	= hsr_print_opt,
+ 	.print_help	= hsr_print_help,
+diff --git a/ip/iplink_prp.c b/ip/iplink_prp.c
+index 46533e9..062c1c7 100644
+--- a/ip/iplink_prp.c
++++ b/ip/iplink_prp.c
+@@ -52,20 +52,20 @@ static int prp_parse_opt(struct link_util *lu, int argc, char **argv,
+ 			NEXT_ARG();
+ 			if (get_u8(&multicast_spec, *argv, 0))
+ 				invarg("ADDR-BYTE is invalid", *argv);
+-			addattr_l(n, 1024, IFLA_PRP_MULTICAST_SPEC,
++			addattr_l(n, 1024, IFLA_HSR_PRP_SF_MC_ADDR_LSB,
+ 				  &multicast_spec, 1);
+ 		} else if (matches(*argv, "slave1") == 0) {
+ 			NEXT_ARG();
+ 			ifindex = ll_name_to_index(*argv);
+ 			if (ifindex == 0)
+ 				invarg("No such interface", *argv);
+-			addattr_l(n, 1024, IFLA_PRP_SLAVE1, &ifindex, 4);
++			addattr_l(n, 1024, IFLA_HSR_PRP_SLAVE1, &ifindex, 4);
+ 		} else if (matches(*argv, "slave2") == 0) {
+ 			NEXT_ARG();
+ 			ifindex = ll_name_to_index(*argv);
+ 			if (ifindex == 0)
+ 				invarg("No such interface", *argv);
+-			addattr_l(n, 1024, IFLA_PRP_SLAVE2, &ifindex, 4);
++			addattr_l(n, 1024, IFLA_HSR_PRP_SLAVE2, &ifindex, 4);
+ 		} else if (matches(*argv, "help") == 0) {
+ 			usage();
+ 			return -1;
+@@ -87,28 +87,28 @@ static void prp_print_opt(struct link_util *lu, FILE *f, struct rtattr *tb[])
+ 	if (!tb)
+ 		return;
+ 
+-	if (tb[IFLA_PRP_SLAVE1] &&
+-	    RTA_PAYLOAD(tb[IFLA_PRP_SLAVE1]) < sizeof(__u32))
++	if (tb[IFLA_HSR_PRP_SLAVE1] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SLAVE1]) < sizeof(__u32))
+ 		return;
+-	if (tb[IFLA_PRP_SLAVE2] &&
+-	    RTA_PAYLOAD(tb[IFLA_PRP_SLAVE2]) < sizeof(__u32))
++	if (tb[IFLA_HSR_PRP_SLAVE2] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SLAVE2]) < sizeof(__u32))
+ 		return;
+-	if (tb[IFLA_PRP_SEQ_NR] &&
+-	    RTA_PAYLOAD(tb[IFLA_PRP_SEQ_NR]) < sizeof(__u16))
++	if (tb[IFLA_HSR_PRP_SEQ_NR] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SEQ_NR]) < sizeof(__u16))
+ 		return;
+-	if (tb[IFLA_PRP_SUPERVISION_ADDR] &&
+-	    RTA_PAYLOAD(tb[IFLA_PRP_SUPERVISION_ADDR]) < ETH_ALEN)
++	if (tb[IFLA_HSR_PRP_SF_MC_ADDR] &&
++	    RTA_PAYLOAD(tb[IFLA_HSR_PRP_SF_MC_ADDR]) < ETH_ALEN)
+ 		return;
+ 
+-	if (tb[IFLA_PRP_SLAVE1])
++	if (tb[IFLA_HSR_PRP_SLAVE1])
+ 		print_string(PRINT_ANY,
+ 			     "slave1",
+ 			     "slave1 %s ",
+-			     ll_index_to_name(rta_getattr_u32(tb[IFLA_PRP_SLAVE1])));
++			     ll_index_to_name(rta_getattr_u32(tb[IFLA_HSR_PRP_SLAVE1])));
+ 	else
+ 		print_null(PRINT_ANY, "slave1", "slave1 %s ", "<none>");
+ 
+-	if (tb[IFLA_PRP_SLAVE2])
++	if (tb[IFLA_HSR_PRP_SLAVE2])
+ 		print_string(PRINT_ANY,
+ 			     "slave2",
+ 			     "slave2 %s ",
+@@ -116,18 +116,18 @@ static void prp_print_opt(struct link_util *lu, FILE *f, struct rtattr *tb[])
+ 	else
+ 		print_null(PRINT_ANY, "slave2", "slave2 %s ", "<none>");
+ 
+-	if (tb[IFLA_PRP_SEQ_NR])
++	if (tb[IFLA_HSR_PRP_SEQ_NR])
+ 		print_int(PRINT_ANY,
+ 			  "seq_nr",
+ 			  "sequence %d ",
+-			  rta_getattr_u16(tb[IFLA_PRP_SEQ_NR]));
++			  rta_getattr_u16(tb[IFLA_HSR_PRP_SEQ_NR]));
+ 
+-	if (tb[IFLA_PRP_SUPERVISION_ADDR])
++	if (tb[IFLA_HSR_PRP_SF_MC_ADDR])
+ 		print_string(PRINT_ANY,
+ 			     "supervision_addr",
+ 			     "supervision %s ",
+-			     ll_addr_n2a(RTA_DATA(tb[IFLA_PRP_SUPERVISION_ADDR]),
+-					 RTA_PAYLOAD(tb[IFLA_PRP_SUPERVISION_ADDR]),
++			     ll_addr_n2a(RTA_DATA(tb[IFLA_HSR_PRP_SF_MC_ADDR]),
++					 RTA_PAYLOAD(tb[IFLA_HSR_PRP_SF_MC_ADDR]),
+ 					 ARPHRD_VOID,
+ 					 b1, sizeof(b1)));
+ }
+@@ -140,7 +140,7 @@ static void prp_print_help(struct link_util *lu, int argc, char **argv,
+ 
+ struct link_util prp_link_util = {
+ 	.id		= "prp",
+-	.maxattr	= IFLA_PRP_MAX,
++	.maxattr	= IFLA_HSR_PRP_MAX,
+ 	.parse_opt	= prp_parse_opt,
+ 	.print_opt	= prp_print_opt,
+ 	.print_help	= prp_print_help,
+-- 
+2.7.4
+

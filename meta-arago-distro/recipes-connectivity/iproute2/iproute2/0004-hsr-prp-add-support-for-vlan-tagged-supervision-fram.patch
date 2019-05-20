@@ -1,0 +1,148 @@
+From 87877ac34fd4656dd61e3f8d4b37fa458cf7015a Mon Sep 17 00:00:00 2001
+From: Murali Karicheri <m-karicheri2@ti.com>
+Date: Fri, 17 May 2019 17:06:29 -0400
+Subject: [PATCH 4/4] hsr/prp: add support for vlan tagged supervision frames
+
+This patch adds support to configure vlan tag information
+(vid, pcp and dei) at the hsr/prp lre device. This tag values
+will be used by the lre device to generate a VLAN tagged
+Supervision frames. This is done by adding 3 additional attributes
+to the hsr/prp link type and passing this to Linux HSR/PRP
+device through the ip link command.
+
+Upstream-Status: Pending
+
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ include/uapi/linux/if_link.h |  3 +++
+ ip/iplink_hsr.c              | 13 +++++++++++--
+ ip/iplink_hsr_prp_common.c   | 28 ++++++++++++++++++++++++++++
+ ip/iplink_prp.c              | 15 ++++++++++++---
+ 4 files changed, 54 insertions(+), 5 deletions(-)
+
+diff --git a/include/uapi/linux/if_link.h b/include/uapi/linux/if_link.h
+index ba78aaf..9b02642 100644
+--- a/include/uapi/linux/if_link.h
++++ b/include/uapi/linux/if_link.h
+@@ -1004,6 +1004,9 @@ enum {
+ 	IFLA_HSR_PRP_SF_MC_ADDR,	/* Supervision frame multicast addr */
+ 	IFLA_HSR_PRP_SEQ_NR,
+ 	IFLA_HSR_PRP_VERSION,		/* HSR version */
++	IFLA_HSR_PRP_SV_VID,
++	IFLA_HSR_PRP_SV_DEI,
++	IFLA_HSR_PRP_SV_PCP,
+ 	__IFLA_HSR_PRP_MAX,
+ };
+ 
+diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
+index 2e83af0..0190e12 100644
+--- a/ip/iplink_hsr.c
++++ b/ip/iplink_hsr.c
+@@ -17,7 +17,8 @@ static void print_usage(FILE *f)
+ {
+ 	fprintf(f,
+ "Usage:\tip link add name NAME type hsr slave1 SLAVE1-IF slave2 SLAVE2-IF\n"
+-"\t[ supervision ADDR-BYTE ] [version VERSION]\n"
++"\t[ supervision ADDR-BYTE ] [version VERSION] [ sv_vid SV-VID ] \n"
++"\t[ sv_pcp SV-PCP ] [ sv_cfi SV-CFI ] \n"
+ "\n"
+ "NAME\n"
+ "	name of new hsr device (e.g. hsr0)\n"
+@@ -27,7 +28,15 @@ static void print_usage(FILE *f)
+ "	0-255; the last byte of the multicast address used for HSR supervision\n"
+ "	frames (default = 0)\n"
+ "VERSION\n"
+-"	0,1; the protocol version to be used. (default = 0)\n");
++"      0,1; the protocol version to be used. (default = 0)\n"
++"SV-VID\n"
++"      0-4094; VLAN ID to be used in the VLAN tag of SV frames (default 0)\n"
++"SV-PCP\n"
++"      0-7; PCP value to be used in the VLAN tag of SV frames (default 0)\n"
++"SV-CFI\n"
++"      0-1; CFI value to be used in the VLAN tag of SV frames (default 0)\n"
++"Use VLAN tag if one of sv_vid, sv_pcp or sv_cfi is specified. Default value\n"
++"used for unspecified ones\n");
+ }
+ 
+ static void usage(void)
+diff --git a/ip/iplink_hsr_prp_common.c b/ip/iplink_hsr_prp_common.c
+index 780c1cb..734cc56 100644
+--- a/ip/iplink_hsr_prp_common.c
++++ b/ip/iplink_hsr_prp_common.c
+@@ -19,6 +19,9 @@ int hsr_prp_parse_opt(bool hsr, struct link_util *lu, int argc, char **argv,
+ 	int ifindex;
+ 	unsigned char multicast_spec;
+ 	unsigned char protocol_version;
++	unsigned short sv_vid;
++	unsigned char sv_dei;
++	unsigned char sv_pcp;
+ 
+ 	while (argc > 0) {
+ 		if (matches(*argv, "supervision") == 0) {
+@@ -46,6 +49,31 @@ int hsr_prp_parse_opt(bool hsr, struct link_util *lu, int argc, char **argv,
+ 			if (ifindex == 0)
+ 				invarg("No such interface", *argv);
+ 			addattr_l(n, 1024, IFLA_HSR_PRP_SLAVE2, &ifindex, 4);
++		} else if (matches(*argv, "sv_vid") == 0) {
++			NEXT_ARG();
++			if (get_u16(&sv_vid, *argv, 0))
++				invarg("SV-VID is invalid", *argv);
++			/* exclude reserved 4095 */
++			if (sv_vid >= 4095)
++				invarg("SV-VID is invalid", *argv);
++			addattr_l(n, 1024, IFLA_HSR_PRP_SV_VID,
++				  &sv_vid, sizeof(sv_vid));
++		} else if (matches(*argv, "sv_pcp") == 0) {
++			NEXT_ARG();
++			if (get_u8(&sv_pcp, *argv, 0))
++				invarg("SV-PCP is invalid", *argv);
++			if (sv_pcp > 7)
++				invarg("SV-PCP is invalid", *argv);
++			addattr_l(n, 1024, IFLA_HSR_PRP_SV_PCP,
++				  &sv_pcp, sizeof(sv_pcp));
++		} else if (matches(*argv, "sv_dei") == 0) {
++			NEXT_ARG();
++			if (get_u8(&sv_dei, *argv, 0))
++				invarg("SV-DEI is invalid", *argv);
++			if (sv_dei > 1)
++				invarg("SV-DEI is invalid", *argv);
++			addattr_l(n, 1024, IFLA_HSR_PRP_SV_DEI,
++				  &sv_dei, sizeof(sv_dei));
+ 		} else if (matches(*argv, "help") == 0) {
+ 			return -1;
+ 		} else {
+diff --git a/ip/iplink_prp.c b/ip/iplink_prp.c
+index eff8a0d..52c4cf6 100644
+--- a/ip/iplink_prp.c
++++ b/ip/iplink_prp.c
+@@ -17,15 +17,24 @@ static void print_usage(FILE *f)
+ {
+ 	fprintf(f,
+ "Usage:\tip link add name NAME type prp slave1 SLAVE1-IF slave2 SLAVE2-IF\n"
+-"\t[ supervision ADDR-BYTE ]\n"
++"\t[ supervision ADDR-BYTE ] [ sv_vid SV-VID ] [ sv_pcp SV-PCP ] \n"
++"\t [ sv_cfi SV-CFI ] \n"
+ "\n"
+ "NAME\n"
+ "	name of new prp device (e.g. prp0)\n"
+ "SLAVE1-IF, SLAVE2-IF\n"
+ "	the two slave devices bound to the PRP device\n"
+ "ADDR-BYTE\n"
+-"	0-255; the last byte of the multicast address used for PRP supervision\n"
+-"	frames (default = 0)\n");
++"      0-255; the last byte of the multicast address used for PRP supervision\n"
++"      frames (default = 0) \n"
++"SV-VID\n"
++"      0-4094; VLAN ID to be used in the VLAN tag of SV frames (default 0)\n"
++"SV-PCP\n"
++"      0-7; PCP value to be used in the VLAN tag of SV frames (default 0)\n"
++"SV-CFI\n"
++"      0-1; CFI value to be used in the VLAN tag of SV frames (default 0)\n"
++"Use VLAN tag if one of sv_vid, sv_pcp or sv_cfi is specified. Default value\n"
++"used for unspecified ones\n");
+ }
+ 
+ static void usage(void)
+-- 
+2.7.4
+
