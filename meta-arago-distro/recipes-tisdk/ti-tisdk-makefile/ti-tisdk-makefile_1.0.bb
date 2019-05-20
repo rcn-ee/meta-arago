@@ -53,7 +53,7 @@ SRC_URI = "\
     file://Makefile_mmwavegesture-hmi \
 "
 
-PR = "r93"
+PR = "r94"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -299,12 +299,15 @@ do_install () {
 
 }
 
+K3_UBOOT_MACHINE_R5 = ""
+K3_UBOOT_MACHINE_R5_am65xx-evm = "am65x_evm_r5_defconfig"
+K3_UBOOT_MACHINE_R5_am65xx-hs-evm = "am65x_hs_evm_r5_defconfig"
 do_install_append_k3() {
     cat >> ${D}/Rules.make << __EOF__
 
 # Add CROSS_COMPILE and UBOOT_MACHINE for the R5
 export CROSS_COMPILE_ARMV7=\$(LINUX_DEVKIT_PATH)/sysroots/${SDKMACHINE}-arago-linux/usr/bin/arm-linux-gnueabihf-
-UBOOT_MACHINE_R5=am65x_evm_r5_defconfig
+UBOOT_MACHINE_R5=${K3_UBOOT_MACHINE_R5}
 __EOF__
 }
 
