@@ -342,7 +342,7 @@ fitimage_emit_section_config() {
 
 	dtbcount=1
 	for DTB in ${KERNEL_DEVICETREE}; do
-		DTB=$(echo "${DTB}" | tr '/' '_')
+		DTB=$(basename "${DTB}")
 		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
 			conf_name="${DTB}"
 		else
@@ -514,7 +514,7 @@ fitimage_assemble() {
 			if [ ! -e "${DTB_PATH}" ]; then
 				DTB_PATH="arch/${ARCH}/boot/${DTB}"
 			fi
-			DTB=$(echo "${DTB}" | tr '/' '_')
+			DTB=$(basename "${DTB}")
 			fitimage_ti_secure ${DTB_PATH} ${DTB_PATH}.sec
 			if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
 				fitimage_emit_section_dtb ${1} ${DTB} ${DTB_PATH}.sec
