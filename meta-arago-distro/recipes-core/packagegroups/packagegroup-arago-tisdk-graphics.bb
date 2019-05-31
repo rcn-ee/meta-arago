@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r22"
+PR = "r23"
 
 inherit packagegroup
 
@@ -12,25 +12,25 @@ GRAPHICS_WAYLAND = "\
 "
 
 GRAPHICS_WAYLAND_append_omap-a15 = "\
-    chromium-wayland \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','chromium-wayland','',d)} \
 "
 
 GRAPHICS_WAYLAND_append_k3 = "\
-    chromium-wayland \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','chromium-wayland','',d)} \
 "
 
 GRAPHICS_RDEPENDS = "\
     libgbm \
-    ti-sgx-ddk-km \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','ti-sgx-ddk-km','',d)} \
     ti-sgx-ddk-um \
-    glmark2 \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','glmark2','',d)} \
 "
 
 GRAPHICS_DISPLAY_UTILS = "\
 "
 
 GRAPHICS_DISPLAY_UTILS_append_omap-a15  = "\
-    glsdk-util-scripts \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','glsdk-util-scripts','',d)} \
 "
 
 GRAPHICS_RDEPENDS_append_omap-a15 = "\
