@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r78"
+PR = "r79"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -36,11 +36,11 @@ MATRIX_QT_APPS = " \
     matrix-qt5-demo-webkit-browser \
     matrix-qt5-demo-calculator \
     matrix-qt5-demo-deform \
-    matrix-gui-thermostat-demo \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','matrix-gui-thermostat-demo','',d)} \
 "
 
 MATRIX_TOUCH_APPS = " \
-    matrix-gui-touch-demos \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','matrix-gui-touch-demos','',d)} \
 "
 
 MATRIX_QT_APPS_keystone = ""
