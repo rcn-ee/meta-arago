@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r73"
+PR = "r74"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -81,7 +81,7 @@ UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
 UTILS_append_dra7xx = " can-utils \
                         ${UTILS_DSP} \
-                        glsdk-example-apps \
+                        ${@bb.utils.contains('MACHINE_FEATURES','sgx','glsdk-example-apps','',d)} \
 "
 
 UTILS_append_keystone = " \
