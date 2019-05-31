@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require recipes-core/matrix/matrix-gui-apps-git.inc
 
-PR = "${INC_PR}.3"
+PR = "${INC_PR}.4"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -25,7 +25,7 @@ RDEPENDS_matrix-machinevision-demo-dlp3dscanner = " \
 "
 
 RDEPENDS_matrix-machinevision-demo-dlp3dscanner_append_dra7xx = " \
-    point-cloud-viewer \
+    ${@bb.utils.contains('MACHINE_FEATURES','sgx','point-cloud-viewer','',d)} \
 "
 
 RDEPENDS_matrix-machinevision-demo-barcoderoi = " \
