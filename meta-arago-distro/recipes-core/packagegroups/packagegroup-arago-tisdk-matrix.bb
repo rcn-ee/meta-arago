@@ -115,6 +115,7 @@ MATRIX_APPS_append_ti33x = "        \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
     ${MATRIX_ARMNN_APPS}            \
+    matrix-analytics-pdm-anomaly-detection \
 "
 
 MATRIX_APPS_append_ti43x = "        \
@@ -138,6 +139,7 @@ MATRIX_APPS_append_ti43x = "        \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
     ${MATRIX_ARMNN_APPS}            \
+    matrix-analytics-pdm-anomaly-detection \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
@@ -160,6 +162,7 @@ MATRIX_APPS_append_omap-a15 = "     \
     ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','sgx',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
                                 \
     ${MATRIX_ARMNN_APPS}            \
+    matrix-analytics-pdm-anomaly-detection \
 "
 
 MATRIX_APPS_append_k3 = "           \
@@ -175,6 +178,7 @@ MATRIX_APPS_append_k3 = "           \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
     ${MATRIX_ARMNN_APPS}            \
+    matrix-analytics-pdm-anomaly-detection \
 "
 
 MATRIX_APPS_append_dra7xx += " \
