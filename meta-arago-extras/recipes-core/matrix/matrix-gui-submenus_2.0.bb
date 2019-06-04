@@ -7,7 +7,7 @@ require matrix-gui-apps-git.inc
 # reset the LIC_FILES_CHKSUM setting from the matrix-gui-apps-git.inc file
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6e0ae7214f6c74c149cb25f373057fa9"
 
-PR = "${INC_PR}.19"
+PR = "${INC_PR}.20"
 
 # These packages make submenus in matrix and are not architecture specific
 inherit allarch
@@ -37,6 +37,7 @@ SUBMENUS = " arm_submenu \
              browser_submenu \
 	     hmi_submenu \
              tidl_submenu \
+             analytics_submenu \
 "
 
 do_install(){
@@ -72,6 +73,7 @@ PACKAGES += " ${PN}-arm \
               ${PN}-browser \
               ${PN}-hmi \
               ${PN}-tidl \
+              ${PN}-analytics \
 "
 
 # Make sure app images has been installed
@@ -102,3 +104,4 @@ FILES_${PN}-touch = "${MATRIX_APP_DIR}/touch_submenu/*"
 FILES_${PN}-browser = "${MATRIX_APP_DIR}/browser_submenu/*"
 FILES_${PN}-hmi = "${MATRIX_APP_DIR}/hmi_submenu/*"
 FILES_${PN}-tidl = "${MATRIX_APP_DIR}/tidl_submenu/*"
+FILES_${PN}-analytics = "${MATRIX_APP_DIR}/analytics_submenu/*"
