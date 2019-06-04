@@ -51,9 +51,10 @@ SRC_URI = "\
     file://Makefile_barcode-roi \
     file://Makefile_sysfw-image \
     file://Makefile_mmwavegesture-hmi \
+    file://Makefile_pdm-anomaly-detection \
 "
 
-PR = "r94"
+PR = "r95"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -96,6 +97,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            barcode-roi \
                            uio-module-drv \
 			   mmwavegesture-hmi \
+                           pdm-anomaly-detection \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
                            ${QUICK_PLAYGROUND} \
@@ -110,6 +112,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            barcode-roi \
                            uio-module-drv \
 			   mmwavegesture-hmi \
+                           pdm-anomaly-detection \
 "
 
 #                            debugss-module-drv 
@@ -132,6 +135,7 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               barcode-roi \
                               uio-module-drv \
 			      mmwavegesture-hmi \
+                              pdm-anomaly-detection \
 "
 MAKEFILES_append_omapl138 = " linux-dtbs \
                               u-boot-spl \
@@ -178,6 +182,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
                         pru-icss \
                         sysfw-image \
 			mmwavegesture-hmi \
+                        pdm-anomaly-detection \
 "
 
 # Use this to export kernel arch to ARCH
