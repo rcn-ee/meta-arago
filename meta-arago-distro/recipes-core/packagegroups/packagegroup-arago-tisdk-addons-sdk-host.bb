@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r34"
+PR = "r35"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -86,7 +86,26 @@ EXTRA_LIBS_append_keystone = " \
 #    gdbserverproxy-module-drv-src \
 #"
 
+EXTRA_PACKAGES = ""
+
+EXTRA_PACKAGES_append_omap-a15 = " \
+    pdm-anomaly-detection-src \
+"
+
+EXTRA_PACKAGES_append_ti33x = " \
+    pdm-anomaly-detection-src \
+"
+
+EXTRA_PACKAGES_append_ti43x = " \
+    pdm-anomaly-detection-src \
+"
+
+EXTRA_PACKAGES_append_k3 = " \
+    pdm-anomaly-detection-src \
+"
+
 RDEPENDS_${PN} = "\
     ${UTILS} \
     ${EXTRA_LIBS} \
+    ${EXTRA_PACKAGES} \
 "
