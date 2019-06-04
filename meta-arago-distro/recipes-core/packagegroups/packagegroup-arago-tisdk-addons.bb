@@ -151,11 +151,13 @@ ARMNN_PACKAGES = ""
 EXTRA_PACKAGES_append_ti33x = " voxelsdk \
                                 arm-compute-library \
                                 ${ARMNN_PACKAGES} \
+                                pdm-anomaly-detection \
 "
 
 EXTRA_PACKAGES_append_ti43x = " voxelsdk \
                                 arm-compute-library \
                                 ${ARMNN_PACKAGES} \
+                                pdm-anomaly-detection \
 "
 
 EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
@@ -163,10 +165,12 @@ EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
                                    big-data-ipc-demo-linux-firmware \
                                    arm-compute-library \
                                    ${ARMNN_PACKAGES} \
+                                   pdm-anomaly-detection \
 "
 
 EXTRA_PACKAGES_append_k3 = " arm-compute-library \
                              ${ARMNN_PACKAGES} \
+                             pdm-anomaly-detection \
 "
 
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
