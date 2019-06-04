@@ -1,7 +1,7 @@
 DESCRIPTION = "Target packages for Qt Embedded SDK"
 LICENSE = "MIT"
 
-PR = "r14"
+PR = "r15"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -65,6 +65,8 @@ QT5_DEV = " \
         qtwebkit-dev \
         qtserialport-mkspecs \
         qtserialport-dev  \
+        qtcharts-mkspecs \
+        qtcharts-dev \
 "
 
 #QT5_DEV_append_k3 = " \
