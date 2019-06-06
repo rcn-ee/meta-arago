@@ -1,0 +1,16 @@
+diff --git a/src/importTool/modules/ti_dl/utils/tidlModelImport/makefile b/src/importTool/modules/ti_dl/utils/tidlModelImport/makefile
+index 374f862..521f0dc 100644
+--- a/src/importTool/modules/ti_dl/utils/tidlModelImport/makefile
++++ b/src/importTool/modules/ti_dl/utils/tidlModelImport/makefile
+@@ -103,9 +103,9 @@ ifeq ($(PLATFORM_BUILD), x86)
+ ifeq ($(LINUX_IMPORT_TOOL), 64BIT)
+ CFLAGS+= -DPLATFORM_64BIT 
+ endif
+-LDFLAGS+= -lstdc++ -static
++LDFLAGS+= -lstdc++
+ else
+-LDFLAGS+= -lstdc++ -lz -static
++LDFLAGS+= -lstdc++ -lz
+ endif
+ endif
+ 

@@ -8,7 +8,9 @@ LICENSE = "BSD-3"
 LIC_FILES_CHKSUM = "file://modules/ti_dl/inc/itidl_ti.h;beginline=1;endline=34;md5=cabe1fdaabfa0d85dc5544566b0e2425"
 
 PV = "01.01.00.00"
-PR = "r0"
+PR = "r1"
+
+SRC_URI_append = " file://disable_static.patch;pnum=3"
 
 S = "${WORKDIR}/git/src/importTool/"
 
