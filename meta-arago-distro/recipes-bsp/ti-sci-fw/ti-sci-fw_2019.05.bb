@@ -14,11 +14,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 TI_SECURE_DEV_PKG ?= ""
 export TI_SECURE_DEV_PKG
 
-SRCREV = "b41c4f097ab6f341462645f76059f48f78bbd17e"
-
+SRCREV = "94a06ceb66aa821b293e8b903f6b65346d33328d"
 BRANCH ?= "ti-linux-firmware"
-
-SRCREV_imggen = "f68fe913c16f13a7e04f6f340de1c4f6cc561c10"
+SRCREV_imggen = "45a79c0ec817df212296bb148aa55f888d3a7f8b"
 SRCREV_FORMAT = "imggen"
 
 SRC_URI = " \
@@ -26,7 +24,7 @@ SRC_URI = " \
 	git://git.ti.com/processor-firmware/system-firmware-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
 "
 
-# Please note, "install.source.dir.local" is not a real URL, files need to be pre-downloaded
+# Please note, "install.source.dir.local" is not a real URL, below files need to be pre-downloaded
 SRC_URI_append_am65xx-hs-evm = " \
 	http://install.source.dir.local/ti-sci-firmware-am65x-hs-cert.bin;name=hs-cert \
 	http://install.source.dir.local/ti-sci-firmware-am65x-hs-enc.bin;name=hs-enc \
@@ -39,20 +37,42 @@ SRC_URI[hs-enc.sha256sum] = "73a17fd6ee2770d12ba328dd64009572b9ab0fbd4989111b34a
 
 S = "${WORKDIR}/git"
 
-SYSFW_TISCI_am65xx-evm = "${S}/ti-sysfw/ti-sci-firmware-am65x-gp.bin"
-SYSFW_TISCI_am65xx-hs-evm = "${WORKDIR}/ti-sci-firmware-am65x-hs-*.bin"
-SYSFW_BINARY = "sysfw.itb"
+SYSFW_SOC_am65xx = "am65x"
+SYSFW_SOC_j7-evm = "j721e"
+SYSFW_CONFIG = "evm"
+
+SYSFW_PREFIX = "ti-sci-firmware"
+
+SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-gp"
+SYSFW_BASE_am65xx-hs-evm = "${SYSFW_PREFIX}-${SYSFW_SOC}-hs"
+
+SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}.bin"
+SYSFW_TISCI_am65xx-hs-evm = "${WORKDIR}/${SYSFW_BASE}-*.bin"
+
+SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
 SYSFW_IMAGE = "sysfw-${PV}.itb"
+SYSFW_SYMLINK = "sysfw.itb"
+
+CFLAGS[unexport] = "1"
+LDFLAGS[unexport] = "1"
+AS[unexport] = "1"
+LD[unexport] = "1"
+
+do_configure[noexec] = "1"
 
 CROSS_COMPILE_V7 = "${@['${TARGET_SYS}-','${ELT_TARGET_SYS_ARMV7}-'][d.getVar('TOOLCHAIN_TYPE') == 'external' and d.getVar('TOOLCHAIN_BRAND') == 'linaro']}"
 CROSS_COMPILE_V7 = "${@['${TARGET_SYS}-','${EAT_TARGET_SYS_ARMV7}-'][d.getVar('TOOLCHAIN_TYPE') == 'external' and d.getVar('TOOLCHAIN_BRAND') == 'arm']}"
 PATH_prepend = "${TOOLCHAIN_PATH_ARMV7}/bin:"
 
-EXTRA_OEMAKE = "CROSS_COMPILE=${CROSS_COMPILE_V7} SYSFW_DL_URL='' SYSFW_HS_DL_URL='' SYSFW_HS_INNER_CERT_DL_URL=''"
-EXTRA_OEMAKE_append_am65xx-hs-evm = " HS=1"
+EXTRA_OEMAKE = "\
+    CROSS_COMPILE=${CROSS_COMPILE_V7} SYSFW_DL_URL='' SYSFW_HS_DL_URL='' SYSFW_HS_INNER_CERT_DL_URL='' \
+    SYSFW_PATH="${SYSFW_TISCI}" SOC=${SYSFW_SOC} CONFIG=${SYSFW_CONFIG} \
+"
+EXTRA_OEMAKE_append_am65xx-hs-evm = " \
+    HS=1 SYSFW_HS_PATH="${WORKDIR}/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${WORKDIR}/${SYSFW_BASE}-cert.bin" \
+"
 
 do_compile() {
-	cp ${SYSFW_TISCI} ${WORKDIR}/imggen/
 	cd ${WORKDIR}/imggen/
 	oe_runmake
 }
@@ -60,7 +80,7 @@ do_compile() {
 do_install() {
 	install -d ${D}/boot
 	install -m 644 ${WORKDIR}/imggen/${SYSFW_BINARY} ${D}/boot/${SYSFW_IMAGE}
-	ln -sf ${SYSFW_IMAGE} ${D}/boot/${SYSFW_BINARY}
+	ln -sf ${SYSFW_IMAGE} ${D}/boot/${SYSFW_SYMLINK}
 }
 
 FILES_${PN} = "/boot"
@@ -70,8 +90,8 @@ inherit deploy
 do_deploy () {
 	install -d ${DEPLOYDIR}
 	install -m 644 ${WORKDIR}/imggen/${SYSFW_BINARY} ${DEPLOYDIR}/${SYSFW_IMAGE}
-	rm -f ${DEPLOYDIR}/${SYSFW_BINARY}
-	ln -sf ${SYSFW_IMAGE} ${DEPLOYDIR}/${SYSFW_BINARY}
+	rm -f ${DEPLOYDIR}/${SYSFW_SYMLINK}
+	ln -sf ${SYSFW_IMAGE} ${DEPLOYDIR}/${SYSFW_SYMLINK}
 
 	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
 }
