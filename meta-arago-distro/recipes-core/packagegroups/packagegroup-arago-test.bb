@@ -62,7 +62,7 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     ti-ipc-test \
     "
 
-ARAGO_TI_TEST_append_k3 = " \
+ARAGO_TI_TEST_append_am65xx = " \
     ti-ipc-test \
     "
 

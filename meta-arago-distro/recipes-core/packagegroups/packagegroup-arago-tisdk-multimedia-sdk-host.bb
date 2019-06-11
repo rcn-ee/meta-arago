@@ -16,7 +16,7 @@ MULTIMEDIA_append_ti43x = " \
 
 MULTIMEDIA_append_ti33x = " barcode-roi-src"
 
-MULTIMEDIA_append_k3 = " barcode-roi-src"
+MULTIMEDIA_append_am65xx = " barcode-roi-src"
 
 MULTIMEDIA_append_omap-a15 = " \
     dual-camera-demo-src \

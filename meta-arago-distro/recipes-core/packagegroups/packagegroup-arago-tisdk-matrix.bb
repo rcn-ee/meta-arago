@@ -20,6 +20,7 @@ MATRIX_GUI = "               \
 
 MATRIX_GUI_keystone = ""
 MATRIX_GUI_omapl138 = ""
+MATRIX_GUI_j7-evm = ""
 
 MATRIX_COMMON_APPS = "              \
     matrix-gui-armbenchmarks-demos  \
@@ -45,6 +46,8 @@ MATRIX_TOUCH_APPS = " \
 
 MATRIX_QT_APPS_keystone = ""
 MATRIX_QT_APPS_omapl138 = ""
+MATRIX_QT_APPS_j7-evm = ""
+
 #MATRIX_QT_APPS_remove_k3 = "matrix-qt5-demo-browser"
 #MATRIX_QT_APPS_append_k3 = " \
 #    matrix-qt5-demo-webkit-browser \
@@ -167,7 +170,7 @@ MATRIX_APPS_append_omap-a15 = "     \
 #                                \
 #
 
-MATRIX_APPS_append_k3 = "           \
+MATRIX_APPS_append_am65xx = "           \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-audiocapture \
     matrix-multimedia-demo-h264dec  \

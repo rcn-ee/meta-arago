@@ -17,7 +17,7 @@ MULTIMEDIA_append_dra7xx = " \
 MULTIMEDIA_append_ti33x = " barcode-roi-dev"
 MULTIMEDIA_append_ti43x = " barcode-roi-dev"
 MULTIMEDIA_append_omap-a15 = " barcode-roi-dev"
-MULTIMEDIA_append_k3 = " barcode-roi-dev"
+MULTIMEDIA_append_am65xx = " barcode-roi-dev"
 
 MULTIMEDIA_append_keystone = " \
     hevc-arm-decoder-dev \

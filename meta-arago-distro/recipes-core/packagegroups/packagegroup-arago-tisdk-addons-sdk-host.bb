@@ -36,7 +36,7 @@ UTILS_append_k2g = " \
     pru-icss-src \
 "
 
-UTILS_append_k3 = " \
+UTILS_append_am65xx = " \
     pru-icss-src \
 "
 
@@ -100,7 +100,7 @@ EXTRA_PACKAGES_append_ti43x = " \
     pdm-anomaly-detection-src \
 "
 
-EXTRA_PACKAGES_append_k3 = " \
+EXTRA_PACKAGES_append_am65xx = " \
     pdm-anomaly-detection-src \
 "
 
