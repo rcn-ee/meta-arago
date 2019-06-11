@@ -13,6 +13,7 @@ MATRIX_GUI = " \
 
 MATRIX_GUI_keystone = ""
 MATRIX_GUI_omapl138 = ""
+MATRIX_GUI_j7-evm = ""
 
 RDEPENDS_${PN} = "\
     matrix-gui-src \

@@ -25,7 +25,7 @@ HMI_append_omap-a15 = " \
     mmwavegesture-hmi-src \
 "
 
-HMI_append_k3 = " \
+HMI_append_am65xx = " \
     evse-hmi-src \
     mmwavegesture-hmi-src \
 "

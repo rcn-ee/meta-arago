@@ -72,11 +72,10 @@ UTILS_append_k3 = " mmc-utils \
                     can-utils \
                     parted \
                     switch-config \
-                    pru-icss \
-                    ti-ipc-rtos-fw \
                     irqbalance \
 "
 
+UTILS_append_am65xx = " ti-ipc-rtos-fw pru-icss"
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
 UTILS_append_dra7xx = " can-utils \
@@ -168,7 +167,7 @@ EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
                                    pdm-anomaly-detection \
 "
 
-EXTRA_PACKAGES_append_k3 = " arm-compute-library \
+EXTRA_PACKAGES_append_am65xx = " arm-compute-library \
                              ${ARMNN_PACKAGES} \
                              pdm-anomaly-detection \
 "
@@ -176,7 +175,7 @@ EXTRA_PACKAGES_append_k3 = " arm-compute-library \
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_keystone = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
-EXTRA_PACKAGES_append_k3 = " ti-ipc-examples-linux"
+EXTRA_PACKAGES_append_am65xx = " ti-ipc-examples-linux"
 
 EXTRA_PACKAGES_append_am335x-evm = " pruss-lld-apps acontis-atemsys"
 EXTRA_PACKAGES_append_am437x-evm = " pruss-lld-apps"
