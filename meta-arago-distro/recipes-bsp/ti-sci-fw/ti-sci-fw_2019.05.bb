@@ -16,7 +16,7 @@ export TI_SECURE_DEV_PKG
 
 SRCREV = "94a06ceb66aa821b293e8b903f6b65346d33328d"
 BRANCH ?= "ti-linux-firmware"
-SRCREV_imggen = "45a79c0ec817df212296bb148aa55f888d3a7f8b"
+SRCREV_imggen = "b78f394a997c919cff2733d1cf1d2f3b643ad02f"
 SRCREV_FORMAT = "imggen"
 
 SRC_URI = " \
