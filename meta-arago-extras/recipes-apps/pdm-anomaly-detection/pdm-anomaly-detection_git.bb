@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e88016d2cbc82d0d2efbb0865891e9d6"
 inherit qt-provider
 
 PV = "1.0"
-PR = "r0"
+PR = "r1"
 
 BRANCH = "master"
 SRC_URI  = "git://git.ti.com/apps/pdm-anomaly-detection.git;protocol=git;branch=${BRANCH}"
 
-SRCREV = "832c4021de19998c7e47e94e1868943c9a145489"
+SRCREV = "01bca39e69cf2e73e17259a16b2465dde7cce6e9"
 
 S = "${WORKDIR}/git"
 
