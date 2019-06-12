@@ -17,7 +17,7 @@ PV = "2.1"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "glfw opencv libstdc++"
+RDEPENDS_${PN} = "glfw opencv libxkbcommon"
 
 do_install() {
     install -d ${D}${bindir}
