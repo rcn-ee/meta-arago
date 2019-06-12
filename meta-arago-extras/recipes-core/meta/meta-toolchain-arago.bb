@@ -47,10 +47,11 @@ toolchain_create_sdk_env_script () {
 	echo 'export PKG_CONFIG_PATH=$SDK_PATH_TARGET${libdir}/pkgconfig' >> $script
 	echo 'export PKG_CONFIG_ALLOW_SYSTEM_LIBS=1' >> $script
 	echo 'export CONFIG_SITE=$SDK_PATH/site-config-$REAL_MULTIMACH_TARGET_SYS' >> $script
-	printf 'export CC=\x24{TOOLCHAIN_PREFIX}gcc\n' >> $script
-	printf 'export CXX=\x24{TOOLCHAIN_PREFIX}g++\n' >> $script
+	printf 'export CC="\x24{TOOLCHAIN_PREFIX}gcc --sysroot=$SDK_PATH_TARGET"\n' >> $script
+	printf 'export CXX="\x24{TOOLCHAIN_PREFIX}g++ --sysroot=$SDK_PATH_TARGET"\n' >> $script
 	printf 'export GDB=\x24{TOOLCHAIN_PREFIX}gdb\n' >> $script
-	printf 'export CPP="\x24{TOOLCHAIN_PREFIX}gcc -E"\n' >> $script
+	printf 'export CPP="\x24{TOOLCHAIN_PREFIX}gcc -E --sysroot=$SDK_PATH_TARGET"\n' >> $script
+	printf 'export LD="\x24{TOOLCHAIN_PREFIX}ld --sysroot=$SDK_PATH_TARGET"\n' >> $script
 	printf 'export NM=\x24{TOOLCHAIN_PREFIX}nm\n' >> $script
 	printf 'export AS=\x24{TOOLCHAIN_PREFIX}as\n' >> $script
 	printf 'export AR=\x24{TOOLCHAIN_PREFIX}ar\n' >> $script
