@@ -5,7 +5,7 @@ LICENSE = "BSD"
 
 include tidl-api.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 DEPENDS = "boost boost-native ti-cgt6x-native clocl-native"
 
@@ -14,6 +14,9 @@ S = "${WORKDIR}/git"
 TARGET_class-target = "arm"
 TARGET_class-native = "x86"
 TARGET_class-nativesdk = "x86"
+
+CXXFLAGS_append_class-native    = " -DPLATFORM_64BIT "
+CXXFLAGS_append_class-nativesdk = " -DPLATFORM_64BIT "
 
 EXTRA_OEMAKE = " -C ${S}/viewer \
                  TARGET=${TARGET} \
