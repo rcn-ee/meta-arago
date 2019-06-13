@@ -1,8 +1,6 @@
 DESCRIPTION = "Task to add Gtk embedded related packages"
 LICENSE = "MIT"
-PR = "r0"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PR = "r1"
 
 inherit packagegroup
 
