@@ -1,6 +1,8 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r23"
+PR = "r24"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
@@ -21,8 +23,8 @@ GRAPHICS_WAYLAND_append_k3 = "\
 
 GRAPHICS_RDEPENDS = "\
     libgbm \
+    ${PREFERRED_PROVIDER_virtual/egl} \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx','ti-sgx-ddk-km','',d)} \
-    ti-sgx-ddk-um \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx','glmark2','',d)} \
 "
 

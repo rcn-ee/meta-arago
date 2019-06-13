@@ -1,13 +1,19 @@
 DESCRIPTION = "Task to install graphics binaries on sdk target"
 LICENSE = "MIT"
-PR = "r8"
+PR = "r9"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
 GRAPHICS_RDEPENDS = "\
     libgbm-dev \
-    ti-sgx-ddk-um-dev \
-    "
+    libdrm-dev \
+    wayland-dev \
+    weston-dev \
+    ${PREFERRED_PROVIDER_virtual/egl}-dev \
+    ti-sgx-ddk-km-dev \
+"
 
 GRAPHICS_RDEPENDS_append_omap-a15 = "\
     ti-gc320-libs-dev \
