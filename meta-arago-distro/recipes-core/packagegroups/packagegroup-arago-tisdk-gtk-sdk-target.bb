@@ -1,8 +1,6 @@
 DESCRIPTION = "Task to install Gtk dev packages in SDK"
 LICENSE = "MIT"
-PR = "r0"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PR = "r1"
 
 inherit packagegroup
 
