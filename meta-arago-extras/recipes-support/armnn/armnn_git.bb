@@ -28,6 +28,7 @@ SRC_URI = " \
     file://0005-add-armnn-mobilenet-test-example.patch \
     file://0006-armnn-mobilenet-test-example.patch \
     file://0007-enable-use-of-arm-compute-shared-library.patch \
+    file://0008-Avoid-stringop-overflow-warning-resulting-in-compila.patch \
     http://download.tensorflow.org/models/mobilenet_v1_2018_02_22/mobilenet_v1_1.0_224.tgz;name=mobilenet;subdir=${WORKDIR}/tfmodel;destsuffix=tfmodel \
     git://git.ti.com/tidl/tidl-api.git;name=tidl-api;branch=${BRANCH};subdir=${WORKDIR}/tidl-api;destsuffix=tidl-api \
 "
