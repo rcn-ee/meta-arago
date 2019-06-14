@@ -5,14 +5,9 @@ LICENSE = "TI-TFL"
 
 require ./tidl-utils.inc
 
-PV = "1.0.1.0"
-INC_PR = "r0"
-
 LIC_FILES_CHKSUM = "file://docs/LICENSE.txt;md5=a93aa5af7a3bbbb6fb34c8df59efaa5c"
 
 RDEPENDS_${PN}_class-target += "tidl-api tidl-examples"
-
-PR = "${INC_PR}.0"
 
 S = "${WORKDIR}/git"
 
