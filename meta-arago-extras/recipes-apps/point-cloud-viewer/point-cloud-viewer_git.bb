@@ -3,7 +3,7 @@ HOMEPAGE = "https://git.ti.com/processor-sdk/point-cloud-viewer/"
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM := "file://PointCloudViewer_manifest.html;md5=7ea694db2dd8d82fd91a18cab8c2c2db"
 
-PR = "r1"
+PR = "r2"
 
 COMPATIBLE_MACHINE = "dra7xx"
 
@@ -17,7 +17,7 @@ PV = "2.1"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "glfw opencv libxkbcommon"
+RDEPENDS_${PN} = "opencv libxkbcommon"
 
 do_install() {
     install -d ${D}${bindir}
