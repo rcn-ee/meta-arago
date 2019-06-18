@@ -1,6 +1,6 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r20"
+PR = "r21"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -24,5 +24,5 @@ RDEPENDS_${PN} = "\
     arago-feed-config \
     nfs-utils-client \
     cifs-utils \
-    ${@oe.utils.conditional('OPTEEMACHINE', 'ti', "${OPTEE_PKGS}", "", d)} \
+    ${@bb.utils.contains_any('OPTEEMACHINE', 'ti k3', "${OPTEE_PKGS}", "", d)} \
 "
