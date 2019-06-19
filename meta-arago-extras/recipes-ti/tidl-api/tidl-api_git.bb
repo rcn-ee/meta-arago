@@ -24,8 +24,6 @@ RDEPENDS_${PN} += "opencl-runtime \
                    opencv \
 "
 
-S = "${WORKDIR}/git"
-
 EXTRA_OEMAKE = " -C ${S}/tidl_api \
                  TARGET_ROOTDIR=${STAGING_DIR_HOST} \
                  TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \

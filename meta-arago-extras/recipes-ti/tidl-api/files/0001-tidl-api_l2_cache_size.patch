@@ -1,0 +1,41 @@
+diff --git a/tidl_api/dsp/ocl_wrapper.cl b/tidl_api/dsp/ocl_wrapper.cl
+index e75ed1d..cb56302 100644
+--- a/tidl_api/dsp/ocl_wrapper.cl
++++ b/tidl_api/dsp/ocl_wrapper.cl
+@@ -46,6 +46,7 @@ void ocl_tidl_initialize(global unsigned char*            createParams,
+ {
+     // Set L1 cache to 16KB. TIDL requires 16KB of L1 scratch
+     __cache_l1d_16k();
++    __cache_l2_64k();
+ 
+     ocl_dsp_tidl_initialize(createParams, netParamsBuffer, 
+                             externalMemoryHeapBase, initializeParams, 
+@@ -66,5 +67,6 @@ void ocl_tidl_process(global OCL_TIDL_ProcessParams* processParams,
+ kernel void ocl_tidl_cleanup()
+ {
+     ocl_dsp_tidl_cleanup();
++    __cache_l2_128k();
+     __cache_l1d_all();
+ }
+diff --git a/tidl_api/src/ocl_device.cpp b/tidl_api/src/ocl_device.cpp
+index ab0bf26..d9351cd 100644
+--- a/tidl_api/src/ocl_device.cpp
++++ b/tidl_api/src/ocl_device.cpp
+@@ -511,7 +511,7 @@ static bool CheckOpenCLVersion(cl_platform_id id)
+     err = clGetPlatformInfo(id, CL_PLATFORM_VERSION, 0, nullptr, &length);
+     if (err != CL_SUCCESS) return false;
+ 
+-    std::unique_ptr<char> version(new char[length]);
++    std::unique_ptr<char[]> version(new char[length]);
+     err = clGetPlatformInfo(id, CL_PLATFORM_VERSION, length, version.get(),
+                             nullptr);
+     if (err != CL_SUCCESS) return false;
+@@ -543,7 +543,7 @@ static bool PlatformIsAM57()
+     err = clGetPlatformInfo(id, CL_PLATFORM_NAME, 0, nullptr, &length);
+     if (err != CL_SUCCESS) return false;
+ 
+-    std::unique_ptr<char> name(new char[length]);
++    std::unique_ptr<char[]> name(new char[length]);
+ 
+     err = clGetPlatformInfo(id, CL_PLATFORM_NAME, length, name.get(), nullptr);
+     if (err != CL_SUCCESS) return false;
