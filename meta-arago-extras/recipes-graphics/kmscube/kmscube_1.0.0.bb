@@ -3,14 +3,14 @@ HOMEPAGE = "http://git.ti.com"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://kmscube.c;beginline=1;endline=23;md5=e760965096e52da8f3969dd53b6bf158"
 
-DEPENDS = "libdrm libgbm ti-sgx-ddk-um"
+DEPENDS = "libdrm libgbm virtual/egl virtual/libgles2"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|k3"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit autotools pkgconfig
 
-PR = "r11"
+PR = "r12"
 SRCREV = "5f90636ae01b859a064b9136da4b759b41c1ee10"
 
 SRC_URI = "git://git.ti.com/glsdk/kmscube.git;protocol=git"
