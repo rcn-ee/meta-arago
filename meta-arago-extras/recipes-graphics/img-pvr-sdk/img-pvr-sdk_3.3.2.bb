@@ -9,7 +9,7 @@ BRANCH = "master"
 SRC_URI = "git://git.ti.com/graphics/img-pvr-sdk.git;protocol=git;branch=${BRANCH}"
 SRCREV = "7af5846a0989a1475548ca05f6984c817fb76adc"
 
-PR = "r14"
+PR = "r15"
 
 COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x|k3"
 
@@ -44,6 +44,7 @@ do_install () {
 }
 
 RDEPENDS_${PN} = "ti-sgx-ddk-um"
+RDEPENDS_${PN}_j7-evm = "ti-img-rogue-umlibs"
 
 INHIBIT_PACKAGE_STRIP = "1"
 
