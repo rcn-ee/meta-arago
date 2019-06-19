@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://viddec3test.c;beginline=1;endline=16;md5=c391f44e40a2
 
 DEPENDS = "ffmpeg libdce libdrm libgbm ti-sgx-ddk-um wayland"
 
+COMPATIBLE_MACHINE = "omap-a15|ti43x"
+
 inherit autotools pkgconfig
 
 PR = "r28"
