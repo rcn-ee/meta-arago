@@ -5,11 +5,9 @@ LICENSE = "BSD"
 
 include tidl-api.inc
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.0"
 
 DEPENDS = "boost boost-native ti-cgt6x-native clocl-native"
-
-S = "${WORKDIR}/git"
 
 TARGET_class-target = "arm"
 TARGET_class-native = "x86"
