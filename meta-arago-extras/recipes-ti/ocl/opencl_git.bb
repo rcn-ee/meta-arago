@@ -39,6 +39,7 @@ DEPENDS_remove_k2g = " libulm"
 MONITORS                      = " opencl-monitor"
 MONITORS_append_am57xx-evm    = " opencl-monitor-ipu"
 MONITORS_append_am57xx-hs-evm = " opencl-monitor-ipu"
+MONITORS_append_dra7xx        = " opencl-monitor-ipu"
 
 RDEPENDS_${PN} += " bash"
 RDEPENDS_${PN}-dev += " ocl-gl-headers-dev opencl-monitor"
