@@ -7,6 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 GRAPHICS_RDEPENDS = "ti-sgx-ddk-km-src"
+GRAPHICS_RDEPENDS_remove_j7-evm = "ti-sgx-ddk-km-src"
 
 GRAPHICS_RDEPENDS_append_omap-a15 = "\
     ti-gc320-driver-src \
