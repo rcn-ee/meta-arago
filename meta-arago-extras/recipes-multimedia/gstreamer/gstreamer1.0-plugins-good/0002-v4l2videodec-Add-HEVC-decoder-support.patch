@@ -1,0 +1,60 @@
+From 70982aa13af7c7cb571d253706bc1458336c20a1 Mon Sep 17 00:00:00 2001
+From: Song Bing <bing.song@nxp.com>
+Date: Thu, 13 Sep 2018 03:16:32 +0000
+Subject: [PATCH 2/2] v4l2videodec: Add HEVC decoder support
+
+https://bugzilla.gnome.org/show_bug.cgi?id=771686
+---
+ sys/v4l2/gstv4l2object.c   | 8 ++++++++
+ sys/v4l2/gstv4l2videodec.c | 2 ++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
+index 211f835..c32608c 100644
+--- a/sys/v4l2/gstv4l2object.c
++++ b/sys/v4l2/gstv4l2object.c
+@@ -171,6 +171,7 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
+   {V4L2_PIX_FMT_H264, FALSE, GST_V4L2_CODEC},
+   {V4L2_PIX_FMT_H264_NO_SC, FALSE, GST_V4L2_CODEC},
+   {V4L2_PIX_FMT_H264_MVC, FALSE, GST_V4L2_CODEC},
++  {V4L2_PIX_FMT_HEVC, FALSE, GST_V4L2_CODEC},
+   {V4L2_PIX_FMT_H263, FALSE, GST_V4L2_CODEC},
+   {V4L2_PIX_FMT_MPEG1, FALSE, GST_V4L2_CODEC},
+   {V4L2_PIX_FMT_MPEG2, FALSE, GST_V4L2_CODEC},
+@@ -1433,6 +1434,11 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+           "stream-format", G_TYPE_STRING, "avc", "alignment",
+           G_TYPE_STRING, "au", NULL);
+       break;
++    case V4L2_PIX_FMT_HEVC:    /* H.265 */
++      structure = gst_structure_new ("video/x-h265",
++          "stream-format", G_TYPE_STRING, "byte-stream", "alignment",
++          G_TYPE_STRING, "au", NULL);
++      break;
+     case V4L2_PIX_FMT_VC1_ANNEX_G:
+     case V4L2_PIX_FMT_VC1_ANNEX_L:
+       structure = gst_structure_new ("video/x-wmv",
+@@ -1809,6 +1815,8 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
+         fourcc = V4L2_PIX_FMT_H264_NO_SC;
+       else
+         fourcc = V4L2_PIX_FMT_H264;
++    } else if (g_str_equal (mimetype, "video/x-h265")) {
++      fourcc = V4L2_PIX_FMT_HEVC;
+     } else if (g_str_equal (mimetype, "video/x-vp8")) {
+       fourcc = V4L2_PIX_FMT_VP8;
+     } else if (g_str_equal (mimetype, "video/x-vp9")) {
+diff --git a/sys/v4l2/gstv4l2videodec.c b/sys/v4l2/gstv4l2videodec.c
+index 838ebff..ece20bd 100644
+--- a/sys/v4l2/gstv4l2videodec.c
++++ b/sys/v4l2/gstv4l2videodec.c
+@@ -1083,6 +1083,8 @@ G_STMT_START { \
+     SET_META ("H263");
+   } else if (gst_structure_has_name (s, "video/x-h264")) {
+     SET_META ("H264");
++  } else if (gst_structure_has_name (s, "video/x-h265")) {
++    SET_META ("H265");
+   } else if (gst_structure_has_name (s, "video/x-wmv")) {
+     SET_META ("VC1");
+   } else if (gst_structure_has_name (s, "video/x-vp8")) {
+-- 
+1.9.1
+
