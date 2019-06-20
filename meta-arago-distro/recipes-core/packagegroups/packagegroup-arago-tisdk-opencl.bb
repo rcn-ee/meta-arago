@@ -25,6 +25,7 @@ EXTRA_PKGS_append_k2hk = " \
 
 EXTRA_PKGS_append_dra7xx = " \
     linalg-examples \
+    opencl-examples \
 "
 
 RDEPENDS_${PN} = "\
