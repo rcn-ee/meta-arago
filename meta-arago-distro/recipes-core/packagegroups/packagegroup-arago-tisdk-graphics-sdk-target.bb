@@ -14,6 +14,7 @@ GRAPHICS_RDEPENDS = "\
     ${PREFERRED_PROVIDER_virtual/egl}-dev \
     ti-sgx-ddk-km-dev \
 "
+GRAPHICS_RDEPENDS_remove_j7-evm = "ti-sgx-ddk-km-dev"
 
 GRAPHICS_RDEPENDS_append_omap-a15 = "\
     ti-gc320-libs-dev \

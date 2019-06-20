@@ -179,7 +179,6 @@ MAKEFILES_append_k3 = " u-boot-spl \
                         linux-dtbs \
                         barcode-roi \
                         cryptodev \
-                        ti-sgx-ddk-km-k3 \
                         sysfw-image \
 			mmwavegesture-hmi \
                         pdm-anomaly-detection \
@@ -187,6 +186,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
 
 MAKEFILES_append_am65xx = " \
                         pru-icss \
+                        ti-sgx-ddk-km-k3 \
 "
 
 # Use this to export kernel arch to ARCH

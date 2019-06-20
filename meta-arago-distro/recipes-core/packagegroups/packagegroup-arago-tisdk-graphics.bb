@@ -27,6 +27,7 @@ GRAPHICS_RDEPENDS = "\
     ${@bb.utils.contains('MACHINE_FEATURES','sgx','ti-sgx-ddk-km','',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','sgx','glmark2','',d)} \
 "
+GRAPHICS_RDEPENDS_remove_j7-evm = "ti-sgx-ddk-km"
 
 GRAPHICS_DISPLAY_UTILS = "\
 "
