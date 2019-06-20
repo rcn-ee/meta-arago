@@ -6,13 +6,23 @@ PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
+# OpenGLES/EGL preferences
+# Most of existing TI platforms have SGX GPU core
 PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
 PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
 PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
+
+# J7 has a Rogue GPU core
+PREFERRED_PROVIDER_virtual/egl_j7-evm = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles1_j7-evm = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles2_j7-evm = "ti-img-rogue-umlibs"
+
+# OpenGL preferences
+PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
+
+# GBM (Generic Buffer Management) preferences
 PREFERRED_PROVIDER_libgbm = "libgbm"
 PREFERRED_PROVIDER_libgbm-dev = "libgbm-dev"
-
-PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
 
 # This is required when using keystone devices with graphical support
 # such as Qt5
