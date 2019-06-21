@@ -8,7 +8,7 @@ require recipes-ti/includes/ti-paths.inc
 
 PR = "${INC_PR}.0"
 
-COMPATIBLE_MACHINE = "dra7xx-evm|m57xx-evm|am57xx-hs-evm"
+COMPATIBLE_MACHINE = "dra7xx-evm|am57xx-evm|am57xx-hs-evm"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit python3native
