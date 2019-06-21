@@ -1,0 +1,59 @@
+From aa7101256aefcea11d326740c111bf37a48b191e Mon Sep 17 00:00:00 2001
+From: Yuan Zhao <yuanzhao@ti.com>
+Date: Thu, 20 Jun 2019 12:01:24 -0500
+Subject: [PATCH] Fix g++ 8.3.0 compilation error
+
+- Fix a syntax allowed in g++ 7.2.1 but not in 8.3.0
+- Make should report error from loop
+
+Upstream-Status: Submitted [Remove this patch when next release is out]
+
+Signed-off-by: Yuan Zhao <yuanzhao@ti.com>
+---
+ examples/Makefile                | 2 +-
+ examples/classification/main.cpp | 2 +-
+ examples/imagenet/main.cpp       | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/examples/Makefile b/examples/Makefile
+index 52b3ff6..9217380 100644
+--- a/examples/Makefile
++++ b/examples/Makefile
+@@ -34,7 +34,7 @@ RUN_DIRS := $(filter-out classification, $(DIRS))
+ define make_in_dirs
+ 	@for dir in $(1); do \
+ 	  echo "=============== " $$dir " =================" ; \
+-	  $(MAKE) --no-print-directory $(MAKEFILE) -C $$dir $(2); \
++	  $(MAKE) --no-print-directory $(MAKEFILE) -C $$dir $(2) || exit 1; \
+ 	done
+ endef
+ 
+diff --git a/examples/classification/main.cpp b/examples/classification/main.cpp
+index 020004b..25361f8 100644
+--- a/examples/classification/main.cpp
++++ b/examples/classification/main.cpp
+@@ -699,7 +699,7 @@ int tf_postprocess(uchar *in, int size, int roi_idx, int frame_idx, int f_id)
+   int rpt_id = -1;
+ 
+   typedef std::pair<uchar, int> val_index;
+-  auto constexpr cmp = [](val_index &left, val_index &right) { return left.first > right.first; };
++  auto cmp = [](val_index &left, val_index &right) { return left.first > right.first; };
+   std::priority_queue<val_index, std::vector<val_index>, decltype(cmp)> queue(cmp);
+   // initialize priority queue with smallest value on top
+   for (int i = 0; i < k; i++) {
+diff --git a/examples/imagenet/main.cpp b/examples/imagenet/main.cpp
+index 937f467..dc1035b 100644
+--- a/examples/imagenet/main.cpp
++++ b/examples/imagenet/main.cpp
+@@ -309,7 +309,7 @@ bool WriteFrameOutput(const ExecutionObjectPipeline &eop,
+ 
+     // sort and get k largest values and corresponding indices
+     typedef pair<unsigned char, int> val_index;
+-    auto constexpr cmp = [](val_index &left, val_index &right)
++    auto cmp = [](val_index &left, val_index &right)
+                          { return left.first > right.first; };
+     priority_queue<val_index, vector<val_index>, decltype(cmp)> queue(cmp);
+     // initialize priority queue with smallest value on top
+-- 
+2.17.1
+
