@@ -34,6 +34,11 @@ MULTIMEDIA_append_omap5-evm = " \
     abefw \
 "
 
+MULTIMEDIA_append_j7-evm = " \
+    ti-img-encode-decode \
+    vxd-dec-fw \
+"
+
 ACCEL_FW = ""
 
 ACCEL_FW_append_am57xx-evm = " \
