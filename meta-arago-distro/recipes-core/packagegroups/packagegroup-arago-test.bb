@@ -66,6 +66,10 @@ ARAGO_TI_TEST_append_am65xx = " \
     ti-ipc-test \
     "
 
+ARAGO_TI_TEST_append_j7-evm = " \
+    viddec-test-app \
+    "
+
 ARAGO_TI_TEST_append_keystone = " \
     ti-ipc-test \
     "
