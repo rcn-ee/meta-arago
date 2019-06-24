@@ -11,11 +11,13 @@ PREFERRED_PROVIDER_virtual/gettext = "gettext"
 PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
 PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
 PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
+PREFERRED_PROVIDER_virtual/gpudriver = "ti-sgx-ddk-km"
 
 # J7 has a Rogue GPU core
 PREFERRED_PROVIDER_virtual/egl_j7-evm = "ti-img-rogue-umlibs"
 PREFERRED_PROVIDER_virtual/libgles1_j7-evm = "ti-img-rogue-umlibs"
 PREFERRED_PROVIDER_virtual/libgles2_j7-evm = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/gpudriver_j7-evm = "ti-img-rogue-driver"
 
 # OpenGL preferences
 PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
