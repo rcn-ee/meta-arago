@@ -12,7 +12,7 @@ GRAPHICS_RDEPENDS = "\
     wayland-dev \
     weston-dev \
     ${PREFERRED_PROVIDER_virtual/egl}-dev \
-    ti-sgx-ddk-km-dev \
+    ${PREFERRED_PROVIDER_virtual/gpudriver}-dev \
 "
 GRAPHICS_RDEPENDS_remove_j7-evm = "ti-sgx-ddk-km-dev"
 
