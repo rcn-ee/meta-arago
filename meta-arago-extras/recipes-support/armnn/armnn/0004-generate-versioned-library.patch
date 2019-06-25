@@ -1,19 +1,19 @@
-From 00dc7ad438b9d751201b8e8d5aa747a19d1cac3b Mon Sep 17 00:00:00 2001
-From: Qin Su <qsu@ti.com>
-Date: Wed, 13 Feb 2019 11:11:52 -0500
+From ad22150032bda1b1a8d0f0cb4b0b020f80724313 Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <x0157990@ti.com>
+Date: Mon, 24 Jun 2019 15:10:04 -0400
 Subject: [PATCH] generate versioned library
 
 Upstream-Status: Inappropriate [configuration]
-Signed-off-by: Qin Su <qsu@ti.com>
+Signed-off-by: Djordje Senicic <x0157990@ti.com>
 ---
- CMakeLists.txt | 6 ++++++
- 1 file changed, 6 insertions(+)
+ CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2768f6a..c16383a 100644
+index b6c97761..5c7b13a7 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -82,6 +82,7 @@ if(BUILD_CAFFE_PARSER)
+@@ -88,6 +88,7 @@ if(BUILD_CAFFE_PARSER)
  
      target_link_libraries(armnnCaffeParser armnn)
      target_link_libraries(armnnCaffeParser ${PROTOBUF_LIBRARIES})
@@ -21,7 +21,7 @@ index 2768f6a..c16383a 100644
  
  endif()
  
-@@ -106,6 +107,7 @@ if(BUILD_ONNX_PARSER)
+@@ -112,6 +113,7 @@ if(BUILD_ONNX_PARSER)
  
      # Protobuf
      target_link_libraries(armnnOnnxParser ${PROTOBUF_LIBRARIES})
@@ -29,38 +29,22 @@ index 2768f6a..c16383a 100644
  endif()
  
  if(BUILD_TF_PARSER)
-@@ -129,6 +131,7 @@ if(BUILD_TF_PARSER)
+@@ -135,6 +137,7 @@ if(BUILD_TF_PARSER)
  
      # Protobuf (use the specific version tensorflow wants)
      target_link_libraries(armnnTfParser ${PROTOBUF_LIBRARIES})
 +    set_target_properties(armnnTfParser PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
  endif()
  
- if(BUILD_TF_LITE_PARSER)
-@@ -147,6 +150,7 @@ if(BUILD_TF_LITE_PARSER)
+ if(BUILD_ARMNN_QUANTIZER)
+@@ -430,6 +433,7 @@ endif()
+ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
  
-     target_link_libraries(armnnTfLiteParser ${Boost_FILESYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY})
-     target_link_libraries(armnnTfLiteParser armnn ${FLATBUFFERS_LIBRARY})
-+    set_target_properties(armnnTfLiteParser PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
- endif()
+ target_link_libraries(armnn ${Boost_LOG_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
++set_target_properties(armnn PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
  
- if(BUILD_ARMNN_SERIALIZER)
-@@ -175,6 +179,7 @@ if(BUILD_ARMNN_SERIALIZER)
-     target_include_directories(armnnSerializer SYSTEM PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/src/armnnSerializer)
- 
-     target_link_libraries(armnnSerializer armnn ${FLATBUFFERS_LIBRARY})
-+    set_target_properties(armnnSerializer PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
- endif()
- 
- list(APPEND armnn_sources
-@@ -414,6 +419,7 @@ endif()
- if(PROFILING_BACKEND_STREAMLINE)
-     target_link_libraries(armnn pthread)
- endif()
-+set_target_properties( armnn PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
- 
- if(BUILD_UNIT_TESTS)
-     set(unittest_sources)
+ if(ARMCOMPUTENEON OR ARMCOMPUTECL)
+     target_link_libraries(armnn ${ARMCOMPUTE_LIBRARIES})
 -- 
-1.9.1
+2.17.1
 
