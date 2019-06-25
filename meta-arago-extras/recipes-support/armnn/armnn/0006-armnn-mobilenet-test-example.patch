@@ -326,9 +326,9 @@ index 0000000..53a11cc
 +    params.m_InputBindings = { inputName };
 +    params.m_InputShapes = { *inputTensorShape };
 +    params.m_OutputBindings = { outputName };
-+    params.m_EnableProfiling = enableProfiling;
++    //params.m_EnableProfiling = enableProfiling;
 +    params.m_SubgraphId = 0;
-+    InferenceModel<TParser, TDataType> model(params, runtime);
++    InferenceModel<TParser, TDataType> model(params, enableProfiling, runtime);
 +
 +    VideoCapture cap;
 +    int input_type = INPUT_IMAGE;
