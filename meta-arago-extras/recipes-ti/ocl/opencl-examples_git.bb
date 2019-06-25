@@ -5,7 +5,9 @@ LICENSE = "BSD"
 include ocl.inc
 require recipes-ti/includes/ti-paths.inc
 
-PR = "${INC_PR}.0"
+SRC_URI += "file://0003-Fix-g-8.3.0-OpenCL-example-undefined-behavior.patch;patchdir=.."
+
+PR = "${INC_PR}.1"
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -65,12 +67,14 @@ OCL_MPAX_EXAMPLE_LIST = " vecadd_mpax \
 OCL_EXAMPLE_LIST_append_k2hk = " ${OCL_MPAX_EXAMPLE_LIST}"
 
 python do_unpack_append() {
-    import shutil
+    s = d.getVar("S")
+    os.makedirs(s)
+}
 
+python do_patch_append() {
+    import shutil
     git_dir = d.expand("${WORKDIR}/git/examples")
     s = d.getVar("S")
-
-    os.makedirs(s)
     shutil.copy(os.path.join(git_dir,"Makefile"),s)
     shutil.copy(os.path.join(git_dir,"make.inc"),s)
     for example in d.getVar("OCL_EXAMPLE_LIST").split():
