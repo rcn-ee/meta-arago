@@ -25,7 +25,7 @@ RDEPENDS_matrix-machinevision-demo-dlp3dscanner = " \
 "
 
 RDEPENDS_matrix-machinevision-demo-dlp3dscanner_append_dra7xx = " \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','point-cloud-viewer','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','point-cloud-viewer','',d)} \
 "
 
 RDEPENDS_matrix-machinevision-demo-barcoderoi = " \
