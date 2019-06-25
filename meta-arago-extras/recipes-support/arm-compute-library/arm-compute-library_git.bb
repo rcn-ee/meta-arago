@@ -1,7 +1,7 @@
 SUMMARY = "The ARM Computer Vision and Machine Learning library"
 DESCRIPTION = "The ARM Computer Vision and Machine Learning library is a set of functions optimised for both ARM CPUs and GPUs."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=762a7ba8d2ddc3b38d88742fbaf0b62d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8948bc85114b3b716576ef8d732f034f"
 
 COMPATIBLE_MACHINE = "armv7a|aarch64"
 
@@ -20,11 +20,12 @@ SRC_URI = " \
     file://0011-add-ti-benchmark-test-group.patch \
 "
 PR = "r0"
-PV  = "19.02"
+PV  = "19.05"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
-BRANCH = "master"
-SRCREV = "d9f9318cffba4051c4ca0ec2028819962bdc2b1c"
+BRANCH = "branches/arm_compute_19_05"
+SRCREV = "bd17a169153ee181100f3b31984968b66618ef3c"
+
 
 S = "${WORKDIR}/git"
 
