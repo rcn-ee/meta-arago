@@ -37,11 +37,11 @@ MATRIX_QT_APPS = " \
     matrix-qt5-demo-webkit-browser \
     matrix-qt5-demo-calculator \
     matrix-qt5-demo-deform \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','matrix-gui-thermostat-demo','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','matrix-gui-thermostat-demo','',d)} \
 "
 
 MATRIX_TOUCH_APPS = " \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','matrix-gui-touch-demos','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','matrix-gui-touch-demos','',d)} \
 "
 
 MATRIX_QT_APPS_keystone = ""
@@ -53,7 +53,7 @@ MATRIX_QT_APPS_j7-evm = ""
 #    matrix-qt5-demo-webkit-browser \
 #"
 
-MATRIX_SGX_DEMOS = " \
+MATRIX_GPU_DEMOS = " \
     matrix-3d-demo-chameleon \
     matrix-3d-demo-coverflow \
     matrix-3d-demo-navigation \
@@ -61,7 +61,7 @@ MATRIX_SGX_DEMOS = " \
     matrix-3d-demo-kmscube \
 "
 
-MATRIX_SGX_DEMOS_append_omap-a15 = " \
+MATRIX_GPU_DEMOS_append_omap-a15 = " \
     matrix-3d-demo-kmscubevideo \
 "
 
@@ -165,7 +165,7 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-analytics-pdm-anomaly-detection \
 "
 
-#    ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','sgx',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
+#    ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','gpu',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
 #                                \
 #
 
@@ -212,7 +212,7 @@ RDEPENDS_${PN} = "        \
     ${MATRIX_QT_APPS}     \
     ${MATRIX_TOUCH_APPS}  \
     ${MATRIX_APPS}        \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx',"${MATRIX_SGX_DEMOS}",'',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_GPU_DEMOS}",'',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','dsp',"${MATRIX_OPENCL_APPS}",'',d)} \
 "
 

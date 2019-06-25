@@ -14,18 +14,18 @@ GRAPHICS_WAYLAND = "\
 "
 
 GRAPHICS_WAYLAND_append_omap-a15 = "\
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','chromium-wayland','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
 "
 
 GRAPHICS_WAYLAND_append_k3 = "\
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','chromium-wayland','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
 "
 
 GRAPHICS_RDEPENDS = "\
     libgbm \
     ${PREFERRED_PROVIDER_virtual/egl} \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','${PREFERRED_PROVIDER_virtual/gpudriver}','',d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','glmark2','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','${PREFERRED_PROVIDER_virtual/gpudriver}','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','glmark2','',d)} \
 "
 GRAPHICS_RDEPENDS_remove_j7-evm = "ti-sgx-ddk-km"
 
@@ -33,7 +33,7 @@ GRAPHICS_DISPLAY_UTILS = "\
 "
 
 GRAPHICS_DISPLAY_UTILS_append_omap-a15  = "\
-    ${@bb.utils.contains('MACHINE_FEATURES','sgx','glsdk-util-scripts','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-util-scripts','',d)} \
 "
 
 GRAPHICS_RDEPENDS_append_omap-a15 = "\

@@ -80,7 +80,7 @@ UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
 UTILS_append_dra7xx = " can-utils \
                         ${UTILS_DSP} \
-                        ${@bb.utils.contains('MACHINE_FEATURES','sgx','glsdk-example-apps','',d)} \
+                        ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-example-apps','',d)} \
 "
 
 UTILS_append_keystone = " \
