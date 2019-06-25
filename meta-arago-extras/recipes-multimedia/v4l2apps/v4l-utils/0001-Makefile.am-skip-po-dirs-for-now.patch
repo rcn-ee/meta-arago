@@ -1,0 +1,26 @@
+From 8c3531847894cc28aa8d0489332f893d69beab1e Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Mon, 24 Jun 2019 20:54:18 -0400
+Subject: [PATCH] Makefile.am: skip po dirs for now
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 8abe4f9..26a4609 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,7 +1,7 @@
+ AUTOMAKE_OPTIONS = foreign
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = v4l-utils-po libdvbv5-po lib
++SUBDIRS = lib
+ 
+ if WITH_V4LUTILS
+ SUBDIRS += utils contrib
+-- 
+2.7.4
+
