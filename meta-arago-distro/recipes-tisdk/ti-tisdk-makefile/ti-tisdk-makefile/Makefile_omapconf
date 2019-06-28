@@ -3,7 +3,7 @@ omapconf:
 	@echo =======================
 	@echo    Building OmapConf
 	@echo =======================
-	@cd example-applications; cd `find . -name "*omapconf*"`; make CROSS_COMPILE=${CROSS_COMPILE} omapconf
+	@cd example-applications; cd `find . -name "*omapconf*"`; make CROSS_COMPILE=${CROSS_COMPILE} STATIC_BUILD="" omapconf
 
 omapconf_clean:
 	@echo =======================
