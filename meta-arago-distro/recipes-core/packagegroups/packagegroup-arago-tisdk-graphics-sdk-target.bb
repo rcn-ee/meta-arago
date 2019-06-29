@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 GRAPHICS_RDEPENDS = "\
-    libgbm-dev \
+    ${PREFERRED_PROVIDER_virtual/libgbm}-dev \
     libdrm-dev \
     wayland-dev \
     weston-dev \

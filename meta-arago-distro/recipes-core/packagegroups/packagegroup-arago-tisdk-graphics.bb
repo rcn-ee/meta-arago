@@ -22,7 +22,7 @@ GRAPHICS_WAYLAND_append_k3 = "\
 "
 
 GRAPHICS_RDEPENDS = "\
-    libgbm \
+    ${PREFERRED_PROVIDER_virtual/libgbm} \
     ${PREFERRED_PROVIDER_virtual/egl} \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','${PREFERRED_PROVIDER_virtual/gpudriver}','',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','glmark2','',d)} \
