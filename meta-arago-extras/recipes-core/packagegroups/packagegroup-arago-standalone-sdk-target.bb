@@ -1,5 +1,5 @@
 DESCRIPTION = "Target packages for the standalone SDK"
-PR = "r12"
+PR = "r13"
 LICENSE = "MIT"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -10,8 +10,9 @@ RDEPENDS_${PN} = "\
     libgcc \
     libgcc-dev \
     libstdc++-dev \
+    libgomp-dev \
     ${LIBC_DEPENDENCIES} \
-    ${@oe.utils.conditional('TCMODE', 'external-linaro', 'glibc-staticdev', '', d)} \
+    libc-staticdev \
     linux-libc-headers-dev \
     gdbserver \
     alsa-dev \
@@ -32,5 +33,4 @@ RDEPENDS_${PN} = "\
     ncurses-dev \
     opkg-dev \
     util-linux-dev \
-    ${@oe.utils.conditional('TCMODE', 'external-linaro', 'libgomp-dev', '', d)} \
-    "
+"
