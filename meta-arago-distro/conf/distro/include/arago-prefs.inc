@@ -23,8 +23,12 @@ PREFERRED_PROVIDER_virtual/gpudriver_j7-evm = "ti-img-rogue-driver"
 PREFERRED_PROVIDER_virtual/libgl = "mesa-gl"
 
 # GBM (Generic Buffer Management) preferences
-PREFERRED_PROVIDER_libgbm = "libgbm"
-PREFERRED_PROVIDER_libgbm-dev = "libgbm-dev"
+PREFERRED_PROVIDER_virtual/libgbm = "libgbm"
+PREFERRED_PROVIDER_virtual/libgbm-dev = "libgbm-dev"
+
+# J7 gbm provider
+PREFERRED_PROVIDER_virtual/libgbm_j7-evm = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgbm-dev_j7-evm = "ti-img-rogue-umlibs-dev"
 
 # This is required when using keystone devices with graphical support
 # such as Qt5
