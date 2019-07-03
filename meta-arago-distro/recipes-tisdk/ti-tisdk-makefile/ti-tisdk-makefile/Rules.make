@@ -25,7 +25,7 @@ export CROSS_COMPILE=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/us
 
 #Default CC value to be used when cross compiling.  This is so that the
 #GNU Make default of "cc" is not used to point to the host compiler
-export CC=$(CROSS_COMPILE)gcc
+export CC=$(CROSS_COMPILE)gcc --sysroot=$(SDK_PATH_TARGET)
 
 #Location of environment-setup file
 export ENV_SETUP=$(LINUX_DEVKIT_PATH)/environment-setup

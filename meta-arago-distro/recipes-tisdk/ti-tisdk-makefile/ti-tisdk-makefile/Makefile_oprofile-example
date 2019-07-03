@@ -3,7 +3,7 @@ oprofile-example:
 	@echo =============================
 	@echo    Building OProfile Example
 	@echo =============================
-	@cd example-applications; cd `find . -name "*oprofile-example*"`; make
+	@cd example-applications; cd `find . -name "*oprofile-example*"`; make CC="$(CC)"
 
 oprofile-example_clean:
 	@echo =============================
