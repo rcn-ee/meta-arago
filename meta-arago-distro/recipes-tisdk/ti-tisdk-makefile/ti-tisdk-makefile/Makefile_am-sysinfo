@@ -3,7 +3,7 @@ am-sysinfo:
 	@echo =============================
 	@echo    Building AM Sysinfo
 	@echo =============================
-	@cd example-applications; cd `find . -name "*am-sysinfo*"`; make
+	@cd example-applications; cd `find . -name "*am-sysinfo*"`; make CC="$(CC)"
 
 am-sysinfo_clean:
 	@echo =============================
