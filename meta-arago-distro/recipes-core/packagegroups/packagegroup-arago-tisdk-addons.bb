@@ -76,6 +76,8 @@ UTILS_append_k3 = " mmc-utils \
 "
 
 UTILS_append_am65xx = " ti-ipc-rtos-fw pru-icss"
+UTILS_append_j7-evm = " ipc-lld-fw"
+
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
 UTILS_append_dra7xx = " can-utils \
