@@ -3,7 +3,7 @@ arm-benchmarks:
 	@echo =============================
 	@echo    Building ARM Benchmarks
 	@echo =============================
-	@cd example-applications; cd `find . -name "*arm-benchmarks*"`; make
+	@cd example-applications; cd `find . -name "*arm-benchmarks*"`; make CC="$(CC)"
 
 arm-benchmarks_clean:
 	@echo =============================
