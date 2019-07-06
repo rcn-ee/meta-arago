@@ -54,7 +54,7 @@ SRC_URI = "\
     file://Makefile_pdm-anomaly-detection \
 "
 
-PR = "r97"
+PR = "r98"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -232,6 +232,9 @@ AMSDK_DEFCONFIG = "singlecore-omap2plus_defconfig"
 
 DEFCONFIG := "${@oe.utils.conditional('ARAGO_BRAND','amsdk','${AMSDK_DEFCONFIG}','${DEFCONFIG}',d)}"
 
+EXTERNAL_TOOLCHAIN_BINDIR = "/usr/bin"
+INTERNAL_TOOLCHAIN_BINDIR = "/usr/bin/${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
+
 # This step will stitch together the final Makefile based on the supported
 # make targets.
 do_install () {
@@ -305,6 +308,12 @@ do_install () {
     sed -i -e "s/__UBOOT_MACHINE__/${UBOOT_MACHINE}/" ${D}/Rules.make
     sed -i -e "s/__CFLAGS__/${TARGET_CC_ARCH}/" ${D}/Rules.make
     sed -i -e "s/__SDKMACHINE__/${SDKMACHINE}/" ${D}/Rules.make
+
+    if [ "${TOOLCHAIN_TYPE}" = "internal" ]; then
+        sed -i -e "s|__TOOLCHAIN_BINDIR__|${INTERNAL_TOOLCHAIN_BINDIR}|" ${D}/Rules.make
+    else
+        sed -i -e "s|__TOOLCHAIN_BINDIR__|${EXTERNAL_TOOLCHAIN_BINDIR}|" ${D}/Rules.make
+    fi
 
 }
 
