@@ -20,7 +20,7 @@ DEPENDS = " common-csl-ip-rtos \
             opencl-tidl-fw \
 "
 
-COMPATIBLE_MACHINE = "dra7xx-evm|am57xx-evm|am57xx-hs-evm"
+COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/monitor_ipu"
