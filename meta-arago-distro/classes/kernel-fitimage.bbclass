@@ -6,10 +6,6 @@ FITIMAGE_DTB_BY_NAME ?= "0"
 FITIMAGE_TEE_BY_NAME ?= "0"
 FITIMAGE_CONF_BY_NAME ?= "0"
 
-XZ_COMPRESSION_LEVEL ?= "-e -6"
-XZ_INTEGRITY_CHECK ?= "crc32"
-XZ_THREADS ?= "-T 0"
-
 python __anonymous () {
     kerneltypes = d.getVar('KERNEL_IMAGETYPES') or ""
     if 'fitImage' in kerneltypes.split():
@@ -255,6 +251,25 @@ EOF
 fitimage_emit_section_ramdisk() {
 
 	ramdisk_csum=${FITIMAGE_HASH_ALGO}
+	ramdisk_ctype="none"
+
+	case $3 in
+		*.gz|*.gz.sec)
+			ramdisk_ctype="gzip"
+			;;
+		*.bz2|*.bz2.sec)
+			ramdisk_ctype="bzip2"
+			;;
+		*.lzma|*.lzma.sec)
+			ramdisk_ctype="lzma"
+			;;
+		*.lzo|*.lzo.sec)
+			ramdisk_ctype="lzo"
+			;;
+		*.lz4|*.lz4.sec)
+			ramdisk_ctype="lz4"
+			;;
+	esac
 
 	cat << EOF >> ${1}
                 ramdisk@${2} {
@@ -263,7 +278,7 @@ fitimage_emit_section_ramdisk() {
                         type = "ramdisk";
                         arch = "${UBOOT_ARCH}";
                         os = "linux";
-                        compression = "none";
+                        compression = "${ramdisk_ctype}";
 EOF
 	if test -n "${UBOOT_RD_LOADADDRESS}"; then
 		cat << EOF >> ${1}
@@ -573,11 +588,17 @@ fitimage_assemble() {
 	# Step 4: Prepare a ramdisk section.
 	#
 	if [ "x${ramdiskcount}" = "x1" ] ; then
-		copy_initramfs
-		RAMDISK_FILE="usr/${INITRAMFS_IMAGE}-${MACHINE}.cpio"
-		xz -f -k -c ${XZ_COMPRESSION_LEVEL} ${XZ_THREADS} --check=${XZ_INTEGRITY_CHECK} ${RAMDISK_FILE} > ${RAMDISK_FILE}.xz
-		fitimage_ti_secure ${RAMDISK_FILE}.xz ${RAMDISK_FILE}.xz.sec
-		fitimage_emit_section_ramdisk ${1} "${ramdiskcount}" ${RAMDISK_FILE}.xz.sec
+		# Find and use the first initramfs image archive type we find
+		for img in cpio.lz4 cpio.lzo cpio.lzma cpio.xz cpio.gz cpio; do
+			initramfs_path="${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.${img}"
+			initramfs_local="usr/${INITRAMFS_IMAGE}-${MACHINE}.${img}"
+			echo "Using $initramfs_path"
+			if [ -e "${initramfs_path}" ]; then
+				fitimage_ti_secure ${initramfs_path} ${initramfs_local}.sec
+				fitimage_emit_section_ramdisk ${1} "${ramdiskcount}" ${initramfs_local}.sec
+				break
+			fi
+		done
 	fi
 
 	fitimage_emit_section_maint ${1} sectend
