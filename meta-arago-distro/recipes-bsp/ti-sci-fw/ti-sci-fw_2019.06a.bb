@@ -30,10 +30,10 @@ SRC_URI_append_am65xx-hs-evm = " \
 	http://install.source.dir.local/ti-sci-firmware-am65x-hs-enc.bin;name=hs-enc \
 "
 
-SRC_URI[hs-cert.md5sum] = "9c4de5577d92c83a467dad36ef04691b"
-SRC_URI[hs-cert.sha256sum] = "262d4e4edc8eca996caaeefeb3d5daffe11d45d9499c6f71ad1a6a2fcf68aa97"
-SRC_URI[hs-enc.md5sum] = "c851061ec96db61b601ad3685b1ecd23"
-SRC_URI[hs-enc.sha256sum] = "73a17fd6ee2770d12ba328dd64009572b9ab0fbd4989111b34a7d67c5dfd2ca8"
+SRC_URI[hs-cert.md5sum] = "29eeb2ef5088626c2add8a25f8b9a420"
+SRC_URI[hs-cert.sha256sum] = "c7185e4d95f8bd57e985d1c53c814e65bed078669e2270152e406e8d2a04a186"
+SRC_URI[hs-enc.md5sum] = "e465a2328e042dd932b98d78d8f531de"
+SRC_URI[hs-enc.sha256sum] = "6ecc456f2800a8937c6109c91bc4c62432c2aabad73ad6f3486a6457e22b087a"
 
 S = "${WORKDIR}/git"
 
