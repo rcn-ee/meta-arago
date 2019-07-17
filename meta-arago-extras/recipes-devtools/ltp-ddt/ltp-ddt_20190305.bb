@@ -39,7 +39,7 @@ RDEPENDS_${PN} = "\
 
 inherit autotools-brokensep
 
-SRCREV = "1053c84e8b0485019ab085b5fb4e3c0e72e701ec"
+SRCREV = "58205cac664f0e5823b8975e41b96ae7c7739407"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
