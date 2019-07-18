@@ -3,16 +3,16 @@ pru: linux
 	@echo ===========================
 	@echo    Building PRU Examples
 	@echo ===========================
-	@cd example-applications; cd `find . -name "*pru*"`; make
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru*"`; make
 
 pru_clean:
 	@echo ===========================
 	@echo    Cleaning PRU Examples
 	@echo ===========================
-	@cd example-applications; cd `find . -name "*pru*"`; make clean
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru*"`; make clean
 
 pru_install:
 	@echo ==============================
 	@echo     Installing PRU Examples
 	@echo ==============================
-	@cd example-applications; cd `find . -name "*pru*"`; make install
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru*"`; make install

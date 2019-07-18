@@ -4,7 +4,7 @@ pru-icss:
 	@echo =================================
 	@echo    Building PRU-ICSS
 	@echo =================================
-	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	for dir in examples pru_cape/pru_fw lib/src labs; \
 	do \
 		make -C $$dir PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
@@ -14,7 +14,7 @@ pru-icss_clean:
 	@echo =================================
 	@echo    Cleaning PRU-ICSS
 	@echo =================================
-	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	for dir in examples pru_cape/pru_fw lib/src labs; \
 	do \
 		make -C $$dir clean PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
@@ -39,7 +39,7 @@ pru-icss_install_none:
 	@echo ===================================================
 
 pru-icss_install_am335x: pru-icss_install_common
-	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	install -m 0644 ./examples/am335x/PRU_Halt/gen/PRU_Halt.out \
 		$(DESTDIR)/lib/firmware/pru; \
 	for i in 0 1; \
@@ -49,7 +49,7 @@ pru-icss_install_am335x: pru-icss_install_common
 	done
 
 pru-icss_install_am437x: pru-icss_install_common
-	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	install -m 0644 ./examples/am437x/PRU_Halt/gen/PRU_Halt.out \
 		$(DESTDIR)/lib/firmware/pru; \
 	for i in 0 1; \
@@ -59,7 +59,7 @@ pru-icss_install_am437x: pru-icss_install_common
 	done
 
 pru-icss_install_am572x: pru-icss_install_common
-	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	install -m 0644 ./examples/am572x/PRU_Halt/gen/PRU_Halt.out \
 		$(DESTDIR)/lib/firmware/pru; \
 	for i in 1 2; \
@@ -72,7 +72,7 @@ pru-icss_install_am572x: pru-icss_install_common
 	done
 
 pru-icss_install_k2g: pru-icss_install_common
-	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	install -m 0644 ./examples/k2g/PRU_Halt/gen/PRU_Halt.out \
 		$(DESTDIR)/lib/firmware/pru; \
 	for i in 0 1; \
@@ -85,7 +85,7 @@ pru-icss_install_k2g: pru-icss_install_common
 	done
 
 pru-icss_install_am65x: pru-icss_install_common
-	@cd example-applications; cd `find . -name "*pru-icss*"`; \
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	for i in 0 1; \
 	do \
 		install -m 0644 ./examples/am65x/PRU_Halt/gen/PRU$${i}/PRU_Halt_$${i}.out \

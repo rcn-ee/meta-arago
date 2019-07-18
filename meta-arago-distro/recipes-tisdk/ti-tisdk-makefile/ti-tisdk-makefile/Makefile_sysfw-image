@@ -4,14 +4,14 @@ sysfw-image: linux-dtbs
 	@echo =============================
 	@echo    Building SYSFW Image
 	@echo =============================
-	@cd board-support; cd `find . -name "*system-firmware-image*"`; \
+	@cd board-support; cd `find . -maxdepth 1 -type d -name "*system-firmware-image*"`; \
 		make SYSFW_DL_URL="" SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/ti-sci-firmware-am65x-gp.bin CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) PATH=$(PATH):$(LINUXKERNEL_INSTALL_DIR)/scripts/dtc
 
 sysfw-image_clean:
 	@echo =============================
 	@echo    Cleaning SYSFW Image
 	@echo =============================
-	@cd board-support; cd `find . -name "*system-firmware-image*"`; make clean
+	@cd board-support; cd `find . -maxdepth 1 -type d -name "*system-firmware-image*"`; make clean
 
 sysfw-image_install:
 	@echo =============================

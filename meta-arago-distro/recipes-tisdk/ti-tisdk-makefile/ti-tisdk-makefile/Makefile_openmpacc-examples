@@ -3,7 +3,7 @@ openmpacc-examples:
 	@echo ================================================
 	@echo     Building the OpenMP Accelerator Examples
 	@echo ================================================
-	@cd example-applications; cd `find . -name "*openmpacc-examples*"`; . $(ENV_SETUP); make TARGET_ROOTDIR=$(SDK_PATH_TARGET) TI_OCL_CGT_INSTALL=$(SDK_PATH_TARGET)/usr/share/ti/cgt-c6x
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*openmpacc-examples*"`; . $(ENV_SETUP); make TARGET_ROOTDIR=$(SDK_PATH_TARGET) TI_OCL_CGT_INSTALL=$(SDK_PATH_TARGET)/usr/share/ti/cgt-c6x
 
 openmpacc-examples_install:
 	@echo ==================================================
@@ -15,7 +15,7 @@ openmpacc-examples_install:
 		exit 1; \
 	fi
 	@cd example-applications; \
-	cd `find . -name "*openmpacc-examples*"`; \
+	cd `find . -maxdepth 1 -type d -name "*openmpacc-examples*"`; \
 	for example in `find . -executable -not \( -type d -o -iname 'make*' \)`; do \
 		install -d $(DESTDIR)/usr/share/ti/examples/openmpacc/`dirname $${example}` ; \
 		install -m 755 $${example} $(DESTDIR)/usr/share/ti/examples/openmpacc/`dirname $${example}` ; \
@@ -28,5 +28,5 @@ openmpacc-examples_clean:
 	@echo ==================================================
 	@echo     Cleaning the OpenMP Accelerator Examples
 	@echo ==================================================
-	@cd example-applications; cd `find . -name "*openmpacc-examples*"`; . $(ENV_SETUP); make TARGET_ROOTDIR=$(SDK_PATH_TARGET) clean
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*openmpacc-examples*"`; . $(ENV_SETUP); make TARGET_ROOTDIR=$(SDK_PATH_TARGET) clean
 

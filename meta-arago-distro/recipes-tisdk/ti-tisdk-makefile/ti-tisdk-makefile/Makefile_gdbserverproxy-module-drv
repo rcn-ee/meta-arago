@@ -3,7 +3,7 @@ gdbserverproxy-module-drv: linux
 	@echo      Building gdbserverproxy-module-drv
 	@echo ==============================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "gdbserverproxy*"`; \
+	cd `find . -maxdepth 1 -type d -name "gdbserverproxy*"`; \
 	make ARCH=__KERNEL_ARCH__ KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) PLATFORM=__PLATFORM_GDBSERVERPROXY__
 
 gdbserverproxy-module-drv_clean:
@@ -11,7 +11,7 @@ gdbserverproxy-module-drv_clean:
 	@echo      Cleaning gdbserverproxy-module-drv
 	@echo ==============================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "gdbserverproxy*"`; \
+	cd `find . -maxdepth 1 -type d -name "gdbserverproxy*"`; \
 	make ARCH=__KERNEL_ARCH__ KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) PLATFORM=__PLATFORM_GDBSERVERPROXY__ clean
 
 gdbserverproxy-module-drv_install:
@@ -24,6 +24,6 @@ gdbserverproxy-module-drv_install:
 		exit 1; \
 	fi
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "gdbserverproxy*"`; \
+	cd `find . -maxdepth 1 -type d -name "gdbserverproxy*"`; \
 	make ARCH=__KERNEL_ARCH__  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) PLATFORM=__PLATFORM_GDBSERVERPROXY__ modules_install
 

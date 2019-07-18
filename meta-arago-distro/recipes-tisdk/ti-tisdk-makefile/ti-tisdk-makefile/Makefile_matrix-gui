@@ -15,4 +15,4 @@ matrix-gui_install:
 	@echo =============================
 	@echo     Installing Matrix GUI
 	@echo =============================
-	@cd example-applications; cd `find . -name "*matrix-gui-2.0*"`; make install
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*matrix-gui-2.0*"`; make install
