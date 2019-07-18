@@ -4,7 +4,7 @@ cmem-mod: linux
 	@echo     Building CMEM Module
 	@echo ================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "cmem-mod*"`; \
+	cd `find . -maxdepth 1 -type d -name "cmem-mod*"`; \
 	. $(ENV_SETUP); \
 	make -f lu.mak ARCH=__KERNEL_ARCH__ KERNEL_INSTALL_DIR=$(LINUXKERNEL_INSTALL_DIR) module
 
@@ -13,7 +13,7 @@ cmem-mod_clean:
 	@echo     Cleaning CMEM Module
 	@echo ================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "cmem-mod*"`; \
+	cd `find . -maxdepth 1 -type d -name "cmem-mod*"`; \
 	. $(ENV_SETUP); \
 	make -f lu.mak ARCH=__KERNEL_ARCH__ KERNEL_INSTALL_DIR=$(LINUXKERNEL_INSTALL_DIR) modules_clean
 
@@ -27,7 +27,7 @@ cmem-mod_install:
 		exit 1; \
 	fi
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "cmem-mod*"`; \
+	cd `find . -maxdepth 1 -type d -name "cmem-mod*"`; \
 	. $(ENV_SETUP); \
 	make -C $(LINUXKERNEL_INSTALL_DIR) SUBDIRS=`pwd`/src/cmem/module INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) modules_install
 

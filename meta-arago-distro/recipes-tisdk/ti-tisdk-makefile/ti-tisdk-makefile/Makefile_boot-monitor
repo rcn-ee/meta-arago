@@ -3,7 +3,7 @@ boot-monitor:
 	@echo      Building boot-monitor
 	@echo ================================
 	@cd board-support; \
-	cd `find . -maxdepth 1 -name "boot-monitor*"`; \
+	cd `find . -maxdepth 1 -type d -name "boot-monitor*"`; \
 	make image___BOOT_MONITOR_MAKE_TARGET__
 
 boot-monitor_clean:
@@ -11,7 +11,7 @@ boot-monitor_clean:
 	@echo      Cleaning boot-monitor
 	@echo ================================
 	@cd board-support; \
-	cd `find . -maxdepth 1 -name "boot-monitor*"`; \
+	cd `find . -maxdepth 1 -type d -name "boot-monitor*"`; \
 	make clean
 
 boot-monitor_install:
@@ -24,7 +24,7 @@ boot-monitor_install:
 		exit 1; \
 	fi
 	@cd board-support; \
-	cd `find . -maxdepth 1 -name "boot-monitor*"`; \
+	cd `find . -maxdepth 1 -type d -name "boot-monitor*"`; \
 	install -d $(DESTDIR)/boot; \
 	install -m 0644 ./skern-__BOOT_MONITOR_MAKE_TARGET__.bin $(DESTDIR)/boot
 

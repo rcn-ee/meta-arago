@@ -3,22 +3,22 @@ ti-crypto-examples:
 	@echo =================================
 	@echo    Building TI Crypto Examples
 	@echo =================================
-	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make release
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*ti-crypto-examples*"`; make release
 
 ti-crypto-examples_clean:
 	@echo =================================
 	@echo    Cleaning TI Crypto Examples
 	@echo =================================
-	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make clean
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*ti-crypto-examples*"`; make clean
 
 ti-crypto-examples_install:
 	@echo ===================================================
 	@echo   Installing TI Crypto Examples - Release version
 	@echo ===================================================
-	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make install
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*ti-crypto-examples*"`; make install
 
 ti-crypto-examples_install_debug:
 	@echo =================================================
 	@echo   Installing TI Crypto Examples - Debug Version
 	@echo =================================================
-	@cd example-applications; cd `find . -name "*ti-crypto-examples*"`; make install_debug
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*ti-crypto-examples*"`; make install_debug

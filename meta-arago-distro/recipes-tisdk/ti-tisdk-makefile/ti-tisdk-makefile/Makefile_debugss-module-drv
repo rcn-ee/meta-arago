@@ -3,7 +3,7 @@ debugss-module-drv: linux
 	@echo      Building debugss-module-drv
 	@echo =======================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "debugss*"`; \
+	cd `find . -maxdepth 1 -type d -name "debugss*"`; \
 	make ARCH=__KERNEL_ARCH__ KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) PLATFORM=__PLATFORM_DEBUGSS__
 
 debugss-module-drv_clean:
@@ -11,7 +11,7 @@ debugss-module-drv_clean:
 	@echo      Cleaning debugss-module-drv
 	@echo =======================================
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "debugss*"`; \
+	cd `find . -maxdepth 1 -type d -name "debugss*"`; \
 	make ARCH=__KERNEL_ARCH__ KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR) PLATFORM=__PLATFORM_DEBUGSS__ clean
 
 debugss-module-drv_install:
@@ -24,6 +24,6 @@ debugss-module-drv_install:
 		exit 1; \
 	fi
 	@cd board-support/extra-drivers; \
-	cd `find . -maxdepth 1 -name "debugss*"`; \
+	cd `find . -maxdepth 1 -type d -name "debugss*"`; \
 	make ARCH=__KERNEL_ARCH__  KERNEL_SRC=$(LINUXKERNEL_INSTALL_DIR)  INSTALL_MOD_PATH=$(DESTDIR) PREFIX=$(SDK_PATH_TARGET) INSTALL_MOD_STRIP=$(INSTALL_MOD_STRIP) PLATFORM=__PLATFORM_DEBUGSS__ modules_install
 
