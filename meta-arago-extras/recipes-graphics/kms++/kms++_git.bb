@@ -1,14 +1,14 @@
 SUMMARY = "C++ library for kernel mode setting"
 HOMEPAGE = "https://github.com/tomba/kmsxx"
 LICENSE = "MPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c670e18272184fc0e86e1648678b4f2a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
 
-PV = "2.0"
+PV = "2.1"
 PR = "r0"
 
 BRANCH = "master"
 SRC_URI = "git://github.com/tomba/kmsxx.git;protocol=git;branch=${BRANCH}"
-SRCREV = "c13047e3f7674a5a05b107ef3fd97d9ff4165639"
+SRCREV = "626edbe2fc845803ffdd25936e21202e4f123b63"
 
 DEPENDS = "drm python3-pybind11"
 
