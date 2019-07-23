@@ -37,7 +37,6 @@ SRC_URI = "\
     file://Makefile_debugss-module-drv \
     file://Makefile_gdbserverproxy-module-drv \
     file://Makefile_ti-sgx-ddk-km \
-    file://Makefile_ti-sgx-ddk-km-k3 \
     file://Makefile_opencl-examples \
     file://Makefile_boot-monitor \
     file://Makefile_hplib-mod \
@@ -54,7 +53,7 @@ SRC_URI = "\
     file://Makefile_pdm-anomaly-detection \
 "
 
-PR = "r99"
+PR = "r100"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -186,7 +185,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
 
 MAKEFILES_append_am65xx = " \
                         pru-icss \
-                        ti-sgx-ddk-km-k3 \
+                        ti-sgx-ddk-km \
 "
 
 # Use this to export kernel arch to ARCH
@@ -200,10 +199,15 @@ PLATFORM_ARCH = "${ARMPKGARCH}"
 PLATFORM_ARCH_arm = "armv7-a"
 PLATFORM_ARCH_omapl138 = "armv5te"
 
-TARGET_PRODUCT = "jacinto6evm"
-TARGET_PRODUCT_ti33x = "ti335x"
-TARGET_PRODUCT_ti43x = "ti437x"
-TARGET_PRODUCT_k3 = "ti654x"
+# ti-sgx-ddk-km configurations
+# See meta-ti/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
+TI_SGX_TARGET_PRODUCT = "jacinto6evm"
+TI_SGX_TARGET_PRODUCT_ti33x = "ti335x"
+TI_SGX_TARGET_PRODUCT_ti43x = "ti437x"
+TI_SGX_TARGET_PRODUCT_k3 = "ti654x"
+
+TI_SGX_TARGET_ARCH = "armhf"
+TI_SGX_TARGET_ARCH_k3 = "aarch64"
 
 PLATFORM_DEBUGSS = ""
 PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
@@ -279,7 +283,8 @@ do_install () {
     sed -i -e "s/__KERNEL_BUILD_CMDS__/${KERNEL_BUILD_CMDS}/" ${D}/Makefile
     sed -i -e "s/__SDKMACHINE__/${SDKMACHINE}/g" ${D}/Makefile
 
-    sed -i -e "s/__TARGET_PRODUCT__/${TARGET_PRODUCT}/" ${D}/Makefile
+    sed -i -e "s/__TI_SGX_TARGET_PRODUCT__/${TI_SGX_TARGET_PRODUCT}/" ${D}/Makefile
+    sed -i -e "s/__TI_SGX_TARGET_ARCH__/${TI_SGX_TARGET_ARCH}/" ${D}/Makefile
     sed -i -e "s/__PLATFORM_DEBUGSS__/${PLATFORM_DEBUGSS}/g" ${D}/Makefile
     sed -i -e "s/__PLATFORM_GDBSERVERPROXY__/${PLATFORM_GDBSERVERPROXY}/g" ${D}/Makefile
     sed -i -e "s/__BOOT_MONITOR_MAKE_TARGET__/${BOOT_MONITOR_MAKE_TARGET}/g" ${D}/Makefile
