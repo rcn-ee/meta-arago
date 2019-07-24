@@ -39,3 +39,7 @@ CFLAGS=__CFLAGS__
 INSTALL_MOD_STRIP=1
 
 SDK_PATH_TARGET=$(TI_SDK_PATH)/__SDK_PATH_TARGET__
+
+# Set EXEC_DIR to install example binaries.
+# This will be configured with the setup.sh script.
+EXEC_DIR=__EXEC_DIR__

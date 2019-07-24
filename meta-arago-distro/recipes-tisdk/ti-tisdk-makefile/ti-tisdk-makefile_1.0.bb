@@ -51,6 +51,7 @@ SRC_URI = "\
     file://Makefile_sysfw-image \
     file://Makefile_mmwavegesture-hmi \
     file://Makefile_pdm-anomaly-detection \
+    file://Makefile_ti-ipc \
 "
 
 PR = "r100"
@@ -136,9 +137,11 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               uio-module-drv \
 			      mmwavegesture-hmi \
                               pdm-anomaly-detection \
+                              ti-ipc \
 "
 MAKEFILES_append_omapl138 = " linux-dtbs \
                               u-boot-spl \
+                              ti-ipc \
 "
 
 MAKEFILES_append_keystone = " u-boot-spl \
@@ -151,6 +154,7 @@ MAKEFILES_append_keystone = " u-boot-spl \
                               uio-module-drv \
                               ipsecmgr-mod \
                               barcode-roi \
+                              ti-ipc \
 "
 
 #                              gdbserverproxy-module-drv 
@@ -181,6 +185,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
                         sysfw-image \
 			mmwavegesture-hmi \
                         pdm-anomaly-detection \
+                        ti-ipc \
 "
 
 MAKEFILES_append_am65xx = " \
@@ -223,6 +228,21 @@ PRU_ICSS_INSTALL_TARGET_ti43x = "pru-icss_install_am437x"
 PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
 PRU_ICSS_INSTALL_TARGET_k2g = "pru-icss_install_k2g"
 PRU_ICSS_INSTALL_TARGET_am65xx = "pru-icss_install_am65x"
+
+# Path to toolchains for the various cores in TI SOCs
+#
+# These are provided by the TI RTOS SDK and used to build firmwares used by the
+# IPC Linux examples.
+IPC_TOOLS_PATHS_C66 = "ti.targets.elf.C66="\$\(C6X_GEN_INSTALL_PATH\)""
+IPC_TOOLS_PATHS_M4  = "ti.targets.arm.elf.M4="\$\(TOOLCHAIN_PATH_M4\)" ti.targets.arm.elf.M4F="\$\(TOOLCHAIN_PATH_M4\)""
+IPC_TOOLS_PATHS_R5F  = "ti.targets.arm.elf.R5F="\$\(TOOLCHAIN_PATH_R5\)""
+IPC_TOOLS_PATHS_C674 = "ti.targets.elf.C674="\$\(C6X_GEN_INSTALL_PATH\)""
+
+IPC_TOOLS_PATHS = ""
+IPC_TOOLS_PATHS_append_keystone = " ${IPC_TOOLS_PATHS_C66}"
+IPC_TOOLS_PATHS_append_omap-a15 = " ${IPC_TOOLS_PATHS_C66} ${IPC_TOOLS_PATHS_M4}"
+IPC_TOOLS_PATHS_append_omapl138 = " ${IPC_TOOLS_PATHS_C674}"
+IPC_TOOLS_PATHS_append_k3 = "${IPC_TOOLS_PATHS_R5F}"
 
 
 # If it's not defined at all, like for zImage case
@@ -289,6 +309,8 @@ do_install () {
     sed -i -e "s/__PLATFORM_GDBSERVERPROXY__/${PLATFORM_GDBSERVERPROXY}/g" ${D}/Makefile
     sed -i -e "s/__BOOT_MONITOR_MAKE_TARGET__/${BOOT_MONITOR_MAKE_TARGET}/g" ${D}/Makefile
     sed -i -e "s/__PRU_ICSS_INSTALL_TARGET__/${PRU_ICSS_INSTALL_TARGET}/g" ${D}/Makefile
+    sed -i -e "s/__IPC_TOOLS_PATHS__/${IPC_TOOLS_PATHS}/g" ${D}/Makefile
+    sed -i -e "s/__TISDK_VERSION__/${TISDK_VERSION}/g" ${D}/Makefile
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
 
