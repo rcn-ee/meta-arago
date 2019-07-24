@@ -1,0 +1,135 @@
+TISDK_VERSION=__TISDK_VERSION__
+
+PRSDK_VERSION=$(shell echo $(TISDK_VERSION) | sed -e 's|^0||' -e 's|\.|_|g')
+PRSDK_PLATFORM=$(shell echo $(PLATFORM) | sed -e 's|-evm$$||' | sed -e 's|-lcdk$$||')
+
+ifneq ($(TI_RTOS_PATH),)
+  TI_IPC_TARGETS = ti-ipc-linux
+
+  TI_RTOS_PATH_ABS := $(realpath $(TI_RTOS_PATH))
+
+  TI_PRSDK_PATH=$(TI_RTOS_PATH_ABS)/processor_sdk_rtos_$(PRSDK_PLATFORM)_$(PRSDK_VERSION)
+  SDK_INSTALL_PATH=$(TI_RTOS_PATH_ABS)
+  include $(TI_PRSDK_PATH)/Rules.make
+
+  IPC_TOOLS_PATHS=__IPC_TOOLS_PATHS__
+
+else
+  TI_IPC_TARGETS = ti-ipc-rtos-missing
+endif
+
+TI_IPC_CLEAN = $(addsuffix _clean, $(TI_IPC_TARGETS))
+TI_IPC_INSTALL = $(addsuffix _install, $(TI_IPC_TARGETS))
+
+ti-ipc-rtos-missing ti-ipc-rtos-missing_clean ti-ipc-rtos-missing_install:
+	@echo
+	@echo ===========================================================
+	@echo     If you wish to build IPC, please install
+	@echo     Processor SDK RTOS $(TISDK_VERSION) for $(PLATFORM)
+	@echo     and set TI_RTOS_PATH in Rules.make
+	@echo ===========================================================
+
+ti-ipc-rtos-path-check:
+	@if [ ! -d "$(TI_PRSDK_PATH)" ]; \
+	then \
+		echo; \
+		echo "Error: TI_RTOS_PATH ($(TI_RTOS_PATH_ABS)) does not contain"; \
+		echo "       the corresponding Processor SDK RTOS release!"; \
+		echo; \
+		echo "Please install Processor SDK RTOS $(TISDK_VERSION) for $(PLATFORM)."; \
+		exit 1; \
+	fi
+
+ti-ipc: $(TI_IPC_TARGETS)
+
+ti-ipc_clean: $(TI_IPC_CLEAN)
+
+ti-ipc_install: $(TI_IPC_INSTALL)
+
+ti-ipc-linux-config: ti-ipc-rtos-path-check
+	@echo =================================
+	@echo     Configuring IPC
+	@echo =================================
+	. $(ENV_SETUP); \
+	cd $(IPC_INSTALL_PATH); \
+	./configure $${CONFIGURE_FLAGS} \
+		CC=$${TOOLCHAIN_PREFIX}gcc \
+		--prefix=/usr \
+		PLATFORM=$(IPC_PLATFORM) \
+		KERNEL_INSTALL_DIR=$(LINUXKERNEL_INSTALL_DIR)
+
+
+ti-ipc-linux: ti-ipc-rtos-path-check linux ti-ipc-linux-config
+	@echo =================================
+	@echo     Building IPC
+	@echo =================================
+	. $(ENV_SETUP); \
+	$(MAKE) -j $(MAKE_JOBS) -C $(IPC_INSTALL_PATH)
+
+ti-ipc-linux_clean: ti-ipc-rtos-path-check ti-ipc-linux-config
+	@echo =================================
+	@echo     Cleaning IPC
+	@echo =================================
+	. $(ENV_SETUP); \
+	$(MAKE) -j $(MAKE_JOBS) -C $(IPC_INSTALL_PATH) clean
+
+ti-ipc-linux_install: ti-ipc-rtos-path-check ti-ipc-linux
+	@echo =================================
+	@echo     Installing IPC
+	@echo =================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	. $(ENV_SETUP); \
+	$(MAKE) -j $(MAKE_JOBS) -C $(IPC_INSTALL_PATH) install DESTDIR=$(DESTDIR)
+
+ti-ipc-linux-examples: ti-ipc-rtos-path-check
+	@echo =================================
+	@echo     Building the IPC Examples
+	@echo =================================
+	$(MAKE) -j $(MAKE_JOBS) -C $${IPC_INSTALL_PATH}/examples \
+		HOSTOS="linux" \
+		PLATFORM="$(IPC_PLATFORM)" \
+		KERNEL_INSTALL_DIR="$(LINUXKERNEL_INSTALL_DIR)" \
+		XDC_INSTALL_DIR="$(XDC_INSTALL_PATH)" \
+		PDK_INSTALL_DIR="$(PDK_INSTALL_PATH)/.." \
+		BIOS_INSTALL_DIR="$(BIOS_INSTALL_PATH)" \
+		IPC_INSTALL_DIR="$(IPC_INSTALL_PATH)" \
+		TOOLCHAIN_LONGNAME=$${TOOLCHAIN_SYS} \
+		TOOLCHAIN_INSTALL_DIR=$${SDK_PATH_NATIVE}/usr \
+		TOOLCHAIN_PREFIX=$(CROSS_COMPILE) \
+		$(IPC_TOOLS_PATHS)
+
+ti-ipc-linux-examples_install: ti-ipc-rtos-path-check ti-ipc-linux-examples
+	@echo =================================
+	@echo     Installing the IPC Examples
+	@echo =================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	$(MAKE) -j $(MAKE_JOBS) -C $${IPC_INSTALL_PATH}/examples install \
+		HOSTOS="linux" \
+		PLATFORM="$(IPC_PLATFORM)" \
+		EXEC_DIR="$(EXEC_DIR)"
+
+ti-ipc-linux-examples_clean: ti-ipc-rtos-path-check
+	@echo =================================
+	@echo     Cleaning the IPC Examples
+	@echo =================================
+	. $(ENV_SETUP); \
+	$(MAKE) -j $(MAKE_JOBS) -C $${IPC_INSTALL_PATH}/examples clean \
+		HOSTOS="linux" \
+		PLATFORM="$(IPC_PLATFORM)" \
+		KERNEL_INSTALL_DIR="$(LINUXKERNEL_INSTALL_DIR)" \
+		XDC_INSTALL_DIR="$(XDC_INSTALL_PATH)" \
+		BIOS_INSTALL_DIR="$(BIOS_INSTALL_PATH)" \
+		IPC_INSTALL_DIR="$(IPC_INSTALL_PATH)" \
+		TOOLCHAIN_LONGNAME=$${TOOLCHAIN_SYS} \
+		TOOLCHAIN_INSTALL_DIR=$${SDK_PATH_NATIVE}/usr \
+		TOOLCHAIN_PREFIX=$(CROSS_COMPILE) \
+		$(IPC_TOOLS_PATHS)
+
