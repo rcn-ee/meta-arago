@@ -54,8 +54,11 @@ pru-icss_install_am437x: pru-icss_install_common
 		$(DESTDIR)/lib/firmware/pru; \
 	for i in 0 1; \
 	do \
-		install -m 0644 ./examples/am437x/PRU_RPMsg_Echo_Interrupt$${i}/gen/PRU_RPMsg_Echo_Interrupt$${i}.out \
-			$(DESTDIR)/lib/firmware/pru; \
+		for j in 0 1; \
+		do \
+			install -m 0644 ./examples/am437x/PRU_RPMsg_Echo_Interrupt$${i}_$${j}/gen/PRU_RPMsg_Echo_Interrupt$${i}_$${j}.out \
+				$(DESTDIR)/lib/firmware/pru; \
+		done; \
 	done
 
 pru-icss_install_am572x: pru-icss_install_common
