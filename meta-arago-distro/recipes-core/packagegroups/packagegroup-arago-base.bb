@@ -31,6 +31,7 @@ ARAGO_EXTRA = "\
 
 # minimal set of packages - needed to boot
 RDEPENDS_${PN} = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'packagegroup-base-zeroconf', '',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', '${ARAGO_ALSA_BASE}', '',d)} \
     ${ARAGO_BASE} \
     ${ARAGO_EXTRA} \
