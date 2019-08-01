@@ -32,6 +32,7 @@ ARAGO_TEST = "\
     mtd-utils-ubifs-tests \
     pcitest \
     mstpd \
+    fio \
     "
 
 ARAGO_TEST_append_armv7a = " \
