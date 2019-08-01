@@ -5,7 +5,7 @@ LICENSE = "MIT"
 IMAGE_FSTYPES = "tar.xz"
 IMAGE_NAME_SUFFIX = ""
 
-inherit tisdk-image
+inherit tisdk-bundle
 
 COMPATIBLE_MACHINE = "omap3|omapl138|ti33x|ti43x|omap-a15|keystone|k3"
 

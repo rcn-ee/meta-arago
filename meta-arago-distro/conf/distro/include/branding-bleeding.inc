@@ -15,4 +15,4 @@ SRCREV_pn-optee-test = "${AUTOREV}"
 SRCREV_pn-arm-trusted-firmware = "${AUTOREV}"
 
 # Build and assemble TI-SDK, but don't package it
-IMAGE_FSTYPES_pn-arago-core-tisdk-image = ""
+IMAGE_FSTYPES_pn-arago-core-tisdk-bundle = ""

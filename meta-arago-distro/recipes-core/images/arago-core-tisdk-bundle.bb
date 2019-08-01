@@ -1,4 +1,4 @@
-require arago-core-tisdk-image.inc
+require arago-core-tisdk-bundle.inc
 
 DEPLOY_SPL_NAME_omapl138 = ""
 DEPLOY_SPL_NAME_k2hk = ""
