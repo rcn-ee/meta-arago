@@ -53,6 +53,7 @@ ARAGO_UTILS = "\
     i2c-tools \
     strace \
     ${@bb.utils.contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi-utils', '',d)} \
     "
 
 # ARAGO_UTILS - ltrace fails with __cxa_demangle for now
