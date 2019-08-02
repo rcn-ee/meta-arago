@@ -1,0 +1,37 @@
+From 9918ca3242b836d4ff286c0e975fe2dd492fdc83 Mon Sep 17 00:00:00 2001
+From: Daniel Stone <daniels@collabora.com>
+Date: Fri, 20 Jul 2018 19:00:06 +0100
+Subject: [PATCH 12/13] compositor-drm: Add backend pointer to drm_output
+
+Add this for convenience, so it's easier to access when we add the DRM
+backend debug scope.
+
+Signed-off-by: Daniel Stone <daniels@collabora.com>
+---
+ libweston/compositor-drm.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/libweston/compositor-drm.c b/libweston/compositor-drm.c
+index 01448881..fcb7cf17 100644
+--- a/libweston/compositor-drm.c
++++ b/libweston/compositor-drm.c
+@@ -464,6 +464,7 @@ struct drm_head {
+ 
+ struct drm_output {
+ 	struct weston_output base;
++	struct drm_backend *backend;
+ 
+ 	uint32_t crtc_id; /* object ID to pass to DRM functions */
+ 	int pipe; /* index of CRTC in resource array / bitmasks */
+@@ -6118,6 +6119,8 @@ drm_output_create(struct weston_compositor *compositor, const char *name)
+ 	if (output == NULL)
+ 		return NULL;
+ 
++	output->backend = b;
++
+ 	weston_output_init(&output->base, compositor, name);
+ 
+ 	output->base.enable = drm_output_enable;
+-- 
+2.22.0
+
