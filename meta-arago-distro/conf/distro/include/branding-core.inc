@@ -11,6 +11,3 @@ ALTERNATIVE_PRIORITY_pn-opencl-monitor-ipu = "1"
 
 # Raise priority for sample IPC FW images
 ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
-
-# Temporarily disable UBI images for K2 "server" rootfs due to size
-IMAGE_FSTYPES_remove_pn-tisdk-server-rootfs-image = "ubi ubifs"
