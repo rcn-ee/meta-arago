@@ -44,6 +44,7 @@ UTILS_append_ti33x = " mmc-utils \
                        can-utils \
                        switch-config \
                        pru-icss \
+                       pru-swuart-fw \
                        uio-module-drv-test \
                        uio-test-pruss \
 "
