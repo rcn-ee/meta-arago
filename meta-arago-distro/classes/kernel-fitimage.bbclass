@@ -120,7 +120,7 @@ fitimage_emit_section_kernel() {
 
 	kernel_csum=${FITIMAGE_HASH_ALGO}
 
-	ENTRYPOINT=${UBOOT_ENTRYPOINT}
+	ENTRYPOINT="${UBOOT_ENTRYPOINT}"
 	if test -n "${UBOOT_ENTRYSYMBOL}"; then
 		ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
 			awk '$4=="${UBOOT_ENTRYSYMBOL}" {print $2}'`
@@ -155,9 +155,11 @@ EOF
 # $1 ... .its filename
 # $2 ... Image counter/name
 # $3 ... Path to DTB image
+# $4 ... Load address
 fitimage_emit_section_dtb() {
 
 	dtb_csum=${FITIMAGE_HASH_ALGO}
+	dtb_loadline="${4}"
 
 	cat << EOF >> ${1}
                 ${2} {
@@ -166,6 +168,7 @@ fitimage_emit_section_dtb() {
                         type = "flat_dt";
                         arch = "${UBOOT_ARCH}";
                         compression = "none";
+                        ${dtb_loadline}
 EOF
 	if test -n "${FITIMAGE_HASH_ALGO}"; then
 		cat << EOF >> ${1}
@@ -320,22 +323,34 @@ fitimage_emit_section_config() {
 		conf_sign_keyname="${UBOOT_SIGN_KEYNAME}"
 	fi
 
-	conf_desc="Linux kernel"
-	kernel_line="kernel = \"kernel@${2}\";"
+	sep=""
+	conf_desc=""
+	kernel_line=""
+	fdt_line=""
 	ramdisk_line=""
+	setup_line=""
+	default_line=""
 
-	# Test if we have any DTBs at all
+	if [ -n "${2}" ]; then
+		conf_desc="Linux kernel"
+		sep=", "
+		kernel_line="kernel = \"kernel@${2}\";"
+	fi
+
 	if [ -n "${3}" ]; then
-		conf_desc="${conf_desc}, FDT blob"
+		conf_desc="${conf_desc}${sep}FDT blob"
+		sep=", "
 	fi
 
 	if [ -n "${4}" ]; then
-		conf_desc="${conf_desc}, ramdisk"
+		conf_desc="${conf_desc}${sep}ramdisk"
+		sep=", "
 		ramdisk_line="ramdisk = \"ramdisk@${4}\";"
 	fi
 
 	if [ -n "${5}" ]; then
-		conf_desc="${conf_desc}, setup"
+		conf_desc="${conf_desc}${sep}setup"
+		sep=", "
 		setup_line="setup = \"setup@${5}\";"
 	fi
 
@@ -348,7 +363,7 @@ fitimage_emit_section_config() {
 			nextnum=`expr ${6} + 1`
 			loadables_pager_line="loadables = \"tee@${nextnum}\";"
 		fi
-		final_conf_desc="${conf_desc}, OPTEE OS Image"
+		final_conf_desc="${conf_desc}${sep}OPTEE OS Image"
 	else
 		loadables_line=""
 		loadables_pager_line=""
@@ -358,6 +373,7 @@ fitimage_emit_section_config() {
 	dtbcount=1
 	for DTB in ${KERNEL_DEVICETREE}; do
 		DTB=$(basename "${DTB}")
+		dtb_ext=${DTB##*.}
 		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
 			conf_name="${DTB}"
 		else
@@ -380,13 +396,16 @@ EOF
 			cat << EOF >> ${1}
                 ${conf_name} {
                         description = "${final_conf_desc}";
-                        ${kernel_line}
                         ${fdt_line}
+EOF
+			if [ "${dtb_ext}" != "dtbo" ]; then
+			cat << EOF >> ${1}
+                        ${kernel_line}
                         ${ramdisk_line}
                         ${setup_line}
                         ${loadables_line}
 EOF
-
+			fi
 			if test -n "${FITIMAGE_HASH_ALGO}"; then
 				cat << EOF >> ${1}
                         hash@1 {
@@ -438,13 +457,16 @@ EOF
 			cat << EOF >> ${1}
                 ${conf_name} {
                         description = "${final_conf_desc}";
-                        ${kernel_line}
                         ${fdt_line}
+EOF
+			if [ "${dtb_ext}" != "dtbo" ]; then
+			cat << EOF >> ${1}
+                        ${kernel_line}
                         ${ramdisk_line}
                         ${setup_line}
                         ${loadables_pager_line}
 EOF
-
+			fi
 			if test -n "${FITIMAGE_HASH_ALGO}"; then
 				cat << EOF >> ${1}
                         hash@1 {
@@ -520,6 +542,7 @@ fitimage_assemble() {
 	#
 	if test -n "${KERNEL_DEVICETREE}"; then
 		dtbcount=1
+		dtboaddress="${UBOOT_DTBO_LOADADDRESS}"
 		for DTB in ${KERNEL_DEVICETREE}; do
 			if echo ${DTB} | grep -q '/dts/'; then
 				bbwarn "${DTB} contains the full path to the the dts file, but only the dtb name should be used."
@@ -530,11 +553,25 @@ fitimage_assemble() {
 				DTB_PATH="arch/${ARCH}/boot/${DTB}"
 			fi
 			DTB=$(basename "${DTB}")
+
+			dtb_ext=${DTB##*.}
+			if [ "${dtb_ext}" = "dtbo" ]; then
+				if [ -n "${UBOOT_DTBO_LOADADDRESS}" ]; then
+					dtb_loadline="load = <${dtboaddress}>;"
+					num1=`printf "%d\n" ${dtboaddress}`
+					num2=`printf "%d\n" ${UBOOT_DTBO_OFFSET}`
+					num3=`expr $num1 + $num2`
+					dtboaddress=`printf "0x%x\n" $num3`
+				fi
+			elif [ -n "${UBOOT_DTB_LOADADDRESS}" ]; then
+				dtb_loadline="load = <${UBOOT_DTB_LOADADDRESS}>;"
+			fi
+
 			fitimage_ti_secure ${DTB_PATH} ${DTB_PATH}.sec
 			if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
-				fitimage_emit_section_dtb ${1} ${DTB} ${DTB_PATH}.sec
+				fitimage_emit_section_dtb ${1} ${DTB} ${DTB_PATH}.sec "${dtb_loadline}"
 			else
-				fitimage_emit_section_dtb ${1} "fdt@${dtbcount}" ${DTB_PATH}.sec
+				fitimage_emit_section_dtb ${1} "fdt@${dtbcount}" ${DTB_PATH}.sec "${dtb_loadline}"
 			fi
 			if [ "x${dtbcount}" = "x1" ]; then
 				dtbref=${DTB}
