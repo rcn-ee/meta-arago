@@ -19,6 +19,7 @@ inherit cmake
 
 EXTRA_OECMAKE := "-DWITH_ILM_INPUT=1"
 
+FILES_${PN} += "${datadir}/wayland-protocols/stable/ivi-application/ivi-application.xml"
 FILES_${PN} += "${libdir}/weston/*"
 FILES_${PN}-dbg += "${libdir}/weston/.debug/*"
 
