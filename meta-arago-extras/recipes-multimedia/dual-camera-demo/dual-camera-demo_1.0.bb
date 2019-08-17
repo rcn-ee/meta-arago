@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7ca707704d3354a64feeb4f19f52eb5"
 DEPENDS += "libdrm cmem"
 require recipes-core/matrix/matrix-gui-paths.inc
 
-PR = "r19"
+PR = "r20"
 
 BRANCH = "master"
-SRCREV = "b335bdf26b00f6294bcf4807e9022c2c435855b7"
+SRCREV = "3188b1eacb14dda0dcf3a58877962d86687b6d20"
 
 SRC_URI = "git://git.ti.com/sitara-linux/dual-camera-demo.git;protocol=git;branch=${BRANCH} \
            file://desc_dual-camera.html \
