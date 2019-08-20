@@ -4,7 +4,7 @@ DESCRIPTION = "TIDL import tool is using protobuf to read and parse information 
 
 require ./tidl-utils.inc
 
-LICENSE = "BSD-3"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://modules/ti_dl/inc/itidl_ti.h;beginline=1;endline=34;md5=cabe1fdaabfa0d85dc5544566b0e2425"
 
 S = "${WORKDIR}/git/src/importTool/"
