@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PV = "1.16.99+1.17-rc+git${SRCPV}"
 
-SRCREV = "e30639edd74f12f8f58d8e9cf10d85a1f071a6c3"
+SRCREV = "9343eaf5433135b3360e34db606c0d7de95ed289"
 
 SRC_URI = " \
 	git://linuxtv.org/v4l-utils.git \
