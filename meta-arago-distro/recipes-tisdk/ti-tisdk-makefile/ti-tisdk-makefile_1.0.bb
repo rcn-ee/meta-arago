@@ -52,6 +52,7 @@ SRC_URI = "\
     file://Makefile_mmwavegesture-hmi \
     file://Makefile_pdm-anomaly-detection \
     file://Makefile_ti-ipc \
+    file://Makefile_jailhouse \
 "
 
 PR = "r100"
@@ -186,6 +187,7 @@ MAKEFILES_append_k3 = " u-boot-spl \
 			mmwavegesture-hmi \
                         pdm-anomaly-detection \
                         ti-ipc \
+                        jailhouse \
 "
 
 MAKEFILES_append_am65xx = " \
@@ -244,6 +246,9 @@ IPC_TOOLS_PATHS_append_omap-a15 = " ${IPC_TOOLS_PATHS_C66} ${IPC_TOOLS_PATHS_M4}
 IPC_TOOLS_PATHS_append_omapl138 = " ${IPC_TOOLS_PATHS_C674}"
 IPC_TOOLS_PATHS_append_k3 = "${IPC_TOOLS_PATHS_R5F}"
 
+# Populate Jailhouse config header
+JH_PLATFORM = "${MACHINE}"
+JH_PLATFORM_k3 = "k3"
 
 # If it's not defined at all, like for zImage case
 UBOOT_LOADADDRESS ?= "0"
@@ -310,6 +315,7 @@ do_install () {
     sed -i -e "s/__BOOT_MONITOR_MAKE_TARGET__/${BOOT_MONITOR_MAKE_TARGET}/g" ${D}/Makefile
     sed -i -e "s/__PRU_ICSS_INSTALL_TARGET__/${PRU_ICSS_INSTALL_TARGET}/g" ${D}/Makefile
     sed -i -e "s/__IPC_TOOLS_PATHS__/${IPC_TOOLS_PATHS}/g" ${D}/Makefile
+    sed -i -e "s/__JH_PLATFORM__/${JH_PLATFORM}/" ${D}/Makefile
     sed -i -e "s/__TISDK_VERSION__/${TISDK_VERSION}/g" ${D}/Makefile
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
