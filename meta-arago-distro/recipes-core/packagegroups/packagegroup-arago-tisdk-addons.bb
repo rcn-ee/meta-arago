@@ -74,10 +74,11 @@ UTILS_append_k3 = " mmc-utils \
                     parted \
                     switch-config \
                     irqbalance \
+                    jailhouse \
 "
 
 UTILS_append_am65xx = " ipc-lld-fw ti-ipc-rtos-fw pru-icss"
-UTILS_append_j7-evm = " ipc-lld-fw ti-display-sharing-fw jailhouse"
+UTILS_append_j7-evm = " ipc-lld-fw ti-display-sharing-fw"
 
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 

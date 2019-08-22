@@ -36,6 +36,10 @@ UTILS_append_k2g = " \
     pru-icss-src \
 "
 
+UTILS_append_k3 = " \
+    jailhouse-src \
+"
+
 UTILS_append_am65xx = " \
     pru-icss-src \
 "
