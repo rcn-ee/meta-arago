@@ -35,7 +35,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r1.12;protocol=http
 
 SRCREV = "5b900cfe4b3b848f577315a0dde09a729f770e95"
 
-PR = "r1"
+PR = "r2"
 
 S = "${WORKDIR}/git"
 
@@ -94,7 +94,7 @@ do_compile() {
 
 do_install() {
     install -d ${D}${libdir}
-    install -m 0644 ${S}/tensorflow/contrib/lite/tools/make/gen/${TARGET_OS}_${TUNE_ARCH}/lib/libtensorflow-lite.a ${D}${libdir}/
+    install -m 0644 ${S}/tensorflow/contrib/lite/tools/make/gen/${TARGET_OS}_${TUNE_ARCH}/lib/*.a ${D}${libdir}/
     install -d ${D}${includedir}/tensorflow/contrib/lite
     install -m 0644 ${S}/tensorflow/contrib/lite/*.h ${D}${includedir}/tensorflow/contrib/lite/
     install -d ${D}${includedir}/tensorflow/contrib/lite/c
@@ -114,6 +114,16 @@ do_install() {
     sed -i 's:@version@:${PV}:g
         s:@libdir@:${libdir}:g
         s:@includedir@:${includedir}:g' ${D}${libdir}/pkgconfig/tensorflow-lite.pc
+    # install examples
+    install -d ${D}${datadir}/${PN}-${PV}/examples
+    install -m 0755 ${S}/tensorflow/contrib/lite/tools/make/gen/${TARGET_OS}_${TUNE_ARCH}/bin/minimal ${D}${datadir}/${PN}-${PV}/examples
+    install -m 0755 ${S}/tensorflow/contrib/lite/tools/make/gen/${TARGET_OS}_${TUNE_ARCH}/bin/benchmark_model ${D}${datadir}/${PN}-${PV}/examples
 }
+
+PACKAGES += "${PN}-examples"
+
+FILES_${PN}-examples = " \
+    ${datadir}/${PN}-${PV}/examples/minimal \
+    ${datadir}/${PN}-${PV}/examples/benchmark_model \ "
 
 ALLOW_EMPTY_${PN} = "1"
