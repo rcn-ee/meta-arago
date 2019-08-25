@@ -4,6 +4,8 @@ Date: Wed, 12 Jun 2019 13:12:09 -0400
 Subject: [PATCH] Avoid stringop-overflow warning resulting in compilation
  error
 
+Upstream-Status: Inappropriate [TI only test code]
+
 Signed-off-by: Djordje Senicic <x0157990@ti.com>
 ---
  src/armnn/LayerSupport.cpp | 2 ++
