@@ -7,25 +7,14 @@ COMPATIBLE_MACHINE = "armv7a|aarch64"
 
 SRC_URI = " \
     git://review.mlplatform.org/ml/ComputeLibrary;protocol=https;branch=${BRANCH} \
-    file://0001-add-ti-benchmark-test-group.patch \
-    file://0002-add-ti-benchmark-test-group.patch \
-    file://0003-add-ti-benchmark-test-group.patch \
-    file://0004-add-ti-benchmark-test-group.patch \
-    file://0005-add-ti-benchmark-test-group.patch \
-    file://0006-add-ti-benchmark-test-group.patch \
-    file://0007-add-ti-benchmark-test-group.patch \
-    file://0008-add-ti-benchmark-test-group.patch \
-    file://0009-add-ti-benchmark-test-group.patch \
-    file://0010-add-ti-benchmark-test-group.patch \
-    file://0011-add-ti-benchmark-test-group.patch \
 "
+
 PR = "r0"
-PV  = "19.05"
+PV  = "19.08"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
-BRANCH = "branches/arm_compute_19_05"
-SRCREV = "bd17a169153ee181100f3b31984968b66618ef3c"
-
+BRANCH = "branches/arm_compute_19_08"
+SRCREV = "35c3eb011d8e2813d83c6a6cbe28a446534e4a14"
 
 S = "${WORKDIR}/git"
 
