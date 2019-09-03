@@ -1,19 +1,20 @@
-From ad22150032bda1b1a8d0f0cb4b0b020f80724313 Mon Sep 17 00:00:00 2001
+From 94bec1c47b8da6350c598827950ef4852e998bd9 Mon Sep 17 00:00:00 2001
 From: Djordje Senicic <x0157990@ti.com>
-Date: Mon, 24 Jun 2019 15:10:04 -0400
-Subject: [PATCH] generate versioned library
+Date: Mon, 2 Sep 2019 10:16:21 -0400
+Subject: [PATCH] Generate versioned library
 
 Upstream-Status: Inappropriate [configuration]
+
 Signed-off-by: Djordje Senicic <x0157990@ti.com>
 ---
  CMakeLists.txt | 4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b6c97761..5c7b13a7 100644
+index 8bdcd8df..38d1390f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -88,6 +88,7 @@ if(BUILD_CAFFE_PARSER)
+@@ -95,6 +95,7 @@ if(BUILD_CAFFE_PARSER)
  
      target_link_libraries(armnnCaffeParser armnn)
      target_link_libraries(armnnCaffeParser ${PROTOBUF_LIBRARIES})
@@ -21,7 +22,7 @@ index b6c97761..5c7b13a7 100644
  
  endif()
  
-@@ -112,6 +113,7 @@ if(BUILD_ONNX_PARSER)
+@@ -119,6 +120,7 @@ if(BUILD_ONNX_PARSER)
  
      # Protobuf
      target_link_libraries(armnnOnnxParser ${PROTOBUF_LIBRARIES})
@@ -29,18 +30,18 @@ index b6c97761..5c7b13a7 100644
  endif()
  
  if(BUILD_TF_PARSER)
-@@ -135,6 +137,7 @@ if(BUILD_TF_PARSER)
+@@ -142,6 +144,7 @@ if(BUILD_TF_PARSER)
  
      # Protobuf (use the specific version tensorflow wants)
      target_link_libraries(armnnTfParser ${PROTOBUF_LIBRARIES})
 +    set_target_properties(armnnTfParser PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
  endif()
  
- if(BUILD_ARMNN_QUANTIZER)
-@@ -430,6 +433,7 @@ endif()
- install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+ if(BUILD_ARMNN_QUANTIZER AND ARMNNREF)
+@@ -473,6 +476,7 @@ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
  
- target_link_libraries(armnn ${Boost_LOG_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+ target_link_libraries(armnn ${Boost_LOG_LIBRARY} ${Boost_THREAD_LIBRARY}
+                             ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
 +set_target_properties(armnn PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
  
  if(ARMCOMPUTENEON OR ARMCOMPUTECL)
