@@ -1,0 +1,63 @@
+From 46c54daed15b94861569b401c9612a25f615c0f1 Mon Sep 17 00:00:00 2001
+From: Angela Stegmaier <angelabaker@ti.com>
+Date: Tue, 20 Aug 2019 15:59:02 -0500
+Subject: [PATCH] v4l2object: Update formats table to include YUV422
+ multiplanar
+
+YUV422 multiplanar is missing from the table. Add the support
+for this format.
+
+Upstream-Status: Pending
+
+Signed-off-by: Angela Stegmaier <angelabaker@ti.com>
+---
+ sys/v4l2/gstv4l2object.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
+index c32608c..87d262f 100644
+--- a/sys/v4l2/gstv4l2object.c
++++ b/sys/v4l2/gstv4l2object.c
+@@ -129,6 +129,7 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
+   {V4L2_PIX_FMT_UYVY, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_VYUY, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_YUV422P, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_YUV422M, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_YUV411P, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_Y41P, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_YUV444, TRUE, GST_V4L2_RAW},
+@@ -1088,6 +1089,7 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
+       rank = YUV_BASE_RANK + 4;
+       break;
+     case V4L2_PIX_FMT_YUV422P: /* Y42B, 16 bits per pixel */
++    case V4L2_PIX_FMT_YUV422M:
+       rank = YUV_BASE_RANK + 8;
+       break;
+ 
+@@ -1343,6 +1345,7 @@ gst_v4l2_object_v4l2fourcc_to_video_format (guint32 fourcc)
+       format = GST_VIDEO_FORMAT_Y41B;
+       break;
+     case V4L2_PIX_FMT_YUV422P:
++    case V4L2_PIX_FMT_YUV422M:
+       format = GST_VIDEO_FORMAT_Y42B;
+       break;
+     case V4L2_PIX_FMT_YVYU:
+@@ -1484,6 +1487,7 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+     case V4L2_PIX_FMT_YVU420:
+     case V4L2_PIX_FMT_UYVY:
+     case V4L2_PIX_FMT_YUV422P:
++    case V4L2_PIX_FMT_YUV422M:
+     case V4L2_PIX_FMT_YVYU:
+     case V4L2_PIX_FMT_YUV411P:{
+       GstVideoFormat format;
+@@ -1714,6 +1718,7 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
+         break;
+       case GST_VIDEO_FORMAT_Y42B:
+         fourcc = V4L2_PIX_FMT_YUV422P;
++        fourcc_nc = V4L2_PIX_FMT_YUV422M;
+         break;
+       case GST_VIDEO_FORMAT_NV12:
+         fourcc = V4L2_PIX_FMT_NV12;
+-- 
+1.9.1
+
