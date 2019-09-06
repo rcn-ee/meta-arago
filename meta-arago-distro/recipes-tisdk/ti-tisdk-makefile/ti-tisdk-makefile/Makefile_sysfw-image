@@ -1,3 +1,29 @@
+# Define the following to support multple platforms
+PLATFORM_TYPE_$(PLATFORM) = gp
+PLATFORM_TYPE_am65xx-hs-evm = hs
+PLATFORM_TYPE = $(PLATFORM_TYPE_$(PLATFORM))
+
+SYSFW_CONFIG = evm
+
+SYSFW_SOC_$(PLATFORM) = NULL
+SYSFW_SOC_am65xx-evm = am65x
+SYSFW_SOC_am65xx-hs-evm = am65x
+SYSFW_SOC_j7-evm = j721e
+SYSFW_SOC = $(SYSFW_SOC_$(PLATFORM))
+
+SYSFW_PREFIX = ti-sci-firmware
+
+SYSFW_BASE = $(SYSFW_PREFIX)-$(SYSFW_SOC)-$(PLATFORM_TYPE)
+
+SYSFW_MAKEARGS_common = SYSFW_DL_URL="" SYSFW_HS_DL_URL="" SYSFW_HS_INNER_CERT_DL_URL="" \
+                        SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE).bin \
+                        SOC=$(SYSFW_SOC) CONFIG=$(SYSFW_CONFIG)
+
+SYSFW_MAKEARGS_gp = 
+SYSFW_MAKEARGS_hs = HS=1 SYSFW_HS_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-enc.bin \
+                    SYSFW_HS_INNER_CERT_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-cert.bin
+
+SYSFW_MAKEARGS = $(SYSFW_MAKEARGS_common) $(SYSFW_MAKEARGS_$(PLATFORM_TYPE))
 
 # Depend on linux-dtbs for the dtc utility
 sysfw-image: linux-dtbs
@@ -5,7 +31,7 @@ sysfw-image: linux-dtbs
 	@echo    Building SYSFW Image
 	@echo =============================
 	@cd board-support; cd `find . -maxdepth 1 -type d -name "*system-firmware-image*"`; \
-		make SYSFW_DL_URL="" SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/ti-sci-firmware-am65x-gp.bin CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) PATH=$(PATH):$(LINUXKERNEL_INSTALL_DIR)/scripts/dtc
+		make $(SYSFW_MAKEARGS) CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) PATH=$(PATH):$(LINUXKERNEL_INSTALL_DIR)/scripts/dtc
 
 sysfw-image_clean:
 	@echo =============================
