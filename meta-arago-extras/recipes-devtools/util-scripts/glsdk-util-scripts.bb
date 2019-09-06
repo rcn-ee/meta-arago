@@ -3,12 +3,13 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://debug/filter-dmesg-rproc.sh;md5=ce264e7cbc036fd2f37073947c2f0800"
 PR = "r1"
 
-COMPATIBLE_MACHINE = "omap-a15"
+COMPATIBLE_MACHINE = "omap-a15|j7-evm"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+RDEPENDS_${PN} += "bash"
 
 SRC_URI = "git://git.ti.com/glsdk/util-scripts.git"
 
-SRCREV = "ecbb9cd13e1728686a82e87e5c1b325c0e806202"
+SRCREV = "df50ca1592cae97ad0c7285686d602926b4f7305"
 
 S = "${WORKDIR}/git"
 
@@ -20,8 +21,11 @@ do_install() {
     install -d ${D}${datadir}/ti/util-scripts
     install -d ${D}${datadir}/ti/util-scripts/debug
     install -d ${D}${datadir}/ti/util-scripts/perf
-    install -m 0644 ${S}/debug/* ${D}${datadir}/ti/util-scripts/debug/.
-    install -m 0644 ${S}/perf/* ${D}${datadir}/ti/util-scripts/perf/.
+    install -d ${D}${datadir}/ti/util-scripts/demo
+    install -m 755 ${S}/debug/* ${D}${datadir}/ti/util-scripts/debug/.
+    install -m 755 ${S}/perf/* ${D}${datadir}/ti/util-scripts/perf/.
+    install -m 755 ${S}/demo/* ${D}${datadir}/ti/util-scripts/demo/.
+
 }
 
 FILES_${PN} += "${datadir}/ti/util-scripts/*"
