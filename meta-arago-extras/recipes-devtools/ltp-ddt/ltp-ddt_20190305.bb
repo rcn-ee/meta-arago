@@ -43,7 +43,10 @@ SRCREV = "2a01542a86a76c925f70cf0090350ac2799d4edb"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
+    file://0001-Add-configure-time-check-for-getdents-getdents64-API.patch \
+    file://0002-check-for-RES_USE_INET6-during-configure.patch \
     file://0003-Add-knob-to-control-tirpc-support.patch \
+    file://0001-getcpu01-Rename-getcpu-to-avoid-conflict-with-glibc-.patch \
 "
 
 S = "${WORKDIR}/git"
