@@ -5,7 +5,7 @@ LICENSE = "BSD"
 require recipes-ti/ocl/ocl.inc
 require recipes-ti/includes/arago-paths.inc
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.0"
 
 COMPATIBLE_MACHINE = "omap-a15"
 PACKAGE_ARCH = "${MACHINE_ARCH}"

@@ -38,6 +38,7 @@ export WANT_LLVM_RELEASE = "3.6-ti"
 OCL_BUILD_TARGET_omap-a15   = "ARM_AM57"
 
 ENABLE_ULM = "0"
+SHMEM_MANAGER = "CMEM"
 
 RELEASE_TARGET = ""
 RELEASE_TARGET_omap-a15 = "am57xx"
@@ -63,6 +64,7 @@ do_configure() {
         -DBUILD_TARGET=${OCL_BUILD_TARGET} \
         -DBUILD_OUTPUT=lib \
         -DENABLE_ULM=${ENABLE_ULM} \
+        -DSHMEM_MANAGER=${SHMEM_MANAGER} \
         -DBUILD_OS=SYS_BIOS \
         -DIPC_INSTALL_PATH=${IPC_INSTALL_DIR}/packages \
         -DXDC_INSTALL_PATH=${XDC_INSTALL_DIR}/packages \
