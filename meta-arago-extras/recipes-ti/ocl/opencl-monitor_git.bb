@@ -5,9 +5,7 @@ LICENSE = "BSD"
 include ocl.inc
 require recipes-ti/includes/arago-paths.inc
 
-SRC_URI += "file://0002-OpenCL_l2_cache_size.patch;patchdir=${WORKDIR}/git"
-
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.0"
 
 inherit update-alternatives
 
