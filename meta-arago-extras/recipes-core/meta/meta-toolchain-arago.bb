@@ -149,7 +149,7 @@ cleanup_toolchain_packages() {
 	fi
 }
 
-fakeroot tar_sdk() {
+fakeroot archive_sdk() {
 	# Package it up
 	mkdir -p ${SDK_DEPLOY}
 	cd ${SDK_OUTPUT}/${SDKPATH}
