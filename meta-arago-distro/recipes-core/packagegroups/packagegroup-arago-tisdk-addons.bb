@@ -148,7 +148,7 @@ EXTRA_PACKAGES_omapl138 = " \
     protobuf \
 "
 
-ARMNN_PACKAGES = "armnn"
+ARMNN_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'armnn', '', d)}"
 
 EXTRA_PACKAGES_append_ti33x = " voxelsdk \
                                 arm-compute-library \
