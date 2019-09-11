@@ -149,20 +149,21 @@ EXTRA_PACKAGES_omapl138 = " \
 "
 
 ARMNN_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'armnn', '', d)}"
+VOXEL_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'voxelsdk', '', d)}"
 
-EXTRA_PACKAGES_append_ti33x = " voxelsdk \
+EXTRA_PACKAGES_append_ti33x = " ${VOXEL_PACKAGES} \
                                 arm-compute-library \
                                 ${ARMNN_PACKAGES} \
                                 pdm-anomaly-detection \
 "
 
-EXTRA_PACKAGES_append_ti43x = " voxelsdk \
+EXTRA_PACKAGES_append_ti43x = " ${VOXEL_PACKAGES} \
                                 arm-compute-library \
                                 ${ARMNN_PACKAGES} \
                                 pdm-anomaly-detection \
 "
 
-EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
+EXTRA_PACKAGES_append_omap-a15 = " ${VOXEL_PACKAGES} \
                                    big-data-ipc-demo-linux \
                                    big-data-ipc-demo-linux-firmware \
                                    arm-compute-library \

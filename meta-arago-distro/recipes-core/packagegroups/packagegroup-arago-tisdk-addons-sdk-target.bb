@@ -154,19 +154,20 @@ EXTRA_LIBS_append_k2e = " libulm-staticdev \
 "
 
 ARMNN_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'armnn-dev', '', d)}"
+VOXEL_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'voxelsdk-dev', '', d)}"
 
 EXTRA_PACKAGES = ""
-EXTRA_PACKAGES_append_ti33x = " voxelsdk-dev \
+EXTRA_PACKAGES_append_ti33x = " ${VOXEL_PACKAGES} \
                                 arm-compute-library-dev \
                                 ${ARMNN_PACKAGES} \
                                 pdm-anomaly-detection-dev \
 "
-EXTRA_PACKAGES_append_ti43x = " voxelsdk-dev \
+EXTRA_PACKAGES_append_ti43x = " ${VOXEL_PACKAGES} \
                                 arm-compute-library-dev \
                                 ${ARMNN_PACKAGES} \
                                 pdm-anomaly-detection-dev \
 "
-EXTRA_PACKAGES_append_omap-a15 = " voxelsdk-dev \
+EXTRA_PACKAGES_append_omap-a15 = " ${VOXEL_PACKAGES} \
                                 arm-compute-library-dev \
                                 ${ARMNN_PACKAGES} \
                                 pdm-anomaly-detection-dev \
