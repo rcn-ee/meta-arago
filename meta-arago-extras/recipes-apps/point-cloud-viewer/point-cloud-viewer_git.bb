@@ -31,4 +31,4 @@ FILES_${PN} += "\
     ${datadir}/ti/pointclouds \
 "
 
-INSANE_SKIP_${PN} = "already-stripped"
+INSANE_SKIP_${PN} = "already-stripped file-rdeps"
