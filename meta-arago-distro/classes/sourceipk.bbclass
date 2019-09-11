@@ -290,9 +290,9 @@ INSANE_SKIP_${PN}-src += "${@oe.utils.conditional("${CREATE_SRCIPK}", "0", "", "
 
 python __anonymous () {
     if d.getVar("CREATE_SRCIPK") != "0":
+        if '${PN}-src' not in d.getVar("PACKAGES", False):
+            d.appendVar('PACKAGES', ' ${PN}-src')
         pn = d.getVar("PN")
-
-        d.appendVar('PACKAGES', ' %s-src' % (pn))
         d.setVar('FILES_%s-src' % (pn), '${SRCIPK_INSTALL_DIR}')
 }
 
