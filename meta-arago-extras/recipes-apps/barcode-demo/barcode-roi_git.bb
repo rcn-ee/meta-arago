@@ -2,6 +2,10 @@ DESCRIPTION = "Barcode demo to detect region of interest"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://detect_barcode.cpp;beginline=1;endline=25;md5=babab64d39715b3671dd16bcb4f4917b"
 
+inherit machine_features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
+
 DEPENDS += "opencv"
 
 PV = "01.00.00"
