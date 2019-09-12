@@ -1,0 +1,75 @@
+From 4bfbb6c8236c648f7fd8090a540e3590674dbd81 Mon Sep 17 00:00:00 2001
+From: Angela Stegmaier <angelabaker@ti.com>
+Date: Fri, 19 Jul 2019 15:19:17 -0500
+Subject: [PATCH 2/2] wayland-drm: Update to version 2
+
+Update the wayland-drm protocol to version 2
+
+Signed-off-by: Angela Stegmaier <angelabaker@ti.com>
+---
+ stable/wayland-drm/wayland-drm.xml | 35 +++++++++++++++++++++++++++++++++--
+ 1 file changed, 33 insertions(+), 2 deletions(-)
+
+diff --git a/stable/wayland-drm/wayland-drm.xml b/stable/wayland-drm/wayland-drm.xml
+index 265d4f8..83aa561 100644
+--- a/stable/wayland-drm/wayland-drm.xml
++++ b/stable/wayland-drm/wayland-drm.xml
+@@ -29,7 +29,7 @@
+ 
+   <!-- drm support. This object is created by the server and published
+        using the display's global event. -->
+-  <interface name="wl_drm" version="1">
++  <interface name="wl_drm" version="2">
+     <enum name="error">
+       <entry name="authenticate_fail" value="0"/>
+       <entry name="invalid_format" value="1"/>
+@@ -39,7 +39,8 @@
+     <enum name="format">
+       <!-- The drm format codes match the #defines in drm_fourcc.h.
+            The formats actually supported by the compositor will be
+-           reported by the format event. -->
++           reported by the format event. New codes must not be added,
++           unless directly taken from drm_fourcc.h. -->
+       <entry name="c8" value="0x20203843"/>
+       <entry name="rgb332" value="0x38424752"/>
+       <entry name="bgr233" value="0x38524742"/>
+@@ -150,6 +151,36 @@
+ 
+     <!-- Raised if the authenticate request succeeded -->
+     <event name="authenticated"/>
++
++    <enum name="capability" since="2">
++      <description summary="wl_drm capability bitmask">
++        Bitmask of capabilities.
++      </description>
++      <entry name="prime" value="1" summary="wl_drm prime available"/>
++    </enum>
++
++    <event name="capabilities">
++      <arg name="value" type="uint"/>
++    </event>
++
++    <!-- Version 2 additions -->
++
++    <!-- Create a wayland buffer for the prime fd.  Use for regular and planar
++         buffers.  Pass 0 for offset and stride for unused planes. -->
++    <request name="create_prime_buffer" since="2">
++      <arg name="id" type="new_id" interface="wl_buffer"/>
++      <arg name="name" type="fd"/>
++      <arg name="width" type="int"/>
++      <arg name="height" type="int"/>
++      <arg name="format" type="uint"/>
++      <arg name="offset0" type="int"/>
++      <arg name="stride0" type="int"/>
++      <arg name="offset1" type="int"/>
++      <arg name="stride1" type="int"/>
++      <arg name="offset2" type="int"/>
++      <arg name="stride2" type="int"/>
++    </request>
++
+   </interface>
+ 
+ </protocol>
+-- 
+1.9.1
+
