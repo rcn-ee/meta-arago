@@ -13,13 +13,13 @@ GRAPHICS_WAYLAND = "\
     weston-examples \
 "
 
-GRAPHICS_WAYLAND_append_omap-a15 = "\
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
-"
+#GRAPHICS_WAYLAND_append_omap-a15 = "\
+#    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
+#"
 
-GRAPHICS_WAYLAND_append_k3 = "\
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
-"
+#GRAPHICS_WAYLAND_append_k3 = "\
+#    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
+#"
 
 GRAPHICS_RDEPENDS = "\
     ${PREFERRED_PROVIDER_virtual/libgbm} \
