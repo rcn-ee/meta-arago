@@ -15,18 +15,6 @@ diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgb
 index 4023381..eb24175 100644
 --- a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.cpp
 +++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.cpp
-@@ -61,11 +61,6 @@ QEglFSKmsGbmIntegration::QEglFSKmsGbmIntegration()
-     qCDebug(qLcEglfsKmsDebug, "New DRM/KMS via GBM integration created");
- }
- 
--#ifndef EGL_EXT_platform_base
--typedef EGLDisplay (EGLAPIENTRYP PFNEGLGETPLATFORMDISPLAYEXTPROC) (EGLenum platform, void *native_display, const EGLint *attrib_list);
--typedef EGLSurface (EGLAPIENTRYP PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC) (EGLDisplay dpy, EGLConfig config, void *native_window, const EGLint *attrib_list);
--#endif
--
- #ifndef EGL_PLATFORM_GBM_KHR
- #define EGL_PLATFORM_GBM_KHR 0x31D7
- #endif
 @@ -83,7 +78,7 @@ EGLDisplay QEglFSKmsGbmIntegration::createDisplay(EGLNativeDisplayType nativeDis
      }
  
@@ -36,22 +24,6 @@ index 4023381..eb24175 100644
      } else {
          qCDebug(qLcEglfsKmsDebug, "No eglGetPlatformDisplay for GBM, falling back to eglGetDisplay");
          display = eglGetDisplay(nativeDisplay);
-diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.h b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.h
-index 71f232a..6467a21 100644
---- a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.h
-+++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmintegration.h
-@@ -48,6 +48,11 @@
- 
- QT_BEGIN_NAMESPACE
- 
-+#ifndef EGL_EXT_platform_base
-+typedef EGLDisplay (EGLAPIENTRYP PFNEGLGETPLATFORMDISPLAYEXTPROC) (EGLenum platform, void *native_display, const EGLint *attrib_list);
-+typedef EGLSurface (EGLAPIENTRYP PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC) (EGLDisplay dpy, EGLConfig config, void *native_window, const EGLint *attrib_list);
-+#endif
-+
- class QEglFSKmsDevice;
- 
- class QEglFSKmsGbmIntegration : public QEglFSKmsIntegration
 -- 
 1.9.1
 

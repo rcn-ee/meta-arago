@@ -14,10 +14,11 @@ QT_EGLFS_PATCHES = "\
     file://quit.png \
 "
 
+#    file://0002-deform-disable-opengl-button.patch
+
 SRC_URI += "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', "${QT_EGLFS_PATCHES}", d)}\
     file://0001-deform-Fix-how-controls-are-shown.patch \
-    file://0002-deform-disable-opengl-button.patch \
     file://0001-qtbase-plugins-platforms-eglfs_kms-fix-compiler-erro.patch \
 "
 
