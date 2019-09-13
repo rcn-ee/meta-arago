@@ -1,0 +1,47 @@
+From e9ce4695a1ea78434b7244705ef3fd2af7b360f7 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Thu, 12 Sep 2019 21:03:18 -0400
+Subject: [PATCH] Revert "gl-renderer: Add EGL_EXT_partial_update query"
+
+This reverts commit 0a86a81cc251330b15e213fde8434f291e35bf88.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ libweston/renderer-gl/gl-renderer.c | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl/gl-renderer.c
+index 6c2a56d..590ef09 100644
+--- a/libweston/renderer-gl/gl-renderer.c
++++ b/libweston/renderer-gl/gl-renderer.c
+@@ -233,8 +233,6 @@ struct gl_renderer {
+ 	bool has_egl_image_external;
+ 
+ 	bool has_egl_buffer_age;
+-	bool has_egl_partial_update;
+-	PFNEGLSETDAMAGEREGIONKHRPROC set_damage_region;
+ 
+ 	bool has_configless_context;
+ 
+@@ -3515,8 +3513,6 @@ gl_renderer_setup_egl_extensions(struct weston_compositor *ec)
+ 		(void *) eglGetProcAddress("eglUnbindWaylandDisplayWL");
+ 	gr->query_buffer =
+ 		(void *) eglGetProcAddress("eglQueryWaylandBufferWL");
+-	gr->set_damage_region =
+-		(void *) eglGetProcAddress("eglSetDamageRegionKHR");
+ 
+ 	extensions =
+ 		(const char *) eglQueryString(gr->egl_display, EGL_EXTENSIONS);
+@@ -3539,9 +3535,6 @@ gl_renderer_setup_egl_extensions(struct weston_compositor *ec)
+ 	if (weston_check_egl_extension(extensions, "EGL_EXT_buffer_age"))
+ 		gr->has_egl_buffer_age = true;
+ 
+-	if (weston_check_egl_extension(extensions, "EGL_KHR_partial_update"))
+-		gr->has_egl_partial_update = true;
+-
+ 	for (i = 0; i < ARRAY_LENGTH(swap_damage_ext_to_entrypoint); i++) {
+ 		if (weston_check_egl_extension(extensions,
+ 				swap_damage_ext_to_entrypoint[i].extension)) {
+-- 
+2.7.4
+

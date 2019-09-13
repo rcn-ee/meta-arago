@@ -1,0 +1,51 @@
+From c4e7764e9062729a320d2a81f4b4f1a2392454cb Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Thu, 12 Sep 2019 21:20:01 -0400
+Subject: [PATCH] Revert "gl-renderer: Support EGL_KHR_partial_update"
+
+This reverts commit df2095fa35fe84e4ebc30754dd9f25e50bd1aa47.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ libweston/renderer-gl/gl-renderer.c | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
+
+diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl/gl-renderer.c
+index 590ef09..a95e873 100644
+--- a/libweston/renderer-gl/gl-renderer.c
++++ b/libweston/renderer-gl/gl-renderer.c
+@@ -1531,8 +1531,8 @@ gl_renderer_repaint_output(struct weston_output *output,
+ 
+ 	/* In fan debug mode, redraw everything to make sure that we clear any
+ 	 * fans left over from previous draws on this buffer.
+-	 * This precludes the use of EGL_EXT_swap_buffers_with_damage and
+-	 * EGL_KHR_partial_update, since we damage the whole area. */
++	 * This precludes the use of EGL_EXT_swap_buffers_with_damage, since
++	 * we damage the whole area. */
+ 	if (gr->fan_debug) {
+ 		pixman_region32_t undamaged;
+ 		pixman_region32_init(&undamaged);
+@@ -1560,20 +1560,6 @@ gl_renderer_repaint_output(struct weston_output *output,
+ 	pixman_region32_union(&total_damage, &previous_damage, output_damage);
+ 	border_status |= go->border_status;
+ 
+-	if (gr->has_egl_partial_update && !gr->fan_debug) {
+-		int n_egl_rects;
+-		EGLint *egl_rects;
+-
+-		/* For partial_update, we need to pass the region which has
+-		 * changed since we last rendered into this specific buffer;
+-		 * this is total_damage. */
+-		pixman_region_to_egl_y_invert(output, &total_damage,
+-					      &egl_rects, &n_egl_rects);
+-		gr->set_damage_region(gr->egl_display, go->egl_surface,
+-				      egl_rects, n_egl_rects);
+-		free(egl_rects);
+-	}
+-
+ 	repaint_views(output, &total_damage);
+ 
+ 	pixman_region32_fini(&total_damage);
+-- 
+2.7.4
+
