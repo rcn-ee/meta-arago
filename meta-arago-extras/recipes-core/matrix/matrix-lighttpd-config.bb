@@ -22,7 +22,7 @@ do_install() {
 FILES_${PN} = "${sysconfdir}/lighttpd.conf.matrix"
 RDEPENDS_${PN} = "lighttpd lighttpd-module-setenv"
 
-pkg_postinst_${PN} () {
+pkg_postinst_ontarget_${PN} () {
 if [ -f $D${sysconfdir}/lighttpd.conf ] ; then
 	cp $D${sysconfdir}/lighttpd.conf.matrix $D${sysconfdir}/lighttpd.conf
 else
