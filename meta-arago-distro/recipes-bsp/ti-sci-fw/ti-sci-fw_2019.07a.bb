@@ -14,9 +14,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 TI_SECURE_DEV_PKG ?= ""
 export TI_SECURE_DEV_PKG
 
-SRCREV = "3f7c97c9f923f6fbf1b96dcae1da8620a3bab0b3"
+SRCREV = "fc39e69ec83bfb1c577bcb05cefca4da1172f878"
 BRANCH ?= "ti-linux-firmware"
-SRCREV_imggen = "38a82e00f84efdf381dba001fff75e8411898e99"
+SRCREV_imggen = "3b4a2007a54db72d8814ecbb2555392863c24935"
 SRCREV_FORMAT = "imggen"
 
 SRC_URI = " \
@@ -30,10 +30,10 @@ SRC_URI_append_am65xx-hs-evm = " \
 	http://install.source.dir.local/ti-sci-firmware-am65x-hs-enc.bin;name=hs-enc \
 "
 
-SRC_URI[hs-cert.md5sum] = "e36d9d945b4aa20347470c7c53dbc54a"
-SRC_URI[hs-cert.sha256sum] = "e32182a3b36e5fc9543ca920dafcc2163384e116c88e3c2625399bc1c2ad2f45"
-SRC_URI[hs-enc.md5sum] = "735128f2ac0dafdd44529f243b60a0c6"
-SRC_URI[hs-enc.sha256sum] = "46c2870e133058f68d6b25fd4979a0726b7c6e2a100d48431d47e47db4165c75"
+SRC_URI[hs-cert.md5sum] = "2607900285231ed9e505292d19bd5a22"
+SRC_URI[hs-cert.sha256sum] = "eded0fd276bc25061a95424487653862894b44c13f445a6a7c787f3d1cd758e3"
+SRC_URI[hs-enc.md5sum] = "52ed4f83bdf82e9dc62cb9986b933660"
+SRC_URI[hs-enc.sha256sum] = "51c474c4173b9cf489a7903ffc2d97b7fd6f6a65272cac24047da5d089424832"
 
 S = "${WORKDIR}/git"
 
