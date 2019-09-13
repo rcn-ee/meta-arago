@@ -19,16 +19,16 @@ EXTRA_PKGS = " \
     python-pyopencl \
 "
 
+#    ti-fftw-examples
 EXTRA_PKGS_append_k2hk = " \
     linalg-examples \
-    ti-fftw-examples \
 "
 
+#    ti-fftw-examples
 EXTRA_PKGS_append_dra7xx = " \
     linalg-examples \
     opencl-examples \
     kaldi \
-    ti-fftw-examples \
 "
 
 RDEPENDS_${PN} = "\
