@@ -19,8 +19,8 @@ WLAN_COMMON = "\
 "
 
 WLAN_TI = "\
-    wpa-supplicant-wl18xx \
-    hostap-daemon-wl18xx \
+    wpa-supplicant \
+    hostapd \
     wl18xx-calibrator \
     wl18xx-target-scripts \
     wl18xx-fw \

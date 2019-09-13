@@ -9,7 +9,7 @@ LICENSE = "GPLv2 | BSD"
 
 inherit pkgconfig
 
-DEPENDS = "gnutls dbus libnl openssl10 libgcrypt"
+DEPENDS = "gnutls dbus libnl openssl libgcrypt"
 RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 
 # To prevent users from accidently picking up this customized version of

@@ -11,14 +11,13 @@ CRYPTO_SUPPORT = "\
     openssl-bin \
     openssl-conf \
     openssl-engines \
-    openssl10 \
-    openssl10-engines \
 "
 
-CRYPTO_SUPPORT_append_ti33x = " ti-crypto-examples cryptodev-module cryptodev-tests"
-CRYPTO_SUPPORT_append_ti43x = " ti-crypto-examples cryptodev-module cryptodev-tests"
-CRYPTO_SUPPORT_append_dra7xx = " ti-crypto-examples cryptodev-module cryptodev-tests"
-CRYPTO_SUPPORT_append_keystone = " ti-crypto-examples cryptodev-module cryptodev-tests"
+#ti-crypto-examples
+CRYPTO_SUPPORT_append_ti33x = " cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT_append_ti43x = " cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT_append_dra7xx = " cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT_append_keystone = " cryptodev-module cryptodev-tests"
 
 RDEPENDS_${PN} = "\
     ${CRYPTO_SUPPORT} \

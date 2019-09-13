@@ -5,7 +5,7 @@ HOMEPAGE = "http://hostap.epitest.fi"
 DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
 SECTION = "kernel/userland"
 
-DEPENDS = "libnl openssl10"
+DEPENDS = "libnl openssl"
 
 # Since this is a TI customized version of hostap-daemon do not make this the
 # default
