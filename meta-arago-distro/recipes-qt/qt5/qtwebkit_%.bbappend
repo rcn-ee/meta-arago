@@ -8,7 +8,9 @@ SRC_URI += " \
 	file://GraphicsSurfaceGL_NoX.cpp.patch \
 "
 
-PR_append = ".arago6"
+PR_append = ".arago7"
+
+EXTRA_OECMAKE_append = " -DCMAKE_BUILD_TYPE=Release"
 
 EXTRA_OECMAKE_append_k3 = " -DUSE_SYSTEM_MALLOC=ON"
 
