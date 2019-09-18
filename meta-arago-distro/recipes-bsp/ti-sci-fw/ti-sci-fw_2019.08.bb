@@ -14,9 +14,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 TI_SECURE_DEV_PKG ?= ""
 export TI_SECURE_DEV_PKG
 
-SRCREV = "3f7c97c9f923f6fbf1b96dcae1da8620a3bab0b3"
+SRCREV = "c75bca342d5a8579c3a459515adb6b77d640a245"
 BRANCH ?= "ti-linux-firmware"
-SRCREV_imggen = "38a82e00f84efdf381dba001fff75e8411898e99"
+SRCREV_imggen = "92623d82dc683e74225ceaac239b29deac437adf"
 SRCREV_FORMAT = "imggen"
 
 SRC_URI = " \
