@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://fixgcc60.patch \
     file://fixpkgconfig.patch \
+    file://0001-morph.cl-fix-compilation-error.patch \
     file://0001-Fix-sign-macro-redefinition-compile-time-error.patch;patchdir=../contrib \
 "
 
