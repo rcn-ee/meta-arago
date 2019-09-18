@@ -1,0 +1,35 @@
+From c3befabd0420d6665cc61931af5aea00e82977e3 Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <x0157990@ti.com>
+Date: Tue, 17 Sep 2019 19:16:00 -0400
+Subject: [PATCH] morph.cl: fix compilation error
+
+Upstream-Status: Inappropriate [other]
+
+- TI C6x intrinsic _min2(), _max2() cannot be applied to data types  such as uchar3.
+
+Signed-off-by: Djordje Senicic <x0157990@ti.com>
+---
+ modules/imgproc/src/opencl/morph.cl | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/modules/imgproc/src/opencl/morph.cl b/modules/imgproc/src/opencl/morph.cl
+index 8e3ab2fa0..47243ca0c 100644
+--- a/modules/imgproc/src/opencl/morph.cl
++++ b/modules/imgproc/src/opencl/morph.cl
+@@ -90,11 +90,11 @@
+ #if defined INTEL_DEVICE && defined DEPTH_0
+ #define MORPH_OP(A, B) ((A) < (B) ? (A) : (B))
+ #else
+-#define MORPH_OP(A, B) _min2((A), (B))
++#define MORPH_OP(A, B) min((A), (B))
+ #endif
+ #endif
+ #ifdef OP_DILATE
+-#define MORPH_OP(A, B) _max2((A), (B))
++#define MORPH_OP(A, B) max((A), (B))
+ #endif
+ 
+ #define PROCESS(y, x) \
+-- 
+2.17.1
+
