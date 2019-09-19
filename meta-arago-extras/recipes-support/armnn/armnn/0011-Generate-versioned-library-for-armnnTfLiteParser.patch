@@ -1,0 +1,25 @@
+From 1f5670c6ef8669d7d25621d9c97d66178800dcf9 Mon Sep 17 00:00:00 2001
+From: Hongmei Gou <a0271529@ti.com>
+Date: Tue, 17 Sep 2019 17:58:39 -0400
+Subject: [PATCH] Generate versioned library for armnnTfLiteParser
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Hongmei Gou <a0271529@ti.com>
+---
+ src/armnnTfLiteParser/CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/armnnTfLiteParser/CMakeLists.txt b/src/armnnTfLiteParser/CMakeLists.txt
+index 17d4cf68..c83f7059 100755
+--- a/src/armnnTfLiteParser/CMakeLists.txt
++++ b/src/armnnTfLiteParser/CMakeLists.txt
+@@ -24,4 +24,5 @@ if(BUILD_TF_LITE_PARSER)
+     install(TARGETS armnnTfLiteParser
+             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+             RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
++    set_target_properties(armnnTfLiteParser PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+ endif()
+-- 
+2.17.1
+
