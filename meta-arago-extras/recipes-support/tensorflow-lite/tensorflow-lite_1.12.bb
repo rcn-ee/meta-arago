@@ -40,7 +40,7 @@ SRC_URI[mobilenet_v1_quant.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226d
 
 SRCREV = "5b900cfe4b3b848f577315a0dde09a729f770e95"
 
-PR = "r3"
+PR = "r4"
 
 S = "${WORKDIR}/git"
 
@@ -112,6 +112,7 @@ do_install() {
     install -m 0644 ${S}/tensorflow/contrib/lite/profiling/*.h ${D}${includedir}/tensorflow/contrib/lite/profiling/
     install -d ${D}${includedir}/tensorflow/contrib/lite/schema/
     install -m 0644 ${S}/tensorflow/contrib/lite/schema/*.h ${D}${includedir}/tensorflow/contrib/lite/schema/
+    install -m 0644 ${S}/tensorflow/contrib/lite/schema/schema.fbs ${D}${includedir}/tensorflow/contrib/lite/schema/
     install -d ${D}${includedir}/tensorflow/contrib/lite/tools/
     install -m 0644 ${S}/tensorflow/contrib/lite/tools/*.h ${D}${includedir}/tensorflow/contrib/lite/tools/
     install -d ${D}${libdir}/pkgconfig
