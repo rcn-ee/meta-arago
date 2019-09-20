@@ -39,6 +39,12 @@ UTILS_append_k2g = " \
 UTILS_append_k3 = " \
     jailhouse-src \
     ti-sci-fw-src \
+    arm-trusted-firmware-src \
+"
+
+UTILS_append_j7-evm = " \
+    ti-img-encode-decode-src \
+    ti-img-rogue-driver-src \
 "
 
 UTILS_append_am65xx = " \
