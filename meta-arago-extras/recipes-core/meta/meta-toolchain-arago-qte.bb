@@ -5,7 +5,7 @@ TOOLCHAIN_SUFFIX ?= "-qte-sdk"
 
 require meta-toolchain-arago.bb
 
-PR = "r19"
+PR = "r20"
 
 # There could be qt5, qt4e and qt4x11 providers, but we don't support qt4x11 for now
 QT_DIR_NAME = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'qtopia', d)}"
@@ -19,10 +19,10 @@ toolchain_create_sdk_env_script_append() {
 	echo 'export OE_QMAKE_CFLAGS="$CFLAGS"' >> $script
 	echo 'export OE_QMAKE_CXXFLAGS="$CXXFLAGS"' >> $script
 	echo 'export OE_QMAKE_LDFLAGS="$LDFLAGS"' >> $script
-	echo 'export OE_QMAKE_CC=$CC' >> $script
-	echo 'export OE_QMAKE_CXX=$CXX' >> $script
-	echo 'export OE_QMAKE_LINK=$CXX' >> $script
-	echo 'export OE_QMAKE_AR=$AR' >> $script
+	echo 'export OE_QMAKE_CC="$CC"' >> $script
+	echo 'export OE_QMAKE_CXX="$CXX"' >> $script
+	echo 'export OE_QMAKE_LINK="$CXX"' >> $script
+	echo 'export OE_QMAKE_AR="$AR"' >> $script
 	echo 'export OE_QMAKE_PREFIX_QT=${prefix}' >> $script
 	echo 'export OE_QMAKE_LIBDIR_QT=${libdir}' >> $script
 	echo 'export OE_QMAKE_INCDIR_QT=${includedir}/${QT_DIR_NAME}' >> $script
