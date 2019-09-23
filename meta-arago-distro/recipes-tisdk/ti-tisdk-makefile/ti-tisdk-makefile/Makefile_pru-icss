@@ -106,3 +106,25 @@ pru-icss_install_am65x: pru-icss_install_common
 				$(DESTDIR)/lib/firmware/pru; \
 		done; \
 	done
+
+pru-icss_install_j721e: pru-icss_install_common
+	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
+	for i in 0 1; \
+	do \
+		install -m 0644 ./examples/j721e/PRU_Halt/gen/PRU$${i}/PRU_Halt_$${i}.out \
+			$(DESTDIR)/lib/firmware/pru; \
+		install -m 0644 ./examples/j721e/RTU_Halt/gen/RTU$${i}/RTU_Halt_$${i}.out \
+			$(DESTDIR)/lib/firmware/pru; \
+		install -m 0644 ./examples/j721e/TX_PRU_Halt/gen/TX_PRU$${i}/PRU_Halt_$${i}.out \
+			$(DESTDIR)/lib/firmware/pru; \
+	done; \
+	for i in 0 1; \
+	do \
+		for j in 0 1; \
+		do \
+			install -m 0644 ./examples/j721e/PRU_RPMsg_Echo_Interrupt$${j}/gen/icssg$${i}/PRU_RPMsg_Echo_Interrupt$${i}_$${j}.out \
+				$(DESTDIR)/lib/firmware/pru; \
+			install -m 0644 ./examples/j721e/RTU_RPMsg_Echo_Interrupt$${j}/gen/icssg$${i}/RTU_RPMsg_Echo_Interrupt$${i}_$${j}.out \
+				$(DESTDIR)/lib/firmware/pru; \
+		done; \
+	done

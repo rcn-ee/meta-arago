@@ -55,7 +55,7 @@ SRC_URI = "\
     file://Makefile_jailhouse \
 "
 
-PR = "r101"
+PR = "r102"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -195,6 +195,9 @@ MAKEFILES_append_am65xx = " \
                         pdm-anomaly-detection \
 "
 
+MAKEFILES_append_j7-evm = " pru-icss \
+"
+
 # Use this to export kernel arch to ARCH
 #
 # We need to be very careful here. This class will also overwrite UBOOT_ARCH
@@ -230,6 +233,7 @@ PRU_ICSS_INSTALL_TARGET_ti43x = "pru-icss_install_am437x"
 PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
 PRU_ICSS_INSTALL_TARGET_k2g = "pru-icss_install_k2g"
 PRU_ICSS_INSTALL_TARGET_am65xx = "pru-icss_install_am65x"
+PRU_ICSS_INSTALL_TARGET_j7-evm = "pru-icss_install_j721e"
 
 # Path to toolchains for the various cores in TI SOCs
 #
