@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r35"
+PR = "r36"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -45,6 +45,7 @@ UTILS_append_k3 = " \
 UTILS_append_j7-evm = " \
     ti-img-encode-decode-src \
     ti-img-rogue-driver-src \
+    pru-icss-src \
 "
 
 UTILS_append_am65xx = " \
