@@ -51,6 +51,7 @@ SRC_URI = "\
     file://Makefile_sysfw-image \
     file://Makefile_mmwavegesture-hmi \
     file://Makefile_pdm-anomaly-detection \
+    file://Makefile_tiovx-app-host \
     file://Makefile_ti-ipc \
     file://Makefile_jailhouse \
 "
@@ -124,6 +125,7 @@ MAKEFILES_append_dra7xx = " cryptodev \
                             openmpacc-examples \
                             qt-opencv-opencl-opengl-multithreaded \
                             linalg-examples \
+                            tiovx-app-host \
 "
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \

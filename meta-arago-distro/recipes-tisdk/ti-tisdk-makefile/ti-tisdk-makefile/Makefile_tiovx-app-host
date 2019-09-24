@@ -1,0 +1,34 @@
+# tiovx-app-host build targets
+tiovx-app-host:
+	@echo =====================================
+	@echo     Building TIOVX Host Application
+	@echo =====================================
+	@cd example-applications; cd `find . -name "*tiovx-app-host*"`; . $(ENV_SETUP); make \
+		TARGET_ROOTDIR=$(SDK_PATH_TARGET) \
+		GCCLINARO=$(LINUX_DEVKIT_PATH)/sysroots/x86_64-arago-linux/usr \
+		TIOVXPATH=$(SDK_PATH_TARGET)/usr/include/VX \
+		IPCPATH=$(SDK_PATH_TARGET)/usr/share/ti/ti-ipc-tree \
+		SDKPLATFORMIFPATH=$(SDK_PATH_TARGET)/usr/share/ti/ti-tiovx-lib-tree/sys-iface \
+		PROC_LIST='host khronos_example'
+
+tiovx-app-host_install:
+	@echo =======================================
+	@echo     Installing TIOVX Host Application
+	@echo =======================================
+	@if [ ! -d $(DESTDIR) ] ; then \
+		echo "The extracted target filesystem directory doesn't exist."; \
+		echo "Please run setup.sh in the SDK's root directory and then try again."; \
+		exit 1; \
+	fi
+	@cd example-applications; \
+	cd `find . -name "*tiovx-app-host*"`; \
+	install -m 0755 host/bin/debug/app_host $(DESTDIR)/usr/bin/tiovx-app_host; \
+	install -m 0755 khronos_example/bin/debug/opticalflow $(DESTDIR)/usr/bin/tiovx-opticalflow
+
+tiovx-app-host_clean:
+	@echo =======================================
+	@echo     Cleaning TIOVX Host Application
+	@echo =======================================
+	@cd example-applications; cd `find . -name "*tiovx-app-host*"`; . $(ENV_SETUP); \
+	make PROC_LIST='host khronos_example' clean
+
