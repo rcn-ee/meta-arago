@@ -43,7 +43,7 @@ BT_COMMON = "\
 "
 
 BT_TI = "\
-    uim \
+    uim-sysfs \
     bt-enable \
     bt-fw \
 "
