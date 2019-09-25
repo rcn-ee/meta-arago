@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to include Matrix v2"
 LICENSE = "MIT"
-PR = "r80"
+PR = "r81"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -28,7 +28,6 @@ MATRIX_COMMON_APPS = "              \
     matrix-gui-oprofile-demos       \
     matrix-gui-settings-demos       \
     matrix-gui-usb-demos            \
-    matrix-gui-submenus-ethernet    \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'matrix-gui-weston-terminal-demo', '', d)} \
 "
 
