@@ -181,11 +181,8 @@ MAKEFILES_append_k2g = " pru-icss"
 
 MAKEFILES_append_k3 = " u-boot-spl \
                         linux-dtbs \
-                        barcode-roi \
                         cryptodev \
                         sysfw-image \
-			mmwavegesture-hmi \
-                        pdm-anomaly-detection \
                         ti-ipc \
                         jailhouse \
 "
@@ -193,6 +190,9 @@ MAKEFILES_append_k3 = " u-boot-spl \
 MAKEFILES_append_am65xx = " \
                         pru-icss \
                         ti-sgx-ddk-km \
+                        barcode-roi \
+                        mmwavegesture-hmi \
+                        pdm-anomaly-detection \
 "
 
 # Use this to export kernel arch to ARCH
@@ -353,6 +353,8 @@ do_install () {
 K3_UBOOT_MACHINE_R5 = ""
 K3_UBOOT_MACHINE_R5_am65xx-evm = "am65x_evm_r5_defconfig"
 K3_UBOOT_MACHINE_R5_am65xx-hs-evm = "am65x_hs_evm_r5_defconfig"
+K3_UBOOT_MACHINE_R5_j7-evm = "j721e_evm_r5_config"
+
 do_install_append_k3() {
     cat >> ${D}/Rules.make << __EOF__
 
