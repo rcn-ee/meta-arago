@@ -1,6 +1,6 @@
 DESCRIPTION = "Additional packages beyond console packages shared by TI SDKs"
 LICENSE = "MIT"
-PR = "r21"
+PR = "r22"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -20,6 +20,7 @@ RDEPENDS_${PN} = "\
     iptables \
     iperf \
     iperf3 \
+    netperf \
     arago-gpl-notice \
     arago-feed-config \
     nfs-utils-client \
