@@ -100,6 +100,7 @@ ti-ipc-linux-examples: ti-ipc-rtos-path-check
 		TOOLCHAIN_LONGNAME=$${TOOLCHAIN_SYS} \
 		TOOLCHAIN_INSTALL_DIR=$${SDK_PATH_NATIVE}/usr \
 		TOOLCHAIN_PREFIX=$(CROSS_COMPILE) \
+		LINUX_SYSROOT_DIR=$(SDK_PATH_TARGET) \
 		$(IPC_TOOLS_PATHS)
 
 ti-ipc-linux-examples_install: ti-ipc-rtos-path-check ti-ipc-linux-examples
@@ -131,5 +132,6 @@ ti-ipc-linux-examples_clean: ti-ipc-rtos-path-check
 		TOOLCHAIN_LONGNAME=$${TOOLCHAIN_SYS} \
 		TOOLCHAIN_INSTALL_DIR=$${SDK_PATH_NATIVE}/usr \
 		TOOLCHAIN_PREFIX=$(CROSS_COMPILE) \
+		LINUX_SYSROOT_DIR=$(SDK_PATH_TARGET) \
 		$(IPC_TOOLS_PATHS)
 
