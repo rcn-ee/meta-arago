@@ -1,0 +1,26 @@
+The files contained in this directory represent the images that were built
+as part of the original SDK build and packaging process.  They are meant
+to serve as a restore and starting point for your development.  In order
+to use these images with an SD card they should be placed in the appropriate
+locations.
+
+By default these locations are:
+
++-------------+-----------------------------------------+
+|    File     |                Location                 |
++-------------+-----------------------------------------+
+| tiboot3.bin | boot partition                          |
+| tispl.bin   | boot partition                          |
+| u-boot.img  | boot partition                          |
+| sysfw.itb   | boot partition                          |
+| uEnv.txt    | boot partition                          |
++-------------+-----------------------------------------+
+| Image       | /boot directory of the rootfs partition |
+| *.dtb       | /boot directory of the rootfs partition |
+| *.dtbo      | /boot directory of the rootfs partition |
++-------------+-----------------------------------------+
+
+By default the boot loaders are read from the first FAT partition, which is
+usually called the "boot" partition.  Then the bootloader will look for the
+Image and .dtb .dtbo files in the /boot directory of the ext4 partition, which is
+usually called the "rootfs" partition.
