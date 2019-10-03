@@ -8,14 +8,14 @@ BIG_DATA_IPC_GIT_URI = "git://git.ti.com/processor-sdk/big-data-ipc-examples.git
 BIG_DATA_IPC_GIT_PROTOCOL = "git"
 BIG_DATA_IPC_GIT_BRANCH = "master"
 
-# Below commit ID corresponds to "DEV.BIG_DATA_IPC.01.02.00.00"
-BIG_DATA_IPC_SRCREV = "5ef821453c58e997bba0cf47aa9f54e616097861"
+# Below commit ID corresponds to "DEV.BIG_DATA_IPC.01.03.00.00"
+BIG_DATA_IPC_SRCREV = "984edb3c69c8a1f51da02e0abcd2201319650894"
 
 BRANCH = "${BIG_DATA_IPC_GIT_BRANCH}"
 SRC_URI = "${BIG_DATA_IPC_GIT_URI};protocol=${BIG_DATA_IPC_GIT_PROTOCOL};branch=${BRANCH}"
 
 SRCREV = "${BIG_DATA_IPC_SRCREV}"
-PV = "01.02.00.00"
+PV = "01.03.00.00"
 
 S = "${WORKDIR}/git"
 
