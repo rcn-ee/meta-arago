@@ -4,9 +4,9 @@ LICENSE_CHECKSUM = "LICENSE;md5=6e0ae7214f6c74c149cb25f373057fa9"
 LIC_FILES_CHKSUM := "file://../${LICENSE_CHECKSUM}"
 
 SRC_URI = "git://git.ti.com/matrix-gui-v2/matrix-gui-v2-apps.git;protocol=git;branch=${BRANCH}"
-SRCREV = "63e4a531807aadf91037fe8bb5ee4395a4d472c0"
+SRCREV = "494aa5bf02335d3034a9739584c42bf47c6ba792"
 BRANCH = "master"
-INC_PR = "r72"
+INC_PR = "r73"
 
 # Pull in the base package for installing matrix applications
 require matrix-gui-apps.inc
