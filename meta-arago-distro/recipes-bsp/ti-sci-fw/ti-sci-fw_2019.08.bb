@@ -72,9 +72,6 @@ EXTRA_OEMAKE_append_am65xx-hs-evm = " \
     HS=1 SYSFW_HS_PATH="${WORKDIR}/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${WORKDIR}/${SYSFW_BASE}-cert.bin" \
 "
 
-EXTRA_OEMAKE_append_j7-evm = " \
-    ENABLE_TRACE=1 \
-"
 do_compile() {
 	cd ${WORKDIR}/imggen/
 	oe_runmake
