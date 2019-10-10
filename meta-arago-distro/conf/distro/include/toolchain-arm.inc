@@ -96,24 +96,24 @@ PREFERRED_VERSION_glibc-initial ?= "${GLIBCVERSION}"
 #    to the published releases - http://ftp.gnu.org/gnu/binutils/
 
 python external_arm_toolchain_license_handler () {
-	if not isinstance(e, bb.event.ConfigParsed):
-		return
-	d = e.data
-	ld = d.createCopy()
-	ld.finalize()
+    if not isinstance(e, bb.event.ConfigParsed):
+        return
+    d = e.data
+    ld = d.createCopy()
+    ld.finalize()
 
-	lc_libc = "LGPL-2.1"
-	lc_gcc = ["GPL-3.0", "GPL-2.0"][eat_get_gcc_version(ld) <= "4.2.1"]
-	lc_rle = ["GPL-3.0-with-GCC-exception", "GPL-2.0-with-GCC-exception"][eat_get_gcc_version(ld) <= "4.3.3"]
-	lc_gdb = ["GPL-3.0", "GPL-2.0"][eat_get_gdb_version(ld) <= "6.6"]
-#	lc_bfd = ["GPL-3.0", "GPL-2.0"][eat_get_bfd_version(ld) <= "2.17"]
+    lc_libc = "LGPL-2.1"
+    lc_gcc = ["GPL-3.0", "GPL-2.0"][eat_get_gcc_version(ld) <= "4.2.1"]
+    lc_rle = ["GPL-3.0-with-GCC-exception", "GPL-2.0-with-GCC-exception"][eat_get_gcc_version(ld) <= "4.3.3"]
+    lc_gdb = ["GPL-3.0", "GPL-2.0"][eat_get_gdb_version(ld) <= "6.6"]
+#    lc_bfd = ["GPL-3.0", "GPL-2.0"][eat_get_bfd_version(ld) <= "2.17"]
 
-	d.setVar('EAT_LIC_LIBC', lc_libc)
-	d.setVar('EAT_LIC_GCC', lc_gcc)
-	d.setVar('EAT_LIC_RLE', lc_rle)
-	d.setVar('EAT_LIC_GDB', lc_gdb)
-#	d.setVar('EAT_LIC_BFD', lc_bfd)
+    d.setVar('EAT_LIC_LIBC', lc_libc)
+    d.setVar('EAT_LIC_GCC', lc_gcc)
+    d.setVar('EAT_LIC_RLE', lc_rle)
+    d.setVar('EAT_LIC_GDB', lc_gdb)
+#    d.setVar('EAT_LIC_BFD', lc_bfd)
 
-	d.setVar('EAT_LICENSE', "%s&%s&%s&%s" % (lc_libc, lc_gcc, lc_rle, lc_gdb))
+    d.setVar('EAT_LICENSE', "%s&%s&%s&%s" % (lc_libc, lc_gcc, lc_rle, lc_gdb))
 }
 addhandler external_arm_toolchain_license_handler
