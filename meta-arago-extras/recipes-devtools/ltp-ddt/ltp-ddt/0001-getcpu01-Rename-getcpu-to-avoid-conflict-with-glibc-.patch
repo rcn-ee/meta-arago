@@ -1,4 +1,4 @@
-From c9edb0eaaca83c18ac7b5ea3330faad8d47d3fd1 Mon Sep 17 00:00:00 2001
+From 574b03aa9e4648a3c62c94e815f7962d7ef8088e Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Fri, 14 Dec 2018 06:44:02 -0800
 Subject: [PATCH] getcpu01: Rename getcpu to avoid conflict with glibc >= 2.29
@@ -12,12 +12,13 @@ Renaming helps to keep ltp build going
 Upstream-Status: Submitted [http://lists.linux.it/pipermail/ltp/2018-December/010321.html]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  testcases/kernel/syscalls/getcpu/getcpu01.c | 10 +++++-----
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/testcases/kernel/syscalls/getcpu/getcpu01.c b/testcases/kernel/syscalls/getcpu/getcpu01.c
-index c927512ca..e850fe844 100644
+index c927512..e850fe8 100644
 --- a/testcases/kernel/syscalls/getcpu/getcpu01.c
 +++ b/testcases/kernel/syscalls/getcpu/getcpu01.c
 @@ -82,7 +82,7 @@ int sys_support = 0;
@@ -52,6 +53,3 @@ index c927512ca..e850fe844 100644
  {
  #if defined(__i386__)
  	return syscall(318, cpu_id, node_id, cache_struct);
--- 
-2.20.0
-
