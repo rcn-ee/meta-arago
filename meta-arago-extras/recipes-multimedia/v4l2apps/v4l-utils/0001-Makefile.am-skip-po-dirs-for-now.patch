@@ -1,9 +1,10 @@
-From 8c3531847894cc28aa8d0489332f893d69beab1e Mon Sep 17 00:00:00 2001
+From f21271f720000c9f91569b8a7dfe71d4b74850f8 Mon Sep 17 00:00:00 2001
 From: Denys Dmytriyenko <denys@ti.com>
 Date: Mon, 24 Jun 2019 20:54:18 -0400
 Subject: [PATCH] Makefile.am: skip po dirs for now
 
 Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
 ---
  Makefile.am | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
@@ -21,6 +22,3 @@ index 8abe4f9..26a4609 100644
  
  if WITH_V4LUTILS
  SUBDIRS += utils contrib
--- 
-2.7.4
-
