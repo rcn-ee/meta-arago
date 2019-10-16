@@ -25,5 +25,6 @@ RDEPENDS_${PN} = "\
     arago-feed-config \
     nfs-utils-client \
     cifs-utils \
+    phytool \
     ${@bb.utils.contains_any('OPTEEMACHINE', 'ti k3', "${OPTEE_PKGS}", "", d)} \
 "
