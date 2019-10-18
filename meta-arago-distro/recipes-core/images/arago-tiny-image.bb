@@ -1,4 +1,3 @@
-
 # Common pieces for Arago images
 
 LICENSE = "MIT"
@@ -13,7 +12,14 @@ IMAGE_FSTYPES += "cpio"
 EXTRA_IMAGECMD_ext2.gz += "-i 4096"
 
 # Install a small set of utils which can be used for diagnostics
-ARAGO_TINY_IMAGE_EXTRA_INSTALL ?= "parted util-linux e2fsprogs dosfstools devmem2"
+ARAGO_TINY_IMAGE_EXTRA_INSTALL ?= " \
+	parted \
+	util-linux \
+	e2fsprogs \
+	dosfstools \
+	devmem2 \
+	arago-feed-config \
+"
 
 IMAGE_INSTALL += " \
 	packagegroup-arago-sysvinit-boot \
