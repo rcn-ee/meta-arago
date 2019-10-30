@@ -1,0 +1,37 @@
+From ca37dce0e9c50645a3473dc942a33478eb79378d Mon Sep 17 00:00:00 2001
+From: Jesus Sanchez-Palencia <jesus.sanchez-palencia@intel.com>
+Date: Fri, 5 Oct 2018 16:25:19 -0700
+Subject: [PATCH 03/12] libnetlink: Add helper for getting a __s32 from netlink
+ msgs
+
+Upstream-Status: Backport
+commit d791f3ad869659da4b151eded060840a88d9656a upstream.
+
+This function retrieves a signed 32-bit integer from a netlink message
+and returns it.
+
+Signed-off-by: Jesus Sanchez-Palencia <jesus.sanchez-palencia@intel.com>
+Signed-off-by: David Ahern <dsahern@gmail.com>
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ include/libnetlink.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/include/libnetlink.h b/include/libnetlink.h
+index ffc49e56..c44c3c72 100644
+--- a/include/libnetlink.h
++++ b/include/libnetlink.h
+@@ -185,6 +185,10 @@ static inline __u64 rta_getattr_u64(const struct rtattr *rta)
+ 	memcpy(&tmp, RTA_DATA(rta), sizeof(__u64));
+ 	return tmp;
+ }
++static inline __s32 rta_getattr_s32(const struct rtattr *rta)
++{
++	return *(__s32 *)RTA_DATA(rta);
++}
+ static inline __s64 rta_getattr_s64(const struct rtattr *rta)
+ {
+ 	__s64 tmp;
+-- 
+2.18.1
+

@@ -1,0 +1,35 @@
+From 0c672a07e1d5a8068f2323e88a72e5349dacbed9 Mon Sep 17 00:00:00 2001
+From: Kurt Kanzenbach <kurt@linutronix.de>
+Date: Thu, 4 Jul 2019 14:24:27 +0200
+Subject: [PATCH 08/12] utils: Fix get_s64() function
+
+Upstream-Status: Backport
+commit c875433b145e33645798ecfe4d99bcb28c80d1e9 upstream.
+
+get_s64() uses internally strtoll() to parse the value out of a given
+string. strtoll() returns a long long. However, the intermediate variable is
+long only which might be 32 bit on some systems. So, fix it.
+
+Signed-off-by: Kurt Kanzenbach <kurt@linutronix.de>
+Signed-off-by: Stephen Hemminger <stephen@networkplumber.org>
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ lib/utils.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/utils.c b/lib/utils.c
+index be29530f..9c121ce3 100644
+--- a/lib/utils.c
++++ b/lib/utils.c
+@@ -386,7 +386,7 @@ int get_u8(__u8 *val, const char *arg, int base)
+ 
+ int get_s64(__s64 *val, const char *arg, int base)
+ {
+-	long res;
++	long long res;
+ 	char *ptr;
+ 
+ 	errno = 0;
+-- 
+2.18.1
+

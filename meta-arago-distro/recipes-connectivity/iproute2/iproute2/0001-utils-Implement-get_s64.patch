@@ -1,0 +1,65 @@
+From 7e4397dff47438be65fdf90dc4e51b763797d201 Mon Sep 17 00:00:00 2001
+From: Vinicius Costa Gomes <vinicius.gomes@intel.com>
+Date: Fri, 5 Oct 2018 16:25:17 -0700
+Subject: [PATCH 01/12] utils: Implement get_s64()
+
+Upstream-Status: Backport
+commit a066bac8a2775bc43d54ae7173057f75f543c44b upstream.
+
+Add this helper to read signed 64-bit integers from a string.
+
+Signed-off-by: Vinicius Costa Gomes <vinicius.gomes@intel.com>
+Signed-off-by: David Ahern <dsahern@gmail.com>
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ include/utils.h |  1 +
+ lib/utils.c     | 21 +++++++++++++++++++++
+ 2 files changed, 22 insertions(+)
+
+diff --git a/include/utils.h b/include/utils.h
+index 8cb4349e..58574a05 100644
+--- a/include/utils.h
++++ b/include/utils.h
+@@ -139,6 +139,7 @@ int get_time_rtt(unsigned *val, const char *arg, int *raw);
+ #define get_byte get_u8
+ #define get_ushort get_u16
+ #define get_short get_s16
++int get_s64(__s64 *val, const char *arg, int base);
+ int get_u64(__u64 *val, const char *arg, int base);
+ int get_u32(__u32 *val, const char *arg, int base);
+ int get_s32(__s32 *val, const char *arg, int base);
+diff --git a/lib/utils.c b/lib/utils.c
+index ad27f78c..be29530f 100644
+--- a/lib/utils.c
++++ b/lib/utils.c
+@@ -384,6 +384,27 @@ int get_u8(__u8 *val, const char *arg, int base)
+ 	return 0;
+ }
+ 
++int get_s64(__s64 *val, const char *arg, int base)
++{
++	long res;
++	char *ptr;
++
++	errno = 0;
++
++	if (!arg || !*arg)
++		return -1;
++	res = strtoll(arg, &ptr, base);
++	if (!ptr || ptr == arg || *ptr)
++		return -1;
++	if ((res == LLONG_MIN || res == LLONG_MAX) && errno == ERANGE)
++		return -1;
++	if (res > INT64_MAX || res < INT64_MIN)
++		return -1;
++
++	*val = res;
++	return 0;
++}
++
+ int get_s32(__s32 *val, const char *arg, int base)
+ {
+ 	long res;
+-- 
+2.18.1
+

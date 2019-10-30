@@ -1,0 +1,131 @@
+From 3736970b76dc41cd2d76399650709eab6a031807 Mon Sep 17 00:00:00 2001
+From: Murali Karicheri <m-karicheri2@ti.com>
+Date: Thu, 17 Oct 2019 17:50:18 -0400
+Subject: [PATCH 12/12] sync pkt_sched header with kernel version
+
+For picking taprio specific definitions, sync up the pkt_sched.h with
+kernel header.
+
+Upstream-Status: Backport
+commit 720a44a751a922cc6e1e62ae3b7c3d5ae6c084f3 upstream.
+
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ include/uapi/linux/const.h     | 31 ++++++++++++++++
+ include/uapi/linux/pkt_sched.h | 64 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 95 insertions(+)
+ create mode 100644 include/uapi/linux/const.h
+
+diff --git a/include/uapi/linux/const.h b/include/uapi/linux/const.h
+new file mode 100644
+index 00000000..fd885c79
+--- /dev/null
++++ b/include/uapi/linux/const.h
+@@ -0,0 +1,31 @@
++/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
++/* const.h: Macros for dealing with constants.  */
++
++#ifndef _LINUX_CONST_H
++#define _LINUX_CONST_H
++
++/* Some constant macros are used in both assembler and
++ * C code.  Therefore we cannot annotate them always with
++ * 'UL' and other type specifiers unilaterally.  We
++ * use the following macros to deal with this.
++ *
++ * Similarly, _AT() will cast an expression with a type in C, but
++ * leave it unchanged in asm.
++ */
++
++#ifdef __ASSEMBLY__
++#define _AC(X,Y)	X
++#define _AT(T,X)	X
++#else
++#define __AC(X,Y)	(X##Y)
++#define _AC(X,Y)	__AC(X,Y)
++#define _AT(T,X)	((T)(X))
++#endif
++
++#define _UL(x)		(_AC(x, UL))
++#define _ULL(x)		(_AC(x, ULL))
++
++#define _BITUL(x)	(_UL(1) << (x))
++#define _BITULL(x)	(_ULL(1) << (x))
++
++#endif /* _LINUX_CONST_H */
+diff --git a/include/uapi/linux/pkt_sched.h b/include/uapi/linux/pkt_sched.h
+index 8975fd1a..9408fb43 100644
+--- a/include/uapi/linux/pkt_sched.h
++++ b/include/uapi/linux/pkt_sched.h
+@@ -1084,4 +1084,68 @@ enum {
+ 	CAKE_ATM_MAX
+ };
+ 
++
++/* TAPRIO */
++enum {
++	TC_TAPRIO_CMD_SET_GATES = 0x00,
++	TC_TAPRIO_CMD_SET_AND_HOLD = 0x01,
++	TC_TAPRIO_CMD_SET_AND_RELEASE = 0x02,
++};
++
++enum {
++	TCA_TAPRIO_SCHED_ENTRY_UNSPEC,
++	TCA_TAPRIO_SCHED_ENTRY_INDEX, /* u32 */
++	TCA_TAPRIO_SCHED_ENTRY_CMD, /* u8 */
++	TCA_TAPRIO_SCHED_ENTRY_GATE_MASK, /* u32 */
++	TCA_TAPRIO_SCHED_ENTRY_INTERVAL, /* u32 */
++	__TCA_TAPRIO_SCHED_ENTRY_MAX,
++};
++#define TCA_TAPRIO_SCHED_ENTRY_MAX (__TCA_TAPRIO_SCHED_ENTRY_MAX - 1)
++
++/* The format for schedule entry list is:
++ * [TCA_TAPRIO_SCHED_ENTRY_LIST]
++ *   [TCA_TAPRIO_SCHED_ENTRY]
++ *     [TCA_TAPRIO_SCHED_ENTRY_CMD]
++ *     [TCA_TAPRIO_SCHED_ENTRY_GATES]
++ *     [TCA_TAPRIO_SCHED_ENTRY_INTERVAL]
++ */
++enum {
++	TCA_TAPRIO_SCHED_UNSPEC,
++	TCA_TAPRIO_SCHED_ENTRY,
++	__TCA_TAPRIO_SCHED_MAX,
++};
++
++#define TCA_TAPRIO_SCHED_MAX (__TCA_TAPRIO_SCHED_MAX - 1)
++
++/* The format for the admin sched (dump only):
++ * [TCA_TAPRIO_SCHED_ADMIN_SCHED]
++ *   [TCA_TAPRIO_ATTR_SCHED_BASE_TIME]
++ *   [TCA_TAPRIO_ATTR_SCHED_ENTRY_LIST]
++ *     [TCA_TAPRIO_ATTR_SCHED_ENTRY]
++ *       [TCA_TAPRIO_ATTR_SCHED_ENTRY_CMD]
++ *       [TCA_TAPRIO_ATTR_SCHED_ENTRY_GATES]
++ *       [TCA_TAPRIO_ATTR_SCHED_ENTRY_INTERVAL]
++ */
++
++#define TCA_TAPRIO_ATTR_FLAG_TXTIME_ASSIST	BIT(0)
++#define TCA_TAPRIO_ATTR_FLAG_FULL_OFFLOAD	BIT(1)
++
++enum {
++	TCA_TAPRIO_ATTR_UNSPEC,
++	TCA_TAPRIO_ATTR_PRIOMAP, /* struct tc_mqprio_qopt */
++	TCA_TAPRIO_ATTR_SCHED_ENTRY_LIST, /* nested of entry */
++	TCA_TAPRIO_ATTR_SCHED_BASE_TIME, /* s64 */
++	TCA_TAPRIO_ATTR_SCHED_SINGLE_ENTRY, /* single entry */
++	TCA_TAPRIO_ATTR_SCHED_CLOCKID, /* s32 */
++	TCA_TAPRIO_PAD,
++	TCA_TAPRIO_ATTR_ADMIN_SCHED, /* The admin sched, only used in dump */
++	TCA_TAPRIO_ATTR_SCHED_CYCLE_TIME, /* s64 */
++	TCA_TAPRIO_ATTR_SCHED_CYCLE_TIME_EXTENSION, /* s64 */
++	TCA_TAPRIO_ATTR_FLAGS, /* u32 */
++	TCA_TAPRIO_ATTR_TXTIME_DELAY, /* u32 */
++	__TCA_TAPRIO_ATTR_MAX,
++};
++
++#define TCA_TAPRIO_ATTR_MAX (__TCA_TAPRIO_ATTR_MAX - 1)
++
+ #endif
+-- 
+2.18.1
+

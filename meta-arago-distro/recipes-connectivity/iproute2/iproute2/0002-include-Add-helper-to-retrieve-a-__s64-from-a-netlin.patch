@@ -1,0 +1,40 @@
+From 6d0bcdd9d0283768798227f4046414ed7da42047 Mon Sep 17 00:00:00 2001
+From: Vinicius Costa Gomes <vinicius.gomes@intel.com>
+Date: Fri, 5 Oct 2018 16:25:18 -0700
+Subject: [PATCH 02/12] include: Add helper to retrieve a __s64 from a netlink
+ msg
+
+Upstream-Status: Backport
+commit de63cd90444ac9fdf238f950c16cafe351846691 upstream.
+
+This allows signed 64-bit integers to be retrieved from a netlink
+message.
+
+Signed-off-by: Vinicius Costa Gomes <vinicius.gomes@intel.com>
+Signed-off-by: David Ahern <dsahern@gmail.com>
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ include/libnetlink.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/include/libnetlink.h b/include/libnetlink.h
+index 9d9249e6..ffc49e56 100644
+--- a/include/libnetlink.h
++++ b/include/libnetlink.h
+@@ -185,6 +185,13 @@ static inline __u64 rta_getattr_u64(const struct rtattr *rta)
+ 	memcpy(&tmp, RTA_DATA(rta), sizeof(__u64));
+ 	return tmp;
+ }
++static inline __s64 rta_getattr_s64(const struct rtattr *rta)
++{
++	__s64 tmp;
++
++	memcpy(&tmp, RTA_DATA(rta), sizeof(tmp));
++	return tmp;
++}
+ static inline const char *rta_getattr_str(const struct rtattr *rta)
+ {
+ 	return (const char *)RTA_DATA(rta);
+-- 
+2.18.1
+

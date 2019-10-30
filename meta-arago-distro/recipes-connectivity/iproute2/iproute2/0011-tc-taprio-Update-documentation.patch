@@ -1,0 +1,81 @@
+From 5932369560e2ad1deecafa829edd0e89170a3545 Mon Sep 17 00:00:00 2001
+From: Vedang Patel <vedang.patel@intel.com>
+Date: Thu, 18 Jul 2019 12:55:43 -0700
+Subject: [PATCH 11/12] tc: taprio: Update documentation
+
+Upstream-Status: Backport
+commit a794d0523711d5ab4530483b9435ba627e07d28b upstream.
+
+Add documentation for the latest options, flags and txtime-delay, to the
+taprio manpage.
+
+This also adds an example to run tc in txtime offload mode.
+
+Signed-off-by: Vedang Patel <vedang.patel@intel.com>
+Signed-off-by: David Ahern <dsahern@gmail.com>
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ man/man8/tc-taprio.8 | 40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+diff --git a/man/man8/tc-taprio.8 b/man/man8/tc-taprio.8
+index 92055b43..2cb39da3 100644
+--- a/man/man8/tc-taprio.8
++++ b/man/man8/tc-taprio.8
+@@ -112,6 +112,26 @@ means that traffic class 0 is "active" for that schedule entry.
+ long that state defined by <command> and <gate mask> should be held
+ before moving to the next entry.
+ 
++.TP
++flags
++.br
++Specifies different modes for taprio. Currently, only txtime-assist is
++supported which can be enabled by setting it to 0x1. In this mode, taprio will
++set the transmit timestamp depending on the interval in which the packet needs
++to be transmitted. It will then utililize the
++.BR etf(8)
++qdisc to sort and transmit the packets at the right time. The second example
++can be used as a reference to configure this mode.
++
++.TP
++txtime-delay
++.br
++This parameter is specific to the txtime offload mode. It specifies the maximum
++time a packet might take to reach the network card from the taprio qdisc. The
++value should always be greater than the delta specified in the
++.BR etf(8)
++qdisc.
++
+ .SH EXAMPLES
+ 
+ The following example shows how an traffic schedule with three traffic
+@@ -137,6 +157,26 @@ reference CLOCK_TAI. The schedule is composed of three entries each of
+               clockid CLOCK_TAI
+ .EE
+ 
++Following is an example to enable the txtime offload mode in taprio. See
++.BR etf(8)
++for more information about configuring the ETF qdisc.
++
++.EX
++# tc qdisc replace dev eth0 parent root handle 100 taprio \\
++              num_tc 3 \\
++              map 2 2 1 0 2 2 2 2 2 2 2 2 2 2 2 2 \\
++              queues 1@0 1@0 1@0 \\
++              base-time 1528743495910289987 \\
++              sched-entry S 01 300000 \\
++              sched-entry S 02 300000 \\
++              sched-entry S 04 400000 \\
++              flags 0x1 \\
++              txtime-delay 200000 \\
++              clockid CLOCK_TAI
++
++# tc qdisc replace dev $IFACE parent 100:1 etf skip_skb_check \\
++              offload delta 200000 clockid CLOCK_TAI
++.EE
+ 
+ .SH AUTHORS
+ Vinicius Costa Gomes <vinicius.gomes@intel.com>
+-- 
+2.18.1
+
