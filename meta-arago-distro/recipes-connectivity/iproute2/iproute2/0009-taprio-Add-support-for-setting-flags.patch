@@ -1,0 +1,78 @@
+From 7e5c69b7a4733f099ca53aecfafa5dac4a3a002d Mon Sep 17 00:00:00 2001
+From: Vinicius Costa Gomes <vinicius.gomes@intel.com>
+Date: Thu, 18 Jul 2019 12:55:40 -0700
+Subject: [PATCH 09/12] taprio: Add support for setting flags
+
+Upstream-Status: Backport
+commit ee000bf217870b6425849c03b309faa64539ff24 upstream.
+
+This allows a new parameter, flags, to be passed to taprio. Currently, it
+only supports enabling the txtime-assist mode. But, we plan to add
+different modes for taprio (e.g. hardware offloading) and this parameter
+will be useful in enabling those modes.
+
+Signed-off-by: Vinicius Costa Gomes <vinicius.gomes@intel.com>
+Signed-off-by: Vedang Patel <vedang.patel@intel.com>
+Signed-off-by: David Ahern <dsahern@gmail.com>
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ tc/q_taprio.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/tc/q_taprio.c b/tc/q_taprio.c
+index 9a69b86b..91e3f27b 100644
+--- a/tc/q_taprio.c
++++ b/tc/q_taprio.c
+@@ -158,6 +158,7 @@ static int taprio_parse_opt(struct qdisc_util *qu, int argc,
+ 	__s64 cycle_time_extension = 0;
+ 	struct list_head sched_entries;
+ 	struct rtattr *tail, *l;
++	__u32 taprio_flags = 0;
+ 	__s64 cycle_time = 0;
+ 	__s64 base_time = 0;
+ 	int err, idx;
+@@ -280,6 +281,17 @@ static int taprio_parse_opt(struct qdisc_util *qu, int argc,
+ 				explain_clockid(*argv);
+ 				return -1;
+ 			}
++		} else if (strcmp(*argv, "flags") == 0) {
++			NEXT_ARG();
++			if (taprio_flags) {
++				fprintf(stderr, "taprio: duplicate \"flags\" specification\n");
++				return -1;
++			}
++			if (get_u32(&taprio_flags, *argv, 0)) {
++				PREV_ARG();
++				return -1;
++			}
++
+ 		} else if (strcmp(*argv, "help") == 0) {
+ 			explain();
+ 			return -1;
+@@ -296,6 +308,9 @@ static int taprio_parse_opt(struct qdisc_util *qu, int argc,
+ 	if (clockid != CLOCKID_INVALID)
+ 		addattr_l(n, 1024, TCA_TAPRIO_ATTR_SCHED_CLOCKID, &clockid, sizeof(clockid));
+ 
++	if (taprio_flags)
++		addattr_l(n, 1024, TCA_TAPRIO_ATTR_FLAGS, &taprio_flags, sizeof(taprio_flags));
++
+ 	if (opt.num_tc > 0)
+ 		addattr_l(n, 1024, TCA_TAPRIO_ATTR_PRIOMAP, &opt, sizeof(opt));
+ 
+@@ -441,6 +456,13 @@ static int taprio_print_opt(struct qdisc_util *qu, FILE *f, struct rtattr *opt)
+ 
+ 	print_string(PRINT_ANY, "clockid", "clockid %s", get_clock_name(clockid));
+ 
++	if (tb[TCA_TAPRIO_ATTR_FLAGS]) {
++		__u32 flags;
++
++		flags = rta_getattr_u32(tb[TCA_TAPRIO_ATTR_FLAGS]);
++		print_0xhex(PRINT_ANY, "flags", " flags %#x", flags);
++	}
++
+ 	print_schedule(f, tb);
+ 
+ 	if (tb[TCA_TAPRIO_ATTR_ADMIN_SCHED]) {
+-- 
+2.18.1
+
