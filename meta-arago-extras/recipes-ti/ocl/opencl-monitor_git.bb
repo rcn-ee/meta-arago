@@ -5,7 +5,8 @@ LICENSE = "BSD"
 include ocl.inc
 require recipes-ti/includes/arago-paths.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
+SRC_URI += "file://0001-Fix-carveout-block-allocation-in-resource-table.patch;patchdir=.."
 
 inherit update-alternatives
 
