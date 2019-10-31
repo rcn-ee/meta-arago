@@ -2,7 +2,7 @@
 PACKAGECONFIG[fbdev] = "--enable-fbdev-compositor WESTON_NATIVE_BACKEND="fbdev-backend.so",--disable-fbdev-compositor,udev mtdev"
 PACKAGECONFIG[kms] = "--enable-drm-compositor,--disable-drm-compositor,drm udev virtual/libgbm mtdev"
 
-PR_append = ".arago34"
+PR_append = ".arago35"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
@@ -26,6 +26,7 @@ SRC_URI += " \
         file://0011-compositor-Add-scene-graph-debug-scope.patch \
         file://0012-compositor-drm-Add-backend-pointer-to-drm_output.patch \
         file://0013-compositor-drm-Add-drm-backend-log-debug-scope.patch \
+	file://0001-HACK-composito-drm-undef-HAVE_GBM_MODIFIERS-explicit.patch \
 "
 
 INHIBIT_PACKAGE_STRIP = "1"

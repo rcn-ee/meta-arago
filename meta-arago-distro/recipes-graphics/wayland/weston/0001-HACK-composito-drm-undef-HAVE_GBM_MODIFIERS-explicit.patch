@@ -1,0 +1,31 @@
+From fb7f77c7b039344f736c77fe85b68f0f49083fae Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Sun, 1 Sep 2019 08:28:27 -0400
+Subject: [PATCH] HACK: composito-drm: undef HAVE_GBM_MODIFIERS explicitly
+
+GBM_MODIFIERS is expected for Mesa/gbm 19.1.6, but is not fully supported
+yet.
+
+Upstream-Status: Inappropriate [tentative workaround only]
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ libweston/compositor-drm.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/libweston/compositor-drm.c b/libweston/compositor-drm.c
+index d92ecfcd..88f845a8 100644
+--- a/libweston/compositor-drm.c
++++ b/libweston/compositor-drm.c
+@@ -68,6 +68,8 @@
+ #include "linux-dmabuf-unstable-v1-server-protocol.h"
+ #include "linux-explicit-synchronization.h"
+ 
++#undef HAVE_GBM_MODIFIERS
++
+ #ifndef DRM_CLIENT_CAP_ASPECT_RATIO
+ #define DRM_CLIENT_CAP_ASPECT_RATIO	4
+ #endif
+-- 
+2.17.1
+
