@@ -1,0 +1,32 @@
+From 06b21346d662209f5ea9816f408f9f883b775d60 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Mon, 28 Oct 2019 09:43:47 -0400
+Subject: [PATCH] util: Makefile.am: update LDFLAGS for Mesa-based EGL
+
+- replace pvr_wlegl with wayland-egl
+
+Upstream-Status: Pending
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ util/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ mode change 100644 => 100755 util/Makefile.am
+
+diff --git a/util/Makefile.am b/util/Makefile.am
+old mode 100644
+new mode 100755
+index 2bfcb5e..fdeb877
+--- a/util/Makefile.am
++++ b/util/Makefile.am
+@@ -37,7 +37,7 @@ endif
+ if ENABLE_WAYLAND
+ libutil_la_SOURCES += display-wayland.c wayland-drm-protocol.c viewporter-protocol.c
+ libutil_la_CFLAGS = @DRM_CFLAGS@
+-libutil_la_LDFLAGS = -lwayland-client -lwayland-cursor -ldrm -ldrm_omap -lpthread -lpvr_wlegl -lavcodec
++libutil_la_LDFLAGS = -lwayland-client -lwayland-cursor -ldrm -ldrm_omap -lpthread -lwayland-egl -lavcodec
+ 
+ endif
+ 
+-- 
+2.17.1
+
