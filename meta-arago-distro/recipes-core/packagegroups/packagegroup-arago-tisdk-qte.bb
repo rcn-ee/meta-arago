@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to add Qt embedded related packages"
 LICENSE = "MIT"
-PR = "r21"
+PR = "r22"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -22,11 +22,14 @@ QT5_DEMOS = "\
     qtscript-examples \
     qtsvg-examples \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-examples', '', d)} \
+    qtwebengine-examples \
     qtserialport-examples \
     qtcharts-examples \
 "
 
-#QT5_DEMOS_remove_k3 = "\
+QT5_DEMOS_remove_k3 = "\
+    qtwebengine-examples \
+"
 #    qtwebbrowser \
 #    qtwebbrowser-examples \
 #    qtwebengine-examples \
