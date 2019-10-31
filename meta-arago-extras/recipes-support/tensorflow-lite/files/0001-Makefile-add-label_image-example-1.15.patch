@@ -1,0 +1,82 @@
+From 481c021e98c443195b73484fd0d9d50a2e0ae69a Mon Sep 17 00:00:00 2001
+From: Hongmei Gou <a0271529@ti.com>
+Date: Wed, 25 Sep 2019 18:07:04 -0400
+Subject: [PATCH] Makefile: add label_image example
+
+Upstream-Status: Pending
+
+Signed-off-by: Hongmei Gou <a0271529@ti.com>
+---
+ tensorflow/lite/tools/make/Makefile | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/tensorflow/lite/tools/make/Makefile b/tensorflow/lite/tools/make/Makefile
+index 73c50d3272..e2f664e1eb 100644
+--- a/tensorflow/lite/tools/make/Makefile
++++ b/tensorflow/lite/tools/make/Makefile
+@@ -201,6 +201,12 @@ BENCHMARK_SRCS := $(filter-out \
+ 	$(BENCHMARK_SRCS_DIR)/benchmark_plus_flex_main.cc, \
+ 	$(BENCHMARK_ALL_SRCS))
+ 
++# label image example
++LABELIMAGE_SRCS := \
++	tensorflow/lite/examples/label_image/bitmap_helpers.cc \
++	tensorflow/lite/examples/label_image/label_image.cc \
++	$(EVALUATION_UTILS_SRCS)
++
+ # These target-specific makefiles should modify or replace options like
+ # CXXFLAGS or LIBS to work for a specific targetted architecture. All logic
+ # based on platforms or architectures should happen within these files, to
+@@ -209,6 +215,7 @@ include $(wildcard $(MAKEFILE_DIR)/targets/*_makefile.inc)
+ 
+ ALL_SRCS := \
+ 	$(MINIMAL_SRCS) \
++	$(LABELIMAGE_SRCS) \
+ 	$(PROFILER_SRCS) \
+ 	$(PROFILER_SUMMARIZER_SRCS) \
+ 	$(TF_LITE_CC_SRCS) \
+@@ -225,6 +232,7 @@ LIB_PATH := $(LIBDIR)$(LIB_NAME)
+ BENCHMARK_LIB := $(LIBDIR)$(BENCHMARK_LIB_NAME)
+ BENCHMARK_BINARY := $(BINDIR)$(BENCHMARK_BINARY_NAME)
+ MINIMAL_BINARY := $(BINDIR)minimal
++LABELIMAGE_BINARY := $(BINDIR)label_image
+ 
+ CXX := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}g++
+ CC := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}gcc
+@@ -233,6 +241,9 @@ AR := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}ar
+ MINIMAL_OBJS := $(addprefix $(OBJDIR), \
+ $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(MINIMAL_SRCS))))
+ 
++LABELIMAGE_OBJS := $(addprefix $(OBJDIR), \
++$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(LABELIMAGE_SRCS))))
++
+ LIB_OBJS := $(addprefix $(OBJDIR), \
+ $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(TF_LITE_CC_SRCS)))))
+ 
+@@ -252,7 +263,7 @@ $(OBJDIR)%.o: %.cpp
+ 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+ 
+ # The target that's compiled if there's no command-line arguments.
+-all: $(LIB_PATH)  $(MINIMAL_BINARY) $(BENCHMARK_BINARY)
++all: $(LIB_PATH)  $(MINIMAL_BINARY) $(LABELIMAGE_BINARY) $(BENCHMARK_BINARY)
+ 
+ # The target that's compiled for micro-controllers
+ micro: $(LIB_PATH)
+@@ -276,6 +287,14 @@ $(MINIMAL_BINARY): $(MINIMAL_OBJS) $(LIB_PATH)
+ 
+ minimal: $(MINIMAL_BINARY)
+ 
++$(LABELIMAGE_BINARY): $(LABELIMAGE_OBJS) $(LIB_PATH)
++	@mkdir -p $(dir $@)
++	$(CXX) $(CXXFLAGS) $(INCLUDES) \
++	-o $(LABELIMAGE_BINARY) $(LABELIMAGE_OBJS) \
++	$(LIBFLAGS) $(LIB_PATH) $(LDFLAGS) $(LIBS)
++
++label_image: $(LABELIMAGE_BINARY)
++
+ $(BENCHMARK_LIB) : $(LIB_PATH) $(BENCHMARK_OBJS)
+ 	@mkdir -p $(dir $@)
+ 	$(AR) $(ARFLAGS) $(BENCHMARK_LIB) $(LIB_OBJS) $(BENCHMARK_OBJS)
+-- 
+2.17.1
+
