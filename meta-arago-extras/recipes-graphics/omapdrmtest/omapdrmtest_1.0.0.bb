@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "omap-a15|ti43x"
 
 inherit autotools pkgconfig
 
-PR = "r28"
+PR = "r29"
 SRCREV = "20338b9f575ffe9c18c12bbed41c16069d27ccf4"
 
 EXTRA_OEMAKE = "CC="${CC}""
@@ -17,6 +17,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 SRC_URI = "git://git.ti.com/glsdk/omapdrmtest.git;protocol=git \
         file://0001-Makefile.am-lblah-flags-belong-to-LDADD-not-LDFLAGS.patch \
+	file://0001-util-Makefile.am-update-LDFLAGS-for-Mesa-based-EGL.patch \
 "
 
 S = "${WORKDIR}/git"
