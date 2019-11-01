@@ -14,26 +14,15 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 TI_SECURE_DEV_PKG ?= ""
 export TI_SECURE_DEV_PKG
 
-SRCREV = "c75bca342d5a8579c3a459515adb6b77d640a245"
+SRCREV = "2b292f87e7257d4f9103d4e862a7b1769b13fed7"
 BRANCH ?= "ti-linux-firmware"
-SRCREV_imggen = "92623d82dc683e74225ceaac239b29deac437adf"
+SRCREV_imggen = "8e6b34ad71b244f055f3d9a0107f6e905dd53e22"
 SRCREV_FORMAT = "imggen"
 
 SRC_URI = " \
 	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
 	git://git.ti.com/processor-firmware/system-firmware-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
 "
-
-# Please note, "install.source.dir.local" is not a real URL, below files need to be pre-downloaded
-SRC_URI_append_am65xx-hs-evm = " \
-	http://install.source.dir.local/ti-sci-firmware-am65x-hs-cert.bin;name=hs-cert \
-	http://install.source.dir.local/ti-sci-firmware-am65x-hs-enc.bin;name=hs-enc \
-"
-
-SRC_URI[hs-cert.md5sum] = "b5ad8a9e8d7d0bc2c0d075ce06a15213"
-SRC_URI[hs-cert.sha256sum] = "f79cf2696f4dac4f682a79336e7be86df50bddf764234bd82ac67921565e6129"
-SRC_URI[hs-enc.md5sum] = "dfe6eac6a650b9b3ac2a9a679e5e5678"
-SRC_URI[hs-enc.sha256sum] = "6389d873889b63c32d9aa3aaae7f0ebd21d1e97e32c176a8daf514e99e412d17"
 
 S = "${WORKDIR}/git"
 
@@ -47,7 +36,7 @@ SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-gp"
 SYSFW_BASE_am65xx-hs-evm = "${SYSFW_PREFIX}-${SYSFW_SOC}-hs"
 
 SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}.bin"
-SYSFW_TISCI_am65xx-hs-evm = "${WORKDIR}/${SYSFW_BASE}-*.bin"
+SYSFW_TISCI_am65xx-hs-evm = "${S}/ti-sysfw/${SYSFW_BASE}-*.bin"
 
 SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
 SYSFW_IMAGE = "sysfw-${PV}.itb"
@@ -69,7 +58,7 @@ EXTRA_OEMAKE = "\
     SYSFW_PATH="${SYSFW_TISCI}" SOC=${SYSFW_SOC} CONFIG=${SYSFW_CONFIG} \
 "
 EXTRA_OEMAKE_append_am65xx-hs-evm = " \
-    HS=1 SYSFW_HS_PATH="${WORKDIR}/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${WORKDIR}/${SYSFW_BASE}-cert.bin" \
+    HS=1 SYSFW_HS_PATH="${S}/ti-sysfw/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${S}/ti-sysfw/${SYSFW_BASE}-cert.bin" \
 "
 
 do_compile() {
