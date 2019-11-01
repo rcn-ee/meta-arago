@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
 inherit python3native
 
-DEPENDS += "python3-pyelftools-native"
+DEPENDS += "python3-pyelftools-native python3-pycrypto-native"
 
 PR_append = ".arago0"
 
-PV = "3.6.0+git${SRCPV}"
+PV = "3.7.0+git${SRCPV}"
 
 is_armv7 = "1"
 is_armv7_aarch64 = "0"
@@ -17,7 +17,7 @@ SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
            file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
 "
 BRANCH = "ti-optee-os"
-SRCREV = "e5a8779a6ffa2aa7ad01aed43608bcb9321817c6"
+SRCREV = "5208e5c1f3743fcde71e150eada2fc9945f749df"
 
 ARMCORE = "CFG_ARM32_core=y ta-targets=ta_arm32"
 ARMCORE_aarch64 = "CFG_ARM64_core=y ta-targets=ta_arm64"

@@ -1,12 +1,14 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+inherit python3native
+
+DEPENDS += "python3-pycrypto-native"
+
 PR_append = ".arago0"
 
 SRC_URI = "git://git.ti.com/optee/ti-optee-test.git;branch=${BRANCH}"
 
-SRC_URI += "file://0001-host-xtest-Makefile-fix-COMPILE_NS_USER-not-being-se.patch"
-
-PV = "3.5.0+git${SRCPV}"
+PV = "3.7.0+git${SRCPV}"
 
 BRANCH = "ti-optee-test"
-SRCREV = "e4f6f76b4cb5763112f4722981f84a26f4ac7e55"
+SRCREV = "7c68d7b098b19363ada3c48b133484b018254fb1"

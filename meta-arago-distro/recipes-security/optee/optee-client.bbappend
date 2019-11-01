@@ -5,10 +5,10 @@ SRC_URI = "git://git.ti.com/optee/ti-optee-client.git;branch=${BRANCH} \
 
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 
-PV = "3.5.0+git${SRCPV}"
+PV = "3.7.0+git${SRCPV}"
 
 BRANCH = "ti-optee-client"
-SRCREV = "1f8f9abe4a31abd7b7490a7ddd9bbe812c92d5af"
+SRCREV = "2e526f4be1d471706915ba1e0044bcbe7c0b2626"
 
 do_install() {
     oe_runmake install
