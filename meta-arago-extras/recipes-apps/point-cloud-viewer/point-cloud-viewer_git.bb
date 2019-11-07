@@ -11,9 +11,9 @@ BRANCH = "master"
 
 SRC_URI = "git://git.ti.com/processor-sdk/point-cloud-viewer.git;protocol=git;branch=${BRANCH}"
 
-SRCREV = "c4800b186744e9379c798299c5caa67f6a4468f0"
+SRCREV = "f0af54e63a6c802b4f8f0657873e74f1cb486e86"
 
-PV = "2.1"
+PV = "2.2"
 
 S = "${WORKDIR}/git"
 
