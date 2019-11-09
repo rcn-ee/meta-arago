@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install graphics binaries"
 LICENSE = "MIT"
-PR = "r25"
+PR = "r26"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -14,11 +14,11 @@ GRAPHICS_WAYLAND = "\
 "
 
 GRAPHICS_WAYLAND_append_omap-a15 = "\
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-ozone-wayland','',d)} \
 "
 
 GRAPHICS_WAYLAND_append_k3 = "\
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-wayland','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','chromium-ozone-wayland','',d)} \
 "
 
 GRAPHICS_RDEPENDS = "\
