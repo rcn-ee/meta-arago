@@ -1,0 +1,38 @@
+From bdb9181fc9b8ba0e32129e07be0a92a6bce4dc55 Mon Sep 17 00:00:00 2001
+From: Eric Ruei <e-ruei1@ti.com>
+Date: Fri, 8 Nov 2019 11:49:28 -0500
+Subject: [PATCH] native-state-drm: restrict udev enumeration to card0 only
+
+In case of separate GPU and Display devices as found in embedded system,
+there could be modeset node and render node controlled by different
+drivers.  The current udev search algorithm does not verify whether
+the GPU DRM node is able to handle modesetting operation and thus select
+an invalid DRM node and then the DRM initialization will fail.
+
+This patch restricts the udev enumeration to card0 to ensure that the
+DRM device corresponding to dispaly is selected as the primarary DRM
+device.
+
+Upstream-Status: Inappropriate [Tentative workaround only]
+
+Signed-off-by: Eric Ruei <e-ruei1@ti.com>
+---
+ src/native-state-drm.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/native-state-drm.cpp b/src/native-state-drm.cpp
+index dc2b323..cf17d88 100644
+--- a/src/native-state-drm.cpp
++++ b/src/native-state-drm.cpp
+@@ -280,7 +280,7 @@ static std::string udev_main_gpu_drm_node_path()
+     auto dev_enumeration = udev_enumerate_new(udev);
+ 
+     udev_enumerate_add_match_subsystem(dev_enumeration, "drm");
+-    udev_enumerate_add_match_sysname(dev_enumeration, "card[0-9]*");
++    udev_enumerate_add_match_sysname(dev_enumeration, "card0");
+     udev_enumerate_scan_devices(dev_enumeration);
+ 
+     Log::debug("Looking for the main GPU DRM node...\n");
+-- 
+2.17.1
+
