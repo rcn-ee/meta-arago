@@ -33,6 +33,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r${PV};protocol=htt
     http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=mobilenet_v1_quant;subdir=${WORKDIR}/model;destsuffix=model \
     file://apply-modification-for-tflite-${PV}-to-eigen.patch \
     file://0001-Makefile-add-label_image-example-${PV}.patch \
+    file://tflite-benchmark.sh \
     file://tensorflow-lite.pc.in"
 
 SRC_URI[mobilenet_v1_quant.md5sum] = "36af340c00e60291931cb30ce32d4e86"
@@ -40,7 +41,7 @@ SRC_URI[mobilenet_v1_quant.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226d
 
 SRCREV = "590d6eef7e91a6a7392c8ffffb7b58f2e0c8bc6b"
 
-PR = "r1"
+PR = "r2"
 
 S = "${WORKDIR}/git"
 
@@ -128,6 +129,8 @@ do_install() {
     install -m 0644 ${S}/tensorflow/lite/examples/label_image/testdata/grace_hopper.bmp ${D}${datadir}/${PN}-${PV}/examples
     install -m 0644 ${S}/tensorflow/lite/java/ovic/src/testdata/labels.txt ${D}${datadir}/${PN}-${PV}/examples
     install -m 0644 ${WORKDIR}/model/mobilenet_v1_1.0_224_quant.tflite ${D}${datadir}/${PN}-${PV}/examples
+    # install scripts for benchmarking
+    install -m 0755 ${WORKDIR}/tflite-benchmark.sh ${D}${datadir}/${PN}-${PV}/examples
 }
 
 PACKAGES += "${PN}-examples"
