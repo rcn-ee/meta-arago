@@ -25,11 +25,13 @@ UTILS_append_keystone = "\
 	libsdl-dev \
 	"
 
-TI_SECURE_STORAGE_DEV = "\
-	ti-softhsmv2-dev \
-	libp11-dev \
-	libp11-staticdev \
-	"
+TI_SECURE_STORAGE_DEV = ""
+# All these secure storage packages need to be
+# migrated to openssl 1.1
+#	ti-softhsmv2-dev \
+#	libp11-dev \
+#	libp11-staticdev \
+#	"
 
 # Disable ipsecmgr due to libnl and xfrm conflict
 #	ipsecmgr-dev

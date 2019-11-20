@@ -75,11 +75,13 @@ ARAGO_PYTHON = "\
     python \
     "
 
-ARAGO_SECURE_STORAGE = "\
-    ti-softhsmv2 \
-    libp11 \
-    engine-pkcs11 \
-    "
+ARAGO_SECURE_STORAGE = ""
+# All these secure storage packages need to be
+# migrated to openssl 1.1
+#    ti-softhsmv2 \
+#    libp11 \
+#    engine-pkcs11 \
+#    "
 
 # ipsecmgr has been disabled for a while
 # disable ipsecmgr-mod,hplib-mod due to K4.14 API changes
@@ -153,9 +155,8 @@ ARAGO_TI_PKGS_append_k2e = "\
     hyplnk-lld \
     "
 
-ARAGO_VTUN = "\
-    vtun \
-"
+# vtun does not build against openssl 1.1
+ARAGO_VTUN = ""
 # vtun does not support aarch64
 ARAGO_VTUN_aarch64 = ""
 
