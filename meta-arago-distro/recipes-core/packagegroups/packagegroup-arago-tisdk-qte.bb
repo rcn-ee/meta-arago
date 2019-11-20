@@ -23,13 +23,13 @@ QT5_DEMOS = "\
     qtsvg-examples \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-examples', '', d)} \
     qtwebengine-examples \
+    qtwebbrowser \
+    qtwebbrowser-examples \
     qtserialport-examples \
     qtcharts-examples \
 "
 
-QT5_DEMOS_remove_k3 = "\
-    qtwebengine-examples \
-"
+#QT5_DEMOS_remove_k3 = "\
 #    qtwebbrowser \
 #    qtwebbrowser-examples \
 #    qtwebengine-examples \
