@@ -9,7 +9,7 @@ LICENSE = "GPLv2 | BSD"
 
 inherit pkgconfig
 
-DEPENDS = "gnutls dbus libnl openssl10 libgcrypt"
+DEPENDS = "gnutls dbus libnl openssl libgcrypt"
 RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 
 # To prevent users from accidently picking up this customized version of
@@ -25,6 +25,7 @@ SRC_URI = "git://git.ti.com/wilink8-wlan/hostap.git;protocol=git;branch=${BRANCH
            file://p2p_supplicant.conf \
            file://99_wpa_supplicant \
           "
+SRC_URI += "file://crypto_openssl.patch;patchdir=.."
 
 S = "${WORKDIR}/git/wpa_supplicant"
 
