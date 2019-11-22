@@ -25,6 +25,7 @@ SRC_URI = "git://git.ti.com/wilink8-wlan/hostap.git;protocol=git;branch=${BRANCH
            file://p2p_supplicant.conf \
            file://99_wpa_supplicant \
           "
+SRC_URI += "file://crypto_openssl.patch;patchdir=.."
 
 S = "${WORKDIR}/git/wpa_supplicant"
 
