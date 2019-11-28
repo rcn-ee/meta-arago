@@ -9,8 +9,8 @@ COMPATIBLE_MACHINE = "omap-a15|ti43x"
 
 inherit autotools pkgconfig
 
-PR = "r28"
-SRCREV = "20338b9f575ffe9c18c12bbed41c16069d27ccf4"
+PR = "r29"
+SRCREV = "1fceb3ac4b0e7ed014000a10dfe6ca8729f9cd8d"
 
 EXTRA_OEMAKE = "CC="${CC}""
 TARGET_CC_ARCH += "${LDFLAGS}"
