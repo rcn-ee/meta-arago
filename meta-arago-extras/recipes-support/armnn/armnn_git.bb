@@ -33,6 +33,7 @@ SRC_URI = " \
     file://0009-command-line-options-for-video-port-selection.patch \
     file://0010-armnnexamples-update-for-19.08-modifications.patch \
     file://0011-Generate-versioned-library-for-armnnTfLiteParser.patch \
+    file://0012-ArmnnExample-Fix-exception-for-help-command-line-opt.patch \
     http://download.tensorflow.org/models/mobilenet_v1_2018_02_22/mobilenet_v1_1.0_224.tgz;name=mobilenet;subdir=${WORKDIR}/tfmodel;destsuffix=tfmodel \
     https://storage.googleapis.com/mobilenet_v2/checkpoints/mobilenet_v2_1.0_224.tgz;name=mobilenetv2;subdir=${WORKDIR}/tfmodel;destsuffix=tfmodel \
     git://git.ti.com/tidl/tidl-api.git;name=tidl-api;branch=${BRANCH_tidl-api};subdir=${WORKDIR}/tidl-api;destsuffix=tidl-api \
