@@ -1,0 +1,51 @@
+From 707ba3cba21c86d09cbb5f67ede565054b8c904d Mon Sep 17 00:00:00 2001
+From: Djordje Senicic <x0157990@ti.com>
+Date: Mon, 2 Dec 2019 16:56:27 -0500
+Subject: [PATCH] ArmnnExample: Fix exception for --help command line option
+
+Signed-off-by: Djordje Senicic <x0157990@ti.com>
+---
+ tests/ArmnnExamples/ArmnnExamples.cpp | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/tests/ArmnnExamples/ArmnnExamples.cpp b/tests/ArmnnExamples/ArmnnExamples.cpp
+index c10a4fc0..660106c0 100644
+--- a/tests/ArmnnExamples/ArmnnExamples.cpp
++++ b/tests/ArmnnExamples/ArmnnExamples.cpp
+@@ -213,6 +213,18 @@ namespace
+   // Configure boost::program_options for command-line parsing and validation.
+   namespace po = boost::program_options;
+ 
++  bool CheckOption(const po::variables_map& vm, const char* option)
++  {
++    // Check that the given option is valid.
++    if (option == nullptr)
++    {
++        return false;
++    }
++
++    // Check whether 'option' is provided.
++    return vm.find(option) != vm.end();
++  }
++
+   template<typename T, typename TParseElementFunc>
+   std::vector<T> ParseArrayImpl(std::istream& stream, TParseElementFunc parseElementFunc)
+   {
+@@ -647,6 +659,14 @@ int main(int argc, const char* argv[])
+     try
+     {
+       po::store(po::parse_command_line(argc, argv, desc), vm);
++      if (CheckOption(vm, "help") || argc <= 1)
++      {
++            std::cout << "Executes a neural network model using the provided video clip, or input camera stream. " << std::endl;
++            std::cout << "Runs many consecutive inferences and shows classification labels on display, in real-time." << std::endl;
++            std::cout << std::endl;
++            std::cout << desc << std::endl;
++            return EXIT_SUCCESS;
++      }
+       po::notify(vm);
+     }
+     catch (const po::error& e)
+-- 
+2.17.1
+
