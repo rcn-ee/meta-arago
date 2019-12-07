@@ -8,13 +8,13 @@ inherit packagegroup
 
 # WLAN support packages.
 # These are the packages that all platforms use for WLAN support
-# add wireless-regdb
+# add wireless-regdb-static
 WLAN_COMMON = "\
     iw \
     softap-udhcpd-config \
     eventdump \
     wlconf \
-    wireless-regdb \
+    wireless-regdb-static \
     linux-firmware-iwlwifi-8000c \
     linux-firmware-iwlwifi-8265 \
     linux-firmware-iwlwifi-3160-17 \
@@ -45,7 +45,6 @@ BT_COMMON = "\
 "
 
 BT_TI = "\
-    uim-sysfs \
     bt-enable \
     bt-fw \
 "
