@@ -41,9 +41,11 @@ do_install() {
     install -d ${D}${TIDL_INSTALL_DIR}
     install -d ${D}${TIDL_INSTALL_DIR}/tidl_api
     install -d ${D}${TIDL_INSTALL_DIR}/viewer
+    install -d ${D}${libdir}
     cp ${CP_ARGS} ${S}/tidl_api/* ${D}${TIDL_INSTALL_DIR}/tidl_api/
     cp ${CP_ARGS} ${S}/viewer/* ${D}${TIDL_INSTALL_DIR}/viewer/
     install ${S}/readme.md ${D}${TIDL_INSTALL_DIR}/
+    cp ${CP_ARGS} ${S}/tidl_api/libtidl_*.so ${D}${libdir}
 }
 
 FILES_${PN} += "\
