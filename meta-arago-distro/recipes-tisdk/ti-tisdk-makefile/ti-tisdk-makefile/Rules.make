@@ -14,7 +14,7 @@ UBOOT_MACHINE=__UBOOT_MACHINE__
 export TI_SDK_PATH=__SDK__INSTALL_DIR__
 
 #root of the target file system for installing applications
-DESTDIR=__DESTDIR__
+DESTDIR ?=__DESTDIR__
 
 #Points to the root of the Linux libraries and headers matching the
 #demo file system.
@@ -42,4 +42,4 @@ SDK_PATH_TARGET=$(TI_SDK_PATH)/__SDK_PATH_TARGET__
 
 # Set EXEC_DIR to install example binaries.
 # This will be configured with the setup.sh script.
-EXEC_DIR=__EXEC_DIR__
+EXEC_DIR ?=__EXEC_DIR__
