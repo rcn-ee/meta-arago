@@ -1,0 +1,48 @@
+From dc175c00a317cdd693772f7dbf9de6ddeef46f19 Mon Sep 17 00:00:00 2001
+From: Hongmei Gou <a0271529@ti.com>
+Date: Tue, 10 Dec 2019 13:07:26 -0500
+Subject: [PATCH] ArmnnExample: setting capture resolution for the camera input
+
+Upstream-Status: Inappropriate [TI only example code]
+
+Signed-off-by: Hongmei Gou <a0271529@ti.com>
+---
+ tests/ArmnnExamples/ArmnnExamples.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/tests/ArmnnExamples/ArmnnExamples.cpp b/tests/ArmnnExamples/ArmnnExamples.cpp
+index 1bd76a47..7fdaa167 100644
+--- a/tests/ArmnnExamples/ArmnnExamples.cpp
++++ b/tests/ArmnnExamples/ArmnnExamples.cpp
+@@ -349,6 +349,10 @@ int MainImpl(const char* modelPath,
+       }
+       std::cout << "Using video" << vport << std::endl;
+       cap = VideoCapture(vport);
++      // Setting the capture resolution
++      cap.set(CV_CAP_PROP_FRAME_WIDTH, 352);
++      cap.set(CV_CAP_PROP_FRAME_HEIGHT, 288);
++
+       namedWindow("ARMNN MobileNet Example", WINDOW_AUTOSIZE | CV_GUI_NORMAL);
+       input_type = INPUT_CAMERA; //camera input
+     }
+@@ -452,7 +452,7 @@ int MainImpl(const char* modelPath,
+         cv::putText(test_image, predict_target_name,
+                     cv::Point(rectCrop.x + 5,rectCrop.y + 20), // Coordinates
+                     cv::FONT_HERSHEY_COMPLEX_SMALL, // Font
+-                    1.0, // Scale. 2.0 = 2x bigger
++                    0.75, // Scale. 2.0 = 2x bigger
+                     cv::Scalar(0,0,255), // Color
+                     1, // Thickness
+                     8); // Line type
+@@ -462,7 +462,7 @@ int MainImpl(const char* modelPath,
+         cv::putText(test_image, preformance_ret_string,
+                     cv::Point(rectCrop.x + 5,rectCrop.y + 40), // Coordinates
+                     cv::FONT_HERSHEY_COMPLEX_SMALL, // Font
+-                    1.0, // Scale. 2.0 = 2x bigger
++                    0.75, // Scale. 2.0 = 2x bigger
+                     cv::Scalar(0,0,255), // Color
+                     1, // Thickness
+                     8); // Line type
+-- 
+2.17.1
+
