@@ -6,7 +6,8 @@ LICENSE = "BSD"
 include tidl-api.inc
 require recipes-ti/includes/ti-paths.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
+SRC_URI += "file://0001-Fix-versioning-for-shared-libary.patch"
 
 COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -42,10 +43,11 @@ do_install() {
     install -d ${D}${TIDL_INSTALL_DIR}/tidl_api
     install -d ${D}${TIDL_INSTALL_DIR}/viewer
     install -d ${D}${libdir}
+    cp ${CP_ARGS} ${S}/tidl_api/libtidl_*.so* ${D}${libdir}
+    rm -f ${S}/tidl_api/libtidl_*.so*
     cp ${CP_ARGS} ${S}/tidl_api/* ${D}${TIDL_INSTALL_DIR}/tidl_api/
     cp ${CP_ARGS} ${S}/viewer/* ${D}${TIDL_INSTALL_DIR}/viewer/
     install ${S}/readme.md ${D}${TIDL_INSTALL_DIR}/
-    cp ${CP_ARGS} ${S}/tidl_api/libtidl_*.so ${D}${libdir}
 }
 
 FILES_${PN} += "\
