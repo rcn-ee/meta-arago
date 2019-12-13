@@ -41,7 +41,7 @@ SRC_URI[mobilenet_v1_quant.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226d
 
 SRCREV = "590d6eef7e91a6a7392c8ffffb7b58f2e0c8bc6b"
 
-PR = "r2"
+PR = "r3"
 
 S = "${WORKDIR}/git"
 
@@ -138,3 +138,5 @@ PACKAGES += "${PN}-examples"
 FILES_${PN}-examples = "${datadir}/${PN}-${PV}/examples"
 
 ALLOW_EMPTY_${PN} = "1"
+
+BBCLASSEXTEND = "native nativesdk"
