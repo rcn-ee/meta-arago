@@ -21,8 +21,6 @@ OMPACC_EXAMPLE_LIST = " target_update \
                         local \
                         null \
                         dsplib_fft \
-                        vecadd_lib \
-                        edmabw \
                         sub_section \
 "
 
@@ -35,7 +33,6 @@ python do_unpack_append() {
     os.makedirs(s)
     shutil.copy(os.path.join(git_dir,"Makefile"),s)
     shutil.copy(os.path.join(git_dir,"make.inc"),s)
-    shutil.copy(os.path.join(git_dir,"ompacc_env.sh"),s)
     for example in d.getVar("OMPACC_EXAMPLE_LIST").split():
         shutil.copytree(os.path.join(git_dir,example), os.path.join(s,example))
 }
@@ -47,11 +44,9 @@ EXTRA_OEMAKE = " TARGET_ROOTDIR=${STAGING_DIR_HOST} \
 MKFILELIST = "vecadd/Makefile vecadd_complex/Makefile dsplib_fft/Makefile \
 null/Makefile dspheap/Makefile target_implicit_map/Makefile printf_debug/Makefile \
 edmamgr/Makefile vecadd_t/Makefile target_orphan_call/Makefile target_update/Makefile \
-edmabw/Makefile sub_section/Makefile vecadd_lib/Makefile local/Makefile"
+sub_section/Makefile local/Makefile"
 
 do_configure() {
-    sed "s|arm-linux-gnueabihf-gcc|${CC}|g" -i make.inc
-    sed "s|arm-linux-gnueabihf-g++|${CXX}|g" -i make.inc
     for f in ${MKFILELIST}; do
         sed "s|-fopenmp|-fopenmp ${TUNE_CCARGS}${TOOLCHAIN_OPTIONS}|g" -i $f
     done
@@ -66,7 +61,6 @@ do_install() {
 
     install -m 644 ${B}/Makefile ${D}${datadir}/ti/examples/openmpacc
     install -m 644 ${B}/make.inc ${D}${datadir}/ti/examples/openmpacc
-    install -m 644 ${B}/ompacc_env.sh ${D}${datadir}/ti/examples/openmpacc
 
     for ompacc_example in ${OMPACC_EXAMPLE_LIST}; do
         install -d ${D}${datadir}/ti/examples/openmpacc/${ompacc_example}
