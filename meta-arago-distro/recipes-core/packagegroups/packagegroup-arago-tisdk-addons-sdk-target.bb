@@ -192,6 +192,7 @@ IPCDEV = " \
 EXTRA_PACKAGES_append_omap-a15 = " ${IPCDEV}"
 EXTRA_PACKAGES_append_keystone = " ${IPCDEV}"
 EXTRA_PACKAGES_append_omapl138 = " ${IPCDEV}"
+EXTRA_PACKAGES_append_am65xx = " ${IPCDEV}"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \
