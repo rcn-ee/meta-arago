@@ -1,5 +1,5 @@
 # patch version at the end needs to be in double digits
-PV = "1.2.00.00"
+PV = "1.2.00.01"
 INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://../debian/copyright;md5=2e3965a73a8a49c23836467266120dff"
@@ -10,7 +10,7 @@ OCL_GIT_URI = "git://git.ti.com/opencl/ti-opencl.git"
 OCL_GIT_PROTOCOL = "git"
 OCL_GIT_BRANCH = "master"
 
-OCL_SRCREV = "301ecd37ac5553a8c94c87a0083b8d929e1d1a1e"
+OCL_SRCREV = "850361c85cd00fcb9df958e016c792936ef4aa2b"
 
 BRANCH = "${OCL_GIT_BRANCH}"
 SRC_URI = "${OCL_GIT_URI};protocol=${OCL_GIT_PROTOCOL};branch=${BRANCH}"
