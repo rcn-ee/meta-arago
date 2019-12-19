@@ -7,7 +7,7 @@ pru-icss:
 	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	for dir in examples pru_cape/pru_fw lib/src labs; \
 	do \
-		make -C $$dir PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
+		make -C $$dir PRU_SSP=$$PWD PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
 	done
 
 pru-icss_clean:
@@ -17,7 +17,7 @@ pru-icss_clean:
 	@cd example-applications; cd `find . -maxdepth 1 -type d -name "*pru-icss*"`; \
 	for dir in examples pru_cape/pru_fw lib/src labs; \
 	do \
-		make -C $$dir clean PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
+		make -C $$dir clean PRU_SSP=$$PWD PRU_CGT=$(LINUX_DEVKIT_PATH)/sysroots/__SDKMACHINE__-arago-linux/usr/share/ti/cgt-pru; \
 	done
 
 pru-icss_install: __PRU_ICSS_INSTALL_TARGET__
