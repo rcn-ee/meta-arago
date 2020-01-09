@@ -1,0 +1,34 @@
+tidl-api: replace 2 dsp + 2 group layer use cases with 1 dsp
+
+    The BBAI only has enough CMEM for 4 EVEs, 1 DSP, and 2 group
+    layers. In the case of all of our networks, the difference between
+    1 and 2 dsps is essentially nonexistent. (PLSDK-3189)
+
+Upstream-Status: Accepted
+
+Signed-off-by: Caleb Robey <a0232989@ti.com>
+Signed-off-by: Yuan Zhao <yuanzhao@ti.com>
+---
+ examples/mcbench/scripts/all_5729.sh | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/examples/mcbench/scripts/all_5729.sh b/examples/mcbench/scripts/all_5729.sh
+index defec72..0fee8a1 100755
+--- a/examples/mcbench/scripts/all_5729.sh
++++ b/examples/mcbench/scripts/all_5729.sh
+@@ -7,8 +7,7 @@ export TIDL_NETWORK_HEAP_SIZE_DSP=56623104
+ export TIDL_NETWORK_HEAP_SIZE_EVE=67108864
+ export TIDL_NETWORK_HEAP_SIZE_DSP=8388608
+ ./mcbench -g 2 -d 1 -e 4 -c ../test/testvecs/config/infer/tidl_config_mobileNet1_lg2.txt -f 50 -i ../test/testvecs/input/preproc_2_224x224_multi.y
+-./mcbench -g 2 -d 2 -e 4 -c ../test/testvecs/config/infer/tidl_config_mobileNet1_lg2.txt -f 50 -i ../test/testvecs/input/preproc_2_224x224_multi.y
+-./mcbench -g 2 -d 2 -e 4 -c ../test/testvecs/config/infer/tidl_config_mobileNet2_lg2.txt -f 50 -i ../test/testvecs/input/preproc_2_224x224_multi.y
+-./mcbench -g 2 -d 2 -e 4 -c ../test/testvecs/config/infer/tidl_config_inceptionNetv1_lg2.txt -f 50 -i ../test/testvecs/input/preproc_0_224x224_multi.y
+-./mcbench -g 2 -d 2 -e 4 -c ../test/testvecs/config/infer/tidl_config_j11_v2_lg2.txt -f 50 -i ../test/testvecs/input/preproc_0_224x224_multi.y
+-./mcbench -g 2 -d 2 -e 4 -c ../test/testvecs/config/infer/tidl_config_j11_v2_dense_lg2.txt -f 50 -i ../test/testvecs/input/preproc_0_224x224_multi.y
++./mcbench -g 2 -d 1 -e 4 -c ../test/testvecs/config/infer/tidl_config_mobileNet2_lg2.txt -f 50 -i ../test/testvecs/input/preproc_2_224x224_multi.y
++./mcbench -g 2 -d 1 -e 4 -c ../test/testvecs/config/infer/tidl_config_inceptionNetv1_lg2.txt -f 50 -i ../test/testvecs/input/preproc_0_224x224_multi.y
++./mcbench -g 2 -d 1 -e 4 -c ../test/testvecs/config/infer/tidl_config_j11_v2_lg2.txt -f 50 -i ../test/testvecs/input/preproc_0_224x224_multi.y
++./mcbench -g 2 -d 1 -e 4 -c ../test/testvecs/config/infer/tidl_config_j11_v2_dense_lg2.txt -f 50 -i ../test/testvecs/input/preproc_0_224x224_multi.y
+-- 
+2.17.1
+
