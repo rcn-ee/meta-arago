@@ -2,9 +2,9 @@
 TCMODE = "external-arm"
 TCLIBC = "external-arm-toolchain"
 
-EAT_TARGET_SYS_ARMV5 ?= "arm-linux-gnueabi"
-EAT_TARGET_SYS_ARMV7 ?= "arm-linux-gnueabihf"
-EAT_TARGET_SYS_ARMV8 ?= "aarch64-linux-gnu"
+EAT_TARGET_SYS_ARMV5 ?= "arm-none-linux-gnueabi"
+EAT_TARGET_SYS_ARMV7 ?= "arm-none-linux-gnueabihf"
+EAT_TARGET_SYS_ARMV8 ?= "aarch64-none-linux-gnu"
 
 EAT_TARGET_SYS_arm = "${EAT_TARGET_SYS_ARMV5}"
 EAT_TARGET_SYS_armv7a = "${EAT_TARGET_SYS_ARMV7}"
@@ -16,9 +16,9 @@ SECONDARY_TARGET_ARCH_k3 = "armv7a"
 TARGET_VENDOR = ""
 
 TOOLCHAIN_BASE ?= "/opt"
-TOOLCHAIN_PATH_ARMV5 ?= "${TOOLCHAIN_BASE}/gcc-arm-8.3-ti2019.01-armv5-x86_64-${EAT_TARGET_SYS_ARMV5}"
-TOOLCHAIN_PATH_ARMV7 ?= "${TOOLCHAIN_BASE}/gcc-arm-8.3-2019.03-x86_64-${EAT_TARGET_SYS_ARMV7}"
-TOOLCHAIN_PATH_ARMV8 ?= "${TOOLCHAIN_BASE}/gcc-arm-8.3-2019.03-x86_64-${EAT_TARGET_SYS_ARMV8}"
+TOOLCHAIN_PATH_ARMV5 ?= "${TOOLCHAIN_BASE}/gcc-arm-9.2-ti2020.01-armv5-x86_64-${EAT_TARGET_SYS_ARMV5}"
+TOOLCHAIN_PATH_ARMV7 ?= "${TOOLCHAIN_BASE}/gcc-arm-9.2-2019.12-x86_64-${EAT_TARGET_SYS_ARMV7}"
+TOOLCHAIN_PATH_ARMV8 ?= "${TOOLCHAIN_BASE}/gcc-arm-9.2-2019.12-x86_64-${EAT_TARGET_SYS_ARMV8}"
 
 DEF_TOOLCHAIN_PATH_arm = "${TOOLCHAIN_PATH_ARMV5}"
 DEF_TOOLCHAIN_PATH_armv7a = "${TOOLCHAIN_PATH_ARMV7}"
@@ -47,10 +47,10 @@ PREFERRED_PROVIDER_libgcc = "external-arm-toolchain"
 PREFERRED_PROVIDER_gcc-runtime = "external-arm-toolchain"
 
 # Set Cross and SDK toolchain preferences
-SDKGCCVERSION ?= "arm-8.3%"
-SDKGDBVERSION ?= "8.2%"
-SDKBINUVERSION ?= "2.31%"
-SDKGLIBCVERSION ?= "2.28%"
+SDKGCCVERSION ?= "arm-9.2%"
+SDKGDBVERSION ?= "8.3%"
+SDKBINUVERSION ?= "2.32%"
+SDKGLIBCVERSION ?= "2.30%"
 SDKLINUXLIBCVERSION ?= "4.19%"
 
 PREFERRED_VERSION_gcc-crosssdk-${SDK_SYS} ?= "${SDKGCCVERSION}"
@@ -69,10 +69,10 @@ PREFERRED_VERSION_nativesdk-glibc-initial ?= "${SDKGLIBCVERSION}"
 
 # Set target toolchain preferences to match Cross/SDK by default
 # Can be overwritten globally, if needed
-GCCVERSION ?= "arm-8.3%"
-GDBVERSION ?= "8.2%"
-BINUVERSION ?= "2.31%"
-GLIBCVERSION ?= "2.28%"
+GCCVERSION ?= "arm-9.2%"
+GDBVERSION ?= "8.3%"
+BINUVERSION ?= "2.32%"
+GLIBCVERSION ?= "2.30%"
 
 PREFERRED_VERSION_gcc ?= "${GCCVERSION}"
 PREFERRED_VERSION_gdb ?= "${GDBVERSION}"
