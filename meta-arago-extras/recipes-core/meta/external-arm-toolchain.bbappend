@@ -26,9 +26,9 @@ do_install_append() {
 	ln -sf libgfortran.so.5 ${D}${libdir}/libgfortran.so
 }
 
-FILES_libgcc-dev += "\
-    ${libdir}/gcc/${TARGET_SYS} \
-"
+# Below FILES_* overrides are due to TARGET_SYS -> ORIG_TARGET_SYS move in ${libdir}/gcc
+# to enable native compile on the target
+FILES_libgcov-staticdev = "${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/libgcov.a"
 
 FILES_libgfortran-dev = "\
     ${libdir}/libgfortran*.so \
@@ -37,6 +37,18 @@ FILES_libgfortran-dev = "\
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/libgfortranbegin.* \
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/libcaf_single* \
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/finclude/ \
+"
+
+FILES_gcc-sanitizers = "${libdir}/*.spec ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include/sanitizer/*.h"
+
+# This is provided by gcc:
+#    ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include
+FILES_libgcc-dev = "\
+    ${base_libdir}/libgcc*.so \
+    ${@oe.utils.conditional('BASETARGET_SYS', '${ORIG_TARGET_SYS}', '', '${libdir}/${BASETARGET_SYS}', d)} \
+    ${libdir}/${TARGET_SYS}/${BINV}* \
+    ${libdir}/${TARGET_ARCH}${TARGET_VENDOR}* \
+    ${libdir}/gcc/${TARGET_SYS} \
 "
 
 FILES_libssp-dev = "\
