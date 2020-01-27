@@ -17,11 +17,6 @@ OOBE_ti43x += "\
     parse-ip \
 "
 
-EXTRA_APPLICATIONS = "\
-    screenshot \
-"
-
 RDEPENDS_${PN} = "\
     ${OOBE} \
-    ${EXTRA_APPLICATIONS} \
 "
