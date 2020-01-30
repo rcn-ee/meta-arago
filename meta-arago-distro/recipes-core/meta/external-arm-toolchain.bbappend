@@ -3,21 +3,21 @@
 # on linux-libc-headers creates circular dependencies now. Mostly
 # duplication of code from corresponding recipe.
 
-BRANCH = "ti-linux-4.19.y"
-SRCREV = "50ceb3c6e7f2d5f54d66d4999e79d3c4e09796df"
+BRANCH = "ti-linux-5.4.y"
+SRCREV = "c65c87b98f8d1b647c13b5bb36e5ffbad5805ff1"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
 SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH}"
 
-PKGV_linux-libc-headers-dev = "4.19"
-PKGV_linux-libc-headers = "4.19"
+PKGV_linux-libc-headers-dev = "5.4"
+PKGV_linux-libc-headers = "5.4"
 
 inherit kernel-arch pkgconfig multilib_header
 
 EXTRA_OEMAKE = " HOSTCC="${BUILD_CC}" HOSTCPP="${BUILD_CPP}""
 
-DEPENDS += "bison-native"
+DEPENDS += "bison-native rsync-native"
 
 do_configure_append() {
 	cd ${WORKDIR}/git
