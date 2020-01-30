@@ -12,6 +12,7 @@ ALTERNATIVE_PRIORITY_pn-opencl-monitor-ipu = "1"
 # Raise priority for sample IPC FW images
 ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
 
-# Temporarily disable "dsp" and "mmip" machine features for all SOCs
+# Temporarily disable "dsp", "mmip" and "gpu" machine features for all SOCs
 MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('dsp', '')}"
 MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('mmip', '')}"
+MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('gpu', '')}"
