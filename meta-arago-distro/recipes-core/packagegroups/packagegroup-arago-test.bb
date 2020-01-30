@@ -43,11 +43,11 @@ ARAGO_TEST_append_armv7ve = " \
     cpuburn-neon \
 "
 
+# timestamping
 ARAGO_TI_TEST = " \
     ltp-ddt \
     input-utils \
     cpuloadgen \
-    timestamping \
     uvc-gadget \
     "
 
