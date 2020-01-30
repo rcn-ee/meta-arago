@@ -1,9 +1,11 @@
 require recipes-kernel/linux-libc-headers/linux-libc-headers.inc
 
-PR_append = ".arago1"
+PR_append = ".arago0"
 
-BRANCH = "ti-linux-4.19.y"
-SRCREV = "50ceb3c6e7f2d5f54d66d4999e79d3c4e09796df"
+DEPENDS += "rsync-native"
+
+BRANCH = "ti-linux-5.4.y"
+SRCREV = "c65c87b98f8d1b647c13b5bb36e5ffbad5805ff1"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
