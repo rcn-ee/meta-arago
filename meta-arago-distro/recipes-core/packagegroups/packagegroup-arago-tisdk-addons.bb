@@ -41,32 +41,32 @@ UTILS_DSP = " \
 "
 
 # switch-config
+# uio-module-drv-test
+# uio-test-pruss
 UTILS_append_ti33x = " mmc-utils \
                        can-utils \
                        pru-icss \
                        pru-swuart-fw \
-                       uio-module-drv-test \
-                       uio-test-pruss \
 "
 
 # switch-config
+# uio-module-drv-test
+# uio-test-pruss
 UTILS_append_ti43x = " mmc-utils \
                        can-utils \
                        libdrm-omap \
                        pru-icss \
-                       uio-module-drv-test \
-                       uio-test-pruss \
 "
 
 # switch-config
+# uio-test-pruss
+# uio-module-drv-test
 UTILS_append_omap-a15 = " mmc-utils \
                           parted \
                           libdrm-omap \
                           stream-openmp \
                           pru-icss \
                           ti-ipc-rtos-fw \
-                          uio-test-pruss \
-                          uio-module-drv-test \
 "
 
 # switch-config
@@ -87,8 +87,8 @@ UTILS_append_dra7xx = " can-utils \
                         ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-example-apps','',d)} \
 "
 
+# uio-module-drv-test
 UTILS_append_keystone = " \
-    uio-module-drv-test \
     ti-ipc-rtos-fw \
 "
 
@@ -104,30 +104,30 @@ UTILS_append_k2e = " \
     ${UTILS_DSP} \
 "
 
+# uio-test-pruss
 UTILS_append_k2g = " \
     can-utils \
     pru-icss \
-    uio-test-pruss \
 "
 
 EXTRA_LIBS = ""
+# uio-module-drv
 EXTRA_LIBS_append_omap-a15 = " \
     cmem \
-    uio-module-drv \
 "
 
+# uio-module-drv
 EXTRA_LIBS_append_keystone = " \
     cmem \
-    uio-module-drv \
 "
 
+# uio-module-drv
 EXTRA_LIBS_append_ti43x = " \
     cmem \
-    uio-module-drv \
 "
 
+# uio-module-drv
 EXTRA_LIBS_append_ti33x = " \
-    uio-module-drv \
 "
 
 DEVTOOLS = " \

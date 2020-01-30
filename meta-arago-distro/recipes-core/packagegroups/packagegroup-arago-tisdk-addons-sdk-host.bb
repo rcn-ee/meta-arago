@@ -54,9 +54,9 @@ UTILS_append_am65xx = " \
 
 EXTRA_LIBS = ""
 
+# uio-module-drv-src
 EXTRA_LIBS_append_omap-a15 = " \
     cmem-mod-src \
-    uio-module-drv-src \
     big-data-ipc-demo-linux-src \
 "
 
@@ -65,22 +65,22 @@ EXTRA_LIBS_append_omap-a15 = " \
 #    gdbserverproxy-module-drv-src \
 #"
 
+# uio-module-drv-src
 EXTRA_LIBS_append_ti33x = " \
-    uio-module-drv-src \
 "
 
+# uio-module-drv-src
 EXTRA_LIBS_append_ti43x = " \
     cmem-mod-src \
-    uio-module-drv-src \
 "
 
 # Disable ipsecmgr due to libnl and xfrm conflict
 #    ipsecmgr-mod-src
 # Disable hplib-mod-srv due to K4.14 breakage
 #    hplib-mod-src
+# uio-module-drv-src
 EXTRA_LIBS_append_keystone = " \
     cmem-mod-src \
-    uio-module-drv-src \
 "
 
 #EXTRA_LIBS_append_k2hk = " \
