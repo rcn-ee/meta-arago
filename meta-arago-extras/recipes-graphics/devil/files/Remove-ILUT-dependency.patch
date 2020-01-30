@@ -1,0 +1,13 @@
+diff --git a/DevIL/CMakeLists.txt b/DevIL/CMakeLists.txt
+index e342f93d..fae40167 100644
+--- a/DevIL/CMakeLists.txt
++++ b/DevIL/CMakeLists.txt
+@@ -6,7 +6,7 @@ set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+ 
+ add_subdirectory(src-IL)
+ add_subdirectory(src-ILU)
+-add_subdirectory(src-ILUT)
++# add_subdirectory(src-ILUT)
+ option(IL_TESTS "build DevIL tests" ON)
+ if (IL_TESTS)
+     ENABLE_TESTING()
