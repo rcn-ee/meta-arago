@@ -87,9 +87,9 @@ ARAGO_SECURE_STORAGE = ""
 # disable ipsecmgr-mod,hplib-mod due to K4.14 API changes
 #    ipsecmgr-mod
 #    hplib-mod
+# uio-module-drv
 ARAGO_TI_KEYSTONE_PKGS = "\
     ${ARAGO_SECURE_STORAGE} \
-    uio-module-drv \
     traceframework \
     cuia \
     libnl-xfrm \
