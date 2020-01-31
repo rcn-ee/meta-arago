@@ -52,13 +52,10 @@ ARAGO_UTILS = "\
     usbutils \
     i2c-tools \
     strace \
+    ltrace \
     ${@bb.utils.contains('MACHINE_FEATURES', 'pci', 'pciutils', '',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi-utils', '',d)} \
     "
-
-# ARAGO_UTILS - ltrace fails with __cxa_demangle for now
-#    ltrace 
-
 
 ARAGO_SDK_PREREQ = "\
     zlib \
