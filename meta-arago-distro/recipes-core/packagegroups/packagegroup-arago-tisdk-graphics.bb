@@ -27,7 +27,6 @@ GRAPHICS_RDEPENDS = "\
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','${PREFERRED_PROVIDER_virtual/gpudriver}','',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','glmark2','',d)} \
 "
-GRAPHICS_RDEPENDS_remove_j7-evm = "ti-sgx-ddk-km"
 
 GRAPHICS_DISPLAY_UTILS = "\
 "

@@ -44,7 +44,6 @@ UTILS_append_k3 = " \
 
 UTILS_append_j7-evm = " \
     ti-img-encode-decode-src \
-    ti-img-rogue-driver-src \
     pru-icss-src \
 "
 
