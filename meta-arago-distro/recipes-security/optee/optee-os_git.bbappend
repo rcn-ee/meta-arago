@@ -2,13 +2,11 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
-inherit python3native
-
-DEPENDS += "python3-pyelftools-native python3-pycrypto-native"
+DEPENDS += "python3-pycryptodomex-native"
 
 PR_append = ".arago0"
 
-PV = "3.7.0+git${SRCPV}"
+PV = "3.8.0+git${SRCPV}"
 
 is_armv7 = "1"
 is_armv7_aarch64 = "0"
@@ -17,7 +15,7 @@ SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
            file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
 "
 BRANCH = "ti-optee-os"
-SRCREV = "5208e5c1f3743fcde71e150eada2fc9945f749df"
+SRCREV = "199fca17b575d4c748c9c435e908a6ec9618c75a"
 
 ARMCORE = "CFG_ARM32_core=y ta-targets=ta_arm32"
 ARMCORE_aarch64 = "CFG_ARM64_core=y ta-targets=ta_arm64"
@@ -64,7 +62,7 @@ do_compile() {
 do_compile_aarch64() {
     oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
     ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
-        cp tee-pager.bin ${B}/bl32.bin; \
+        cp tee-pager_v2.bin ${B}/bl32.bin; \
         cp tee.elf ${B}/bl32.elf; \
     )
 }
@@ -73,7 +71,7 @@ do_compile_am65xx-hs-evm() {
     export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
     oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
     ( cd out/arm-plat-${OPTEEOUTPUTMACHINE}/core/; \
-        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee-pager.bin tee-pager.bin.signed; \
+        ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh tee-pager_v2.bin tee-pager.bin.signed; \
         mv tee-pager.bin.signed ${B}/bl32.bin; \
         cp tee.elf ${B}/bl32.elf; \
     )
