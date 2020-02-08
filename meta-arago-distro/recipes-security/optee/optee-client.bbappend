@@ -2,11 +2,6 @@ PR_append = ".arago0"
 
 SRC_URI = "git://git.ti.com/optee/ti-optee-client.git;branch=${BRANCH} \
            file://tee-supplicant.service"
-
-LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=69663ab153298557a59c67a60a743e5b"
-
-PV = "3.7.0+git${SRCPV}"
-
 BRANCH = "ti-optee-client"
 SRCREV = "2e526f4be1d471706915ba1e0044bcbe7c0b2626"
 
