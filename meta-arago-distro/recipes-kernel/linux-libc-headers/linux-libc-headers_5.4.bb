@@ -5,7 +5,7 @@ PR_append = ".arago0"
 DEPENDS += "rsync-native"
 
 BRANCH = "ti-linux-5.4.y"
-SRCREV = "c65c87b98f8d1b647c13b5bb36e5ffbad5805ff1"
+SRCREV = "1661da3fddf4cc3f62796ecfb5c572f1e5361bdf"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
