@@ -15,4 +15,3 @@ ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
 # Temporarily disable "dsp", "mmip" and "gpu" machine features for all SOCs
 MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('dsp', '')}"
 MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('mmip', '')}"
-MACHINE_FEATURES := "${@d.getVar('MACHINE_FEATURES', True).replace('gpu', '')}"
