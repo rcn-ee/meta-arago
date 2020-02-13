@@ -40,27 +40,27 @@ UTILS_DSP = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'gdbc6x dsptop', '', d)} \
 "
 
-# switch-config
 UTILS_append_ti33x = " mmc-utils \
                        can-utils \
+                       switch-config \
                        pru-icss \
                        pru-swuart-fw \
                        uio-module-drv-test \
                        uio-test-pruss \
 "
 
-# switch-config
 UTILS_append_ti43x = " mmc-utils \
                        can-utils \
+                       switch-config \
                        libdrm-omap \
                        pru-icss \
                        uio-module-drv-test \
                        uio-test-pruss \
 "
 
-# switch-config
 UTILS_append_omap-a15 = " mmc-utils \
                           parted \
+                          switch-config \
                           libdrm-omap \
                           stream-openmp \
                           pru-icss \
@@ -69,10 +69,10 @@ UTILS_append_omap-a15 = " mmc-utils \
                           uio-module-drv-test \
 "
 
-# switch-config
 UTILS_append_k3 = " mmc-utils \
                     can-utils \
                     parted \
+                    switch-config \
                     irqbalance \
                     jailhouse \
 "
