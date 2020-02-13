@@ -15,14 +15,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 TI_SECURE_DEV_PKG ?= ""
 export TI_SECURE_DEV_PKG
 
-SRCREV = "a692931eba713a099ed9ae41ef4a4f7ba145a706"
+SRCREV = "6a07e130e7dac6b49c9e516ffc84e33a68155260"
 BRANCH ?= "ti-linux-firmware"
 SRCREV_imggen = "642da4e2a01ea5d8a553ae0d674839cd5e0715b9"
 SRCREV_FORMAT = "imggen"
 
 SRC_URI = " \
 	git://git.ti.com/processor-firmware/ti-linux-firmware.git;protocol=git;branch=${BRANCH} \
-	git://git.ti.com/processor-firmware/system-firmware-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
+	git://git.ti.com/k3-image-gen/k3-image-gen.git;protocol=git;branch=master;destsuffix=imggen;name=imggen \
 "
 
 S = "${WORKDIR}/git"
