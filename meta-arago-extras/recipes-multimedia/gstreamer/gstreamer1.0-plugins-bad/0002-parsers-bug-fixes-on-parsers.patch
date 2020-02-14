@@ -1,4 +1,4 @@
-From e44c23a75544aa4eea9a151b8d7a5168de86c0da Mon Sep 17 00:00:00 2001
+From 39013d1e9c42018d1848a9c34538db46230120e2 Mon Sep 17 00:00:00 2001
 From: Ramprasad N <x0038811@ti.com>
 Date: Thu, 18 Jan 2018 17:01:37 +0530
 Subject: [PATCH 2/5] parsers: Pick bug fixes on different parsers
@@ -10,6 +10,7 @@ The following bug fixes which were previously identified are picked :
 
 Signed-off-by: Pooja Prajod <a0132412@ti.com>
 Signed-off-by: Ramprasad N <x0038811@ti.com>
+
 ---
  gst/jpegformat/gstjpegformat.c        |  2 +-
  gst/jpegformat/gstjpegparse.c         |  2 +-
@@ -33,10 +34,10 @@ index b410466..ecb9311 100644
      return FALSE;
    if (!gst_element_register (plugin, "jifmux", GST_RANK_SECONDARY,
 diff --git a/gst/jpegformat/gstjpegparse.c b/gst/jpegformat/gstjpegparse.c
-index dd684d7..2682afb 100644
+index 17cbec9..a10e9e0 100644
 --- a/gst/jpegformat/gstjpegparse.c
 +++ b/gst/jpegformat/gstjpegparse.c
-@@ -151,7 +151,7 @@ gst_jpeg_parse_class_init (GstJpegParseClass * klass)
+@@ -113,7 +113,7 @@ gst_jpeg_parse_class_init (GstJpegParseClass * klass)
  
    gst_element_class_set_static_metadata (gstelement_class,
        "JPEG stream parser",
@@ -46,7 +47,7 @@ index dd684d7..2682afb 100644
        "Arnout Vandecappelle (Essensium/Mind) <arnout@mind.be>");
  
 diff --git a/gst/videoparsers/gsth264parse.c b/gst/videoparsers/gsth264parse.c
-index 10543ea..ebea0f9 100644
+index f4d82e5..6228b98 100644
 --- a/gst/videoparsers/gsth264parse.c
 +++ b/gst/videoparsers/gsth264parse.c
 @@ -161,7 +161,7 @@ static void
@@ -58,7 +59,7 @@ index 10543ea..ebea0f9 100644
    GST_PAD_SET_ACCEPT_INTERSECT (GST_BASE_PARSE_SINK_PAD (h264parse));
    GST_PAD_SET_ACCEPT_TEMPLATE (GST_BASE_PARSE_SINK_PAD (h264parse));
  
-@@ -1778,13 +1778,8 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
+@@ -1901,13 +1901,8 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
      gint fps_num, fps_den;
      gint par_n, par_d;
  
@@ -74,7 +75,7 @@ index 10543ea..ebea0f9 100644
  
      if (G_UNLIKELY (h264parse->width != crop_width ||
              h264parse->height != crop_height)) {
-@@ -1819,7 +1814,7 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
+@@ -1942,7 +1937,7 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
  
      if (G_UNLIKELY (modified || h264parse->update_caps)) {
        GstVideoInterlaceMode imode = GST_VIDEO_INTERLACE_MODE_PROGRESSIVE;
@@ -83,7 +84,7 @@ index 10543ea..ebea0f9 100644
        GstClockTime latency;
  
        const gchar *caps_mview_mode = NULL;
-@@ -1831,16 +1826,13 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
+@@ -1956,16 +1951,13 @@ gst_h264_parse_update_src_caps (GstH264Parse * h264parse, GstCaps * caps)
  
        caps = gst_caps_copy (sink_caps);
  
@@ -117,7 +118,7 @@ index 38e1f45..49434c7 100644
    GST_PAD_SET_ACCEPT_TEMPLATE (GST_BASE_PARSE_SINK_PAD (parse));
  }
 diff --git a/gst/videoparsers/gstmpegvideoparse.c b/gst/videoparsers/gstmpegvideoparse.c
-index 6896339..cd87838 100644
+index eef79bc..e9ddda1 100644
 --- a/gst/videoparsers/gstmpegvideoparse.c
 +++ b/gst/videoparsers/gstmpegvideoparse.c
 @@ -173,7 +173,7 @@ gst_mpegv_parse_init (GstMpegvParse * parse)
@@ -142,6 +143,3 @@ index 2deddf4..c622b50 100644
  
    return ret;
  }
--- 
-1.9.1
-

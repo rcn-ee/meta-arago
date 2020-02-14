@@ -1,4 +1,4 @@
-From c76b68075cbee0989ca168a08574f04d71ba61e0 Mon Sep 17 00:00:00 2001
+From 45f709bcaa243a6b503a11eb2e917f9719ea1cce Mon Sep 17 00:00:00 2001
 From: Ramprasad N <x0038811@ti.com>
 Date: Tue, 4 Dec 2018 18:56:52 +0530
 Subject: [PATCH 1/5] gstdrmallocator: Add DRM allocator support
@@ -12,6 +12,7 @@ The following changes are included :
 3. Allocate GstMemory objects with mem_type as 'dmabuf'
 
 Signed-off-by: Ramprasad N <x0038811@ti.com>
+
 ---
  configure.ac                              |   5 +
  gst-libs/gst/Makefile.am                  |   4 +-
@@ -29,27 +30,27 @@ Signed-off-by: Ramprasad N <x0038811@ti.com>
  create mode 100644 pkgconfig/gstreamer-drm.pc.in
 
 diff --git a/configure.ac b/configure.ac
-index 943412c..cb17bf3 100644
+index d29cac1..114cd89 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -208,6 +208,8 @@ AG_GST_PKG_CHECK_MODULES(GST_PBUTILS, gstreamer-pbutils-[$GST_API_VERSION], [$GS
- AG_GST_PKG_CHECK_MODULES(GST_GL, gstreamer-gl-[$GST_API_VERSION], [$GST_REQ], no)
- AG_GST_PKG_CHECK_MODULES(GST_SDP, gstreamer-sdp-[$GST_API_VERSION], [$GST_REQ], yes)
+ AG_GST_PKG_CHECK_MODULES(GST_GL, gstreamer-gl-[$GST_API_VERSION], [$GSTPB_REQ], no)
+ AG_GST_PKG_CHECK_MODULES(GST_SDP, gstreamer-sdp-[$GST_API_VERSION], [$GSTPB_REQ], yes)
  
 +PKG_CHECK_MODULES([DRM], [libdrm libdrm_omap], HAVE_KMS=yes, HAVE_KMS=no)
 +
  if test "x$HAVE_GST_GL" = "xyes"; then
  
    AC_MSG_CHECKING([GStreamer OpenGL window systems ...])
-@@ -2566,6 +2568,7 @@ gst-libs/gst/isoff/Makefile
- gst-libs/gst/codecparsers/Makefile
+@@ -2587,6 +2589,7 @@ gst-libs/gst/codecparsers/Makefile
  gst-libs/gst/mpegts/Makefile
+ gst-libs/gst/sctp/Makefile
  gst-libs/gst/uridownloader/Makefile
 +gst-libs/gst/drm/Makefile
  gst-libs/gst/wayland/Makefile
  gst-libs/gst/webrtc/Makefile
  gst-libs/gst/player/Makefile
-@@ -2696,6 +2699,8 @@ pkgconfig/gstreamer-plugins-bad.pc
+@@ -2712,6 +2715,8 @@ pkgconfig/gstreamer-plugins-bad.pc
  pkgconfig/gstreamer-plugins-bad-uninstalled.pc
  pkgconfig/gstreamer-codecparsers.pc
  pkgconfig/gstreamer-codecparsers-uninstalled.pc
@@ -59,21 +60,21 @@ index 943412c..cb17bf3 100644
  pkgconfig/gstreamer-insertbin-uninstalled.pc
  pkgconfig/gstreamer-mpegts.pc
 diff --git a/gst-libs/gst/Makefile.am b/gst-libs/gst/Makefile.am
-index db67fc8..f1fed2b 100644
+index a53f26e..7fe6ae7 100644
 --- a/gst-libs/gst/Makefile.am
 +++ b/gst-libs/gst/Makefile.am
 @@ -7,12 +7,12 @@ OPENCV_DIR=opencv
  endif
  
  SUBDIRS = uridownloader adaptivedemux interfaces basecamerabinsrc codecparsers \
--	 insertbin mpegts video audio player isoff webrtc $(WAYLAND_DIR) \
-+	 insertbin mpegts video audio player isoff webrtc drm $(WAYLAND_DIR) \
+-	 insertbin mpegts audio sctp player isoff webrtc $(WAYLAND_DIR) \
++	 insertbin mpegts audio sctp player isoff webrtc drm $(WAYLAND_DIR) \
  	 $(OPENCV_DIR)
  
  noinst_HEADERS = gst-i18n-plugin.h gettext.h glib-compat-private.h
  DIST_SUBDIRS = uridownloader adaptivedemux interfaces basecamerabinsrc \
--	codecparsers insertbin mpegts wayland opencv video audio player isoff webrtc
-+	codecparsers insertbin mpegts drm wayland opencv video audio player isoff webrtc
+-	codecparsers insertbin mpegts wayland opencv audio player isoff sctp webrtc
++	codecparsers insertbin mpegts drm wayland opencv audio player isoff sctp webrtc
  
  adaptivedemux: uridownloader
  
@@ -412,7 +413,7 @@ index 0000000..3199b92
 +
 +#endif /* __GSTDRMALLOCATOR_H__ */
 diff --git a/pkgconfig/Makefile.am b/pkgconfig/Makefile.am
-index 0e69cd1..f511b4c 100644
+index 8e74a8e..86ee8d6 100644
 --- a/pkgconfig/Makefile.am
 +++ b/pkgconfig/Makefile.am
 @@ -2,6 +2,7 @@
@@ -466,6 +467,3 @@ index 0000000..d155e80
 +Libs: -L${libdir} -lgstdrm-@GST_MAJORMINOR@
 +Cflags: -I${includedir}
 +
--- 
-1.9.1
-
