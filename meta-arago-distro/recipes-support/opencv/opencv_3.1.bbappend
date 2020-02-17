@@ -25,7 +25,7 @@ PACKAGECONFIG_append = " ${PACKAGECONFIG_QTWAYLAND} \
 "
 
 PACKAGECONFIG_remove = "python3"
-PACKAGECONFIG_append = " python2"
+PACKAGECONFIG_remove = "python2"
 
 inherit cmake_qt5
 
