@@ -20,6 +20,9 @@ EXTRA_TI_TOOLS = " \
 "
 
 RDEPENDS_${PN} = "\
-    nativesdk-packagegroup-arago-sdk-host \
+    nativesdk-packagegroup-sdk-host \
+    nativesdk-python-distutils \
+    nativesdk-git \
+    nativesdk-mtd-utils-ubifs \
     ${EXTRA_TI_TOOLS} \
 "
