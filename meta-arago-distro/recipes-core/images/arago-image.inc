@@ -9,16 +9,17 @@ IMAGE_FEATURES += "package-management splash"
 # 4KB per 1 inode should be enough
 EXTRA_IMAGECMD_ext2.gz += "-i 4096"
 
-ARAGO_IMAGE_EXTRA_INSTALL ?= ""
-
-IMAGE_INSTALL += " \
+IMAGE_INSTALL = " \
 	packagegroup-core-boot \
-	${ARAGO_IMAGE_EXTRA_INSTALL} \
+	${CORE_IMAGE_EXTRA_INSTALL} \
 "
 
 export IMAGE_BASENAME = "arago-image"
 
 IMAGE_LINGUAS = ""
+
+TOOLCHAIN_HOST_TASK += "nativesdk-buildtools-perl-dummy"
+SDK_PACKAGE_ARCHS += "buildtools-dummy-${SDKPKGSUFFIX}"
 
 make_bootfiles_symlinks_relative() {
     for f in "${IMAGE_ROOTFS}/boot"/*
