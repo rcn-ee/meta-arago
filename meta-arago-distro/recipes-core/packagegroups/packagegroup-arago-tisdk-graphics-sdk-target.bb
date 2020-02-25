@@ -1,25 +1,17 @@
-DESCRIPTION = "Task to install graphics binaries on sdk target"
+SUMMARY = "Task to install graphics packages on sdk target"
 LICENSE = "MIT"
-PR = "r9"
+PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup
+inherit packagegroup machine_features_check
 
-GRAPHICS_RDEPENDS = "\
-    ${PREFERRED_PROVIDER_virtual/libgbm}-dev \
+REQUIRED_MACHINE_FEATURES = "gpu"
+
+RDEPENDS_${PN} = "\
+    libegl-dev \
     libdrm-dev \
     wayland-dev \
     weston-dev \
-    ${PREFERRED_PROVIDER_virtual/egl}-dev \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','${PREFERRED_PROVIDER_virtual/gpudriver}-dev','',d)} \
-"
-GRAPHICS_RDEPENDS_remove_j7-evm = "ti-sgx-ddk-km-dev"
-
-GRAPHICS_RDEPENDS_append_omap-a15 = "\
-    ti-gc320-libs-dev \
-"
-
-RDEPENDS_${PN} = "\
-    ${GRAPHICS_RDEPENDS} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'gc320', 'ti-gc320-libs-dev', '', d)} \
 "

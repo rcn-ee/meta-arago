@@ -1,17 +1,14 @@
-DESCRIPTION = "Task to install graphics sources in SDK"
+SUMMARY = "Task to install graphics sources in SDK"
 LICENSE = "MIT"
-PR = "r7"
+PR = "r8"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup
+inherit packagegroup machine_features_check
 
-GRAPHICS_RDEPENDS = "${@bb.utils.contains('MACHINE_FEATURES','gpu','${PREFERRED_PROVIDER_virtual/gpudriver}-src','',d)}"
-
-GRAPHICS_RDEPENDS_append_omap-a15 = "\
-    ti-gc320-driver-src \
-"
+REQUIRED_MACHINE_FEATURES = "gpu"
 
 RDEPENDS_${PN} = "\
-    ${GRAPHICS_RDEPENDS} \
+    ${PREFERRED_PROVIDER_virtual/gpudriver}-src \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'gc320', 'ti-gc320-driver-src', '', d)} \
 "
