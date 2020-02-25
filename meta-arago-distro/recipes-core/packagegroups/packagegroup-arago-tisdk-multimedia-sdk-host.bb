@@ -1,4 +1,4 @@
-DESCRIPTION = "Task to add multimedia related sources into the SDK"
+SUMMARY = "Task to add multimedia related sources into the SDK"
 LICENSE = "MIT"
 PR = "r15"
 
@@ -10,15 +10,13 @@ BARCODE_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'barcode-roi-src'
 
 MULTIMEDIA = ""
 
+MULTIMEDIA_append_ti33x = " ${BARCODE_PKG}"
+
 MULTIMEDIA_append_ti43x = " \
     dual-camera-demo-src \
     image-gallery-src \
     ${BARCODE_PKG} \
 "
-
-MULTIMEDIA_append_ti33x = " ${BARCODE_PKG}"
-
-MULTIMEDIA_append_am65xx = " ${BARCODE_PKG}"
 
 MULTIMEDIA_append_omap-a15 = " \
     dual-camera-demo-src \
@@ -26,14 +24,13 @@ MULTIMEDIA_append_omap-a15 = " \
     ${BARCODE_PKG} \
 "
 
+MULTIMEDIA_append_am65xx = " ${BARCODE_PKG}"
+
 MULTIMEDIA_append_dra7xx = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'qt-opencv-opencl-opengl-multithreaded-src', '', d)} \
 "
 
 MULTIMEDIA_append_keystone = " ${BARCODE_PKG}"
-
-#Demo doesn't work on 3.14
-# ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'dual-camera-demo-src image-gallery-src', d)}
 
 RDEPENDS_${PN} = "\
     ${MULTIMEDIA} \
