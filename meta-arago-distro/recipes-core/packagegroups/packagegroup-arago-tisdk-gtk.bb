@@ -1,18 +1,14 @@
 DESCRIPTION = "Task to add Gtk embedded related packages"
 LICENSE = "MIT"
-PR = "r1"
+PR = "r2"
 
-inherit packagegroup
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-GTK = "\
-    gtk+3 \
-"
+inherit packagegroup machine_features_check
 
-GTK_DEMOS = "\
-    gtk+3-demo \
-"
+REQUIRED_MACHINE_FEATURES = "gpu"
 
 RDEPENDS_${PN} = "\
-    ${GTK} \
-    ${GTK_DEMOS} \
+    gtk+3 \
+    gtk+3-demo \
 "
