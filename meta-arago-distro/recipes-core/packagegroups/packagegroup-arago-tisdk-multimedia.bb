@@ -1,6 +1,6 @@
-DESCRIPTION = "Task to add multimedia related packages"
+SUMMARY = "Task to add multimedia related packages"
 LICENSE = "MIT"
-PR = "r23"
+PR = "r24"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -11,6 +11,7 @@ MULTIMEDIA = " \
 "
 
 MULTIMEDIA_omapl138 = ""
+
 MULTIMEDIA_append_keystone = " \
     hevc-arm-decoder \
 "
@@ -26,6 +27,7 @@ MULTIMEDIA_append_omap-a15 = " \
 "
 
 MULTIMEDIA_append_dra7xx = " \
+    vis \
     hevc-arm-decoder \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'qt-opencv-opencl-opengl-multithreaded-dev', '', d)} \
 "
@@ -34,36 +36,19 @@ MULTIMEDIA_append_omap5-evm = " \
     abefw \
 "
 
-#MULTIMEDIA_append_j7-evm = " \
-#    ti-img-encode-decode \
-#    vxd-dec-fw \
-#"
+ACCEL_MM = ""
 
-ACCEL_FW = ""
-
-ACCEL_FW_append_am57xx-evm = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
+ACCEL_MM_append_omap-a15 = " \
+    ipumm-fw \
 "
 
-ACCEL_FW_append_am57xx-hs-evm = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
-"
-
-ACCEL_FW_append_omap5-evm = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
-"
-
-ACCEL_FW_append_dra7xx-evm = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
-    vis \
-"
-
-ACCEL_FW_append_dra7xx-hs-evm = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'ipumm-fw', '', d)} \
+ACCEL_MM_append_j7-evm = " \
+    ti-img-encode-decode \
+    vxd-dec-fw \
 "
 
 RDEPENDS_${PN} = "\
     packagegroup-arago-gst \
     ${MULTIMEDIA} \
-    ${ACCEL_FW} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', '${ACCEL_MM}', '', d)} \
 "
