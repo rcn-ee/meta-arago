@@ -4,7 +4,7 @@ include openmpacc.inc
 
 PR = "${INC_PR}.0"
 
-DEPENDS = "boost elfutils"
+DEPENDS = "boost elfutils perl-native"
 RDEPENDS_${PN} += "clocl"
 
 S = "${WORKDIR}/git/host"
