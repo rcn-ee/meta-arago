@@ -6,8 +6,7 @@ LICENSE = "BSD"
 include tidl-api.inc
 require recipes-ti/includes/ti-paths.inc
 
-PR = "${INC_PR}.1"
-SRC_URI += "file://0002-replace-2-dsp-2-group-layer-use-cases-with-1-dsp.patch"
+PR = "${INC_PR}.0"
 
 COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -23,6 +22,7 @@ RDEPENDS_${PN} += "tidl-api \
                    opencl-runtime \
                    opencv \
                    json-c \
+                   python3-core \
 "
 
 EXTRA_OEMAKE = " -C ${S}/examples \

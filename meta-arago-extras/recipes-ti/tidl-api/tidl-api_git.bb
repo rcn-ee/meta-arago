@@ -6,8 +6,7 @@ LICENSE = "BSD"
 include tidl-api.inc
 require recipes-ti/includes/ti-paths.inc
 
-PR = "${INC_PR}.1"
-SRC_URI += "file://0001-Fix-versioning-for-shared-libary.patch"
+PR = "${INC_PR}.0"
 
 COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
