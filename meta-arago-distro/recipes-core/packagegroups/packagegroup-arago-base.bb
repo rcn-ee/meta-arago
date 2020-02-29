@@ -20,6 +20,7 @@ ARAGO_BASE = "\
     ethtool \
     thermal-init \
     bash \
+    opkg-bash-completion \
     udev-extraconf \
     "
 

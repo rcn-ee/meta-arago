@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# TBD: parse "opkg --help" to get this list
+OPKG_COMMANDS="update upgrade install configure remove clean flag list list-installed list-upgradable list-changed-conffiles files search find info status download compare-versions print-architecture depends whatdepends whatdependsrec whatrecommends whatsuggests whatprovides whatconflicts whatreplaces"
+OPKG_FLAGS="hold noprune user ok installed unpacked"
+OPKG_LONGOPTS="--help --verbosity --conf --dest --offline-root --add-arch --add-dest --add-exclude --add-ignore-recommends --prefer-arch-to-version --combine --force-depends --force-maintainer --force-reinstall --force-overwrite --force-downgrade --force-space --force-postinstall --force-remove --force-checksum --noaction --size --download-only --nodeps --no-install-recommends --force-removal-of-dependent-packages --autoremove --tmp-dir --lists-dir --cache-dir --host-cache-dir --volatile-cache"
+
+_opkg_completions() {
+    # Use this helpful helper to beautify things and catch vars and redirects
+    local cur prev words cword
+    _init_completion -s || return 0
+
+    # Catch options first
+    if [[ "$cur" == -* ]]
+    then
+        COMPREPLY=($(compgen -W "${OPKG_LONGOPTS}" -- "$cur"))
+        return
+    fi
+
+    # Now catch args
+    # opkg supports a single verb, so that will be the first arg,
+    local arg args
+    _get_first_arg
+    _count_args
+
+    case "$arg" in
+        install|files|info|status|download)
+            COMPREPLY=($(compgen -W "$(opkg list | sed -e 's| .*$||')" -- "$cur"));;
+        depends|whatdepends|whatdependsrec|whatrecommends|whatsuggests|whatprovides|whatconflicts|whatreplaces)
+            COMPREPLY=($(compgen -W "-A $(opkg list | sed -e 's| .*$||')" -- "$cur"));;
+        remove)
+            COMPREPLY=($(compgen -W "$(opkg list-installed | sed -e 's| .*$||')" -- "$cur"));;
+        upgrade)
+            COMPREPLY=($(compgen -W "$(opkg list-upgradable | sed -e 's| .*$||')" -- "$cur"));;
+        flag)
+            if [ $args -eq 2 ]
+            then
+                COMPREPLY=($(compgen -W "${OPKG_FLAGS}" "$cur"))
+            else
+                COMPREPLY=($(compgen -W "-A $(opkg list | sed -e 's| .*$||')" -- "$cur"))
+            fi
+            ;;
+        search)
+            # Only search for a single file
+            [ $args -gt 2 ] || _longopt;;
+        "")
+            COMPREPLY=($(compgen -W "${OPKG_COMMANDS}" -- "$cur"));;
+        *)
+            COMPREPLY=( "*" "I DONT KNOW WHAT TO DO!!!" )
+    esac
+}
+
+complete -F _opkg_completions opkg
