@@ -4,17 +4,23 @@ LICENSE = "BSD"
 
 include ocl.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.3"
 
 inherit cmake systemd
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+# Define runtime package for minimal dependencies to run opencl applications
+# which precompile the offloaded kernels. The base package will provide the
+# ability to compile kernels (clocl) during runtime.
 PACKAGES =+ "${PN}-runtime"
 
+MONITORS                      = " opencl-monitor"
+MONITORS_append_dra7xx        = " opencl-monitor-ipu"
+
 DEPENDS = " ocl-gl-headers \
-            opencl-monitor \
+            ${MONITORS} \
             cmake-native \
             cmem \
             ti-llvm3.6 \
@@ -31,20 +37,16 @@ DEPENDS = " ocl-gl-headers \
             json-c \
 "
 
-DEPENDS_append_dra7xx   = " ti-ipc virtual/kernel"
+DEPENDS_append_dra7xx = " ti-ipc virtual/kernel"
 DEPENDS_append_keystone = " mpm-transport multiprocmgr"
 DEPENDS_remove_k2g = " libulm"
 
-MONITORS                      = " opencl-monitor"
-MONITORS_append_am57xx-evm    = " opencl-monitor-ipu"
-MONITORS_append_am57xx-hs-evm = " opencl-monitor-ipu"
-MONITORS_append_dra7xx        = " opencl-monitor-ipu"
+RDEPENDS_${PN}-runtime += "bash ${MONITORS}"
+RDEPENDS_${PN}-dev += "ocl-gl-headers-dev"
+RDEPENDS_${PN} += "${PN}-runtime clocl bash"
 
-RDEPENDS_${PN} += " bash"
-RDEPENDS_${PN}-dev += " ocl-gl-headers-dev opencl-monitor"
-RDEPENDS_${PN}-runtime += " ${PN} ${MONITORS} clocl ti-cgt6x"
-
-ALLOW_EMPTY_${PN}-runtime = "1"
+# Use main package to pull in full support
+ALLOW_EMPTY_${PN} = "1"
 
 S = "${WORKDIR}/git/host"
 
@@ -73,10 +75,11 @@ do_install_append() {
     install -m0644 ${MCTD} ${D}${systemd_system_unitdir}/ti-mct-daemon.service
 }
 
-SYSTEMD_SERVICE_${PN} = "ti-mct-daemon.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "${@oe.utils.conditional("RESERVE_CMEM", "1", "enable", "disable", d)}"
+SYSTEMD_PACKAGES = "${PN}-runtime"
+SYSTEMD_SERVICE_${PN}-runtime = "ti-mct-daemon.service"
+SYSTEMD_AUTO_ENABLE_${PN}-runtime = "${@oe.utils.conditional("RESERVE_CMEM", "1", "enable", "disable", d)}"
 
-FILES_${PN}-runtime += "${bindir}"
+FILES_${PN}-runtime += "${bindir} ${systemd_system_unitdir} ${sysconfdir}/ti-mctd ${libdir}/lib*${SOLIBS}"
 
 FILES_${PN} += " \
     ${datadir}/ti/opencl/* \
