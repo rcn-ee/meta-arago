@@ -2,17 +2,11 @@ ARAGO_SYSVINIT = "1"
 
 require arago-image.inc
 
+IMAGE_FEATURES_remove = "package-management splash"
+
 IMAGE_FSTYPES += "cpio"
 
-# Install a small set of utils which can be used for diagnostics
-ARAGO_TINY_IMAGE_EXTRA_INSTALL ?= " \
-	parted \
-	util-linux \
-	e2fsprogs \
-	dosfstools \
-	devmem2 \
-	arago-feed-config \
-"
+ARAGO_TINY_IMAGE_EXTRA_INSTALL ?= ""
 
 IMAGE_INSTALL = " \
 	packagegroup-arago-sysvinit-boot \
