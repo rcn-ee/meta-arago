@@ -23,7 +23,7 @@ EXTRABROWSERS = " \
 
 DEVTOOLS = " \
     linux-libc-headers-dev \
-    packagegroup-core-buildessential \
+    build-essential \
     packagegroup-core-tools-debug \
     git \
 "
