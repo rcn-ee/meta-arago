@@ -22,6 +22,8 @@ IMAGE_INSTALL += "\
     packagegroup-arago-tisdk-addons \
     packagegroup-arago-tisdk-addons-extra \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-hmi','packagegroup-arago-base-tisdk-server-extra',d)} \
+    ti-analytics \
+    ti-demos \
 "
 
 export IMAGE_BASENAME = "tisdk-rootfs-image"
