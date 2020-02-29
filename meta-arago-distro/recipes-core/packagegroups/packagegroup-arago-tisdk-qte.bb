@@ -13,7 +13,6 @@ QT4_DEMOS = "\
 "
 
 QT5_DEMOS = "\
-    qt3d-examples \
     qtbase-examples \
     qtdeclarative-examples \
     qtdeclarative-tools \
@@ -22,18 +21,9 @@ QT5_DEMOS = "\
     qtscript-examples \
     qtsvg-examples \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-examples', '', d)} \
-    qtwebengine-examples \
-    qtwebbrowser \
-    qtwebbrowser-examples \
     qtserialport-examples \
     qtcharts-examples \
 "
-
-#QT5_DEMOS_remove_k3 = "\
-#    qtwebbrowser \
-#    qtwebbrowser-examples \
-#    qtwebengine-examples \
-#"
 
 QT_DEMOS = "\
     qt-tstat \

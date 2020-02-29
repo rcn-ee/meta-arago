@@ -23,7 +23,6 @@ UTILS = " \
     libdrm-kms \
     kms++ \
     kms++-python \
-    ${@bb.utils.contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
     stream \
     strongswan \
     kexec \
@@ -130,13 +129,6 @@ EXTRA_LIBS_append_ti33x = " \
     uio-module-drv \
 "
 
-DEVTOOLS = " \
-    linux-libc-headers-dev \
-    packagegroup-core-buildessential \
-    packagegroup-core-tools-debug \
-    git \
-"
-
 EXTRA_PACKAGES = " \
     nodejs \
     nodejs-npm \
@@ -197,7 +189,6 @@ EXTRA_PACKAGES_append_k2g-evm  = " pruss-lld-apps"
 RDEPENDS_${PN} = "\
     ${UTILS} \
     ${UTILS_UBOOT_FW} \
-    ${DEVTOOLS} \
     ${EXTRA_LIBS} \
 "
 
