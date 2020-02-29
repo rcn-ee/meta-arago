@@ -9,13 +9,10 @@ inherit packagegroup
 PACKAGES =+ "${PN}-extra"
 
 MAIN_PKGS = " \
-    opencl-examples \
+    opencl-examples-offline-compile \
 "
 
 EXTRA_PKGS = " \
-    opencl-staticdev \
-    opencl-examples-dev \
-    openmpacc-examples-dev \
     python-pyopencl \
 "
 
@@ -27,7 +24,6 @@ EXTRA_PKGS_append_k2hk = " \
 #    ti-fftw-examples
 EXTRA_PKGS_append_dra7xx = " \
     linalg-examples \
-    opencl-examples \
     kaldi \
 "
 

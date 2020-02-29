@@ -31,4 +31,5 @@ do_install() {
   install -m 755 ${S}/clocl/${TARGET}/clocl ${D}${bindir}
 }
 
+RDEPENDS_${PN} += "ti-cgt6x"
 BBCLASSEXTEND = "native nativesdk"

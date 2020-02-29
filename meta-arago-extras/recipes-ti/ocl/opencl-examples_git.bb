@@ -5,7 +5,7 @@ LICENSE = "BSD"
 include ocl.inc
 require recipes-ti/includes/ti-paths.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 COMPATIBLE_MACHINE = "dra7xx|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -16,11 +16,29 @@ OCL_PERSISTENT_DEPENDS = "ti-xdctools-native ti-ipc-rtos ti-sysbios"
 
 DEPENDS_append_dra7xx = " ${OCL_PERSISTENT_DEPENDS}"
 
-RDEPENDS_${PN} += " opencl-runtime"
-RDEPENDS_${PN}-dev += " libgomp-dev"
+# Split examples into two groups:
+# - offline-compile: examples who's kernels are precompiled (offline).
+# - runtime-compile: examples who's kernels are compiled during runtime.
+PACKAGES =+ "${PN}-runtime-compile ${PN}-runtime-compile-dbg ${PN}-offline-compile ${PN}-offline-compile-dbg"
+
+RDEPENDS_${PN} = "${PN}-runtime-compile ${PN}-offline-compile"
+RDEPENDS_${PN}-dev += "libgomp-dev"
+RDEPENDS_${PN}-offline-compile += "opencl-runtime"
+RDEPENDS_${PN}-runtime-compile += "opencl"
 
 S = "${WORKDIR}/git/opencl_example_src"
 B = "${S}"
+
+OCL_RUNTIME_COMPILE_EXAMPLE_LIST = " \
+    ccode \
+    null \
+    ooo_callback \
+    simple \
+    vecadd \
+    vecadd_openmp \
+    vecadd_openmp_t \
+    vecadd_subdevice \
+"
 
 OCL_EXAMPLE_LIST = " abort_exit \
                      buffer \
@@ -100,12 +118,29 @@ do_install() {
     done
 }
 
-FILES_${PN} += "\
-    ${datadir}/ti/examples/opencl \
+# First package the examples which require run-time kernel compilation.
+FILES_${PN}-runtime-compile += "\
+    ${@' '.join(['${datadir}/ti/examples/opencl/' + example for example in d.getVar('OCL_RUNTIME_COMPILE_EXAMPLE_LIST').split()])} \
 "
 
-FILES_${PN}-dbg += "\
+FILES_${PN}-runtime-compile-dbg += "\
+    ${@' '.join(['${datadir}/ti/examples/opencl/' + example + '/.debug' for example in d.getVar('OCL_RUNTIME_COMPILE_EXAMPLE_LIST').split()])} \
+"
+
+# Remaining examples will fall through to the "offline" package.
+FILES_${PN}-offline-compile += "\
+    ${datadir}/ti/examples/opencl/ \
+"
+
+FILES_${PN}-offline-compile-dbg += "\
     ${datadir}/ti/examples/opencl/*/.debug \
 "
 
+# Add makefiles to dev package
+FILES_${PN}-dev = "${datadir}/ti/examples/opencl/Makefile \
+                   ${datadir}/ti/examples/opencl/make.inc"
+
+ALLOW_EMPTY_${PN} = "1"
 INSANE_SKIP_${PN} = "arch ldflags textrel staticdev"
+INSANE_SKIP_${PN}-offline-compile = "arch ldflags textrel staticdev"
+INSANE_SKIP_${PN}-runtime-compile = "arch ldflags textrel staticdev"
