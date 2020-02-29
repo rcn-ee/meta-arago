@@ -140,44 +140,15 @@ EXTRA_PACKAGES_omapl138 = " \
     protobuf \
 "
 
-ARMNN_PACKAGES = ""
-VOXEL_PACKAGES = ""
-#ARMNN_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'armnn', '', d)}"
-#VOXEL_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'voxelsdk', '', d)}"
-
-EXTRA_PACKAGES_append_ti33x = " ${VOXEL_PACKAGES} \
-                                arm-compute-library \
-                                ${ARMNN_PACKAGES} \
-                                tensorflow-lite-demo \
-                                pdm-anomaly-detection \
-"
-
-EXTRA_PACKAGES_append_ti43x = " ${VOXEL_PACKAGES} \
-                                arm-compute-library \
-                                ${ARMNN_PACKAGES} \
-                                tensorflow-lite-demo \
-                                pdm-anomaly-detection \
-"
-
-EXTRA_PACKAGES_append_omap-a15 = " ${VOXEL_PACKAGES} \
-                                   big-data-ipc-demo-linux \
-                                   big-data-ipc-demo-linux-firmware \
-                                   arm-compute-library \
-                                   ${ARMNN_PACKAGES} \
-                                   tensorflow-lite-demo \
-                                   pdm-anomaly-detection \
-"
-
-EXTRA_PACKAGES_append_am65xx = " arm-compute-library \
-                             ${ARMNN_PACKAGES} \
-                             tensorflow-lite-demo \
-                             pdm-anomaly-detection \
-"
-
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_keystone = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_am65xx = " ti-ipc-examples-linux"
+
+EXTRA_PACKAGES_append_omap-a15 = " \
+    big-data-ipc-demo-linux \
+    big-data-ipc-demo-linux-firmware \
+"
 
 # acontis-atemsys
 EXTRA_PACKAGES_append_am335x-evm = " pruss-lld-apps"
