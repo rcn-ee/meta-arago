@@ -29,7 +29,6 @@ MULTIMEDIA_append_omap-a15 = " \
 MULTIMEDIA_append_dra7xx = " \
     vis \
     hevc-arm-decoder \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'qt-opencv-opencl-opengl-multithreaded-dev', '', d)} \
 "
 
 MULTIMEDIA_append_omap5-evm = " \
