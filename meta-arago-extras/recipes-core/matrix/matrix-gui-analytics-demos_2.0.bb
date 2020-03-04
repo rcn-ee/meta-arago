@@ -1,5 +1,4 @@
 DESCRIPTION = "Analytics demo descriptions for Matrix v2"
-HOMEPAGE = "http://git.ti.com/matrix-gui-v2/matrix-gui-v2-apps"
 
 require recipes-core/matrix/matrix-gui-apps-git.inc
 

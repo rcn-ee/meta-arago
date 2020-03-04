@@ -1,5 +1,4 @@
 DESCRIPTION = "Image package for Matrix GUI v2 Applications"
-HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 

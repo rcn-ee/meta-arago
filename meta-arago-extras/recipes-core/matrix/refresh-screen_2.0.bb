@@ -1,5 +1,4 @@
 DESCRIPTION = "Simple Application to force a screen refresh"
-HOMEPAGE = "https://gitorious.org/matrix-gui-v2/refresh-screen"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://main.cpp;beginline=9;endline=37;md5=75a9adc782a6df0d3a5419743e9a9f18"
 SECTION = "multimedia"
