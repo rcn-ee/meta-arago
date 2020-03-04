@@ -1,5 +1,4 @@
 DESCRIPTION = "Qt4 demo descriptions for Matrix v2"
-HOMEPAGE = "https://gitorious.org/matrix-gui-v2/matrix-gui-v2-apps"
 
 require matrix-gui-apps-git.inc
 
