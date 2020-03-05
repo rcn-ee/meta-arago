@@ -1,6 +1,6 @@
-From ada9b45981854d5b2789f1394d158a91f24e1570 Mon Sep 17 00:00:00 2001
+From 0368b83f0cce76c00954577e037cc64c42a99bac Mon Sep 17 00:00:00 2001
 From: Ramprasad N <x0038811@ti.com>
-Date: Wed, 6 Feb 2019 13:30:56 +0530
+Date: Thu, 20 Feb 2020 15:36:10 +0530
 Subject: [PATCH 5/5] waylandsink: Add input device support
 
 Remove wldispay.h and wlwindow.h to avoid
@@ -13,28 +13,29 @@ Signed-off-by: Ramprasad N <x0038811@ti.com>
  ext/wayland/gstwaylandsink.h              |   3 +-
  ext/wayland/wlbuffer.c                    |   2 +-
  ext/wayland/wlbuffer.h                    |  67 -------
- ext/wayland/wldisplay-wlwindow-wlbuffer.h | 229 +++++++++++++++++++++++
- ext/wayland/wldisplay.c                   | 294 +++++++++++++++++++++++++++++-
- ext/wayland/wldisplay.h                   | 102 -----------
+ ext/wayland/wldisplay-wlwindow-wlbuffer.h | 243 +++++++++++++++++++++++++
+ ext/wayland/wldisplay.c                   | 292 +++++++++++++++++++++++++++++-
+ ext/wayland/wldisplay.h                   | 107 -----------
  ext/wayland/wldrm.c                       |   2 +-
  ext/wayland/wlshmallocator.h              |   2 +-
- ext/wayland/wlwindow.c                    |   6 +-
- ext/wayland/wlwindow.h                    |  93 ----------
- 12 files changed, 529 insertions(+), 276 deletions(-)
+ ext/wayland/wlwindow.c                    |   7 +-
+ ext/wayland/wlwindow.h                    | 102 -----------
+ 12 files changed, 543 insertions(+), 289 deletions(-)
  delete mode 100644 ext/wayland/wlbuffer.h
  create mode 100644 ext/wayland/wldisplay-wlwindow-wlbuffer.h
  delete mode 100644 ext/wayland/wldisplay.h
  delete mode 100644 ext/wayland/wlwindow.h
 
 diff --git a/ext/wayland/Makefile.am b/ext/wayland/Makefile.am
-index ebc9968..50d9808 100644
+index a118033..6f222b7 100644
 --- a/ext/wayland/Makefile.am
 +++ b/ext/wayland/Makefile.am
-@@ -42,9 +42,7 @@ noinst_HEADERS = \
+@@ -47,10 +47,8 @@ libgstwaylandsink_la_LDFLAGS = $(GST_PLUGIN_LDFLAGS)
+ noinst_HEADERS = \
  	gstwaylandsink.h \
  	wlshmallocator.h \
- 	wldrm.h \
 -	wlbuffer.h \
+ 	wldrm.h \
 -	wldisplay.h \
 -	wlwindow.h \
 +	wldisplay-wlwindow-wlbuffer.h \
@@ -42,7 +43,7 @@ index ebc9968..50d9808 100644
  	wllinuxdmabuf.h
  
 diff --git a/ext/wayland/gstwaylandsink.c b/ext/wayland/gstwaylandsink.c
-index f0aeea0..19ecf4d 100644
+index 9441232..752a0b6 100644
 --- a/ext/wayland/gstwaylandsink.c
 +++ b/ext/wayland/gstwaylandsink.c
 @@ -43,7 +43,6 @@
@@ -54,7 +55,7 @@ index f0aeea0..19ecf4d 100644
  #include "wllinuxdmabuf.h"
  #include "wldrm.h"
 diff --git a/ext/wayland/gstwaylandsink.h b/ext/wayland/gstwaylandsink.h
-index a7123fb..195d4b3 100644
+index f6d010e..3917918 100644
 --- a/ext/wayland/gstwaylandsink.h
 +++ b/ext/wayland/gstwaylandsink.h
 @@ -27,8 +27,7 @@
@@ -68,7 +69,7 @@ index a7123fb..195d4b3 100644
  G_BEGIN_DECLS
  
 diff --git a/ext/wayland/wlbuffer.c b/ext/wayland/wlbuffer.c
-index 4ac99ef..0e38d2e 100644
+index 2121460..3642d17 100644
 --- a/ext/wayland/wlbuffer.c
 +++ b/ext/wayland/wlbuffer.c
 @@ -76,7 +76,7 @@
@@ -155,10 +156,10 @@ index cbb50f7..0000000
 -#endif /* __GST_WL_BUFFER_H__ */
 diff --git a/ext/wayland/wldisplay-wlwindow-wlbuffer.h b/ext/wayland/wldisplay-wlwindow-wlbuffer.h
 new file mode 100644
-index 0000000..a89d0c0
+index 0000000..face05f
 --- /dev/null
 +++ b/ext/wayland/wldisplay-wlwindow-wlbuffer.h
-@@ -0,0 +1,229 @@
+@@ -0,0 +1,243 @@
 +/* GStreamer Wayland video sink
 + *
 + * Copyright (C) 2014 Collabora Ltd.
@@ -189,8 +190,10 @@ index 0000000..a89d0c0
 +#include <gst/gstbuffer.h>
 +#include <gst/drm/gstdrmallocator.h>
 +#include <wayland-client.h>
++#include "xdg-shell-client-protocol.h"
 +#include "viewporter-client-protocol.h"
 +#include "linux-dmabuf-unstable-v1-client-protocol.h"
++#include "fullscreen-shell-unstable-v1-client-protocol.h"
 +
 +G_BEGIN_DECLS
 +
@@ -262,12 +265,19 @@ index 0000000..a89d0c0
 +
 +  GstWlDisplay *display;
 +  struct wl_surface *area_surface;
++  struct wl_surface *area_surface_wrapper;
 +  struct wl_subsurface *area_subsurface;
 +  struct wp_viewport *area_viewport;
 +  struct wl_surface *video_surface;
++  struct wl_surface *video_surface_wrapper;
 +  struct wl_subsurface *video_subsurface;
 +  struct wp_viewport *video_viewport;
-+  struct wl_shell_surface *shell_surface;
++  struct wl_shell_surface *wl_shell_surface;
++  struct xdg_surface *xdg_surface;
++  struct xdg_toplevel *xdg_toplevel;
++  gboolean configured;
++  GCond configure_cond;
++  GMutex configure_mutex;
 +
 +  /* the size and position of the area_(sub)surface */
 +  GstVideoRectangle render_rectangle;
@@ -290,9 +300,11 @@ index 0000000..a89d0c0
 +};
 +
 +GType gst_wl_window_get_type (void);
++void gst_wl_window_ensure_fullscreen (GstWlWindow * window,
++         gboolean fullscreen);
 +
 +GstWlWindow *gst_wl_window_new_toplevel (GstWlDisplay * display,
-+        const GstVideoInfo * info, GMutex * render_lock);
++        const GstVideoInfo * info, gboolean fullscreen, GMutex * render_lock);
 +GstWlWindow *gst_wl_window_new_in_surface (GstWlDisplay * display,
 +        struct wl_surface * parent, GMutex * render_lock);
 +
@@ -330,13 +342,16 @@ index 0000000..a89d0c0
 +
 +  /* public objects */
 +  struct wl_display *display;
++  struct wl_display *display_wrapper;
 +  struct wl_event_queue *queue;
 +
 +  /* globals */
 +  struct wl_registry *registry;
 +  struct wl_compositor *compositor;
 +  struct wl_subcompositor *subcompositor;
-+  struct wl_shell *shell;
++  struct wl_shell *wl_shell;
++  struct xdg_wm_base *xdg_wm_base;
++  struct zwp_fullscreen_shell_v1 *fullscreen_shell;
 +  struct wl_shm *shm;
 +  struct wl_drm *drm;
 +  struct wp_viewporter *viewporter;
@@ -389,14 +404,13 @@ index 0000000..a89d0c0
 +
 +#endif /* __GST_WL_DISPLAY_H__ */
 diff --git a/ext/wayland/wldisplay.c b/ext/wayland/wldisplay.c
-index ac6637f..507efaf 100644
+index 363e817..7ae952c 100644
 --- a/ext/wayland/wldisplay.c
 +++ b/ext/wayland/wldisplay.c
-@@ -21,15 +21,15 @@
- #ifdef HAVE_CONFIG_H
+@@ -22,14 +22,15 @@
  #include <config.h>
  #endif
--
+ 
 -#include "wldisplay.h"
 -#include "wlbuffer.h"
 +#include "wldisplay-wlwindow-wlbuffer.h"
@@ -411,7 +425,7 @@ index ac6637f..507efaf 100644
  #include <errno.h>
  
  GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
-@@ -58,6 +58,54 @@ gst_wl_display_init (GstWlDisplay * self)
+@@ -58,6 +59,53 @@ gst_wl_display_init (GstWlDisplay * self)
    self->use_drm = FALSE;
    g_mutex_init (&self->buffers_mutex);
  }
@@ -421,13 +435,13 @@ index ac6637f..507efaf 100644
 +	input->grab = window;
 +}
 +
-+	static void
++static void
 +input_ungrab (struct input *input)
 +{
 +	input->grab = NULL;
 +}
 +
-+	static void
++static void
 +input_remove_pointer_focus (struct input *input)
 +{
 +	GstWlWindow *window = input->pointer_focus;
@@ -438,7 +452,7 @@ index ac6637f..507efaf 100644
 +	input->pointer_focus = NULL;
 +}
 +
-+	static void
++static void
 +input_destroy (struct input *input)
 +{
 +	input_remove_pointer_focus (input);
@@ -453,7 +467,7 @@ index ac6637f..507efaf 100644
 +	free (input);
 +}
 +
-+	static void
++static void
 +display_destroy_inputs (GstWlDisplay *display)
 +{
 +	struct input *tmp;
@@ -462,7 +476,6 @@ index ac6637f..507efaf 100644
 +	wl_list_for_each_safe (input, tmp, &display->input_list, link)
 +		input_destroy (input);
 +}
-+
  
  static void
  gst_wl_display_finalize (GObject * gobject)
@@ -475,10 +488,11 @@ index ac6637f..507efaf 100644
    if(self->fd != -1)
  	close(self->fd);
  
-@@ -264,6 +314,240 @@ static const struct wl_drm_listener drm_listener = {
+@@ -252,6 +302,240 @@ static const struct wl_drm_listener drm_listener = {
+   drm_handle_authenticated
  };
-  
- static void
+ 
++ static void
 +pointer_handle_enter (void *data, struct wl_pointer *pointer,
 +    uint32_t serial, struct wl_surface *surface,
 +    wl_fixed_t sx_w, wl_fixed_t sy_w)
@@ -514,7 +528,7 @@ index ac6637f..507efaf 100644
 +    return;
 +
 +  if (input->grab)
-+    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++    wl_shell_surface_move (input->grab->wl_shell_surface, input->seat,
 +        input->display->serial);
 +
 +}
@@ -536,7 +550,7 @@ index ac6637f..507efaf 100644
 +  }
 +
 +  if (input->grab)
-+    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++    wl_shell_surface_move (input->grab->wl_shell_surface, input->seat,
 +        input->display->serial);
 +}
 +
@@ -585,7 +599,7 @@ index ac6637f..507efaf 100644
 +  if (tp) {
 +    tp->id = id;
 +    wl_list_insert (&input->touch_point_list, &tp->link);
-+    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++    wl_shell_surface_move (input->touch_focus->wl_shell_surface, input->seat,
 +        serial);
 +  }
 +}
@@ -605,7 +619,7 @@ index ac6637f..507efaf 100644
 +    if (tp->id != id)
 +      continue;
 +
-+    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++    wl_shell_surface_move (input->touch_focus->wl_shell_surface, input->seat,
 +        input->display->serial);
 +
 +    return;
@@ -712,11 +726,10 @@ index ac6637f..507efaf 100644
 +}
 +
 +
-+static void
+ static void
  registry_handle_global (void *data, struct wl_registry *registry,
      uint32_t id, const char *interface, uint32_t version)
- {
-@@ -283,6 +567,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
+@@ -279,6 +563,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
    } else if (g_strcmp0 (interface, "wl_drm") == 0) {
      self->drm = wl_registry_bind (registry, id, &wl_drm_interface, 1);
      wl_drm_add_listener (self->drm, &drm_listener, self);
@@ -726,20 +739,20 @@ index ac6637f..507efaf 100644
    } else if (g_strcmp0 (interface, "wp_viewporter") == 0) {
      self->viewporter =
          wl_registry_bind (registry, id, &wp_viewporter_interface, 1);
-@@ -365,6 +652,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+@@ -361,6 +648,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+   self->display_wrapper = wl_proxy_create_wrapper (display);
    self->own_display = take_ownership;
  
-   self->queue = wl_display_create_queue (self->display);
 +  wl_list_init (&self->input_list);
-   self->registry = wl_display_get_registry (self->display);
-   wl_proxy_set_queue ((struct wl_proxy *) self->registry, self->queue);
-   wl_registry_add_listener (self->registry, &registry_listener, self);
+   self->queue = wl_display_create_queue (self->display);
+   wl_proxy_set_queue ((struct wl_proxy *) self->display_wrapper, self->queue);
+   self->registry = wl_display_get_registry (self->display_wrapper);
 diff --git a/ext/wayland/wldisplay.h b/ext/wayland/wldisplay.h
 deleted file mode 100644
-index 1d3a49e..0000000
+index 81e96bc..0000000
 --- a/ext/wayland/wldisplay.h
 +++ /dev/null
-@@ -1,102 +0,0 @@
+@@ -1,107 +0,0 @@
 -/* GStreamer Wayland video sink
 - *
 - * Copyright (C) 2014 Collabora Ltd.
@@ -766,8 +779,10 @@ index 1d3a49e..0000000
 -#include <gst/gst.h>
 -#include <gst/video/video.h>
 -#include <wayland-client.h>
+-#include "xdg-shell-client-protocol.h"
 -#include "viewporter-client-protocol.h"
 -#include "linux-dmabuf-unstable-v1-client-protocol.h"
+-#include "fullscreen-shell-unstable-v1-client-protocol.h"
 -
 -G_BEGIN_DECLS
 -
@@ -787,20 +802,23 @@ index 1d3a49e..0000000
 -
 -  /* public objects */
 -  struct wl_display *display;
+-  struct wl_display *display_wrapper;
 -  struct wl_event_queue *queue;
 -
 -  /* globals */
 -  struct wl_registry *registry;
 -  struct wl_compositor *compositor;
 -  struct wl_subcompositor *subcompositor;
--  struct wl_shell *shell;
+-  struct wl_shell *wl_shell;
+-  struct xdg_wm_base *xdg_wm_base;
+-  struct zwp_fullscreen_shell_v1 *fullscreen_shell;
 -  struct wl_shm *shm;
 -  struct wl_drm *drm;
 -  struct wp_viewporter *viewporter;
 -  struct zwp_linux_dmabuf_v1 *dmabuf;
 -  GArray *shm_formats;
--  GArray *dmabuf_formats;
 -  GArray *drm_formats;
+-  GArray *dmabuf_formats;
 -
 -  /* private */
 -  gboolean own_display;
@@ -843,7 +861,7 @@ index 1d3a49e..0000000
 -
 -#endif /* __GST_WL_DISPLAY_H__ */
 diff --git a/ext/wayland/wldrm.c b/ext/wayland/wldrm.c
-index 92f8e74..9aca9d5 100644
+index 0da9b73..0b72896 100644
 --- a/ext/wayland/wldrm.c
 +++ b/ext/wayland/wldrm.c
 @@ -1,4 +1,4 @@
@@ -866,7 +884,7 @@ index 07ae17f..2860fc3 100644
  G_BEGIN_DECLS
  
 diff --git a/ext/wayland/wlwindow.c b/ext/wayland/wlwindow.c
-index e066ef2..efe246a 100644
+index b184dfc..2c768f2 100644
 --- a/ext/wayland/wlwindow.c
 +++ b/ext/wayland/wlwindow.c
 @@ -24,9 +24,9 @@
@@ -881,21 +899,22 @@ index e066ef2..efe246a 100644
  
  GST_DEBUG_CATEGORY_EXTERN (gstwayland_debug);
  #define GST_CAT_DEFAULT gstwayland_debug
-@@ -120,6 +120,8 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
- 
+@@ -199,6 +199,9 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
    window->area_surface = wl_compositor_create_surface (display->compositor);
    window->video_surface = wl_compositor_create_surface (display->compositor);
+ 
 +  wl_surface_set_user_data (window->area_surface, window);
 +  wl_surface_set_user_data (window->video_surface, window);
- 
-   wl_proxy_set_queue ((struct wl_proxy *) window->area_surface, display->queue);
-   wl_proxy_set_queue ((struct wl_proxy *) window->video_surface,
++
+   window->area_surface_wrapper = wl_proxy_create_wrapper (window->area_surface);
+   window->video_surface_wrapper =
+       wl_proxy_create_wrapper (window->video_surface);
 diff --git a/ext/wayland/wlwindow.h b/ext/wayland/wlwindow.h
 deleted file mode 100644
-index e247b4e..0000000
+index c3f0172..0000000
 --- a/ext/wayland/wlwindow.h
 +++ /dev/null
-@@ -1,93 +0,0 @@
+@@ -1,102 +0,0 @@
 -/* GStreamer Wayland video sink
 - *
 - * Copyright (C) 2014 Collabora Ltd.
@@ -943,12 +962,19 @@ index e247b4e..0000000
 -
 -  GstWlDisplay *display;
 -  struct wl_surface *area_surface;
+-  struct wl_surface *area_surface_wrapper;
 -  struct wl_subsurface *area_subsurface;
 -  struct wp_viewport *area_viewport;
 -  struct wl_surface *video_surface;
+-  struct wl_surface *video_surface_wrapper;
 -  struct wl_subsurface *video_subsurface;
 -  struct wp_viewport *video_viewport;
--  struct wl_shell_surface *shell_surface;
+-  struct wl_shell_surface *wl_shell_surface;
+-  struct xdg_surface *xdg_surface;
+-  struct xdg_toplevel *xdg_toplevel;
+-  gboolean configured;
+-  GCond configure_cond;
+-  GMutex configure_mutex;
 -
 -  /* the size and position of the area_(sub)surface */
 -  GstVideoRectangle render_rectangle;
@@ -972,8 +998,10 @@ index e247b4e..0000000
 -
 -GType gst_wl_window_get_type (void);
 -
+-void gst_wl_window_ensure_fullscreen (GstWlWindow * window,
+-        gboolean fullscreen);
 -GstWlWindow *gst_wl_window_new_toplevel (GstWlDisplay * display,
--        const GstVideoInfo * info, GMutex * render_lock);
+-        const GstVideoInfo * info, gboolean fullscreen, GMutex * render_lock);
 -GstWlWindow *gst_wl_window_new_in_surface (GstWlDisplay * display,
 -        struct wl_surface * parent, GMutex * render_lock);
 -

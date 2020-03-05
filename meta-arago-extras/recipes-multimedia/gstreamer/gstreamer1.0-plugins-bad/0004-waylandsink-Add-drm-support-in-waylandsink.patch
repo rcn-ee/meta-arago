@@ -1,7 +1,7 @@
-From 7e5f42a25a8b30655df304acc83a485b9fc7090e Mon Sep 17 00:00:00 2001
+From 0f7df5b0b7ec131d9d7af76005dbe3b78521b58f Mon Sep 17 00:00:00 2001
 From: Ramprasad N <x0038811@ti.com>
-Date: Wed, 26 Dec 2018 15:47:28 +0530
-Subject: [PATCH 4/4] waylandsink: Add drm support in waylandsink
+Date: Thu, 20 Feb 2020 14:38:55 +0530
+Subject: [PATCH 4/5] waylandsink: Add drm support in waylandsink
 
 Waylandsink works out of shm memory. We have a DRM
 based memory allocator in place. Adding wl_drm support
@@ -17,27 +17,27 @@ Following features are also added
 Signed-off-by: Ramprasad N <x0038811@ti.com>
 ---
  ext/wayland/Makefile.am      |  11 +++-
- ext/wayland/gstwaylandsink.c |  82 +++++++++++++++++++++++++++--
+ ext/wayland/gstwaylandsink.c |  89 +++++++++++++++++++++++++++++--
  ext/wayland/gstwaylandsink.h |   2 +
- ext/wayland/wldisplay.c      |  56 ++++++++++++++++++++
+ ext/wayland/wldisplay.c      |  56 +++++++++++++++++++
  ext/wayland/wldisplay.h      |   9 ++++
- ext/wayland/wldrm.c          | 121 +++++++++++++++++++++++++++++++++++++++++++
+ ext/wayland/wldrm.c          | 124 +++++++++++++++++++++++++++++++++++++++++++
  ext/wayland/wldrm.h          |  21 ++++++++
  ext/wayland/wlwindow.c       |  63 +++++++++++++++++++---
- 8 files changed, 354 insertions(+), 11 deletions(-)
+ 8 files changed, 363 insertions(+), 12 deletions(-)
  create mode 100644 ext/wayland/wldrm.c
  create mode 100644 ext/wayland/wldrm.h
 
 diff --git a/ext/wayland/Makefile.am b/ext/wayland/Makefile.am
-index 387f84f..ebc9968 100644
+index 95bb97e..a118033 100644
 --- a/ext/wayland/Makefile.am
 +++ b/ext/wayland/Makefile.am
-@@ -4,12 +4,15 @@ BUILT_SOURCES = \
- 	viewporter-protocol.c \
- 	viewporter-client-protocol.h \
- 	linux-dmabuf-unstable-v1-protocol.c \
--	linux-dmabuf-unstable-v1-client-protocol.h
-+	linux-dmabuf-unstable-v1-client-protocol.h \
+@@ -8,12 +8,15 @@ BUILT_SOURCES = \
+ 	fullscreen-shell-unstable-v1-protocol.c \
+ 	fullscreen-shell-unstable-v1-client-protocol.h \
+ 	xdg-shell-protocol.c \
+-	xdg-shell-client-protocol.h
++	xdg-shell-client-protocol.h \
 +	wayland-drm-protocol.c \
 +	wayland-drm-client-protocol.h
  
@@ -49,12 +49,12 @@ index 387f84f..ebc9968 100644
  	wldisplay.c \
  	wlwindow.c \
  	wlvideoformat.c \
-@@ -17,24 +20,28 @@ libgstwaylandsink_la_SOURCES =  \
- 
- nodist_libgstwaylandsink_la_SOURCES = \
+@@ -23,18 +26,21 @@ nodist_libgstwaylandsink_la_SOURCES = \
  	viewporter-protocol.c \
--	linux-dmabuf-unstable-v1-protocol.c
-+	linux-dmabuf-unstable-v1-protocol.c \
+ 	linux-dmabuf-unstable-v1-protocol.c \
+ 	fullscreen-shell-unstable-v1-protocol.c \
+-	xdg-shell-protocol.c
++	xdg-shell-protocol.c \
 +	wayland-drm-protocol.c
  
  libgstwaylandsink_la_CFLAGS = \
@@ -72,15 +72,16 @@ index 387f84f..ebc9968 100644
  	$(WAYLAND_LIBS)
  libgstwaylandsink_la_LDFLAGS = $(GST_PLUGIN_LDFLAGS)
  
- noinst_HEADERS = \
+@@ -42,6 +48,7 @@ noinst_HEADERS = \
  	gstwaylandsink.h \
  	wlshmallocator.h \
-+	wldrm.h \
  	wlbuffer.h \
++	wldrm.h \
  	wldisplay.h \
  	wlwindow.h \
+ 	wlvideoformat.h \
 diff --git a/ext/wayland/gstwaylandsink.c b/ext/wayland/gstwaylandsink.c
-index ff08194..f0aeea0 100644
+index 78dd294..9441232 100644
 --- a/ext/wayland/gstwaylandsink.c
 +++ b/ext/wayland/gstwaylandsink.c
 @@ -46,6 +46,7 @@
@@ -91,21 +92,21 @@ index ff08194..f0aeea0 100644
  
  #include <gst/wayland/wayland.h>
  #include <gst/video/videooverlay.h>
-@@ -61,7 +62,9 @@ enum
- enum
+@@ -62,7 +63,9 @@ enum
  {
    PROP_0,
--  PROP_DISPLAY
-+  PROP_DISPLAY,
+   PROP_DISPLAY,
+-  PROP_FULLSCREEN
++  PROP_FULLSCREEN,
 +  PROP_ALLOCATION,
 +  PROP_SCALE
  };
  
  GST_DEBUG_CATEGORY (gstwayland_debug);
-@@ -202,6 +205,18 @@ gst_wayland_sink_class_init (GstWaylandSinkClass * klass)
-       g_param_spec_string ("display", "Wayland Display name", "Wayland "
-           "display name to connect to, if not supplied via the GstContext",
-           NULL, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+@@ -208,6 +211,18 @@ gst_wayland_sink_class_init (GstWaylandSinkClass * klass)
+       g_param_spec_boolean ("fullscreen", "Fullscreen",
+           "Whether the surface should be made fullscreen ", FALSE,
+           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 +
 +  g_object_class_install_property (gobject_class, PROP_ALLOCATION,
 +      g_param_spec_boolean ("use-drm", "Wayland Allocation name", "Wayland "
@@ -121,7 +122,7 @@ index ff08194..f0aeea0 100644
  }
  
  static void
-@@ -209,6 +224,7 @@ gst_wayland_sink_init (GstWaylandSink * sink)
+@@ -215,6 +230,7 @@ gst_wayland_sink_init (GstWaylandSink * sink)
  {
    g_mutex_init (&sink->display_lock);
    g_mutex_init (&sink->render_lock);
@@ -129,7 +130,7 @@ index ff08194..f0aeea0 100644
  }
  
  static void
-@@ -234,6 +250,7 @@ gst_wayland_sink_set_property (GObject * object,
+@@ -257,6 +273,7 @@ gst_wayland_sink_set_property (GObject * object,
      guint prop_id, const GValue * value, GParamSpec * pspec)
  {
    GstWaylandSink *sink = GST_WAYLAND_SINK (object);
@@ -137,8 +138,8 @@ index ff08194..f0aeea0 100644
  
    switch (prop_id) {
      case PROP_DISPLAY:
-@@ -241,6 +258,23 @@ gst_wayland_sink_set_property (GObject * object,
-       sink->display_name = g_value_dup_string (value);
+@@ -269,6 +286,24 @@ gst_wayland_sink_set_property (GObject * object,
+       gst_wayland_sink_set_fullscreen (sink, g_value_get_boolean (value));
        GST_OBJECT_UNLOCK (sink);
        break;
 +    case PROP_ALLOCATION:
@@ -158,10 +159,11 @@ index ff08194..f0aeea0 100644
 +          g_free(string);
 +      GST_OBJECT_UNLOCK (sink);
 +      break;
++
      default:
        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
        break;
-@@ -325,6 +359,9 @@ gst_wayland_sink_find_display (GstWaylandSink * sink)
+@@ -353,6 +388,9 @@ gst_wayland_sink_find_display (GstWaylandSink * sink)
          /* if the application didn't set a display, let's create it ourselves */
          GST_OBJECT_LOCK (sink);
          sink->display = gst_wl_display_new (sink->display_name, &error);
@@ -171,20 +173,20 @@ index ff08194..f0aeea0 100644
          GST_OBJECT_UNLOCK (sink);
  
          if (error) {
-@@ -501,7 +538,11 @@ gst_wayland_create_pool (GstWaylandSink * sink, GstCaps * caps)
+@@ -529,7 +567,11 @@ gst_wayland_create_pool (GstWaylandSink * sink, GstCaps * caps)
    structure = gst_buffer_pool_get_config (pool);
    gst_buffer_pool_config_set_params (structure, caps, size, 2, 0);
  
 -  alloc = gst_wl_shm_allocator_get ();
 +  if(sink->display->use_drm)
-+  	alloc = gst_drm_allocator_get ();
++	alloc = gst_drm_allocator_get ();
 +  else
-+  	alloc = gst_wl_shm_allocator_get ();
++	alloc = gst_wl_shm_allocator_get ();
 +
    gst_buffer_pool_config_set_allocator (structure, alloc, NULL);
    if (!gst_buffer_pool_set_config (pool, structure)) {
      g_object_unref (pool);
-@@ -512,16 +553,34 @@ gst_wayland_create_pool (GstWaylandSink * sink, GstCaps * caps)
+@@ -540,16 +582,34 @@ gst_wayland_create_pool (GstWaylandSink * sink, GstCaps * caps)
    return pool;
  }
  
@@ -219,7 +221,7 @@ index ff08194..f0aeea0 100644
  
    /* extract info from caps */
    if (!gst_video_info_from_caps (&sink->video_info, caps))
-@@ -530,6 +589,12 @@ gst_wayland_sink_set_caps (GstBaseSink * bsink, GstCaps * caps)
+@@ -558,6 +618,12 @@ gst_wayland_sink_set_caps (GstBaseSink * bsink, GstCaps * caps)
    format = GST_VIDEO_INFO_FORMAT (&sink->video_info);
    sink->video_info_changed = TRUE;
  
@@ -232,45 +234,51 @@ index ff08194..f0aeea0 100644
    /* create a new pool for the new caps */
    if (sink->pool)
      gst_object_unref (sink->pool);
-@@ -582,7 +647,11 @@ gst_wayland_sink_propose_allocation (GstBaseSink * bsink, GstQuery * query)
+@@ -610,7 +676,12 @@ gst_wayland_sink_propose_allocation (GstBaseSink * bsink, GstQuery * query)
    if (pool)
      g_object_unref (pool);
  
 -  alloc = gst_wl_shm_allocator_get ();
++
 +  if(sink->display->use_drm)
-+      alloc = gst_drm_allocator_get ();
++     alloc = gst_drm_allocator_get ();
 +  else
-+      alloc = gst_wl_shm_allocator_get ();
++     alloc = gst_wl_shm_allocator_get ();
 +
    gst_query_add_allocation_param (query, alloc, NULL);
    gst_query_add_allocation_meta (query, GST_VIDEO_META_API_TYPE, NULL);
    g_object_unref (alloc);
-@@ -649,6 +718,9 @@ gst_wayland_sink_show_frame (GstVideoSink * vsink, GstBuffer * buffer)
+@@ -687,6 +758,10 @@ gst_wayland_sink_show_frame (GstVideoSink * vsink, GstBuffer * buffer)
  
    GST_LOG_OBJECT (sink, "render buffer %p", buffer);
  
 +  if (sink->display) {
 +     sink->display->crop = gst_buffer_get_video_crop_meta (buffer);
 +  }
++
    if (G_UNLIKELY (!sink->window)) {
      /* ask for window handle. Unlock render_lock while doing that because
       * set_window_handle & friends will lock it in this context */
-@@ -712,6 +784,10 @@ gst_wayland_sink_show_frame (GstVideoSink * vsink, GstBuffer * buffer)
-       wbuf = gst_wl_linux_dmabuf_construct_wl_buffer (buffer, sink->display,
-           &sink->video_info);
-   }
+@@ -741,7 +816,13 @@ gst_wayland_sink_show_frame (GstVideoSink * vsink, GstBuffer * buffer)
+       "display, creating it", buffer);
+ 
+   format = GST_VIDEO_INFO_FORMAT (&sink->video_info);
+-  if (gst_wl_display_check_format_for_dmabuf (sink->display, format)) {
++
 +  if (gst_is_drm_memory (mem)) {
 +     wbuf = gst_wl_drm_memory_construct_wl_buffer (mem, sink->display,
 +         &sink->video_info);
 +  }
++
++  if (!wbuf && gst_wl_display_check_format_for_dmabuf (sink->display, format)) {
+     guint i, nb_dmabuf = 0;
  
-   if (!wbuf && gst_wl_display_check_format_for_shm (sink->display, format)) {
-     if (gst_buffer_n_memory (buffer) == 1 && gst_is_fd_memory (mem))
+     for (i = 0; i < gst_buffer_n_memory (buffer); i++)
 diff --git a/ext/wayland/gstwaylandsink.h b/ext/wayland/gstwaylandsink.h
-index 2704d00..a7123fb 100644
+index be92fe7..f6d010e 100644
 --- a/ext/wayland/gstwaylandsink.h
 +++ b/ext/wayland/gstwaylandsink.h
-@@ -63,6 +63,8 @@ struct _GstWaylandSink
+@@ -64,6 +64,8 @@ struct _GstWaylandSink
  
    gchar *display_name;
  
@@ -280,7 +288,7 @@ index 2704d00..a7123fb 100644
    GMutex render_lock;
    GstBuffer *last_buffer;
 diff --git a/ext/wayland/wldisplay.c b/ext/wayland/wldisplay.c
-index 39782bc..ac6637f 100644
+index 9400095..363e817 100644
 --- a/ext/wayland/wldisplay.c
 +++ b/ext/wayland/wldisplay.c
 @@ -26,6 +26,10 @@
@@ -330,16 +338,15 @@ index 39782bc..ac6637f 100644
 +  if (self->drm)
 +    wl_drm_destroy (self->drm);
 +
-   if (self->shell)
-     wl_shell_destroy (self->shell);
+   if (self->wl_shell)
+     wl_shell_destroy (self->wl_shell);
  
-@@ -210,8 +224,46 @@ gst_wl_display_check_format_for_dmabuf (GstWlDisplay * display,
+@@ -200,6 +214,44 @@ static const struct xdg_wm_base_listener xdg_wm_base_listener = {
+   handle_xdg_wm_base_ping
+ };
  
-   return FALSE;
- }
 +/* For wl_drm_listener */
- 
- static void
++static void
 +drm_handle_device (void *data, struct wl_drm *drm, const char *device)
 +{
 +  GstWlDisplay *d = data;
@@ -375,12 +382,11 @@ index 39782bc..ac6637f 100644
 +  drm_handle_format,
 +  drm_handle_authenticated
 +};
-+ 
-+static void
++
+ static void
  registry_handle_global (void *data, struct wl_registry *registry,
      uint32_t id, const char *interface, uint32_t version)
- {
-@@ -228,6 +280,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
+@@ -224,6 +276,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
    } else if (g_strcmp0 (interface, "wl_shm") == 0) {
      self->shm = wl_registry_bind (registry, id, &wl_shm_interface, 1);
      wl_shm_add_listener (self->shm, &shm_listener, self);
@@ -390,32 +396,31 @@ index 39782bc..ac6637f 100644
    } else if (g_strcmp0 (interface, "wp_viewporter") == 0) {
      self->viewporter =
          wl_registry_bind (registry, id, &wp_viewporter_interface, 1);
-@@ -338,6 +393,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+@@ -334,6 +389,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+   VERIFY_INTERFACE_EXISTS (compositor, "wl_compositor");
    VERIFY_INTERFACE_EXISTS (subcompositor, "wl_subcompositor");
-   VERIFY_INTERFACE_EXISTS (shell, "wl_shell");
    VERIFY_INTERFACE_EXISTS (shm, "wl_shm");
 +  VERIFY_INTERFACE_EXISTS (drm, "wl_drm");
  
  #undef VERIFY_INTERFACE_EXISTS
  
 diff --git a/ext/wayland/wldisplay.h b/ext/wayland/wldisplay.h
-index 7c89212..1d3a49e 100644
+index 4ecc0d6..81e96bc 100644
 --- a/ext/wayland/wldisplay.h
 +++ b/ext/wayland/wldisplay.h
-@@ -53,10 +53,12 @@ struct _GstWlDisplay
-   struct wl_subcompositor *subcompositor;
-   struct wl_shell *shell;
+@@ -58,9 +58,11 @@ struct _GstWlDisplay
+   struct xdg_wm_base *xdg_wm_base;
+   struct zwp_fullscreen_shell_v1 *fullscreen_shell;
    struct wl_shm *shm;
 +  struct wl_drm *drm;
    struct wp_viewporter *viewporter;
    struct zwp_linux_dmabuf_v1 *dmabuf;
    GArray *shm_formats;
-   GArray *dmabuf_formats;
 +  GArray *drm_formats;
+   GArray *dmabuf_formats;
  
    /* private */
-   gboolean own_display;
-@@ -66,6 +68,13 @@ struct _GstWlDisplay
+@@ -71,6 +73,13 @@ struct _GstWlDisplay
    GMutex buffers_mutex;
    GHashTable *buffers;
    gboolean shutting_down;
@@ -431,10 +436,10 @@ index 7c89212..1d3a49e 100644
  struct _GstWlDisplayClass
 diff --git a/ext/wayland/wldrm.c b/ext/wayland/wldrm.c
 new file mode 100644
-index 0000000..92f8e74
+index 0000000..0da9b73
 --- /dev/null
 +++ b/ext/wayland/wldrm.c
-@@ -0,0 +1,121 @@
+@@ -0,0 +1,124 @@
 +#include "wldisplay.h"
 +#include <gst/drm/gstdrmallocator.h>
 +#include "wayland-drm-client-protocol.h"
@@ -475,7 +480,10 @@ index 0000000..92f8e74
 +  {
 +    /* NV12 */
 +    fourcc = GST_MAKE_FOURCC ('N', 'V', '1', '2');
-+    strides[1] = GST_ROUND_UP_4 (video_width);
++    strides[0] = GST_VIDEO_INFO_PLANE_STRIDE (info, 0);
++    strides[1] = GST_VIDEO_INFO_PLANE_STRIDE (info, 1);
++    offsets[0] = GST_VIDEO_INFO_PLANE_OFFSET (info, 0);
++    offsets[1] = GST_VIDEO_INFO_PLANE_OFFSET (info, 1);
 +  }
 +  else if(format == GST_VIDEO_FORMAT_I420)
 +  {
@@ -529,7 +537,7 @@ index 0000000..92f8e74
 +    return NULL;
 +  }
 +
-+  req2.handle = req1.handle,
++  req2.handle = req1.handle;
 +
 +  ret = drmIoctl(display->fd, DRM_IOCTL_GEM_FLINK, &req2);
 +  if (ret) {
@@ -584,13 +592,13 @@ index 0000000..c6b4ae1
 +
 +#endif /* __GST_WL_DRM_H__ */
 diff --git a/ext/wayland/wlwindow.c b/ext/wayland/wlwindow.c
-index c64c77a..e066ef2 100644
+index 9ebbcaf..b184dfc 100644
 --- a/ext/wayland/wlwindow.c
 +++ b/ext/wayland/wlwindow.c
-@@ -137,6 +137,16 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
-     window->video_viewport = wp_viewporter_get_viewport (display->viewporter,
+@@ -221,6 +221,17 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
          window->video_surface);
    }
+ 
 +  if (display->crop) {
 +    GST_DEBUG ("Setting source crop : %d %d %d %d",display->crop->x, display->crop->y,
 +                    display->crop->width, display->crop->height);
@@ -601,10 +609,11 @@ index c64c77a..e066ef2 100644
 +                                        wl_fixed_from_int(display->crop->height));
 +
 +  }
- 
++
    /* do not accept input */
-   region = wl_compositor_create_region (display->compositor);
-@@ -228,6 +238,8 @@ gst_wl_window_resize_video_surface (GstWlWindow * window, gboolean commit)
+   wl_surface_set_input_region (window->area_surface, NULL);
+   wl_surface_set_input_region (window->video_surface, NULL);
+@@ -380,6 +391,8 @@ gst_wl_window_resize_video_surface (GstWlWindow * window, gboolean commit)
    GstVideoRectangle src = { 0, };
    GstVideoRectangle dst = { 0, };
    GstVideoRectangle res;
@@ -613,13 +622,13 @@ index c64c77a..e066ef2 100644
  
    /* center the video_subsurface inside area_subsurface */
    src.w = window->video_width;
-@@ -237,10 +249,31 @@ gst_wl_window_resize_video_surface (GstWlWindow * window, gboolean commit)
+@@ -389,8 +402,28 @@ gst_wl_window_resize_video_surface (GstWlWindow * window, gboolean commit)
  
    if (window->video_viewport) {
      gst_video_sink_center_rect (src, dst, &res, TRUE);
 -    wp_viewport_set_destination (window->video_viewport, res.w, res.h);
 -  } else {
-+ 
++
 +    if(scale_width > 0 && scale_height > 0)
 +    {
 +	    res.x = 0;
@@ -635,7 +644,7 @@ index c64c77a..e066ef2 100644
 +    if (window->display->crop) {
 +	    wp_viewport_set_destination (window->area_viewport, window->display->crop->width,  window->display->crop->height);
 +	    wp_viewport_set_destination (window->video_viewport, window->display->crop->width,  window->display->crop->height);
-+    } else 
++    } else
 +    {
 +	    wp_viewport_set_destination (window->video_viewport, res.w, res.h);
 +    }
@@ -643,11 +652,8 @@ index c64c77a..e066ef2 100644
 +   else {
      gst_video_sink_center_rect (src, dst, &res, FALSE);
    }
-+  
  
-   wl_subsurface_set_position (window->video_subsurface, res.x, res.y);
- 
-@@ -355,13 +388,23 @@ gst_wl_window_update_borders (GstWlWindow * window)
+@@ -507,13 +540,23 @@ gst_wl_window_update_borders (GstWlWindow * window)
    /* draw the area_subsurface */
    gst_video_info_set_format (&info, format, width, height);
  
@@ -673,9 +679,9 @@ index c64c77a..e066ef2 100644
 +          window->display, &info);
 +
    gwlbuf = gst_buffer_add_wl_buffer (buf, wlbuf, window->display);
-   gst_wl_buffer_attach (gwlbuf, window->area_surface);
+   gst_wl_buffer_attach (gwlbuf, window->area_surface_wrapper);
  
-@@ -375,8 +418,16 @@ void
+@@ -527,8 +570,16 @@ void
  gst_wl_window_set_render_rectangle (GstWlWindow * window, gint x, gint y,
      gint w, gint h)
  {

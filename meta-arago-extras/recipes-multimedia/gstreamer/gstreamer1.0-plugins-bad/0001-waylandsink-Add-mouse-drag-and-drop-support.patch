@@ -1,4 +1,4 @@
-From d78e29c70505e5a9bab8152436f5e5a9d4192687 Mon Sep 17 00:00:00 2001
+From 2fbb4e711f2e413e20085cc771d3b3f77c5f6229 Mon Sep 17 00:00:00 2001
 From: Ramprasad N <x0038811@ti.com>
 Date: Wed, 28 Mar 2018 13:01:06 +0530
 Subject: [PATCH] waylandsink: Add mouse drag and drop support
@@ -7,11 +7,11 @@ Signed-off-by: Ramprasad N <x0038811@ti.com>
 ---
  ext/wayland/wldisplay.c | 321 +++++++++++++++++++++++++++++++++++++++++++++++-
  ext/wayland/wldisplay.h |   5 +
- ext/wayland/wlwindow.c  |   3 +-
- 3 files changed, 327 insertions(+), 2 deletions(-)
+ ext/wayland/wlwindow.c  |   3 +
+ 3 files changed, 328 insertions(+), 1 deletion(-)
 
 diff --git a/ext/wayland/wldisplay.c b/ext/wayland/wldisplay.c
-index 39782bc..248afa7 100644
+index 9400095..bdb4fee 100644
 --- a/ext/wayland/wldisplay.c
 +++ b/ext/wayland/wldisplay.c
 @@ -22,18 +22,47 @@
@@ -116,7 +116,7 @@ index 39782bc..248afa7 100644
  
  static void
  gst_wl_display_finalize (GObject * gobject)
-@@ -152,6 +228,239 @@ shm_format (void *data, struct wl_shm *wl_shm, uint32_t format)
+@@ -130,6 +206,239 @@ shm_format (void *data, struct wl_shm *wl_shm, uint32_t format)
  static const struct wl_shm_listener shm_listener = {
    shm_format
  };
@@ -156,7 +156,7 @@ index 39782bc..248afa7 100644
 +    return;
 +
 +  if (input->grab)
-+    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++    wl_shell_surface_move (input->grab->wl_shell_surface, input->seat,
 +        input->display->serial);
 +
 +}
@@ -178,7 +178,7 @@ index 39782bc..248afa7 100644
 +  }
 +
 +  if (input->grab)
-+    wl_shell_surface_move (input->grab->shell_surface, input->seat,
++    wl_shell_surface_move (input->grab->wl_shell_surface, input->seat,
 +        input->display->serial);
 +}
 +
@@ -229,7 +229,7 @@ index 39782bc..248afa7 100644
 +  if (tp) {
 +    tp->id = id;
 +    wl_list_insert (&input->touch_point_list, &tp->link);
-+    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++    wl_shell_surface_move (input->touch_focus->wl_shell_surface, input->seat,
 +        serial);
 +  }
 +}
@@ -248,7 +248,7 @@ index 39782bc..248afa7 100644
 +    if (tp->id != id)
 +      continue;
 +
-+    wl_shell_surface_move (input->touch_focus->shell_surface, input->seat,
++    wl_shell_surface_move (input->touch_focus->wl_shell_surface, input->seat,
 +        input->display->serial);
 +
 +    return;
@@ -356,7 +356,7 @@ index 39782bc..248afa7 100644
  
  static void
  dmabuf_format (void *data, struct zwp_linux_dmabuf_v1 *zwp_linux_dmabuf,
-@@ -228,6 +537,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
+@@ -224,6 +533,9 @@ registry_handle_global (void *data, struct wl_registry *registry,
    } else if (g_strcmp0 (interface, "wl_shm") == 0) {
      self->shm = wl_registry_bind (registry, id, &wl_shm_interface, 1);
      wl_shm_add_listener (self->shm, &shm_listener, self);
@@ -366,7 +366,7 @@ index 39782bc..248afa7 100644
    } else if (g_strcmp0 (interface, "wp_viewporter") == 0) {
      self->viewporter =
          wl_registry_bind (registry, id, &wp_viewporter_interface, 1);
-@@ -237,9 +549,15 @@ registry_handle_global (void *data, struct wl_registry *registry,
+@@ -233,9 +545,15 @@ registry_handle_global (void *data, struct wl_registry *registry,
      zwp_linux_dmabuf_v1_add_listener (self->dmabuf, &dmabuf_listener, self);
    }
  }
@@ -383,19 +383,19 @@ index 39782bc..248afa7 100644
  };
  
  static gpointer
-@@ -310,6 +628,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+@@ -306,6 +624,7 @@ gst_wl_display_new_existing (struct wl_display * display,
+   self->display_wrapper = wl_proxy_create_wrapper (display);
    self->own_display = take_ownership;
  
-   self->queue = wl_display_create_queue (self->display);
 +  wl_list_init (&self->input_list);
-   self->registry = wl_display_get_registry (self->display);
-   wl_proxy_set_queue ((struct wl_proxy *) self->registry, self->queue);
-   wl_registry_add_listener (self->registry, &registry_listener, self);
+   self->queue = wl_display_create_queue (self->display);
+   wl_proxy_set_queue ((struct wl_proxy *) self->display_wrapper, self->queue);
+   self->registry = wl_display_get_registry (self->display_wrapper);
 diff --git a/ext/wayland/wldisplay.h b/ext/wayland/wldisplay.h
-index 7c89212..d60b368 100644
+index 4ecc0d6..b4339c0 100644
 --- a/ext/wayland/wldisplay.h
 +++ b/ext/wayland/wldisplay.h
-@@ -66,6 +66,11 @@ struct _GstWlDisplay
+@@ -71,6 +71,11 @@ struct _GstWlDisplay
    GMutex buffers_mutex;
    GHashTable *buffers;
    gboolean shutting_down;
@@ -408,19 +408,19 @@ index 7c89212..d60b368 100644
  
  struct _GstWlDisplayClass
 diff --git a/ext/wayland/wlwindow.c b/ext/wayland/wlwindow.c
-index d08ed87..12ef2e3 100644
+index 9ebbcaf..8dd5420 100644
 --- a/ext/wayland/wlwindow.c
 +++ b/ext/wayland/wlwindow.c
-@@ -120,7 +120,8 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
- 
+@@ -199,6 +199,9 @@ gst_wl_window_new_internal (GstWlDisplay * display, GMutex * render_lock)
    window->area_surface = wl_compositor_create_surface (display->compositor);
    window->video_surface = wl_compositor_create_surface (display->compositor);
--
+ 
 +  wl_surface_set_user_data (window->area_surface, window);
 +  wl_surface_set_user_data (window->video_surface, window);
-   wl_proxy_set_queue ((struct wl_proxy *) window->area_surface, display->queue);
-   wl_proxy_set_queue ((struct wl_proxy *) window->video_surface,
-       display->queue);
++
+   window->area_surface_wrapper = wl_proxy_create_wrapper (window->area_surface);
+   window->video_surface_wrapper =
+       wl_proxy_create_wrapper (window->video_surface);
 -- 
 1.9.1
 
