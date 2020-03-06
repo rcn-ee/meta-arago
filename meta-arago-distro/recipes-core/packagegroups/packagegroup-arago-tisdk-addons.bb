@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r77"
+PR = "r78"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -153,6 +153,7 @@ ARMNN_PACKAGES = "armnn"
 EXTRA_PACKAGES_append_ti33x = " voxelsdk \
                                 arm-compute-library \
                                 ${ARMNN_PACKAGES} \
+                                tensorflow-lite \
                                 tensorflow-lite-demo \
                                 pdm-anomaly-detection \
 "
@@ -160,6 +161,7 @@ EXTRA_PACKAGES_append_ti33x = " voxelsdk \
 EXTRA_PACKAGES_append_ti43x = " voxelsdk \
                                 arm-compute-library \
                                 ${ARMNN_PACKAGES} \
+                                tensorflow-lite \
                                 tensorflow-lite-demo \
                                 pdm-anomaly-detection \
 "
@@ -169,12 +171,14 @@ EXTRA_PACKAGES_append_omap-a15 = " voxelsdk \
                                    big-data-ipc-demo-linux-firmware \
                                    arm-compute-library \
                                    ${ARMNN_PACKAGES} \
+                                   tensorflow-lite \
                                    tensorflow-lite-demo \
                                    pdm-anomaly-detection \
 "
 
 EXTRA_PACKAGES_append_am65xx = " arm-compute-library \
                              ${ARMNN_PACKAGES} \
+                             tensorflow-lite \
                              tensorflow-lite-demo \
                              pdm-anomaly-detection \
 "
