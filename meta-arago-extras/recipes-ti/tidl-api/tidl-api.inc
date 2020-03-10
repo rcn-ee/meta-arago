@@ -1,4 +1,4 @@
-PV = "1.5.0"
+PV = "1.5.1"
 INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://license.txt;md5=e3daeabffb9fc131a73f16d16cbdb118"
@@ -8,7 +8,7 @@ GIT_PROTOCOL = "git"
 BRANCH = "master"
 
 SRC_URI = "${GIT_URI};protocol=${GIT_PROTOCOL};branch=${BRANCH}"
-SRCREV = "eeb4c457c8881a81fbf59a60b2ee070d2450a935"
+SRCREV = "4b801ad96b50f53e977b96d8b227ba4bcb26e011"
 
 # default patchdir is ${S}
 S = "${WORKDIR}/git"
