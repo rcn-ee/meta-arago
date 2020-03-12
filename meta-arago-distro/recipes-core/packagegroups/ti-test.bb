@@ -32,6 +32,7 @@ ARAGO_TEST = "\
     pcitest \
     mstpd \
     fio \
+    git \
 "
 
 ARAGO_TEST_append_armv7a = " \
