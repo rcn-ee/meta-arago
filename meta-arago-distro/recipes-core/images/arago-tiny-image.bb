@@ -4,7 +4,7 @@ require arago-image.inc
 
 IMAGE_FEATURES_remove = "package-management splash"
 
-IMAGE_FSTYPES += "cpio"
+IMAGE_FSTYPES += "cpio cpio.xz"
 
 ARAGO_TINY_IMAGE_EXTRA_INSTALL ?= ""
 
