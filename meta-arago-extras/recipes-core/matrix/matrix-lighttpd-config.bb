@@ -15,16 +15,16 @@ SRC_URI += "file://COPYING"
 S = "${WORKDIR}"
 
 do_install() {
-	install -d ${D}${sysconfdir}
-	install -m 0644 ${WORKDIR}/lighttpd.conf.matrix ${D}${sysconfdir}/lighttpd.conf.matrix
+	install -d ${D}${sysconfdir}/lighttpd
+	install -m 0644 ${WORKDIR}/lighttpd.conf.matrix ${D}${sysconfdir}/lighttpd/lighttpd.conf.matrix
 }
 
-FILES_${PN} = "${sysconfdir}/lighttpd.conf.matrix"
+FILES_${PN} = "${sysconfdir}/lighttpd/lighttpd.conf.matrix"
 RDEPENDS_${PN} = "lighttpd lighttpd-module-setenv"
 
 pkg_postinst_ontarget_${PN} () {
-if [ -f $D${sysconfdir}/lighttpd.conf ] ; then
-	cp $D${sysconfdir}/lighttpd.conf.matrix $D${sysconfdir}/lighttpd.conf
+if [ -f ${sysconfdir}/lighttpd/lighttpd.conf ] ; then
+	cp ${sysconfdir}/lighttpd/lighttpd.conf.matrix ${sysconfdir}/lighttpd/lighttpd.conf
 else
 	echo "No lighttpd.conf found, aborting"
 	exit 1
