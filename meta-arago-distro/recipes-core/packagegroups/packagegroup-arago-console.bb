@@ -63,7 +63,6 @@ ARAGO_SDK_PREREQ = "\
     jpeg \
     jpeg-tools \
     freetype \
-    thttpd \
     "
 
 ARAGO_CONSOLE = "\
