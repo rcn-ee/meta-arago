@@ -29,7 +29,7 @@ ARAGO_TEST = "\
     procps \
     mtd-utils-ubifs-tests \
     pcitest \
-    mstpd \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "mstpd", "", d)} \
     fio \
     git \
 "
