@@ -31,7 +31,8 @@ OPCLK_ti43x = "RESET_OPCLK"
 CXXFLAGS_append = " -I${STAGING_INCDIR}/libusb-1.0 -D${OPCLK}"
 EXTRA_OECMAKE += "-DDISTROFEATURE=ExcludePCL -DCMAKE_BUILD_TYPE=Debug -DPYTHON_INCLUDE_DIRS=${STAGING_INCDIR}/include/python2.7"
 
-inherit pkgconfig cmake pythonnative python-dir
+inherit pkgconfig cmake
+inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "pythonnative python-dir", "", d)}
 
 DEPENDS = "libusb1 udev opencv boost python swig swig-native"
 
@@ -54,3 +55,8 @@ FILES_${PN}-dev += "${libdir}/cmake ${libdir}/cmake/Voxel ${libdir}/cmake/TI3DTo
 FILES_${PN}-dev += "${libdir}/cmake/Voxel/*.cmake"
 FILES_${PN}-dev += "${libdir}/cmake/TI3DToF/*.cmake"
 FILES_${PN}-dev += "${libdir}/voxel/*.so"
+
+python() {
+    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
+        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
+}
