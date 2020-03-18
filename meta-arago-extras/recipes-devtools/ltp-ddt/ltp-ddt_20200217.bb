@@ -28,7 +28,7 @@ RDEPENDS_${PN} = "\
     logrotate \
     perl \
     pm-qa \
-    python-core \
+    python3-core \
     serialcheck \
     unzip \
     util-linux \
