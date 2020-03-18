@@ -27,7 +27,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=d0a3ef0d3e0e8f5cf59e5ffc273ab1f8"
 
 DEPENDS = "libffi libxml2-native llvm-common"
 
-inherit perlnative pythonnative autotools
+inherit perlnative python3native autotools
 
 LLVM_RELEASE = "${PV}"
 LLVM_DIR = "llvm${LLVM_RELEASE}"
