@@ -26,7 +26,6 @@ ARAGO_TEST = "\
     rwmem \
     pulseaudio-misc \
     kselftests \
-    cpuset \
     procps \
     mtd-utils-ubifs-tests \
     pcitest \
