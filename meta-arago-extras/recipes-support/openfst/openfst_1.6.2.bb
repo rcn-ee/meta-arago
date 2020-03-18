@@ -2,7 +2,7 @@ SUMMARY = "OpenFst: library for operating on finite-state transducers"
 DESCRIPTION = "OpenFst: a library for constructing, combining, optimizing, and searching weighted finite-state transducers (FSTs)"
 LICENSE = "Apache-2.0"
 HOMEPAGE = "http://www.openfst.org/twiki/bin/view/FST/WebHome"
-PR ="r0"
+PR = "r0"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=17bdccf7f927b4b2aeac950537db3369"
 SRC_URI = "http://openslr.org/resources/2/openfst-${PV}.tar.gz"
@@ -12,7 +12,7 @@ S = "${WORKDIR}/openfst-${PV}"
 SRC_URI[md5sum] = "e5b2b8c41a8320a03f3a8bbea63bb0ca"
 SRC_URI[sha256sum] = "3f72e35097fdf1c1c41e15165c16696c223295b40b7b145b5466306db7972578"
 
-inherit autotools pythonnative
+inherit autotools ${@bb.utils.contains("PACKAGECONFIG", "python", "pythonnative", "", d)}
 
 # From the OpenFST documentation:
 #
