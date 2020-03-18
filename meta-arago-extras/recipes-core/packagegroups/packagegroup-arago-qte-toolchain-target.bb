@@ -63,23 +63,12 @@ QT5_DEV = " \
         qtxmlpatterns-dev \
         qtwebkit-mkspecs \
         qtwebkit-dev \
-        qtwebengine-mkspecs \
-        qtwebengine-dev \
+        ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "qtwebengine-mkspecs qtwebengine-dev", "", d)} \
         qtserialport-mkspecs \
         qtserialport-dev  \
         qtcharts-mkspecs \
         qtcharts-dev \
 "
-
-#QT5_DEV_append_k3 = " \
-#        qtwebkit-mkspecs \
-#        qtwebkit-dev \
-#"
-#
-#QT5_DEV_remove_k3 = " \
-#        qtwebengine-mkspecs \
-#        qtwebengine-dev \
-#"
 
 RDEPENDS_${PN} += " \
         ${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT5_DEV}", "${QT4_DEV}", d)} \
