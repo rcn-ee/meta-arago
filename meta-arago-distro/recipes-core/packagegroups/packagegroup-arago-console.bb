@@ -48,6 +48,7 @@ ARAGO_FSTOOLS = "\
     "
 
 ARAGO_UTILS = "\
+    less \
     fbset \
     usbutils \
     i2c-tools \
