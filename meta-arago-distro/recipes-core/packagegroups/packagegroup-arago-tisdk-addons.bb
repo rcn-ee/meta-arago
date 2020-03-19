@@ -31,9 +31,7 @@ UTILS = " \
     open62541-tests \
 "
 
-UTILS_UBOOT_FW = "u-boot-fw-utils"
-UTILS_UBOOT_FW_keystone = ""
-UTILS_UBOOT_FW_k3 = ""
+UTILS_UBOOT_FW = "libubootenv-bin"
 
 UTILS_DSP = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'gdbc6x dsptop', '', d)} \
