@@ -13,7 +13,6 @@ MAIN_PKGS = " \
 "
 
 EXTRA_PKGS = " \
-    python-pyopencl \
 "
 
 #    ti-fftw-examples
