@@ -8,12 +8,12 @@ inherit packagegroup
 INSANE_SKIP_${PN} += "dev-deps"
 
 CHROMIUM = ""
-#CHROMIUM_append_omap-a15 = "\
-#    chromium-ozone-wayland \
-#"
-#CHROMIUM_append_k3 = "\
-#    chromium-ozone-wayland \
-#"
+CHROMIUM_append_omap-a15 = "\
+    chromium-ozone-wayland \
+"
+CHROMIUM_append_k3 = "\
+    chromium-ozone-wayland \
+"
 
 EXTRABROWSERS = " \
     qtwebbrowser-examples \
