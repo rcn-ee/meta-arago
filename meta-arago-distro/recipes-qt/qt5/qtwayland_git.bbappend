@@ -3,5 +3,4 @@ PR_append = ".arago1"
 
 SRC_URI += " \
     file://0001-plugins-decorations-bradient-display-window-icon-onl.patch \
-    file://0001-Client-really-use-OpenGL-ES-2-API-for-decoration-bli.patch \
 "
