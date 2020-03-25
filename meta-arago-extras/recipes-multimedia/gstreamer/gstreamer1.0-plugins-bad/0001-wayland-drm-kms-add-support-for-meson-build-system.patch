@@ -1,0 +1,140 @@
+From dc24c3386701639d8ba04451bb40317f36cbce0a Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@ti.com>
+Date: Tue, 24 Mar 2020 21:26:07 -0400
+Subject: [PATCH] wayland,drm,kms: add support for meson build system
+
+Upstream-Status: Inappropriate [depends on drmallocator and kms/waylandsink patches in meta-arago]
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ext/wayland/meson.build                   |  4 +++-
+ gst-libs/gst/drm/meson.build              | 25 +++++++++++++++++++++++++
+ gst-libs/gst/meson.build                  |  1 +
+ pkgconfig/gstreamer-drm-uninstalled.pc.in |  4 ++--
+ pkgconfig/meson.build                     |  2 ++
+ sys/kms/meson.build                       |  2 +-
+ 6 files changed, 34 insertions(+), 4 deletions(-)
+ create mode 100644 gst-libs/gst/drm/meson.build
+
+diff --git a/ext/wayland/meson.build b/ext/wayland/meson.build
+index 3c377ee..294bf51 100644
+--- a/ext/wayland/meson.build
++++ b/ext/wayland/meson.build
+@@ -2,6 +2,7 @@ wl_sources = [
+     'gstwaylandsink.c',
+     'wlshmallocator.c',
+     'wlbuffer.c',
++    'wldrm.c',
+     'wldisplay.c',
+     'wlwindow.c',
+     'wlvideoformat.c',
+@@ -20,6 +21,7 @@ if use_wayland
+         ['/unstable/fullscreen-shell/fullscreen-shell-unstable-v1.xml',
+          'fullscreen-shell-unstable-v1-protocol.c', 'fullscreen-shell-unstable-v1-client-protocol.h'],
+         ['/stable/xdg-shell/xdg-shell.xml', 'xdg-shell-protocol.c', 'xdg-shell-client-protocol.h'],
++        ['/stable/wayland-drm/wayland-drm.xml', 'wayland-drm-protocol.c', 'wayland-drm-client-protocol.h'],
+     ]
+     protocols_files = []
+ 
+@@ -42,7 +44,7 @@ if use_wayland
+         c_args : gst_plugins_bad_args + ['-DGST_USE_UNSTABLE_API'],
+         include_directories : [configinc],
+         dependencies : [gst_dep, gstvideo_dep, gstwayland_dep, gstallocators_dep,
+-                        wl_client_dep, wl_protocol_dep, libdrm_dep],
++                        gstdrm_dep, wl_client_dep, wl_protocol_dep, libdrm_dep],
+         install : true,
+         install_dir : plugins_install_dir,
+     )
+diff --git a/gst-libs/gst/drm/meson.build b/gst-libs/gst/drm/meson.build
+new file mode 100644
+index 0000000..3310cc6
+--- /dev/null
++++ b/gst-libs/gst/drm/meson.build
+@@ -0,0 +1,25 @@
++gstdrm_sources = [
++  'gstdrmallocator.c',
++]
++gstdrm_headers = [
++  'gstdrmallocator.h',
++]
++install_headers(gstdrm_headers, subdir : 'gstreamer-1.0/gst/drm')
++
++libdrm_dep = dependency('libdrm', version: '>= 2.4.55', required: get_option('wayland'))
++if libdrm_dep.found()
++  gstdrm = library('gstdrm-' + api_version,
++    gstdrm_sources,
++    c_args : gst_plugins_bad_args + ['-DGST_USE_UNSTABLE_API'],
++    include_directories : [configinc, libsinc],
++    version : libversion,
++    soversion : soversion,
++    darwin_versions : osxversion,
++    install : true,
++    dependencies : [gstbase_dep, gstallocators_dep, libdrm_dep],
++  )
++
++  gstdrm_dep = declare_dependency(link_with : gstdrm,
++    include_directories : [libsinc],
++    dependencies : [gstbase_dep, gstallocators_dep, libdrm_dep])
++endif
+diff --git a/gst-libs/gst/meson.build b/gst-libs/gst/meson.build
+index 5d90a91..e069327 100644
+--- a/gst-libs/gst/meson.build
++++ b/gst-libs/gst/meson.build
+@@ -4,6 +4,7 @@ subdir('adaptivedemux')
+ subdir('audio')
+ subdir('basecamerabinsrc')
+ subdir('codecparsers')
++subdir('drm')
+ subdir('insertbin')
+ subdir('interfaces')
+ subdir('isoff')
+diff --git a/pkgconfig/gstreamer-drm-uninstalled.pc.in b/pkgconfig/gstreamer-drm-uninstalled.pc.in
+index 9dcf978..ec705e4 100644
+--- a/pkgconfig/gstreamer-drm-uninstalled.pc.in
++++ b/pkgconfig/gstreamer-drm-uninstalled.pc.in
+@@ -1,7 +1,7 @@
+ prefix=
+ exec_prefix=
+-libdir=${pcfiledir}/../gst-libs/gst/drm
+-includedir=${pcfiledir}/../gst-libs
++libdir=@drmlibdir@
++includedir=@abs_top_builddir@/gst-libs
+ 
+ Name: GStreamer DRM Allocator, Uninstalled
+ Description: DRM Allocator for GStreamer elements, uninstalled
+diff --git a/pkgconfig/meson.build b/pkgconfig/meson.build
+index 7ddfafb..35cd7bf 100644
+--- a/pkgconfig/meson.build
++++ b/pkgconfig/meson.build
+@@ -12,6 +12,7 @@ pkgconf.set('abs_top_builddir', join_paths(meson.current_build_dir(), '..'))
+ pkgconf.set('abs_top_srcdir', join_paths(meson.current_source_dir(), '..'))
+ pkgconf.set('audiolibdir', join_paths(meson.build_root(), gstbadaudio.outdir()))
+ pkgconf.set('codecparserslibdir', join_paths(meson.build_root(), gstcodecparsers.outdir()))
++pkgconf.set('drmlibdir', join_paths(meson.build_root(), gstdrm.outdir()))
+ pkgconf.set('insertbinlibdir', join_paths(meson.build_root(), gstinsertbin.outdir()))
+ pkgconf.set('mpegtslibdir', join_paths(meson.build_root(), gstmpegts.outdir()))
+ pkgconf.set('playerlibdir', join_paths(meson.build_root(), gstplayer.outdir()))
+@@ -24,6 +25,7 @@ pkg_install_dir = '@0@/pkgconfig'.format(get_option('libdir'))
+ pkg_libs = [
+   'bad-audio',
+   'codecparsers',
++  'drm',
+   'insertbin',
+   'mpegts',
+   'player',
+diff --git a/sys/kms/meson.build b/sys/kms/meson.build
+index fbc1861..0a000fd 100644
+--- a/sys/kms/meson.build
++++ b/sys/kms/meson.build
+@@ -11,7 +11,7 @@ if libdrm_dep.found()
+     kmssink_sources,
+     c_args : gst_plugins_bad_args,
+     include_directories : [configinc],
+-    dependencies : [gstbase_dep, gstvideo_dep, gstallocators_dep, libdrm_dep],
++    dependencies : [gstbase_dep, gstvideo_dep, gstallocators_dep, gstdrm_dep, libdrm_dep],
+     install : true,
+     install_dir : plugins_install_dir,
+   )
+-- 
+2.7.4
+
