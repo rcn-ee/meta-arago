@@ -1,0 +1,28 @@
+From b99082adfaf250b15f03345cdf1b433fb1575581 Mon Sep 17 00:00:00 2001
+From: Rajendraprasad K J <KarammelJayakumar.Rajendraprasad@in.bosch.com>
+Date: Mon, 6 Jan 2020 06:45:54 -0500
+Subject: [PATCH] ivi-id-agent: update dependencies to build on weston 7
+
+upgrade libweston-desktop version.
+
+Upstream-Status: Submitted [https://github.com/GENIVI/wayland-ivi-extension/pull/110]
+
+Signed-off-by: Rajendraprasad K J <KarammelJayakumar.Rajendraprasad@in.bosch.com>
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+ ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt b/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt
+index 3e604a5..ff47808 100644
+--- a/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt
++++ b/ivi-id-agent-modules/ivi-id-agent/CMakeLists.txt
+@@ -25,7 +25,7 @@ find_package(PkgConfig REQUIRED)
+ pkg_check_modules(WAYLAND_SERVER wayland-server REQUIRED)
+ pkg_check_modules(WESTON weston>=6.0.0 REQUIRED)
+ pkg_check_modules(PIXMAN pixman-1 REQUIRED)
+-pkg_check_modules(LIBWESTON_DESKTOP libweston-desktop-6 REQUIRED)
++pkg_check_modules(LIBWESTON_DESKTOP libweston-desktop-7 REQUIRED)
+ 
+ find_package(Threads REQUIRED)
+ 

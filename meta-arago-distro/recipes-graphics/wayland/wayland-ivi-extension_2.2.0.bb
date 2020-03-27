@@ -5,10 +5,12 @@ BUGTRACKER = "http://bugs.genivi.org/enter_bug.cgi?product=Wayland%20IVI%20Exten
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1f1a56bb2dadf5f2be8eb342acf4ed79"
 
-SRCREV = "d2c2e262f3bdc9db33b3014293fcdbcfdc90ab27"
+SRCREV = "e9c2fe4c5034a06b159cfd45dbd485755cbaf4c8"
 
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=http \
-           file://force-type-conversion.patch \
+           file://01-ivi-input-controller-update-to-weston-7.patch \
+           file://02-ivi-id-agent-update-to-weston-7-header.patch \
+           file://03-ivi-id-agent-update-dependencies-to-build-on-weston-7.patch \
     "
 
 S = "${WORKDIR}/git"
@@ -25,7 +27,7 @@ FILES_${PN}-dbg += "${libdir}/weston/.debug/*"
 
 EXTRA_OECMAKE += "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 
-PR = "r1"
+PR = "r0"
 
 # Need these temporarily to prevent a non-fatal do_package_qa issue
 INSANE_SKIP_${PN} += "dev-deps"
