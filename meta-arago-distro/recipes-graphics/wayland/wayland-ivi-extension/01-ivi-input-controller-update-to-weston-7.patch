@@ -1,0 +1,28 @@
+From efdd2a85519d4990596194af5bf50636d2610f09 Mon Sep 17 00:00:00 2001
+From: Rajendraprasad K J <KarammelJayakumar.Rajendraprasad@in.bosch.com>
+Date: Mon, 6 Jan 2020 06:41:57 -0500
+Subject: [PATCH] ivi-input-controller: update to weston 7 header files
+
+update the header file path.
+
+Upstream-Status: Submitted [https://github.com/GENIVI/wayland-ivi-extension/pull/110]
+
+Signed-off-by: Rajendraprasad K J <KarammelJayakumar.Rajendraprasad@in.bosch.com>
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+ .../ivi-input-controller/src/ivi-input-controller.c             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c b/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
+index a0bfc48..257a1dc 100644
+--- a/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
++++ b/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
+@@ -31,7 +31,7 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+ 
+-#include "plugin-registry.h"
++#include <libweston/plugin-registry.h>
+ #include "ilm_types.h"
+ 
+ #include "ivi-input-server-protocol.h"

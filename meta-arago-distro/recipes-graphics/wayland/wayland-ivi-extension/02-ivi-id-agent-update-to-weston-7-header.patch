@@ -1,0 +1,30 @@
+From 5abb2b497e0153210d41ec3685dc0152587625fa Mon Sep 17 00:00:00 2001
+From: Rajendraprasad K J <KarammelJayakumar.Rajendraprasad@in.bosch.com>
+Date: Mon, 6 Jan 2020 06:45:11 -0500
+Subject: [PATCH] ivi-id-agent: update to weston 7 header files
+
+update the header file path.
+
+Upstream-Status: Submitted [https://github.com/GENIVI/wayland-ivi-extension/pull/110]
+
+Signed-off-by: Rajendraprasad K J <KarammelJayakumar.Rajendraprasad@in.bosch.com>
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+ ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c b/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c
+index 8f0c199..b80e2a4 100644
+--- a/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c
++++ b/ivi-id-agent-modules/ivi-id-agent/src/ivi-id-agent.c
+@@ -26,8 +26,8 @@
+ #include <limits.h>
+ 
+ #include <weston.h>
+-#include <libweston-6/libweston-desktop.h>
+-#include "config-parser.h"
++#include <libweston-desktop/libweston-desktop.h>
++#include <libweston/config-parser.h>
+ #include <weston/ivi-layout-export.h>
+ 
+ #ifndef INVALID_ID
