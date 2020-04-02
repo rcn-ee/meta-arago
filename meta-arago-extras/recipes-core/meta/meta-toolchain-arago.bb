@@ -65,6 +65,23 @@ toolchain_create_sdk_env_script () {
 	echo 'export OECORE_ACLOCAL_OPTS="-I $SDK_PATH_NATIVE/usr/share/aclocal"' >> $script
 	echo 'export OECORE_DISTRO_VERSION="${DISTRO_VERSION}"' >> $script
 	echo 'export OECORE_SDK_VERSION="${SDK_VERSION}"' >> $script
+
+        # Borrowed from oe-core/meta/classes/toolchain-scripts.bbclass
+	cat >> $script <<EOF
+
+# Append environment subscripts
+if [ -d "\$OECORE_TARGET_SYSROOT/environment-setup.d" ]; then
+    for envfile in \$OECORE_TARGET_SYSROOT/environment-setup.d/*.sh; do
+	    . \$envfile
+    done
+fi
+if [ -d "\$OECORE_NATIVE_SYSROOT/environment-setup.d" ]; then
+    for envfile in \$OECORE_NATIVE_SYSROOT/environment-setup.d/*.sh; do
+	    . \$envfile
+    done
+fi
+EOF
+
 }
 
 SDK_POSTPROCESS_COMMAND_prepend = "arago_sdk_fixup; "
