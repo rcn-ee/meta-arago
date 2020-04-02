@@ -23,7 +23,6 @@ EXTRA_PKGS_append_k2hk = " \
 #    ti-fftw-examples
 EXTRA_PKGS_append_dra7xx = " \
     linalg-examples \
-    kaldi \
 "
 
 RDEPENDS_${PN} = "\
