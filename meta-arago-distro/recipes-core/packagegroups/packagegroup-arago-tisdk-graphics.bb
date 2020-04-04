@@ -4,7 +4,7 @@ PR = "r26"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup machine_features_check
+inherit packagegroup features_check
 
 REQUIRED_MACHINE_FEATURES = "gpu"
 

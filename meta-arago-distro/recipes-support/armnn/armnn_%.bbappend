@@ -1,3 +1,3 @@
-inherit machine_features_check
+inherit features_check
 
 REQUIRED_MACHINE_FEATURES = "dsp"
