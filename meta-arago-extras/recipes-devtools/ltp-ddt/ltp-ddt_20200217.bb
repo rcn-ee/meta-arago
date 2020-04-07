@@ -47,6 +47,7 @@ SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;bran
     file://0002-check-for-RES_USE_INET6-during-configure.patch \
     file://0003-Add-knob-to-control-tirpc-support.patch \
     file://0001-getcpu01-Rename-getcpu-to-avoid-conflict-with-glibc-.patch \
+    file://0001-testcases-kernel-syscalls-disable-stime-due-to-glibc.patch \
 "
 
 S = "${WORKDIR}/git"
