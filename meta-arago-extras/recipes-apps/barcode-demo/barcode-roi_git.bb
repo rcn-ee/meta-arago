@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://detect_barcode.cpp;beginline=1;endline=25;md5=babab64
 inherit features_check
 
 REQUIRED_MACHINE_FEATURES = "dsp"
+REQUIRED_DISTRO_FEATURES = "opencv"
 
 DEPENDS += "opencv"
 
