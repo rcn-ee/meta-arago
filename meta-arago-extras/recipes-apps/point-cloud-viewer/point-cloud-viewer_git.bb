@@ -3,6 +3,10 @@ HOMEPAGE = "https://git.ti.com/processor-sdk/point-cloud-viewer/"
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM := "file://PointCloudViewer_manifest.html;md5=7ea694db2dd8d82fd91a18cab8c2c2db"
 
+inherit features_check
+
+REQUIRED_DISTRO_FEATURES = "opencv"
+
 PR = "r2"
 
 COMPATIBLE_MACHINE = "dra7xx"
