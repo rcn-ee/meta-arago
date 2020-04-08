@@ -12,3 +12,8 @@ SRCREV = "4b801ad96b50f53e977b96d8b227ba4bcb26e011"
 
 # default patchdir is ${S}
 S = "${WORKDIR}/git"
+
+inherit features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
+REQUIRED_DISTRO_FEATURES = "opencl opencv"
