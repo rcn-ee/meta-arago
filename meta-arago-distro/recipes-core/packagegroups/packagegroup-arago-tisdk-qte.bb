@@ -12,9 +12,9 @@ QT4_DEMOS = "\
     ${@oe.utils.conditional('ARAGO_QT_PROVIDER', 'qt4-embedded-gles', 'quick-playground', '', d)} \
 "
 
+#    qtdeclarative-examples
 QT5_DEMOS = "\
     qtbase-examples \
-    qtdeclarative-examples \
     qtdeclarative-tools \
     qtlocation-examples \
     qtmultimedia-examples \
