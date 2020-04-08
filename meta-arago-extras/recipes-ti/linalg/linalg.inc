@@ -10,6 +10,11 @@ COMPATIBLE_MACHINE = "k2hk|dra7xx"
 require recipes-ti/includes/arago-paths.inc
 require recipes-ti/includes/ti-staging.inc
 
+inherit features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
+REQUIRED_DISTRO_FEATURES = "opencl openmp"
+
 SRC_URI = " \
 	git://git.ti.com/dense-linear-algebra-libraries/linalg.git;protocol=git;branch=${BRANCH} \
 	file://0001-Makefile-fix-toolchain-variables.patch \

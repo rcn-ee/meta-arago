@@ -17,12 +17,12 @@ EXTRA_PKGS = " \
 
 #    ti-fftw-examples
 EXTRA_PKGS_append_k2hk = " \
-    linalg-examples \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples')} \
 "
 
 #    ti-fftw-examples
 EXTRA_PKGS_append_dra7xx = " \
-    linalg-examples \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples')} \
 "
 
 RDEPENDS_${PN} = "\
