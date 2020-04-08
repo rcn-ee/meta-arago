@@ -1,4 +1,4 @@
-DESCRIPTION = "GStreamer plugin for ARM HEVC decoder"
+SUMMARY = "GStreamer plugin for ARM HEVC decoder"
 HOMEPAGE = "https://git.ti.com/processor-sdk/gst-plugin-hevc"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2827f94fc0a1adeff4d9702e97ce2979"
@@ -18,9 +18,9 @@ inherit autotools-brokensep pkgconfig gettext
 PR = "r5"
 
 do_configure() {
-        cd ${S}
-        chmod +x autogen.sh
-        ./autogen.sh --host=arm-linux --with-libtool-sysroot=${STAGING_DIR_TARGET} --prefix=/usr
+    cd ${S}
+    chmod +x autogen.sh
+    ./autogen.sh --host=arm-linux --with-libtool-sysroot=${STAGING_DIR_TARGET} --prefix=/usr
 }
 
 EXTRA_OECONF += "--enable-maintainer-mode"
@@ -29,3 +29,5 @@ EXTRA_OEMAKE += "'ERROR_CFLAGS=-Wno-deprecated-declarations'"
 FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
 FILES_${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
 FILES_${PN}-dev += "${libdir}/gstreamer-1.0/*.la"
+
+INSANE_SKIP_${PN} = "textrel"
