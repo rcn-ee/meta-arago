@@ -23,20 +23,11 @@ ARAGO_NDISC6 = "\
     ndisc6-tracert6 \
     "
 
-ARAGO_SECURE_STORAGE = ""
-# All these secure storage packages need to be
-# migrated to openssl 1.1
-#    ti-softhsmv2 \
-#    libp11 \
-#    engine-pkcs11 \
-#    "
-
 # ipsecmgr has been disabled for a while
 # disable ipsecmgr-mod,hplib-mod due to K4.14 API changes
 #    ipsecmgr-mod
 #    hplib-mod
 ARAGO_TI_KEYSTONE_PKGS = "\
-    ${ARAGO_SECURE_STORAGE} \
     uio-module-drv \
     traceframework \
     cuia \
