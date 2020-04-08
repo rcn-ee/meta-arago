@@ -4,7 +4,9 @@ PR = "r4"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup
+inherit packagegroup features_check
+
+REQUIRED_DISTRO_FEATURES = "opencl"
 
 PACKAGES =+ "${PN}-extra"
 
