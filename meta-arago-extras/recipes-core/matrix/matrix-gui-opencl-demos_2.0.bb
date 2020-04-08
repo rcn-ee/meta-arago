@@ -4,7 +4,9 @@ require matrix-gui-apps-git.inc
 
 PR = "${INC_PR}.2"
 
-inherit allarch
+inherit allarch features_check
+
+REQUIRED_DISTRO_FEATURES = "opencl"
 
 S = "${WORKDIR}/git/opencl_apps"
 
