@@ -14,42 +14,6 @@ ARAGO_LIBNL = "\
     libnl-cli \
     "
 
-ARAGO_PERL = "\
-    perl \
-    perl-module-carp \
-    perl-module-class-struct \
-    perl-module-errno \
-    perl-module-exporter \
-    perl-module-exporter-heavy \
-    perl-module-fcntl \
-    perl-module-file-spec \
-    perl-module-file-spec-unix \
-    perl-module-file-stat \
-    perl-module-io-dir \
-    perl-module-io-file \
-    perl-module-io-handle \
-    perl-module-io-pipe \
-    perl-module-io-poll \
-    perl-module-io-seekable \
-    perl-module-io-select \
-    perl-module-io-socket-inet \
-    perl-module-io-socket-unix \
-    perl-module-io-socket \
-    perl-module-io \
-    perl-module-list-util \
-    perl-module-selectsaver \
-    perl-module-socket \
-    perl-module-strict \
-    perl-module-symbol \
-    perl-module-tie-handle \
-    perl-module-tie-hash \
-    perl-module-tie-stdhandle \
-    perl-module-vars \
-    perl-module-warnings-register \
-    perl-module-warnings \
-    perl-module-xsloader \
-    "
-
 ARAGO_NDISC6 = "\
     ndisc6-ndisc6 \
     ndisc6-rdisc6 \
@@ -57,22 +21,6 @@ ARAGO_NDISC6 = "\
     ndisc6-tcpspray6 \
     ndisc6-tcptraceroute6 \
     ndisc6-tracert6 \
-    "
-
-ARAGO_PYTHON = "\
-    python-core \
-    python-io \
-    python-ctypes \
-    python-json \
-    python-numpy \
-    python-codecs \
-    python-subprocess \
-    python-pickle \
-    python-shell \
-    python-logging \
-    python-mmap \
-    python-profile \
-    python \
     "
 
 ARAGO_SECURE_STORAGE = ""
@@ -163,9 +111,7 @@ ARAGO_VTUN_aarch64 = ""
 #    recovery-kernel
 RDEPENDS_${PN} = "\
     ${ARAGO_LIBNL} \
-    ${ARAGO_PERL} \
     ${ARAGO_NDISC6} \
-    ${ARAGO_PYTHON} \
     ${ARAGO_TI_PKGS} \
     ${ARAGO_VTUN} \
     ptpd \
