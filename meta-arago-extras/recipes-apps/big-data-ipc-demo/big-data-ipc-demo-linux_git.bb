@@ -3,6 +3,10 @@ SUMMARY = "TI Big data IPC: Host linux examples"
 require recipes-ti/includes/ti-paths.inc
 require big-data-ipc-demo.inc
 
+inherit features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
+
 DEPENDS = "ti-ipc \
            ti-xdctools-native \
            ti-sysbios \

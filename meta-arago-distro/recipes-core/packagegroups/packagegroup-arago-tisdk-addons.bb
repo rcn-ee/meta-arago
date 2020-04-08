@@ -144,8 +144,7 @@ EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_am65xx = " ti-ipc-examples-linux"
 
 EXTRA_PACKAGES_append_omap-a15 = " \
-    big-data-ipc-demo-linux \
-    big-data-ipc-demo-linux-firmware \
+    ${@bb.utils.contains('MACHINE_FEATURES','dsp','big-data-ipc-demo-linux big-data-ipc-demo-linux-firmware','',d)} \
 "
 
 # acontis-atemsys
