@@ -18,7 +18,7 @@ GSTREAMER_DEPS = " \
 "
 
 GSTREAMER_DSP = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'gstreamer1.0-plugins-dsp66', '', d)} \
+    ${@['','gstreamer1.0-plugins-dsp66'][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
 
 GSTREAMER_DEPS_append_dra7xx = " \
