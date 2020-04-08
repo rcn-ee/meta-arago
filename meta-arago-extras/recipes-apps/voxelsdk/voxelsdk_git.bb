@@ -4,6 +4,11 @@ SECTION = "multimedia"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e69c599445026ffeae140a21181dfa88"
 
+inherit features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
+REQUIRED_DISTRO_FEATURES = "opencv"
+
 PV = "0.6.8"
 PR = "r1"
 BRANCH = "plsdk-devel"
