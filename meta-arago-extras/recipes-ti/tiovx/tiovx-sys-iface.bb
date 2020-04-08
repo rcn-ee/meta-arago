@@ -1,5 +1,6 @@
-SUMMARY = "TI OpenVX interface header files between TIOVX library and HOST, DSP IPC side implementation "
-DESCRIPTION = "Collection of header files needed to defined interface between TIOVX library and HOST and DSP IPC side implementation. In order to maintain source compatibility, directory structure follows VSDK source tree layout."
+SUMMARY = "TI OpenVX interface header files between TIOVX library and HOST, DSP IPC side implementation"
+DESCRIPTION = "Collection of header files needed to define interface between TIOVX library and HOST and DSP IPC side implementation. \
+In order to maintain source compatibility, directory structure follows VSDK source tree layout."
 
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM = "file://iface/VSDK/docs/TIOVX-SYS-IFACE_1.0.0.0_manifest.html;md5=10904cbdb4f065c025a63ca71ae7de2d"
@@ -12,7 +13,9 @@ PR = "r1"
 COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit update-alternatives
+inherit update-alternatives features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
 
 SRC_URI_append += "\
      file://reload-dsp-fw.sh \
@@ -46,4 +49,3 @@ PACKAGES =+ "${PN}-firmware"
 FILES_${PN}-firmware = "${base_libdir}/firmware/*"
 
 INSANE_SKIP_${PN}-firmware = "arch"
-
