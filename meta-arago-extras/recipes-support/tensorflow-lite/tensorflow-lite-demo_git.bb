@@ -2,6 +2,11 @@ SUMMARY = "Tensorflow Lite Demo with input and display via OpenCV and TIDL accel
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d8927f3331d2b3e321b7dd1925166d25"
 
+inherit features_check
+
+REQUIRED_DISTRO_FEATURES = "opencv"
+REQUIRED_DISTRO_FEATURES_append_dra7xx = " opencl"
+
 DEPENDS = "tensorflow-lite flatbuffers opencv"
 DEPENDS_append_dra7xx = " tidl-api"
 
