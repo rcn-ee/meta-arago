@@ -18,6 +18,7 @@ TENSORFLOW_DEMO_dra7xx = " \
 ANALYTICS = " \
     ${ARMNN_PACKAGES} \
     ${TENSORFLOW_DEMO} \
+    ${@['','qt-opencv-opencl-opengl-multithreaded'][oe.utils.all_distro_features(d, 'opencv opencl opengl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'gpu dsp', True, False, d)]} \
 "
 ANALYTICS_keystone = ""
 ANALYTICS_j7-evm = ""
