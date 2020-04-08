@@ -1,5 +1,7 @@
-SUMMARY = "TI OpenVX HOST (Linux A15) conformance verification application, Khronos tutorial example, and Host side IPC implementation "
-DESCRIPTION = "TI OpenVX implementation, TIOVX, includes Khronos defined conformance test and tutorial example, as well as additional TI specific tests. This package creates application which runs all the conformance tests (7K-8K) and Khronos tutorial exercise1. Same package includes IPC implementation (MessageQ based) needed for communication with DSP firmware (loaded at boot time) "
+SUMMARY = "TI OpenVX HOST (Linux A15) conformance verification application, Khronos tutorial example, and Host side IPC implementation"
+DESCRIPTION = "TI OpenVX implementation, TIOVX, includes Khronos defined conformance test and tutorial example, as well as additional TI \
+specific tests. This package creates application which runs all the conformance tests (7K-8K) and Khronos tutorial exercise1. \
+Same package includes IPC implementation (MessageQ based) needed for communication with DSP firmware (loaded at boot time)"
 
 LICENSE = "BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = "file://docs/manifest/TIOVX-APP-HOST_01.00.01.00_manifest.html;md5=247d7c56d783f583bf802490d5c93db3"
@@ -10,13 +12,15 @@ SRC_URI_append += "\
      file://setenv.sh \
 "
 
-inherit pkgconfig
+inherit pkgconfig features_check
+
+REQUIRED_DISTRO_FEATURES = "opencv"
 
 require recipes-ti/includes/arago-paths.inc
 require tiovx-sys.inc
 
-DEPENDS = " tiovx-sys-iface tiovx-lib-host ti-ipc cmem opencv udev"
-RDEPENDS_${PN} = " tiovx-sys-iface tiovx-sys-iface-firmware tiovx-lib-host ti-ipc cmem"
+DEPENDS = "tiovx-sys-iface tiovx-lib-host ti-ipc cmem opencv udev"
+RDEPENDS_${PN} = "tiovx-sys-iface tiovx-sys-iface-firmware tiovx-lib-host ti-ipc cmem"
 
 PR = "r3"
 
