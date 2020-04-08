@@ -7,6 +7,11 @@ LIC_FILES_CHKSUM = "file://docs/TI-FFTW_3.1.0_manifest.html;md5=aaa275ec704a7382
 
 include fftlib.inc
 
+inherit features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
+REQUIRED_DISTRO_FEATURES = "opencl"
+
 PR = "${INC_PR}.0"
 
 DEPENDS = "common-csl-ip-rtos common-csl-ip ti-xdctools-native ti-sysbios ti-cgt6x-native ti-xdais libulm fftlib dsplib-c66x opencl clocl-native libarch"
