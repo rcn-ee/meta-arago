@@ -6,6 +6,11 @@ LIC_FILES_CHKSUM = "file://ti/fftlib/docs/manifest/manifest.xml.xdt;md5=178402e8
 
 include fftlib.inc
 
+inherit features_check
+
+REQUIRED_MACHINE_FEATURES = "dsp"
+REQUIRED_DISTRO_FEATURES = "openmp"
+
 PR = "${INC_PR}.0"
 
 DEPENDS = "common-csl-ip-rtos libarch ti-xdctools-native doxygen-native ti-cgt6x-native ti-xdais libulm dsplib-c66x php libxslt-native libxslt openmp-rtos"
