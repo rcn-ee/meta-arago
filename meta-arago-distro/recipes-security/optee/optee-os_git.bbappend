@@ -1,40 +1,10 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
-DEPENDS += "python3-pycryptodomex-native"
-
 PR_append = ".arago0"
-
-PV = "3.8.0+git${SRCPV}"
-
-is_armv7 = "1"
-is_armv7_aarch64 = "0"
 
 SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
            file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
 "
 BRANCH = "ti-optee-os"
 SRCREV = "199fca17b575d4c748c9c435e908a6ec9618c75a"
-
-ARMCORE = "CFG_ARM32_core=y ta-targets=ta_arm32"
-ARMCORE_aarch64 = "CFG_ARM64_core=y ta-targets=ta_arm64"
-
-EXTRA_OEMAKE = "CROSS_COMPILE_core=${HOST_PREFIX} \
-                CROSS_COMPILE_ta_arm32=${HOST_PREFIX} \
-                CROSS_COMPILE_ta_arm64=${HOST_PREFIX} \
-                NOWERROR=1 V=1 \
-                LIBGCC_LOCATE_CFLAGS=--sysroot=${STAGING_DIR_HOST} \
-                CFG_TEE_TA_LOG_LEVEL=0 \
-                CFG_TEE_CORE_LOG_LEVEL=2 \
-                ${ARMCORE} \
-"
-
-CFLAGS[unexport] = "1"
-LDFLAGS[unexport] = "1"
-CPPFLAGS[unexport] = "1"
-AS[unexport] = "1"
-LD[unexport] = "1"
-
-do_configure[noexec] = "1"
 
 do_compile() {
     export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
@@ -98,3 +68,6 @@ do_deploy() {
 
 FILES_${PN} = "/boot"
 SYSROOT_DIRS += "/boot"
+
+# This is needed for bl32.elf
+INSANE_SKIP_${PN} += "textrel"
