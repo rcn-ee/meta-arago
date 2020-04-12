@@ -4,19 +4,21 @@ PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup
+inherit packagegroup features_check
+
+REQUIRED_DISTRO_FEATURES = "opencl"
 
 UTILS = " \
     opencl-examples-src \
-    openmpacc-examples-src \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'openmpacc-examples-src')} \
 "
 
 UTILS_append_k2hk = " \
-    linalg-examples-src \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples-src')} \
 "
 
 UTILS_append_dra7xx = " \
-    linalg-examples-src \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples-src')} \
 "
 
 RDEPENDS_${PN} = "\

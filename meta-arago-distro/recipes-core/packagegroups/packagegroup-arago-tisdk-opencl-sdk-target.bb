@@ -4,20 +4,21 @@ PR = "r2"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup
+inherit packagegroup features_check
+
+REQUIRED_DISTRO_FEATURES = "opencl"
 
 UTILS = " \
     opencl-staticdev \
-    openmpacc-dev \
-    python-pyopencl-dev \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'openmpacc-dev')} \
 "
 
 UTILS_append_k2hk = " \
-    linalg-dev \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-dev')} \
 "
 
 UTILS_append_dra7xx = " \
-    linalg-dev \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-dev')} \
 "
 
 RDEPENDS_${PN} = "\
