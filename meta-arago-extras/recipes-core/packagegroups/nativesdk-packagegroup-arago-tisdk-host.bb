@@ -6,22 +6,26 @@ inherit packagegroup nativesdk
 
 PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
 
+TIDL_TOOLS = " \
+    nativesdk-tidl-import \
+    nativesdk-tidl-viewer \
+    nativesdk-tidl-utils \
+"
+
 #    nativesdk-open62541-examples
 #    nativesdk-open62541-tests
 EXTRA_TI_TOOLS = " \
     nativesdk-ti-cgt6x \
     nativesdk-ti-cgt-pru \
     nativesdk-clocl \
-    nativesdk-clacc \
-    nativesdk-tidl-import \
-    nativesdk-tidl-viewer \
-    nativesdk-tidl-utils \
+    ${@oe.utils.all_distro_features(d, "opencl openmp", "nativesdk-clacc")} \
     nativesdk-gcc-arm-none-eabi \
+    ${@oe.utils.all_distro_features(d, "opencl opencv", "${TIDL_TOOLS}")} \
 "
 
 RDEPENDS_${PN} = "\
     nativesdk-packagegroup-sdk-host \
-    nativesdk-python-distutils \
+    nativesdk-python3-distutils \
     nativesdk-git \
     nativesdk-mtd-utils-ubifs \
     ${EXTRA_TI_TOOLS} \
