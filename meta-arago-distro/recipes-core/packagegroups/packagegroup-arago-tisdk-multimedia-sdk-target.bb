@@ -6,7 +6,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-BARCODE_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'barcode-roi-dev', '', d)}"
+BARCODE_PKG = " \
+    ${@['','barcode-roi-dev'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
+"
 
 MULTIMEDIA = ""
 
