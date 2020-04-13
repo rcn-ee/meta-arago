@@ -1,23 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PACKAGECONFIG_append = " faad kms"
-PACKAGECONFIG_remove_keystone = "wayland"
-
-DEPENDS_append_omap-a15 = " \
-    libdrm \
-"
-
-DEPENDS_append_ti43x = " \
-    libdrm \
-"
-
-DEPENDS_append_ti33x = " \
-    libdrm \
-"
-
-DEPENDS_append_k3 = " \
-    libdrm \
-"
 
 SRC_URI_append_ti43x = " \
     file://0001-gstdrmallocator-Add-DRM-allocator-support.patch \
@@ -52,4 +35,4 @@ SRC_URI_append_k3 = " \
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR_append = ".arago2"
+PR_append = ".arago3"
