@@ -6,8 +6,6 @@ SRC_URI = "git://git.ti.com/optee/ti-optee-os.git;branch=${BRANCH} \
 BRANCH = "ti-optee-os"
 SRCREV = "199fca17b575d4c748c9c435e908a6ec9618c75a"
 
-OPTEE_ARCH = "null"
-
 do_compile() {
     export TI_SECURE_DEV_PKG=${TI_SECURE_DEV_PKG}
     oe_runmake all PLATFORM=${OPTEEMACHINE} PLATFORM_FLAVOR=${OPTEEFLAVOR}
