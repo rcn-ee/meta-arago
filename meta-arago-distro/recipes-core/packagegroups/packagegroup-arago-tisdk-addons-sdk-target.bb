@@ -53,12 +53,8 @@ EXTRA_LIBS_append_keystone = "\
 	cppi-lld-staticdev \
 	qmss-lld-dev \
 	qmss-lld-staticdev \
-	pa-lld-dev \
-	pa-lld-staticdev \
 	rm-lld-dev \
 	rm-lld-staticdev \
-	sa-lld-dev \
-	sa-lld-staticdev \
 	pktlib-dev \
 	pktlib-staticdev \
 	libnl-dev \
@@ -88,6 +84,10 @@ EXTRA_LIBS_append_k2l = "\
 	dfe-lld-staticdev \
 	iqn2-lld-dev \
 	iqn2-lld-staticdev \
+	pa-lld-dev \
+	pa-lld-staticdev \
+	sa-lld-dev \
+	sa-lld-staticdev \
 	"
 
 # Disable netapi due to libnl and xfrm conflict
@@ -109,6 +109,10 @@ EXTRA_LIBS_append_k2hk = "\
 	hyplnk-lld-staticdev \
 	aif2-lld-dev \
 	aif2-lld-staticdev \
+	pa-lld-dev \
+	pa-lld-staticdev \
+	sa-lld-dev \
+	sa-lld-staticdev \
 	"
 
 # Disable netapi due to libnl and xfrm conflict
@@ -124,6 +128,10 @@ EXTRA_LIBS_append_k2e = "\
 	mmap-lld-staticdev \
 	hyplnk-lld-dev \
 	hyplnk-lld-staticdev \
+	pa-lld-dev \
+	pa-lld-staticdev \
+	sa-lld-dev \
+	sa-lld-staticdev \
 "
 
 UTILS_append_ti33x = " can-utils-dev"

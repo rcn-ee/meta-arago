@@ -42,7 +42,6 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     mpm-transport \
     multiprocmgr \
     rm-lld \
-    pa-lld \
     qmss-lld \
     pktlib \
     cppi-lld \
@@ -68,6 +67,7 @@ ARAGO_TI_PKGS_append_keystone = " ${ARAGO_TI_KEYSTONE_PKGS}"
 ARAGO_TI_PKGS_append_k2l = "\
     dfe-lld \
     iqn2-lld \
+    pa-lld \
     "
 
 # Disable netapi due to libnl and xfrm conflict
@@ -81,6 +81,7 @@ ARAGO_TI_PKGS_append_k2hk = "\
     mmap-lld \
     hyplnk-lld \
     aif2-lld \
+    pa-lld \
     "
 
 # Disable netapi due to libnl and xfrm conflict
@@ -92,6 +93,7 @@ ARAGO_TI_PKGS_append_k2hk = "\
 ARAGO_TI_PKGS_append_k2e = "\
     mmap-lld \
     hyplnk-lld \
+    pa-lld \
     "
 
 # vtun does not build against openssl 1.1
