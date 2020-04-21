@@ -10,8 +10,6 @@ PACKAGES =+ "${PN}-extra"
 
 #    dt
 
-#    open62541-examples
-#    open62541-tests
 UTILS = " \
     am-sysinfo \
     gdbserver \
@@ -29,6 +27,8 @@ UTILS = " \
     strongswan \
     kexec \
     kdump \
+    open62541-examples \
+    open62541-tests \
 "
 
 UTILS_UBOOT_FW = "libubootenv-bin"

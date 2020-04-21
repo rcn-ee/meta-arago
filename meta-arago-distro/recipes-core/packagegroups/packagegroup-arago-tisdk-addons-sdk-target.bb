@@ -6,9 +6,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-#         open62541-dev
-#         open62541-staticdev
 UTILS = "libdrm-dev \
+         open62541-dev \
+         open62541-staticdev \
          "
 
 UTILS_append_keystone = "\

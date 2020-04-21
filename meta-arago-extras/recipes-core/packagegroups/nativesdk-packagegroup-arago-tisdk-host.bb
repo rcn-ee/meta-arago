@@ -12,13 +12,13 @@ TIDL_TOOLS = " \
     nativesdk-tidl-utils \
 "
 
-#    nativesdk-open62541-examples
-#    nativesdk-open62541-tests
 EXTRA_TI_TOOLS = " \
     nativesdk-ti-cgt6x \
     nativesdk-ti-cgt-pru \
     nativesdk-clocl \
     ${@oe.utils.all_distro_features(d, "opencl openmp", "nativesdk-clacc")} \
+    nativesdk-open62541-examples \
+    nativesdk-open62541-tests \
     nativesdk-gcc-arm-none-eabi \
     ${@oe.utils.all_distro_features(d, "opencl opencv", "${TIDL_TOOLS}")} \
 "
