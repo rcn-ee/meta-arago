@@ -10,8 +10,9 @@ inherit features_check
 REQUIRED_MACHINE_FEATURES = "dsp"
 REQUIRED_DISTRO_FEATURES = "opencl openmp"
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.2"
 SRC_URI += "file://0001-Update-VRING-in-resource-table-for-new-Linux-kernel.patch;patchdir=.."
+SRC_URI += "file://0002-Fix-K2x-race-condition-during-DSP-firmware-booting.patch;patchdir=.."
 
 inherit update-alternatives
 
