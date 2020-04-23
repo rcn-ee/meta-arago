@@ -8,6 +8,7 @@ SRC_URI = "git://github.com/open62541/open62541.git;protocol=https;branch=${BRAN
            git://github.com/OPCFoundation/UA-Nodeset.git;protocol=https;branch=v1.04;destsuffix=git/deps/ua-nodeset;name=ua-nodeset \
            git://github.com/Pro/mdnsd.git;protocol=https;branch=master;destsuffix=git/deps/mdnsd;name=mdnsd \
            file://0001-examples-client-allow-configurable-server.patch \
+           file://0001-CMakeLists-do-not-install-git-directories.patch \
 "
 
 BRANCH = "1.0"
