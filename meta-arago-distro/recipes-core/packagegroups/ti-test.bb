@@ -70,7 +70,7 @@ ARAGO_TI_TEST_append_am65xx = " \
 ARAGO_TI_TEST_append_j7 = " \
     viddec-test-app \
     videnc-test-app \
-    ufs-tool \
+    ufs-utils \
 "
 
 ARAGO_TI_TEST_append_keystone = " \
