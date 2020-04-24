@@ -1,6 +1,3 @@
-INHIBIT_PACKAGE_STRIP = "0"
-INHIBIT_PACKAGE_DEBUG_SPLIT = "0"
-
 ORIG_TARGET_SYS = "${TARGET_ARCH}${TARGET_VENDOR}${@['-' + d.getVar('TARGET_OS'), ''][d.getVar('TARGET_OS') == ('' or 'custom')]}"
 
 do_install_append() {
