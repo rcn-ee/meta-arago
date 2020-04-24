@@ -1,6 +1,5 @@
 # Select external binary prebuilt Arm toolchain
 TCMODE = "external-arm"
-TCLIBC = "external-arm-toolchain"
 
 EAT_TARGET_SYS_ARMV5 ?= "arm-none-linux-gnueabi"
 EAT_TARGET_SYS_ARMV7 ?= "arm-none-linux-gnueabihf"
