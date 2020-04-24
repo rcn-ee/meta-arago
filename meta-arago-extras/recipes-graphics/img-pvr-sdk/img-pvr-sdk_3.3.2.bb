@@ -49,7 +49,7 @@ do_install () {
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/DRM/OGLES2FilmTV ${D}${bindir}/SGX/demos/DRM/
 }
 
-do_install_append_j7-evm () {
+do_install_append_j7 () {
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/Wayland/OpenGLESDeferredShading ${D}${bindir}/SGX/demos/Wayland/
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/Wayland/OpenGLESGaussianBlur ${D}${bindir}/SGX/demos/Wayland/
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/Wayland/OpenGLESImageBasedLighting ${D}${bindir}/SGX/demos/Wayland/
@@ -72,14 +72,12 @@ do_install_append_j7-evm () {
 }
 
 
-RDEPENDS_${PN} = "ti-sgx-ddk-um"
-RDEPENDS_${PN}_j7-evm = "ti-img-rogue-umlibs"
+RDEPENDS_${PN} = "libegl"
 
 INHIBIT_PACKAGE_STRIP = "1"
 
 INSANE_SKIP_${PN} += "dev-so staticdev already-stripped ldflags file-rdeps"
 
 FILES_${PN} += " \
-    /opt/img-powervr-sdk/PVRHub/* \
-    /opt/img-powervr-sdk/PVRScopeDeveloper/* \
+    /opt/img-powervr-sdk/* \
 "

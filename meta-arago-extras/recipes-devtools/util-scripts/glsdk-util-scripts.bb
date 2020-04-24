@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://debug/filter-dmesg-rproc.sh;md5=ce264e7cbc036fd2f37073947c2f0800"
 PR = "r1"
 
-COMPATIBLE_MACHINE = "omap-a15|j7-evm"
+COMPATIBLE_MACHINE = "omap-a15|j7"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 RDEPENDS_${PN} += "bash"
 
@@ -29,4 +29,3 @@ do_install() {
 }
 
 FILES_${PN} += "${datadir}/ti/util-scripts/*"
-

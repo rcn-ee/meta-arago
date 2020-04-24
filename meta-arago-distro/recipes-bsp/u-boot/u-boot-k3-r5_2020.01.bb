@@ -14,6 +14,7 @@ PATH_prepend = "${TOOLCHAIN_PATH_ARMV7}/bin:"
 UBOOT_MACHINE_am65xx-evm = "am65x_evm_r5_defconfig"
 UBOOT_MACHINE_am65xx-hs-evm = "am65x_hs_evm_r5_defconfig"
 UBOOT_MACHINE_j7-evm = "j721e_evm_r5_defconfig"
+UBOOT_MACHINE_j7-hs-evm = "j721e_hs_evm_r5_defconfig"
 
 EXTRA_OEMAKE = 'ARCH=arm CROSS_COMPILE=${CROSS_COMPILE_V7} CC="${CROSS_COMPILE_V7}gcc ${TOOLCHAIN_OPTIONS}" V=1'
 EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'

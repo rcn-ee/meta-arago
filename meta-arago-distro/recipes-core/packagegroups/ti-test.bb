@@ -67,7 +67,7 @@ ARAGO_TI_TEST_append_am65xx = " \
     ti-ipc-test \
 "
 
-ARAGO_TI_TEST_append_j7-evm = " \
+ARAGO_TI_TEST_append_j7 = " \
     viddec-test-app \
     videnc-test-app \
     ufs-tool \

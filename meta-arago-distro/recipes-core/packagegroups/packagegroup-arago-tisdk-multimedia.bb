@@ -41,7 +41,7 @@ ACCEL_MM_append_omap-a15 = " \
     ipumm-fw \
 "
 
-ACCEL_MM_append_j7-evm = " \
+ACCEL_MM_append_j7 = " \
     ti-img-encode-decode \
     vxd-dec-fw \
 "

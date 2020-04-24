@@ -14,8 +14,6 @@ SRCREV = "e34284a7e07763769f671a74b4fec718174ad862"
 PR = "r1"
 S = "${WORKDIR}/git"
 
-COMPATIBLE_MACHINE = "j7-evm"
-
 # Build only DevIL
 OECMAKE_SOURCEPATH = "${S}/DevIL"
 

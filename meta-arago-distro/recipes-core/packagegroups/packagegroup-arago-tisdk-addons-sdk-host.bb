@@ -43,7 +43,7 @@ UTILS_append_k3 = " \
 "
 
 #    ti-img-encode-decode-src
-UTILS_append_j7-evm = " \
+UTILS_append_j7 = " \
     pru-icss-src \
 "
 

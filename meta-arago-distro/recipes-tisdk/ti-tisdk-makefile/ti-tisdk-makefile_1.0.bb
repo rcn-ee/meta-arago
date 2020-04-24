@@ -67,7 +67,7 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
 
 MAKEFILES_MATRIX_GUI_keystone = ""
 MAKEFILES_MATRIX_GUI_omapl138 = ""
-MAKEFILES_MATRIX_GUI_j7-evm = ""
+MAKEFILES_MATRIX_GUI_j7 = ""
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -199,7 +199,7 @@ MAKEFILES_append_am65xx = " \
                         pdm-anomaly-detection \
 "
 
-MAKEFILES_append_j7-evm = " pru-icss \
+MAKEFILES_append_j7 = " pru-icss \
                             ti-img-rogue-driver \
                             ti-img-encode-decode \
 "
@@ -239,7 +239,7 @@ PRU_ICSS_INSTALL_TARGET_ti43x = "pru-icss_install_am437x"
 PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
 PRU_ICSS_INSTALL_TARGET_k2g = "pru-icss_install_k2g"
 PRU_ICSS_INSTALL_TARGET_am65xx = "pru-icss_install_am65x"
-PRU_ICSS_INSTALL_TARGET_j7-evm = "pru-icss_install_j721e"
+PRU_ICSS_INSTALL_TARGET_j7 = "pru-icss_install_j721e"
 
 # Path to toolchains for the various cores in TI SOCs
 #
@@ -364,6 +364,7 @@ K3_UBOOT_MACHINE_R5 = ""
 K3_UBOOT_MACHINE_R5_am65xx-evm = "am65x_evm_r5_defconfig"
 K3_UBOOT_MACHINE_R5_am65xx-hs-evm = "am65x_hs_evm_r5_defconfig"
 K3_UBOOT_MACHINE_R5_j7-evm = "j721e_evm_r5_config"
+K3_UBOOT_MACHINE_R5_j7-hs-evm = "j721e_hs_evm_r5_config"
 
 do_install_append_k3() {
     cat >> ${D}/Rules.make << __EOF__

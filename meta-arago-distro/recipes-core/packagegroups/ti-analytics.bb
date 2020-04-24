@@ -22,7 +22,7 @@ ANALYTICS = " \
     ${@['','barcode-roi'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
 ANALYTICS_keystone = ""
-ANALYTICS_j7-evm = ""
+ANALYTICS_j7 = ""
 ANALYTICS_omapl138 = ""
 
 RDEPENDS_${PN} = "\

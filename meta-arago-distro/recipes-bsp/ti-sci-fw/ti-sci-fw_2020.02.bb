@@ -28,16 +28,18 @@ SRC_URI = " \
 S = "${WORKDIR}/git"
 
 SYSFW_SOC_am65xx = "am65x"
-SYSFW_SOC_j7-evm = "j721e"
+SYSFW_SOC_j7 = "j721e"
 SYSFW_CONFIG = "evm"
 
 SYSFW_PREFIX = "ti-sci-firmware"
 
 SYSFW_BASE = "${SYSFW_PREFIX}-${SYSFW_SOC}-gp"
 SYSFW_BASE_am65xx-hs-evm = "${SYSFW_PREFIX}-${SYSFW_SOC}-hs"
+SYSFW_BASE_j7-hs-evm = "${SYSFW_PREFIX}-${SYSFW_SOC}-hs"
 
 SYSFW_TISCI = "${S}/ti-sysfw/${SYSFW_BASE}.bin"
 SYSFW_TISCI_am65xx-hs-evm = "${S}/ti-sysfw/${SYSFW_BASE}-*.bin"
+SYSFW_TISCI_j7-hs-evm = "${S}/ti-sysfw/${SYSFW_BASE}-*.bin"
 
 SYSFW_BINARY = "sysfw-${SYSFW_SOC}-${SYSFW_CONFIG}.itb"
 SYSFW_IMAGE = "sysfw-${PV}.itb"
@@ -59,6 +61,9 @@ EXTRA_OEMAKE = "\
     SYSFW_PATH="${SYSFW_TISCI}" SOC=${SYSFW_SOC} CONFIG=${SYSFW_CONFIG} \
 "
 EXTRA_OEMAKE_append_am65xx-hs-evm = " \
+    HS=1 SYSFW_HS_PATH="${S}/ti-sysfw/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${S}/ti-sysfw/${SYSFW_BASE}-cert.bin" \
+"
+EXTRA_OEMAKE_append_j7-hs-evm = " \
     HS=1 SYSFW_HS_PATH="${S}/ti-sysfw/${SYSFW_BASE}-enc.bin" SYSFW_HS_INNER_CERT_PATH="${S}/ti-sysfw/${SYSFW_BASE}-cert.bin" \
 "
 
