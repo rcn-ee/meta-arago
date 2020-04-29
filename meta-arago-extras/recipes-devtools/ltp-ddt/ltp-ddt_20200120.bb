@@ -19,6 +19,9 @@ BRANCH ?= "master"
 SRC_URI_remove = "git://github.com/linux-test-project/ltp.git"
 SRC_URI_prepend = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} "
 
+export prefix = "/opt/ltp"
+export exec_prefix = "/opt/ltp"
+
 EXTRA_OEMAKE_append = " \
     KERNEL_USR_INC=${STAGING_INCDIR} \
     ALSA_INCPATH=${STAGING_INCDIR} \
