@@ -62,4 +62,5 @@ RDEPENDS_${PN} = "\
     packagegroup-arago-misc \
     ti-analytics \
     ti-demos \
+    virtual/docker \
 "
