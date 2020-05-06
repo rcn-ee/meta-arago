@@ -13,4 +13,4 @@ IMAGE_INSTALL = " \
 	${ARAGO_TINY_IMAGE_EXTRA_INSTALL} \
 "
 
-export IMAGE_BASENAME = "arago-tiny-image"
+export IMAGE_BASENAME = "tisdk-tiny-image"

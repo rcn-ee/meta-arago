@@ -30,7 +30,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 # List of target side images to be built and packaged.  By default take
 # the base image but this can be modified if desired to package
 # additional images.
-TARGET_IMAGES ?= "arago-base-tisdk-image"
+TARGET_IMAGES ?= "tisdk-base-image"
 
 # path to install the meta-toolchain package in the SDK
 TISDK_TOOLCHAIN_PATH ?= "linux-devkit"

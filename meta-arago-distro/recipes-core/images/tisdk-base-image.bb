@@ -13,4 +13,4 @@ IMAGE_INSTALL += "\
     ${VIRTUAL-RUNTIME_initramfs} \
     "
 
-export IMAGE_BASENAME = "arago-base-tisdk-image"
+export IMAGE_BASENAME = "tisdk-base-image"

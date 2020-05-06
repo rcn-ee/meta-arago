@@ -26,7 +26,7 @@ IMAGE_INSTALL += "\
     ti-demos \
 "
 
-export IMAGE_BASENAME = "tisdk-rootfs-image"
+export IMAGE_BASENAME = "tisdk-default-image"
 
 # Disable ubi/ubifs as the filesystem requires more space than is
 # available on the HW.
