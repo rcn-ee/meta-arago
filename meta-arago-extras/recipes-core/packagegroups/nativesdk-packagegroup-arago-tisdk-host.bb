@@ -6,11 +6,12 @@ inherit packagegroup nativesdk
 
 PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
 
-TIDL_TOOLS = " \
-    nativesdk-tidl-import \
-    nativesdk-tidl-viewer \
-    nativesdk-tidl-utils \
-"
+TIDL_TOOLS = ""
+#TIDL_TOOLS = " \
+#    nativesdk-tidl-import \
+#    nativesdk-tidl-viewer \
+#    nativesdk-tidl-utils \
+#"
 
 EXTRA_TI_TOOLS = " \
     nativesdk-ti-cgt6x \
