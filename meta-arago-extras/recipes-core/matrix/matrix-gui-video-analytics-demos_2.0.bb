@@ -17,9 +17,9 @@ VIDEO_ANALYTICS_DEMO_RDEPENDS += " \
 PACKAGES = "matrix-video-analytics-opencv-opencl-opengl-demo \
 "
 
+#    ${@['','qt-opencv-opencl-opengl-multithreaded'][oe.utils.all_distro_features(d, 'opencv opencl opengl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'gpu dsp', True, False, d)]}
 RDEPENDS_matrix-video-analytics-opencv-opencl-opengl-demo = " \
     ${VIDEO_ANALYTICS_DEMO_RDEPENDS} \
-    ${@['','qt-opencv-opencl-opengl-multithreaded'][oe.utils.all_distro_features(d, 'opencv opencl opengl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'gpu dsp', True, False, d)]} \
 "
 
 # Split the matrix files by demos

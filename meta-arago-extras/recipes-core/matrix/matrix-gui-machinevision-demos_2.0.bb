@@ -11,9 +11,10 @@ S = "${WORKDIR}/git/machinevision_apps"
 # Make sure machinevision submenu and app images has been installed
 MACHINEVISION_RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-machinevision"
 
-BARCODE_RDEPENDS = " \
-    ${@['','barcode-roi'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
-"
+BARCODE_RDEPENDS = ""
+#BARCODE_RDEPENDS = " \
+#    ${@['','barcode-roi'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
+#"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"
 
