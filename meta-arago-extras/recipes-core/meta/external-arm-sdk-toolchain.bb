@@ -2,7 +2,10 @@ inherit cross-canadian
 
 require external-arm-bfd-version.inc
 
-PR = "r8"
+PR = "r9"
+
+PN = "external-arm-sdk-toolchain-${TARGET_ARCH}"
+BPN = "external-arm-sdk-toolchain"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
