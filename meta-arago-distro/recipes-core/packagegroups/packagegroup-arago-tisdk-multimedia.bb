@@ -41,11 +41,6 @@ ACCEL_MM_append_omap-a15 = " \
     ipumm-fw \
 "
 
-ACCEL_MM_append_j7 = " \
-    ti-img-encode-decode \
-    vxd-dec-fw \
-"
-
 RDEPENDS_${PN} = "\
     packagegroup-arago-gst \
     ${MULTIMEDIA} \

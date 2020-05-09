@@ -206,10 +206,6 @@ CREATE_SRCIPK_pn-ti-img-rogue-driver = "1"
 SRCIPK_INSTALL_DIR_pn-ti-img-rogue-driver = "board-support/extra-drivers/${PN}-${PV}"
 SRCIPK_PRESERVE_GIT_pn-ti-img-rogue-driver = "true"
 
-CREATE_SRCIPK_pn-ti-img-encode-decode = "1"
-SRCIPK_INSTALL_DIR_pn-ti-img-encode-decode = "board-support/extra-drivers/${PN}-${PV}"
-SRCIPK_PRESERVE_GIT_pn-ti-img-encode-decode = "true"
-
 CREATE_SRCIPK_pn-ti-gc320-driver = "1"
 SRCIPK_INSTALL_DIR_pn-ti-gc320-driver = "board-support/extra-drivers/${PN}-${PV}"
 

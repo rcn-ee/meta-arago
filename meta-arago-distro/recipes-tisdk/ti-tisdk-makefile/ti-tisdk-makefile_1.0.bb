@@ -55,7 +55,6 @@ SRC_URI = "\
     file://Makefile_ti-ipc \
     file://Makefile_jailhouse \
     file://Makefile_ti-img-rogue-driver \
-    file://Makefile_ti-img-encode-decode \
 "
 
 PR = "r104"
@@ -201,7 +200,6 @@ MAKEFILES_append_am65xx = " \
 
 MAKEFILES_append_j7 = " pru-icss \
                             ti-img-rogue-driver \
-                            ti-img-encode-decode \
 "
 
 # Use this to export kernel arch to ARCH
