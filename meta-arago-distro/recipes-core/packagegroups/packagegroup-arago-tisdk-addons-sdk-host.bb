@@ -41,7 +41,6 @@ UTILS_append_k3 = " \
     arm-trusted-firmware-src \
 "
 
-#    ti-img-encode-decode-src
 UTILS_append_j7 = " \
     pru-icss-src \
 "
