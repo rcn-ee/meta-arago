@@ -39,7 +39,7 @@ UTILS_append_k2g = " \
 UTILS_append_k3 = " \
     jailhouse-src \
     ti-sci-fw-source \
-    arm-trusted-firmware-src \
+    trusted-firmware-a-src \
 "
 
 UTILS_append_j7 = " \

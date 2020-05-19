@@ -145,9 +145,9 @@ SRCIPK_PRESERVE_GIT_pn-u-boot-keystone = "true"
 CREATE_SRCIPK_pn-u-boot-dra7xx = "1"
 SRCIPK_INSTALL_DIR_pn-u-boot-dra7xx = "board-support/u-boot-${PV}-${PR}"
 
-CREATE_SRCIPK_pn-arm-trusted-firmware = "1"
-SRCIPK_INSTALL_DIR_pn-arm-trusted-firmware = "board-support/${PN}-${PV}"
-SRCIPK_PRESERVE_GIT_pn-arm-trusted-firmware = "true"
+CREATE_SRCIPK_pn-trusted-firmware-a = "1"
+SRCIPK_INSTALL_DIR_pn-trusted-firmware-a = "board-support/${PN}-${PV}"
+SRCIPK_PRESERVE_GIT_pn-trusted-firmware-a = "true"
 
 CREATE_SRCIPK_pn-linux-ti-staging = "1"
 SRCIPK_INSTALL_DIR_pn-linux-ti-staging = "board-support/linux-${PV}${KERNEL_LOCALVERSION}"
