@@ -23,8 +23,6 @@ PACKAGES = "matrix-tidl-demo-staticimg \
             matrix-tidl-demo-objdet \
             matrix-tidl-demo-objdet-livecam \
             matrix-tidl-demo-segment \
-            matrix-armnn-demo-staticimg \
-            matrix-armnn-demo-livecam \
 "
 
 RDEPENDS_matrix-tidl-demo-staticimg = " \
@@ -67,14 +65,6 @@ RDEPENDS_matrix-tidl-demo-segment = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-armnn-demo-staticimg = " \
-    ${TIDLDEMO_RDEPENDS} \
-"
-
-RDEPENDS_matrix-armnn-demo-livecam = " \
-    ${TIDLDEMO_RDEPENDS} \
-"
-
 FILES_matrix-tidl-demo-staticimg = "${MATRIX_APP_DIR}/tidl_demo_staticimg/*"
 FILES_matrix-tidl-demo-staticimg += "${bindir}/runTidlStaticImg.sh"
 
@@ -104,9 +94,3 @@ FILES_matrix-tidl-demo-objdet-livecam   += "${bindir}/runTidlObjdet_livecam.sh"
 
 FILES_matrix-tidl-demo-segment   = "${MATRIX_APP_DIR}/tidl_demo_segment/*"
 FILES_matrix-tidl-demo-segment   += "${bindir}/runTidlSegment.sh"
-
-FILES_matrix-armnn-demo-staticimg = "${MATRIX_APP_DIR}/armnn_demo_staticimg/*"
-FILES_matrix-armnn-demo-staticimg += "${bindir}/runArmnnStaticImg.sh"
-
-FILES_matrix-armnn-demo-livecam = "${MATRIX_APP_DIR}/armnn_demo_livecam/*"
-FILES_matrix-armnn-demo-livecam += "${bindir}/runArmnnLiveCam.sh"
