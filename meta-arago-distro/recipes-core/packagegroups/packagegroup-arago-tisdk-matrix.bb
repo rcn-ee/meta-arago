@@ -88,11 +88,6 @@ MATRIX_OPENCV_OPENCL_APPS_omap-a15 = " \
      matrix-machinevision-demo-simplepeopletracking \
 "
 
-MATRIX_ARMNN_APPS = " \
-    matrix-armnn-demo-staticimg     \
-    matrix-armnn-demo-livecam       \
-"
-
 MATRIX_APPS = ""
 
 MATRIX_APPS_append_ti33x = "        \
@@ -115,7 +110,6 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
-    ${MATRIX_ARMNN_APPS}            \
     matrix-analytics-pdm-anomaly-detection \
 "
 
@@ -139,7 +133,6 @@ MATRIX_APPS_append_ti43x = "        \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
-    ${MATRIX_ARMNN_APPS}            \
     matrix-analytics-pdm-anomaly-detection \
 "
 
@@ -160,7 +153,6 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-gui-generic-pm           \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
-    ${MATRIX_ARMNN_APPS}            \
     matrix-analytics-pdm-anomaly-detection \
 "
 
@@ -180,7 +172,6 @@ MATRIX_APPS_append_am65xx = "           \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
                                     \
-    ${MATRIX_ARMNN_APPS}            \
     matrix-analytics-pdm-anomaly-detection \
 "
 
