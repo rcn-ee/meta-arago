@@ -27,3 +27,11 @@ EXTRA_OEMAKE_append = " \
     ALSA_INCPATH=${STAGING_INCDIR} \
     ALSA_LIBPATH=${STAGING_LIBDIR} \
 "
+
+RDEPENDS_${PN} += "\
+    acl \
+    at \
+    pm-qa \
+    serialcheck \
+    memtester \
+"
