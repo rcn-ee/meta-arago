@@ -40,7 +40,7 @@ TISDK_TOOLCHAIN ?= "meta-toolchain-arago"
 TOOLCHAIN_SUFFIX ?= "-sdk"
 
 # List of the type of target file system images we want to include
-TARGET_IMAGE_TYPES ?= "tar.xz tar.gz ubi"
+TARGET_IMAGE_TYPES ?= "tar.xz tar.gz ubi wic.gz wic.xz"
 
 # If EXTRA_TISDK_FILES points to a valid directory then all the contents
 # of that directory will be added to the SDK using the same directory
