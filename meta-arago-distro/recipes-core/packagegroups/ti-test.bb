@@ -15,6 +15,7 @@ ARAGO_TEST = "\
     bc \
     memtester \
     libdrm-tests \
+    dma-heap-tests \
     powertop \
     stress \
     stress-ng \
