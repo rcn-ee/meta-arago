@@ -21,6 +21,8 @@ do_install_append() {
 	ln -sf libubsan.so.1 ${D}${libdir}/libubsan.so
 	ln -sf libasan.so.5 ${D}${libdir}/libasan.so
 	ln -sf libgfortran.so.5 ${D}${libdir}/libgfortran.so
+
+	cp ${CP_ARGS} ${EXTERNAL_TOOLCHAIN}/lib/gcc/${EAT_TARGET_SYS}/${EAT_VER_GCC}/libgcc* ${D}${libdir}/${EAT_TARGET_SYS}/${EAT_VER_GCC}/
 }
 
 # Below FILES_* overrides are due to TARGET_SYS -> ORIG_TARGET_SYS move in ${libdir}/gcc
@@ -67,3 +69,5 @@ FILES_libgomp-dev = "\
     ${libdir}/libgomp.spec \
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include/omp.h \
 "
+
+INSANE_SKIP_libgcc-dev += "staticdev"
