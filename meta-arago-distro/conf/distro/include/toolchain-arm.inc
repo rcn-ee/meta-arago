@@ -9,6 +9,9 @@ EAT_TARGET_SYS_arm = "${EAT_TARGET_SYS_ARMV5}"
 EAT_TARGET_SYS_armv7a = "${EAT_TARGET_SYS_ARMV7}"
 EAT_TARGET_SYS_aarch64 = "${EAT_TARGET_SYS_ARMV8}"
 
+SECONDARY_TARGET_ARCH = "invalid"
+SECONDARY_TARGET_ARCH_k3 = "armv7a"
+
 TARGET_VENDOR = ""
 
 TOOLCHAIN_BASE ?= "/opt"
@@ -30,6 +33,9 @@ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate = "external-arm-tool
 PREFERRED_PROVIDER_gcc-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-arm-sdk-toolchain-${TRANSLATED_TARGET_ARCH}"
 PREFERRED_PROVIDER_binutils-cross-canadian-${TRANSLATED_TARGET_ARCH} ?= "external-arm-sdk-toolchain-${TRANSLATED_TARGET_ARCH}"
 #PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "external-arm-sdk-toolchain-${TRANSLATED_TARGET_ARCH}"
+
+PREFERRED_PROVIDER_gcc-cross-canadian-${SECONDARY_TARGET_ARCH} ?= "external-arm-secondary-sdk-toolchain-${SECONDARY_TARGET_ARCH}"
+PREFERRED_PROVIDER_binutils-cross-canadian-${SECONDARY_TARGET_ARCH} ?= "external-arm-secondary-sdk-toolchain-${SECONDARY_TARGET_ARCH}"
 
 # Special case for gdb to be built as part of canadian-cross-sdk, instead of packaged from external toolchain
 bindir_pn-gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "${exec_prefix}/bin"
