@@ -163,23 +163,20 @@ EXTRA_LIBS_append_k2e = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
 
-VOXEL_PACKAGES = ""
-#VOXEL_PACKAGES = "${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'voxelsdk-dev', '', d)}"
-
 EXTRA_PACKAGES = ""
-EXTRA_PACKAGES_append_ti33x = " ${VOXEL_PACKAGES} \
+EXTRA_PACKAGES_append_ti33x = " \
                                 arm-compute-library-dev \
                                 tensorflow-lite-dev \
                                 tensorflow-lite-staticdev \
                                 pdm-anomaly-detection-dev \
 "
-EXTRA_PACKAGES_append_ti43x = " ${VOXEL_PACKAGES} \
+EXTRA_PACKAGES_append_ti43x = " \
                                 arm-compute-library-dev \
                                 tensorflow-lite-dev \
                                 tensorflow-lite-staticdev \
                                 pdm-anomaly-detection-dev \
 "
-EXTRA_PACKAGES_append_omap-a15 = " ${VOXEL_PACKAGES} \
+EXTRA_PACKAGES_append_omap-a15 = " \
                                 arm-compute-library-dev \
                                 tensorflow-lite-dev \
                                 tensorflow-lite-staticdev \
