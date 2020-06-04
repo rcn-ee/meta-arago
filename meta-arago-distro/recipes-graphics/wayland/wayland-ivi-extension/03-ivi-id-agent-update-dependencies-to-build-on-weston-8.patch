@@ -1,7 +1,7 @@
 From b99082adfaf250b15f03345cdf1b433fb1575581 Mon Sep 17 00:00:00 2001
 From: Rajendraprasad K J <KarammelJayakumar.Rajendraprasad@in.bosch.com>
 Date: Mon, 6 Jan 2020 06:45:54 -0500
-Subject: [PATCH] ivi-id-agent: update dependencies to build on weston 7
+Subject: [PATCH] ivi-id-agent: update dependencies to build on weston 8
 
 upgrade libweston-desktop version.
 
@@ -22,7 +22,7 @@ index 3e604a5..ff47808 100644
  pkg_check_modules(WESTON weston>=6.0.0 REQUIRED)
  pkg_check_modules(PIXMAN pixman-1 REQUIRED)
 -pkg_check_modules(LIBWESTON_DESKTOP libweston-desktop-6 REQUIRED)
-+pkg_check_modules(LIBWESTON_DESKTOP libweston-desktop-7 REQUIRED)
++pkg_check_modules(LIBWESTON_DESKTOP libweston-desktop-8 REQUIRED)
  
  find_package(Threads REQUIRED)
  
