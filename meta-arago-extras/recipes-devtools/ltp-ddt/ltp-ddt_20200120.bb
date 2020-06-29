@@ -35,3 +35,9 @@ RDEPENDS_${PN} += "\
     serialcheck \
     memtester \
 "
+
+do_install_prepend() {
+	# Upstream ltp recipe wants to remove this test case in do_install
+	install -d ${D}${prefix}/runtest/
+	echo "memcg_stress" >> ${D}${prefix}/runtest/controllers
+}
