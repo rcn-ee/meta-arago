@@ -8,7 +8,7 @@ jailhouse_config:
 	@echo =====================================
 	@cd board-support/extra-drivers; \
 	cd `find . -maxdepth 1 -name "jailhouse*" -type d`; \
-	cp -v ./ci/jailhouse-config-$(JH_PLATFORM).h ./include/jailhouse/config.h
+	echo "#define CONFIG_TRACE_ERROR    1" >> include/jailhouse/config.h
 
 jailhouse: linux jailhouse_config
 	@echo =====================================
