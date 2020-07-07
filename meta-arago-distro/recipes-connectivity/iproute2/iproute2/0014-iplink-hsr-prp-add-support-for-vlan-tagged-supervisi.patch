@@ -1,0 +1,108 @@
+From 6e48ed61da3b03da415a87bfbd3651fde8742647 Mon Sep 17 00:00:00 2001
+From: Murali Karicheri <m-karicheri2@ti.com>
+Date: Fri, 5 Jun 2020 12:07:43 -0400
+Subject: [PATCH 2/2] iplink: hsr/prp: add support for vlan tagged supervision
+ frames
+
+This patch adds support to configure vlan tag information
+(vid, pcp and dei) at the hsr/prp lre device. This tag values
+will be used by the lre device to generate a VLAN tagged
+Supervision frames. This is done by adding 3 additional attributes
+to the hsr/prp link type and passing this to Linux HSR/PRP
+device through the ip link command.
+
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+---
+ include/uapi/linux/if_link.h |  3 +++
+ ip/iplink_hsr.c              | 40 +++++++++++++++++++++++++++++++++++-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+
+diff --git a/include/uapi/linux/if_link.h b/include/uapi/linux/if_link.h
+index de08704c5862..94a381769e5a 100644
+--- a/include/uapi/linux/if_link.h
++++ b/include/uapi/linux/if_link.h
+@@ -901,6 +901,9 @@ enum {
+ 	IFLA_HSR_PROTOCOL,		/* Indicate different protocol than
+ 					 * HSR. For example PRP.
+ 					 */
++	IFLA_HSR_SV_VID,		/* Supervision frames VLAN ID */
++	IFLA_HSR_SV_DEI,		/* Supervision frames VLAN DEI */
++	IFLA_HSR_SV_PCP,		/* Supervision frames VLAN PCP */
+ 	__IFLA_HSR_MAX,
+ };
+ 
+diff --git a/ip/iplink_hsr.c b/ip/iplink_hsr.c
+index 6ea138a23cbc..f38c752c0065 100644
+--- a/ip/iplink_hsr.c
++++ b/ip/iplink_hsr.c
+@@ -26,6 +26,7 @@ static void print_usage(FILE *f)
+ 	fprintf(f,
+ 		"Usage:\tip link add name NAME type hsr slave1 SLAVE1-IF slave2 SLAVE2-IF\n"
+ 		"\t[ supervision ADDR-BYTE ] [version VERSION] [proto PROTOCOL]\n"
++		"\t[ sv_vid SV-VID ] [ sv_pcp SV-PCP ] [ sv_dei SV-DEI ]\n"
+ 		"\n"
+ 		"NAME\n"
+ 		"	name of new hsr device (e.g. hsr0)\n"
+@@ -37,7 +38,15 @@ static void print_usage(FILE *f)
+ 		"VERSION\n"
+ 		"	0,1; the protocol version to be used. (default = 0)\n"
+ 		"PROTOCOL\n"
+-		"	0 - HSR, 1 - PRP. (default = 0 - HSR)\n");
++		"	0 - HSR, 1 - PRP. (default = 0 - HSR)\n"
++		"SV-VID\n"
++		"      0-4094; VLAN ID to be used in the VLAN tag of SV frames (default 0)\n"
++		"SV-PCP\n"
++		"      0-7; PCP value to be used in the VLAN tag of SV frames (default 0)\n"
++		"SV-DEI\n"
++		"      0-1;  DEI value to be used in the VLAN tag of SV frames (default 0)\n"
++		"      Use VLAN tag if one of sv_vid, sv_pcp or sv_dei is specified. Default value\n"
++		"      used for unspecified ones\n");
+ }
+ 
+ static void usage(void)
+@@ -52,6 +61,9 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
+ 	unsigned char multicast_spec;
+ 	unsigned char protocol_version;
+ 	unsigned char protocol = HSR_PROTOCOL_HSR;
++	unsigned short sv_vid;
++	unsigned char sv_dei;
++	unsigned char sv_pcp;
+ 
+ 	while (argc > 0) {
+ 		if (matches(*argv, "supervision") == 0) {
+@@ -86,6 +98,32 @@ static int hsr_parse_opt(struct link_util *lu, int argc, char **argv,
+ 			if (ifindex == 0)
+ 				invarg("No such interface", *argv);
+ 			addattr_l(n, 1024, IFLA_HSR_SLAVE2, &ifindex, 4);
++		} else if (matches(*argv, "sv_vid") == 0) {
++			NEXT_ARG();
++			if (get_u16(&sv_vid, *argv, 0))
++				invarg("SV-VID is invalid", *argv);
++			/* exclude reserved 4095 */
++			if (sv_vid >= 4095)
++				invarg("SV-VID is invalid", *argv);
++			addattr_l(n, 1024, IFLA_HSR_SV_VID,
++				  &sv_vid, sizeof(sv_vid));
++		} else if (matches(*argv, "sv_pcp") == 0) {
++			NEXT_ARG();
++			if (get_u8(&sv_pcp, *argv, 0))
++				invarg("SV-PCP is invalid", *argv);
++			if (sv_pcp > 7)
++				invarg("SV-PCP is invalid", *argv);
++			addattr_l(n, 1024, IFLA_HSR_SV_PCP,
++				  &sv_pcp, sizeof(sv_pcp));
++		} else if (matches(*argv, "sv_dei") == 0) {
++			NEXT_ARG();
++			if (get_u8(&sv_dei, *argv, 0))
++				invarg("SV-DEI is invalid", *argv);
++			if (sv_dei > 1)
++				invarg("SV-DEI is invalid", *argv);
++			addattr_l(n, 1024, IFLA_HSR_SV_DEI,
++				  &sv_dei, sizeof(sv_dei));
++
+ 		} else if (matches(*argv, "help") == 0) {
+ 			usage();
+ 			return -1;
+-- 
+2.17.1
+
