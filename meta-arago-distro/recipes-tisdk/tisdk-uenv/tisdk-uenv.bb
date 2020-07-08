@@ -20,3 +20,11 @@ do_install () {
 }
 
 FILES_${PN} += "board-support/*"
+
+# deploy files for wic image
+inherit deploy
+do_deploy() {
+    install -d ${DEPLOYDIR}
+    install -m 0644 ${S}/uEnv.txt ${DEPLOYDIR}
+}
+addtask deploy before do_build after do_unpack
