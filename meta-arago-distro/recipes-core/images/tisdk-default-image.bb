@@ -32,3 +32,42 @@ export IMAGE_BASENAME = "tisdk-default-image"
 # available on the HW.
 IMAGE_FSTYPES_remove_keystone = "ubifs ubi"
 IMAGE_FSTYPES_remove_omapl138 = "ubifs ubi"
+
+# Below is the delta in packages between old fuller and a new smaller default rootfs
+CHROMIUM = ""
+CHROMIUM_append_omap-a15 = "\
+    chromium-ozone-wayland \
+"
+CHROMIUM_append_k3 = "\
+    chromium-ozone-wayland \
+"
+
+EXTRABROWSERS = " \
+    qtwebbrowser-examples \
+    qtwebengine-qmlplugins \
+    qtwebengine-examples \
+"
+
+PYTHON2APPS = " \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${EXTRABROWSERS}",'',d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', "${CHROMIUM}", '', d)} \
+"
+
+DEVTOOLS = " \
+    linux-libc-headers-dev \
+    build-essential \
+    packagegroup-core-tools-debug \
+    git \
+"
+
+OPENCL = " \
+    ${@bb.utils.contains('MACHINE_FEATURES','dsp','ti-opencl','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','dsp','packagegroup-arago-tisdk-opencl-extra','',d)} \
+"
+
+IMAGE_INSTALL += "\
+    ${@oe.utils.all_distro_features(d, "opencl", "${OPENCL}")} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "${PYTHON2APPS}", "", d)} \
+    ${DEVTOOLS} \
+    ${@bb.utils.contains('TUNE_FEATURES', 'armv7a', 'valgrind', '', d)} \
+"
