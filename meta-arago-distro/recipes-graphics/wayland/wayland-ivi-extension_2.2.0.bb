@@ -10,7 +10,7 @@ SRCREV = "e9c2fe4c5034a06b159cfd45dbd485755cbaf4c8"
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=http \
            file://01-ivi-input-controller-update-to-weston-7.patch \
            file://02-ivi-id-agent-update-to-weston-7-header.patch \
-           file://03-ivi-id-agent-update-dependencies-to-build-on-weston-7.patch \
+           file://03-ivi-id-agent-update-dependencies-to-build-on-weston-8.patch \
     "
 
 S = "${WORKDIR}/git"
@@ -27,7 +27,7 @@ FILES_${PN}-dbg += "${libdir}/weston/.debug/*"
 
 EXTRA_OECMAKE += "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 
-PR = "r0"
+PR = "r1"
 
 # Need these temporarily to prevent a non-fatal do_package_qa issue
 INSANE_SKIP_${PN} += "dev-deps"
