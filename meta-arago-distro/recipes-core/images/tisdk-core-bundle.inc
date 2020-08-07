@@ -37,20 +37,8 @@ TARGET_IMAGES = "tisdk-base-image tisdk-default-image"
 # dra71 lcard requires an initramfs with modules for NFS boot
 TARGET_IMAGES_append_dra7xx-evm = " netboot-initrd"
 
-TISDK_TOOLCHAIN = "meta-toolchain-arago-tisdk"
-TOOLCHAIN_SUFFIX = "-tisdk"
-
-TISDK_TOOLCHAIN_keystone = "meta-toolchain-arago-tisdk-server"
-TOOLCHAIN_SUFFIX_keystone = "-tisdk-server"
-TISDK_TOOLCHAIN_omapl138 = "meta-toolchain-arago-tisdk-server"
-TOOLCHAIN_SUFFIX_omapl138 = "-tisdk-server"
-
-IMAGE_INSTALL_QT = "\
-    packagegroup-arago-tisdk-qte-sdk-host \
-"
-
-IMAGE_INSTALL_QT_keystone = ""
-IMAGE_INSTALL_QT_omapl138 = ""
+TISDK_TOOLCHAIN = "${@bb.utils.contains('MACHINE_FEATURES','gpu','meta-toolchain-arago-tisdk','meta-toolchain-arago-tisdk-server',d)}"
+TOOLCHAIN_SUFFIX = "${@bb.utils.contains('MACHINE_FEATURES','gpu','-tisdk','-tisdk-server',d)}"
 
 IMAGE_INSTALL = "\
     packagegroup-arago-tisdk-addons-sdk-host \
@@ -61,5 +49,5 @@ IMAGE_INSTALL = "\
     packagegroup-arago-tisdk-multimedia-sdk-host \
     packagegroup-arago-tisdk-hmi-sdk-host \
     packagegroup-arago-tisdk-amsdk-sdk-host${ARAGO_KERNEL_SUFFIX} \
-    ${IMAGE_INSTALL_QT} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-qte-sdk-host','',d)} \
 "

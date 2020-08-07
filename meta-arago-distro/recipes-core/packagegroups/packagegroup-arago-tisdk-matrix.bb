@@ -18,10 +18,6 @@ MATRIX_GUI = "               \
     matrix-gui-browser       \
 "
 
-MATRIX_GUI_keystone = ""
-MATRIX_GUI_omapl138 = ""
-MATRIX_GUI_j7 = ""
-
 MATRIX_COMMON_APPS = "              \
     matrix-gui-armbenchmarks-demos  \
     matrix-gui-crypto-demos         \
@@ -36,21 +32,12 @@ MATRIX_QT_APPS = " \
     matrix-qt5-demo-webkit-browser \
     matrix-qt5-demo-calculator \
     matrix-qt5-demo-deform \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','matrix-gui-thermostat-demo','',d)} \
+    matrix-gui-thermostat-demo \
 "
 
 MATRIX_TOUCH_APPS = " \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','matrix-gui-touch-demos','',d)} \
 "
-
-MATRIX_QT_APPS_keystone = ""
-MATRIX_QT_APPS_omapl138 = ""
-MATRIX_QT_APPS_j7 = ""
-
-#MATRIX_QT_APPS_remove_k3 = "matrix-qt5-demo-browser"
-#MATRIX_QT_APPS_append_k3 = " \
-#    matrix-qt5-demo-webkit-browser \
-#"
 
 MATRIX_GPU_DEMOS = " \
     matrix-3d-demo-chameleon \
@@ -197,11 +184,11 @@ MATRIX_APPS_append_keystone = " \
 
 RDEPENDS_${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
-    ${MATRIX_GUI}         \
-    ${MATRIX_COMMON_APPS} \
-    ${MATRIX_QT_APPS}     \
-    ${MATRIX_TOUCH_APPS}  \
     ${MATRIX_APPS}        \
+    ${MATRIX_COMMON_APPS} \
+    ${@bb.utils.contains('MACHINE_FEATURES','touchscreen',"${MATRIX_TOUCH_APPS}",'',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_GUI}",'',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_QT_APPS}",'',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_GPU_DEMOS}",'',d)} \
     ${@['',"${MATRIX_OPENCL_APPS}"][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
