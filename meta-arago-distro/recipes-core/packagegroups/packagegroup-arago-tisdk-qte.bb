@@ -4,7 +4,9 @@ PR = "r22"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup
+inherit packagegroup features_check
+
+REQUIRED_MACHINE_FEATURES = "gpu"
 
 QT4_DEMOS = "\
     qt4-embedded-examples \

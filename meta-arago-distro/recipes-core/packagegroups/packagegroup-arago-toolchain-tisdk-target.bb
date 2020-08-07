@@ -6,13 +6,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-QT_TOOLCHAIN_TARGET = "\
-    packagegroup-arago-qte-toolchain-target \
-"
-QT_TOOLCHAIN_TARGET_keystone = ""
-QT_TOOLCHAIN_TARGET_omapl138 = ""
-QT_TOOLCHAIN_TARGET_j7 = ""
-
 TISDK_TOOLCHAIN_BASE_TARGET = "\
     packagegroup-arago-standalone-sdk-target \
     packagegroup-arago-tisdk-multimedia-sdk-target \
@@ -24,10 +17,9 @@ TISDK_TOOLCHAIN_EXTRA_TARGET = "\
 "
 TISDK_TOOLCHAIN_EXTRA_TARGET_keystone = ""
 TISDK_TOOLCHAIN_EXTRA_TARGET_omapl138 = ""
-TISDK_TOOLCHAIN_EXTRA_TARGET_j7 = ""
 
 RDEPENDS_${PN} = "\
-    ${QT_TOOLCHAIN_TARGET} \
+    ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-qte-toolchain-target','',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-gtk-sdk-target','',d)} \
     ${TISDK_TOOLCHAIN_BASE_TARGET} \
     ${TISDK_TOOLCHAIN_EXTRA_TARGET} \
