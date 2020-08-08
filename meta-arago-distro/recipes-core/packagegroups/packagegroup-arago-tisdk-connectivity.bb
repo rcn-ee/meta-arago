@@ -59,6 +59,7 @@ CONNECTIVITY_RDEPENDS = " \
     iproute2 \
     iproute2-tc \
     net-snmp \
+    net-snmp-server-snmpd \
 "
 
 CONNECTIVITY_RDEPENDS_append_ti33x = "\
