@@ -450,6 +450,43 @@ sw_manifest_host() {
     sw_manifest_table_footer
 }
 
+# Use the recipe-data class to collect SRC_URI for the manifest.
+#
+# While this will need to be globally INHERIT'd to work properly, inherit
+# locally so that parsing does not fail.
+inherit recipe-data
+
+# Instead of re-adding the do_rootfs task, re-add the do_emit_recipe_data_all
+#  task to run before do_rootfs.
+deltask do_emit_recipe_data_all
+
+# There seems to be something special with the rootfs task and task dependencies
+# are not working as expected, so use the install task instead.
+addtask emit_recipe_data_all after do_emit_recipe_data before do_install
+
+get_sources_from_recipe(){
+    [ ! -z "$1" ] || return 0
+
+    # Check if a full URL is given (e.g. ipks from sourceipk class)
+    if [ $(echo "$1" | grep -c '://') -gt 0 ]
+    then
+        echo "$1"
+        return 0
+    fi
+
+    # Now assume that this was created by the package_ipk class
+
+    # Cannot assume that recipe filename is ${PN}_${PV}.bb
+    # This is easily seen with BBCLASSEXTEND recipes.
+    for pn in $(sed -ne 's|FILE_pn-\([^ \t=]*\)[ \t]*=[ \t]*".*/'$1'".*|\1|p' "${RECIPE_DATA_FILE}")
+    do
+        # Only need a single PN incase there are native, nativesdk, target variants.
+        break
+    done
+
+    recipe_data_get_var_sh "$pn" "SRC_URI"
+}
+
 # This function expects to be passed the following parameter
 #   - The location to the opkg info directory containing the control files
 #     of the installed packages
@@ -459,6 +496,9 @@ sw_manifest_host() {
 generate_sw_manifest_table() {
     control_dir="$1"
     gplv3_only="$2"
+
+    # Call this here so that the function gets added to the task script
+    get_sources_from_recipe
 
     if [ ! -d "$control_dir" ]
     then
@@ -549,7 +589,8 @@ EOF
         long_version="`cat $i | grep Version: | awk {'print $2'}`"
         license="`cat $i | grep License: | cut -d: -f2 `"
         architecture="`cat $i | grep Architecture: | awk {'print $2'}`"
-        sources="`cat $i | grep Source: | cut -d ':' -f2-`"
+        recipe="`cat $i | grep Source: | cut -d ':' -f2-`"
+        sources="`get_sources_from_recipe $recipe`"
         location="$package""_""$long_version""_""$architecture"".ipk"
 
         # Set the highlight color if the license in GPLv3.  If this is
@@ -639,7 +680,6 @@ cat >> ${SW_MANIFEST_TEXT} << EOF
 EOF
 
 }
-
 # Generate the TI SW Manifest for the SDK image
 generate_sw_manifest() {
     sw_manifest_header
