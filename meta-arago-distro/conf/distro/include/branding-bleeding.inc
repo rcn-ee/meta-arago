@@ -14,5 +14,22 @@ SRCREV_pn-optee-os = "${AUTOREV}"
 #SRCREV_pn-optee-test = "${AUTOREV}"
 SRCREV_pn-arm-trusted-firmware = "${AUTOREV}"
 
+# Point to latest nightly metadata
+#TI_RTOS_METADATA_URI = "git://git.ti.com/processor-sdk/coresdk_rtos_releases.git"
+#TI_RTOS_METADATA_PROTOCOL = "git"
+TI_RTOS_METADATA_SRCREV = "${AUTOREV}"
+TI_RTOS_METADATA_BRANCH = "next"
+
+# Switch to internal nightlies, force overriding incorrect metadata values
+# and ensure parsing won't break w/o metadata file
+CORESDK_RTOS_WEBLINK_NIGHTLY ?= "file://empty"
+CORESDK_RTOS_WEBLINK_forcevariable = "${CORESDK_RTOS_WEBLINK_NIGHTLY}"
+CORESDK_RTOS_FIRMWARE_URL_forcevariable = "${DEFAULT_FIRMWARE_URL}"
+
+# Avoid use of old cached nightly file by using timed prefix
+DATEH := "${@time.strftime('%Y%m%d%H',time.gmtime())}"
+CORESDK_RTOS_FILE_PREFIX = "${DATEH}-"
+CORESDK_RTOS_FILE_SUFFIX = ";downloadfilename=${CORESDK_RTOS_FILE_PREFIX}${DEFAULT_FIRMWARE_FILE}"
+
 # Build and assemble TI-SDK, but don't package it
 IMAGE_FSTYPES_pn-tisdk-core-bundle = ""
