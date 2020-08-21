@@ -74,8 +74,8 @@ UTILS_append_k3 = " mmc-utils \
                     jailhouse \
 "
 
-UTILS_append_am65xx = " ipc-lld-examples-rtos pru-icss pru-pwm-fw"
-UTILS_append_j7 = " pru-icss ti-display-sharing-fw cpsw9g-eth-fw"
+UTILS_append_am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
+UTILS_append_j7 = " ti-rtos-firmware pru-icss"
 
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
