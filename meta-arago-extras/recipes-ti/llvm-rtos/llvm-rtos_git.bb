@@ -1,6 +1,6 @@
 SUMMARY = "Bare-metal build of a subset of LLVM 3.6 with support for TI C66x"
 HOMEPAGE = "http://git.ti.com/opencl/llvm"
-DESCRIPTION = "A subset of LLVM 3.6 libraries built using gcc-arm-none-eabi-native. Used in the OpenCL running over a TI-RTOS based host."
+DESCRIPTION = "A subset of LLVM 3.6 libraries built using gcc-arm-baremetal-native. Used in the OpenCL running over a TI-RTOS based host."
 
 # 3-clause BSD-like
 # University of Illinois/NCSA Open Source License
@@ -12,7 +12,7 @@ require recipes-ti/includes/arago-paths.inc
 
 PR = "${INC_PR}.0"
 
-DEPENDS = "gcc-arm-none-eabi-native cmake-native"
+DEPENDS = "gcc-arm-baremetal-native cmake-native"
 
 COMPATIBLE_MACHINE = "omap-a15"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
