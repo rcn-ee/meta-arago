@@ -20,7 +20,7 @@ EXTRA_TI_TOOLS = " \
     ${@oe.utils.all_distro_features(d, "opencl openmp", "nativesdk-clacc")} \
     nativesdk-open62541-examples \
     nativesdk-open62541-tests \
-    nativesdk-gcc-arm-none-eabi \
+    nativesdk-gcc-arm-baremetal \
     ${@oe.utils.all_distro_features(d, "opencl opencv", "${TIDL_TOOLS}")} \
 "
 

@@ -16,7 +16,7 @@ PACKAGES += " ${PN}-runtime"
 DEPENDS = "cmake-native \
            llvm-rtos \
            libloki \
-           gcc-arm-none-eabi-native \
+           gcc-arm-baremetal-native \
            ti-sysbios \
            ti-xdctools-native \
            ti-ipc-rtos  \

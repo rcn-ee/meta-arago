@@ -18,7 +18,7 @@ DEPENDS = " ti-llvm3.6-native \
             ti-framework-components \
             libaet \
             openmp-rtos \
-            gcc-arm-none-eabi-native \
+            gcc-arm-baremetal-native \
 "
 
 COMPATIBLE_MACHINE = "omap-a15"

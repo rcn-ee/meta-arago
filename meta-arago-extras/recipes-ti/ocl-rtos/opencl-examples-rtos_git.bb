@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "omap-a15"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "opencl-rtos ti-cgt6x-native clocl-rtos-native opencl-monitor-rtos \
-           clocl-win gcc-arm-none-eabi-native ti-xdctools-native ti-sysbios \
+           clocl-win gcc-arm-baremetal-native ti-xdctools-native ti-sysbios \
 "
 
 S = "${WORKDIR}/git/opencl_example_src"
