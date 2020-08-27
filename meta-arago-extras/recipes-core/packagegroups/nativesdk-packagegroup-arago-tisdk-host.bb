@@ -1,5 +1,5 @@
 SUMMARY = "Host packages for a standalone Arago SDK with TI tools"
-PR = "r1"
+PR = "r2"
 LICENSE = "MIT"
 
 inherit packagegroup nativesdk
@@ -31,4 +31,8 @@ RDEPENDS_${PN} = "\
     nativesdk-git \
     nativesdk-mtd-utils-ubifs \
     ${EXTRA_TI_TOOLS} \
+"
+
+RDEPENDS_${PN}_remove = "\
+    nativesdk-meson \
 "
