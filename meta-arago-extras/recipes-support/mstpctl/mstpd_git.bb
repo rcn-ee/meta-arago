@@ -12,14 +12,13 @@ SRCREV = "e4f0ba5a48649a3253f8b353c87c965e12aafc50"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "python"
-RDEPENDS_${PN} = "python-core"
+DEPENDS = "python3"
+RDEPENDS_${PN} = "python3-core"
 
 inherit autotools
 
 EXTRA_OECONF = "--sbindir=/sbin"
 
-python() {
-    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
-        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
+do_configure_prepend() {
+	 sed -i -e "s,#!.*python.*,#!${USRBINPATH}/env python3," ${S}/utils/ifquery
 }
