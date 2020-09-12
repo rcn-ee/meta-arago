@@ -42,7 +42,11 @@ UTILS_append_k3 = " \
     trusted-firmware-a-src \
 "
 
-UTILS_append_j7 = " \
+UTILS_append_j7-evm = " \
+    pru-icss-src \
+"
+
+UTILS_append_j7-hs-evm = " \
     pru-icss-src \
 "
 
