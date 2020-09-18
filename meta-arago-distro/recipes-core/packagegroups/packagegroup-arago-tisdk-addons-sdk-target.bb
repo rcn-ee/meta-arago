@@ -6,10 +6,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-UTILS = "libdrm-dev \
-         open62541-dev \
-         open62541-staticdev \
-         "
+UTILS = " \
+	libdrm-dev \
+	open62541-dev \
+	open62541-staticdev \
+	python3-numpy \
+"
 
 UTILS_append_keystone = "\
 	kernel-dev \
