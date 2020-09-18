@@ -62,9 +62,13 @@ toolchain_create_sdk_env_script () {
 	echo 'export LDFLAGS="${TARGET_LD_ARCH} --sysroot=$SDK_PATH_TARGET"' >> $script
 	echo 'export OECORE_NATIVE_SYSROOT=$SDK_PATH_NATIVE' >> $script
 	echo 'export OECORE_TARGET_SYSROOT=$SDK_PATH_TARGET' >> $script
+	echo 'export SDKTARGETSYSROOT=$SDK_PATH_TARGET' >> $script
 	echo 'export OECORE_ACLOCAL_OPTS="-I $SDK_PATH_NATIVE/usr/share/aclocal"' >> $script
 	echo 'export OECORE_DISTRO_VERSION="${DISTRO_VERSION}"' >> $script
 	echo 'export OECORE_SDK_VERSION="${SDK_VERSION}"' >> $script
+	echo 'export OECORE_BASELIB="${baselib}"' >> $script
+	echo 'export OECORE_TARGET_ARCH="${TARGET_ARCH}"' >>$script
+	echo 'export OECORE_TARGET_OS="${TARGET_OS}"' >>$script
 
         # Borrowed from oe-core/meta/classes/toolchain-scripts.bbclass
 	cat >> $script <<EOF
