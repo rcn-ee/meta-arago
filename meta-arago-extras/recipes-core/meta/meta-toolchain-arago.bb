@@ -98,10 +98,6 @@ arago_sdk_fixup () {
 
 	cleanup_toolchain_packages
 
-	# Remove python binaries
-	# gdb links with libpython and loads core modules, which bundled with binaries
-	rm -rf ${SDK_OUTPUT}/${SDKPATHNATIVE}${bindir_nativesdk}/python*
-
 	# Do some extra setup work due to new structure
 	mkdir -p "${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/lib/${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
 	if [ "${TOOLCHAIN_TYPE}" = "internal" ]; then
