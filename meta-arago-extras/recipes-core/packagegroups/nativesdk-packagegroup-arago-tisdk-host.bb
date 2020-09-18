@@ -28,6 +28,7 @@ RDEPENDS_${PN} = "\
     nativesdk-packagegroup-sdk-host \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'nativesdk-wayland-dev', '', d)} \
     nativesdk-python3-distutils \
+    nativesdk-python3-numpy \
     nativesdk-git \
     nativesdk-mtd-utils-ubifs \
     ${EXTRA_TI_TOOLS} \
