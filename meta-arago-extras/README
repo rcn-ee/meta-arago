@@ -28,4 +28,6 @@ layers: meta-linaro-toolchain
 
 Send pull requests to meta-arago@arago-project.org
 
-Layer maintainer: Denys Dmytriyenko <denys@ti.com>
+Layer maintainers:
+Dan Murphy <dmurphy@ti.com>
+Denys Dmytriyenko <denys@ti.com>
