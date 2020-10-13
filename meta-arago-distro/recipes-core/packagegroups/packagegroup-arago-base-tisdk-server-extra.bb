@@ -45,7 +45,6 @@ ARAGO_TI_KEYSTONE_PKGS = "\
     qmss-lld \
     pktlib \
     cppi-lld \
-    k2-fw-initrd \
     parse-ip \
     "
 
