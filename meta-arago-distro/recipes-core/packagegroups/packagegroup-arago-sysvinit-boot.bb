@@ -1,3 +1,6 @@
+REQUIRED_DISTRO_FEATURES = "sysvinit"
+inherit features_check
+
 require recipes-core/packagegroups/packagegroup-core-boot.bb
 
 PR = "r0"
