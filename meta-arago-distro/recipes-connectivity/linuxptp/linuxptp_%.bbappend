@@ -2,7 +2,7 @@ PR_append = ".arago0"
 PV_append = "+git${SRCPV}"
 
 BRANCH = "ti-linuxptp"
-SRCREV = "e54ee647f1d2844b7015d1ae60eef21aa92e113b"
+SRCREV = "a06698a12e828a0372955c2d9c8d6604d8326811"
 
 SRC_URI = " \
     git://git.ti.com/processor-sdk/linuxptp.git;branch=${BRANCH} \
