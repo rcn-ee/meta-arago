@@ -74,6 +74,7 @@ UTILS_append_k3 = " mmc-utils \
                     jailhouse \
                     ti-rpmsg-char \
                     ti-rpmsg-char-examples \
+                    statcol \
 "
 
 UTILS_append_am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
