@@ -10,6 +10,7 @@ S = "${WORKDIR}/git/power_apps"
 
 # Make sure power submenu and app images has been installed
 RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-power matrix-gui-generic-pm"
+ALLOW_EMPTY_${PN} = "1"
 
 # Break out the individual files into separate packages.  That way only the
 # PM features supported for each device can be installed.  Prepend the list
