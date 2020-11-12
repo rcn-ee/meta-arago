@@ -10,10 +10,10 @@ PROVIDES += "ltp"
 DEPENDS += "alsa-lib"
 
 PE = "1"
-PR = "r7"
+PR = "r8"
 PV_append = "+git${SRCPV}"
 
-SRCREV = "e97fb1c59cbafc944e38de588cdc2565948116ef"
+SRCREV = "d82d554074a480fa59a458c9690171fc46312e0d"
 BRANCH ?= "master"
 
 SRC_URI_remove = "git://github.com/linux-test-project/ltp.git"
