@@ -58,6 +58,7 @@ CONNECTIVITY_RDEPENDS = " \
     iptables \
     iproute2 \
     iproute2-tc \
+    iproute2-devlink \
     net-snmp \
     net-snmp-server-snmpd \
 "
