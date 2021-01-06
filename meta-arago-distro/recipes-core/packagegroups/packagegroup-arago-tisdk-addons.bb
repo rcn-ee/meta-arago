@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r78"
+PR = "r79"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -77,6 +77,7 @@ UTILS_append_k3 = " mmc-utils \
                     statcol \
 "
 
+UTILS_append_am64xx = " ti-rtos-firmware"
 UTILS_append_am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
 UTILS_append_j7 = " ti-rtos-firmware"
 UTILS_append_j7-evm = " pru-icss"
