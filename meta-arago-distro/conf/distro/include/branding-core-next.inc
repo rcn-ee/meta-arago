@@ -2,10 +2,10 @@
 
 require branding-core.inc
 
-PREFERRED_VERSION_linux-ti-staging = ""
-PREFERRED_VERSION_linux-ti-staging-rt = ""
-PREFERRED_VERSION_linux-ti-staging-systest = ""
-PREFERRED_VERSION_u-boot-ti-staging = ""
+PREFERRED_VERSION_linux-ti-staging = "5.10%"
+PREFERRED_VERSION_linux-ti-staging-rt = "5.10%"
+PREFERRED_VERSION_linux-ti-staging-systest = "5.10%"
+PREFERRED_VERSION_u-boot-ti-staging = "2021.01%"
 
 # Auto rev important packages to pick up latest
 SRCREV_pn-linux-ti-staging = "${AUTOREV}"
