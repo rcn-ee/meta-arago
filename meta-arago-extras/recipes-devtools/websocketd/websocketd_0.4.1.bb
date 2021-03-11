@@ -8,7 +8,7 @@ inherit go-mod
 GO_IMPORT = "github.com/joewalnes/websocketd"
 
 SRC_URI = "git://${GO_IMPORT}"
-SRCREV = "0440211d7862dc76b5f2499d7dfcd4ef6a9c2fa2"
+SRCREV = "035c18cc3e6962dabd5ea2ad8845260726a4a99e"
 
 # bitbake only exports proxy variables during fetching, but go handles
 # module fetching on its own during compile and needs proxy settings
