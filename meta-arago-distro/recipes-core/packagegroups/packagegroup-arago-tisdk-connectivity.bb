@@ -61,34 +61,23 @@ CONNECTIVITY_RDEPENDS = " \
     iproute2-devlink \
     net-snmp \
     net-snmp-server-snmpd \
-"
-
-CONNECTIVITY_RDEPENDS_append_ti33x = "\
     ${WLAN_COMMON} \
     ${WLAN_TI} \
     ${BT_COMMON} \
+"
+
+CONNECTIVITY_RDEPENDS_append_ti33x = "\
     ${BT_TI} \
     ${DEMO_APPS} \
 "
 
 CONNECTIVITY_RDEPENDS_append_ti43x = "\
-    ${WLAN_COMMON} \
-    ${WLAN_TI} \
-    ${BT_COMMON} \
     ${BT_TI} \
     ${DEMO_APPS} \
 "
 
 CONNECTIVITY_RDEPENDS_append_dra7xx = "\
-    ${WLAN_COMMON} \
-    ${WLAN_TI} \
-    ${BT_COMMON} \
     ${BT_TI} \
-"
-
-CONNECTIVITY_RDEPENDS_append_k3 = "\
-    ${WLAN_COMMON} \
-    ${BT_COMMON} \
 "
 
 RDEPENDS_${PN} = "\
