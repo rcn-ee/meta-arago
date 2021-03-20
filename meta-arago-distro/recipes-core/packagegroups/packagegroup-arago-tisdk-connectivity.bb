@@ -64,20 +64,15 @@ CONNECTIVITY_RDEPENDS = " \
     ${WLAN_COMMON} \
     ${WLAN_TI} \
     ${BT_COMMON} \
+    ${BT_TI} \
 "
 
 CONNECTIVITY_RDEPENDS_append_ti33x = "\
-    ${BT_TI} \
     ${DEMO_APPS} \
 "
 
 CONNECTIVITY_RDEPENDS_append_ti43x = "\
-    ${BT_TI} \
     ${DEMO_APPS} \
-"
-
-CONNECTIVITY_RDEPENDS_append_dra7xx = "\
-    ${BT_TI} \
 "
 
 RDEPENDS_${PN} = "\
