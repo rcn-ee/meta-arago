@@ -11,6 +11,7 @@ IMAGE_INSTALL += "\
     packagegroup-arago-console \
     packagegroup-arago-base-tisdk \
     ${VIRTUAL-RUNTIME_initramfs} \
-    "
+    ${@oe.utils.conditional('ARAGO_BRAND', 'mainline', 'ti-test', '', d)} \
+"
 
 export IMAGE_BASENAME = "tisdk-base-image"
