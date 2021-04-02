@@ -36,6 +36,8 @@ ARAGO_TEST = "\
     bridge-utils \
     linuxptp \
     openntpd \
+    nbench-byte \
+    stream \
 "
 
 ARAGO_TEST_append_armv7a = " \
@@ -52,6 +54,7 @@ ARAGO_TI_TEST = " \
     input-utils \
     cpuloadgen \
     uvc-gadget \
+    arm-benchmarks \
 "
 
 ARAGO_TI_TEST_append_ti33x = " \

@@ -14,12 +14,9 @@ UTILS = " \
     am-sysinfo \
     gdbserver \
     oprofile \
-    nbench-byte \
-    arm-benchmarks \
     netkit-ftp \
     ptpd \
     libdrm-kms \
-    stream \
     strongswan \
     kexec \
     kdump \
