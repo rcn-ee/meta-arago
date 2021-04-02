@@ -33,6 +33,9 @@ ARAGO_TEST = "\
     mstpd \
     fio \
     git \
+    bridge-utils \
+    linuxptp \
+    openntpd \
 "
 
 ARAGO_TEST_append_armv7a = " \
@@ -57,11 +60,14 @@ ARAGO_TI_TEST_append_ti33x = " \
 
 ARAGO_TI_TEST_append_ti43x = " \
     omapconf \
+    cmem-test \
 "
 
 ARAGO_TI_TEST_append_omap-a15 = " \
     omapconf \
     ti-ipc-test \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
+    cmem-test \
 "
 
 ARAGO_TI_TEST_append_k3 = " \
@@ -72,34 +78,14 @@ ARAGO_TI_TEST_append_j7 = " \
     ufs-utils \
 "
 
-ARAGO_TI_TEST_append_keystone = " \
-    ti-ipc-test \
-"
-
 ARAGO_TI_TEST_append_omapl138 = " \
     ti-ipc-test \
 "
 
-TEST_ADDONS = " \
-    bridge-utils \
-    linuxptp \
-    openntpd \
-"
-
-TEST_ADDONS_TI = ""
-
-TEST_ADDONS_TI_append_ti43x = " \
-    cmem-test \
-"
-
-TEST_ADDONS_TI_append_omap-a15 = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
-    cmem-test \
-"
-
 # Disable ipsecmgr due to libnl and xfrm conflict
 #    ipsecmgr
-TEST_ADDONS_TI_append_keystone = " \
+ARAGO_TI_TEST_append_keystone = " \
+    ti-ipc-test \
     mpm-transport-test \
     multiprocmgr-test \
     qmss-lld-test \
@@ -125,7 +111,7 @@ TEST_ADDONS_TI_append_keystone = " \
 #    hplib-test
 #    nwal-lld-test
 #    nwal-lld
-TEST_ADDONS_TI_append_k2hk = " \
+ARAGO_TI_TEST_append_k2hk = " \
     srio-lld-test \
     ipc-transport-srio-test \
     ipc-transport-qmss-test \
@@ -143,7 +129,7 @@ TEST_ADDONS_TI_append_k2hk = " \
 #    hplib-test
 #    nwal-lld-test
 #    nwal-lld
-TEST_ADDONS_TI_append_k2l = " \
+ARAGO_TI_TEST_append_k2l = " \
     dfe-lld-test \
     iqn2-lld-test \
     ipc-transport-qmss-test \
@@ -158,7 +144,7 @@ TEST_ADDONS_TI_append_k2l = " \
 #    hplib-test
 #    nwal-lld-test
 #    nwal-lld
-TEST_ADDONS_TI_append_k2e = " \
+ARAGO_TI_TEST_append_k2e = " \
     mmap-lld-test \
     hyplnk-lld-test \
     ipc-transport-qmss-test \
@@ -170,6 +156,4 @@ TEST_ADDONS_TI_append_k2e = " \
 RDEPENDS_${PN} = "\
     ${ARAGO_TEST} \
     ${ARAGO_TI_TEST} \
-    ${TEST_ADDONS} \
-    ${TEST_ADDONS_TI} \
 "
