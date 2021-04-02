@@ -16,13 +16,9 @@ UTILS = " \
     oprofile \
     nbench-byte \
     arm-benchmarks \
-    dropbear \
-    openssh-sftp-server \
     netkit-ftp \
     ptpd \
     libdrm-kms \
-    kms++ \
-    kms++-python \
     stream \
     strongswan \
     kexec \
@@ -38,7 +34,6 @@ UTILS_DSP = " \
 "
 
 UTILS_append_ti33x = " mmc-utils \
-                       can-utils \
                        switch-config \
                        pru-icss \
                        pru-swuart-fw \
@@ -47,7 +42,6 @@ UTILS_append_ti33x = " mmc-utils \
 "
 
 UTILS_append_ti43x = " mmc-utils \
-                       can-utils \
                        switch-config \
                        libdrm-omap \
                        pru-icss \
@@ -56,7 +50,6 @@ UTILS_append_ti43x = " mmc-utils \
 "
 
 UTILS_append_omap-a15 = " mmc-utils \
-                          parted \
                           switch-config \
                           libdrm-omap \
                           stream-openmp \
@@ -67,8 +60,6 @@ UTILS_append_omap-a15 = " mmc-utils \
 "
 
 UTILS_append_k3 = " mmc-utils \
-                    can-utils \
-                    parted \
                     switch-config \
                     irqbalance \
                     jailhouse \
@@ -85,7 +76,7 @@ UTILS_append_j7-hs-evm = " pru-icss"
 
 UTILS_append_omapl138 = " ti-ipc-rtos-fw"
 
-UTILS_append_dra7xx = " can-utils \
+UTILS_append_dra7xx = " \
                         ${UTILS_DSP} \
                         ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-example-apps','',d)} \
 "
@@ -108,7 +99,6 @@ UTILS_append_k2e = " \
 "
 
 UTILS_append_k2g = " \
-    can-utils \
     pru-icss \
     uio-test-pruss \
 "

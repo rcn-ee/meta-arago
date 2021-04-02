@@ -9,7 +9,7 @@ inherit packagegroup
 ARAGO_ALSA_BASE = "\
     libasound \
     alsa-utils-aplay \
-    "
+"
 
 ARAGO_BASE = "\
     module-init-tools \
@@ -22,13 +22,19 @@ ARAGO_BASE = "\
     bash \
     opkg-bash-completion \
     udev-extraconf \
-    "
+"
 
 # these require meta-openembedded/meta-oe layer
 ARAGO_EXTRA = "\
     devmem2 \
     tcpdump \
-    "
+    parted \
+    dropbear \
+    openssh-sftp-server \
+    kms++ \
+    kms++-python \
+    can-utils \
+"
 
 ARAGO_EXTRA_append_keystone = "\
     k2-fw-initrd \
@@ -40,4 +46,4 @@ RDEPENDS_${PN} = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', '${ARAGO_ALSA_BASE}', '',d)} \
     ${ARAGO_BASE} \
     ${ARAGO_EXTRA} \
-    "
+"
