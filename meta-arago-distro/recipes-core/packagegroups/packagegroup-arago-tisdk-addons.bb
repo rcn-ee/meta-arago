@@ -10,6 +10,7 @@ PACKAGES =+ "${PN}-extra"
 
 #    dt
 
+#    kms++-python
 UTILS = " \
     am-sysinfo \
     gdbserver \
