@@ -148,7 +148,7 @@ cleanup_toolchain_packages() {
 
 		# Clean up the target side of the toolchain
 		opkg_dir="${SDK_OUTPUT}/${SDKTARGETSYSROOT}"
-		opkg_conf="${opkg_dir}/etc/opkg.conf"
+		opkg_conf="${opkg_dir}/etc/opkg/opkg.conf"
 		opkg -o $opkg_dir -f $opkg_conf --force-depends remove ${TOOLCHAIN_CLEANUP_PACKAGES}
 
 		# Clean up empty directories from cleaned up packages
