@@ -21,3 +21,5 @@ do_install_prepend_pn-php() {
     mkdir -p ${B}/sapi/fpm/
     touch ${B}/sapi/fpm/init.d.php-fpm
 }
+
+INSANE_SKIP_${PN} += "installed-vs-shipped"
