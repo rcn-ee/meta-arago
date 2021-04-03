@@ -1,13 +1,13 @@
 PR_append = ".arago0"
-PV_append = "+git${SRCPV}"
+PV = "3.0+git${SRCPV}"
 
 BRANCH = "ti-linuxptp"
-SRCREV = "a06698a12e828a0372955c2d9c8d6604d8326811"
+SRCREV = "f155c21283a0421f5e1e0b5e850c8a9a71d72453"
 
 SRC_URI = " \
     git://git.ti.com/processor-sdk/linuxptp.git;branch=${BRANCH} \
     file://build-Allow-CC-and-prefix-to-be-overriden.patch \
-    file://no-incdefs-using-host-headers.patch \
+    file://Use-cross-cpp-in-incdefs.patch \
 "
 
 S = "${WORKDIR}/git"
