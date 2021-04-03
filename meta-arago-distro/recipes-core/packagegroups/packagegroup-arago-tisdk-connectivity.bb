@@ -53,14 +53,14 @@ DEMO_APPS = "\
     ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
 "
 
+#    net-snmp
+#    net-snmp-server-snmpd
 CONNECTIVITY_RDEPENDS = " \
     htop \
     iptables \
     iproute2 \
     iproute2-tc \
     iproute2-devlink \
-    net-snmp \
-    net-snmp-server-snmpd \
     ${WLAN_COMMON} \
     ${WLAN_TI} \
     ${BT_COMMON} \
