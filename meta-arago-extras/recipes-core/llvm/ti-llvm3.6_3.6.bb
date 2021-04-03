@@ -170,6 +170,7 @@ llvm_sysroot_preprocess_target() {
     mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${PV}-ti
 }
 
+INSANE_SKIP_${PN} += "installed-vs-shipped"
 INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE}.0 += "dev-so"
 
 BBCLASSEXTEND = "native nativesdk"
