@@ -111,7 +111,7 @@ RDEPENDS_${PN} = "\
     syslog-ng \
     dtc \
     procps \
-    dhcp-client \
+    dhcpcd \
     tzdata \
     lksctp-tools \
     lksctp-tools-utils \
