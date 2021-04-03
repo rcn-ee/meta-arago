@@ -16,3 +16,6 @@ PREFERRED_VERSION_linux-ti-staging = "5.4%"
 PREFERRED_VERSION_linux-ti-staging-rt = "5.4%"
 PREFERRED_VERSION_linux-ti-staging-systest = "5.4%"
 PREFERRED_VERSION_u-boot-ti-staging = "2020.01%"
+
+# Remove mmip - DRM allocator, KMS sink, Wayland sink need porting to GST 1.18
+MACHINE_FEATURES_remove = "mmip"
