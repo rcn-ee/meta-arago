@@ -647,7 +647,7 @@ EOF
         case "$package" in
             task-*)
                 continue ;;
-            *-src*)
+            *-source*)
                 delivered_as="Source"
                 ;;
             *)

@@ -9,14 +9,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 # Choose the kernel and u-boot recipe sources to use
-UBOOT_SRC = "${PREFERRED_PROVIDER_virtual/bootloader}-src"
-KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-src"
+UBOOT_SRC = "${PREFERRED_PROVIDER_virtual/bootloader}-source"
+KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-source"
 
 KERNEL_SHADOW_CLONE := "${PREFERRED_PROVIDER_virtual/kernel}"
 KERNEL_SHADOW_CLONE_ENABLED := "${SRCIPK_SHALLOW_CLONE_pn-${KERNEL_SHADOW_CLONE}}"
 
 BOOT_MONITOR = ""
-BOOT_MONITOR_keystone = "boot-monitor-src"
+BOOT_MONITOR_keystone = "boot-monitor-source"
 
 EXTRA_FILES = ""
 EXTRA_FILES_ti43x = "tisdk-uenv"

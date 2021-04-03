@@ -9,16 +9,16 @@ inherit packagegroup features_check
 REQUIRED_DISTRO_FEATURES = "opencl"
 
 UTILS = " \
-    opencl-examples-src \
-    ${@oe.utils.all_distro_features(d, 'openmp', 'openmpacc-examples-src')} \
+    opencl-examples-source \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'openmpacc-examples-source')} \
 "
 
 UTILS_append_k2hk = " \
-    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples-src')} \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples-source')} \
 "
 
 UTILS_append_dra7xx = " \
-    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples-src')} \
+    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples-source')} \
 "
 
 RDEPENDS_${PN} = "\

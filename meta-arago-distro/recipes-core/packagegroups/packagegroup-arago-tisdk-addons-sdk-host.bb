@@ -7,115 +7,115 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 UTILS = " \
-    am-sysinfo-src \
-    arm-benchmarks-src \
-    oprofile-example-src \
+    am-sysinfo-source \
+    arm-benchmarks-source \
+    oprofile-example-source \
 "
 
 # ti-pru-sw-edma-driver is currently broken
 # Add pru and profibus sources for omapl138 devices
 #UTILS_append_omapl138 = " \
-#    ti-pru-sw-examples-src \
+#    ti-pru-sw-examples-source \
 #"
 
 UTILS_append_omap-a15 = " \
-    omapconf-src \
-    pru-icss-src \
+    omapconf-source \
+    pru-icss-source \
 "
 
 UTILS_append_ti33x = " \
-    omapconf-src \
-    pru-icss-src \
+    omapconf-source \
+    pru-icss-source \
 "
 
 UTILS_append_ti43x = " \
-    pru-icss-src \
+    pru-icss-source \
 "
 
 UTILS_append_k2g = " \
-    pru-icss-src \
+    pru-icss-source \
 "
 
 UTILS_append_k3 = " \
-    jailhouse-src \
+    jailhouse-source \
     ti-sci-fw-source \
-    trusted-firmware-a-src \
+    trusted-firmware-a-source \
 "
 
 UTILS_append_j7-evm = " \
-    pru-icss-src \
+    pru-icss-source \
 "
 
 UTILS_append_j7-hs-evm = " \
-    pru-icss-src \
+    pru-icss-source \
 "
 
 UTILS_append_am65xx = " \
-    pru-icss-src \
+    pru-icss-source \
 "
 
 EXTRA_LIBS = ""
 
 EXTRA_LIBS_append_omap-a15 = " \
-    cmem-mod-src \
-    uio-module-drv-src \
-    big-data-ipc-demo-linux-src \
+    cmem-mod-source \
+    uio-module-drv-source \
+    big-data-ipc-demo-linux-source \
 "
 
 #EXTRA_LIBS_append_dra7xx = " \
-#    debugss-module-drv-src \
-#    gdbserverproxy-module-drv-src \
+#    debugss-module-drv-source \
+#    gdbserverproxy-module-drv-source \
 #"
 
 EXTRA_LIBS_append_ti33x = " \
-    uio-module-drv-src \
+    uio-module-drv-source \
 "
 
 EXTRA_LIBS_append_ti43x = " \
-    cmem-mod-src \
-    uio-module-drv-src \
+    cmem-mod-source \
+    uio-module-drv-source \
 "
 
 # Disable ipsecmgr due to libnl and xfrm conflict
-#    ipsecmgr-mod-src
+#    ipsecmgr-mod-source
 # Disable hplib-mod-srv due to K4.14 breakage
-#    hplib-mod-src
+#    hplib-mod-source
 EXTRA_LIBS_append_keystone = " \
-    cmem-mod-src \
-    uio-module-drv-src \
+    cmem-mod-source \
+    uio-module-drv-source \
 "
 
 #EXTRA_LIBS_append_k2hk = " \
-#    debugss-module-drv-src \
-#    gdbserverproxy-module-drv-src \
+#    debugss-module-drv-source \
+#    gdbserverproxy-module-drv-source \
 #"
 
 #EXTRA_LIBS_append_k2l = " \
-#    debugss-module-drv-src \
-#    gdbserverproxy-module-drv-src \
+#    debugss-module-drv-source \
+#    gdbserverproxy-module-drv-source \
 #"
 
 #EXTRA_LIBS_append_k2e = " \
-#    debugss-module-drv-src \
-#    gdbserverproxy-module-drv-src \
+#    debugss-module-drv-source \
+#    gdbserverproxy-module-drv-source \
 #"
 
 EXTRA_PACKAGES = ""
 
 EXTRA_PACKAGES_append_omap-a15 = " \
-    pdm-anomaly-detection-src \
+    pdm-anomaly-detection-source \
 "
 
 EXTRA_PACKAGES_append_ti33x = " \
-    pdm-anomaly-detection-src \
+    pdm-anomaly-detection-source \
 "
 
 EXTRA_PACKAGES_append_ti43x = " \
-    pdm-anomaly-detection-src \
+    pdm-anomaly-detection-source \
 "
 
 EXTRA_PACKAGES_append_am65xx = " \
-    pdm-anomaly-detection-src \
+    pdm-anomaly-detection-source \
 "
 
 RDEPENDS_${PN} = "\

@@ -7,11 +7,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 MATRIX_GUI = " \
-    matrix-gui-browser-src \
-    refresh-screen-src \
+    matrix-gui-browser-source \
+    refresh-screen-source \
 "
 
 RDEPENDS_${PN} = "\
-    matrix-gui-src \
+    matrix-gui-source \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_GUI}",'',d)} \
 "

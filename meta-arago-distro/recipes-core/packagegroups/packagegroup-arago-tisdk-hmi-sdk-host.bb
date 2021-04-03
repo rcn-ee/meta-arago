@@ -9,25 +9,25 @@ inherit packagegroup
 HMI = ""
 
 HMI_append_ti43x = " \
-    evse-hmi-src \
-    mmwavegesture-hmi-src \
+    evse-hmi-source \
+    mmwavegesture-hmi-source \
 "
 
 HMI_append_ti33x = " \
-    evse-hmi-src \
-    protection-relays-hmi-src \
-    mmwavegesture-hmi-src \
+    evse-hmi-source \
+    protection-relays-hmi-source \
+    mmwavegesture-hmi-source \
 "
 
 
 HMI_append_omap-a15 = " \
-    evse-hmi-src \
-    mmwavegesture-hmi-src \
+    evse-hmi-source \
+    mmwavegesture-hmi-source \
 "
 
 HMI_append_am65xx = " \
-    evse-hmi-src \
-    mmwavegesture-hmi-src \
+    evse-hmi-source \
+    mmwavegesture-hmi-source \
 "
 
 RDEPENDS_${PN} = "\

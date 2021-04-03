@@ -19,7 +19,7 @@
 #                             such as the README file and recipe.
 #
 # The default installation directory for the sources is:
-#   /usr/src/${PN}-src
+#   /usr/src/${PN}-source
 #
 # By setting the SRCIPK_INSTALL_DIR this default can be changed to any
 # location desired.  When combined with the opkg -o option this allows for the
@@ -45,7 +45,7 @@
 CREATE_SRCIPK ?= "0"
 
 # Default installation prefix
-SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
+SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-source"
 
 # Directory to preserve sources until they can be installed for packaging
 SRCIPK_STAGING_DIR = "${WORKDIR}/srcipk-staging"
@@ -215,7 +215,7 @@ adjust_git() {
 
 # Create a README file that describes the contents of the source ipk
 sourceipk_create_readme() {
-    readme="$1/README.${PN}-src"
+    readme="$1/README.${PN}-source"
     touch $readme
     echo 'This package contains the patched sources for ${PN} that' >> $readme
     echo 'were used to generate the ${PN} binary ipk package(s).' >> $readme
@@ -234,7 +234,7 @@ do_create_srcipk[umask] = "022"
 
 # Create the source ipk file.  The ipk is manually created here instead
 # of using the normal ipk system because some recipes will over write
-# the PACKAGES variable.  Thus if this class added a -src package
+# the PACKAGES variable.  Thus if this class added a -source package
 # to the list of packages to be created that package would be lost.
 # See the linux kernel recipe for an example of this issue.
 sourceipk_do_create_srcipk() {
@@ -283,23 +283,23 @@ python () {
 }
 
 #Add source packages to list of packages OE knows about
-PACKAGES_DYNAMIC += "${PN}-src"
+PACKAGES_DYNAMIC += "${PN}-source"
 
 # Do not perform any QA checks on sourceipk packages
-INSANE_SKIP_${PN}-src += "${@oe.utils.conditional("${CREATE_SRCIPK}", "0", "", "${ALL_QA}", d)}"
+INSANE_SKIP_${PN}-source += "${@oe.utils.conditional("${CREATE_SRCIPK}", "0", "", "${ALL_QA}", d)}"
 
 python __anonymous () {
     if d.getVar("CREATE_SRCIPK") != "0":
-        if '${PN}-src' not in d.getVar("PACKAGES", False):
-            d.appendVar('PACKAGES', ' ${PN}-src')
+        if '${PN}-source' not in d.getVar("PACKAGES", False):
+            d.appendVar('PACKAGES', ' ${PN}-source')
         pn = d.getVar("PN")
-        d.setVar('FILES_%s-src' % (pn), '${SRCIPK_INSTALL_DIR}')
+        d.setVar('FILES_%s-source' % (pn), '${SRCIPK_INSTALL_DIR}')
 }
 
 PACKAGESPLITFUNCS_append = " ${@oe.utils.conditional('CREATE_SRCIPK','0','','populate_srcipk_package',d)}"
 populate_srcipk_package() {
-    install -d ${PKGDEST}/${PN}-src/${SRCIPK_INSTALL_DIR}
+    install -d ${PKGDEST}/${PN}-source/${SRCIPK_INSTALL_DIR}
     cp -Prf --preserve=mode,timestamps --no-preserve=ownership \
         ${SRCIPK_STAGING_DIR}/${SRCIPK_INSTALL_DIR}/. \
-        ${PKGDEST}/${PN}-src/${SRCIPK_INSTALL_DIR}
+        ${PKGDEST}/${PN}-source/${SRCIPK_INSTALL_DIR}
 }
