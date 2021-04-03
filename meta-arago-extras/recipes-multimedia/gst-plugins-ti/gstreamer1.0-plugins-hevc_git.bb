@@ -25,6 +25,7 @@ do_configure() {
 
 EXTRA_OECONF += "--enable-maintainer-mode"
 EXTRA_OEMAKE += "'ERROR_CFLAGS=-Wno-deprecated-declarations'"
+CFLAGS += "-fcommon"
 
 FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
 FILES_${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
