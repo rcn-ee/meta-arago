@@ -20,3 +20,5 @@ do_install() {
 }
 
 PR_append = "_3"
+
+INSANE_SKIP_${PN} = "ldflags"
