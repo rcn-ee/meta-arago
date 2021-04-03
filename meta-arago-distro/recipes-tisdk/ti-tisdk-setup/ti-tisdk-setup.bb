@@ -8,7 +8,7 @@ BRANCH ?= "master"
 SRCREV = "42a8379fda829f34c374ddfca0242a479a84d454"
 SRC_URI = "git://arago-project.org/git/projects/tisdk-setup-scripts.git;protocol=git;branch=${BRANCH}"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

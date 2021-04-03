@@ -12,7 +12,7 @@ SRCREV = "6f4b09fffe970bb6b448369875874e798ef282f6"
 
 SRC_URI = "git://arago-project.org/git/projects/crypto-example-apps.git;protocol=git;branch=${BRANCH}"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 do_compile() {
     export CROSS_COMPILE=${TARGET_PREFIX}

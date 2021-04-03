@@ -10,4 +10,4 @@ BRANCH ?= "master"
 SRCREV = "e58f941784fb45fd826779a45b33973e6342700f"
 SRC_URI = "git://arago-project.org/git/projects/oe-layersetup.git;protocol=git;branch=${BRANCH}"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"

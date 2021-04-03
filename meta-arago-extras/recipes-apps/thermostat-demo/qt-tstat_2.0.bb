@@ -21,7 +21,7 @@ SRCREV = "665bff9a7bc0dbf82f9d6a58ff2778c03fe04fd1"
 
 SRC_URI = "git://git.ti.com/apps/thermostat-demo.git;protocol=git;branch=${BRANCH}"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 DESKTOP_FILE = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'thermostat_demo_qt5.desktop', 'thermostat_demo.desktop', d)}"
 

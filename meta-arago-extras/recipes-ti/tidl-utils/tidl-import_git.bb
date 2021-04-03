@@ -7,7 +7,7 @@ require ./tidl-utils.inc
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://modules/ti_dl/inc/itidl_ti.h;beginline=1;endline=34;md5=cabe1fdaabfa0d85dc5544566b0e2425"
 
-S = "${WORKDIR}/git/src/importTool/"
+S = "${WORKDIR}/git/src/importTool"
 
 DEPENDS = "protobuf zlib protobuf-native flatbuffers tensorflow-lite flatbuffers-native tensorflow-lite-native"
 
