@@ -1,0 +1,46 @@
+From 82b7ec12b768ba9de4b7a4ae71500a3de6574bfd Mon Sep 17 00:00:00 2001
+From: Gowtham Tammana <g-tammana@ti.com>
+Date: Thu, 1 Apr 2021 10:45:13 -0500
+Subject: [PATCH] WebCore/PlatformQt.cmake: Fix no x11 build
+
+For platforms with no x11 support, egl package config sets up EGL_NO_X11
+flag. However the build is not picking up this flag at the moment
+causing below build failure.
+
+```{.package=qtwebkit .version=dunfell}
+In file included from
+tisdk/build/arago-tmp-external-arm-glibc/work/aarch64-linux/qtwebkit/5.14.2+gitAUTOINC+ab1bd15209-r0.arago7/recipe-sysroot/usr/include/EGL/egl.h:39,
+                from tisdk/build/arago-tmp-external-arm-glibc/work/aarch64-linux/qtwebkit/5.14.2+gitAUTOINC+ab1bd15209-r0.arago7/git/Source/WebCore/platform/graphics/opengl/Extensions3DOpenGLES.cpp:36:
+tisdk/build/arago-tmp-external-arm-glibc/work/aarch64-linux/qtwebkit/5.14.2+gitAUTOINC+ab1bd15209-r0.arago7/recipe-sysroot/usr/include/EGL/eglplatform.h:134:10: fatal error: X11/Xlib.h: No such file or directory
+  134 | #include <X11/Xlib.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+```
+
+Set this flag explicitly when there is no X11 target enable.
+
+Upstream-Status: Pending
+
+Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+---
+ Source/WebCore/PlatformQt.cmake | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/Source/WebCore/PlatformQt.cmake b/Source/WebCore/PlatformQt.cmake
+index 99c625dc3..375d28a47 100644
+--- a/Source/WebCore/PlatformQt.cmake
++++ b/Source/WebCore/PlatformQt.cmake
+@@ -350,6 +350,10 @@ if (ENABLE_OPENGL)
+             ${Qt5Gui_EGL_LIBRARIES}
+             ${Qt5Gui_OPENGL_LIBRARIES}
+         )
++        if (NOT ENABLE_X11_TARGET)
++            # EGL definitions are not getting detected. Add the EGL_NO_X11 flag.
++            add_definitions("-DEGL_NO_X11")
++        endif ()
+     else ()
+         list(APPEND WebCore_SOURCES
+             platform/graphics/opengl/Extensions3DOpenGL.cpp
+-- 
+2.31.1
+
