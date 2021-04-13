@@ -11,8 +11,3 @@ ALTERNATIVE_PRIORITY_pn-opencl-monitor-ipu = "1"
 
 # Raise priority for sample IPC FW images
 ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
-
-PREFERRED_VERSION_linux-ti-staging = "5.4%"
-PREFERRED_VERSION_linux-ti-staging-rt = "5.4%"
-PREFERRED_VERSION_linux-ti-staging-systest = "5.4%"
-PREFERRED_VERSION_u-boot-ti-staging = "2020.01%"
