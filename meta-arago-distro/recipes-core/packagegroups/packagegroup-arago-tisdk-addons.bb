@@ -59,7 +59,6 @@ UTILS_append_omap-a15 = " mmc-utils \
 UTILS_append_k3 = " mmc-utils \
                     switch-config \
                     irqbalance \
-                    jailhouse \
                     ti-rpmsg-char \
                     ti-rpmsg-char-examples \
                     statcol \
