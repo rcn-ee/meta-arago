@@ -37,7 +37,6 @@ UTILS_append_k2g = " \
 "
 
 UTILS_append_k3 = " \
-    jailhouse-source \
     ti-sci-fw-source \
     trusted-firmware-a-source \
 "
