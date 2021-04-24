@@ -66,12 +66,14 @@ ARAGO_TI_TEST_append_ti43x = " \
     ${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '', 'cmem-test', d)} \
 "
 
+NOT_MAINLINE_MMIP_DEPS = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)}"
+
 ARAGO_TI_TEST_append_omap-a15 = " \
     omapconf \
     ${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '', " \
         ti-ipc-test \
-        ${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)} \
         cmem-test \
+	${NOT_MAINLINE_MMIP_DEPS} \
     ", d)} \
 "
 
