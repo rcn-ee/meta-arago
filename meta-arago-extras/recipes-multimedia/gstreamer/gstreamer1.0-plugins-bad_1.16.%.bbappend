@@ -9,6 +9,7 @@ GSTDRM_WAYLANDSINK_PATCHES = " \
     file://0004-waylandsink-Add-drm-support-in-waylandsink.patch \
     file://0005-waylandsink-Add-input-device-support.patch \
     file://0001-wayland-drm-kms-add-support-for-meson-build-system.patch \
+    file://0001-gstdrm-Remove-wayland-as-required-dependency.patch \
 "
 
 SRC_URI_append_ti43x = " \
@@ -37,4 +38,4 @@ SRC_URI_append_j7-hs-evm = " \
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR_append = ".arago3"
+PR_append = ".arago4"
