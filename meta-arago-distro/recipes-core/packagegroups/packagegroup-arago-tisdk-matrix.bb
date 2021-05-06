@@ -35,6 +35,22 @@ MATRIX_QT_APPS = " \
     matrix-gui-thermostat-demo \
 "
 
+MATRIX_QT_APPS_append_omap-a15 = " \
+    matrix-analytics-pdm-anomaly-detection \
+"
+
+MATRIX_QT_APPS_append_am65xx = " \
+    matrix-analytics-pdm-anomaly-detection \
+"
+
+MATRIX_QT_APPS_append_ti33x = " \
+    matrix-analytics-pdm-anomaly-detection \
+"
+
+MATRIX_QT_APPS_append_ti43x = " \
+    matrix-analytics-pdm-anomaly-detection \
+"
+
 MATRIX_TOUCH_APPS = " \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','matrix-gui-touch-demos','',d)} \
 "
@@ -96,8 +112,6 @@ MATRIX_APPS_append_ti33x = "        \
     matrix-hmi-demo-mmwavegesture   \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
-                                    \
-    matrix-analytics-pdm-anomaly-detection \
 "
 
 MATRIX_APPS_append_ti43x = "        \
@@ -119,8 +133,6 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-hmi-demo-mmwavegesture   \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
-                                    \
-    matrix-analytics-pdm-anomaly-detection \
 "
 
 MATRIX_APPS_append_omap-a15 = "     \
@@ -140,7 +152,6 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-gui-generic-pm           \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
-    matrix-analytics-pdm-anomaly-detection \
 "
 
 #    ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','gpu',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
@@ -158,8 +169,6 @@ MATRIX_APPS_append_am65xx = "           \
     matrix-hmi-demo-mmwavegesture   \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
-                                    \
-    matrix-analytics-pdm-anomaly-detection \
 "
 
 MATRIX_APPS_append_dra7xx += " \

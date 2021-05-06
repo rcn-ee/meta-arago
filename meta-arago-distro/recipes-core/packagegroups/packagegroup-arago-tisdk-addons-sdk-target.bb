@@ -169,29 +169,34 @@ EXTRA_LIBS_append_k2e = " libulm-staticdev \
                               gdbserver-c6x-dev \
 "
 
+PDM_ANOMALY_PKG_DEV = "\
+    ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'pdm-anomaly-detection-dev', '', d)} \
+"
+
+
 EXTRA_PACKAGES = ""
 EXTRA_PACKAGES_append_ti33x = " \
                                 arm-compute-library-dev \
                                 tensorflow-lite-dev \
                                 tensorflow-lite-staticdev \
-                                pdm-anomaly-detection-dev \
+                                ${PDM_ANOMALY_PKG_DEV} \
 "
 EXTRA_PACKAGES_append_ti43x = " \
                                 arm-compute-library-dev \
                                 tensorflow-lite-dev \
                                 tensorflow-lite-staticdev \
-                                pdm-anomaly-detection-dev \
+                                ${PDM_ANOMALY_PKG_DEV} \
 "
 EXTRA_PACKAGES_append_omap-a15 = " \
                                 arm-compute-library-dev \
                                 tensorflow-lite-dev \
                                 tensorflow-lite-staticdev \
-                                pdm-anomaly-detection-dev \
+                                ${PDM_ANOMALY_PKG_DEV} \
 "
 EXTRA_PACKAGES_append_am65xx = " arm-compute-library-dev \
                              tensorflow-lite-dev \
                              tensorflow-lite-staticdev \
-                             pdm-anomaly-detection-dev \
+                             ${PDM_ANOMALY_PKG_DEV} \
 "
 
 IPCDEV = " \

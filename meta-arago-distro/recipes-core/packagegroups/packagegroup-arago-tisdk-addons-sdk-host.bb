@@ -99,22 +99,26 @@ EXTRA_LIBS_append_keystone = " \
 #    gdbserverproxy-module-drv-source \
 #"
 
+PDM_ANOMALY_PKG_SRC = "\
+    ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'pdm-anomaly-detection-src', '', d)} \
+"
+
 EXTRA_PACKAGES = ""
 
 EXTRA_PACKAGES_append_omap-a15 = " \
-    pdm-anomaly-detection-source \
+    ${PDM_ANOMALY_PKG_SRC} \
 "
 
 EXTRA_PACKAGES_append_ti33x = " \
-    pdm-anomaly-detection-source \
+    ${PDM_ANOMALY_PKG_SRC} \
 "
 
 EXTRA_PACKAGES_append_ti43x = " \
-    pdm-anomaly-detection-source \
+    ${PDM_ANOMALY_PKG_SRC} \
 "
 
 EXTRA_PACKAGES_append_am65xx = " \
-    pdm-anomaly-detection-source \
+    ${PDM_ANOMALY_PKG_SRC} \
 "
 
 RDEPENDS_${PN} = "\
