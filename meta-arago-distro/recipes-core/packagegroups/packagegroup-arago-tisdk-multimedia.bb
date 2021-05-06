@@ -17,15 +17,16 @@ MULTIMEDIA_append_keystone = " \
 "
 
 DUAL_CAMERA_DEMO = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'dual-camera-demo', '', d)}"
+IMAGE_GALLERY_DEMO = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'image-gallery', '', d)}"
 
 MULTIMEDIA_append_ti43x = " \
     ${DUAL_CAMERA_DEMO} \
-    image-gallery \
+    ${IMAGE_GALLERY_DEMO} \
 "
 
 MULTIMEDIA_append_omap-a15 = " \
     ${DUAL_CAMERA_DEMO} \
-    image-gallery \
+    ${IMAGE_GALLERY_DEMO} \
 "
 
 MULTIMEDIA_append_dra7xx = " \
