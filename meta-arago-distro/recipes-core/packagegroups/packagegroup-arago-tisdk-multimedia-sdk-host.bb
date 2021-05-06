@@ -11,19 +11,21 @@ BARCODE_PKG = ""
 #    ${@['','barcode-roi-source'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 #"
 
+DUAL_CAMERA_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'dual-camera-demo-src', '', d)}"
+
 MULTIMEDIA = ""
 
 MULTIMEDIA_append_ti33x = " ${BARCODE_PKG}"
 
 MULTIMEDIA_append_ti43x = " \
-    dual-camera-demo-source \
-    image-gallery-source \
+    ${DUAL_CAMERA_PKG} \
+    image-gallery-src \
     ${BARCODE_PKG} \
 "
 
 MULTIMEDIA_append_omap-a15 = " \
-    dual-camera-demo-source \
-    image-gallery-source \
+    ${DUAL_CAMERA_PKG} \
+    image-gallery-src \
     ${BARCODE_PKG} \
 "
 
