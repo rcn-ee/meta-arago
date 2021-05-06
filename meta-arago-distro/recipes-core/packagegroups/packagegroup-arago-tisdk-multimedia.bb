@@ -16,13 +16,15 @@ MULTIMEDIA_append_keystone = " \
     hevc-arm-decoder \
 "
 
+DUAL_CAMERA_DEMO = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'dual-camera-demo', '', d)}"
+
 MULTIMEDIA_append_ti43x = " \
-    dual-camera-demo \
+    ${DUAL_CAMERA_DEMO} \
     image-gallery \
 "
 
 MULTIMEDIA_append_omap-a15 = " \
-    dual-camera-demo \
+    ${DUAL_CAMERA_DEMO} \
     image-gallery \
 "
 
