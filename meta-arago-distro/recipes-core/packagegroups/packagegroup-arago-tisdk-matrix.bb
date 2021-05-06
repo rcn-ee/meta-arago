@@ -37,20 +37,31 @@ MATRIX_QT_APPS = " \
 
 MATRIX_QT_APPS_append_omap-a15 = " \
     matrix-analytics-pdm-anomaly-detection \
+    matrix-hmi-demo-evse            \
+    matrix-hmi-demo-mmwavegesture   \
 "
 
 MATRIX_QT_APPS_append_am65xx = " \
     matrix-analytics-pdm-anomaly-detection \
+                                    \
+    matrix-hmi-demo-evse            \
+    matrix-hmi-demo-mmwavegesture   \
 "
 
 MATRIX_QT_APPS_append_ti33x = " \
     matrix-analytics-pdm-anomaly-detection \
+    matrix-hmi-demo-evse            \
+    matrix-hmi-demo-protection-relays \
+    matrix-hmi-demo-mmwavegesture   \
 "
 
 MATRIX_QT_APPS_append_ti43x = " \
     matrix-analytics-pdm-anomaly-detection \
     matrix-gui-apps-dual-camera     \
     matrix-gui-apps-image-gallery   \
+                                    \
+    matrix-hmi-demo-evse            \
+    matrix-hmi-demo-mmwavegesture   \
 "
 
 MATRIX_TOUCH_APPS = " \
@@ -109,10 +120,6 @@ MATRIX_APPS_append_ti33x = "        \
                                     \
     matrix-gui-ethernet-demos       \
                                     \
-    matrix-hmi-demo-evse            \
-    matrix-hmi-demo-protection-relays \
-    matrix-hmi-demo-mmwavegesture   \
-                                    \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
@@ -128,10 +135,6 @@ MATRIX_APPS_append_ti43x = "        \
     matrix-gui-clocks               \
     matrix-gui-pm-demos-governor    \
                                     \
-                                    \
-    matrix-hmi-demo-evse            \
-    matrix-hmi-demo-mmwavegesture   \
-                                    \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
@@ -139,8 +142,6 @@ MATRIX_APPS_append_omap-a15 = "     \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-audiocapture \
     matrix-multimedia-demo-h265dec  \
-    matrix-hmi-demo-evse            \
-    matrix-hmi-demo-mmwavegesture   \
                                     \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264dec','matrix-multimedia-demo-h264dec',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','mmip','matrix-multimedia-demo-ivahdh264enc','',d)} \
@@ -164,9 +165,6 @@ MATRIX_APPS_append_am65xx = "           \
     matrix-multimedia-demo-h264dec  \
     matrix-multimedia-demo-mpeg4aacdec \
     matrix-multimedia-demo-mpeg4dec \
-                                    \
-    matrix-hmi-demo-evse            \
-    matrix-hmi-demo-mmwavegesture   \
                                     \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
