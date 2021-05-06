@@ -12,6 +12,7 @@ BARCODE_PKG = ""
 #"
 
 DUAL_CAMERA_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'dual-camera-demo-src', '', d)}"
+IMAGE_GALLERY_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu','image-gallery-src', '', d)}"
 
 MULTIMEDIA = ""
 
@@ -19,13 +20,13 @@ MULTIMEDIA_append_ti33x = " ${BARCODE_PKG}"
 
 MULTIMEDIA_append_ti43x = " \
     ${DUAL_CAMERA_PKG} \
-    image-gallery-src \
+    ${IMAGE_GALLERY_PKG} \
     ${BARCODE_PKG} \
 "
 
 MULTIMEDIA_append_omap-a15 = " \
     ${DUAL_CAMERA_PKG} \
-    image-gallery-src \
+    ${IMAGE_GALLERY_PKG} \
     ${BARCODE_PKG} \
 "
 
