@@ -3,15 +3,15 @@
 # on linux-libc-headers creates circular dependencies now. Mostly
 # duplication of code from corresponding recipe.
 
-BRANCH = "ti-linux-5.4.y"
-SRCREV = "1661da3fddf4cc3f62796ecfb5c572f1e5361bdf"
+BRANCH = "ti-linux-5.10.y"
+SRCREV = "bdfd5b0c1ee5617c9a94bacad0d818920d95b486"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
 SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH}"
 
-PKGV_linux-libc-headers-dev = "5.4"
-PKGV_linux-libc-headers = "5.4"
+PKGV_linux-libc-headers-dev = "5.10"
+PKGV_linux-libc-headers = "5.10"
 
 inherit kernel-arch pkgconfig multilib_header
 
