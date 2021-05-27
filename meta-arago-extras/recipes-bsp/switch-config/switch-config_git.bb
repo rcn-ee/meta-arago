@@ -3,13 +3,13 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://switch-config.c;beginline=1;endline=14;md5=659ff9658cbaba3110b81804af60de75"
 
 PV = "2.0"
-PR = "r4"
+PR = "r5"
 
 BRANCH ?= "v4.1"
 BRANCH_aarch64 ?= "am65x-v1.0"
 
-SRCREV = "15e8be3b1249ac4193031127565eec5b64ecaff1"
-SRCREV_aarch64 = "3b31ce5fe8bd5a3560b89f2a709fb3e3b877326d"
+SRCREV = "412dce4e65cfe5af729be38fd1b4c1d59e9a8828"
+SRCREV_aarch64 = "0f52dcb3c4e3678e96427d546d6c2e1fabc2ad91"
 
 SRC_URI = "git://git.ti.com/switch-config/switch-config.git;protocol=git;branch=${BRANCH}"
 
