@@ -22,6 +22,8 @@ ARAGO_BASE = "\
     bash \
     opkg-bash-completion \
     udev-extraconf \
+    libgpiod \
+    libgpiod-tools \
 "
 
 # these require meta-openembedded/meta-oe layer
