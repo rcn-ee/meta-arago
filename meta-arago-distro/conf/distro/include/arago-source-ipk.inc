@@ -373,10 +373,6 @@ SRCIPK_INSTALL_DIR_pn-hplib-mod ?= "board-support/extra-drivers/${PN}-${PV}"
 CREATE_SRCIPK_pn-uio-module-drv ?= "1"
 SRCIPK_INSTALL_DIR_pn-uio-module-drv ?= "board-support/extra-drivers/${PN}-${PV}"
 
-CREATE_SRCIPK_pn-ivshmem-uio-driver ?= "1"
-SRCIPK_INSTALL_DIR_pn-ivshmem-uio-driver ?= "board-support/extra-drivers/${PN}-${PV}"
-SRCIPK_PRESERVE_GIT_pn-ivshmem-uio-driver ?= "true"
-
 CREATE_SRCIPK_pn-ipsecmgr-mod ?= "1"
 SRCIPK_INSTALL_DIR_pn-ipsecmgr-mod ?= "board-support/extra-drivers/${PN}-${PV}"
 
@@ -397,6 +393,3 @@ SRCIPK_INSTALL_DIR_pn-vlib-c66x ?= "component-sources/vlib_c66x_${PV}"
 
 CREATE_SRCIPK_pn-big-data-ipc-demo-linux ?= "1"
 SRCIPK_INSTALL_DIR_pn-big-data-ipc-demo-linux ?= "example-applications/${PN}-${PV}"
-
-CREATE_SRCIPK_pn-jailhouse ?= "1"
-SRCIPK_INSTALL_DIR_pn-jailhouse ?= "board-support/extra-drivers/${PN}-${PV}"
