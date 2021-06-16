@@ -1,4 +1,5 @@
 FILESEXTRAPATHS_prepend := "${COREBASE}/meta/recipes-extended/ltp/ltp:"
+FILESEXTRAPATHS_prepend := "${ARAGOBASE}/meta-arago-extras/recipes-extended/ltp/ltp:"
 
 require recipes-extended/ltp/ltp_${PV}.bb
 
@@ -10,14 +11,14 @@ PROVIDES += "ltp"
 DEPENDS += "alsa-lib"
 
 PE = "1"
-PR = "r13"
+PR = "r1"
 PV_append = "+git${SRCPV}"
 
-SRCREV = "31f9cfa61ae4102da6fa87f624130096c09d63a2"
+SRCREV = "21b2b2e3ce3d30a685cd64c05cfd5920eca9be21"
 BRANCH ?= "master"
 
 SRC_URI_remove = "git://github.com/linux-test-project/ltp.git"
-SRC_URI_prepend = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} "
+SRC_URI_prepend = "git://git.ti.com/test-automation/ltp-ddt.git;branch=${BRANCH} "
 
 export prefix = "/opt/ltp"
 export exec_prefix = "/opt/ltp"
