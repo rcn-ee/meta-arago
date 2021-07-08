@@ -4,7 +4,7 @@
 # duplication of code from corresponding recipe.
 
 BRANCH = "ti-linux-5.10.y"
-SRCREV = "bdfd5b0c1ee5617c9a94bacad0d818920d95b486"
+SRCREV = "73aa709ca10103b61fba3a07471dbb4dcb56db45"
 
 KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
