@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago11"
+PR_append = ".arago12"
 
 SRC_URI_append = " \
     file://runWeston \
