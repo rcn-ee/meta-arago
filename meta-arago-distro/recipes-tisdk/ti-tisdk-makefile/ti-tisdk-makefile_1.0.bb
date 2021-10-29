@@ -56,7 +56,7 @@ SRC_URI = "\
     file://Makefile_ti-img-rogue-driver \
 "
 
-PR = "r105"
+PR = "r106"
 
 MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         refresh-screen \
@@ -197,6 +197,9 @@ MAKEFILES_append_am65xx = " \
 MAKEFILES_append_j7 = " pru-icss \
                             ti-img-rogue-driver \
 "
+MAKEFILES_append_am64xx = " \
+                        pru-icss \
+"
 
 # Use this to export kernel arch to ARCH
 #
@@ -234,6 +237,7 @@ PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
 PRU_ICSS_INSTALL_TARGET_k2g = "pru-icss_install_k2g"
 PRU_ICSS_INSTALL_TARGET_am65xx = "pru-icss_install_am65x"
 PRU_ICSS_INSTALL_TARGET_j7 = "pru-icss_install_j721e"
+PRU_ICSS_INSTALL_TARGET_am64xx = "pru-icss_install_am64x"
 
 # Path to toolchains for the various cores in TI SOCs
 #
