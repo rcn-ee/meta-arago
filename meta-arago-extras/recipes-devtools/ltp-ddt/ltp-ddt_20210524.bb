@@ -17,7 +17,7 @@ PV_append = "+git${SRCPV}"
 SRCREV = "4548c131f8fcbe240746c6114aa0a12b61e6166b"
 BRANCH ?= "master"
 
-SRC_URI_remove = "git://github.com/linux-test-project/ltp.git"
+SRC_URI_remove = "git://github.com/linux-test-project/ltp.git;protocol=https;branch=master"
 SRC_URI_prepend = "git://git.ti.com/test-automation/ltp-ddt.git;branch=${BRANCH} "
 
 export prefix = "/opt/ltp"

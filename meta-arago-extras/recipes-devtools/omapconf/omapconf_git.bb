@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|omap4"
 BRANCH ?= "master"
 SRCREV = "ff07b6992bacb1e1586c72b7d2be469caee4a347"
 
-SRC_URI = "git://github.com/omapconf/omapconf.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://github.com/omapconf/omapconf.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

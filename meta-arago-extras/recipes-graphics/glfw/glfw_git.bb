@@ -8,7 +8,7 @@ PV = "3.2.1+git${SRCPV}"
 PR = "r0"
 
 BRANCH = "master"
-SRC_URI = "git://github.com/glfw/glfw.git;branch=${BRANCH}"
+SRC_URI = "git://github.com/glfw/glfw.git;protocol=https;branch=${BRANCH}"
 SRCREV = "0a3c4f5d80b041ee1a12c8da3503653d98bd1a15"
 
 SRC_URI += "file://0001-HACK-CMakeList.txt-remove-check-for-Wayland-Egl-prov.patch"

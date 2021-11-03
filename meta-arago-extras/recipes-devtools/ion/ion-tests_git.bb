@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://src/ion_test.c;beginline=1;endline=15;md5=b225db90086
 PV = "1.0"
 
 BRANCH = "master"
-SRC_URI = "git://github.com/glneo/ion-tests.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://github.com/glneo/ion-tests.git;protocol=https;branch=${BRANCH} \
 	file://0001-CMakeLists.txt-disable-phys-addr-for-now.patch \
 	file://0001-map_test-Replace-PAGE_SIZE-with-local-variable-name.patch \
 "
