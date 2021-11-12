@@ -16,6 +16,9 @@ SRCREV_pn-arm-trusted-firmware = "${AUTOREV}"
 # Point to the latest ti linux firmware
 TI_LINUX_FW_SRCREV = "${AUTOREV}"
 
+# Point to the latest ti k3 image gen
+K3_IMAGE_GEN_SRCREV = "${AUTOREV}"
+
 # Point to latest nightly metadata
 #TI_RTOS_METADATA_URI = "git://git.ti.com/processor-sdk/coresdk_rtos_releases.git"
 #TI_RTOS_METADATA_PROTOCOL = "git"
