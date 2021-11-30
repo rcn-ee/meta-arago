@@ -84,6 +84,7 @@ ARAGO_TI_TEST_append_k3 = " \
 ARAGO_TI_TEST_append_j7 = " \
     ufs-utils \
     viddec-test-app \
+    videnc-test-app \
 "
 
 ARAGO_TI_TEST_append_omapl138 = " \
