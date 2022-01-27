@@ -97,7 +97,6 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            cryptodev \
                            ti-sgx-ddk-km \
                            pru-icss \
-                           barcode-roi \
                            uio-module-drv \
 			   mmwavegesture-hmi \
                            pdm-anomaly-detection \
@@ -112,7 +111,6 @@ MAKEFILES_append_ti43x = " u-boot-spl \
                            ti-sgx-ddk-km \
                            cmem-mod \
                            pru-icss \
-                           barcode-roi \
                            uio-module-drv \
 			   mmwavegesture-hmi \
                            pdm-anomaly-detection \
