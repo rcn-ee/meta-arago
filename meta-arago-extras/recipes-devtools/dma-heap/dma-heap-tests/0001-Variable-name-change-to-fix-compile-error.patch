@@ -1,0 +1,32 @@
+From ab0bb27b915419e3f93b4c0102837e7e748b0667 Mon Sep 17 00:00:00 2001
+From: Ryan Eatmon <reatmon@ti.com>
+Date: Thu, 13 Jan 2022 20:00:27 -0600
+Subject: [dma-heap-tests][PATCH] Variable name change to fix compile error.
+
+It appears that a recent change in the GTest CMake integration
+changed the variable names for the libraries.  This fixes that
+issue and makes the compile work under Yocto.
+
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 71d7225..7d4a97f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -19,8 +19,8 @@ target_include_directories(dma-heap-unit-tests
+ )
+ 
+ target_link_libraries(dma-heap-unit-tests
+-	${GTEST_LIBRARY}
+-	${GTEST_MAIN_LIBRARY}
++    ${GTEST_LIBRARIES}
++    ${GTEST_MAIN_LIBRARIES}
+ 	pthread
+ )
+ 
+-- 
+2.17.1
+
