@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://src/heap_test_fixture.cpp;beginline=1;endline=15;md5=
 PV = "1.0"
 
 BRANCH = "master"
-SRC_URI = "git://github.com/glneo/dma-heap-tests.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://github.com/glneo/dma-heap-tests.git;protocol=https;branch=${BRANCH}"
 SRCREV = "bccbfbf24baccefa09439a924f61f04e82b3910a"
 
 DEPENDS = "googletest"

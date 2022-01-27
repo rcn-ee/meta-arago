@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/DentonW/DevIL"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
 
-SRC_URI = "git://github.com/dentonw/devil.git;protocol=git;branch=master \
+SRC_URI = "git://github.com/dentonw/devil.git;protocol=https;branch=master \
            file://Remove-ILUT-dependency.patch"
 
 SRCREV = "e34284a7e07763769f671a74b4fec718174ad862"

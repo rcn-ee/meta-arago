@@ -10,7 +10,7 @@ PR = "r1"
 BRANCH ?= "master"
 SRCREV ?= "301d69899d6f4d84f143e0ed86957eea416a27a6"
 
-SRC_URI = "git://github.com/ptitiano/cpuloadgen.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://github.com/ptitiano/cpuloadgen.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

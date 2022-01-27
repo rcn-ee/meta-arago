@@ -7,7 +7,7 @@ PV = "2.1"
 PR = "r1"
 
 BRANCH = "master"
-SRC_URI = "git://github.com/tomba/kmsxx.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://github.com/tomba/kmsxx.git;protocol=https;branch=${BRANCH}"
 SRCREV = "5afc8d918f2c084acd65027604868dfde43395cf"
 
 DEPENDS = "drm fmt"
