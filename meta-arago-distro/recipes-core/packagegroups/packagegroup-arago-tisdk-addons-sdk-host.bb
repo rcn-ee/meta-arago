@@ -1,6 +1,6 @@
 DESCRIPTION = "Task to install sources for additional utilities/demos for SDKs"
 LICENSE = "MIT"
-PR = "r36"
+PR = "r37"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -51,6 +51,10 @@ UTILS_append_j7-hs-evm = " \
 
 UTILS_append_am65xx = " \
     pru-icss-source \
+"
+
+UTILS_append_am64xx = " \
+    pru-icss-src \
 "
 
 EXTRA_LIBS = ""
