@@ -36,7 +36,6 @@ ARAGO_EXTRA = "\
     kms++ \
     kms++-python \
     can-utils \
-    docker \
 "
 
 ARAGO_EXTRA_append_keystone = "\
