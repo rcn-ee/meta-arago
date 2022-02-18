@@ -1,5 +1,6 @@
-# Define the following to support multple platforms
+# Define the following to support multiple platforms
 PLATFORM_TYPE_$(PLATFORM) = gp
+PLATFORM_TYPE_am64xx-hs-evm = hs
 PLATFORM_TYPE_am65xx-hs-evm = hs
 PLATFORM_TYPE_j7-hs-evm = hs
 PLATFORM_TYPE = $(PLATFORM_TYPE_$(PLATFORM))
@@ -9,6 +10,8 @@ SYSFW_CONFIG = evm
 SYSFW_SOC_$(PLATFORM) = NULL
 SYSFW_SOC_am65xx-evm = am65x
 SYSFW_SOC_am65xx-hs-evm = am65x
+SYSFW_SOC_am64xx-evm = am64x
+SYSFW_SOC_am64xx-hs-evm = am64x
 SYSFW_SOC_j7-evm = j721e
 SYSFW_SOC_j7-hs-evm = j721e
 SYSFW_SOC = $(SYSFW_SOC_$(PLATFORM))
@@ -22,7 +25,7 @@ SYSFW_MAKEARGS_common = SYSFW_DL_URL="" SYSFW_HS_DL_URL="" SYSFW_HS_INNER_CERT_D
                         SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE).bin \
                         SOC=$(SYSFW_SOC) CONFIG=$(SYSFW_CONFIG)
 
-SYSFW_MAKEARGS_gp = 
+SYSFW_MAKEARGS_gp =
 SYSFW_MAKEARGS_hs = HS=1 SYSFW_HS_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-enc.bin \
                     SYSFW_HS_INNER_CERT_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-cert.bin
 

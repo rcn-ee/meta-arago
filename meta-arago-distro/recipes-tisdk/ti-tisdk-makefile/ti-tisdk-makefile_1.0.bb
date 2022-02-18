@@ -66,6 +66,7 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
 MAKEFILES_MATRIX_GUI_keystone = ""
 MAKEFILES_MATRIX_GUI_omapl138 = ""
 MAKEFILES_MATRIX_GUI_j7 = ""
+MAKEFILES_MATRIX_GUI_am64xx = ""
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -356,6 +357,8 @@ do_install () {
 K3_UBOOT_MACHINE_R5 = ""
 K3_UBOOT_MACHINE_R5_am65xx-evm = "am65x_evm_r5_defconfig"
 K3_UBOOT_MACHINE_R5_am65xx-hs-evm = "am65x_hs_evm_r5_defconfig"
+K3_UBOOT_MACHINE_R5_am64xx-evm = "am64x_evm_r5_defconfig"
+K3_UBOOT_MACHINE_R5_am64xx-hs-evm = "am64x_hs_evm_r5_defconfig"
 K3_UBOOT_MACHINE_R5_j7-evm = "j721e_evm_r5_config"
 K3_UBOOT_MACHINE_R5_j7-hs-evm = "j721e_hs_evm_r5_config"
 K3_UBOOT_MACHINE_R5_j7200-evm = "j7200_evm_r5_config"
