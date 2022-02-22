@@ -30,10 +30,10 @@ UTILS_DSP = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'gdbc6x dsptop', '', d)} \
 "
 
+#                       pru-swuart-fw 
 UTILS:append:ti33x = " mmc-utils \
                        switch-config \
                        pru-icss \
-                       pru-swuart-fw \
                        uio-module-drv-test \
                        uio-test-pruss \
 "
