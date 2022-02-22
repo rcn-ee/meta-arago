@@ -38,7 +38,7 @@ make_bootfiles_symlinks_relative() {
     done
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "make_bootfiles_symlinks_relative;"
+#ROOTFS_POSTPROCESS_COMMAND += "make_bootfiles_symlinks_relative;"
 
 BAD_RECOMMENDATIONS += " \
     ti-llvm3.6-dev \
