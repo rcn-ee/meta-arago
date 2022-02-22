@@ -2,7 +2,7 @@ SUMMARY = "Predictive maintenance demo for anomaly detection using Recurrent Neu
 LICENSE = "BSD-3-Clause & MIT & GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e88016d2cbc82d0d2efbb0865891e9d6"
 
-inherit qt-provider
+inherit qt5
 
 PV = "1.0"
 PR = "r2"

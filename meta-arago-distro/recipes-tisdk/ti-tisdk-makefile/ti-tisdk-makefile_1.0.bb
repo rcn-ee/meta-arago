@@ -27,7 +27,6 @@ SRC_URI = "\
     file://Makefile_pru \
     file://Makefile_ti-ocf-crypto-module \
     file://Makefile_qt-tstat \
-    file://Makefile_quick-playground \
     file://Makefile_omapconf \
     file://Makefile_oprofile-example \
     file://Makefile_dual-camera-demo \
@@ -76,13 +75,9 @@ MAKEFILES_COMMON = "linux \
 "
 MAKEFILES = ""
 
-# This example application should not be used when using non-SGX
-QUICK_PLAYGROUND = "${@oe.utils.conditional('ARAGO_QT_PROVIDER','qt4-embedded-gles','quick-playground','', d)}"
-
 # Add device specific make targets
 
 MAKEFILES_append_omap3 = " u-boot-spl \
-                           ${QUICK_PLAYGROUND} \
 "
 MAKEFILES_append_am37x-evm = " av-examples \
                                ti-ocf-crypto-module \
@@ -91,7 +86,6 @@ MAKEFILES_append_am3517-evm = " av-examples \
                                 ti-ocf-crypto-module \
 "
 MAKEFILES_append_ti33x = " u-boot-spl \
-                           ${QUICK_PLAYGROUND} \
                            ti-crypto-examples \
                            linux-dtbs \
                            cryptodev \
@@ -102,7 +96,6 @@ MAKEFILES_append_ti33x = " u-boot-spl \
                            pdm-anomaly-detection \
 "
 MAKEFILES_append_ti43x = " u-boot-spl \
-                           ${QUICK_PLAYGROUND} \
                            ti-crypto-examples \
                            linux-dtbs \
                            cryptodev \
@@ -127,7 +120,6 @@ MAKEFILES_append_dra7xx = " cryptodev \
 "
 
 MAKEFILES_append_omap-a15 = " u-boot-spl \
-                              ${QUICK_PLAYGROUND} \
                               omapconf \
                               linux-dtbs \
                               ti-sgx-ddk-km \

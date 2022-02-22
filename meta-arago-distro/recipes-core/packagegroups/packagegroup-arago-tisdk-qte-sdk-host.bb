@@ -6,15 +6,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-QT4_DEMOS = "\
-    ${@oe.utils.conditional('ARAGO_QT_PROVIDER', 'qt4-embedded-gles', 'quick-playground-source', '', d)} \
-"
-
-QT_DEMOS = "\
-    qt-tstat-source \
-"
-
 RDEPENDS_${PN} = "\
-    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', "${QT4_DEMOS}", d)} \
-    ${QT_DEMOS} \
+    qt-tstat-source \
 "

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cc1cdee589f97cbba69e95a89a15"
 
 require recipes-core/matrix/matrix-gui-paths.inc
 
-inherit qt-provider
+inherit qt5
 
 PR = "r5"
 

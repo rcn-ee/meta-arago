@@ -16,22 +16,24 @@ inherit systemd
 BRANCH ?= "master"
 SRCREV = "9a2d12590102fefc5c29fc9e8d346ce6b0198468"
 
-MATRIX_INITSCRIPT = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', bb.utils.contains('DISTRO_FEATURES', 'wayland', 'init', 'init.eglfs', d), 'init', d)}"
+MATRIX_INITSCRIPT = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'init', 'init.eglfs', d)}"
 
 SRC_URI = "git://git.ti.com/matrix-gui-v2/matrix-gui-v2.git;protocol=git;branch=${BRANCH} \
            file://${MATRIX_INITSCRIPT} \
            file://php.ini \
            file://matrix-gui-2.0.service \
-           ${@oe.utils.conditional('QT_PROVIDER', 'qt5', bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'file://0001-execute_command-Stop-matrix-when-running-a-GUI-demo.patch', d), '', d)} \
-           ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'file://0001-execute_command-workaround-for-GUI-apps-with-weston.patch', '', d)} \
+           ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', \
+                'file://0001-execute_command-workaround-for-GUI-apps-with-weston.patch', \
+                'file://0001-execute_command-Stop-matrix-when-running-a-GUI-demo.patch', d)} \
 "
 
 require matrix-gui-paths.inc
 
 S = "${WORKDIR}/git"
 
-MATRIX_FLAGS = "${@oe.utils.conditional('QT_PROVIDER','qt5','','-qws',d)}"
-SWITCH_FOREGROUND_VT = "${@oe.utils.conditional('QT_PROVIDER','qt5','','chvt 4',d)}"
+MATRIX_FLAGS = ""
+SWITCH_FOREGROUND_VT = ""
+
 do_install(){
 	install -d ${D}${MATRIX_BASE_DIR}
 	install -d ${D}${MATRIX_WEB_DIR}

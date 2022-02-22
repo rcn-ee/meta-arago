@@ -2,7 +2,7 @@ SUMMARY = "Gesture baed HMI demo using mmWave IWR1642 chip and Sitara AM device"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://main.cpp;beginline=1;endline=33;md5=e7e749ff1989b18db836e5d9910a37e9"
 
-inherit qt-provider
+inherit qt5
 
 PV = "1.0"
 PR = "r0"

@@ -23,7 +23,7 @@ SRCREV = "80051ec8befd921e40cfb74a49234ed045576bbc"
 
 S = "${WORKDIR}/git"
 
-inherit qt-provider
+inherit qt5
 
 export TARGET_ROOTDIR = "${STAGING_DIR_HOST}"
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"

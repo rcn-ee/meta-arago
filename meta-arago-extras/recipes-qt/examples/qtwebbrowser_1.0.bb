@@ -20,7 +20,7 @@ SRC_URI = "git://code.qt.io/qt-apps/qtwebbrowser.git;protocol=git;branch=${BRANC
 
 S = "${WORKDIR}/git"
 
-inherit qt-provider
+inherit qt5
 
 # Install qtwebbrowser under /usr/bin
 do_install() {

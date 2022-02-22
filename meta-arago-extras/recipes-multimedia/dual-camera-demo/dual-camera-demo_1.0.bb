@@ -21,9 +21,7 @@ SRC_URI = "git://git.ti.com/sitara-linux/dual-camera-demo.git;protocol=git;branc
 
 S = "${WORKDIR}/git"
 
-DEMO_SCRIPT = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', 'dual_camera_qt5.sh', 'dual_camera_qt4.sh', d)}"
-
-inherit qt-provider
+inherit qt5
 
 export SDK_PATH_TARGET='${STAGING_DIR_HOST}'
 
@@ -32,7 +30,7 @@ do_install() {
     install -d ${D}/usr/bin
     install -d ${D}${MATRIX_APP_DIR}/dual-camera
     install dual_camera ${D}/usr/bin/dual_camera
-    install ${WORKDIR}/${DEMO_SCRIPT} ${D}/usr/bin/dual_camera.sh
+    install ${WORKDIR}/dual_camera_qt5.sh ${D}/usr/bin/dual_camera.sh
     install ${WORKDIR}/desc_dual-camera.html ${D}/${MATRIX_APP_DIR}/dual-camera
     install ${WORKDIR}/dual-camera.desktop ${D}/${MATRIX_APP_DIR}/dual-camera
 }

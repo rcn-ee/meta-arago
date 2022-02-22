@@ -26,7 +26,6 @@ RDEPENDS_${PN} = "\
     opkg-dev \
     libpng-dev \
     readline-dev \
-    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'tslib-dev', d)} \
     libusb-compat-dev \
     libusb1-dev \
     zlib-dev \

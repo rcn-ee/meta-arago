@@ -51,10 +51,6 @@ BT_TI = "\
     bt-fw \
 "
 
-DEMO_APPS = "\
-    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', '', 'wpa-gui-e', d)} \
-"
-
 #    net-snmp
 #    net-snmp-server-snmpd
 CONNECTIVITY_RDEPENDS = " \
@@ -67,14 +63,6 @@ CONNECTIVITY_RDEPENDS = " \
     ${WLAN_TI} \
     ${BT_COMMON} \
     ${BT_TI} \
-"
-
-CONNECTIVITY_RDEPENDS_append_ti33x = "\
-    ${DEMO_APPS} \
-"
-
-CONNECTIVITY_RDEPENDS_append_ti43x = "\
-    ${DEMO_APPS} \
 "
 
 RDEPENDS_${PN} = "\

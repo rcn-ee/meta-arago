@@ -6,27 +6,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-QT4_SGX_SUPPORT = "\
-    qt4-embedded-plugin-gfxdriver-gfxpvregl \
-    libqt-embeddedopengl4 \
-    libqt-embeddedpvrqwswsegl4 \
-"
-
-QT4_ESSENTIALS = "\
-    qt4-embedded \
-    qt4-embedded-plugin-mousedriver-tslib \
-    qt4-embedded-plugin-gfxdriver-gfxtransformed \
-    qt4-embedded-plugin-phonon-backend-gstreamer \
-    qt4-embedded-plugin-imageformat-gif \
-    qt4-embedded-plugin-imageformat-jpeg \
-    qt4-embedded-qml-plugins \
-    libqt-embeddedmultimedia4 \
-    libqt-embeddeddeclarative4 \
-    libqt-embeddedxmlpatterns4 \
-    ${@oe.utils.conditional('ARAGO_QT_PROVIDER', 'qt4-embedded-gles', '${QT4_SGX_SUPPORT}', '', d)} \
-"
-
-QT5_ESSENTIALS = "\
+RDEPENDS_${PN} = "\
     qtbase-plugins \
     qtdeclarative-qmlplugins \
     qtlocation-plugins \
@@ -44,8 +24,4 @@ QT5_ESSENTIALS = "\
     liberation-fonts \
     qtconnectivity \
     qtconnectivity-qmlplugins \
-"
-
-RDEPENDS_${PN} = "\
-    ${@oe.utils.conditional('QT_PROVIDER', 'qt5', "${QT5_ESSENTIALS}", "${QT4_ESSENTIALS}", d)} \
 "
