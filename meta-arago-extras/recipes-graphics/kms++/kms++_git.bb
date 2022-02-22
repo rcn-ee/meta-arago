@@ -24,7 +24,7 @@ FILES:${PN}-python += "${libdir}/python*/site-packages"
 
 S = "${WORKDIR}/git"
 
-inherit python3native meson update-alternatives
+inherit python3native meson pkgconfig update-alternatives
 
 ALTERNATIVE_PRIORITY = "100"
 ALTERNATIVE:${PN} = "kmstest"
