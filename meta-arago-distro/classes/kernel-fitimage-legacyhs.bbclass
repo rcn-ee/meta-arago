@@ -1,4 +1,4 @@
-inherit kernel-uboot uboot-sign
+inherit kernel-uboot uboot-sign-legacyhs
 
 FITIMAGE_HASH_ALGO ?= "sha1"
 FITIMAGE_PACK_TEE ?= "0"
