@@ -1,7 +1,7 @@
 DESCRIPTION = "Utility to generate specified CPU Load"
 HOMEPAGE = "https://github.com/ptitiano/cpuloadgen"
 
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c6c2eb46c569d0cd7884089fea6b4f31"
 
 PV = "0.93"

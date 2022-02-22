@@ -1,6 +1,6 @@
 DESCRIPTION = "TI OpenCL M4/IPU device firmware for AM57x"
 HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/opencl/index.html"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 include ocl.inc
 require recipes-ti/includes/arago-paths.inc

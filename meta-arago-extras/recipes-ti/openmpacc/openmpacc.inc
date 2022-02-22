@@ -1,6 +1,6 @@
 SUMMARY = "TI OpenMP Accelerator Model"
 HOMEPAGE = "http://downloads.ti.com/mctools/esd/docs/openmpacc/"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 inherit features_check
 

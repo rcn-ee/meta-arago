@@ -1,6 +1,6 @@
 DESCRIPTION = "Lighttpd config for Matrix"
 
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
 
 inherit allarch

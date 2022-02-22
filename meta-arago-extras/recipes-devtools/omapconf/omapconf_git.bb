@@ -1,7 +1,7 @@
 SUMMARY = "Diagnostic tool for TI OMAP processors"
 HOMEPAGE = "https://github.com/omapconf/omapconf"
 
-LICENSE = "GPLv2 | BSD"
+LICENSE = "GPLv2 | BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=205c83c4e2242a765acb923fc766e914"
 
 PV = "1.75+git${SRCPV}"

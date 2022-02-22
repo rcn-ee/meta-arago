@@ -1,6 +1,6 @@
 SUMMARY = "GLSDK example applications"
 HOMEPAGE = "http://git.ti.com/glsdk"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=10a9abb9c5bb19edd83a8cf66eef7148"
 
 DEPENDS = "gstreamer1.0 libdrm libdce ti-ipc wayland weston"

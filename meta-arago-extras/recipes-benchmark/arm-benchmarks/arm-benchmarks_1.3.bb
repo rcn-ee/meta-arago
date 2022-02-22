@@ -1,6 +1,6 @@
 SUMMARY = "ARM Benchmarks"
 HOMEPAGE = "https://gforge.ti.com/gf/project/am_benchmarks/"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7aefb5e1cffc7b6a3ef18b803f957922"
 SECTION = "system"
 

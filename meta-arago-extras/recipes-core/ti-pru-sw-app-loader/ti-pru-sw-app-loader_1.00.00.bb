@@ -1,6 +1,6 @@
 DESCRIPTION = "PRU sw application loader"
 HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://interface/prussdrv.c;beginline=1;endline=47;md5=6012fea45c1fbced663277bc90d2163a"
 
 RRECOMMENDS:${PN} = "kernel-module-uio-pru"

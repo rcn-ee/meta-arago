@@ -1,6 +1,6 @@
 DESCRIPTION = "TI OpenCL host runtime and development packages"
 HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/opencl/index.html"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 include ocl.inc
 

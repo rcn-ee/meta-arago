@@ -1,5 +1,5 @@
 UMMARY = "Extra modules and scripts for CMake"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1"
 
 PV = "1.5.0+gitr${SRCPV}"

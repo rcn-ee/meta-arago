@@ -1,7 +1,7 @@
 SUMMARY = "TIDL API examples"
 DESCRIPTION = "Examples of TIDL API. Refer TIDL API User's Guide for details."
 HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/tidl-api/intro.html"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 include tidl-api.inc
 require recipes-ti/includes/ti-paths.inc

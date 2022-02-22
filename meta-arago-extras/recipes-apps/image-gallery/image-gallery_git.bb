@@ -1,7 +1,7 @@
 DESCRIPTION = "Image Gallery"
 HOMEPAGE = "https://gitorious.org/image-gallery"
 SECTION = "multimedia"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cc1cdee589f97cbba69e95a89a15"
 
 require recipes-core/matrix/matrix-gui-paths.inc

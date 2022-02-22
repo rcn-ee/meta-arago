@@ -1,6 +1,6 @@
 SUMMARY = "TI OpenCL example applications"
 HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/opencl/index.html"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 include ocl.inc
 require recipes-ti/includes/ti-paths.inc

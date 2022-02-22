@@ -3,7 +3,7 @@
 
 require wpa-supplicant.inc
 
-LICENSE = "GPLv2 | BSD"
+LICENSE = "GPLv2 | BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=292eece3f2ebbaa25608eed8464018a3 \
                     file://../README;md5=3f01d778be8f953962388307ee38ed2b \
                     file://wpa_supplicant.c;beginline=1;endline=17;md5=35e6d71fea6b15f61a9fac935bcf410f"

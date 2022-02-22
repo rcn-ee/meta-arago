@@ -1,6 +1,6 @@
 DESCRIPTION = "TI OpenCL offline C compiler for compute devices"
 HOMEPAGE = "https://downloads.ti.com/mctools/esd/docs/opencl/index.html"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 include ocl.inc
 

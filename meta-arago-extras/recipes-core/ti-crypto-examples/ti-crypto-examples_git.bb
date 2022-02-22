@@ -1,6 +1,6 @@
 DESCRIPTION = "TI Cryptography Example Applications"
 HOMEPAGE = "http://arago-project.org/git/projects/?p=crypto-example-apps.git;a=summary"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://AES/aes_256.c;beginline=9;endline=35;md5=8edbb4dee965d2f2eb5ca2822addcae5"
 SECTION = "console"
 DEPENDS += "openssl"

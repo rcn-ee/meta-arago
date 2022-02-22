@@ -2,7 +2,7 @@ SUMMARY = "Library of simple functions optimized for various CPUs"
 HOMEPAGE = "http://liboil.freedesktop.org/"
 BUGTRACKER = "https://bugs.freedesktop.org/"
 
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ad80780d9c5205d63481a0184e199a15 \
                     file://liboil/liboil.h;endline=28;md5=95c794a66b88800d949fed17e437d9fb \
                     file://liboil/liboilcpu.c;endline=28;md5=89da69a61d88eedcba066f42353fb75a \

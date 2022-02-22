@@ -1,6 +1,6 @@
 SUMMARY = "TI OpenCL compute device firmware for C66x (RTOS)"
 HOMEPAGE = "http://software-dl.ti.com/mctools/docs/opencl/intro.html"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 require recipes-ti/ocl/ocl.inc
 require recipes-ti/includes/arago-paths.inc

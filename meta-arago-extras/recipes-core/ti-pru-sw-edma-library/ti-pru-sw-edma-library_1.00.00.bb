@@ -1,6 +1,6 @@
 DESCRIPTION = "eDMA library for use by PRU sw example applications"
 HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://edma.c;beginline=1;endline=46;md5=f6bde95a8e2277050e36b257ca9214a6"
 
 DEPENDS += "virtual/kernel"

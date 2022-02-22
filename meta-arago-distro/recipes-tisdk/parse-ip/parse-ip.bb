@@ -1,5 +1,5 @@
 DESCRIPTION = "Script to parse ip address during boot and make it available to the host system using shared partitions"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://init;beginline=3;endline=31;md5=f82ddb19a87f97193d08feacfd0e4903"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x"
