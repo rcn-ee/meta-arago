@@ -36,8 +36,6 @@ MULTIMEDIA_append_am65xx = " ${BARCODE_PKG}"
 #    ${@['','qt-opencv-opencl-opengl-multithreaded-source'][oe.utils.all_distro_features(d, 'opencv opencl opengl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'gpu dsp', True, False, d)]} \
 #"
 
-MULTIMEDIA_append_keystone = " ${BARCODE_PKG}"
-
 RDEPENDS_${PN} = "\
     ${MULTIMEDIA} \
 "

@@ -17,7 +17,6 @@ CRYPTO_SUPPORT = "\
 CRYPTO_SUPPORT_append_ti33x = " cryptodev-module cryptodev-tests"
 CRYPTO_SUPPORT_append_ti43x = " cryptodev-module cryptodev-tests"
 CRYPTO_SUPPORT_append_dra7xx = " cryptodev-module cryptodev-tests"
-CRYPTO_SUPPORT_append_keystone = " cryptodev-module cryptodev-tests"
 
 RDEPENDS_${PN} = "\
     ${CRYPTO_SUPPORT} \

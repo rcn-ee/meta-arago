@@ -78,35 +78,8 @@ UTILS_append_dra7xx = " \
                         ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-example-apps','',d)} \
 "
 
-UTILS_append_keystone = " \
-    uio-module-drv-test \
-    ti-ipc-rtos-fw \
-"
-
-UTILS_append_k2hk = " \
-    ${UTILS_DSP} \
-"
-
-UTILS_append_k2l = " \
-    ${UTILS_DSP} \
-"
-
-UTILS_append_k2e = " \
-    ${UTILS_DSP} \
-"
-
-UTILS_append_k2g = " \
-    pru-icss \
-    uio-test-pruss \
-"
-
 EXTRA_LIBS = ""
 EXTRA_LIBS_append_omap-a15 = " \
-    cmem \
-    uio-module-drv \
-"
-
-EXTRA_LIBS_append_keystone = " \
     cmem \
     uio-module-drv \
 "
@@ -132,7 +105,6 @@ EXTRA_PACKAGES_omapl138 = " \
 "
 
 EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
-EXTRA_PACKAGES_append_keystone = " ti-ipc-examples-linux"
 EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
 
 EXTRA_PACKAGES_append_omap-a15 = " \
@@ -144,7 +116,6 @@ EXTRA_PACKAGES_append_am335x-evm = " pruss-lld-apps"
 EXTRA_PACKAGES_append_am437x-evm = " pruss-lld-apps"
 # acontis-atemsys
 EXTRA_PACKAGES_append_am57xx-evm = " pruss-lld-apps"
-EXTRA_PACKAGES_append_k2g-evm  = " pruss-lld-apps"
 
 RDEPENDS_${PN} = "\
     ${UTILS} \

@@ -2,7 +2,7 @@ DESCRIPTION = "Script to parse ip address during boot and make it available to t
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://init;beginline=3;endline=31;md5=f82ddb19a87f97193d08feacfd0e4903"
 
-COMPATIBLE_MACHINE = "ti33x|ti43x|keystone"
+COMPATIBLE_MACHINE = "ti33x|ti43x"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "file://init"

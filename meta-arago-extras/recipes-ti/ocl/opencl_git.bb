@@ -8,7 +8,7 @@ PR = "${INC_PR}.3"
 
 inherit cmake systemd
 
-COMPATIBLE_MACHINE = "dra7xx|keystone"
+COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 # Define runtime package for minimal dependencies to run opencl applications
@@ -38,8 +38,6 @@ DEPENDS = " ocl-gl-headers \
 "
 
 DEPENDS_append_dra7xx = " ti-ipc virtual/kernel"
-DEPENDS_append_keystone = " mpm-transport multiprocmgr"
-DEPENDS_remove_k2g = " libulm"
 
 RDEPENDS_${PN}-runtime += "bash ${MONITORS}"
 RDEPENDS_${PN}-dev += "ocl-gl-headers-dev"
@@ -53,13 +51,8 @@ S = "${WORKDIR}/git/host"
 export WANT_LLVM_RELEASE = "3.6-ti"
 
 OCL_BUILD_TARGET_dra7xx = "ARM_AM57"
-OCL_BUILD_TARGET_k2hk = "ARM_K2H"
-OCL_BUILD_TARGET_k2l = "ARM_K2L"
-OCL_BUILD_TARGET_k2e = "ARM_K2E"
-OCL_BUILD_TARGET_k2g = "ARM_K2G"
 
 ENABLE_ULM = "1"
-ENABLE_ULM_k2g = "0"
 SHMEM_MANAGER = "CMEM"
 
 EXTRA_OECMAKE += " -DBUILD_TARGET=${OCL_BUILD_TARGET} -DBUILD_OUTPUT=lib -DENABLE_ULM=${ENABLE_ULM} -DOCL_VERSION=${PV} -DSHMEM_MANAGER=${SHMEM_MANAGER}"
@@ -67,7 +60,7 @@ EXTRA_OECMAKE += " -DBUILD_TARGET=${OCL_BUILD_TARGET} -DBUILD_OUTPUT=lib -DENABL
 EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} LINUX_DEVKIT_ROOT=${STAGING_DIR_HOST}"
 export KERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
 
-MCTD = "${S}/mct-daemon/ti-mct-daemon.service.k2x"
+MCTD = ""
 MCTD_dra7xx = "${S}/mct-daemon/ti-mct-daemon.service.am57x"
 
 do_install_append() {

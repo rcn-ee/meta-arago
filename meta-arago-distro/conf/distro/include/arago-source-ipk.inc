@@ -109,9 +109,6 @@ SRCIPK_INSTALL_DIR_pn-ti-pru-sw-examples ?= "example-applications/pru-${PV}"
 CREATE_SRCIPK_pn-ti-ocf-crypto-module ?= "1"
 SRCIPK_INSTALL_DIR_pn-ti-ocf-crypto-module ?= "board-support/extra-drivers/${PN}-${PV}"
 
-CREATE_SRCIPK_pn-omap3-sgx-modules ?= "1"
-SRCIPK_INSTALL_DIR_pn-omap3-sgx-modules ?= "board-support/extra-drivers/sgx-modules-${PV}"
-
 CREATE_SRCIPK_pn-ti-compat-wireless-wl18xx ?= "1"
 SRCIPK_INSTALL_DIR_pn-ti-compat-wireless-wl18xx ?= "board-support/extra-drivers/${PN}-${PV}"
 
@@ -126,21 +123,10 @@ SRCIPK_INSTALL_DIR_pn-av-examples ?= "example-applications/av-examples-${PV}"
 
 CREATE_SRCIPK_pn-u-boot ?= "1"
 SRCIPK_INSTALL_DIR_pn-u-boot ?= "board-support/u-boot-${PV}"
-# For beagleboard we use the git version which doesn't define UVER
-SRCIPK_INSTALL_DIR_pn-u-boot_beagleboard ?= "board-support/${P}"
-
-CREATE_SRCIPK_pn-x-load ?= "1"
-SRCIPK_INSTALL_DIR_pn-x-load ?= "board-support/x-load-${XVER}-psp${PSPREL}"
-# For beagleboard we use the git version which doesn't define XVER
-SRCIPK_INSTALL_DIR_pn-x-load_beagleboard ?= "board-support/${P}"
 
 CREATE_SRCIPK_pn-u-boot-ti-staging ?= "1"
 SRCIPK_INSTALL_DIR_pn-u-boot-ti-staging ?= "board-support/u-boot-${PV}${UBOOT_LOCALVERSION}"
 SRCIPK_PRESERVE_GIT_pn-u-boot-ti-staging ?= "true"
-
-CREATE_SRCIPK_pn-u-boot-keystone ?= "1"
-SRCIPK_INSTALL_DIR_pn-u-boot-keystone ?= "board-support/u-boot-${PV}"
-SRCIPK_PRESERVE_GIT_pn-u-boot-keystone ?= "true"
 
 CREATE_SRCIPK_pn-u-boot-dra7xx ?= "1"
 SRCIPK_INSTALL_DIR_pn-u-boot-dra7xx ?= "board-support/u-boot-${PV}-${PR}"
@@ -169,10 +155,6 @@ SRCIPK_INSTALL_DIR_pn-sitara-linux-ti-staging ?= "board-support/linux-${PV}${KER
 SRCIPK_PRESERVE_GIT_pn-sitara-linux-ti-staging ?= "true"
 SRCIPK_SHALLOW_CLONE_pn-sitara-linux-ti-staging ?= "true"
 SRCIPK_SHALLOW_DEPTH_pn-sitara-linux-ti-staging ?= "400"
-
-CREATE_SRCIPK_pn-linux-keystone ?= "1"
-SRCIPK_INSTALL_DIR_pn-linux-keystone ?= "board-support/linux-${PV}"
-SRCIPK_PRESERVE_GIT_pn-linux-keystone ?= "true"
 
 CREATE_SRCIPK_pn-linux-am335x-psp ?= "1"
 SRCIPK_INSTALL_DIR_pn-linux-am335x-psp ?= "board-support/linux-${KVER}"
@@ -215,17 +197,11 @@ SRCIPK_INSTALL_DIR_pn-ti-linux-driver-examples ?= "example-applications/linux-dr
 CREATE_SRCIPK_pn-ti-linux-driver-examples-omapl ?= "1"
 SRCIPK_INSTALL_DIR_pn-ti-linux-driver-examples-omapl ?= "example-applications/linux-driver-examples-${PV}"
 
-CREATE_SRCIPK_pn-ti-linux-driver-examples-omap3 ?= "1"
-SRCIPK_INSTALL_DIR_pn-ti-linux-driver-examples-omap3 ?= "example-applications/linux-driver-examples-${PV}"
-
 CREATE_SRCIPK_pn-ti-framework-components ?= "1"
 SRCIPK_INSTALL_DIR_pn-ti-framework-components ?= "component-sources/framework_components_${PV}"
 
 CREATE_SRCIPK_pn-ti-codec-engine ?= "1"
 SRCIPK_INSTALL_DIR_pn-ti-codec-engine ?= "component-sources/codec_engine_${PV}"
-
-CREATE_SRCIPK_pn-ti-codecs-omap3530 ?= "1"
-SRCIPK_INSTALL_DIR_pn-ti-codecs-omap3530 ?= "codecs-omap3530_${PV}"
 
 CREATE_SRCIPK_pn-ti-linuxutils ?= "1"
 SRCIPK_INSTALL_DIR_pn-ti-linuxutils ?= "component-sources/linuxutils_${PV}"
@@ -372,9 +348,6 @@ SRCIPK_INSTALL_DIR_pn-hplib-mod ?= "board-support/extra-drivers/${PN}-${PV}"
 
 CREATE_SRCIPK_pn-uio-module-drv ?= "1"
 SRCIPK_INSTALL_DIR_pn-uio-module-drv ?= "board-support/extra-drivers/${PN}-${PV}"
-
-CREATE_SRCIPK_pn-ipsecmgr-mod ?= "1"
-SRCIPK_INSTALL_DIR_pn-ipsecmgr-mod ?= "board-support/extra-drivers/${PN}-${PV}"
 
 CREATE_SRCIPK_pn-pru-icss ?= "1"
 SRCIPK_INSTALL_DIR_pn-pru-icss ?= "example-applications/${PN}-${PV}"

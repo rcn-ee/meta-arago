@@ -1,7 +1,7 @@
 DESCRIPTION = "Texas Instruments Pinmux Utility"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d69a4aafe4f7b66d5f9c60d6875ebd52"
-COMPATIBLE_MACHINE = "am335x-evm|am37x-evm|am3517-evm|beagleboard"
+COMPATIBLE_MACHINE = "am335x-evm"
 
 PR = "r0"
 

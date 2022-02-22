@@ -13,8 +13,6 @@ S = "${WORKDIR}/git"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SDCARD_SCRIPT = " create-sdcard.sh"
-SDCARD_SCRIPT_keystone = ""
-SDCARD_SCRIPT_k2g = " create-sdcard.sh"
 
 SETUP_SCRIPTS = " common.sh \
                   setup-host-check.sh \
@@ -27,17 +25,12 @@ SETUP_SCRIPTS = " common.sh \
                   ${SDCARD_SCRIPT} \
 "
 
-UBOOT_ENV_am37x-evm = "setup-uboot-env-am37x.sh"
-UBOOT_ENV_beagleboard = "setup-uboot-env-beagleboard.sh"
-UBOOT_ENV_am3517-evm = "setup-uboot-env-am3517.sh"
 UBOOT_ENV_omapl138 = "setup-uboot-env-am18x.sh"
 UBOOT_ENV_ti33x = "setup-uboot-env-am335x.sh"
 UBOOT_ENV_ti43x = "setup-uboot-env-am43x.sh"
 UBOOT_ENV_omap5-evm = "setup-uboot-env-omap5.sh"
 UBOOT_ENV_am57xx-evm = "setup-uboot-env-am57xx-evm.sh"
 UBOOT_ENV_k3 = "setup-uboot-env-am65x.sh"
-UBOOT_ENV_keystone = "setup-uboot-env-keystone.sh"
-UBOOT_ENV_k2g = "setup-uboot-env-k2g-evm.sh"
 UBOOT_ENV = "setup-uboot-unknown.sh"
 
 do_install () {

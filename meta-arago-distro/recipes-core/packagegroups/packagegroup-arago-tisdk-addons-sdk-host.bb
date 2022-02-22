@@ -32,10 +32,6 @@ UTILS_append_ti43x = " \
     pru-icss-source \
 "
 
-UTILS_append_k2g = " \
-    pru-icss-source \
-"
-
 UTILS_append_k3 = " \
     ti-sci-fw-source \
     trusted-firmware-a-source \
@@ -78,30 +74,6 @@ EXTRA_LIBS_append_ti43x = " \
     cmem-mod-source \
     uio-module-drv-source \
 "
-
-# Disable ipsecmgr due to libnl and xfrm conflict
-#    ipsecmgr-mod-source
-# Disable hplib-mod-srv due to K4.14 breakage
-#    hplib-mod-source
-EXTRA_LIBS_append_keystone = " \
-    cmem-mod-source \
-    uio-module-drv-source \
-"
-
-#EXTRA_LIBS_append_k2hk = " \
-#    debugss-module-drv-source \
-#    gdbserverproxy-module-drv-source \
-#"
-
-#EXTRA_LIBS_append_k2l = " \
-#    debugss-module-drv-source \
-#    gdbserverproxy-module-drv-source \
-#"
-
-#EXTRA_LIBS_append_k2e = " \
-#    debugss-module-drv-source \
-#    gdbserverproxy-module-drv-source \
-#"
 
 PDM_ANOMALY_PKG_SRC = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'pdm-anomaly-detection-src', '', d)} \

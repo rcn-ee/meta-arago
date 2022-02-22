@@ -7,7 +7,7 @@ require recipes-ti/includes/ti-paths.inc
 
 PR = "${INC_PR}.1"
 
-COMPATIBLE_MACHINE = "dra7xx|keystone"
+COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DEPENDS = "opencl opencl-monitor ti-cgt6x-native clocl-native"
@@ -79,8 +79,6 @@ OCL_EXAMPLE_LIST_append_dra7xx = " ${OCL_PERSISTENT_EXAMPLE_LIST}"
 OCL_MPAX_EXAMPLE_LIST = " vecadd_mpax \
                           vecadd_mpax_openmp \
 "
-
-OCL_EXAMPLE_LIST_append_k2hk = " ${OCL_MPAX_EXAMPLE_LIST}"
 
 python do_unpack_append() {
     s = d.getVar("S")

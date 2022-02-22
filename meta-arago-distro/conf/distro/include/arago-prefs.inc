@@ -21,15 +21,6 @@ PREFERRED_PROVIDER_virtual/libgles2_j7 = "ti-img-rogue-umlibs"
 PREFERRED_PROVIDER_virtual/libgbm_j7 = "ti-img-rogue-umlibs"
 PREFERRED_PROVIDER_virtual/gpudriver_j7 = "ti-img-rogue-driver"
 
-# This is required when using keystone devices with graphical support
-# such as Qt5
-PREFERRED_PROVIDER_virtual/egl_keystone = "mesa"
-PREFERRED_PROVIDER_virtual/libgles1_keystone = "mesa"
-PREFERRED_PROVIDER_virtual/libgles2_keystone = "mesa"
-PREFERRED_PROVIDER_virtual/libgbm_keystone = "mesa"
-PREFERRED_PROVIDER_virtual/libgl_keystone = "mesa"
-PREFERRED_PROVIDER_virtual/mesa_keystone = "mesa"
-
 PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_KERNEL_SUFFIX}"
 
 # For TI devices with only baremetal/TI RTOS support
@@ -42,8 +33,6 @@ PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 # application that does not have a GPLv3 license
 PREFERRED_VERSION_crda = "3.18"
 PREFERRED_VERSION_obex = "0.34"
-
-PREFERRED_PROVIDER_libnl-xfrm = "libnl"
 
 PREFERRED_PROVIDER_wpa-supplicant = "wpa-supplicant"
 #PREFERRED_PROVIDER_wpa-supplicant_ti33x = "wpa-supplicant-wl18xx"

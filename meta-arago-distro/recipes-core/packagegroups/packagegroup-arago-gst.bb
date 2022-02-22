@@ -26,11 +26,6 @@ GSTREAMER_DEPS_append_dra7xx = " \
     ${GSTREAMER_DSP} \
 "
 
-GSTREAMER_DEPS_append_keystone = " \
-    gstreamer1.0-plugins-hevc \
-    ${GSTREAMER_DSP} \
-"
-
 GSTREAMER_ACCEL_MM = ""
 GSTREAMER_ACCEL_MM_omap-a15 = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', "gstreamer1.0-plugins-ducati", '', d)}"
 GSTREAMER_ACCEL_MM_append_dra7xx = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', " gstreamer1.0-plugins-vpe", '', d)}"

@@ -12,7 +12,6 @@ REQUIRED_DISTRO_FEATURES = "opencl openmp"
 
 PR = "${INC_PR}.2"
 SRC_URI += "file://0001-Update-VRING-in-resource-table-for-new-Linux-kernel.patch;patchdir=.."
-SRC_URI += "file://0002-Fix-K2x-race-condition-during-DSP-firmware-booting.patch;patchdir=.."
 
 inherit update-alternatives
 
@@ -31,37 +30,15 @@ DEPENDS = " ti-llvm3.6-native \
             openmp-rtos \
 "
 
-DEPENDS_append_k2hk = " multiprocmgr-rtos \
-                            qmss-lld-rtos \
-                            cppi-lld-rtos \
-                            rm-lld-rtos \
-"
-
-DEPENDS_append_k2l  = " multiprocmgr-rtos \
-                            qmss-lld-rtos \
-                            cppi-lld-rtos \
-                            rm-lld-rtos \
-"
-
-DEPENDS_append_k2e  = " multiprocmgr-rtos \
-                            qmss-lld-rtos \
-                            cppi-lld-rtos \
-                            rm-lld-rtos \
-"
-
 DEPENDS_append_dra7xx = " opencl-tidl-fw \
 "
 
-COMPATIBLE_MACHINE = "dra7xx|keystone"
+COMPATIBLE_MACHINE = "dra7xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/monitor"
 
 BUILD_TARGET_dra7xx = "ARM_AM57"
-BUILD_TARGET_k2hk = "ARM_K2H"
-BUILD_TARGET_k2l = "ARM_K2L"
-BUILD_TARGET_k2e = "ARM_K2E"
-BUILD_TARGET_k2g = "ARM_K2G"
 
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 export PDK_DIR = "${PDK_INSTALL_DIR}"
@@ -106,28 +83,6 @@ do_install_append_dra7xx() {
     install -m ${OCL_DPERMS} -d ${D}${base_libdir}/firmware
     install -m ${OCL_FPERMS} monitor_am57x/dsp0.out ${D}${base_libdir}/firmware/dra7-dsp1-fw.xe66.${BPN}
     install -m ${OCL_FPERMS} monitor_am57x/dsp1.out ${D}${base_libdir}/firmware/dra7-dsp2-fw.xe66.${BPN}
-}
-
-do_install_append_k2hk() {
-    for i in {0..7}; do install -m ${OCL_FPERMS} monitor_evmk2h/dsp${i}.out ${SHARE_PATH}; done
-    install_dsp_objs evmk2h
-}
-
-do_install_append_k2l() {
-    for i in {0..3}; do install -m ${OCL_FPERMS} monitor_evmk2l/dsp${i}.out ${SHARE_PATH}; done
-    install_dsp_objs evmk2l
-}
-
-do_install_append_k2e() {
-    install -m ${OCL_FPERMS} monitor_evmk2e/dsp0.out ${SHARE_PATH}
-    install_dsp_objs evmk2e
-}
-
-do_install_append_k2g() {
-    install -m ${OCL_FPERMS} monitor_evmk2g/dsp0.out ${SHARE_PATH}
-    install -m ${OCL_FPERMS} monitor_evmk2g/dsp0.out ${SHARE_PATH}/dsp.out
-    install -m ${OCL_FPERMS} monitor_evmk2g/dsp.syms ${SHARE_PATH}
-    install -m ${OCL_FPERMS} monitor_evmk2g/dsp_syms.obj ${SHARE_PATH}
 }
 
 ALTERNATIVE_${PN}_dra7xx = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66"

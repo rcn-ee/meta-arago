@@ -52,7 +52,7 @@ do_install_prepend() {
 }
 
 3D_DEMOS_RDEPENDS_MATRIX = "matrix-gui-apps-images matrix-gui-submenus-3d"
-3D_DEMOS_RDEPENDS = "${3D_DEMOS_RDEPENDS_MATRIX} libgles-omap3-rawdemos"
+3D_DEMOS_RDEPENDS = "${3D_DEMOS_RDEPENDS_MATRIX}"
 3D_DEMOS_RDEPENDS_omap-a15 = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
 3D_DEMOS_RDEPENDS_ti43x    = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
 3D_DEMOS_RDEPENDS_ti33x    = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"

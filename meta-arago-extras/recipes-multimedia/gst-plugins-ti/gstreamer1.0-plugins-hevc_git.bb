@@ -3,7 +3,7 @@ HOMEPAGE = "https://git.ti.com/processor-sdk/gst-plugin-hevc"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2827f94fc0a1adeff4d9702e97ce2979"
 
-COMPATIBLE_MACHINE = "dra7xx|keystone"
+COMPATIBLE_MACHINE = "dra7xx"
 
 SRC_URI = "git://git.ti.com/processor-sdk/gst-plugin-hevc.git;protocol=git \
 	file://0001-configure.ac-stop-using-export-symbols-regex.patch"

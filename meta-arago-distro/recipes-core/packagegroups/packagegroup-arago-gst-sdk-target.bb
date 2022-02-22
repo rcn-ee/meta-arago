@@ -23,11 +23,6 @@ GSTREAMER_DEPS_append_dra7xx = " \
     ${GSTREAMER_DSP} \
 "
 
-GSTREAMER_DEPS_append_keystone = " \
-    gstreamer1.0-plugins-hevc-dev \
-    ${GSTREAMER_DSP} \
-"
-
 RDEPENDS_${PN} = " \
     ${GSTREAMER_DEPS} \
 "

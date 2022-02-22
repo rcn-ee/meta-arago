@@ -24,12 +24,6 @@ MULTIMEDIA_append_ti43x = " ${BARCODE_PKG}"
 MULTIMEDIA_append_omap-a15 = " ${BARCODE_PKG}"
 MULTIMEDIA_append_am65xx = " ${BARCODE_PKG}"
 
-MULTIMEDIA_append_keystone = " \
-    hevc-arm-decoder-dev \
-    hevc-arm-decoder-staticdev \
-    ${BARCODE_PKG} \
-"
-
 RDEPENDS_${PN} = "\
     ${MULTIMEDIA} \
     packagegroup-arago-gst-sdk-target \

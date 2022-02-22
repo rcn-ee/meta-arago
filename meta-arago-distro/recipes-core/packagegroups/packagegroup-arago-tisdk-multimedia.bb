@@ -12,10 +12,6 @@ MULTIMEDIA = " \
 
 MULTIMEDIA_omapl138 = ""
 
-MULTIMEDIA_append_keystone = " \
-    hevc-arm-decoder \
-"
-
 DUAL_CAMERA_DEMO = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'dual-camera-demo', '', d)}"
 IMAGE_GALLERY_DEMO = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'image-gallery', '', d)}"
 

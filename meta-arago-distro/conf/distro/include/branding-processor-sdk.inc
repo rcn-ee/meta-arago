@@ -32,6 +32,3 @@ SRCIPK_SHALLOW_DEPTH_pn-linux-ti-staging = "400"
 
 SRCIPK_CUSTOM_GIT_BRANCH_pn-u-boot-ti-staging = "processor-sdk-local"
 SRCIPK_CUSTOM_GIT_MESSAGE_pn-u-boot-ti-staging = "${SRCIPK_GIT_COMMIT_MESSAGE}"
-
-# Temporarily disable UBI images for K2 "server" rootfs due to size
-IMAGE_FSTYPES_remove_pn-tisdk-server-rootfs-image = "ubi ubifs"

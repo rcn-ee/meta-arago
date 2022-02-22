@@ -15,9 +15,6 @@ KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-source"
 KERNEL_SHADOW_CLONE := "${PREFERRED_PROVIDER_virtual/kernel}"
 KERNEL_SHADOW_CLONE_ENABLED := "${SRCIPK_SHALLOW_CLONE_pn-${KERNEL_SHADOW_CLONE}}"
 
-BOOT_MONITOR = ""
-BOOT_MONITOR_keystone = "boot-monitor-source"
-
 EXTRA_FILES = ""
 EXTRA_FILES_ti43x = "tisdk-uenv"
 EXTRA_FILES_omap-a15 = "tisdk-readme tisdk-uenv"
@@ -29,7 +26,6 @@ RDEPENDS_${PN} = "\
     ti-tisdk-makefile \
     ${UBOOT_SRC} \
     ${KERNEL_SRC} \
-    ${BOOT_MONITOR} \
     ${@oe.utils.conditional('KERNEL_SHADOW_CLONE_ENABLED','true','unshallow-repositories','',d)} \
     tisdk-install \
 "

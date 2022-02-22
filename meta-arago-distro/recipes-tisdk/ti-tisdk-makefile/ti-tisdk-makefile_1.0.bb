@@ -42,7 +42,6 @@ SRC_URI = "\
     file://Makefile_uio-module-drv \
     file://Makefile_pru-icss \
     file://Makefile_qt-opencv-opencl-opengl-multithreaded \
-    file://Makefile_ipsecmgr-mod \
     file://Makefile_openmpacc-examples \
     file://Makefile_linalg-examples \
     file://Makefile_ti-gc320-driver \
@@ -62,7 +61,6 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         qt-tstat \
 "
 
-MAKEFILES_MATRIX_GUI_keystone = ""
 MAKEFILES_MATRIX_GUI_omapl138 = ""
 MAKEFILES_MATRIX_GUI_j7 = ""
 
@@ -77,14 +75,6 @@ MAKEFILES = ""
 
 # Add device specific make targets
 
-MAKEFILES_append_omap3 = " u-boot-spl \
-"
-MAKEFILES_append_am37x-evm = " av-examples \
-                               ti-ocf-crypto-module \
-"
-MAKEFILES_append_am3517-evm = " av-examples \
-                                ti-ocf-crypto-module \
-"
 MAKEFILES_append_ti33x = " u-boot-spl \
                            ti-crypto-examples \
                            linux-dtbs \
@@ -137,40 +127,6 @@ MAKEFILES_append_omapl138 = " linux-dtbs \
                               ti-ipc \
 "
 
-MAKEFILES_append_keystone = " u-boot-spl \
-                              linux-dtbs \
-                              boot-monitor \
-                              cmem-mod \
-                              cryptodev \
-                              ti-crypto-examples \
-                              hplib-mod \
-                              uio-module-drv \
-                              ipsecmgr-mod \
-                              barcode-roi \
-                              ti-ipc \
-"
-
-#                              gdbserverproxy-module-drv 
-#                              debugss-module-drv 
-MAKEFILES_append_k2hk = " opencl-examples \
-                              openmpacc-examples \
-                              linalg-examples \
-"
-
-#                             gdbserverproxy-module-drv 
-#                             debugss-module-drv 
-MAKEFILES_append_k2l = " opencl-examples \
-                             openmpacc-examples \
-"
-
-#                             gdbserverproxy-module-drv 
-#                             debugss-module-drv 
-MAKEFILES_append_k2e = " opencl-examples \
-                             openmpacc-examples \
-"
-
-MAKEFILES_append_k2g = " pru-icss"
-
 MAKEFILES_append_k3 = " u-boot-spl \
                         linux-dtbs \
                         cryptodev \
@@ -216,17 +172,14 @@ TI_SGX_TARGET_ARCH_k3 = "aarch64"
 
 PLATFORM_DEBUGSS = ""
 PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
-PLATFORM_DEBUGSS_keystone = "KEYSTONE_PLATFORM"
 
 PLATFORM_GDBSERVERPROXY = ""
 PLATFORM_GDBSERVERPROXY_dra7xx = "DRA7xx_PLATFORM"
-PLATFORM_GDBSERVERPROXY_keystone = "KEYSTONE_PLATFORM"
 
 PRU_ICSS_INSTALL_TARGET = "pru-icss_install_none"
 PRU_ICSS_INSTALL_TARGET_ti33x = "pru-icss_install_am335x"
 PRU_ICSS_INSTALL_TARGET_ti43x = "pru-icss_install_am437x"
 PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
-PRU_ICSS_INSTALL_TARGET_k2g = "pru-icss_install_k2g"
 PRU_ICSS_INSTALL_TARGET_am65xx = "pru-icss_install_am65x"
 PRU_ICSS_INSTALL_TARGET_j7 = "pru-icss_install_j721e"
 PRU_ICSS_INSTALL_TARGET_am64xx = "pru-icss_install_am64x"
@@ -241,7 +194,6 @@ IPC_TOOLS_PATHS_R5F  = "ti.targets.arm.elf.R5F="\$\(TOOLCHAIN_PATH_R5\)""
 IPC_TOOLS_PATHS_C674 = "ti.targets.elf.C674="\$\(C6X_GEN_INSTALL_PATH\)""
 
 IPC_TOOLS_PATHS = ""
-IPC_TOOLS_PATHS_append_keystone = " ${IPC_TOOLS_PATHS_C66}"
 IPC_TOOLS_PATHS_append_omap-a15 = " ${IPC_TOOLS_PATHS_C66} ${IPC_TOOLS_PATHS_M4}"
 IPC_TOOLS_PATHS_append_omapl138 = " ${IPC_TOOLS_PATHS_C674}"
 IPC_TOOLS_PATHS_append_k3 = "${IPC_TOOLS_PATHS_R5F}"

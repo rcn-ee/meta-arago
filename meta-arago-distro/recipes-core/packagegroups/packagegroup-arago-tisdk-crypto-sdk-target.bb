@@ -10,7 +10,6 @@ CRYPTO_API = ""
 CRYPTO_API_ti33x = "cryptodev-module-dev"
 CRYPTO_API_ti43x = "cryptodev-module-dev"
 CRYPTO_API_dra7xx = "cryptodev-module-dev"
-CRYPTO_API_keystone = "cryptodev-module-dev"
 
 RDEPENDS_${PN} = "\
     openssl-dev \

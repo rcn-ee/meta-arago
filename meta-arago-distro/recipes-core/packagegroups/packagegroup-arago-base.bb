@@ -39,10 +39,6 @@ ARAGO_EXTRA = "\
     docker \
 "
 
-ARAGO_EXTRA_append_keystone = "\
-    k2-fw-initrd \
-"
-
 # minimal set of packages - needed to boot
 RDEPENDS_${PN} = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'packagegroup-base-zeroconf', '',d)} \

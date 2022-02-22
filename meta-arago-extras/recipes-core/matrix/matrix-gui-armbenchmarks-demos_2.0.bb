@@ -12,6 +12,6 @@ S = "${WORKDIR}/git/arm_apps"
 RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-arm"
 
 # Make sure the benchmarks have been installed
-RDEPENDS_${PN} += "arm-benchmarks lmbench nbench-byte matrix-gui-helper-scripts posix-smp-demo"
+RDEPENDS_${PN} += "arm-benchmarks lmbench nbench-byte matrix-gui-helper-scripts"
 
 FILES_${PN} += "${MATRIX_BASE_DIR}/*"

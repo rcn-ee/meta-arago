@@ -11,7 +11,6 @@ S = "${WORKDIR}/git/utilities_apps"
 do_install_prepend(){
    install -d ${D}${MATRIX_BASE_DIR}/html-apps/
    cp -rf ${S}/utility_eeprom/eeprom ${D}${MATRIX_BASE_DIR}/html-apps/
-   cp -rf ${S}/utility_flash/flash ${D}${MATRIX_BASE_DIR}/html-apps/
    cp -rf ${S}/utility_filesystem/filesystem ${D}${MATRIX_BASE_DIR}/html-apps/
    cp -rf ${S}/utility_info/info ${D}${MATRIX_BASE_DIR}/html-apps/
    cp -rf ${S}/utility_stats/stats ${D}${MATRIX_BASE_DIR}/html-apps/
@@ -19,7 +18,6 @@ do_install_prepend(){
 
 do_install_append(){
     rm ${D}${MATRIX_APP_DIR}/utility_eeprom/eeprom-utility.php
-    rm ${D}${MATRIX_APP_DIR}/utility_flash/flash-utility.php
     rm ${D}${MATRIX_APP_DIR}/utility_filesystem/filesystem-utility.php
     rm ${D}${MATRIX_APP_DIR}/utility_info/info-utility.php
     rm ${D}${MATRIX_APP_DIR}/utility_stats/stats-utility.php

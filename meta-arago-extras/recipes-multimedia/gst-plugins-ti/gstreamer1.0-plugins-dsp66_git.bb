@@ -11,7 +11,7 @@ SRCREV = "0abedafadbed693592804f23482a9447d81b2dbf"
 
 S = "${WORKDIR}/git"
 
-COMPATIBLE_MACHINE = "dra7xx|keystone"
+COMPATIBLE_MACHINE = "dra7xx"
 
 DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base opencl ti-cgt6x-native clocl-native imglib-c66x vlib-c66x gettext-native"
 

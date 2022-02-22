@@ -15,10 +15,9 @@ PR = "${INC_PR}.0"
 
 DEPENDS = "common-csl-ip-rtos libarch ti-xdctools-native doxygen-native ti-cgt6x-native ti-xdais libulm dsplib-c66x php libxslt-native libxslt openmp-rtos"
 
-COMPATIBLE_MACHINE = "k2hk|dra7xx"
+COMPATIBLE_MACHINE = "dra7xx"
 
 TARGET_dra7xx = "SOC_AM572x"
-TARGET_k2hk   = "SOC_K2H"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git"

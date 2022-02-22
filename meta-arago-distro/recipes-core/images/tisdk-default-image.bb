@@ -30,7 +30,6 @@ export IMAGE_BASENAME = "tisdk-default-image"
 
 # Disable ubi/ubifs as the filesystem requires more space than is
 # available on the HW.
-IMAGE_FSTYPES_remove_keystone = "ubifs ubi"
 IMAGE_FSTYPES_remove_omapl138 = "ubifs ubi"
 
 # Below is the delta in packages between old fuller and a new smaller default rootfs

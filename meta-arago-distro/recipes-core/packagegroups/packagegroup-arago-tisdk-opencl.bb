@@ -18,11 +18,6 @@ EXTRA_PKGS = " \
 "
 
 #    ti-fftw-examples
-EXTRA_PKGS_append_k2hk = " \
-    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples')} \
-"
-
-#    ti-fftw-examples
 EXTRA_PKGS_append_dra7xx = " \
     ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples')} \
 "

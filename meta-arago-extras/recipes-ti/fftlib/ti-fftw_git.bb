@@ -18,9 +18,8 @@ DEPENDS = "common-csl-ip-rtos common-csl-ip ti-xdctools-native ti-sysbios ti-cgt
 
 RDEPENDS_${PN} += "opencl-runtime"
 
-COMPATIBLE_MACHINE = "k2hk|dra7xx"
+COMPATIBLE_MACHINE = "dra7xx"
 TARGET_dra7xx = "SOC_AM572x"
-TARGET_k2hk   = "SOC_K2H"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/ti/fftw"

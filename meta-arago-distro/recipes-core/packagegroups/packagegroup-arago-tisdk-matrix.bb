@@ -183,12 +183,6 @@ MATRIX_APPS_append_dra7xx += " \
     matrix-tidl-demo-dogbreeds \
 "
 
-MATRIX_APPS_append_keystone = " \
-    matrix-gui-utility-demos    \
-    matrix-mc-demo-ipc          \
-    matrix-multimedia-demo-dsp66imgproc-f2f \
-"
-
 RDEPENDS_${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
     ${MATRIX_APPS}        \

@@ -13,10 +13,6 @@ UTILS = " \
     ${@oe.utils.all_distro_features(d, 'openmp', 'openmpacc-dev')} \
 "
 
-UTILS_append_k2hk = " \
-    ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-dev')} \
-"
-
 UTILS_append_dra7xx = " \
     ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-dev')} \
 "
