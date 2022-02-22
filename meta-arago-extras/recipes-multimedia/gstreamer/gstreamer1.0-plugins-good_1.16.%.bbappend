@@ -10,6 +10,7 @@ SRC_URI += " \
     file://0001-qmlglsink-fix-build-on-EGL-platform-without-X11-head.patch \
     file://0001-gst-plugins-good-1.16.3-v4l2h264enc-Add-Extended-con.patch \
     file://0001-Avoiding-Failure-to-allocate-required-memory.patch \
+    file://0001-v4l2bufferpool-Set-Video-Meta-to-Imported-Buffers.patch \
 "
 
 PR_append = ".arago3"
