@@ -25,7 +25,7 @@ EXTRA_OEMAKE = "\
     JOBS="${PARALLEL_MAKE}" \
 "
 
-do_create_srcipk_prepend() {
+do_create_srcipk:prepend() {
   rm -rf host_bios
 }
 
@@ -42,5 +42,5 @@ do_install() {
 }
 
 PACKAGES =+ "${PN}-firmware"
-FILES_${PN}-firmware += "${bindir}/simple_buffer_example/release/server_dsp.xe66"
-INSANE_SKIP_${PN}-firmware += "arch"
+FILES:${PN}-firmware += "${bindir}/simple_buffer_example/release/server_dsp.xe66"
+INSANE_SKIP:${PN}-firmware += "arch"

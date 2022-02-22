@@ -5,8 +5,8 @@ LICENSE = "Apache-2.0"
 
 PACKAGE_BEFORE_PN = "${PN}-compiler"
 
-RDEPENDS_${PN}-compiler = "${PN}"
-RDEPENDS_${PN}-dev += "${PN}-compiler"
+RDEPENDS:${PN}-compiler = "${PN}"
+RDEPENDS:${PN}-dev += "${PN}-compiler"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
 
@@ -29,6 +29,6 @@ inherit cmake
 
 S = "${WORKDIR}/git"
 
-FILES_${PN}-compiler = "${bindir}"
+FILES:${PN}-compiler = "${bindir}"
 
 BBCLASSEXTEND = "native nativesdk"

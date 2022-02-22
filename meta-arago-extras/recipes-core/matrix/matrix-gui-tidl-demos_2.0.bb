@@ -11,7 +11,7 @@ S = "${WORKDIR}/git/tidl_apps"
 # Make sure tidl submenu and app images has been installed
 TIDLDEMO_RDEPENDS += "matrix-gui-apps-images matrix-gui-submenus-tidl"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"
 
 PACKAGES = "matrix-tidl-demo-staticimg \
             matrix-tidl-demo-staticimg-lg2 \
@@ -25,72 +25,72 @@ PACKAGES = "matrix-tidl-demo-staticimg \
             matrix-tidl-demo-segment \
 "
 
-RDEPENDS_matrix-tidl-demo-staticimg = " \
+RDEPENDS:matrix-tidl-demo-staticimg = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-staticimg-lg2 = " \
+RDEPENDS:matrix-tidl-demo-staticimg-lg2 = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-staticimg-dsponly = " \
+RDEPENDS:matrix-tidl-demo-staticimg-dsponly = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-pnexamples = " \
+RDEPENDS:matrix-tidl-demo-pnexamples = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-livecam = " \
+RDEPENDS:matrix-tidl-demo-livecam = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-livecam-lg2 = " \
+RDEPENDS:matrix-tidl-demo-livecam-lg2 = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-dogbreeds = " \
+RDEPENDS:matrix-tidl-demo-dogbreeds = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-objdet = " \
+RDEPENDS:matrix-tidl-demo-objdet = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-objdet-livecam = " \
+RDEPENDS:matrix-tidl-demo-objdet-livecam = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-RDEPENDS_matrix-tidl-demo-segment = " \
+RDEPENDS:matrix-tidl-demo-segment = " \
     ${TIDLDEMO_RDEPENDS} \
 "
 
-FILES_matrix-tidl-demo-staticimg = "${MATRIX_APP_DIR}/tidl_demo_staticimg/*"
-FILES_matrix-tidl-demo-staticimg += "${bindir}/runTidlStaticImg.sh"
+FILES:matrix-tidl-demo-staticimg = "${MATRIX_APP_DIR}/tidl_demo_staticimg/*"
+FILES:matrix-tidl-demo-staticimg += "${bindir}/runTidlStaticImg.sh"
 
-FILES_matrix-tidl-demo-staticimg-lg2 = "${MATRIX_APP_DIR}/tidl_demo_staticimg_lg2/*"
-FILES_matrix-tidl-demo-staticimg-lg2 += "${bindir}/runTidlStaticImg_lg2.sh"
+FILES:matrix-tidl-demo-staticimg-lg2 = "${MATRIX_APP_DIR}/tidl_demo_staticimg_lg2/*"
+FILES:matrix-tidl-demo-staticimg-lg2 += "${bindir}/runTidlStaticImg_lg2.sh"
 
-FILES_matrix-tidl-demo-staticimg-dsponly = "${MATRIX_APP_DIR}/tidl_demo_staticimg_dsponly/*"
-FILES_matrix-tidl-demo-staticimg-dsponly += "${bindir}/runTidlStaticImg_dsponly.sh"
+FILES:matrix-tidl-demo-staticimg-dsponly = "${MATRIX_APP_DIR}/tidl_demo_staticimg_dsponly/*"
+FILES:matrix-tidl-demo-staticimg-dsponly += "${bindir}/runTidlStaticImg_dsponly.sh"
 
-FILES_matrix-tidl-demo-pnexamples = "${MATRIX_APP_DIR}/tidl_demo_pnexamples/*"
-FILES_matrix-tidl-demo-pnexamples += "${bindir}/runTidlPnExamples.sh"
+FILES:matrix-tidl-demo-pnexamples = "${MATRIX_APP_DIR}/tidl_demo_pnexamples/*"
+FILES:matrix-tidl-demo-pnexamples += "${bindir}/runTidlPnExamples.sh"
 
-FILES_matrix-tidl-demo-livecam   = "${MATRIX_APP_DIR}/tidl_demo_livecam/*"
-FILES_matrix-tidl-demo-livecam   += "${bindir}/runTidlLiveCam.sh"
+FILES:matrix-tidl-demo-livecam   = "${MATRIX_APP_DIR}/tidl_demo_livecam/*"
+FILES:matrix-tidl-demo-livecam   += "${bindir}/runTidlLiveCam.sh"
 
-FILES_matrix-tidl-demo-livecam-lg2  = "${MATRIX_APP_DIR}/tidl_demo_livecam_lg2/*"
-FILES_matrix-tidl-demo-livecam-lg2  += "${bindir}/runTidlLiveCam_lg2.sh"
+FILES:matrix-tidl-demo-livecam-lg2  = "${MATRIX_APP_DIR}/tidl_demo_livecam_lg2/*"
+FILES:matrix-tidl-demo-livecam-lg2  += "${bindir}/runTidlLiveCam_lg2.sh"
 
-FILES_matrix-tidl-demo-dogbreeds = "${MATRIX_APP_DIR}/tidl_demo_dogbreeds/*"
-FILES_matrix-tidl-demo-dogbreeds += "${bindir}/runTidlDogBreeds.sh"
+FILES:matrix-tidl-demo-dogbreeds = "${MATRIX_APP_DIR}/tidl_demo_dogbreeds/*"
+FILES:matrix-tidl-demo-dogbreeds += "${bindir}/runTidlDogBreeds.sh"
 
-FILES_matrix-tidl-demo-objdet   = "${MATRIX_APP_DIR}/tidl_demo_objdet/*"
-FILES_matrix-tidl-demo-objdet   += "${bindir}/runTidlObjdet.sh"
+FILES:matrix-tidl-demo-objdet   = "${MATRIX_APP_DIR}/tidl_demo_objdet/*"
+FILES:matrix-tidl-demo-objdet   += "${bindir}/runTidlObjdet.sh"
 
-FILES_matrix-tidl-demo-objdet-livecam   = "${MATRIX_APP_DIR}/tidl_demo_objdet_livecam/*"
-FILES_matrix-tidl-demo-objdet-livecam   += "${bindir}/runTidlObjdet_livecam.sh"
+FILES:matrix-tidl-demo-objdet-livecam   = "${MATRIX_APP_DIR}/tidl_demo_objdet_livecam/*"
+FILES:matrix-tidl-demo-objdet-livecam   += "${bindir}/runTidlObjdet_livecam.sh"
 
-FILES_matrix-tidl-demo-segment   = "${MATRIX_APP_DIR}/tidl_demo_segment/*"
-FILES_matrix-tidl-demo-segment   += "${bindir}/runTidlSegment.sh"
+FILES:matrix-tidl-demo-segment   = "${MATRIX_APP_DIR}/tidl_demo_segment/*"
+FILES:matrix-tidl-demo-segment   += "${bindir}/runTidlSegment.sh"

@@ -8,7 +8,7 @@ PV = "1.0"
 PR = "r0"
 
 SRC_URI = "http://ftp.de.debian.org/debian/pool/main/i/input-utils/input-utils_1.0.orig.tar.gz"
-SRC_URI_append_arm = " file://0001-autoconf-fix-for-cross-compilation-for-ARM.patch"
+SRC_URI:append:arm = " file://0001-autoconf-fix-for-cross-compilation-for-ARM.patch"
 
 SRC_URI[md5sum] = "3e58772e8647093b1de2f2c90bfb9ee8"
 SRC_URI[sha256sum] = "ab6f550f01bb5fcede492ab88711d82bacee4229cf2f5dc55a349b3bff4e3b13"

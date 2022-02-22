@@ -49,7 +49,7 @@ EXTRA_OECONF += "--disable-assertions \
                  --enable-targets=host-only"
 EXTRA_OEMAKE += "REQUIRES_RTTI=1 VERBOSE=1"
 
-do_configure_prepend() {
+do_configure:prepend() {
     # Remove RPATHs
     sed -i 's:$(RPATH) -Wl,$(\(ToolDir\|LibDir\|ExmplDir\))::g' ${S}/Makefile.rules
 
@@ -117,34 +117,34 @@ llvm_sysroot_preprocess() {
 }
 
 PACKAGES += "${PN}-bugpointpasses ${PN}-llvmhello"
-ALLOW_EMPTY_${PN} = "1"
-ALLOW_EMPTY_${PN}-staticdev = "1"
-FILES_${PN} = ""
-FILES_${PN}-staticdev = ""
-FILES_${PN}-dbg = " \
+ALLOW_EMPTY:${PN} = "1"
+ALLOW_EMPTY:${PN}-staticdev = "1"
+FILES:${PN} = ""
+FILES:${PN}-staticdev = ""
+FILES:${PN}-dbg = " \
     ${bindir}/${LLVM_DIR}/.debug \
     ${libdir}/${LLVM_DIR}/.debug/BugpointPasses.so \
     ${libdir}/${LLVM_DIR}/.debug/LLVMHello.so \
     /usr/src/debug \
 "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     ${bindir}/${LLVM_DIR} \
     ${includedir}/${LLVM_DIR} \
 "
-RRECOMMENDS_${PN}-dev += "${PN}-bugpointpasses ${PN}-llvmhello"
+RRECOMMENDS:${PN}-dev += "${PN}-bugpointpasses ${PN}-llvmhello"
 
-FILES_${PN}-bugpointpasses = "\
+FILES:${PN}-bugpointpasses = "\
     ${libdir}/${LLVM_DIR}/BugpointPasses.so \
 "
-FILES_${PN}-llvmhello = "\
+FILES:${PN}-llvmhello = "\
     ${libdir}/${LLVM_DIR}/LLVMHello.so \
 "
 
 PACKAGES_DYNAMIC = "^libllvm${LLVM_RELEASE}-.*$"
 NOAUTOPACKAGEDEBUG = "1"
 
-INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
+INSANE_SKIP:${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
 
 python llvm_populate_packages() {
     libdir = bb.data.expand('${libdir}', d)
@@ -154,9 +154,9 @@ python llvm_populate_packages() {
     split_staticdev_packages = do_split_packages(d, libllvm_libdir, '^lib(.*)\.a$', 'libllvm${LLVM_RELEASE}-%s-staticdev', 'Split staticdev package for %s', allow_dirs=True)
     if split_packages:
         pn = d.getVar('PN')
-        d.appendVar('RDEPENDS_' + pn, ' '+' '.join(split_packages))
-        d.appendVar('RDEPENDS_' + pn + '-dbg', ' '+' '.join(split_dbg_packages))
-        d.appendVar('RDEPENDS_' + pn + '-staticdev', ' '+' '.join(split_staticdev_packages))
+        d.appendVar('RDEPENDS:' + pn, ' '+' '.join(split_packages))
+        d.appendVar('RDEPENDS:' + pn + '-dbg', ' '+' '.join(split_dbg_packages))
+        d.appendVar('RDEPENDS:' + pn + '-staticdev', ' '+' '.join(split_staticdev_packages))
 }
 
-PACKAGESPLITFUNCS_prepend = "llvm_populate_packages "
+PACKAGESPLITFUNCS:prepend = "llvm_populate_packages "

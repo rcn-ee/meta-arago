@@ -5,7 +5,7 @@ include openmpacc.inc
 PR = "${INC_PR}.1"
 
 DEPENDS = "openmpacc clacc-native clocl-native ti-cgt6x-native"
-RDEPENDS_${PN} += "opencl-runtime"
+RDEPENDS:${PN} += "opencl-runtime"
 
 S = "${WORKDIR}/git/openmpacc-examples-src"
 
@@ -24,7 +24,7 @@ OMPACC_EXAMPLE_LIST = " target_update \
                         sub_section \
 "
 
-python do_unpack_append() {
+python do_unpack:append() {
     import shutil
 
     git_dir = d.expand("${WORKDIR}/git/examples")
@@ -68,12 +68,12 @@ do_install() {
     done
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${datadir}/ti/examples/openmpacc \
 "
 
-FILES_${PN}-dbg += "\
+FILES:${PN}-dbg += "\
     ${datadir}/ti/examples/openmpacc/*/.debug \
 "
 
-INSANE_SKIP_${PN} = "arch ldflags textrel staticdev"
+INSANE_SKIP:${PN} = "arch ldflags textrel staticdev"

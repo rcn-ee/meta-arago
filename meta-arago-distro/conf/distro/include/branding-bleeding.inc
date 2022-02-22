@@ -3,15 +3,15 @@
 require branding-core.inc
 
 # Auto rev important packages to pick up latest
-SRCREV_pn-linux-ti-staging = "${AUTOREV}"
-SRCREV_pn-linux-ti-staging-rt = "${AUTOREV}"
-SRCREV_pn-linux-ti-staging-systest = "${AUTOREV}"
-SRCREV_pn-u-boot-ti-staging = "${AUTOREV}"
-SRCREV_pn-ltp-ddt = "${AUTOREV}"
-#SRCREV_pn-optee-os = "${AUTOREV}"
-#SRCREV_pn-optee-client = "${AUTOREV}"
-#SRCREV_pn-optee-test = "${AUTOREV}"
-SRCREV_pn-arm-trusted-firmware = "${AUTOREV}"
+SRCREV:pn-linux-ti-staging = "${AUTOREV}"
+SRCREV:pn-linux-ti-staging-rt = "${AUTOREV}"
+SRCREV:pn-linux-ti-staging-systest = "${AUTOREV}"
+SRCREV:pn-u-boot-ti-staging = "${AUTOREV}"
+SRCREV:pn-ltp-ddt = "${AUTOREV}"
+#SRCREV:pn-optee-os = "${AUTOREV}"
+#SRCREV:pn-optee-client = "${AUTOREV}"
+#SRCREV:pn-optee-test = "${AUTOREV}"
+SRCREV:pn-arm-trusted-firmware = "${AUTOREV}"
 
 # Point to the latest ti linux firmware
 TI_LINUX_FW_SRCREV = "${AUTOREV}"
@@ -28,8 +28,8 @@ TI_RTOS_METADATA_BRANCH = "next"
 # Switch to internal nightlies, force overriding incorrect metadata values
 # and ensure parsing won't break w/o metadata file
 CORESDK_RTOS_WEBLINK_NIGHTLY ?= "file://empty"
-CORESDK_RTOS_WEBLINK_forcevariable = "${CORESDK_RTOS_WEBLINK_NIGHTLY}"
-CORESDK_RTOS_FIRMWARE_URL_forcevariable = "${DEFAULT_FIRMWARE_URL}"
+CORESDK_RTOS_WEBLINK:forcevariable = "${CORESDK_RTOS_WEBLINK_NIGHTLY}"
+CORESDK_RTOS_FIRMWARE_URL:forcevariable = "${DEFAULT_FIRMWARE_URL}"
 
 # Avoid use of old cached nightly file by using timed prefix
 DATEH := "${@time.strftime('%Y%m%d%H',time.gmtime())}"
@@ -37,4 +37,4 @@ CORESDK_RTOS_FILE_PREFIX = "${DATEH}-"
 CORESDK_RTOS_FILE_SUFFIX = ";downloadfilename=${CORESDK_RTOS_FILE_PREFIX}${DEFAULT_FIRMWARE_FILE}"
 
 # Build and assemble TI-SDK, but don't package it
-IMAGE_FSTYPES_pn-tisdk-core-bundle = ""
+IMAGE_FSTYPES:pn-tisdk-core-bundle = ""

@@ -16,7 +16,7 @@ BARCODE_RDEPENDS = ""
 #    ${@['','barcode-roi'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 #"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"
 
 PACKAGES = "matrix-machinevision-demo-dlp3dscanner \
             matrix-machinevision-demo-barcoderoi \
@@ -24,35 +24,35 @@ PACKAGES = "matrix-machinevision-demo-dlp3dscanner \
             matrix-machinevision-demo-simplepeopletracking \
 "
 
-RDEPENDS_matrix-machinevision-demo-dlp3dscanner = " \
+RDEPENDS:matrix-machinevision-demo-dlp3dscanner = " \
     ${MACHINEVISION_RDEPENDS} \
 "
 
-RDEPENDS_matrix-machinevision-demo-dlp3dscanner_append_dra7xx = " \
+RDEPENDS:matrix-machinevision-demo-dlp3dscanner:append:dra7xx = " \
     ${@['','point-cloud-viewer'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'gpu', True, False, d)]} \
 "
 
-RDEPENDS_matrix-machinevision-demo-barcoderoi = " \
+RDEPENDS:matrix-machinevision-demo-barcoderoi = " \
     ${MACHINEVISION_RDEPENDS} \
     ${BARCODE_RDEPENDS} \
 "
 
-RDEPENDS_matrix-machinevision-demo-barcoderoi-f2f = " \
+RDEPENDS:matrix-machinevision-demo-barcoderoi-f2f = " \
     ${MACHINEVISION_RDEPENDS} \
     ${BARCODE_RDEPENDS} \
 "
 
-RDEPENDS_matrix-machinevision-demo-simplepeopletracking = " \
+RDEPENDS:matrix-machinevision-demo-simplepeopletracking = " \
     ${MACHINEVISION_RDEPENDS} \
 "
 
-FILES_matrix-machinevision-demo-dlp3dscanner    = "${MATRIX_APP_DIR}/machinevision_dlp_3d_scanner/*"
-FILES_matrix-machinevision-demo-dlp3dscanner   += "${bindir}/runDlp3DScanner.sh"
+FILES:matrix-machinevision-demo-dlp3dscanner    = "${MATRIX_APP_DIR}/machinevision_dlp_3d_scanner/*"
+FILES:matrix-machinevision-demo-dlp3dscanner   += "${bindir}/runDlp3DScanner.sh"
 
-FILES_matrix-machinevision-demo-barcoderoi    = "${MATRIX_APP_DIR}/machinevision_barcode_roi/*"
-FILES_matrix-machinevision-demo-barcoderoi   += "${bindir}/runBarcodeRoi.sh"
-FILES_matrix-machinevision-demo-barcoderoi-f2f = "${MATRIX_APP_DIR}/machinevision_barcode_roi_f2f/*"
-FILES_matrix-machinevision-demo-barcoderoi-f2f += "${bindir}/runBarcodeRoiSave2File.sh"
+FILES:matrix-machinevision-demo-barcoderoi    = "${MATRIX_APP_DIR}/machinevision_barcode_roi/*"
+FILES:matrix-machinevision-demo-barcoderoi   += "${bindir}/runBarcodeRoi.sh"
+FILES:matrix-machinevision-demo-barcoderoi-f2f = "${MATRIX_APP_DIR}/machinevision_barcode_roi_f2f/*"
+FILES:matrix-machinevision-demo-barcoderoi-f2f += "${bindir}/runBarcodeRoiSave2File.sh"
 
-FILES_matrix-machinevision-demo-simplepeopletracking   = "${MATRIX_APP_DIR}/machinevision_simple_people_tracking/*"
-FILES_matrix-machinevision-demo-simplepeopletracking   += "${bindir}/runSimplePeopleTracking.sh"
+FILES:matrix-machinevision-demo-simplepeopletracking   = "${MATRIX_APP_DIR}/machinevision_simple_people_tracking/*"
+FILES:matrix-machinevision-demo-simplepeopletracking   += "${bindir}/runSimplePeopleTracking.sh"

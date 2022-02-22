@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 # Bump to 0.5.0+
 SRCREV = "e66966ef6a08cd3b491ee1df5c6c5d33baaf1f1c"
@@ -7,4 +7,4 @@ SRC_URI += " \
 	file://0001-Return-non-zero-value-on-test-failure.patch \
 	file://0002-cpuidle-Avoid-relative-paths.patch"
 
-PR_append = ".arago0"
+PR:append = ".arago0"

@@ -14,17 +14,17 @@ DEPENDS = "opencl opencl-monitor ti-cgt6x-native clocl-native"
 
 OCL_PERSISTENT_DEPENDS = "ti-xdctools-native ti-ipc-rtos ti-sysbios"
 
-DEPENDS_append_dra7xx = " ${OCL_PERSISTENT_DEPENDS}"
+DEPENDS:append:dra7xx = " ${OCL_PERSISTENT_DEPENDS}"
 
 # Split examples into two groups:
 # - offline-compile: examples who's kernels are precompiled (offline).
 # - runtime-compile: examples who's kernels are compiled during runtime.
 PACKAGES =+ "${PN}-runtime-compile ${PN}-runtime-compile-dbg ${PN}-offline-compile ${PN}-offline-compile-dbg"
 
-RDEPENDS_${PN} = "${PN}-runtime-compile ${PN}-offline-compile"
-RDEPENDS_${PN}-dev += "libgomp-dev"
-RDEPENDS_${PN}-offline-compile += "opencl-runtime"
-RDEPENDS_${PN}-runtime-compile += "opencl"
+RDEPENDS:${PN} = "${PN}-runtime-compile ${PN}-offline-compile"
+RDEPENDS:${PN}-dev += "libgomp-dev"
+RDEPENDS:${PN}-offline-compile += "opencl-runtime"
+RDEPENDS:${PN}-runtime-compile += "opencl"
 
 S = "${WORKDIR}/git/opencl_example_src"
 B = "${S}"
@@ -74,18 +74,18 @@ OCL_PERSISTENT_EXAMPLE_LIST = " persistent_clock_concurrent \
                                 persistent_task_spanning \
 "
 
-OCL_EXAMPLE_LIST_append_dra7xx = " ${OCL_PERSISTENT_EXAMPLE_LIST}"
+OCL_EXAMPLE_LIST:append:dra7xx = " ${OCL_PERSISTENT_EXAMPLE_LIST}"
 
 OCL_MPAX_EXAMPLE_LIST = " vecadd_mpax \
                           vecadd_mpax_openmp \
 "
 
-python do_unpack_append() {
+python do_unpack:append() {
     s = d.getVar("S")
     os.makedirs(s)
 }
 
-python do_patch_append() {
+python do_patch:append() {
     import shutil
     git_dir = d.expand("${WORKDIR}/git/examples")
     s = d.getVar("S")
@@ -117,28 +117,28 @@ do_install() {
 }
 
 # First package the examples which require run-time kernel compilation.
-FILES_${PN}-runtime-compile += "\
+FILES:${PN}-runtime-compile += "\
     ${@' '.join(['${datadir}/ti/examples/opencl/' + example for example in d.getVar('OCL_RUNTIME_COMPILE_EXAMPLE_LIST').split()])} \
 "
 
-FILES_${PN}-runtime-compile-dbg += "\
+FILES:${PN}-runtime-compile-dbg += "\
     ${@' '.join(['${datadir}/ti/examples/opencl/' + example + '/.debug' for example in d.getVar('OCL_RUNTIME_COMPILE_EXAMPLE_LIST').split()])} \
 "
 
 # Remaining examples will fall through to the "offline" package.
-FILES_${PN}-offline-compile += "\
+FILES:${PN}-offline-compile += "\
     ${datadir}/ti/examples/opencl/ \
 "
 
-FILES_${PN}-offline-compile-dbg += "\
+FILES:${PN}-offline-compile-dbg += "\
     ${datadir}/ti/examples/opencl/*/.debug \
 "
 
 # Add makefiles to dev package
-FILES_${PN}-dev = "${datadir}/ti/examples/opencl/Makefile \
+FILES:${PN}-dev = "${datadir}/ti/examples/opencl/Makefile \
                    ${datadir}/ti/examples/opencl/make.inc"
 
-ALLOW_EMPTY_${PN} = "1"
-INSANE_SKIP_${PN} = "arch ldflags textrel staticdev"
-INSANE_SKIP_${PN}-offline-compile = "arch ldflags textrel staticdev"
-INSANE_SKIP_${PN}-runtime-compile = "arch ldflags textrel staticdev"
+ALLOW_EMPTY:${PN} = "1"
+INSANE_SKIP:${PN} = "arch ldflags textrel staticdev"
+INSANE_SKIP:${PN}-offline-compile = "arch ldflags textrel staticdev"
+INSANE_SKIP:${PN}-runtime-compile = "arch ldflags textrel staticdev"

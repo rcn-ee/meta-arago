@@ -3,7 +3,7 @@ LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://../GL/gl.h;startline=1;endline=24;md5=10424a07c8d8310e34ced799b95f0fb6"
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
 SRC_URI = " \
     file://GL/gl.h \

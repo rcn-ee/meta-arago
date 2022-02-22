@@ -11,6 +11,6 @@ S = "${WORKDIR}/git/oprofile_apps"
 # Make sure profiling submenu and app images  has been installed
 # Include am-sysinfo because that package has the sample
 # executables for profiling.
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-oprofile oprofile oprofile-example"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-oprofile oprofile oprofile-example"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

@@ -17,4 +17,4 @@ do_install () {
     install -m 0644 ${WORKDIR}/eglfs_kms_cfg.json ${D}${sysconfdir}/qt5/
 }
 
-FILES_${PN} += "${sysconfdir}/profile.d/* ${sysconfdir}/qt5/*"
+FILES:${PN} += "${sysconfdir}/profile.d/* ${sysconfdir}/qt5/*"

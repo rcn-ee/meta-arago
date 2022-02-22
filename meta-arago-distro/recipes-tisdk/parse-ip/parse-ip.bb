@@ -21,4 +21,4 @@ do_install() {
     install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/parse-ip
 }
 
-FILES_${PN} = "${sysconfdir}"
+FILES:${PN} = "${sysconfdir}"

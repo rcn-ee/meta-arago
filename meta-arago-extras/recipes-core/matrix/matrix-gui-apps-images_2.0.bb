@@ -13,4 +13,4 @@ do_install(){
     cp -rf ${S}/ ${D}${MATRIX_APP_DIR}
 }
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

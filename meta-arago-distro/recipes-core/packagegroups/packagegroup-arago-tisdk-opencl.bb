@@ -18,14 +18,14 @@ EXTRA_PKGS = " \
 "
 
 #    ti-fftw-examples
-EXTRA_PKGS_append_dra7xx = " \
+EXTRA_PKGS:append:dra7xx = " \
     ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples')} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${MAIN_PKGS} \
 "
 
-RDEPENDS_${PN}-extra = "\
+RDEPENDS:${PN}-extra = "\
     ${EXTRA_PKGS} \
 "

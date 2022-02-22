@@ -21,4 +21,4 @@ inherit cmake pkgconfig
 
 EXTRA_OECMAKE += "-DGLFW_USE_WAYLAND=ON -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF"
 
-FILES_${PN}-dev += "${libdir}/cmake"
+FILES:${PN}-dev += "${libdir}/cmake"

@@ -1,2 +1,2 @@
-PR_append = ".arago0"
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+PR:append = ".arago0"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"

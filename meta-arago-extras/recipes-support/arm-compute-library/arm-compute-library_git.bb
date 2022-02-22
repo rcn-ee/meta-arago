@@ -18,7 +18,7 @@ SRCREV = "35c3eb011d8e2813d83c6a6cbe28a446534e4a14"
 
 S = "${WORKDIR}/git"
 
-do_compile_prepend() {
+do_compile:prepend() {
     sed -i 's/arm-linux-gnueabihf-/${TOOLCHAIN_SYS}-/' SConstruct
     sed -i 's/aarch64-linux-gnu-/${TOOLCHAIN_SYS}-/' SConstruct
     sed -i "s#env.Append(LINKFLAGS = \['-fopenmp'\])#env.Append(LINKFLAGS = \['-fopenmp','--sysroot=${STAGING_DIR_TARGET}'\])#" SConstruct
@@ -28,7 +28,7 @@ do_compile_prepend() {
 inherit scons
 
 EXTRA_OESCONS = "arch=armv7a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept ${TOOLCHAIN_OPTIONS}" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
-EXTRA_OESCONS_aarch64 = "arch=arm64-v8a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept ${TOOLCHAIN_OPTIONS}" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
+EXTRA_OESCONS:aarch64 = "arch=arm64-v8a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept ${TOOLCHAIN_OPTIONS}" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
 
 LIBS += "-larmpl_lp64_mp"
 
@@ -53,9 +53,9 @@ do_install() {
     cp $CP_ARGS ${S}/support ${D}${datadir}/${BPN}/.
 }
 
-INSANE_SKIP_${PN} = "ldflags"
-INSANE_SKIP_${PN}-dev = "dev-elf ldflags"
+INSANE_SKIP:${PN} = "ldflags"
+INSANE_SKIP:${PN}-dev = "dev-elf ldflags"
 
-FILES_${PN}-source = "${datadir}/${BPN}"
-INSANE_SKIP_${PN}-source = "ldflags libdir staticdev"
+FILES:${PN}-source = "${datadir}/${BPN}"
+INSANE_SKIP:${PN}-source = "ldflags libdir staticdev"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"

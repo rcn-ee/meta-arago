@@ -8,7 +8,7 @@ inherit packagegroup features_check
 
 REQUIRED_MACHINE_FEATURES = "gpu"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     libegl-dev \
     libdrm-dev \
     wayland-dev \

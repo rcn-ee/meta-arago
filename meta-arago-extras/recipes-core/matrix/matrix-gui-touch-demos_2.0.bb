@@ -9,6 +9,6 @@ inherit allarch
 S = "${WORKDIR}/git/touch_apps"
 
 # Make sure touch submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-touch"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-touch"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

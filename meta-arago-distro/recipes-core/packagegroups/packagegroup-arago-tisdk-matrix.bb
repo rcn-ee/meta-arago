@@ -35,27 +35,27 @@ MATRIX_QT_APPS = " \
     matrix-gui-thermostat-demo \
 "
 
-MATRIX_QT_APPS_append_omap-a15 = " \
+MATRIX_QT_APPS:append:omap-a15 = " \
     matrix-analytics-pdm-anomaly-detection \
     matrix-hmi-demo-evse            \
     matrix-hmi-demo-mmwavegesture   \
 "
 
-MATRIX_QT_APPS_append_am65xx = " \
+MATRIX_QT_APPS:append:am65xx = " \
     matrix-analytics-pdm-anomaly-detection \
                                     \
     matrix-hmi-demo-evse            \
     matrix-hmi-demo-mmwavegesture   \
 "
 
-MATRIX_QT_APPS_append_ti33x = " \
+MATRIX_QT_APPS:append:ti33x = " \
     matrix-analytics-pdm-anomaly-detection \
     matrix-hmi-demo-evse            \
     matrix-hmi-demo-protection-relays \
     matrix-hmi-demo-mmwavegesture   \
 "
 
-MATRIX_QT_APPS_append_ti43x = " \
+MATRIX_QT_APPS:append:ti43x = " \
     matrix-analytics-pdm-anomaly-detection \
     matrix-gui-apps-dual-camera     \
     matrix-gui-apps-image-gallery   \
@@ -76,7 +76,7 @@ MATRIX_GPU_DEMOS = " \
     matrix-3d-demo-kmscube \
 "
 
-MATRIX_GPU_DEMOS_append_omap-a15 = " \
+MATRIX_GPU_DEMOS:append:omap-a15 = " \
     matrix-3d-demo-kmscubevideo \
 "
 
@@ -85,7 +85,7 @@ MATRIX_OPENCL_APPS = " \
     matrix-opencl-demo-vecadd        \
 "
 
-MATRIX_OPENCL_APPS_append_dra7xx = " \
+MATRIX_OPENCL_APPS:append:dra7xx = " \
     matrix-video-analytics-opencv-opencl-opengl-demo \
     matrix-machinevision-demo-dlp3dscanner \
 "
@@ -99,14 +99,14 @@ MATRIX_OPENCV_OPENCL_APPS = " \
     matrix-machinevision-demo-barcoderoi-f2f \
 "
 
-MATRIX_OPENCV_OPENCL_APPS_omap-a15 = " \
+MATRIX_OPENCV_OPENCL_APPS:omap-a15 = " \
      matrix-machinevision-demo-barcoderoi \
      matrix-machinevision-demo-simplepeopletracking \
 "
 
 MATRIX_APPS = ""
 
-MATRIX_APPS_append_ti33x = "        \
+MATRIX_APPS:append:ti33x = "        \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-audiocapture \
     matrix-multimedia-demo-h264dec  \
@@ -123,7 +123,7 @@ MATRIX_APPS_append_ti33x = "        \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
-MATRIX_APPS_append_ti43x = "        \
+MATRIX_APPS:append:ti43x = "        \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-audiocapture \
     matrix-multimedia-demo-h264dec  \
@@ -138,7 +138,7 @@ MATRIX_APPS_append_ti43x = "        \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
-MATRIX_APPS_append_omap-a15 = "     \
+MATRIX_APPS:append:omap-a15 = "     \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-audiocapture \
     matrix-multimedia-demo-h265dec  \
@@ -159,7 +159,7 @@ MATRIX_APPS_append_omap-a15 = "     \
 #                                \
 #
 
-MATRIX_APPS_append_am65xx = "           \
+MATRIX_APPS:append:am65xx = "           \
     matrix-multimedia-demo-aac      \
     matrix-multimedia-demo-audiocapture \
     matrix-multimedia-demo-h264dec  \
@@ -169,7 +169,7 @@ MATRIX_APPS_append_am65xx = "           \
     ${MATRIX_OPENCV_ARM_ONLY_APPS}  \
 "
 
-MATRIX_APPS_append_dra7xx += " \
+MATRIX_APPS:append:dra7xx = " \
     matrix-multimedia-demo-dsp66imgproc \
     matrix-tidl-demo-staticimg \
     matrix-tidl-demo-pnexamples \
@@ -183,7 +183,7 @@ MATRIX_APPS_append_dra7xx += " \
     matrix-tidl-demo-dogbreeds \
 "
 
-RDEPENDS_${PN} = "        \
+RDEPENDS:${PN} = "        \
     ${MATRIX_ESSENTIALS}  \
     ${MATRIX_APPS}        \
     ${MATRIX_COMMON_APPS} \
@@ -194,6 +194,6 @@ RDEPENDS_${PN} = "        \
     ${@['',"${MATRIX_OPENCL_APPS}"][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
 
-RDEPENDS_${PN}-extra = " \
+RDEPENDS:${PN}-extra = " \
     ${@['',"${MATRIX_OPENCV_OPENCL_APPS}"][oe.utils.all_distro_features(d, 'opencl opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "

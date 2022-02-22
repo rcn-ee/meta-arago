@@ -1,7 +1,7 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-PR_append = ".tisdk1"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+PR:append = ".tisdk1"
 
-CXXFLAGS_append_omap-a15 = " -DQ_OS_BLACKBERRY"
+CXXFLAGS:append:omap-a15 = " -DQ_OS_BLACKBERRY"
 
 
 SRC_URI += " \

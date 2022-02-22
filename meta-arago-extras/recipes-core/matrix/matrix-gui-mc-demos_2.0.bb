@@ -15,13 +15,13 @@ PACKAGES = "matrix-mc-demo-ipc \
             matrix-mc-demo-imageproc \
 "
 
-RDEPENDS_matrix-mc-demo-ipc        = "${MC_DEMOS_RDEPENDS}"
-RDEPENDS_matrix-mc-demo-imageproc  = "${MC_DEMOS_RDEPENDS}"
+RDEPENDS:matrix-mc-demo-ipc        = "${MC_DEMOS_RDEPENDS}"
+RDEPENDS:matrix-mc-demo-imageproc  = "${MC_DEMOS_RDEPENDS}"
 
-FILES_matrix-mc-demo-ipc        = "${MATRIX_APP_DIR}/mc_demo_ipc/*"
-FILES_matrix-mc-demo-imageproc  = "${MATRIX_APP_DIR}/mc_demo_imageproc/*"
+FILES:matrix-mc-demo-ipc        = "${MATRIX_APP_DIR}/mc_demo_ipc/*"
+FILES:matrix-mc-demo-imageproc  = "${MATRIX_APP_DIR}/mc_demo_imageproc/*"
 
-FILES_matrix-mc-demo-ipc       += "${bindir}/mc_demo_ipc.sh"
-FILES_matrix-mc-demo-imageproc += "${bindir}/mc_demo_imageproc.sh \
+FILES:matrix-mc-demo-ipc       += "${bindir}/mc_demo_ipc.sh"
+FILES:matrix-mc-demo-imageproc += "${bindir}/mc_demo_imageproc.sh \
                                    ${bindir}/mc_run_dsp.sh \
 "

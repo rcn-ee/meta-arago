@@ -16,4 +16,4 @@ do_install() {
     install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
 }
 
-FILES_${PN} = "${sysconfdir} ${bindir}"
+FILES:${PN} = "${sysconfdir} ${bindir}"

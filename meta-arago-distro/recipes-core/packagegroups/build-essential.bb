@@ -4,4 +4,4 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "packagegroup-core-buildessential"
+RDEPENDS:${PN} = "packagegroup-core-buildessential"

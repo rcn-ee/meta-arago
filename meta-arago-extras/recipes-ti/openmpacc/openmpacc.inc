@@ -5,8 +5,8 @@ LICENSE = "BSD"
 inherit features_check
 
 REQUIRED_MACHINE_FEATURES = "dsp"
-REQUIRED_MACHINE_FEATURES_class-native = ""
-REQUIRED_MACHINE_FEATURES_class-nativesdk = ""
+REQUIRED_MACHINE_FEATURES:class-native = ""
+REQUIRED_MACHINE_FEATURES:class-nativesdk = ""
 REQUIRED_DISTRO_FEATURES = "opencl openmp"
 
 PV = "1.5.6.0"
@@ -14,7 +14,7 @@ INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://../debian/copyright;md5=aaa2a0939d08197132fc382e97b62eb0"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/openmpacc:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/openmpacc:"
 
 OMPACC_GIT_URI = "git://git.ti.com/openmp/ti-openmpacc.git"
 OMPACC_GIT_PROTOCOL = "git"

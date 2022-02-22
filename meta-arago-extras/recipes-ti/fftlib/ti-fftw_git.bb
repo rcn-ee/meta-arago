@@ -16,10 +16,10 @@ PR = "${INC_PR}.0"
 
 DEPENDS = "common-csl-ip-rtos common-csl-ip ti-xdctools-native ti-sysbios ti-cgt6x-native ti-xdais libulm fftlib dsplib-c66x opencl clocl-native libarch"
 
-RDEPENDS_${PN} += "opencl-runtime"
+RDEPENDS:${PN} += "opencl-runtime"
 
 COMPATIBLE_MACHINE = "dra7xx"
-TARGET_dra7xx = "SOC_AM572x"
+TARGET:dra7xx = "SOC_AM572x"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/ti/fftw"
@@ -58,6 +58,6 @@ do_install() {
     rm -rf ${D}${datadir}/ti
 }
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
-INSANE_SKIP_${PN} = "arch"
+INSANE_SKIP:${PN} = "arch"

@@ -6,7 +6,7 @@ MATRIX_FILES_DIR ?= "${S}"
 # MATRIX_FILES_DIR for .desktop files and then:
 #   1.  Install all non-script files into the MATRIX_APP_DIR
 #   2.  Install all script files into ${bindir}
-do_install_append(){
+do_install:append(){
     cd ${MATRIX_FILES_DIR}
     applist=`find . -name "*.desktop"`
 

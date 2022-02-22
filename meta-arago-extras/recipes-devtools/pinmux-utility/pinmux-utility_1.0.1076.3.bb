@@ -31,4 +31,4 @@ do_install() {
     cp -rf ${S}/configurations ${D}/${installdir}/
 }
 
-FILES_${PN} += "${installdir}/*"
+FILES:${PN} += "${installdir}/*"

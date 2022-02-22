@@ -32,5 +32,5 @@ do_install() {
 	done
 }
 
-INSANE_SKIP_${PN} += "ldflags already-stripped libdir"
-INSANE_SKIP_${PN}-dbg += "libdir"
+INSANE_SKIP:${PN} += "ldflags already-stripped libdir"
+INSANE_SKIP:${PN}-dbg += "libdir"

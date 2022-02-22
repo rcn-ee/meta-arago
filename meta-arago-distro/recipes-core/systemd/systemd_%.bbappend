@@ -1,12 +1,12 @@
-PR_append = ".arago6"
+PR:append = ".arago6"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG_append = " networkd resolved"
-USERADD_PARAM_${PN} += "--system -d / -M --shell /bin/nologin systemd-network;"
-USERADD_PARAM_${PN} += "--system -d / -M --shell /bin/nologin systemd-resolve;"
+PACKAGECONFIG:append = " networkd resolved"
+USERADD_PARAM:${PN} += "--system -d / -M --shell /bin/nologin systemd-network;"
+USERADD_PARAM:${PN} += "--system -d / -M --shell /bin/nologin systemd-resolve;"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://local.rules \
     file://usb1-rules.sh \
     file://usb2-rules.sh \
@@ -17,7 +17,7 @@ SRC_URI_append = " \
     file://sync-clocks.service \
 "
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/udev/rules.d/
     install -m 0644 ${WORKDIR}/local.rules ${D}${sysconfdir}/udev/rules.d/
 

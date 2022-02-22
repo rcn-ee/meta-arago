@@ -30,7 +30,7 @@ DEPENDS = " ti-llvm3.6-native \
             openmp-rtos \
 "
 
-DEPENDS_append_dra7xx = " opencl-tidl-fw \
+DEPENDS:append:dra7xx = " opencl-tidl-fw \
 "
 
 COMPATIBLE_MACHINE = "dra7xx"
@@ -38,7 +38,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/monitor"
 
-BUILD_TARGET_dra7xx = "ARM_AM57"
+BUILD_TARGET:dra7xx = "ARM_AM57"
 
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 export PDK_DIR = "${PDK_INSTALL_DIR}"
@@ -78,14 +78,14 @@ install_dsp_objs() {
     install -m ${OCL_FPERMS} monitor_${1}/dsp0.syms ${SHARE_PATH}/dsp.syms
 }
 
-do_install_append_dra7xx() {
+do_install:append:dra7xx() {
     install_dsp_objs am57x
     install -m ${OCL_DPERMS} -d ${D}${base_libdir}/firmware
     install -m ${OCL_FPERMS} monitor_am57x/dsp0.out ${D}${base_libdir}/firmware/dra7-dsp1-fw.xe66.${BPN}
     install -m ${OCL_FPERMS} monitor_am57x/dsp1.out ${D}${base_libdir}/firmware/dra7-dsp2-fw.xe66.${BPN}
 }
 
-ALTERNATIVE_${PN}_dra7xx = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66"
+ALTERNATIVE:${PN}:dra7xx = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66"
 ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/dra7-dsp1-fw.xe66"
 ALTERNATIVE_TARGET[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/dra7-dsp1-fw.xe66.${BPN}"
 ALTERNATIVE_LINK_NAME[dra7-dsp2-fw.xe66] = "${base_libdir}/firmware/dra7-dsp2-fw.xe66"
@@ -93,11 +93,11 @@ ALTERNATIVE_TARGET[dra7-dsp2-fw.xe66] = "${base_libdir}/firmware/dra7-dsp2-fw.xe
 ALTERNATIVE_PRIORITY = "100"
 
 MONITOR_FIRMWARE = ""
-MONITOR_FIRMWARE_dra7xx = "${base_libdir}/firmware/*"
+MONITOR_FIRMWARE:dra7xx = "${base_libdir}/firmware/*"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/ti/opencl/* \
     ${MONITOR_FIRMWARE} \
 "
 
-INSANE_SKIP_${PN} = "arch"
+INSANE_SKIP:${PN} = "arch"

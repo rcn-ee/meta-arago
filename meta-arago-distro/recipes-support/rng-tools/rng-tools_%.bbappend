@@ -1,10 +1,10 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago0"
+PR:append = ".arago0"
 
 SRC_URI += "file://rngd.rules"
 
-do_install_append() {
+do_install:append() {
 	# remove duplicate initscript
 	rm -f ${D}${sysconfdir}/init.d/rng-tools
 

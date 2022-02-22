@@ -24,7 +24,7 @@ EXTRA_TI_TOOLS = " \
     ${@oe.utils.all_distro_features(d, "opencl opencv", "${TIDL_TOOLS}")} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     nativesdk-packagegroup-sdk-host \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'nativesdk-wayland-dev', '', d)} \
     nativesdk-python3-distutils \
@@ -34,6 +34,6 @@ RDEPENDS_${PN} = "\
     ${EXTRA_TI_TOOLS} \
 "
 
-RDEPENDS_${PN}_remove = "\
+RDEPENDS:${PN}:remove = "\
     nativesdk-meson \
 "

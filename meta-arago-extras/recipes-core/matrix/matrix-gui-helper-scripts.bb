@@ -8,9 +8,9 @@ inherit allarch
 
 S = "${WORKDIR}/git/scripts"
 
-do_install_append(){
+do_install:append(){
     install -d ${D}${bindir}
     install -m 0755 ${S}/optimize-benchmark.sh ${D}${bindir}/ 
 }
 
-FILES_${PN} += "{bindir}/*"
+FILES:${PN} += "{bindir}/*"

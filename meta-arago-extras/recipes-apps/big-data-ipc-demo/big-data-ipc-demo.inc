@@ -20,10 +20,10 @@ PV = "01.03.00.00"
 S = "${WORKDIR}/git"
 
 PLATFORM = "UNKNOWN"
-PLATFORM_omap-a15 = "DRA7XX"
+PLATFORM:omap-a15 = "DRA7XX"
 
 IPC_TARGETS = ""
-IPC_TARGETS_omap-a15 = "\
+IPC_TARGETS:omap-a15 = "\
     gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
     ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
     ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \

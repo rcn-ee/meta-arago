@@ -1,3 +1,3 @@
-PR_append = ".arago0"
+PR:append = ".arago0"
 
 LICENSE = "GPLv2+"

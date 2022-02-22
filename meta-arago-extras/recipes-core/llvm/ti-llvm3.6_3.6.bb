@@ -3,12 +3,12 @@ HOMEPAGE = "https://git.ti.com/opencl/llvm"
 
 PR = "r7"
 
-do_configure_prepend_class-native() {
+do_configure:prepend:class-native() {
     # Fix paths in llvm-config
     sed -i "s|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|sys::path::parent_path(CurrentPath))\.str()|g" ${S}/tools/llvm-config/llvm-config.cpp
 }
 
-do_configure_prepend() {
+do_configure:prepend() {
     # Workaround for libdir fix for multilib to undo what is currently upstream
     sed -i 's:${base_libdir}:/${baselib}:g' ${S}/tools/llvm-config/llvm-config.cpp
 }
@@ -18,7 +18,7 @@ require recipes-core/llvm/llvm.inc
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=47e311aa9caedd1b3abf098bd7814d1d"
 
 DEPENDS += "libxml2 groff-native"
-DEPENDS_append_class-target = " valgrind"
+DEPENDS:append:class-target = " valgrind"
 
 LLVM_DIR = "ti-llvm${PV}"
 
@@ -58,7 +58,7 @@ EXTRA_OECONF += " --enable-targets="host,arm,c6000,msp430" \
 
 EXTRA_OEMAKE += "LIBXML2_INC="${LIBXML2_INC}" LIBXML2_LIBS="${LIBXML2_LIBS}""
 
-do_compile_class-native() {
+do_compile:class-native() {
   cd ${LLVM_BUILD_DIR}
 
   # Fix libdir for multilib
@@ -67,7 +67,7 @@ do_compile_class-native() {
   oe_runmake
 }
 
-do_compile_class-nativesdk() {
+do_compile:class-nativesdk() {
     cd ${LLVM_BUILD_DIR}
 
     # Fix libdir for multilib
@@ -119,7 +119,7 @@ do_compile() {
     oe_runmake
 }
 
-do_install_append_class-target() {
+do_install:append:class-target() {
     for b in ${D}${bindir}/${LLVM_DIR}/${HOST_SYS}-clang*; do
         if [ ! -L ${b} ]; then
             mv ${b} ${D}${bindir}/`echo "${b}" | sed -e 's|${D}${bindir}/${LLVM_DIR}/${HOST_SYS}-||g'`
@@ -127,7 +127,7 @@ do_install_append_class-target() {
     done
 }
 
-do_install_class-native() {
+do_install:class-native() {
     cd ${LLVM_BUILD_DIR}
     oe_runmake DESTDIR=${LLVM_INSTALL_DIR} install
 
@@ -158,8 +158,8 @@ do_install_class-native() {
 }
 
 
-SYSROOT_PREPROCESS_FUNCS_class-target += "llvm_sysroot_preprocess_target"
-SYSROOT_PREPROCESS_FUNCS_class-nativesdk += "llvm_sysroot_preprocess_target"
+SYSROOT_PREPROCESS_FUNCS:class-target += "llvm_sysroot_preprocess_target"
+SYSROOT_PREPROCESS_FUNCS:class-nativesdk += "llvm_sysroot_preprocess_target"
 
 llvm_sysroot_preprocess() {
     :
@@ -170,7 +170,7 @@ llvm_sysroot_preprocess_target() {
     mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${PV}-ti
 }
 
-INSANE_SKIP_${PN} += "installed-vs-shipped"
-INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE}.0 += "dev-so"
+INSANE_SKIP:${PN} += "installed-vs-shipped"
+INSANE_SKIP:${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE}.0 += "dev-so"
 
 BBCLASSEXTEND = "native nativesdk"

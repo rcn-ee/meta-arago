@@ -36,7 +36,7 @@ do_install () {
     cp ${CP_ARGS} ${S}/include/TI/* ${D}${includedir}/VX/TI
 }
 
-FILES_${PN}-staticdev = "${libdir}"
-FILES_${PN}-dev = "${includedir}"
+FILES:${PN}-staticdev = "${libdir}"
+FILES:${PN}-dev = "${includedir}"
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"

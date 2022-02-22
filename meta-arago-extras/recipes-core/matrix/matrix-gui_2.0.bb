@@ -7,7 +7,7 @@ SECTION = "multimedia"
 
 PR = "r37"
 
-SYSTEMD_SERVICE_${PN} = "matrix-gui-2.0.service"
+SYSTEMD_SERVICE:${PN} = "matrix-gui-2.0.service"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -58,6 +58,6 @@ do_install(){
 
 GUIDEPS = "${@bb.utils.contains('MACHINE_FEATURES','gpu',"matrix-gui-browser refresh-screen",'',d)}"
 
-RDEPENDS_${PN} += "matrix-lighttpd-config lighttpd lighttpd-module-cgi lighttpd-module-deflate lighttpd-module-expire php php-cgi php-cli ${GUIDEPS}"
+RDEPENDS:${PN} += "matrix-lighttpd-config lighttpd lighttpd-module-cgi lighttpd-module-deflate lighttpd-module-expire php php-cgi php-cli ${GUIDEPS}"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

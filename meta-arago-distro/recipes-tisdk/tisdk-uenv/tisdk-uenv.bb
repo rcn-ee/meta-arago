@@ -19,7 +19,7 @@ do_install () {
     install -m 0644 ${S}/uEnv.txt ${D}/board-support/prebuilt-images/
 }
 
-FILES_${PN} += "board-support/*"
+FILES:${PN} += "board-support/*"
 
 # deploy files for wic image
 inherit deploy

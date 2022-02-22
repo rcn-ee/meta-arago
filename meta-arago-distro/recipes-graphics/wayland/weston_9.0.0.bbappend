@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago3"
+PR:append = ".arago3"
 
 #        file://0002-weston-Allow-visual_id-to-be-0.patch
 SRC_URI += " \

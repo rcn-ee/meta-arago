@@ -1,5 +1,5 @@
-FILESEXTRAPATHS_prepend := "${COREBASE}/meta/recipes-extended/ltp/ltp:"
-FILESEXTRAPATHS_prepend := "${ARAGOBASE}/meta-arago-extras/recipes-extended/ltp/ltp:"
+FILESEXTRAPATHS:prepend := "${COREBASE}/meta/recipes-extended/ltp/ltp:"
+FILESEXTRAPATHS:prepend := "${ARAGOBASE}/meta-arago-extras/recipes-extended/ltp/ltp:"
 
 require recipes-extended/ltp/ltp_${PV}.bb
 
@@ -12,24 +12,24 @@ DEPENDS += "alsa-lib"
 
 PE = "1"
 PR = "r5"
-PV_append = "+git${SRCPV}"
+PV:append = "+git${SRCPV}"
 
 SRCREV = "cfff0a2c889f29c03b9a3ee547a147b1c6727e2c"
 BRANCH ?= "master"
 
-SRC_URI_remove = "git://github.com/linux-test-project/ltp.git;protocol=https;branch=master"
-SRC_URI_prepend = "git://git.ti.com/test-automation/ltp-ddt.git;branch=${BRANCH} "
+SRC_URI:remove = "git://github.com/linux-test-project/ltp.git;protocol=https;branch=master"
+SRC_URI:prepend = "git://git.ti.com/test-automation/ltp-ddt.git;branch=${BRANCH} "
 
 export prefix = "/opt/ltp"
 export exec_prefix = "/opt/ltp"
 
-EXTRA_OEMAKE_append = " \
+EXTRA_OEMAKE:append = " \
     KERNEL_USR_INC=${STAGING_INCDIR} \
     ALSA_INCPATH=${STAGING_INCDIR} \
     ALSA_LIBPATH=${STAGING_LIBDIR} \
 "
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
     acl \
     at \
     pm-qa \
@@ -37,7 +37,7 @@ RDEPENDS_${PN} += "\
     memtester \
 "
 
-do_install_prepend() {
+do_install:prepend() {
 	# Upstream ltp recipe wants to remove this test case in do_install
 	install -d ${D}${prefix}/runtest/
 	echo "memcg_stress" >> ${D}${prefix}/runtest/controllers

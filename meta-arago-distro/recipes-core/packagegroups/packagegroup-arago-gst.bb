@@ -21,16 +21,16 @@ GSTREAMER_DSP = " \
     ${@['','gstreamer1.0-plugins-dsp66'][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
 
-GSTREAMER_DEPS_append_dra7xx = " \
+GSTREAMER_DEPS:append:dra7xx = " \
     gstreamer1.0-plugins-hevc \
     ${GSTREAMER_DSP} \
 "
 
 GSTREAMER_ACCEL_MM = ""
-GSTREAMER_ACCEL_MM_omap-a15 = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', "gstreamer1.0-plugins-ducati", '', d)}"
-GSTREAMER_ACCEL_MM_append_dra7xx = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', " gstreamer1.0-plugins-vpe", '', d)}"
+GSTREAMER_ACCEL_MM:omap-a15 = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', "gstreamer1.0-plugins-ducati", '', d)}"
+GSTREAMER_ACCEL_MM:append:dra7xx = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', " gstreamer1.0-plugins-vpe", '', d)}"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${GSTREAMER_DEPS} \
     ${GSTREAMER_ACCEL_MM} \
     "

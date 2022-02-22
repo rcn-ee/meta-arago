@@ -12,16 +12,16 @@ BLUETOOTH_STACK = "\
 
 CONNECTIVITY_RDEPENDS = ""
 
-CONNECTIVITY_RDEPENDS_ti33x  = "\
+CONNECTIVITY_RDEPENDS:ti33x  = "\
     wpa-supplicant-dev \
     ${BLUETOOTH_STACK} \
 "
 
-CONNECTIVITY_RDEPENDS_ti43x  = "\
+CONNECTIVITY_RDEPENDS:ti43x  = "\
     wpa-supplicant-dev \
     ${BLUETOOTH_STACK} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${CONNECTIVITY_RDEPENDS} \
 "

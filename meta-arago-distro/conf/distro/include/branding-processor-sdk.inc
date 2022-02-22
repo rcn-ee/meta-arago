@@ -2,8 +2,8 @@ ARAGO_TISDK_IMAGE = "processor-sdk-linux-image"
 
 # Set CMEM reserved memory region
 RESERVE_CMEM = "${@bb.utils.contains('MACHINE_FEATURES','dsp','1','0',d)}"
-CMEM_BASE_omap-a15 ?= "a0000000"
-CMEM_SIZE_omap-a15 ?= "08000000"
+CMEM_BASE:omap-a15 ?= "a0000000"
+CMEM_SIZE:omap-a15 ?= "08000000"
 
 # To create newlines in the message \n is used and the slash must be escaped
 # to function properly
@@ -25,10 +25,10 @@ script located in the sdk\'s bin directory\\n\
 The script may take several minutes but you will then have a full copy of\\n\
 the git repository including its entire git history.\\n"
 
-SRCIPK_CUSTOM_GIT_BRANCH_pn-linux-ti-staging = "processor-sdk-local"
-SRCIPK_CUSTOM_GIT_MESSAGE_pn-linux-ti-staging = "${SRCIPK_SHALLOW_GIT_COMMIT_MESSAGE}"
-SRCIPK_SHALLOW_CLONE_pn-linux-ti-staging = "true"
-SRCIPK_SHALLOW_DEPTH_pn-linux-ti-staging = "400"
+SRCIPK_CUSTOM_GIT_BRANCH:pn-linux-ti-staging = "processor-sdk-local"
+SRCIPK_CUSTOM_GIT_MESSAGE:pn-linux-ti-staging = "${SRCIPK_SHALLOW_GIT_COMMIT_MESSAGE}"
+SRCIPK_SHALLOW_CLONE:pn-linux-ti-staging = "true"
+SRCIPK_SHALLOW_DEPTH:pn-linux-ti-staging = "400"
 
-SRCIPK_CUSTOM_GIT_BRANCH_pn-u-boot-ti-staging = "processor-sdk-local"
-SRCIPK_CUSTOM_GIT_MESSAGE_pn-u-boot-ti-staging = "${SRCIPK_GIT_COMMIT_MESSAGE}"
+SRCIPK_CUSTOM_GIT_BRANCH:pn-u-boot-ti-staging = "processor-sdk-local"
+SRCIPK_CUSTOM_GIT_MESSAGE:pn-u-boot-ti-staging = "${SRCIPK_GIT_COMMIT_MESSAGE}"

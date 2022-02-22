@@ -15,9 +15,9 @@ TISDK_TOOLCHAIN_EXTRA_TARGET = "\
     packagegroup-arago-tisdk-connectivity-sdk-target \
     packagegroup-arago-tisdk-crypto-sdk-target \
 "
-TISDK_TOOLCHAIN_EXTRA_TARGET_omapl138 = ""
+TISDK_TOOLCHAIN_EXTRA_TARGET:omapl138 = ""
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-qte-toolchain-target','',d)} \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-gtk-sdk-target','',d)} \
     ${TISDK_TOOLCHAIN_BASE_TARGET} \

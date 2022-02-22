@@ -26,6 +26,6 @@ do_install() {
 
 PACKAGES += "matrix-gui-apps-image-gallery"
 
-RDEPENDS_matrix-gui-apps-image-gallery  = "matrix-gui-apps-images matrix-gui-submenus-camera ${PN}"
+RDEPENDS:matrix-gui-apps-image-gallery  = "matrix-gui-apps-images matrix-gui-submenus-camera ${PN}"
 
-FILES_matrix-gui-apps-image-gallery += "${MATRIX_APP_DIR}/*"
+FILES:matrix-gui-apps-image-gallery += "${MATRIX_APP_DIR}/*"

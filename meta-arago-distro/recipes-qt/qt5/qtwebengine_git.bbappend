@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-PR_append = ".arago1"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+PR:append = ".arago1"
 
 DEPENDS += "bison-native"

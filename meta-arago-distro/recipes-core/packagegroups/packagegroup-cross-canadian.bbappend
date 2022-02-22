@@ -1,10 +1,10 @@
-PR_append = ".arago0"
+PR:append = ".arago0"
 
 SECONDARY_TARGET_ARCH ?= "invalid"
 
 SECONDARY_TOOLCHAIN = "gcc-cross-canadian-${SECONDARY_TARGET_ARCH} \
                        binutils-cross-canadian-${SECONDARY_TARGET_ARCH}"
 
-RDEPENDS_${PN}_append = " \
+RDEPENDS:${PN}:append = " \
     ${@oe.utils.conditional('SECONDARY_TARGET_ARCH', 'invalid', '', '${SECONDARY_TOOLCHAIN}', d)} \
 "

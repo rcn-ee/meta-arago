@@ -28,7 +28,7 @@
 # 
 # Creation of the source ipk can be controlled per package by setting
 # CREATE_SRCIPK = "1" in the package recipe or by setting
-# CREATE_SRCIPK_pn-<package name> = "1" in your local.conf
+# CREATE_SRCIPK:pn-<package name> = "1" in your local.conf
 #
 #TODO: 
 # Need to figure out how to use opkg-build in this class.
@@ -89,7 +89,7 @@ SRCIPK_SHALLOW_DEPTH ?= "1"
 get_remote() {
     git_repo="$1"
 
-    if [ "$git_repo" == "" ]
+    if [ "$git_repo" = "" ]
     then
         echo "git_repo not passed to get_remote"
         exit 1
@@ -167,7 +167,7 @@ adjust_git() {
         then
             # If SRCIPK_SHALLOW_CLONE is true then make a shallow copy of the
             # git repository and then fix up the git URLs
-            if [ "${SRCIPK_SHALLOW_CLONE}" == "true" ]
+            if [ "${SRCIPK_SHALLOW_CLONE}" = "true" ]
             then
                 limit_git_history
             fi
@@ -286,17 +286,17 @@ python () {
 PACKAGES_DYNAMIC += "${PN}-source"
 
 # Do not perform any QA checks on sourceipk packages
-INSANE_SKIP_${PN}-source += "${@oe.utils.conditional("${CREATE_SRCIPK}", "0", "", "${ALL_QA}", d)}"
+INSANE_SKIP:${PN}-source += "${@oe.utils.conditional("${CREATE_SRCIPK}", "0", "", "${ALL_QA}", d)}"
 
 python __anonymous () {
     if d.getVar("CREATE_SRCIPK") != "0":
         if '${PN}-source' not in d.getVar("PACKAGES", False):
             d.appendVar('PACKAGES', ' ${PN}-source')
         pn = d.getVar("PN")
-        d.setVar('FILES_%s-source' % (pn), '${SRCIPK_INSTALL_DIR}')
+        d.setVar('FILES:%s-source' % (pn), '${SRCIPK_INSTALL_DIR}')
 }
 
-PACKAGESPLITFUNCS_append = " ${@oe.utils.conditional('CREATE_SRCIPK','0','','populate_srcipk_package',d)}"
+PACKAGESPLITFUNCS:append = " ${@oe.utils.conditional('CREATE_SRCIPK','0','','populate_srcipk_package',d)}"
 populate_srcipk_package() {
     install -d ${PKGDEST}/${PN}-source/${SRCIPK_INSTALL_DIR}
     cp -Prf --preserve=mode,timestamps --no-preserve=ownership \

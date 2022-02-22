@@ -3,17 +3,17 @@
 # meta-arago switches to Dora
 
 # look for files in this layer first
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago5"
+PR:append = ".arago5"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
                   file://usb1-rules.sh \
                   file://usb2-rules.sh"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/${bindir}
 
     install -m 0755 ${WORKDIR}/usb1-rules.sh ${D}${bindir}/usb1-rules.sh

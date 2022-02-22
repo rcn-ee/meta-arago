@@ -4,7 +4,7 @@ LICENSE = "MIT"
 
 inherit packagegroup nativesdk
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     nativesdk-packagegroup-arago-tisdk-host \
     nativesdk-qtbase \
     nativesdk-qttools \

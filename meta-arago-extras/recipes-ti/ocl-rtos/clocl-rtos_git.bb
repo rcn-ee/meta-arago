@@ -13,8 +13,8 @@ DEPENDS = "ti-llvm3.6-native boost-native"
 
 S = "${WORKDIR}/git/host"
 
-TARGET_class-target = "am57xx"
-TARGET_class-native = "x86"
+TARGET:class-target = "am57xx"
+TARGET:class-native = "x86"
 
 export WANT_LLVM_RELEASE = "3.6-ti"
 export DESTDIR="${D}${OCL_RTOS_INSTALL_DIR_RECIPE}"

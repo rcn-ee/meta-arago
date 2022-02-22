@@ -1,10 +1,10 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 GLES_EXTRA_DEPS = "libdrm wayland"
 
 PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl ${GLES_EXTRA_DEPS}"
 
-PR_append = ".arago17"
+PR:append = ".arago17"
 
 QT_CONFIG_FLAGS += "-qpa ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', 'eglfs', d)}"
 
@@ -23,7 +23,7 @@ SRC_URI += "\
     file://0001-eglfs-Force-888-format-only-on-env-flag.patch \
 "
 
-python do_patch_append() {
+python do_patch:append() {
     import shutil
 
     work_dir = d.getVar("WORKDIR")
@@ -34,13 +34,13 @@ python do_patch_append() {
 }
 
 # Add symbolic link qt5/examples for backward compatibility
-do_install_append () {
+do_install:append () {
 
     install -d ${D}${datadir}/qt5
     ln -sf ../examples ${D}${datadir}/qt5/examples
 }
 
-FILES_${PN}-examples +=  "${datadir}/qt5/*"
+FILES:${PN}-examples +=  "${datadir}/qt5/*"
 
 
-RDEPENDS_${PN} += "${PN}-conf"
+RDEPENDS:${PN} += "${PN}-conf"

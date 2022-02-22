@@ -16,7 +16,7 @@ PR = "r6"
 inherit update-rc.d pkgconfig
 INITSCRIPT_NAME="hostapd"
 
-CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
+CONFFILES:${PN} += "${sysconfdir}/hostapd.conf"
 
 SRC_URI = "git://git.ti.com/wilink8-wlan/hostap.git;protocol=git;branch=${BRANCH} \
            file://defconfig \

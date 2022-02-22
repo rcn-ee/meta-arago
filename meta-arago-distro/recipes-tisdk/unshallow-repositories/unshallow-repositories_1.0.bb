@@ -12,5 +12,5 @@ do_install () {
     install -m 0755 ${WORKDIR}/unshallow-repositories.sh ${D}/bin
 }
 
-FILES_${PN} = "/*"
-RDEPENDS_${PN} += "bash"
+FILES:${PN} = "/*"
+RDEPENDS:${PN} += "bash"

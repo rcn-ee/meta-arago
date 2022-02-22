@@ -21,7 +21,7 @@ do_configure() {
 	oe_runconf --with-lzo-headers=${STAGING_INCDIR}/lzo --with-lzo-lib=${STAGING_LIBDIR} --with-ssl-headers=${STAGING_INCDIR}/openssl --with-ssl-lib=${STAGING_LIBDIR}
 }
 
-do_install_append() {
+do_install:append() {
 	rm -rf ${D}${localstatedir}/run
 	rm -rf ${D}${localstatedir}/lock
 }

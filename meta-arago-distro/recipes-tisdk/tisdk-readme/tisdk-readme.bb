@@ -19,4 +19,4 @@ do_install () {
     install -m 0644 ${S}/README ${D}/board-support/prebuilt-images/
 }
 
-FILES_${PN} += "board-support/*"
+FILES:${PN} += "board-support/*"

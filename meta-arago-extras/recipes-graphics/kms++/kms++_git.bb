@@ -18,14 +18,14 @@ DEPENDS = "drm fmt"
 
 PACKAGES =+ "${PN}-python"
 
-RDEPENDS_${PN}-python += "python3-core"
+RDEPENDS:${PN}-python += "python3-core"
 
-FILES_${PN}-python += "${libdir}/python*/site-packages"
+FILES:${PN}-python += "${libdir}/python*/site-packages"
 
 S = "${WORKDIR}/git"
 
 inherit python3native meson update-alternatives
 
 ALTERNATIVE_PRIORITY = "100"
-ALTERNATIVE_${PN} = "kmstest"
+ALTERNATIVE:${PN} = "kmstest"
 ALTERNATIVE_LINK_NAME[kmstest] = "${bindir}/kmstest"

@@ -17,7 +17,7 @@ DEPENDS = "common-csl-ip-rtos libarch ti-xdctools-native doxygen-native ti-cgt6x
 
 COMPATIBLE_MACHINE = "dra7xx"
 
-TARGET_dra7xx = "SOC_AM572x"
+TARGET:dra7xx = "SOC_AM572x"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git"
@@ -96,8 +96,8 @@ do_install() {
 
 }
 
-FILES_${PN}-dev += "${FFTLIB_INSTALL_DIR_RECIPE}"
+FILES:${PN}-dev += "${FFTLIB_INSTALL_DIR_RECIPE}"
 
 # skip checking binary against ARM architecture
-INSANE_SKIP_${PN}-dev = "arch"
-ALLOW_EMPTY_${PN} = "1"
+INSANE_SKIP:${PN}-dev = "arch"
+ALLOW_EMPTY:${PN} = "1"

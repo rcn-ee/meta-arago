@@ -9,7 +9,7 @@ SRCREV = "dd0131eadf3633e8f9d06cb390d3c6c1b074d873"
 SRC_URI = "git://git.ti.com/glsdk/statcol.git;protocol=${PROTOCOL};branch=${BRANCH}"
 
 DEPENDS = "ti-rpmsg-char websocketd"
-RDEPENDS_${PN} = "bash"
+RDEPENDS:${PN} = "bash"
 
 S = "${WORKDIR}/git"
 
@@ -19,6 +19,6 @@ do_install() {
 	DESTDIR=${D} make install
 }
 
-PR_append = "_3"
+PR:append = "_3"
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"

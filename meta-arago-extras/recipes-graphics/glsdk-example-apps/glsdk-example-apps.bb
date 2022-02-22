@@ -18,7 +18,7 @@ SRCREV="52466430609c402a9f1c0667ccf727d096336d0d"
 
 PR = "r52"
 
-do_install_append () {
+do_install:append () {
     install -d ${D}${sysconfdir}/glsdkstatcoll
     install -m 0644 ${S}/bandwidth-tool/config.ini ${D}${sysconfdir}/glsdkstatcoll/.
     install -m 0644 ${S}/bandwidth-tool/initiators.cfg ${D}${sysconfdir}/glsdkstatcoll/.
@@ -28,6 +28,6 @@ do_install_append () {
     install -m 0644 ${S}/cpuload-plugins/scripts/*.cfg ${D}${sysconfdir}/visualization_scripts/.
 }
 
-FILES_${PN} += "${sysconfdir}/glsdkstatcoll/* ${sysconfdir}/visualization_scripts/*"
+FILES:${PN} += "${sysconfdir}/glsdkstatcoll/* ${sysconfdir}/visualization_scripts/*"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"

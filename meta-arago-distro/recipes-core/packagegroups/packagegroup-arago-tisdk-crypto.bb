@@ -14,10 +14,10 @@ CRYPTO_SUPPORT = "\
 "
 
 #ti-crypto-examples
-CRYPTO_SUPPORT_append_ti33x = " cryptodev-module cryptodev-tests"
-CRYPTO_SUPPORT_append_ti43x = " cryptodev-module cryptodev-tests"
-CRYPTO_SUPPORT_append_dra7xx = " cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT:append:ti33x = " cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT:append:ti43x = " cryptodev-module cryptodev-tests"
+CRYPTO_SUPPORT:append:dra7xx = " cryptodev-module cryptodev-tests"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${CRYPTO_SUPPORT} \
 "

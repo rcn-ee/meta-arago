@@ -5,13 +5,13 @@ include openmpacc.inc
 PR = "${INC_PR}.0"
 
 DEPENDS = "boost elfutils perl-native"
-RDEPENDS_${PN} += "clocl"
+RDEPENDS:${PN} += "clocl"
 
 S = "${WORKDIR}/git/host"
 
-TARGET_class-target = "clacc_arm"
-TARGET_class-native = "clacc_x86"
-TARGET_class-nativesdk = "clacc_x86"
+TARGET:class-target = "clacc:arm"
+TARGET:class-native = "clacc:x86"
+TARGET:class-nativesdk = "clacc:x86"
 
 export LINUX_DEVKIT_ROOT = "${STAGING_DIR_HOST}"
 export X86_HOST_ROOT = "${STAGING_DIR_HOST}"

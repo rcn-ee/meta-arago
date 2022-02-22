@@ -5,15 +5,15 @@ LIC_FILES_CHKSUM = "file://edma.c;beginline=1;endline=46;md5=f6bde95a8e2277050e3
 
 DEPENDS += "virtual/kernel"
 
-RDEPENDS_${PN} += "ti-pru-sw-edma-driver"
+RDEPENDS:${PN} += "ti-pru-sw-edma-driver"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "omapl138"
 
-MACHINE_KERNEL_PR_append = "a"
+MACHINE_KERNEL_PR:append = "a"
 PR = "${MACHINE_KERNEL_PR}"
-PV_append = "+svn${SRCPV}"
+PV:append = "+svn${SRCPV}"
 
 SRC_URI = "svn://gforge.ti.com/svn/pru_sw/;module=trunk;protocol=https;user=anonymous;pswd=''"
 

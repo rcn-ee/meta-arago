@@ -65,6 +65,6 @@ CONNECTIVITY_RDEPENDS = " \
     ${BT_TI} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${CONNECTIVITY_RDEPENDS} \
 "

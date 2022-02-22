@@ -11,7 +11,7 @@ MATRIX_GUI = " \
     refresh-screen-source \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     matrix-gui-source \
     ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_GUI}",'',d)} \
 "

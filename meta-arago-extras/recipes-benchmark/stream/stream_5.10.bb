@@ -26,4 +26,4 @@ do_install() {
 	install -m 0755 ${S}/stream_c_openmp ${D}/${bindir}/
 }
 
-FILES_${PN}-openmp = "${bindir}/stream_c_openmp"
+FILES:${PN}-openmp = "${bindir}/stream_c_openmp"

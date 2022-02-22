@@ -37,11 +37,11 @@ do_install() {
 
 PACKAGES += "matrix-gui-apps-dual-camera"
 
-RDEPENDS_${PN} += "libdrm libdrm-omap"
+RDEPENDS:${PN} += "libdrm libdrm-omap"
 
-RDEPENDS_matrix-gui-apps-dual-camera  = "matrix-gui-apps-images matrix-gui-submenus-camera ${PN}"
+RDEPENDS:matrix-gui-apps-dual-camera  = "matrix-gui-apps-images matrix-gui-submenus-camera ${PN}"
 
 # Add the matrix directory to the FILES
-FILES_${PN} = "/usr/bin/*"
+FILES:${PN} = "/usr/bin/*"
 
-FILES_matrix-gui-apps-dual-camera = "${MATRIX_APP_DIR}/*"
+FILES:matrix-gui-apps-dual-camera = "${MATRIX_APP_DIR}/*"

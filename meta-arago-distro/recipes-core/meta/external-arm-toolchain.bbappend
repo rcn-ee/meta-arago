@@ -10,8 +10,8 @@ KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
 KERNEL_GIT_PROTOCOL = "git"
 SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH}"
 
-PKGV_linux-libc-headers-dev = "5.10"
-PKGV_linux-libc-headers = "5.10"
+PKGV:linux-libc-headers-dev = "5.10"
+PKGV:linux-libc-headers = "5.10"
 
 inherit kernel-arch pkgconfig multilib_header
 
@@ -19,12 +19,12 @@ EXTRA_OEMAKE = " HOSTCC="${BUILD_CC}" HOSTCPP="${BUILD_CPP}""
 
 DEPENDS += "bison-native rsync-native"
 
-do_configure_append() {
+do_configure:append() {
 	cd ${WORKDIR}/git
 	oe_runmake allnoconfig
 }
 
-do_install_append() {
+do_install:append() {
 	cd ${WORKDIR}/git
 	oe_runmake headers_install INSTALL_HDR_PATH=${B}${exec_prefix}
 

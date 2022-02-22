@@ -1,3 +1,3 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-FILES_${PN}-doc += "${datadir}/cmake-${CMAKE_MAJOR_VERSION}/Help/"
+FILES:${PN}-doc += "${datadir}/cmake-${CMAKE_MAJOR_VERSION}/Help/"

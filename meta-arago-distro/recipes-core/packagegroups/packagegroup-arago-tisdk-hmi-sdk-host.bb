@@ -10,28 +10,28 @@ REQUIRED_MACHINE_FEATURES = "gpu"
 
 HMI = ""
 
-HMI_append_ti43x = " \
+HMI:append:ti43x = " \
     evse-hmi-source \
     mmwavegesture-hmi-source \
 "
 
-HMI_append_ti33x = " \
+HMI:append:ti33x = " \
     evse-hmi-source \
     protection-relays-hmi-source \
     mmwavegesture-hmi-source \
 "
 
 
-HMI_append_omap-a15 = " \
+HMI:append:omap-a15 = " \
     evse-hmi-source \
     mmwavegesture-hmi-source \
 "
 
-HMI_append_am65xx = " \
+HMI:append:am65xx = " \
     evse-hmi-source \
     mmwavegesture-hmi-source \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${HMI} \
 "

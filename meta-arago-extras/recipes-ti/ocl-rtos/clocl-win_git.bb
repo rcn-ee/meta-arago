@@ -21,7 +21,7 @@ COMPATIBLE_MACHINE = "omap-a15"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 RELEASE_TARGET = ""
-RELEASE_TARGET_omap-a15 = "am57xx"
+RELEASE_TARGET:omap-a15 = "am57xx"
 
 S = "${WORKDIR}/git"
 export DESTDIR="${OCL_RTOS_INSTALL_DIR}/ti-opencl-rtos-${RELEASE_TARGET}-${PV}/packages/ti/opencl"

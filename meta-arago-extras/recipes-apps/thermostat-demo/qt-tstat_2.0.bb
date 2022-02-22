@@ -33,6 +33,6 @@ do_install() {
 
 PACKAGES += "matrix-gui-thermostat-demo"
 
-RDEPENDS_matrix-gui-thermostat-demo += "matrix-gui-apps-images matrix-gui-submenus-qt5"
+RDEPENDS:matrix-gui-thermostat-demo += "matrix-gui-apps-images matrix-gui-submenus-qt5"
 
-FILES_matrix-gui-thermostat-demo += "${MATRIX_APP_DIR}/*"
+FILES:matrix-gui-thermostat-demo += "${MATRIX_APP_DIR}/*"

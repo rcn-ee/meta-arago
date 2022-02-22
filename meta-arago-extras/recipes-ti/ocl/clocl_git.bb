@@ -12,9 +12,9 @@ S = "${WORKDIR}/git/host"
 
 export WANT_LLVM_RELEASE = "3.6-ti"
 
-TARGET_class-target = "arm"
-TARGET_class-native = "x86"
-TARGET_class-nativesdk = "x86"
+TARGET:class-target = "arm"
+TARGET:class-native = "x86"
+TARGET:class-nativesdk = "x86"
 
 EXTRA_OEMAKE = " -C ${S}/clocl \
                  _PRODUCT_VERSION=${PV} \
@@ -31,5 +31,5 @@ do_install() {
   install -m 755 ${S}/clocl/${TARGET}/clocl ${D}${bindir}
 }
 
-RDEPENDS_${PN} += "ti-cgt6x"
+RDEPENDS:${PN} += "ti-cgt6x"
 BBCLASSEXTEND = "native nativesdk"

@@ -7,8 +7,8 @@ PR = "${INC_PR}.1"
 inherit cmake
 
 DEPENDS = "boost boost-native opencl"
-RDEPENDS_${PN} += "opencl-runtime"
-RDEPENDS_${PN}-dev += "clacc"
+RDEPENDS:${PN} += "opencl-runtime"
+RDEPENDS:${PN}-dev += "clacc"
 
 S = "${WORKDIR}/git/host"
 
@@ -17,4 +17,4 @@ export LINUX_DEVKIT_ROOT = "${STAGING_DIR_HOST}"
 
 EXTRA_OECMAKE += "-DVERSION="${PV}" -DBUILD_OUTPUT=lib"
 
-FILES_${PN} += "/usr/share/ti/openmpacc/*"
+FILES:${PN} += "/usr/share/ti/openmpacc/*"

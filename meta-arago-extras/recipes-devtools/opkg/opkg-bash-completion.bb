@@ -13,5 +13,5 @@ do_install() {
                     ${D}${datadir}/bash-completion/completions/opkg
 }
 
-FILES_${PN} = "${datadir}/bash-completion/completions/opkg"
-RDEPENDS_${PN} = "bash-completion"
+FILES:${PN} = "${datadir}/bash-completion/completions/opkg"
+RDEPENDS:${PN} = "bash-completion"

@@ -3,9 +3,9 @@ HOMEPAGE = "https://gforge.ti.com/gf/project/pru_sw/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://interface/prussdrv.c;beginline=1;endline=47;md5=6012fea45c1fbced663277bc90d2163a"
 
-RRECOMMENDS_${PN} = "kernel-module-uio-pru"
+RRECOMMENDS:${PN} = "kernel-module-uio-pru"
 PR = "r0"
-PV_append = "+svn${SRCPV}"
+PV:append = "+svn${SRCPV}"
 
 COMPATIBLE_MACHINE = "omapl138"
 

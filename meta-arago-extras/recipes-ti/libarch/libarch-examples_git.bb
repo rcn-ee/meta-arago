@@ -5,7 +5,7 @@ include libarch.inc
 PR = "${INC_PR}.0"
 
 DEPENDS += "libarch clocl-native"
-RDEPENDS_${PN} += "opencl-runtime"
+RDEPENDS:${PN} += "opencl-runtime"
 
 export LIBARCH_DIR    = "${LIBARCH_INSTALL_DIR}"
 export TARGET_ROOTDIR = "${STAGING_DIR_TARGET}"
@@ -27,10 +27,10 @@ do_install() {
     cp examples/Makefile ${D}${datadir}/ti/examples/libarch
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${datadir}/ti/examples/libarch/* \ "
 
-FILES_${PN}-dbg += "\
+FILES:${PN}-dbg += "\
     ${datadir}/ti/examples/libarch/*/.debug \ "
 
-INSANE_SKIP_${PN} = "arch ldflags textrel"
+INSANE_SKIP:${PN} = "arch ldflags textrel"

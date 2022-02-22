@@ -7,11 +7,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 CRYPTO_API = ""
-CRYPTO_API_ti33x = "cryptodev-module-dev"
-CRYPTO_API_ti43x = "cryptodev-module-dev"
-CRYPTO_API_dra7xx = "cryptodev-module-dev"
+CRYPTO_API:ti33x = "cryptodev-module-dev"
+CRYPTO_API:ti43x = "cryptodev-module-dev"
+CRYPTO_API:dra7xx = "cryptodev-module-dev"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     openssl-dev \
     ${CRYPTO_API} \
 "

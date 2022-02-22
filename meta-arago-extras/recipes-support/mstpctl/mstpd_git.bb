@@ -13,12 +13,12 @@ SRCREV = "e4f0ba5a48649a3253f8b353c87c965e12aafc50"
 S = "${WORKDIR}/git"
 
 DEPENDS = "python3"
-RDEPENDS_${PN} = "python3-core"
+RDEPENDS:${PN} = "python3-core"
 
 inherit autotools
 
 EXTRA_OECONF = "--sbindir=/sbin"
 
-do_configure_prepend() {
+do_configure:prepend() {
 	 sed -i -e "s,#!.*python.*,#!${USRBINPATH}/env python3," ${S}/utils/ifquery
 }

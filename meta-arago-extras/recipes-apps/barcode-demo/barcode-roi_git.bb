@@ -27,8 +27,8 @@ do_install() {
     install -m 644 ${S}/test/sample_barcode.jpg ${D}${datadir}/ti/image
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${datadir}/ti/image \
 "
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"

@@ -17,7 +17,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGES =+ "${PN}-runtime"
 
 MONITORS                      = " opencl-monitor"
-MONITORS_append_dra7xx        = " opencl-monitor-ipu"
+MONITORS:append:dra7xx        = " opencl-monitor-ipu"
 
 DEPENDS = " ocl-gl-headers \
             ${MONITORS} \
@@ -37,20 +37,20 @@ DEPENDS = " ocl-gl-headers \
             json-c \
 "
 
-DEPENDS_append_dra7xx = " ti-ipc virtual/kernel"
+DEPENDS:append:dra7xx = " ti-ipc virtual/kernel"
 
-RDEPENDS_${PN}-runtime += "bash ${MONITORS}"
-RDEPENDS_${PN}-dev += "ocl-gl-headers-dev"
-RDEPENDS_${PN} += "${PN}-runtime clocl bash"
+RDEPENDS:${PN}-runtime += "bash ${MONITORS}"
+RDEPENDS:${PN}-dev += "ocl-gl-headers-dev"
+RDEPENDS:${PN} += "${PN}-runtime clocl bash"
 
 # Use main package to pull in full support
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
 S = "${WORKDIR}/git/host"
 
 export WANT_LLVM_RELEASE = "3.6-ti"
 
-OCL_BUILD_TARGET_dra7xx = "ARM_AM57"
+OCL_BUILD_TARGET:dra7xx = "ARM_AM57"
 
 ENABLE_ULM = "1"
 SHMEM_MANAGER = "CMEM"
@@ -61,19 +61,19 @@ EXTRA_OEMAKE += "KERNEL_INSTALL_DIR=${STAGING_KERNEL_DIR} LINUX_DEVKIT_ROOT=${ST
 export KERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
 
 MCTD = ""
-MCTD_dra7xx = "${S}/mct-daemon/ti-mct-daemon.service.am57x"
+MCTD:dra7xx = "${S}/mct-daemon/ti-mct-daemon.service.am57x"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${systemd_system_unitdir}
     install -m0644 ${MCTD} ${D}${systemd_system_unitdir}/ti-mct-daemon.service
 }
 
 SYSTEMD_PACKAGES = "${PN}-runtime"
-SYSTEMD_SERVICE_${PN}-runtime = "ti-mct-daemon.service"
-SYSTEMD_AUTO_ENABLE_${PN}-runtime = "${@oe.utils.conditional("RESERVE_CMEM", "1", "enable", "disable", d)}"
+SYSTEMD_SERVICE:${PN}-runtime = "ti-mct-daemon.service"
+SYSTEMD_AUTO_ENABLE:${PN}-runtime = "${@oe.utils.conditional("RESERVE_CMEM", "1", "enable", "disable", d)}"
 
-FILES_${PN}-runtime += "${bindir} ${systemd_system_unitdir} ${sysconfdir}/ti-mctd ${libdir}/lib*${SOLIBS}"
+FILES:${PN}-runtime += "${bindir} ${systemd_system_unitdir} ${sysconfdir}/ti-mctd ${libdir}/lib*${SOLIBS}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/ti/opencl/* \
 "

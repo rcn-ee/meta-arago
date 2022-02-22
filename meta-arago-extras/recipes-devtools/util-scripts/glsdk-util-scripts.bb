@@ -5,7 +5,7 @@ PR = "r1"
 
 COMPATIBLE_MACHINE = "omap-a15|j7"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"
 
 SRC_URI = "git://git.ti.com/glsdk/util-scripts.git"
 
@@ -28,4 +28,4 @@ do_install() {
 
 }
 
-FILES_${PN} += "${datadir}/ti/util-scripts/*"
+FILES:${PN} += "${datadir}/ti/util-scripts/*"

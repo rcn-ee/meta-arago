@@ -61,8 +61,8 @@ MAKEFILES_MATRIX_GUI = "matrix-gui-browser \
                         qt-tstat \
 "
 
-MAKEFILES_MATRIX_GUI_omapl138 = ""
-MAKEFILES_MATRIX_GUI_j7 = ""
+MAKEFILES_MATRIX_GUI:omapl138 = ""
+MAKEFILES_MATRIX_GUI:j7 = ""
 
 MAKEFILES_COMMON = "linux \
                     matrix-gui \
@@ -75,7 +75,7 @@ MAKEFILES = ""
 
 # Add device specific make targets
 
-MAKEFILES_append_ti33x = " u-boot-spl \
+MAKEFILES:append:ti33x = " u-boot-spl \
                            ti-crypto-examples \
                            linux-dtbs \
                            cryptodev \
@@ -85,7 +85,7 @@ MAKEFILES_append_ti33x = " u-boot-spl \
 			   mmwavegesture-hmi \
                            pdm-anomaly-detection \
 "
-MAKEFILES_append_ti43x = " u-boot-spl \
+MAKEFILES:append:ti43x = " u-boot-spl \
                            ti-crypto-examples \
                            linux-dtbs \
                            cryptodev \
@@ -101,7 +101,7 @@ MAKEFILES_append_ti43x = " u-boot-spl \
 
 #                            debugss-module-drv 
 #                            gdbserverproxy-module-drv 
-MAKEFILES_append_dra7xx = " cryptodev \
+MAKEFILES:append:dra7xx = " cryptodev \
                             opencl-examples \
                             openmpacc-examples \
                             qt-opencv-opencl-opengl-multithreaded \
@@ -109,7 +109,7 @@ MAKEFILES_append_dra7xx = " cryptodev \
                             tiovx-app-host \
 "
 
-MAKEFILES_append_omap-a15 = " u-boot-spl \
+MAKEFILES:append:omap-a15 = " u-boot-spl \
                               omapconf \
                               linux-dtbs \
                               ti-sgx-ddk-km \
@@ -122,19 +122,19 @@ MAKEFILES_append_omap-a15 = " u-boot-spl \
                               pdm-anomaly-detection \
                               ti-ipc \
 "
-MAKEFILES_append_omapl138 = " linux-dtbs \
+MAKEFILES:append:omapl138 = " linux-dtbs \
                               u-boot-spl \
                               ti-ipc \
 "
 
-MAKEFILES_append_k3 = " u-boot-spl \
+MAKEFILES:append:k3 = " u-boot-spl \
                         linux-dtbs \
                         cryptodev \
                         sysfw-image \
                         ti-ipc \
 "
 
-MAKEFILES_append_am65xx = " \
+MAKEFILES:append:am65xx = " \
                         pru-icss \
                         ti-sgx-ddk-km \
                         barcode-roi \
@@ -142,10 +142,10 @@ MAKEFILES_append_am65xx = " \
                         pdm-anomaly-detection \
 "
 
-MAKEFILES_append_j7 = " pru-icss \
+MAKEFILES:append:j7 = " pru-icss \
                             ti-img-rogue-driver \
 "
-MAKEFILES_append_am64xx = " \
+MAKEFILES:append:am64xx = " \
                         pru-icss \
 "
 
@@ -157,32 +157,32 @@ inherit kernel-arch
 
 # Use ARCH format expected by the makefile
 PLATFORM_ARCH = "${ARMPKGARCH}"
-PLATFORM_ARCH_arm = "armv7-a"
-PLATFORM_ARCH_omapl138 = "armv5te"
+PLATFORM_ARCH:arm = "armv7-a"
+PLATFORM_ARCH:omapl138 = "armv5te"
 
 # ti-sgx-ddk-km configurations
 # See meta-ti/recipes-bsp/powervr-drivers/ti-sgx-ddk-km_1.17.4948957.bb
 TI_SGX_TARGET_PRODUCT = "jacinto6evm"
-TI_SGX_TARGET_PRODUCT_ti33x = "ti335x"
-TI_SGX_TARGET_PRODUCT_ti43x = "ti437x"
-TI_SGX_TARGET_PRODUCT_k3 = "ti654x"
+TI_SGX_TARGET_PRODUCT:ti33x = "ti335x"
+TI_SGX_TARGET_PRODUCT:ti43x = "ti437x"
+TI_SGX_TARGET_PRODUCT:k3 = "ti654x"
 
 TI_SGX_TARGET_ARCH = "armhf"
-TI_SGX_TARGET_ARCH_k3 = "aarch64"
+TI_SGX_TARGET_ARCH:k3 = "aarch64"
 
 PLATFORM_DEBUGSS = ""
-PLATFORM_DEBUGSS_dra7xx = "DRA7xx_PLATFORM"
+PLATFORM_DEBUGSS:dra7xx = "DRA7xx_PLATFORM"
 
 PLATFORM_GDBSERVERPROXY = ""
-PLATFORM_GDBSERVERPROXY_dra7xx = "DRA7xx_PLATFORM"
+PLATFORM_GDBSERVERPROXY:dra7xx = "DRA7xx_PLATFORM"
 
 PRU_ICSS_INSTALL_TARGET = "pru-icss_install_none"
-PRU_ICSS_INSTALL_TARGET_ti33x = "pru-icss_install_am335x"
-PRU_ICSS_INSTALL_TARGET_ti43x = "pru-icss_install_am437x"
-PRU_ICSS_INSTALL_TARGET_omap-a15 = "pru-icss_install_am572x"
-PRU_ICSS_INSTALL_TARGET_am65xx = "pru-icss_install_am65x"
-PRU_ICSS_INSTALL_TARGET_j7 = "pru-icss_install_j721e"
-PRU_ICSS_INSTALL_TARGET_am64xx = "pru-icss_install_am64x"
+PRU_ICSS_INSTALL_TARGET:ti33x = "pru-icss_install_am335x"
+PRU_ICSS_INSTALL_TARGET:ti43x = "pru-icss_install_am437x"
+PRU_ICSS_INSTALL_TARGET:omap-a15 = "pru-icss_install_am572x"
+PRU_ICSS_INSTALL_TARGET:am65xx = "pru-icss_install_am65x"
+PRU_ICSS_INSTALL_TARGET:j7 = "pru-icss_install_j721e"
+PRU_ICSS_INSTALL_TARGET:am64xx = "pru-icss_install_am64x"
 
 # Path to toolchains for the various cores in TI SOCs
 #
@@ -194,9 +194,9 @@ IPC_TOOLS_PATHS_R5F  = "ti.targets.arm.elf.R5F="\$\(TOOLCHAIN_PATH_R5\)""
 IPC_TOOLS_PATHS_C674 = "ti.targets.elf.C674="\$\(C6X_GEN_INSTALL_PATH\)""
 
 IPC_TOOLS_PATHS = ""
-IPC_TOOLS_PATHS_append_omap-a15 = " ${IPC_TOOLS_PATHS_C66} ${IPC_TOOLS_PATHS_M4}"
-IPC_TOOLS_PATHS_append_omapl138 = " ${IPC_TOOLS_PATHS_C674}"
-IPC_TOOLS_PATHS_append_k3 = "${IPC_TOOLS_PATHS_R5F}"
+IPC_TOOLS_PATHS:append:omap-a15 = " ${IPC_TOOLS_PATHS_C66} ${IPC_TOOLS_PATHS_M4}"
+IPC_TOOLS_PATHS:append:omapl138 = " ${IPC_TOOLS_PATHS_C674}"
+IPC_TOOLS_PATHS:append:k3 = "${IPC_TOOLS_PATHS_R5F}"
 
 # If it's not defined at all, like for zImage case
 UBOOT_LOADADDRESS ?= "0"
@@ -298,12 +298,12 @@ do_install () {
 }
 
 K3_UBOOT_MACHINE_R5 = ""
-K3_UBOOT_MACHINE_R5_am65xx-evm = "am65x_evm_r5_defconfig"
-K3_UBOOT_MACHINE_R5_am65xx-hs-evm = "am65x_hs_evm_r5_defconfig"
-K3_UBOOT_MACHINE_R5_j7-evm = "j721e_evm_r5_config"
-K3_UBOOT_MACHINE_R5_j7-hs-evm = "j721e_hs_evm_r5_config"
+K3_UBOOT_MACHINE_R5:am65xx-evm = "am65x_evm_r5_defconfig"
+K3_UBOOT_MACHINE_R5:am65xx-hs-evm = "am65x_hs_evm_r5_defconfig"
+K3_UBOOT_MACHINE_R5:j7-evm = "j721e_evm_r5_config"
+K3_UBOOT_MACHINE_R5:j7-hs-evm = "j721e_hs_evm_r5_config"
 
-do_install_append_k3() {
+do_install:append:k3() {
     cat >> ${D}/Rules.make << __EOF__
 
 # Add CROSS_COMPILE and UBOOT_MACHINE for the R5
@@ -314,4 +314,4 @@ __EOF__
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-FILES_${PN} = "/*"
+FILES:${PN} = "/*"

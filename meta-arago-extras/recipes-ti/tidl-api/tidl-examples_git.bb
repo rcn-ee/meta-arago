@@ -18,7 +18,7 @@ DEPENDS = "opencv \
            json-c \
 "
 
-RDEPENDS_${PN} += "tidl-api \
+RDEPENDS:${PN} += "tidl-api \
                    opencl-runtime \
                    opencv \
                    json-c \
@@ -44,9 +44,9 @@ do_install() {
     cp ${CP_ARGS} ${S}/examples/* ${D}${TIDL_INSTALL_DIR}/examples/
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${TIDL_INSTALL_DIR} \
 "
 
 
-INSANE_SKIP_${PN} = "arch ldflags textrel staticdev"
+INSANE_SKIP:${PN} = "arch ldflags textrel staticdev"

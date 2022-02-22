@@ -1,7 +1,7 @@
-PR_append = ".arago6"
+PR:append = ".arago6"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0014-iplink-hsr-prp-add-support-for-vlan-tagged-supervisi.patch \
 "

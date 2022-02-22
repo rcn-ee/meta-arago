@@ -8,7 +8,7 @@ inherit packagegroup features_check
 
 REQUIRED_MACHINE_FEATURES = "gpu"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${PREFERRED_PROVIDER_virtual/gpudriver}-source \
     ${@bb.utils.contains('MACHINE_FEATURES', 'gc320', 'ti-gc320-driver-source', '', d)} \
 "

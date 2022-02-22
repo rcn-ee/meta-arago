@@ -1,7 +1,7 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PR_append = ".arago2"
+PR:append = ".arago2"
 
-do_install_append() {
+do_install:append() {
 	chmod -x ${D}${sysconfdir}/init.d/kdump
 }

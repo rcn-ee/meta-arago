@@ -17,14 +17,14 @@ SRC_URI += "file://udhcpd_eth1.conf"
 
 S = "${WORKDIR}/git/ethernet_apps"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}
     install -m 0755 ${WORKDIR}/udhcpd_eth1.conf ${D}${sysconfdir}
 }
 
 # Make sure ethernet submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-ethernet"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-ethernet"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/* \
+FILES:${PN} += "${MATRIX_BASE_DIR}/* \
                 ${sysconfdir}/udhcpd_eth1.conf"
-CONFFILES_${PN} += "${sysconfdir}/udhcpd_eth1.conf"
+CONFFILES:${PN} += "${sysconfdir}/udhcpd_eth1.conf"

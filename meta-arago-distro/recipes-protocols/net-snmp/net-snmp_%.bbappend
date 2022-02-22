@@ -1,8 +1,8 @@
-PR_append = ".arago7"
+PR:append = ".arago7"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:${THISDIR}/files:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0001-IEC-62439-3-add-initial-support-for-hsr-prp-mib-supp.patch \
     file://0002-IEC-62439-3-add-a-dummy-lreInterfaceConfigTable-for-.patch \
     file://0003-IEC-62439-3-MIB-update-lreInterfaceConfigTable-for-M.patch \
@@ -26,6 +26,6 @@ SRC_URI_append = " \
 PACKAGECONFIG[iec-62439-3-mib] = "--with-mib-modules=iec-62439-3-mib,,,"
 PACKAGECONFIG += "iec-62439-3-mib"
 
-RDEPENDS_${PN}-client += "perl-module-getopt-std \
+RDEPENDS:${PN}-client += "perl-module-getopt-std \
                           perl-module-term-readline \
 "

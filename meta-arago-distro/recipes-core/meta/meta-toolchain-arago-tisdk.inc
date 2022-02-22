@@ -3,6 +3,6 @@ TOOLCHAIN_CLEANUP_PACKAGES ?= "libgnutls-dev libgnutls-extra26 libgnutls-openssl
 
 INC_PR = "r5"
 
-toolchain_create_sdk_env_script_append() {
+toolchain_create_sdk_env_script:append() {
     echo -e 'export PS1="\[\\e[32;1m\][linux-devkit]\[\\e[0m\]:\w> "' >> $script
 }

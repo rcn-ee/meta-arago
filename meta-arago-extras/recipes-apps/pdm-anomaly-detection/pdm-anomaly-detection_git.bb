@@ -23,4 +23,4 @@ do_install() {
     install -m 644 ${S}/logs/* ${D}${datadir}/ti/examples/pdm
 }
 
-FILES_${PN} += "${datadir}/ti/examples/pdm"
+FILES:${PN} += "${datadir}/ti/examples/pdm"

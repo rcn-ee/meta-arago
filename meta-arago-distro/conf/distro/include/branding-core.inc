@@ -6,11 +6,11 @@
 # hence this file is mostly empty and used as a template
 
 # Lower opencl-monitor priority for now
-ALTERNATIVE_PRIORITY_pn-opencl-monitor = "1"
-ALTERNATIVE_PRIORITY_pn-opencl-monitor-ipu = "1"
+ALTERNATIVE_PRIORITY:pn-opencl-monitor = "1"
+ALTERNATIVE_PRIORITY:pn-opencl-monitor-ipu = "1"
 
 # Raise priority for sample IPC FW images
-ALTERNATIVE_PRIORITY_pn-ti-ipc-rtos = "15"
+ALTERNATIVE_PRIORITY:pn-ti-ipc-rtos = "15"
 
 # Remove mmip - DRM allocator, KMS sink, Wayland sink need porting to GST 1.18
-MACHINE_FEATURES_remove = "mmip"
+MACHINE_FEATURES:remove = "mmip"

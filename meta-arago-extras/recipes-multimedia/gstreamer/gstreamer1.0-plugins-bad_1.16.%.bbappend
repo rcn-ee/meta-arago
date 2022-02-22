@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG_append = " faad kms"
+PACKAGECONFIG:append = " faad kms"
 
 GSTDRM_WAYLANDSINK_PATCHES = " \
     file://0001-gstdrmallocator-Add-DRM-allocator-support.patch \
@@ -12,30 +12,30 @@ GSTDRM_WAYLANDSINK_PATCHES = " \
     file://0001-gstdrm-Remove-wayland-as-required-dependency.patch \
 "
 
-SRC_URI_append_ti43x = " \
+SRC_URI:append:ti43x = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 
-SRC_URI_append_ti33x = " \
+SRC_URI:append:ti33x = " \
     file://0001-waylandsink-Add-mouse-drag-and-drop-support.patch \
 "
 
-SRC_URI_append_omap-a15 = " \
+SRC_URI:append:omap-a15 = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 
-SRC_URI_append_am65xx = " \
+SRC_URI:append:am65xx = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 
-SRC_URI_append_j7-evm = " \
+SRC_URI:append:j7-evm = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 
-SRC_URI_append_j7-hs-evm = " \
+SRC_URI:append:j7-hs-evm = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PR_append = ".arago4"
+PR:append = ".arago4"

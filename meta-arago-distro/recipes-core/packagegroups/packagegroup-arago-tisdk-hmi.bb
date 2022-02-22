@@ -12,27 +12,27 @@ HMI = " \
 "
 
 
-HMI_append_ti33x = " \
+HMI:append:ti33x = " \
     evse-hmi \
     protection-relays-hmi \
     mmwavegesture-hmi \
 "
 
-HMI_append_ti43x = " \
+HMI:append:ti43x = " \
     evse-hmi \
     mmwavegesture-hmi \
 "
 
-HMI_append_omap-a15 = " \
+HMI:append:omap-a15 = " \
     evse-hmi \
     mmwavegesture-hmi \
 "
 
-HMI_append_am65xx = " \
+HMI:append:am65xx = " \
     evse-hmi \
     mmwavegesture-hmi \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
 	${HMI} \
 "

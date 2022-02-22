@@ -22,7 +22,7 @@ EXTRA_MAKE_ARGS = "PLATFORM_BUILD=x86 LINUXENV=x86 LINUX_IMPORT_TOOL=64BIT \
                    PROTOBUF_LIB_DIR=${STAGING_DIR_NATIVE}/usr/lib PROTOBUF_INC_DIR=${STAGING_DIR_NATIVE}/usr/include \
                    FLATBUFFERS_INC_DIR=${STAGING_DIR_NATIVE}$/usr/include/flatbuffers \
                    TF_LITE_GENERATED_PATH=${STAGING_DIR_NATIVE}/usr/include/tensorflow/lite/schema"
-EXTRA_MAKE_ARGS_class-target = "LINUX_BUILD_TOOLS=${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX} \
+EXTRA_MAKE_ARGS:class-target = "LINUX_BUILD_TOOLS=${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX} \
                                 PROTOBUF_LIB_DIR=${STAGING_LIBDIR} PROTOBUF_INC_DIR=${STAGING_INCDIR} \
                                 FLATBUFFERS_INC_DIR=${STAGING_INCDIR}/flatbuffers \
                                 TF_LITE_GENERATED_PATH=${STAGING_INCDIR}/tensorflow/lite/schema LINUXENV=oearm"
@@ -41,6 +41,6 @@ do_install () {
     install -m 755 ${S}/modules/ti_dl/utils/tidlModelImport/out/tidl_model_import.out ${D}${bindir}
 }
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"
 
 BBCLASSEXTEND = "native nativesdk"

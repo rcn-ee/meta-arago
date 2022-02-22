@@ -1,14 +1,14 @@
-PR_append = ".arago1"
+PR:append = ".arago1"
 
 BBCLASSEXTEND += "nativesdk"
 
 EXTRA_OEMAKE = "'CC=${CC} ${CFLAGS} ${@bb.utils.contains('PACKAGECONFIG', 'xattr', '', '-DWITHOUT_XATTR', d)} -I${S}/include' 'RANLIB=${RANLIB}' 'AR=${AR}' 'BUILDDIR=${S}'"
 
-do_compile_append() {
+do_compile:append() {
 	oe_runmake tests
 }
 
-do_install_append() {
+do_install:append() {
 	install -m 0755 io_update ${D}${sbindir}/
 	install -m 0755 volrefcnt ${D}${sbindir}/
 	install -m 0755 integ ${D}${sbindir}/
@@ -25,7 +25,7 @@ do_install_append() {
 
 PACKAGES =+ "mtd-utils-ubifs-tests"
 
-FILES_mtd-utils-ubifs-tests = " \
+FILES:mtd-utils-ubifs-tests = " \
 ${sbindir}/io_update \
 ${sbindir}/volrefcnt \
 ${sbindir}/integ \

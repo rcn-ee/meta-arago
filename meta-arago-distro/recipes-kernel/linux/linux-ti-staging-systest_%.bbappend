@@ -1,8 +1,8 @@
-MACHINE_KERNEL_PR_append = ".arago1"
+MACHINE_KERNEL_PR:append = ".arago1"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 require copy-defconfig.inc
 require docker.inc
 
-ALLOW_EMPTY_kernel-devicetree = "1"
+ALLOW_EMPTY:kernel-devicetree = "1"

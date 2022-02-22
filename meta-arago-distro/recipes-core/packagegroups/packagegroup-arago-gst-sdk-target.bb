@@ -18,11 +18,11 @@ GSTREAMER_DSP = " \
     ${@['','gstreamer1.0-plugins-dsp66-dev'][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
 
-GSTREAMER_DEPS_append_dra7xx = " \
+GSTREAMER_DEPS:append:dra7xx = " \
     gstreamer1.0-plugins-hevc-dev \
     ${GSTREAMER_DSP} \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     ${GSTREAMER_DEPS} \
 "

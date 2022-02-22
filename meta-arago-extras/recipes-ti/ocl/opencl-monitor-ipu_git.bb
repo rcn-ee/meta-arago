@@ -50,15 +50,15 @@ do_install() {
     install -m ${OCL_FPERMS} bin/release/server_ipu1.xem4 ${D}${base_libdir}/firmware/dra7-ipu1-fw.xem4.opencl-monitor
 }
 
-ALTERNATIVE_${PN} = "dra7-ipu1-fw.xem4"
+ALTERNATIVE:${PN} = "dra7-ipu1-fw.xem4"
 ALTERNATIVE_LINK_NAME[dra7-ipu1-fw.xem4] = "${base_libdir}/firmware/dra7-ipu1-fw.xem4"
 ALTERNATIVE_TARGET[dra7-ipu1-fw.xem4] = "${base_libdir}/firmware/dra7-ipu1-fw.xem4.opencl-monitor"
 ALTERNATIVE_PRIORITY = "100"
 
 MONITOR_IPU_FIRMWARE = "${base_libdir}/firmware/dra7-ipu1-fw.*"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${MONITOR_IPU_FIRMWARE} \
 "
 
-INSANE_SKIP_${PN} = "arch"
+INSANE_SKIP:${PN} = "arch"

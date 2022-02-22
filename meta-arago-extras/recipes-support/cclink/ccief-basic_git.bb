@@ -41,4 +41,4 @@ do_install() {
     install -m 644 ${S}/CCIEF-BASIC_Slave/sample/SlaveParameter.csv ${D}${datadir}/cclink
 }
 
-FILES_${PN} += "${datadir}/cclink"
+FILES:${PN} += "${datadir}/cclink"

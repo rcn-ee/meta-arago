@@ -8,5 +8,5 @@ inherit packagegroup
 
 PACKAGES += "${PN}-runtime"
 
-RDEPENDS_${PN} = "opencl"
-RDEPENDS_${PN}-runtime = "opencl-runtime"
+RDEPENDS:${PN} = "opencl"
+RDEPENDS:${PN}-runtime = "opencl-runtime"

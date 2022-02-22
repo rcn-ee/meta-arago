@@ -9,6 +9,6 @@ inherit allarch
 S = "${WORKDIR}/git/pru_apps"
 
 # Make sure pru submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-pru"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-pru"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

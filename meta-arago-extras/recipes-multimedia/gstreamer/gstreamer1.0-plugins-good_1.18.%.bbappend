@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG_append = " qt5"
+PACKAGECONFIG:append = " qt5"
 
 SRC_URI += " \
     file://0001-v4l2src-Increase-minimum-num-buffers-by-3.patch \
@@ -9,4 +9,4 @@ SRC_URI += " \
     file://0001-v4l2src-Check-for-drm-memory-support-in-try_import.patch \
 "
 
-PR_append = ".arago3"
+PR:append = ".arago3"

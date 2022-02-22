@@ -10,7 +10,7 @@ PR = "r20"
 QT_MKSPECS_LOCATION = "${libdir}"
 QT_MKSPECS_DIR = "linux-oe-g++"
 
-toolchain_create_sdk_env_script_append() {
+toolchain_create_sdk_env_script:append() {
 	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}/${QT_DIR_NAME}:$PATH' >> $script
 	echo 'export OE_QMAKE_CFLAGS="$CFLAGS"' >> $script
 	echo 'export OE_QMAKE_CXXFLAGS="$CXXFLAGS"' >> $script

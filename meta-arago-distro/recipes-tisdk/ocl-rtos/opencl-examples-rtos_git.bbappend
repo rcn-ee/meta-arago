@@ -1,4 +1,4 @@
-PR_append = ".arago0"
+PR:append = ".arago0"
 
 CM_NAME = "OpenCL"
 CM_VERSION = "${PV}"

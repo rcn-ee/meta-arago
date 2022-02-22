@@ -22,4 +22,4 @@ do_install(){
 	install -m0644 ${WORKDIR}/gplv3-notice.service ${D}${systemd_system_unitdir}
 }
 
-SYSTEMD_SERVICE_${PN} = "gplv3-notice.service"
+SYSTEMD_SERVICE:${PN} = "gplv3-notice.service"

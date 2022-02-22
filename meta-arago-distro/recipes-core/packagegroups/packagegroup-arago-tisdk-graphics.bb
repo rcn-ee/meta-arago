@@ -14,11 +14,11 @@ GFX_WAYLAND = "\
 "
 
 GFX_UTILS = ""
-GFX_UTILS_append_omap-a15  = "\
+GFX_UTILS:append:omap-a15  = "\
     glsdk-util-scripts \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     libegl \
     glmark2 \
     ${@bb.utils.contains('MACHINE_FEATURES', 'gc320', 'ti-gc320-tests', '', d)} \

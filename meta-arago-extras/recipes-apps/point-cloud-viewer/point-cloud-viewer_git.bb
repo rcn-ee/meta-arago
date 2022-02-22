@@ -21,7 +21,7 @@ PV = "2.2"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} = "opencv libxkbcommon"
+RDEPENDS:${PN} = "opencv libxkbcommon"
 
 do_install() {
     install -d ${D}${bindir}
@@ -31,8 +31,8 @@ do_install() {
     install -m 644 ${S}/example_point_cloud.xyz ${D}${datadir}/ti/pointclouds
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${datadir}/ti/pointclouds \
 "
 
-INSANE_SKIP_${PN} = "already-stripped file-rdeps"
+INSANE_SKIP:${PN} = "already-stripped file-rdeps"

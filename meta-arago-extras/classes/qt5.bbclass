@@ -1,7 +1,7 @@
 # Class to mimic the old qt4e to prep recipe for use with Qt5 libraries
 
 QT5EDEPENDS ?= "qtbase "
-DEPENDS_prepend = "${QT5EDEPENDS}"
+DEPENDS:prepend = "${QT5EDEPENDS}"
 
 inherit qmake5
 

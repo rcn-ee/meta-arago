@@ -15,17 +15,13 @@ PREFERRED_PROVIDER_virtual/libgbm = "ti-sgx-ddk-um"
 PREFERRED_PROVIDER_virtual/gpudriver = "ti-sgx-ddk-km"
 
 # J7 has a Rogue GPU core
-PREFERRED_PROVIDER_virtual/egl_j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgles1_j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgles2_j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgbm_j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/gpudriver_j7 = "ti-img-rogue-driver"
+PREFERRED_PROVIDER_virtual/egl:j7 = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles1:j7 = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles2:j7 = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgbm:j7 = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/gpudriver:j7 = "ti-img-rogue-driver"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_KERNEL_SUFFIX}"
-
-# For TI devices with only baremetal/TI RTOS support
-PREFERRED_PROVIDER_virtual/kernel_c66x = "linux-dummy"
-PREFERRED_PROVIDER_virtual/kernel_omapl137 = "linux-dummy"
 
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 
@@ -35,6 +31,6 @@ PREFERRED_VERSION_crda = "3.18"
 PREFERRED_VERSION_obex = "0.34"
 
 PREFERRED_PROVIDER_wpa-supplicant = "wpa-supplicant"
-#PREFERRED_PROVIDER_wpa-supplicant_ti33x = "wpa-supplicant-wl18xx"
-#PREFERRED_PROVIDER_wpa-supplicant_ti43x = "wpa-supplicant-wl18xx"
-#PREFERRED_PROVIDER_wpa-supplicant_omap-a15 = "wpa-supplicant-wl18xx"
+#PREFERRED_PROVIDER_wpa-supplicant:ti33x = "wpa-supplicant-wl18xx"
+#PREFERRED_PROVIDER_wpa-supplicant:ti43x = "wpa-supplicant-wl18xx"
+#PREFERRED_PROVIDER_wpa-supplicant:omap-a15 = "wpa-supplicant-wl18xx"

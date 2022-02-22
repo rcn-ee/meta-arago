@@ -57,7 +57,7 @@ PACKAGECONFIG ?= "pubsub pubsub_delta_frames pubsub_informationmodel \
                   certificate"
 
 # Install examples and unit tests
-do_install_append() {
+do_install:append() {
     # Install examples
     install -d "${D}${datadir}/${BPN}/examples"
     for example in ${B}/bin/examples/*
@@ -77,15 +77,15 @@ do_install_append() {
 }
 
 PACKAGES =+ "${PN}-examples ${PN}-tests"
-FILES_${PN}-dev += "${libdir}/cmake/* ${datadir}/${BPN}/tools"
-FILES_${PN}-examples += "${datadir}/${BPN}/examples"
-FILES_${PN}-tests += "${datadir}/${BPN}/tests"
+FILES:${PN}-dev += "${libdir}/cmake/* ${datadir}/${BPN}/tools"
+FILES:${PN}-examples += "${datadir}/${BPN}/examples"
+FILES:${PN}-tests += "${datadir}/${BPN}/tests"
 
 # This contains some python-based tools
-RDEPENDS_${PN}-dev = "python3"
+RDEPENDS:${PN}-dev = "python3"
 
 # Allow staticdev package to be empty incase sharedlibs is switched on
-ALLOW_EMPTY_${PN}-staticdev = "1"
-ALLOW_EMPTY_${PN}-tests = "1"
+ALLOW_EMPTY:${PN}-staticdev = "1"
+ALLOW_EMPTY:${PN}-tests = "1"
 
 BBCLASSEXTEND = "native nativesdk"

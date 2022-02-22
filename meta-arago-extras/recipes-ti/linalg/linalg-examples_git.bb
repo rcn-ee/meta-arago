@@ -4,7 +4,7 @@ include linalg.inc
 PR = "${INC_PR}.0"
 
 DEPENDS += "linalg"
-RDEPENDS_${PN} += "opencl-runtime"
+RDEPENDS:${PN} += "opencl-runtime"
 
 export LINALG_DIR = "${LINALG_INSTALL_DIR}"
 
@@ -23,12 +23,12 @@ do_install() {
     cp -r examples/arm+dsp/* ${D}${datadir}/ti/examples/linalg
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${datadir}/ti/examples/linalg/* \
 "
 
-FILES_${PN}-dbg += "\
+FILES:${PN}-dbg += "\
     ${datadir}/ti/examples/linalg/*/.debug \
 "
 
-INSANE_SKIP_${PN} = "arch ldflags textrel"
+INSANE_SKIP:${PN} = "arch ldflags textrel"

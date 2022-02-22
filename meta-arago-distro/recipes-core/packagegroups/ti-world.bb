@@ -5,13 +5,13 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-INSANE_SKIP_${PN} += "dev-deps"
+INSANE_SKIP:${PN} += "dev-deps"
 
 CHROMIUM = ""
-CHROMIUM_append_omap-a15 = "\
+CHROMIUM:append:omap-a15 = "\
     chromium-ozone-wayland \
 "
-CHROMIUM_append_k3 = "\
+CHROMIUM:append:k3 = "\
     chromium-ozone-wayland \
 "
 
@@ -38,7 +38,7 @@ OPENCL = " \
     ${@bb.utils.contains('MACHINE_FEATURES','dsp','packagegroup-arago-tisdk-opencl-extra','',d)} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     packagegroup-arago-base \
     packagegroup-arago-console \
     packagegroup-arago-base-tisdk \

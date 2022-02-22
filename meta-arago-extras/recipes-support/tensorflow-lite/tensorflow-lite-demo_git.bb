@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d8927f3331d2b3e321b7dd1925166d25"
 inherit features_check
 
 REQUIRED_DISTRO_FEATURES = "opencv"
-REQUIRED_DISTRO_FEATURES_append_dra7xx = " opencl"
+REQUIRED_DISTRO_FEATURES:append:dra7xx = " opencl"
 
 DEPENDS = "tensorflow-lite flatbuffers opencv"
-DEPENDS_append_dra7xx = " tidl-api"
+DEPENDS:append:dra7xx = " tidl-api"
 
 COMPATIBLE_MACHINE = "ti33x|ti43x|omap-a15|am65xx"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -46,7 +46,7 @@ EXTRA_OEMAKE += "SYSROOT_INCDIR="${STAGING_INCDIR}" SYSROOT_LIBDIR="${STAGING_LI
                  TIDL_API_DIR="${STAGING_DATADIR}/ti/tidl""
 
 TIDL = "no"
-TIDL_dra7xx = "yes"
+TIDL:dra7xx = "yes"
 do_compile() {
     oe_runmake -f Makefile TIDL_ACC=${TIDL}
 }
@@ -61,4 +61,4 @@ do_install() {
     install -m 0755 ${S}/scripts/run*.sh ${D}${datadir}/tensorflow-lite/demos
 }
 
-FILES_${PN} = "${datadir}/tensorflow-lite/demos"
+FILES:${PN} = "${datadir}/tensorflow-lite/demos"

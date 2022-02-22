@@ -11,4 +11,4 @@ INC_PR = "r76"
 # Pull in the base package for installing matrix applications
 require matrix-gui-apps.inc
 
-INSANE_SKIP_${PN} += "installed-vs-shipped"
+INSANE_SKIP:${PN} += "installed-vs-shipped"

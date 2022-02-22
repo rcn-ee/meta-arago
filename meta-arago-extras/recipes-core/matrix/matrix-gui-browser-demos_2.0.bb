@@ -9,7 +9,7 @@ inherit allarch
 S = "${WORKDIR}/git/browser_apps"
 
 # Make sure browser submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-browser"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-browser"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
-FILES_${PN} += "${bindir}/runGoogleChrome.sh"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${bindir}/runGoogleChrome.sh"

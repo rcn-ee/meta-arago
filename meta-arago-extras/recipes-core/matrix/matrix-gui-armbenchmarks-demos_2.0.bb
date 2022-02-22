@@ -9,9 +9,9 @@ inherit allarch
 S = "${WORKDIR}/git/arm_apps"
 
 # Make sure arm submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-arm"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-arm"
 
 # Make sure the benchmarks have been installed
-RDEPENDS_${PN} += "arm-benchmarks lmbench nbench-byte matrix-gui-helper-scripts"
+RDEPENDS:${PN} += "arm-benchmarks lmbench nbench-byte matrix-gui-helper-scripts"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

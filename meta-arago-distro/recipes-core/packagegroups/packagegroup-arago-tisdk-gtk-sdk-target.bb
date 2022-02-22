@@ -8,6 +8,6 @@ inherit packagegroup features_check
 
 REQUIRED_MACHINE_FEATURES = "gpu"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     gtk+3-dev \
 "

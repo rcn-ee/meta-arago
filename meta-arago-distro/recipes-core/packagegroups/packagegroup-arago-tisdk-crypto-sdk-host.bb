@@ -8,11 +8,11 @@ inherit packagegroup
 
 CRYPTO_RDEPENDS = ""
 
-CRYPTO_RDEPENDS_append_ti33x = " cryptodev-module-source"
-CRYPTO_RDEPENDS_append_ti43x = " cryptodev-module-source"
-CRYPTO_RDEPENDS_append_dra7xx = " cryptodev-module-source"
-CRYPTO_RDEPENDS_append_k3 = " cryptodev-module-source"
+CRYPTO_RDEPENDS:append:ti33x = " cryptodev-module-source"
+CRYPTO_RDEPENDS:append:ti43x = " cryptodev-module-source"
+CRYPTO_RDEPENDS:append:dra7xx = " cryptodev-module-source"
+CRYPTO_RDEPENDS:append:k3 = " cryptodev-module-source"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${CRYPTO_RDEPENDS} \
 "

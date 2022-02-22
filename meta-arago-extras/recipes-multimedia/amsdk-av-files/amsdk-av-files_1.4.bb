@@ -9,14 +9,14 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 VIDEO_FILES = "video_480p "
 
-VIDEO_FILES_append_ti33x       = "video_wvga \
+VIDEO_FILES:append:ti33x       = "video_wvga \
                                   video_wqvga"
-VIDEO_FILES_append_ti43x       = "video_wqvga"
-VIDEO_FILES_append_dra7xx      = "video_wvga \
+VIDEO_FILES:append:ti43x       = "video_wqvga"
+VIDEO_FILES:append:dra7xx      = "video_wvga \
                                   video_1080p \
                                   video_720p \
                                   video_yuv"
-VIDEO_FILES_append_k3          = "video_720p"
+VIDEO_FILES:append:k3          = "video_720p"
 
 BRANCH = "master"
 
@@ -39,4 +39,4 @@ do_install() {
     done
 }
 
-FILES_${PN} += "${datadir}/ti/*"
+FILES:${PN} += "${datadir}/ti/*"

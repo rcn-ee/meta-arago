@@ -33,4 +33,4 @@ export XDAIS_DIR = "${XDAIS_INSTALL_DIR}"
 export FC_DIR = "${FC_INSTALL_DIR}"
 export PDK_DIR = "${PDK_INSTALL_DIR}"
 
-TARGET_dra7xx = "SOC_AM572x"
+TARGET:dra7xx = "SOC_AM572x"

@@ -25,9 +25,9 @@ DEPENDS = "cmake-native \
            ti-cgt6x-native \
 "
 
-#RDEPENDS_${PN}-dev += " opencl-monitor-rtos"
+#RDEPENDS:${PN}-dev += " opencl-monitor-rtos"
 
-ALLOW_EMPTY_${PN}-runtime = "1"
+ALLOW_EMPTY:${PN}-runtime = "1"
 
 
 S = "${WORKDIR}/git/host"
@@ -35,13 +35,13 @@ B = "${WORKDIR}/build"
 
 export WANT_LLVM_RELEASE = "3.6-ti"
 
-OCL_BUILD_TARGET_omap-a15   = "ARM_AM57"
+OCL_BUILD_TARGET:omap-a15   = "ARM_AM57"
 
 ENABLE_ULM = "0"
 SHMEM_MANAGER = "CMEM"
 
 RELEASE_TARGET = ""
-RELEASE_TARGET_omap-a15 = "am57xx"
+RELEASE_TARGET:omap-a15 = "am57xx"
 
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 export ARM_LLVM_DIR="${LLVM_RTOS_INSTALL_DIR}"
@@ -94,7 +94,7 @@ do_install() {
     install -m 755 ${STAGING_DIR_NATIVE}/usr/share/ti/ti-opencl-rtos-tree/bin/x86/clocl ${D}/usr/share/ti/opencl/bin/x86
 }
 
-FILES_${PN}-dev += "/usr/share/ti/opencl ${OCL_RTOS_INSTALL_DIR_RECIPE}"
+FILES:${PN}-dev += "/usr/share/ti/opencl ${OCL_RTOS_INSTALL_DIR_RECIPE}"
 
-INSANE_SKIP_${PN} = "already-stripped"
-INSANE_SKIP_${PN}-dev = "staticdev file-rdeps arch"
+INSANE_SKIP:${PN} = "already-stripped"
+INSANE_SKIP:${PN}-dev = "staticdev file-rdeps arch"

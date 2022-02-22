@@ -1,4 +1,4 @@
-PR_append = ".arago0"
+PR:append = ".arago0"
 PV = "3.0+git${SRCPV}"
 
 BRANCH = "ti-linuxptp"
@@ -12,6 +12,6 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
-do_install_append () {
+do_install:append () {
     install -p ${S}/phc2pwm ${D}/${bindir}
 }

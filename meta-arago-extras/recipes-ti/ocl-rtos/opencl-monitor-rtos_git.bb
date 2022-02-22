@@ -26,10 +26,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git/monitor"
 
-BUILD_TARGET_omap-a15   = "ARM_AM57"
+BUILD_TARGET:omap-a15   = "ARM_AM57"
 
 RELEASE_TARGET = ""
-RELEASE_TARGET_omap-a15 = "am57xx"
+RELEASE_TARGET:omap-a15 = "am57xx"
 
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 export PDK_DIR = "${PDK_INSTALL_DIR}"
@@ -72,5 +72,5 @@ do_install() {
     install -m ${OCL_FPERMS} cmds/monitor.am57x_rtos.cmd ${SHARE_PATH}
 }
 
-FILES_${PN} += "${OCL_RTOS_INSTALL_DIR_RECIPE}"
-INSANE_SKIP_${PN} = "arch"
+FILES:${PN} += "${OCL_RTOS_INSTALL_DIR_RECIPE}"
+INSANE_SKIP:${PN} = "arch"

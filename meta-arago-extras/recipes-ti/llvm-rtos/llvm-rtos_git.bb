@@ -19,7 +19,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 S = "${WORKDIR}/git"
 RELEASE_TARGET = ""
-RELEASE_TARGET_omap-a15 = "am57xx"
+RELEASE_TARGET:omap-a15 = "am57xx"
 
 CLEANBROKEN = "1"
 
@@ -55,10 +55,10 @@ do_install() {
     done
 }
 
-FILES_${PN} += "${LLVM_RTOS_INSTALL_DIR_RECIPE}"
+FILES:${PN} += "${LLVM_RTOS_INSTALL_DIR_RECIPE}"
 
 # This package contains one x86-64 executable and a few static libraries
-INSANE_SKIP_${PN} = "arch file-rdeps staticdev"
+INSANE_SKIP:${PN} = "arch file-rdeps staticdev"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"

@@ -19,7 +19,7 @@
 # The tasks sequence is set as below, using DEPLOY_IMAGE_DIR as common place to
 # treat the device tree blob:
 #
-# * u-boot:do_install_append
+# * u-boot:do_install:append
 #   Install UBOOT_DTB_BINARY to datadir, so that kernel can use it for
 #   signing, and kernel will deploy UBOOT_DTB_BINARY after signs it.
 #
@@ -103,7 +103,7 @@ install_helper() {
 	fi
 }
 
-do_install_append() {
+do_install:append() {
 	if [ "${UBOOT_SIGN_ENABLE}" = "1" -a "${PN}" = "${UBOOT_PN}" -a -n "${UBOOT_DTB_BINARY}" ]; then
 		if [ -n "${UBOOT_CONFIG}" ]; then
 			for config in ${UBOOT_MACHINE}; do
@@ -125,7 +125,7 @@ python () {
         d.appendVarFlag('do_deploy', 'depends', ' %s:do_deploy' % kernel_pn)
 
         # kernerl's do_deploy is a litle special, so we can't use
-        # do_deploy_append, otherwise it would override
+        # do_deploy:append, otherwise it would override
         # kernel_do_deploy.
         d.appendVarFlag('do_deploy', 'prefuncs', ' concat_dtb')
 }

@@ -6,9 +6,9 @@ Same package includes IPC implementation (MessageQ based) needed for communicati
 LICENSE = "BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = "file://docs/manifest/TIOVX-APP-HOST_01.00.01.00_manifest.html;md5=247d7c56d783f583bf802490d5c93db3"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI_append += "\
+SRC_URI:append = "\
      file://setenv.sh \
 "
 
@@ -20,7 +20,7 @@ require recipes-ti/includes/arago-paths.inc
 require tiovx-sys.inc
 
 DEPENDS = "tiovx-sys-iface tiovx-lib-host ti-ipc cmem opencv udev"
-RDEPENDS_${PN} = "tiovx-sys-iface tiovx-sys-iface-firmware tiovx-lib-host ti-ipc cmem"
+RDEPENDS:${PN} = "tiovx-sys-iface tiovx-sys-iface-firmware tiovx-lib-host ti-ipc cmem"
 
 PR = "r3"
 
@@ -52,9 +52,9 @@ do_install () {
 }
 
 PACKAGES += "${PN}-examples"
-FILES_${PN}-examples = "${datadir}/ti/examples/openvx"
-RDEPENDS_${PN}-examples = "tiovx-lib-host-staticdev tiovx-lib-host-dev"
+FILES:${PN}-examples = "${datadir}/ti/examples/openvx"
+RDEPENDS:${PN}-examples = "tiovx-lib-host-staticdev tiovx-lib-host-dev"
 
-FILES_${PN} += "${bindir}/*"
-INSANE_SKIP_${PN} = "ldflags"
-INSANE_SKIP_${PN}-examples = "dev-deps"
+FILES:${PN} += "${bindir}/*"
+INSANE_SKIP:${PN} = "ldflags"
+INSANE_SKIP:${PN}-examples = "dev-deps"

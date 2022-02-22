@@ -23,7 +23,7 @@ REQUIRED_DISTRO_FEATURES = "opencl"
 
 PR = "r1"
 
-RDEPENDS_${PN} += "opencl-runtime"
+RDEPENDS:${PN} += "opencl-runtime"
 
 EXTRA_OEMAKE = " TARGET_ROOTDIR=${STAGING_DIR_HOST} \
                  TI_OCL_CGT_INSTALL=${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x \
@@ -38,13 +38,13 @@ do_configure() {
 EXTRA_OECONF += "--enable-maintainer-mode"
 EXTRA_OEMAKE += "'ERROR_CFLAGS=-Wno-deprecated-declarations'"
 
-FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
-FILES_${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
-FILES_${PN}-dev += "${libdir}/gstreamer-1.0/*.la"
+FILES:${PN} += "${libdir}/gstreamer-1.0/*.so"
+FILES:${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
+FILES:${PN}-dev += "${libdir}/gstreamer-1.0/*.la"
 
-FILES_${PN} += "${libdir}/*.so"
-FILES_${PN}-dbg += "${libdir}/.debug"
-FILES_${PN}-dev += "${libdir}/*.la"
+FILES:${PN} += "${libdir}/*.so"
+FILES:${PN}-dbg += "${libdir}/.debug"
+FILES:${PN}-dev += "${libdir}/*.la"
 FILES_SOLIBSDEV = ""
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"

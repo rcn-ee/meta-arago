@@ -21,14 +21,14 @@ inherit cmake
 
 EXTRA_OECMAKE := "-DWITH_ILM_INPUT=1"
 
-FILES_${PN} += "${datadir}/wayland-protocols/stable/ivi-application/ivi-application.xml"
-FILES_${PN} += "${libdir}/weston/*"
-FILES_${PN}-dbg += "${libdir}/weston/.debug/*"
+FILES:${PN} += "${datadir}/wayland-protocols/stable/ivi-application/ivi-application.xml"
+FILES:${PN} += "${libdir}/weston/*"
+FILES:${PN}-dbg += "${libdir}/weston/.debug/*"
 
 EXTRA_OECMAKE += "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 
 PR = "r1"
 
 # Need these temporarily to prevent a non-fatal do_package_qa issue
-INSANE_SKIP_${PN} += "dev-deps"
-INSANE_SKIP_${PN}-dev += "dev-elf dev-so"
+INSANE_SKIP:${PN} += "dev-deps"
+INSANE_SKIP:${PN}-dev += "dev-elf dev-so"

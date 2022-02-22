@@ -1,3 +1,3 @@
-PR_append = ".arago1"
+PR:append = ".arago1"
 
-PACKAGECONFIG_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'egl glesv2', '', d)}"
+PACKAGECONFIG:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'egl glesv2', '', d)}"

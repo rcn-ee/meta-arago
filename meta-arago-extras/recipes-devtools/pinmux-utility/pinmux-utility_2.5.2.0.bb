@@ -21,4 +21,4 @@ do_install() {
     install ${S}/Release_Notes.txt ${D}/${installdir}
 }
 
-FILES_${PN} += "${installdir}/*"
+FILES:${PN} += "${installdir}/*"

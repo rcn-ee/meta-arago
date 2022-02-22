@@ -728,7 +728,7 @@ FITIMAGE_INITRAMFS_ITB_IMAGE[vardepsexclude] = "DATETIME"
 FITIMAGE_INITRAMFS_ITB_BINARY ?= "fitImage-${INITRAMFS_IMAGE}.${FITIMAGE_ITB_SUFFIX}"
 FITIMAGE_INITRAMFS_ITB_SYMLINK ?= "fitImage-${INITRAMFS_IMAGE}-${MACHINE}.${FITIMAGE_ITB_SUFFIX}"
 
-kernel_do_deploy_append() {
+kernel_do_deploy:append() {
 	# Update deploy directory
 	if echo ${KERNEL_IMAGETYPES} | grep -wq "fitImage"; then
 		cd ${B}

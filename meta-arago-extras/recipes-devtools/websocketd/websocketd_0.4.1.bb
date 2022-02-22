@@ -15,4 +15,4 @@ SRCREV = "035c18cc3e6962dabd5ea2ad8845260726a4a99e"
 export http_proxy
 
 # Development package contains all the examples in different languages
-INSANE_SKIP_${PN}-dev = "file-rdeps"
+INSANE_SKIP:${PN}-dev = "file-rdeps"

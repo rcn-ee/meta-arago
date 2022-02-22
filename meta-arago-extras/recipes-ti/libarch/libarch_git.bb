@@ -13,8 +13,8 @@ do_install() {
     cp -r exports/libarch_*/* ${D}${LIBARCH_INSTALL_DIR_RECIPE}
 }
 
-FILES_${PN}-dev += "${LIBARCH_INSTALL_DIR_RECIPE}"
+FILES:${PN}-dev += "${LIBARCH_INSTALL_DIR_RECIPE}"
 
 # skip checking binary against ARM architecture
-INSANE_SKIP_${PN}-dev = "arch"
-ALLOW_EMPTY_${PN} = "1"
+INSANE_SKIP:${PN}-dev = "arch"
+ALLOW_EMPTY:${PN} = "1"

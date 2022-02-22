@@ -1,6 +1,6 @@
 ORIG_TARGET_SYS = "${TARGET_ARCH}${TARGET_VENDOR}${@['-' + d.getVar('TARGET_OS'), ''][d.getVar('TARGET_OS') == ('' or 'custom')]}"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${base_sbindir}
 	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/libc/${base_sbindir}/ldconfig ${D}${base_sbindir}/
 	install -d ${D}${sysconfdir}
@@ -25,11 +25,11 @@ do_install_append() {
 	cp ${CP_ARGS} ${EXTERNAL_TOOLCHAIN}/lib/gcc/${EAT_TARGET_SYS}/${EAT_VER_GCC}/libgcc* ${D}${libdir}/${EAT_TARGET_SYS}/${EAT_VER_GCC}/
 }
 
-# Below FILES_* overrides are due to TARGET_SYS -> ORIG_TARGET_SYS move in ${libdir}/gcc
+# Below FILES:* overrides are due to TARGET_SYS -> ORIG_TARGET_SYS move in ${libdir}/gcc
 # to enable native compile on the target
-FILES_libgcov-staticdev = "${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/libgcov.a"
+FILES:libgcov-staticdev = "${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/libgcov.a"
 
-FILES_libgfortran-dev = "\
+FILES:libgfortran-dev = "\
     ${libdir}/libgfortran*.so \
     ${libdir}/libgfortran.spec \
     ${libdir}/libgfortran.la \
@@ -38,11 +38,11 @@ FILES_libgfortran-dev = "\
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/finclude/ \
 "
 
-FILES_gcc-sanitizers = "${libdir}/*.spec ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include/sanitizer/*.h"
+FILES:gcc-sanitizers = "${libdir}/*.spec ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include/sanitizer/*.h"
 
 # This is provided by gcc:
 #    ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include
-FILES_libgcc-dev = "\
+FILES:libgcc-dev = "\
     ${base_libdir}/libgcc*.so \
     ${@oe.utils.conditional('BASETARGET_SYS', '${ORIG_TARGET_SYS}', '', '${libdir}/${BASETARGET_SYS}', d)} \
     ${libdir}/${TARGET_SYS}/${BINV}* \
@@ -50,24 +50,24 @@ FILES_libgcc-dev = "\
     ${libdir}/gcc/${TARGET_SYS} \
 "
 
-FILES_libssp-dev = "\
+FILES:libssp-dev = "\
     ${libdir}/libssp*.so \
     ${libdir}/libssp*_nonshared.a \
     ${libdir}/libssp*.la \
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include/ssp \
 "
 
-FILES_libquadmath-dev = "\
+FILES:libquadmath-dev = "\
     ${libdir}/libquadmath*.so \
     ${libdir}/libquadmath.la \
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include/quadmath* \
 "
 
-FILES_libgomp-dev = "\
+FILES:libgomp-dev = "\
     ${libdir}/libgomp*${SOLIBSDEV} \
     ${libdir}/libgomp*.la \
     ${libdir}/libgomp.spec \
     ${libdir}/gcc/${ORIG_TARGET_SYS}/${BINV}/include/omp.h \
 "
 
-INSANE_SKIP_libgcc-dev += "staticdev"
+INSANE_SKIP:libgcc-dev += "staticdev"

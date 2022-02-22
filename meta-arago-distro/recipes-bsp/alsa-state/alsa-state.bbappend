@@ -1,4 +1,4 @@
-PR_append = ".arago0"
+PR:append = ".arago0"
 
 # look for files in this layer first
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"

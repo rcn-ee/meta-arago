@@ -17,8 +17,8 @@ SETTINGS_DEMOS_RDEPENDS = " \
     am-sysinfo \
 "
 
-RDEPENDS_${PN} += "${SETTINGS_DEMOS_RDEPENDS}"
-RDEPENDS_matrix-gui-weston-terminal-demo += "${SETTINGS_DEMOS_RDEPENDS}"
+RDEPENDS:${PN} += "${SETTINGS_DEMOS_RDEPENDS}"
+RDEPENDS:matrix-gui-weston-terminal-demo += "${SETTINGS_DEMOS_RDEPENDS}"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
-FILES_matrix-gui-weston-terminal-demo = "${MATRIX_APP_DIR}/terminal"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:matrix-gui-weston-terminal-demo = "${MATRIX_APP_DIR}/terminal"

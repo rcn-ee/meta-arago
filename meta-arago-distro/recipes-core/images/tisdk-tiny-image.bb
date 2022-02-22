@@ -2,7 +2,7 @@ ARAGO_SYSVINIT = "1"
 
 require arago-image.inc
 
-IMAGE_FEATURES_remove = "package-management splash"
+IMAGE_FEATURES:remove = "package-management splash"
 
 IMAGE_FSTYPES += "cpio cpio.xz"
 

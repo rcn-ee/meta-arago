@@ -6,10 +6,10 @@ PV = "2.0"
 PR = "r5"
 
 BRANCH ?= "v4.1"
-BRANCH_aarch64 ?= "am65x-v1.0"
+BRANCH:aarch64 ?= "am65x-v1.0"
 
 SRCREV = "412dce4e65cfe5af729be38fd1b4c1d59e9a8828"
-SRCREV_aarch64 = "0f52dcb3c4e3678e96427d546d6c2e1fabc2ad91"
+SRCREV:aarch64 = "0f52dcb3c4e3678e96427d546d6c2e1fabc2ad91"
 
 SRC_URI = "git://git.ti.com/switch-config/switch-config.git;protocol=git;branch=${BRANCH}"
 

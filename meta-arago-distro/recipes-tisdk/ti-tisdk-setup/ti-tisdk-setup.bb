@@ -25,12 +25,12 @@ SETUP_SCRIPTS = " common.sh \
                   ${SDCARD_SCRIPT} \
 "
 
-UBOOT_ENV_omapl138 = "setup-uboot-env-am18x.sh"
-UBOOT_ENV_ti33x = "setup-uboot-env-am335x.sh"
-UBOOT_ENV_ti43x = "setup-uboot-env-am43x.sh"
-UBOOT_ENV_omap5-evm = "setup-uboot-env-omap5.sh"
-UBOOT_ENV_am57xx-evm = "setup-uboot-env-am57xx-evm.sh"
-UBOOT_ENV_k3 = "setup-uboot-env-am65x.sh"
+UBOOT_ENV:omapl138 = "setup-uboot-env-am18x.sh"
+UBOOT_ENV:ti33x = "setup-uboot-env-am335x.sh"
+UBOOT_ENV:ti43x = "setup-uboot-env-am43x.sh"
+UBOOT_ENV:omap5-evm = "setup-uboot-env-omap5.sh"
+UBOOT_ENV:am57xx-evm = "setup-uboot-env-am57xx-evm.sh"
+UBOOT_ENV:k3 = "setup-uboot-env-am65x.sh"
 UBOOT_ENV = "setup-uboot-unknown.sh"
 
 do_install () {
@@ -55,5 +55,5 @@ do_install () {
     fi
 }
 
-FILES_${PN} += "setup.sh"
-RDEPENDS_${PN} += "bash"
+FILES:${PN} += "setup.sh"
+RDEPENDS:${PN} += "bash"

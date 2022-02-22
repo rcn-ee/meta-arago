@@ -17,14 +17,14 @@ TOOLCHAIN_CLEANUP_PACKAGES = "libgnutls-dev libgnutls-extra26 libgnutls-openssl2
 # Set DTB filters for each machine.  Use "unknown" by default to avoid
 # picking up DTB files for devices with no DTB support.
 DTB_FILTER = "unknown"
-DTB_FILTER_ti33x = "am335x"
-DTB_FILTER_dra7xx-evm = "dra7"
-DTB_FILTER_am57xx-evm = "am57xx"
-DTB_FILTER_am57xx-hs-evm = "${DTB_FILTER_am57xx-evm}"
-DTB_FILTER_ti43x = "am43"
-DTB_FILTER_omapl138 = "da850"
-DTB_FILTER_am65xx = "am65"
-DTB_FILTER_j7 = "j721e"
+DTB_FILTER:ti33x = "am335x"
+DTB_FILTER:dra7xx-evm = "dra7"
+DTB_FILTER:am57xx-evm = "am57xx"
+DTB_FILTER:am57xx-hs-evm = "${DTB_FILTER:am57xx-evm}"
+DTB_FILTER:ti43x = "am43"
+DTB_FILTER:omapl138 = "da850"
+DTB_FILTER:am65xx = "am65"
+DTB_FILTER:j7 = "j721e"
 
 # List of target side images to build for the SDK
 TARGET_IMAGES = "tisdk-base-image tisdk-default-image"

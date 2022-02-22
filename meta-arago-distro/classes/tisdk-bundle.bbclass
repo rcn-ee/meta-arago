@@ -9,8 +9,8 @@ IMAGE_FEATURES ?= ""
 IMAGE_FEATURES[type] = "list"
 
 # Always add the sdk_base feature
-IMAGE_FEATURES_prepend = "sdk_base package-management "
-SDKIMAGE_FEATURES_prepend = "package-management "
+IMAGE_FEATURES:prepend = "sdk_base package-management "
+SDKIMAGE_FEATURES:prepend = "package-management "
 
 # Define our always included sdk package group as the IMAGE_INSTALL settings
 # like you would expect.
@@ -19,7 +19,7 @@ FEATURE_PACKAGES_sdk_base = "${IMAGE_INSTALL}"
 # Create the list of packages to be installed
 PACKAGE_INSTALL = "${@' '.join(oe.packagegroup.required_packages('${IMAGE_FEATURES}'.split(), d))}"
 
-RDEPENDS_${PN} += "${@' '.join(oe.packagegroup.active_packages('${IMAGE_FEATURES}'.split(), d))}"
+RDEPENDS:${PN} += "${@' '.join(oe.packagegroup.active_packages('${IMAGE_FEATURES}'.split(), d))}"
 
 # "export IMAGE_BASENAME" not supported at this time
 IMAGE_BASENAME[export] = "1"
@@ -692,7 +692,7 @@ generate_sw_manifest() {
 
 ROOTFS_PREPROCESS_COMMAND += "tisdk_image_setup; "
 ROOTFS_POSTPROCESS_COMMAND += "tisdk_image_build; "
-IMAGE_PREPROCESS_COMMAND_append = "tisdk_image_cleanup; "
+IMAGE_PREPROCESS_COMMAND:append = "tisdk_image_cleanup; "
 
 # Create the SDK image.  We will re-use the rootfs_ipk_do_rootfs functionality
 # to install a given list of packages using opkg.

@@ -9,12 +9,12 @@ PR = "${INC_PR}.0"
 
 DEPENDS = "boost boost-native ti-cgt6x-native clocl-native"
 
-TARGET_class-target = "arm"
-TARGET_class-native = "x86"
-TARGET_class-nativesdk = "x86"
+TARGET:class-target = "arm"
+TARGET:class-native = "x86"
+TARGET:class-nativesdk = "x86"
 
-CXXFLAGS_append_class-native    = " -DPLATFORM_64BIT "
-CXXFLAGS_append_class-nativesdk = " -DPLATFORM_64BIT "
+CXXFLAGS:append:class-native    = " -DPLATFORM_64BIT "
+CXXFLAGS:append:class-nativesdk = " -DPLATFORM_64BIT "
 
 EXTRA_OEMAKE = " -C ${S}/viewer \
                  TARGET=${TARGET} \

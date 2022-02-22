@@ -23,7 +23,7 @@ ARAGO_NDISC6 = "\
     ndisc6-tracert6 \
     "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${ARAGO_LIBNL} \
     ${ARAGO_NDISC6} \
     ptpd \

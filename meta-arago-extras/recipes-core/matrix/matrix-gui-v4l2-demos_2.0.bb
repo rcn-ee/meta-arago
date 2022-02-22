@@ -9,6 +9,6 @@ inherit allarch
 S = "${WORKDIR}/git/v4l2_apps"
 
 # Make sure display submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-display av-examples"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-display av-examples"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

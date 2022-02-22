@@ -30,9 +30,9 @@ do_install() {
     done
 }
 
-FILES_${PN} += "${OCL_TIDL_FW_INSTALL_DIR_RECIPE}"
+FILES:${PN} += "${OCL_TIDL_FW_INSTALL_DIR_RECIPE}"
 
-INSANE_SKIP_${PN} = "arch"
+INSANE_SKIP:${PN} = "arch"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"

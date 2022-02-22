@@ -8,7 +8,7 @@ inherit allarch
 
 S = "${WORKDIR}/git/utilities_apps"
 
-do_install_prepend(){
+do_install:prepend(){
    install -d ${D}${MATRIX_BASE_DIR}/html-apps/
    cp -rf ${S}/utility_eeprom/eeprom ${D}${MATRIX_BASE_DIR}/html-apps/
    cp -rf ${S}/utility_filesystem/filesystem ${D}${MATRIX_BASE_DIR}/html-apps/
@@ -16,7 +16,7 @@ do_install_prepend(){
    cp -rf ${S}/utility_stats/stats ${D}${MATRIX_BASE_DIR}/html-apps/
 }
 
-do_install_append(){
+do_install:append(){
     rm ${D}${MATRIX_APP_DIR}/utility_eeprom/eeprom-utility.php
     rm ${D}${MATRIX_APP_DIR}/utility_filesystem/filesystem-utility.php
     rm ${D}${MATRIX_APP_DIR}/utility_info/info-utility.php
@@ -24,8 +24,8 @@ do_install_append(){
 }
 
 # Make sure utility submenu and app images has been installed.
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-utility"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-utility"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/html-apps/ \
+FILES:${PN} += "${MATRIX_BASE_DIR}/html-apps/ \
                 ${MATRIX_BASE_DIR}/apps/ \
 "

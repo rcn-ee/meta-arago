@@ -10,7 +10,7 @@ PR = "${INC_PR}.0"
 
 DEPENDS = "ti-fftw"
 
-RDEPENDS_${PN} += "ti-fftw-staticdev"
+RDEPENDS:${PN} += "ti-fftw-staticdev"
 
 S = "${WORKDIR}/git/ti/fftw/examples"
 
@@ -21,5 +21,5 @@ do_install() {
     cp -r ./* ${D}${datadir}/ti/examples/fftw
 }
 
-FILES_${PN} = "${datadir}/ti/examples/fftw"
-INSANE_SKIP_${PN} = "ldflags"
+FILES:${PN} = "${datadir}/ti/examples/fftw"
+INSANE_SKIP:${PN} = "ldflags"

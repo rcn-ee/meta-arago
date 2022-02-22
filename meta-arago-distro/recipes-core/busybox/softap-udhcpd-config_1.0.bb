@@ -19,5 +19,5 @@ do_install() {
     install -m 0755 ${S}/udhcpd.conf ${D}${sysconfdir}
 }
 
-FILES_${PN} += "${sysconfdir}/udhcpd.conf"
-CONFFILES_${PN} += "${sysconfdir}/udhcpd.conf"
+FILES:${PN} += "${sysconfdir}/udhcpd.conf"
+CONFFILES:${PN} += "${sysconfdir}/udhcpd.conf"

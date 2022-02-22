@@ -19,7 +19,7 @@ do_compile() {
 	${MAKE} -f Makefile.linux
 }
 
-SRC_URI_append_libc-uclibc = " file://no_aio.patch "
+SRC_URI:append:libc-uclibc = " file://no_aio.patch "
 
 do_install() {
 	install -d ${D}${bindir}

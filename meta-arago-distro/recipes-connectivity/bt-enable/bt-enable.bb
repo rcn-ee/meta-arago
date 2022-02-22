@@ -16,9 +16,9 @@ INITSCRIPT_PARAMS = "defaults 99"
 
 inherit allarch update-rc.d systemd
 
-SYSTEMD_SERVICE_${PN} = "bt-enable.service"
+SYSTEMD_SERVICE:${PN} = "bt-enable.service"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"
 
 do_install () {
 	install -d ${D}${sysconfdir}/init.d

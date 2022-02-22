@@ -9,7 +9,7 @@ inherit packagegroup features_check
 REQUIRED_MACHINE_FEATURES = "gpu"
 
 #    qtdeclarative-examples
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     packagegroup-arago-qte \
     qtbase-examples \
     qtdeclarative-tools \

@@ -37,13 +37,13 @@ OCL_EXAMPLE_LIST = " abort_exit \
 "
 
 RELEASE_TARGET = ""
-RELEASE_TARGET_omap-a15 = "am57xx"
+RELEASE_TARGET:omap-a15 = "am57xx"
 
 export BIOS_INSTALL_DIR = "${SYSBIOS_INSTALL_DIR}"
 export DESTDIR="${OCL_RTOS_INSTALL_DIR}/ti-opencl-rtos-${RELEASE_TARGET}-${PV}"
 export TI_OCL_INSTALL = "${DESTDIR}/packages/ti/opencl"
 
-python do_unpack_append() {
+python do_unpack:append() {
     import shutil
 
     git_dir = d.expand("${WORKDIR}/git/examples")

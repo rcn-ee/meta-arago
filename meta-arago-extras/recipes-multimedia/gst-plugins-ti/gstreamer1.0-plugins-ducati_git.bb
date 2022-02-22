@@ -18,4 +18,4 @@ SRC_URI = " \
     file://0001-gstducati-configure.ac-stop-using-export-symbols-reg.patch \
 "
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"

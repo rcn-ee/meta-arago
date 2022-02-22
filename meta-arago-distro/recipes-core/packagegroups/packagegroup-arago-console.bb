@@ -75,10 +75,10 @@ ARAGO_CONSOLE = "\
     ${ARAGO_SDK_PREREQ} \
     "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${ARAGO_CONSOLE} \
     "
 
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
     kernel-modules \
     "

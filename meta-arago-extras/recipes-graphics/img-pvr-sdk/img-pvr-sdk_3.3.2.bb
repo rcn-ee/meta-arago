@@ -15,7 +15,7 @@ COMPATIBLE_MACHINE = "omap-a15|ti43x|ti33x|k3"
 
 S = "${WORKDIR}/git"
 SRC_DIR = "arm"
-SRC_DIR_k3 = "arm64"
+SRC_DIR:k3 = "arm64"
 
 do_install () {
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
@@ -49,7 +49,7 @@ do_install () {
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/DRM/OGLES2FilmTV ${D}${bindir}/SGX/demos/DRM/
 }
 
-do_install_append_j7 () {
+do_install:append:j7 () {
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/Wayland/OpenGLESDeferredShading ${D}${bindir}/SGX/demos/Wayland/
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/Wayland/OpenGLESGaussianBlur ${D}${bindir}/SGX/demos/Wayland/
     install -m 755 ${S}/targetfs/${SRC_DIR}/Examples/Advanced/Wayland/OpenGLESImageBasedLighting ${D}${bindir}/SGX/demos/Wayland/
@@ -72,12 +72,12 @@ do_install_append_j7 () {
 }
 
 
-RDEPENDS_${PN} = "libegl"
+RDEPENDS:${PN} = "libegl"
 
 INHIBIT_PACKAGE_STRIP = "1"
 
-INSANE_SKIP_${PN} += "dev-so staticdev already-stripped ldflags file-rdeps"
+INSANE_SKIP:${PN} += "dev-so staticdev already-stripped ldflags file-rdeps"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /opt/img-powervr-sdk/* \
 "

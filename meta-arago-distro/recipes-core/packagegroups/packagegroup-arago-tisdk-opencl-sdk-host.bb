@@ -13,10 +13,10 @@ UTILS = " \
     ${@oe.utils.all_distro_features(d, 'openmp', 'openmpacc-examples-source')} \
 "
 
-UTILS_append_dra7xx = " \
+UTILS:append:dra7xx = " \
     ${@oe.utils.all_distro_features(d, 'openmp', 'linalg-examples-source')} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${UTILS} \
 "

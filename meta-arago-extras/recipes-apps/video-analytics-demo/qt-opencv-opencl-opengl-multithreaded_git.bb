@@ -29,7 +29,7 @@ export TARGET_ROOTDIR = "${STAGING_DIR_HOST}"
 export TI_OCL_CGT_INSTALL = "${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x"
 export TI_DSPLIB_DIR = "${STAGING_DIR_TARGET}/usr/share/ti/ti-dsplib-c66x-tree"
 
-CXXFLAGS_append = " -DOCV_NATIVE "
+CXXFLAGS:append = " -DOCV_NATIVE "
 
 do_compile() {
     cd ${S}
@@ -43,4 +43,4 @@ do_install() {
     install -m 755 qt-opencv-opencl-opengl-multithreaded ${D}/usr/bin/qt-opencv-opencl-opengl-multithreaded
 }
 
-RDEPENDS_${PN} += "opencv opencl-runtime"
+RDEPENDS:${PN} += "opencv opencl-runtime"

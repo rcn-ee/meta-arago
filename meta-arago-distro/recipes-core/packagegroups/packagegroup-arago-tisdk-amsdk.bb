@@ -9,14 +9,14 @@ inherit packagegroup
 # Out of Box Experience (OOBE)
 OOBE = ""
 
-OOBE_ti33x += "\
+OOBE:ti33x += "\
     parse-ip \
 "
 
-OOBE_ti43x += "\
+OOBE:ti43x += "\
     parse-ip \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${OOBE} \
 "

@@ -9,6 +9,6 @@ inherit allarch
 S = "${WORKDIR}/git/wifi_apps"
 
 # Make sure wifi submenu and app images has been installed
-RDEPENDS_${PN} += "matrix-gui-apps-images matrix-gui-submenus-wifi"
+RDEPENDS:${PN} += "matrix-gui-apps-images matrix-gui-submenus-wifi"
 
-FILES_${PN} += "${MATRIX_BASE_DIR}/*"
+FILES:${PN} += "${MATRIX_BASE_DIR}/*"

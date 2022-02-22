@@ -31,7 +31,7 @@ UTILS_DSP = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dsp', 'gdbc6x dsptop', '', d)} \
 "
 
-UTILS_append_ti33x = " mmc-utils \
+UTILS:append:ti33x = " mmc-utils \
                        switch-config \
                        pru-icss \
                        pru-swuart-fw \
@@ -39,7 +39,7 @@ UTILS_append_ti33x = " mmc-utils \
                        uio-test-pruss \
 "
 
-UTILS_append_ti43x = " mmc-utils \
+UTILS:append:ti43x = " mmc-utils \
                        switch-config \
                        libdrm-omap \
                        pru-icss \
@@ -47,7 +47,7 @@ UTILS_append_ti43x = " mmc-utils \
                        uio-test-pruss \
 "
 
-UTILS_append_omap-a15 = " mmc-utils \
+UTILS:append:omap-a15 = " mmc-utils \
                           switch-config \
                           libdrm-omap \
                           stream-openmp \
@@ -57,7 +57,7 @@ UTILS_append_omap-a15 = " mmc-utils \
                           uio-module-drv-test \
 "
 
-UTILS_append_k3 = " mmc-utils \
+UTILS:append:k3 = " mmc-utils \
                     switch-config \
                     irqbalance \
                     ti-rpmsg-char \
@@ -65,31 +65,31 @@ UTILS_append_k3 = " mmc-utils \
                     statcol \
 "
 
-UTILS_append_am64xx = " ti-rtos-firmware pru-icss"
-UTILS_append_am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
-UTILS_append_j7 = " ti-rtos-firmware"
-UTILS_append_j7-evm = " pru-icss"
-UTILS_append_j7-hs-evm = " pru-icss"
+UTILS:append:am64xx = " ti-rtos-firmware pru-icss"
+UTILS:append:am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
+UTILS:append:j7 = " ti-rtos-firmware"
+UTILS:append:j7-evm = " pru-icss"
+UTILS:append:j7-hs-evm = " pru-icss"
 
-UTILS_append_omapl138 = " ti-ipc-rtos-fw"
+UTILS:append:omapl138 = " ti-ipc-rtos-fw"
 
-UTILS_append_dra7xx = " \
+UTILS:append:dra7xx = " \
                         ${UTILS_DSP} \
                         ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-example-apps','',d)} \
 "
 
 EXTRA_LIBS = ""
-EXTRA_LIBS_append_omap-a15 = " \
+EXTRA_LIBS:append:omap-a15 = " \
     cmem \
     uio-module-drv \
 "
 
-EXTRA_LIBS_append_ti43x = " \
+EXTRA_LIBS:append:ti43x = " \
     cmem \
     uio-module-drv \
 "
 
-EXTRA_LIBS_append_ti33x = " \
+EXTRA_LIBS:append:ti33x = " \
     uio-module-drv \
 "
 
@@ -100,29 +100,29 @@ EXTRA_PACKAGES = " \
     ccief-basic \
 "
 
-EXTRA_PACKAGES_omapl138 = " \
+EXTRA_PACKAGES:omapl138 = " \
     protobuf \
 "
 
-EXTRA_PACKAGES_append_omap-a15 = " ti-ipc-examples-linux"
-EXTRA_PACKAGES_append_omapl138 = " ti-ipc-examples-linux"
+EXTRA_PACKAGES:append:omap-a15 = " ti-ipc-examples-linux"
+EXTRA_PACKAGES:append:omapl138 = " ti-ipc-examples-linux"
 
-EXTRA_PACKAGES_append_omap-a15 = " \
+EXTRA_PACKAGES:append:omap-a15 = " \
     ${@bb.utils.contains('MACHINE_FEATURES','dsp','big-data-ipc-demo-linux big-data-ipc-demo-linux-firmware','',d)} \
 "
 
 # acontis-atemsys
-EXTRA_PACKAGES_append_am335x-evm = " pruss-lld-apps"
-EXTRA_PACKAGES_append_am437x-evm = " pruss-lld-apps"
+EXTRA_PACKAGES:append:am335x-evm = " pruss-lld-apps"
+EXTRA_PACKAGES:append:am437x-evm = " pruss-lld-apps"
 # acontis-atemsys
-EXTRA_PACKAGES_append_am57xx-evm = " pruss-lld-apps"
+EXTRA_PACKAGES:append:am57xx-evm = " pruss-lld-apps"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${UTILS} \
     ${UTILS_UBOOT_FW} \
     ${EXTRA_LIBS} \
 "
 
-RDEPENDS_${PN}-extra = "\
+RDEPENDS:${PN}-extra = "\
     ${EXTRA_PACKAGES} \
 "

@@ -1,10 +1,10 @@
-PR_append = ".arago1"
+PR:append = ".arago1"
 
 PACKAGES =+ "${PN}-initramfs"
 
-do_install_append() {
+do_install:append() {
 	[ ! -e ${D}/init ] && ln -s ${base_sbindir}/init ${D}/init
 }
 
-FILES_${PN}-initramfs = "/init"
-RDEPENDS_${PN}-initramfs = "${PN}"
+FILES:${PN}-initramfs = "/init"
+RDEPENDS:${PN}-initramfs = "${PN}"

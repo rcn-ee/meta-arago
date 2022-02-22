@@ -10,7 +10,7 @@ LICENSE = "GPLv2 | BSD"
 inherit pkgconfig
 
 DEPENDS = "gnutls dbus libnl openssl libgcrypt"
-RRECOMMENDS_${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
+RRECOMMENDS:${PN} = "wpa-supplicant-passphrase wpa-supplicant-cli"
 
 # To prevent users from accidently picking up this customized version of
 # wpa-supplicant the DEFAULT_PREFERENCE will be set to -1.
@@ -29,10 +29,10 @@ SRC_URI += "file://crypto_openssl.patch;patchdir=.."
 
 S = "${WORKDIR}/git/wpa_supplicant"
 
-PACKAGES_prepend = "wpa-supplicant-passphrase wpa-supplicant-cli "
-FILES_wpa-supplicant-passphrase = "${sbindir}/wpa_passphrase"
-FILES_wpa-supplicant-cli = "${sbindir}/wpa_cli"
-FILES_${PN} += "${datadir}/dbus-1/system-services/*"
+PACKAGES:prepend = "wpa-supplicant-passphrase wpa-supplicant-cli "
+FILES:wpa-supplicant-passphrase = "${sbindir}/wpa_passphrase"
+FILES:wpa-supplicant-cli = "${sbindir}/wpa_cli"
+FILES:${PN} += "${datadir}/dbus-1/system-services/*"
 
 do_configure () {
 	install -m 0755 ${WORKDIR}/defconfig .config
@@ -81,7 +81,7 @@ do_install () {
 	install -m 0644 ${WORKDIR}/99_wpa_supplicant ${D}/etc/default/volatiles
 }
 
-pkg_postinst_wpa-supplicant () {
+pkg_postinst:wpa-supplicant () {
 	# If we're offline, we don't need to do this.
 	if [ "x$D" = "x" ]; then
 		killall -q -HUP dbus-daemon || true

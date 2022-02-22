@@ -40,11 +40,11 @@ ARAGO_TEST = "\
     stream \
 "
 
-ARAGO_TEST_append_armv7a = " \
+ARAGO_TEST:append:armv7a = " \
     cpuburn-neon \
 "
 
-ARAGO_TEST_append_armv7ve = " \
+ARAGO_TEST:append:armv7ve = " \
     cpuburn-neon \
 "
 
@@ -57,18 +57,18 @@ ARAGO_TI_TEST = " \
     arm-benchmarks \
 "
 
-ARAGO_TI_TEST_append_ti33x = " \
+ARAGO_TI_TEST:append:ti33x = " \
     omapconf \
 "
 
-ARAGO_TI_TEST_append_ti43x = " \
+ARAGO_TI_TEST:append:ti43x = " \
     omapconf \
     ${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '', 'cmem-test', d)} \
 "
 
 NOT_MAINLINE_MMIP_DEPS = "${@bb.utils.contains('MACHINE_FEATURES', 'mmip', 'omapdrmtest', '', d)}"
 
-ARAGO_TI_TEST_append_omap-a15 = " \
+ARAGO_TI_TEST:append:omap-a15 = " \
     omapconf \
     ${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '', " \
         ti-ipc-test \
@@ -77,21 +77,21 @@ ARAGO_TI_TEST_append_omap-a15 = " \
     ", d)} \
 "
 
-ARAGO_TI_TEST_append_k3 = " \
+ARAGO_TI_TEST:append:k3 = " \
     k3conf \
 "
 
-ARAGO_TI_TEST_append_j7 = " \
+ARAGO_TI_TEST:append:j7 = " \
     ufs-utils \
     viddec-test-app \
     videnc-test-app \
 "
 
-ARAGO_TI_TEST_append_omapl138 = " \
+ARAGO_TI_TEST:append:omapl138 = " \
     ${@oe.utils.conditional('ARAGO_BRAND', 'mainline', '', 'ti-ipc-test', d)} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${ARAGO_TEST} \
     ${ARAGO_TI_TEST} \
 "

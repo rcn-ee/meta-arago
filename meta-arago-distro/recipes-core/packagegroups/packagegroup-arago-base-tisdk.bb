@@ -11,7 +11,7 @@ OPTEE_PKGS = " \
     optee-test \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     dbus \
     expat \
     glib-2.0 \

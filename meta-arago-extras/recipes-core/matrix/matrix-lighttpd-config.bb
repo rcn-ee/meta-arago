@@ -19,10 +19,10 @@ do_install() {
 	install -m 0644 ${WORKDIR}/lighttpd.conf.matrix ${D}${sysconfdir}/lighttpd/lighttpd.conf.matrix
 }
 
-FILES_${PN} = "${sysconfdir}/lighttpd/lighttpd.conf.matrix"
-RDEPENDS_${PN} = "lighttpd lighttpd-module-setenv"
+FILES:${PN} = "${sysconfdir}/lighttpd/lighttpd.conf.matrix"
+RDEPENDS:${PN} = "lighttpd lighttpd-module-setenv"
 
-pkg_postinst_ontarget_${PN} () {
+pkg_postinst_ontarget:${PN} () {
 if [ -f ${sysconfdir}/lighttpd/lighttpd.conf ] ; then
 	cp ${sysconfdir}/lighttpd/lighttpd.conf.matrix ${sysconfdir}/lighttpd/lighttpd.conf
 else

@@ -1,6 +1,6 @@
-PR_append = ".arago0"
+PR:append = ".arago0"
 
-do_install_append () {
+do_install:append () {
     # Allow telnet sessions to login as root
     securetty_file=${D}${sysconfdir}/securetty
 

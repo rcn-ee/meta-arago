@@ -46,8 +46,8 @@ do_install() {
     done
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${datadir}/ti/*  \
 "
 
-INSANE_SKIP_${PN} += "ldflags"
+INSANE_SKIP:${PN} += "ldflags"

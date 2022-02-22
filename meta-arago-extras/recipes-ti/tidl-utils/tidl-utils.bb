@@ -7,13 +7,13 @@ require ./tidl-utils.inc
 
 LIC_FILES_CHKSUM = "file://docs/LICENSE.txt;md5=a93aa5af7a3bbbb6fb34c8df59efaa5c"
 
-RDEPENDS_${PN}_class-target += "tidl-api tidl-examples"
+RDEPENDS:${PN}:class-target += "tidl-api tidl-examples"
 
 S = "${WORKDIR}/git"
 
-TARGET_class-target = "arm"
-TARGET_class-native = "x86"
-TARGET_class-nativesdk = "x86"
+TARGET:class-target = "arm"
+TARGET:class-native = "x86"
+TARGET:class-nativesdk = "x86"
 
 CP_ARGS = "-Prf --preserve=mode,timestamps --no-preserve=ownership"
 
@@ -26,9 +26,9 @@ do_install() {
   cp ${CP_ARGS} ${S}/docs/* ${D}${datadir}/ti/tidl/utils/docs/.
 }
 
-FILES_${PN} += "${datadir}/ti/tidl/utils \
+FILES:${PN} += "${datadir}/ti/tidl/utils \
                 ${bindir}"
 
 BBCLASSEXTEND = "native nativesdk"
 
-INSANE_SKIP_${PN} += "build-deps ldflags already-stripped"
+INSANE_SKIP:${PN} += "build-deps ldflags already-stripped"

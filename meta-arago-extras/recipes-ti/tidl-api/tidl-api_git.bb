@@ -20,7 +20,7 @@ DEPENDS = "opencv \
            clocl-native \
 "
 
-RDEPENDS_${PN} += "opencl-runtime \
+RDEPENDS:${PN} += "opencl-runtime \
                    opencv \
 "
 
@@ -49,9 +49,9 @@ do_install() {
     install ${S}/readme.md ${D}${TIDL_INSTALL_DIR}/
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
     ${TIDL_INSTALL_DIR} \
 "
 
 
-INSANE_SKIP_${PN} = "arch ldflags textrel staticdev"
+INSANE_SKIP:${PN} = "arch ldflags textrel staticdev"

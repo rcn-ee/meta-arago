@@ -14,63 +14,63 @@ UTILS = " \
 
 # ti-pru-sw-edma-driver is currently broken
 # Add pru and profibus sources for omapl138 devices
-#UTILS_append_omapl138 = " \
+#UTILS:append:omapl138 = " \
 #    ti-pru-sw-examples-source \
 #"
 
-UTILS_append_omap-a15 = " \
+UTILS:append:omap-a15 = " \
     omapconf-source \
     pru-icss-source \
 "
 
-UTILS_append_ti33x = " \
+UTILS:append:ti33x = " \
     omapconf-source \
     pru-icss-source \
 "
 
-UTILS_append_ti43x = " \
+UTILS:append:ti43x = " \
     pru-icss-source \
 "
 
-UTILS_append_k3 = " \
+UTILS:append:k3 = " \
     ti-sci-fw-source \
     trusted-firmware-a-source \
 "
 
-UTILS_append_j7-evm = " \
+UTILS:append:j7-evm = " \
     pru-icss-source \
 "
 
-UTILS_append_j7-hs-evm = " \
+UTILS:append:j7-hs-evm = " \
     pru-icss-source \
 "
 
-UTILS_append_am65xx = " \
+UTILS:append:am65xx = " \
     pru-icss-source \
 "
 
-UTILS_append_am64xx = " \
+UTILS:append:am64xx = " \
     pru-icss-src \
 "
 
 EXTRA_LIBS = ""
 
-EXTRA_LIBS_append_omap-a15 = " \
+EXTRA_LIBS:append:omap-a15 = " \
     cmem-mod-source \
     uio-module-drv-source \
     big-data-ipc-demo-linux-source \
 "
 
-#EXTRA_LIBS_append_dra7xx = " \
+#EXTRA_LIBS:append:dra7xx = " \
 #    debugss-module-drv-source \
 #    gdbserverproxy-module-drv-source \
 #"
 
-EXTRA_LIBS_append_ti33x = " \
+EXTRA_LIBS:append:ti33x = " \
     uio-module-drv-source \
 "
 
-EXTRA_LIBS_append_ti43x = " \
+EXTRA_LIBS:append:ti43x = " \
     cmem-mod-source \
     uio-module-drv-source \
 "
@@ -81,23 +81,23 @@ PDM_ANOMALY_PKG_SRC = "\
 
 EXTRA_PACKAGES = ""
 
-EXTRA_PACKAGES_append_omap-a15 = " \
+EXTRA_PACKAGES:append:omap-a15 = " \
     ${PDM_ANOMALY_PKG_SRC} \
 "
 
-EXTRA_PACKAGES_append_ti33x = " \
+EXTRA_PACKAGES:append:ti33x = " \
     ${PDM_ANOMALY_PKG_SRC} \
 "
 
-EXTRA_PACKAGES_append_ti43x = " \
+EXTRA_PACKAGES:append:ti43x = " \
     ${PDM_ANOMALY_PKG_SRC} \
 "
 
-EXTRA_PACKAGES_append_am65xx = " \
+EXTRA_PACKAGES:append:am65xx = " \
     ${PDM_ANOMALY_PKG_SRC} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${UTILS} \
     ${EXTRA_LIBS} \
     ${EXTRA_PACKAGES} \

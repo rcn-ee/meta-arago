@@ -17,7 +17,7 @@ inherit update-alternatives features_check
 
 REQUIRED_MACHINE_FEATURES = "dsp"
 
-SRC_URI_append += "\
+SRC_URI:append = "\
      file://reload-dsp-fw.sh \
 "
 
@@ -37,15 +37,15 @@ do_install () {
     install -m 0755 ${WORKDIR}/reload-dsp-fw.sh ${D}${bindir}
 }
 
-ALTERNATIVE_${PN} = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66"
+ALTERNATIVE:${PN} = "dra7-dsp1-fw.xe66 dra7-dsp2-fw.xe66"
 ALTERNATIVE_LINK_NAME[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/dra7-dsp1-fw.xe66"
 ALTERNATIVE_TARGET[dra7-dsp1-fw.xe66] = "${base_libdir}/firmware/dra7-dsp1-fw.xe66.openvx"
 ALTERNATIVE_LINK_NAME[dra7-dsp2-fw.xe66] = "${base_libdir}/firmware/dra7-dsp2-fw.xe66"
 ALTERNATIVE_TARGET[dra7-dsp2-fw.xe66] = "${base_libdir}/firmware/dra7-dsp2-fw.xe66.openvx"
 ALTERNATIVE_PRIORITY = "20"
 
-FILES_${PN} += "${TIOVX_INSTALL_DIR_RECIPE}/sys-iface/* "
+FILES:${PN} += "${TIOVX_INSTALL_DIR_RECIPE}/sys-iface/* "
 PACKAGES =+ "${PN}-firmware"
-FILES_${PN}-firmware = "${base_libdir}/firmware/*"
+FILES:${PN}-firmware = "${base_libdir}/firmware/*"
 
-INSANE_SKIP_${PN}-firmware = "arch"
+INSANE_SKIP:${PN}-firmware = "arch"

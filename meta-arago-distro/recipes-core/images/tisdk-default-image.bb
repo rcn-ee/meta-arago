@@ -30,14 +30,14 @@ export IMAGE_BASENAME = "tisdk-default-image"
 
 # Disable ubi/ubifs as the filesystem requires more space than is
 # available on the HW.
-IMAGE_FSTYPES_remove_omapl138 = "ubifs ubi"
+IMAGE_FSTYPES:remove:omapl138 = "ubifs ubi"
 
 # Below is the delta in packages between old fuller and a new smaller default rootfs
 CHROMIUM = ""
-CHROMIUM_append_omap-a15 = "\
+CHROMIUM:append:omap-a15 = "\
     chromium-ozone-wayland \
 "
-CHROMIUM_append_k3 = "\
+CHROMIUM:append:k3 = "\
     chromium-ozone-wayland \
 "
 

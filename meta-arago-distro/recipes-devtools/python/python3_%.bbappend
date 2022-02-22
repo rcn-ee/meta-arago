@@ -8,5 +8,5 @@ python() {
     if d.getVar('CLASSOVERRIDE') == "class-nativesdk":
         pkgs = d.getVar("PACKAGES").split()
         for p in pkgs:
-            d.appendVar('INSANE_SKIP_%s' % (p), ' shebang-size')
+            d.appendVar('INSANE_SKIP:%s' % (p), ' shebang-size')
 }

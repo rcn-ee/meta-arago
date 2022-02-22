@@ -5,12 +5,12 @@ EAT_TARGET_SYS_ARMV5 ?= "arm-none-linux-gnueabi"
 EAT_TARGET_SYS_ARMV7 ?= "arm-none-linux-gnueabihf"
 EAT_TARGET_SYS_ARMV8 ?= "aarch64-none-linux-gnu"
 
-EAT_TARGET_SYS_arm = "${EAT_TARGET_SYS_ARMV5}"
-EAT_TARGET_SYS_armv7a = "${EAT_TARGET_SYS_ARMV7}"
-EAT_TARGET_SYS_aarch64 = "${EAT_TARGET_SYS_ARMV8}"
+EAT_TARGET_SYS:arm = "${EAT_TARGET_SYS_ARMV5}"
+EAT_TARGET_SYS:armv7a = "${EAT_TARGET_SYS_ARMV7}"
+EAT_TARGET_SYS:aarch64 = "${EAT_TARGET_SYS_ARMV8}"
 
 SECONDARY_TARGET_ARCH = "invalid"
-SECONDARY_TARGET_ARCH_k3 = "armv7a"
+SECONDARY_TARGET_ARCH:k3 = "armv7a"
 
 TARGET_VENDOR = ""
 
@@ -19,9 +19,9 @@ TOOLCHAIN_PATH_ARMV5 ?= "${TOOLCHAIN_BASE}/gcc-arm-9.2-ti2020.01-armv5-x86_64-${
 TOOLCHAIN_PATH_ARMV7 ?= "${TOOLCHAIN_BASE}/gcc-arm-9.2-2019.12-x86_64-${EAT_TARGET_SYS_ARMV7}"
 TOOLCHAIN_PATH_ARMV8 ?= "${TOOLCHAIN_BASE}/gcc-arm-9.2-2019.12-x86_64-${EAT_TARGET_SYS_ARMV8}"
 
-DEF_TOOLCHAIN_PATH_arm = "${TOOLCHAIN_PATH_ARMV5}"
-DEF_TOOLCHAIN_PATH_armv7a = "${TOOLCHAIN_PATH_ARMV7}"
-DEF_TOOLCHAIN_PATH_aarch64 = "${TOOLCHAIN_PATH_ARMV8}"
+DEF_TOOLCHAIN_PATH:arm = "${TOOLCHAIN_PATH_ARMV5}"
+DEF_TOOLCHAIN_PATH:armv7a = "${TOOLCHAIN_PATH_ARMV7}"
+DEF_TOOLCHAIN_PATH:aarch64 = "${TOOLCHAIN_PATH_ARMV8}"
 
 TOOLCHAIN_PATH ?= "${DEF_TOOLCHAIN_PATH}"
 
@@ -38,7 +38,7 @@ PREFERRED_PROVIDER_gcc-cross-canadian-${SECONDARY_TARGET_ARCH} ?= "external-arm-
 PREFERRED_PROVIDER_binutils-cross-canadian-${SECONDARY_TARGET_ARCH} ?= "external-arm-secondary-sdk-toolchain-${SECONDARY_TARGET_ARCH}"
 
 # Special case for gdb to be built as part of canadian-cross-sdk, instead of packaged from external toolchain
-bindir_pn-gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "${exec_prefix}/bin"
+bindir:pn-gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "${exec_prefix}/bin"
 PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH} = "gdb-cross-canadian-${TRANSLATED_TARGET_ARCH}"
 
 # Set up runtime preferences

@@ -13,14 +13,14 @@ UBOOT_SRC = "${PREFERRED_PROVIDER_virtual/bootloader}-source"
 KERNEL_SRC = "${PREFERRED_PROVIDER_virtual/kernel}-source"
 
 KERNEL_SHADOW_CLONE := "${PREFERRED_PROVIDER_virtual/kernel}"
-KERNEL_SHADOW_CLONE_ENABLED := "${SRCIPK_SHALLOW_CLONE_pn-${KERNEL_SHADOW_CLONE}}"
+KERNEL_SHADOW_CLONE_ENABLED := "${SRCIPK_SHALLOW_CLONE:pn-${KERNEL_SHADOW_CLONE}}"
 
 EXTRA_FILES = ""
-EXTRA_FILES_ti43x = "tisdk-uenv"
-EXTRA_FILES_omap-a15 = "tisdk-readme tisdk-uenv"
-EXTRA_FILES_k3 = "tisdk-readme tisdk-uenv"
+EXTRA_FILES:ti43x = "tisdk-uenv"
+EXTRA_FILES:omap-a15 = "tisdk-readme tisdk-uenv"
+EXTRA_FILES:k3 = "tisdk-readme tisdk-uenv"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ti-tisdk-setup \
     ${EXTRA_FILES} \
     ti-tisdk-makefile \

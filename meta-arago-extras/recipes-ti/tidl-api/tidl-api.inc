@@ -16,6 +16,6 @@ S = "${WORKDIR}/git"
 inherit features_check
 
 REQUIRED_MACHINE_FEATURES = "dsp"
-REQUIRED_MACHINE_FEATURES_class-native = ""
-REQUIRED_MACHINE_FEATURES_class-nativesdk = ""
+REQUIRED_MACHINE_FEATURES:class-native = ""
+REQUIRED_MACHINE_FEATURES:class-nativesdk = ""
 REQUIRED_DISTRO_FEATURES = "opencl opencv"
