@@ -11,6 +11,7 @@ layers: meta
 URI: git://git.yoctoproject.org/meta-ti
 branch: master
 revision: HEAD
+layers: meta-ti-bsp, meta-ti-extras
 
 URI: git://git.yoctoproject.org/meta-arm
 branch: master
@@ -34,5 +35,5 @@ layers: meta-arago-extras
 Send pull requests to meta-arago@arago-project.org
 
 Layer maintainers:
-Praneeth Bajjuri <praneeth@ti.com>
+Ryan Eatmon <reatmon@ti.com>
 Denys Dmytriyenko <denys@konsulko.com>
