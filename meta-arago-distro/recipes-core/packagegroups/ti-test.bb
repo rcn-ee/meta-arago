@@ -26,7 +26,7 @@ ARAGO_TEST = "\
     smcroute \
     rwmem \
     pulseaudio-misc \
-    kselftests \
+    kernel-selftest \
     procps \
     mtd-utils-ubifs-tests \
     pcitest \
