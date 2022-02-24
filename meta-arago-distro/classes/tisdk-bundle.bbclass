@@ -46,7 +46,7 @@ TARGET_IMAGE_TYPES ?= "tar.xz tar.gz ubi wic.gz wic.xz"
 # of that directory will be added to the SDK using the same directory
 # structure found inside of the EXTRA_TISDK_FILES directory.
 # This can be set in the recipe or from the command line as long as
-# the variable is in the BB_ENV_EXTRAWHITE list.
+# the variable is in the BB_ENV_PASSTHROUGH_ADDITIONS list.
 EXTRA_TISDK_FILES ?= ""
 
 # Variable to specify the name of SPL
