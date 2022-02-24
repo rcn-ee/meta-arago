@@ -1,6 +1,6 @@
 DESCRIPTION = "GStreamer elements to use the Video Processing Engine (VPE) found on some TI devices"
 
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 require gstreamer1.0-plugins-ti.inc

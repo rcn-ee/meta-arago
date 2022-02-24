@@ -1,3 +1,3 @@
 PR:append = ".arago0"
 
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"

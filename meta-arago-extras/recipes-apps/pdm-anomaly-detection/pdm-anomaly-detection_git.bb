@@ -1,5 +1,5 @@
 SUMMARY = "Predictive maintenance demo for anomaly detection using Recurrent Neural Network (RNN)"
-LICENSE = "BSD-3-Clause & MIT & GPLv3"
+LICENSE = "BSD-3-Clause & MIT & GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e88016d2cbc82d0d2efbb0865891e9d6"
 
 inherit qt5

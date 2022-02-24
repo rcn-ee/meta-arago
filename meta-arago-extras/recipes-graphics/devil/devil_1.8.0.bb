@@ -3,7 +3,7 @@ DESCRIPTION = "Developer's Image Library (DevIL) is a cross-platform image \
                library utilizing simple syntax to load, save, convert, \
                manipulate, filter and display a variety of images."
 HOMEPAGE = "https://github.com/DentonW/DevIL"
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
 
 SRC_URI = "git://github.com/dentonw/devil.git;protocol=https;branch=master \

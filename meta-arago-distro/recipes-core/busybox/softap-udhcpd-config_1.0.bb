@@ -1,7 +1,7 @@
 DESCRIPTION = "Configuration files for SoftAP with udhcpd"
 SECTION = "console/network"
 HOMEPAGE = "http://udhcp.busybox.net/"
-LICENSE = "GPLv2 & BSD-4-Clause"
+LICENSE = "GPL-2.0-only & BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=de10de48642ab74318e893a61105afbb"
 
 PR = "r1"

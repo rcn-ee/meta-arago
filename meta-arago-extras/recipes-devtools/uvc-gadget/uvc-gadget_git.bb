@@ -1,5 +1,5 @@
 SUMMARY = "UVC gadget userspace sample application"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://uvc-gadget.c;beginline=1;endline=18;md5=414860c3c534dc95d81da9564cfb8d2a"
 
 SRC_URI = "git://git.ideasonboard.org/uvc-gadget.git;branch=master"

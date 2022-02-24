@@ -1,6 +1,6 @@
 SUMMARY = "TI FFTW"
 HOMEPAGE = "http://git.ti.com/fftlib"
-LICENSE = "GPL-2.0 & BSD-3-Clause"
+LICENSE = "GPL-2.0-only & BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://docs/TI-FFTW_3.1.0_manifest.html;md5=aaa275ec704a738216ba696898941b44 \
                     file://fftw-3.3.4/COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"

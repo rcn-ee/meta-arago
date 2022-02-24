@@ -1,7 +1,7 @@
 DESCRIPTION = "Utilities for the Linux input drivers"
 HOMEPAGE = "http://packages.tanglu.org/source/aequorea/input-utils"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
 PV = "1.0"

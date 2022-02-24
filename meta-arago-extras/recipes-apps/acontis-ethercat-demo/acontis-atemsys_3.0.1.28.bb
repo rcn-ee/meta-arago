@@ -1,6 +1,6 @@
 SUMMARY = "acontis atemsys kernel module for EtherCAT master"
 HOMEPAGE = "https://www.acontis.com/en/ethercat-for-ti-processors.html"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=65dd37ccb3e888dc57e47d925b80b38a"
 
 SRC_URI = "https://www.acontis.com/files/support/ethercat/EC-Master-Atemsys-V${PV}-Linux.tar.gz;subdir=${P}"

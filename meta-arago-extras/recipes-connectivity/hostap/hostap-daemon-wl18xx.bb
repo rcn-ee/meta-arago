@@ -3,7 +3,7 @@
 
 require hostap.inc
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=292eece3f2ebbaa25608eed8464018a3"
 
 PR:append = "e"

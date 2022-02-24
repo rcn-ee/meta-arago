@@ -3,7 +3,7 @@
 DESCRIPTION = "TS calibration init script"
 RDEPENDS:${PN} += "tslib"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://init;beginline=2;endline=11;md5=4b2e3b15f01cf63d2cb7988afdcc6c60"
 
 PR = "r4"

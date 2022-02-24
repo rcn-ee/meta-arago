@@ -1,7 +1,7 @@
 DESCRIPTION = "Virtual Tunnels over TCP/IP networks with traffic shaping, compression and encryption."
 HOMEPAGE = "http://vtun.sourceforge.net/"
 SECTION = "console/network"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://vtun.h;startline=1;endline=17;md5=9ac9e7fefca60c72400239e0de40cde8"
 
 DEPENDS = "zlib lzo openssl bison-native flex-native"

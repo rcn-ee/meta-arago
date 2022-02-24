@@ -1,7 +1,7 @@
 DESCRIPTION = "Qt Dual Camera Demo"
 HOMEPAGE = "https://gitorious.org/dual-camera-demo/"
 SECTION = "multimedia"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c7ca707704d3354a64feeb4f19f52eb5"
 
 DEPENDS += "libdrm cmem"
