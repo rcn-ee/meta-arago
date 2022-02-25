@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://setup.sh;beginline=3;endline=31;md5=fc4b04a33df6d892c
 PR = "r46"
 
 BRANCH ?= "master"
-SRCREV = "42a8379fda829f34c374ddfca0242a479a84d454"
+SRCREV = "22f4e5af1894a60d9e7d04caf83f26a556c14eca"
 SRC_URI = "git://arago-project.org/git/projects/tisdk-setup-scripts.git;protocol=git;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
