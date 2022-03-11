@@ -31,7 +31,7 @@ branch: dunfell
 revision: HEAD
 layers: meta-arago-extras
 
-Send pull requests to meta-arago@arago-project.org
+Send pull requests to meta-arago@lists.yoctoproject.org
 
 Layer maintainers:
 Ryan Eatmon <reatmon@ti.com>
