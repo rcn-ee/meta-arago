@@ -1,6 +1,6 @@
 meta-arago-extras provides additional TI SDK applications that are distro-agnostic
 
-This layer works with the latest Yocto Project release (currently 2.2+) and tracks
+This layer works with the latest Yocto Project release (currently 3.1+) and tracks
 the stable/maintenance branches (currently "dunfell") of the corresponding layers:
 
 URI: git://git.openembedded.org/openembedded-core
@@ -29,5 +29,5 @@ revision: HEAD
 Send pull requests to meta-arago@arago-project.org
 
 Layer maintainers:
-Praneeth Bajjuri <praneeth@ti.com>
+Ryan Eatmon <reatmon@ti.com>
 Denys Dmytriyenko <denys@konsulko.com>
