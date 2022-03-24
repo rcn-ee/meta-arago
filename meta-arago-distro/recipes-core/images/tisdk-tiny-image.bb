@@ -1,15 +1,12 @@
-ARAGO_SYSVINIT = "1"
+ARAGO_TINY_IMAGE_EXTRA_INSTALL ?= ""
 
-require arago-image.inc
+require arago-tiny-image.inc
 
-IMAGE_FEATURES_remove = "package-management splash"
+IMAGE_FEATURES_remove = "package-management"
 
 IMAGE_FSTYPES += "cpio cpio.xz"
 
-ARAGO_TINY_IMAGE_EXTRA_INSTALL ?= ""
-
-IMAGE_INSTALL = " \
-	packagegroup-arago-sysvinit-boot \
+IMAGE_INSTALL += " \
 	${ARAGO_TINY_IMAGE_EXTRA_INSTALL} \
 "
 
