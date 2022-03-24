@@ -1,5 +1,7 @@
-# Arago TI Thin Linux image
-# Minimal bootable image with container to start the next complex system up.
+SUMMARY = "Arago TI SDK Thin Linux image"
+
+DESCRIPTION = "Minimal bootable image with container to start the next\
+ complex system up."
 
 require arago-image.inc
 
