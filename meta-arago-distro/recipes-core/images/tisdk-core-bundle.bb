@@ -1,3 +1,10 @@
+SUMMARY = "Installer package for TI SDK - NOT for direct use on target"
+
+DESCRIPTION = "This creates an installer including all the default images\
+ recommended including source, binaries, filesystems, etc.\
+ for TI SDK. This is meant to be used on the host system.\
+"
+
 require tisdk-core-bundle.inc
 
 DEPLOY_SPL_NAME_omapl138 = ""
