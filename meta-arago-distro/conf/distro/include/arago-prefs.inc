@@ -14,12 +14,12 @@ PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
 PREFERRED_PROVIDER_virtual/libgbm = "ti-sgx-ddk-um"
 PREFERRED_PROVIDER_virtual/gpudriver = "ti-sgx-ddk-km"
 
-# J7 has a Rogue GPU core
-PREFERRED_PROVIDER_virtual/egl:j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgles1:j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgles2:j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgbm:j7 = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/gpudriver:j7 = "ti-img-rogue-driver"
+# J721e has a Rogue GPU core
+PREFERRED_PROVIDER_virtual/egl:j721e = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles1:j721e = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles2:j721e = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgbm:j721e = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/gpudriver:j721e = "ti-img-rogue-driver"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_KERNEL_SUFFIX}"
 
