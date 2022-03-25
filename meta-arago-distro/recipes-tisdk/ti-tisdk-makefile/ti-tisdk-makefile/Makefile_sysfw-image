@@ -1,7 +1,7 @@
 # Define the following to support multple platforms
 PLATFORM_TYPE_$(PLATFORM) = gp
 PLATFORM_TYPE_am65xx-hs-evm = hs
-PLATFORM_TYPE_j7-hs-evm = hs
+PLATFORM_TYPE_j721e-hs-evm = hs
 PLATFORM_TYPE = $(PLATFORM_TYPE_$(PLATFORM))
 
 SYSFW_CONFIG = evm
@@ -9,8 +9,8 @@ SYSFW_CONFIG = evm
 SYSFW_SOC_$(PLATFORM) = NULL
 SYSFW_SOC_am65xx-evm = am65x
 SYSFW_SOC_am65xx-hs-evm = am65x
-SYSFW_SOC_j7-evm = j721e
-SYSFW_SOC_j7-hs-evm = j721e
+SYSFW_SOC_j721e-evm = j721e
+SYSFW_SOC_j721e-hs-evm = j721e
 SYSFW_SOC = $(SYSFW_SOC_$(PLATFORM))
 
 SYSFW_PREFIX = ti-sci-firmware

@@ -28,11 +28,11 @@ SRC_URI:append:am65xx = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 
-SRC_URI:append:j7-evm = " \
+SRC_URI:append:j721e-evm = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 
-SRC_URI:append:j7-hs-evm = " \
+SRC_URI:append:j721e-hs-evm = " \
     ${GSTDRM_WAYLANDSINK_PATCHES} \
 "
 

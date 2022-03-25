@@ -37,11 +37,11 @@ UTILS:append:k3 = " \
     trusted-firmware-a-source \
 "
 
-UTILS:append:j7-evm = " \
+UTILS:append:j721e-evm = " \
     pru-icss-source \
 "
 
-UTILS:append:j7-hs-evm = " \
+UTILS:append:j721e-hs-evm = " \
     pru-icss-source \
 "
 
