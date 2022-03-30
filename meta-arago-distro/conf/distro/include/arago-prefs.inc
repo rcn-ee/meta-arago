@@ -21,6 +21,13 @@ PREFERRED_PROVIDER_virtual/libgles2_j7 = "ti-img-rogue-umlibs"
 PREFERRED_PROVIDER_virtual/libgbm_j7 = "ti-img-rogue-umlibs"
 PREFERRED_PROVIDER_virtual/gpudriver_j7 = "ti-img-rogue-driver"
 
+# am62xx has a Rogue GPU core
+PREFERRED_PROVIDER_virtual/egl_am62xx = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles1_am62xx = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgles2_am62xx = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/libgbm_am62xx = "ti-img-rogue-umlibs"
+PREFERRED_PROVIDER_virtual/gpudriver_am62xx = "ti-img-rogue-driver"
+
 # This is required when using keystone devices with graphical support
 # such as Qt5
 PREFERRED_PROVIDER_virtual/egl_keystone = "mesa"
