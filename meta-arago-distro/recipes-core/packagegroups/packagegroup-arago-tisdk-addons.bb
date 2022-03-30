@@ -65,6 +65,7 @@ UTILS_append_k3 = " mmc-utils \
 "
 
 UTILS_append_am64xx = " ti-rtos-firmware pru-icss"
+UTILS_append_am62xx = " ti-rtos-firmware"
 UTILS_append_am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
 UTILS_append_j7 = " ti-rtos-firmware"
 UTILS_append_j7-evm = " pru-icss"
