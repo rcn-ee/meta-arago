@@ -7,7 +7,7 @@ SECTION = "system"
 PR = "r13"
 
 BRANCH ?= "master"
-SRCREV = "a3126fd88edd911fff33ace5b813652397bf4cfe"
+SRCREV = "fefaf9bdd6f36ab0cebaab8dbf34e5beb50f471c"
 
 SRC_URI = "git://git.ti.com/apps/arm_benchmarks.git;protocol=git;branch=${BRANCH}"
 
