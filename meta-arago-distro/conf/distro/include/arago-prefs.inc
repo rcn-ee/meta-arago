@@ -6,21 +6,6 @@ PREFERRED_PROVIDER_ltp-ddt = "ltp-ddt"
 
 PREFERRED_PROVIDER_virtual/gettext = "gettext"
 
-# OpenGLES/EGL/GBM preferences
-# Most of existing TI platforms have SGX GPU core
-PREFERRED_PROVIDER_virtual/egl = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/libgles1 = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/libgles2 = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/libgbm = "ti-sgx-ddk-um"
-PREFERRED_PROVIDER_virtual/gpudriver = "ti-sgx-ddk-km"
-
-# J721e has a Rogue GPU core
-PREFERRED_PROVIDER_virtual/egl:j721e = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgles1:j721e = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgles2:j721e = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/libgbm:j721e = "ti-img-rogue-umlibs"
-PREFERRED_PROVIDER_virtual/gpudriver:j721e = "ti-img-rogue-driver"
-
 PREFERRED_PROVIDER_virtual/kernel = "linux-ti-staging${ARAGO_KERNEL_SUFFIX}"
 
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
