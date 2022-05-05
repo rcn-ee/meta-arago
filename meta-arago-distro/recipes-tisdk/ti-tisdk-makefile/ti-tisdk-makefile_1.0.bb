@@ -202,6 +202,10 @@ MAKEFILES_append_am64xx = " \
                         pru-icss \
 "
 
+MAKEFILES_append_am62xx = " \
+                        pru-icss \
+"
+
 # Use this to export kernel arch to ARCH
 #
 # We need to be very careful here. This class will also overwrite UBOOT_ARCH
@@ -239,6 +243,7 @@ PRU_ICSS_INSTALL_TARGET_k2g = "pru-icss_install_k2g"
 PRU_ICSS_INSTALL_TARGET_am65xx = "pru-icss_install_am65x"
 PRU_ICSS_INSTALL_TARGET_j7 = "pru-icss_install_j721e"
 PRU_ICSS_INSTALL_TARGET_am64xx = "pru-icss_install_am64x"
+PRU_ICSS_INSTALL_TARGET_am62xx = "pru-icss_install_am62x"
 
 # Path to toolchains for the various cores in TI SOCs
 #

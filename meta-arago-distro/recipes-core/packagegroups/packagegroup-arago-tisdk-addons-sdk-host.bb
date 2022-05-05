@@ -57,6 +57,10 @@ UTILS_append_am64xx = " \
     pru-icss-src \
 "
 
+UTILS_append_am62xx = " \
+    pru-icss-src \
+"
+
 EXTRA_LIBS = ""
 
 EXTRA_LIBS_append_omap-a15 = " \
