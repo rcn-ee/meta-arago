@@ -65,6 +65,7 @@ UTILS:append:k3 = " mmc-utils \
 "
 
 UTILS:append:am64xx = " ti-rtos-firmware pru-icss"
+UTILS:append:am62xx = " ti-rtos-firmware"
 #UTILS:append:am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
 UTILS:append:am65xx = " ti-rtos-firmware pru-icss"
 UTILS:append:j7 = " ti-rtos-firmware"
