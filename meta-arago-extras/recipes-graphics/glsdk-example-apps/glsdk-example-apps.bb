@@ -11,7 +11,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-SRC_URI = "git://git.ti.com/glsdk/example-applications.git;protocol=git \
+SRC_URI = "git://git.ti.com/glsdk/example-applications.git;protocol=git;branch=master \
 "
 
 SRCREV="52466430609c402a9f1c0667ccf727d096336d0d"
@@ -29,5 +29,3 @@ do_install:append () {
 }
 
 FILES:${PN} += "${sysconfdir}/glsdkstatcoll/* ${sysconfdir}/visualization_scripts/*"
-
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
