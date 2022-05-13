@@ -10,6 +10,7 @@ UBOOT_R5_BUILD_DIR=$(TI_SDK_PATH)/board-support/u-boot_build/r5
 UBOOT_ATF=$(TI_SDK_PATH)/board-support/prebuilt-images/bl31.bin
 UBOOT_TEE=$(TI_SDK_PATH)/board-support/prebuilt-images/bl32.bin
 UBOOT_SYSFW=$(TI_SDK_PATH)/board-support/prebuilt-images/sysfw.bin
+UBOOT_DMFW=$(TI_SDK_PATH)/board-support/prebuilt-images/ipc_echo_testb_mcu1_0_release_strip.xer5f
 
 u-boot: u-boot-a53 u-boot-r5
 u-boot_clean: u-boot-a53_clean u-boot-r5_clean
@@ -20,10 +21,17 @@ u-boot-a53:
 	@echo ===================================
 	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) \
 		 $(UBOOT_MACHINE) O=$(UBOOT_A53_BUILD_DIR)
-	$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) \
-		CONFIG_MKIMAGE_DTC_PATH=$(UBOOT_A53_BUILD_DIR)/scripts/dtc/dtc \
-		ATF=$(UBOOT_ATF) TEE=$(UBOOT_TEE) \
-		O=$(UBOOT_A53_BUILD_DIR)
+	if [ $(PLATFORM) = am62xx-evm ]; then \
+		$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) \
+			CONFIG_MKIMAGE_DTC_PATH=$(UBOOT_A53_BUILD_DIR)/scripts/dtc/dtc \
+			ATF=$(UBOOT_ATF) TEE=$(UBOOT_TEE) DM=$(UBOOT_DMFW) \
+			O=$(UBOOT_A53_BUILD_DIR); \
+	else \
+		$(MAKE) -j $(MAKE_JOBS) -C $(TI_SDK_PATH)/board-support/u-boot-* CROSS_COMPILE=$(CROSS_COMPILE) \
+			CONFIG_MKIMAGE_DTC_PATH=$(UBOOT_A53_BUILD_DIR)/scripts/dtc/dtc \
+			ATF=$(UBOOT_ATF) TEE=$(UBOOT_TEE) \
+			O=$(UBOOT_A53_BUILD_DIR); \
+	fi
 
 u-boot-a53_clean:
 	@echo ===================================
