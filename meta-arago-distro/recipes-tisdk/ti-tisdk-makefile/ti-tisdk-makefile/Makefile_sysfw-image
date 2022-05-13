@@ -23,14 +23,17 @@ SYSFW_PREFIX_j7 = ti-fs-firmware
 SYSFW_BASE = $(SYSFW_PREFIX)-$(SYSFW_SOC)-$(PLATFORM_TYPE)
 
 SYSFW_MAKEARGS_common = SYSFW_DL_URL="" SYSFW_HS_DL_URL="" SYSFW_HS_INNER_CERT_DL_URL="" \
-                        SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE).bin \
-                        SOC=$(SYSFW_SOC) CONFIG=$(SYSFW_CONFIG)
+			SOC=$(SYSFW_SOC) CONFIG=$(SYSFW_CONFIG)
 
-SYSFW_MAKEARGS_gp =
+SYSFW_MAKEARGS_gp = SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE).bin
+
 SYSFW_MAKEARGS_hs = HS=1 SYSFW_HS_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-enc.bin \
-                    SYSFW_HS_INNER_CERT_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-cert.bin
+		    SYSFW_HS_INNER_CERT_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-cert.bin \
+		    SYSFW_PATH=$(TI_SDK_PATH)/board-support/prebuilt-images/$(SYSFW_BASE)-enc.bin
 
 SYSFW_MAKEARGS = $(SYSFW_MAKEARGS_common) $(SYSFW_MAKEARGS_$(PLATFORM_TYPE))
+
+SBL_PATH = $(TI_SDK_PATH)/board-support/u-boot_build/r5/spl/u-boot-spl.bin
 
 # Depend on linux-dtbs for the dtc utility
 sysfw-image: linux-dtbs
@@ -38,13 +41,13 @@ sysfw-image: linux-dtbs
 	@echo    Building SYSFW Image
 	@echo =============================
 	@cd board-support; cd `find . -maxdepth 1 -type d -name "*k3-image*"`; \
-		make $(SYSFW_MAKEARGS) CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) PATH=$(PATH):$(LINUXKERNEL_INSTALL_DIR)/scripts/dtc
+		make SBL=$(SBL_PATH) $(SYSFW_MAKEARGS) CROSS_COMPILE=$(CROSS_COMPILE_ARMV7) PATH=$(PATH):$(LINUXKERNEL_INSTALL_DIR)/scripts/dtc
 
 sysfw-image_clean:
 	@echo =============================
 	@echo    Cleaning SYSFW Image
 	@echo =============================
-	@cd board-support; cd `find . -maxdepth 1 -type d -name "*k3-image*"`; make clean
+	@cd board-support; cd `find . -maxdepth 1 -type d -name "*k3-image*"`; make $(SYSFW_MAKEARGS) clean
 
 sysfw-image_install:
 	@echo =============================
