@@ -54,6 +54,7 @@ SRC_URI = "\
     file://Makefile_tiovx-app-host \
     file://Makefile_ti-ipc \
     file://Makefile_ti-img-rogue-driver \
+    file://Makefile_linux-fitimage \
 "
 
 PR = "r106"
@@ -198,8 +199,13 @@ MAKEFILES_append_am65xx = " \
 MAKEFILES_append_j7 = " pru-icss \
                             ti-img-rogue-driver \
 "
+
 MAKEFILES_append_am64xx = " \
                         pru-icss \
+"
+
+MAKEFILES_append_am64xx-hs-evm = " \
+                        linux-fitimage \
 "
 
 MAKEFILES_append_am62xx = " \

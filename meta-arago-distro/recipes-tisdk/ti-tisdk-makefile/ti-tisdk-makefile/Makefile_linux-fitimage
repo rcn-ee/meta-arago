@@ -1,0 +1,32 @@
+# linux-fitimage build targets
+
+linux-fitimage: ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh linux linux-dtbs
+	@echo =============================
+	@echo    Creating fitImage with signed binaries
+	@echo =============================
+	cd $(LINUXKERNEL_INSTALL_DIR)/arch/__KERNEL_ARCH__/boot/dts; \
+		for DTB in __KERNEL_DEVICETREE__; do \
+			${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh $$DTB $$DTB.sec; \
+		done;
+	cd $(LINUXKERNEL_INSTALL_DIR); \
+		${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh arch/arm64/boot/Image.gz linux.bin.sec
+	cd $(LINUXKERNEL_INSTALL_DIR); \
+		cp $(TI_SDK_PATH)/board-support/prebuilt-images/fitImage-its.its .; \
+		mkimage -f fitImage-its.its -r fitImage
+
+linux-fitimage_clean:
+	@echo =============================
+	@echo    Cleaning signed images and fitImage
+	@echo =============================
+	cd $(LINUXKERNEL_INSTALL_DIR)/arch/__KERNEL_ARCH__/boot/dts; \
+		for DTB in __KERNEL_DEVICETREE__; do \
+			rm -rf $$DTB.sec; \
+		done;
+	cd $(LINUXKERNEL_INSTALL_DIR); rm -rf linux.bin.sec fitImage
+
+linux-fitimage_install:
+	@echo ================================================
+	@echo    Installing fitImage
+	@echo ================================================
+	install -m 0644 $(LINUXKERNEL_INSTALL_DIR)/fitImage $(DESTDIR)/boot/
+
