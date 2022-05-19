@@ -5,9 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a886c9ef769b2d8271115d2502512e5d"
 
 SECTION = "multimedia"
 
-PR = "r37"
+PR = "r38"
 
 SYSTEMD_SERVICE_${PN} = "matrix-gui-2.0.service"
+
+SYSTEMD_AUTO_ENABLE_am62xx-evm = "disable"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
