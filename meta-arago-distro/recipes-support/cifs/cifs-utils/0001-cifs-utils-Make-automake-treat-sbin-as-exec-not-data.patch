@@ -1,0 +1,35 @@
+From fd5f395514256572c451127006a68483106cf2b8 Mon Sep 17 00:00:00 2001
+From: Daniel Parks <danielrparks@ti.com>
+Date: Fri, 3 Jun 2022 15:34:59 -0500
+Subject: [PATCH] cifs-utils: Make automake treat /sbin as exec, not data
+
+Otherwise, $(DESTDIR)/sbin doesn't get created until install-data on a
+-j1 build and install-exec-hook can fail because it might not exist.
+
+Steps to reproduce this bug:
+$ autoreconf -i
+$ ./configure
+$ mkdir image
+$ make DESTDIR=image install -j1
+
+Upstream-Status: Pending
+Signed-off-by: Daniel Parks <danielrparks@ti.com>
+---
+ Makefile.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index e9be6b3..edb1b7f 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,8 +1,8 @@
+ AM_CFLAGS = -Wall -Wextra -D_FORTIFY_SOURCE=2 $(PIE_CFLAGS) $(RELRO_CFLAGS)
+ ACLOCAL_AMFLAGS = -I aclocal
+ 
+-root_sbindir = $(ROOTSBINDIR)
+-root_sbin_PROGRAMS = mount.cifs
++root_exec_sbindir = $(ROOTSBINDIR)
++root_exec_sbin_PROGRAMS = mount.cifs
+ mount_cifs_SOURCES = mount.cifs.c mtab.c resolve_host.c util.c
+ mount_cifs_LDADD = $(LIBCAP) $(CAPNG_LDADD) $(RT_LDADD)
+ include_HEADERS = cifsidmap.h
