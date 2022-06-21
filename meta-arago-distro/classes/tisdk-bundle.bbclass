@@ -777,9 +777,9 @@ tisdk_image_build () {
     fi
 
     # Copy the U-Boot image if it exists
-    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.img ]
+    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot.img ]
     then
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.img ${prebuilt_dir}/
+        cp ${DEPLOY_DIR_IMAGE}/u-boot.img ${prebuilt_dir}/
     elif [ -e ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin ]
     then
         cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin ${prebuilt_dir}/
