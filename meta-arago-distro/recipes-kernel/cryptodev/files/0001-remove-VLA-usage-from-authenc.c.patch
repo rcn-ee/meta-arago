@@ -1,0 +1,60 @@
+From 0acdfe789eb0a7aea20ff104bbd52a14553900db Mon Sep 17 00:00:00 2001
+From: Cristian Stoica <cristian.stoica@microchip.com>
+Date: Tue, 28 Jul 2020 10:48:12 +0300
+Subject: [PATCH] remove VLA usage from authenc.c
+
+Linux no longer allows VLA use in the kernel, requiring declaration of
+arrays to be up-front. This patch fixes "alloca is no longer permitted
+in linux" build error.
+
+Upstream-status: Backport [e8263d2d682b06a1ee7bcb2791a7cf27a4af38e0]
+
+Suggested-at: https://github.com/cryptodev-linux/cryptodev-linux/pull/49/commits/5b0662b802f40aa5956e095e404c8080828f8858
+Signed-off-by: Cristian Stoica <cristian.stoica@microchip.com>
+Signed-off-by: Signed-off-by Nishanth Menon <nm@ti.com>
+---
+ Makefile  | 2 +-
+ authenc.c | 5 +++--
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 38629b9e4e59..dce06923dfde 100644
+--- a/Makefile
++++ b/Makefile
+@@ -4,7 +4,7 @@
+ # corresponding CFLAG.
+ #
+ CRYPTODEV_CFLAGS ?= #-DENABLE_ASYNC
+-KBUILD_CFLAGS += -I$(src) $(CRYPTODEV_CFLAGS)
++KBUILD_CFLAGS += -I$(src) $(CRYPTODEV_CFLAGS) -Wvla
+ KERNEL_DIR ?= /lib/modules/$(shell uname -r)/build
+ VERSION = 1.10
+ 
+diff --git a/authenc.c b/authenc.c
+index 7c236cf6ad34..269b826de70e 100644
+--- a/authenc.c
++++ b/authenc.c
+@@ -312,9 +312,10 @@ static void read_tls_hash(struct scatterlist *dst_sg, int len, void *hash, int h
+ 	scatterwalk_map_and_copy(hash, dst_sg, len - hash_len, hash_len, 0);
+ }
+ 
++#define TLS_MAX_PADDING_SIZE 256
+ static int pad_record(struct scatterlist *dst_sg, int len, int block_size)
+ {
+-	uint8_t pad[block_size];
++	uint8_t pad[TLS_MAX_PADDING_SIZE];
+ 	int pad_size = block_size - (len % block_size);
+ 
+ 	memset(pad, pad_size - 1, pad_size);
+@@ -326,7 +327,7 @@ static int pad_record(struct scatterlist *dst_sg, int len, int block_size)
+ 
+ static int verify_tls_record_pad(struct scatterlist *dst_sg, int len, int block_size)
+ {
+-	uint8_t pad[256]; /* the maximum allowed */
++	uint8_t pad[TLS_MAX_PADDING_SIZE];
+ 	uint8_t pad_size;
+ 	int i;
+ 
+-- 
+2.31.1
+
