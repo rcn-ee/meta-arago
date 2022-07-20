@@ -12,7 +12,7 @@ DEPENDS = "libnl"
 BRANCH="hawking_dev"
 # The following commit correspond to DEV.LIBNL-XFRM.03.01.00.00A
 SRCREV = "2a5ee7c4f41398c07c593e81af7b71c7720e6de8"
-SRC_URI = "git://arago-project.org/git/projects/libnl-xfrm.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/arago-project-org/libnl-xfrm.git;protocol=https;branch=${BRANCH}"
 
 PR = "r1"
 

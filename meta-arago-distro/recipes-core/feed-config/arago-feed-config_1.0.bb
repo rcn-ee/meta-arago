@@ -7,7 +7,7 @@ INHIBIT_DEFAULT_DEPS = "1"
 
 FEEDNAMEPREFIX ?= ""
 FEEDURIPREFIX ?= "feeds/"
-DISTRO_FEED_URI ?= "http://arago-project.org"
+DISTRO_FEED_URI ?= ""
 
 do_compile() {
 	mkdir -p ${S}/${sysconfdir}/opkg/

@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE = "keystone"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "http://arago-project.org/files/releases/k2-fw/k2-initramfs-${PV}.tar.gz"
+SRC_URI = "file://k2-initramfs-0.0.7.tar.gz"
 
 SRC_URI[md5sum] = "27fb248cbfe08ed8344bdc4451067c8f"
 SRC_URI[sha256sum] = "beb19d685ee0d20281266726e4c2ba4b245af9450c1bd5155ff06d8c1656dd26"

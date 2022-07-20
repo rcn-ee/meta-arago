@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${ARAGOBASE}/meta-arago-extras/recipes-extended/ltp/
 require recipes-extended/ltp/ltp_${PV}.bb
 
 SUMMARY = "Embedded Linux Device Driver Tests based on Linux Test Project"
-HOMEPAGE = "http://arago-project.org/git/projects/test-automation/ltp-ddt.git"
+HOMEPAGE = "https://git.ti.com/cgit/test-automation/ltp-ddt/"
 
 PROVIDES += "ltp"
 
