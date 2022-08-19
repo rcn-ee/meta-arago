@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://CCIEF-BASIC_Master/library/include/SLMP.h;beginline=1
 PV = "1.0"
 PR = "r1"
 
-CCIEF-BASIC_GIT_URI = "git://git.ti.com/processor-sdk/cclink.git"
-CCIEF-BASIC_GIT_PROTOCOL = "git"
+CCIEF-BASIC_GIT_URI = "git://git.ti.com/git/processor-sdk/cclink.git"
+CCIEF-BASIC_GIT_PROTOCOL = "https"
 CCIEF-BASIC_GIT_BRANCH = "master"
 
 CCIEF-BASIC_SRCREV = "ec2a42e61c85c6a5e858438c590b052f2e780d6f"

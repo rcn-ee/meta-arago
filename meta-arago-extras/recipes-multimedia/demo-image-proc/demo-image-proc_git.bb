@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "keystone"
 DEPENDS = "ti-ipc"
 
 BRANCH = "master"
-SRC_URI = "git://git.ti.com/keystone-demos/image-proc.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/keystone-demos/image-proc.git;protocol=https;branch=${BRANCH}"
 #Commit corresponds to DEV.DEMO_IMAGE_PROC-01.00.00.03
 SRCREV = "d1f4014d28ecedf34dbd20f04d4277eb1c4b8ae0"
 PV = "1.0.0.3"

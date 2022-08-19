@@ -14,7 +14,7 @@ COMPATIBLE_MACHINE = "(omap3)"
 BRANCH ?= "master"
 SRCREV = "b67b11011a8a54a7598eed383f3a106c32b47c6d"
 
-SRC_URI = "git://git.ti.com/apps/av_examples.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/apps/av_examples.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

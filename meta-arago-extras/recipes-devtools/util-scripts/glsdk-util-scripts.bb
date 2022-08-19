@@ -7,7 +7,7 @@ COMPATIBLE_MACHINE = "omap-a15|j7"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 RDEPENDS_${PN} += "bash"
 
-SRC_URI = "git://git.ti.com/glsdk/util-scripts.git"
+SRC_URI = "git://git.ti.com/git/glsdk/util-scripts.git;protocol=https"
 
 SRCREV = "df50ca1592cae97ad0c7285686d602926b4f7305"
 

@@ -6,7 +6,7 @@ CLEANBROKEN = "1"
 
 BRANCH = "master"
 
-SRC_URI = "git://git.ti.com/graphics/img-pvr-sdk.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/graphics/img-pvr-sdk.git;protocol=https;branch=${BRANCH}"
 SRCREV = "e52592c843ad16be31db411b85c4059d82c4a6b9"
 
 PR = "r19"

@@ -8,7 +8,7 @@ PR = "r4"
 COMPATIBLE_MACHINE = "keystone"
 BRANCH = "v3.10.72/master"
 SRCREV = "b9bad8fccc5f9c6bcd78363982b3249a15f193fb"
-SRC_URI = "git://git.ti.com/keystone-linux/linux.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/keystone-linux/linux.git;protocol=https;branch=${BRANCH}"
 S = "${WORKDIR}/git"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 

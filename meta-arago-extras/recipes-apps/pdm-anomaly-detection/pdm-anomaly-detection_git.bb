@@ -8,7 +8,7 @@ PV = "1.0"
 PR = "r2"
 
 BRANCH = "master"
-SRC_URI  = "git://git.ti.com/apps/pdm-anomaly-detection.git;protocol=git;branch=${BRANCH}"
+SRC_URI  = "git://git.ti.com/git/apps/pdm-anomaly-detection.git;protocol=https;branch=${BRANCH}"
 
 SRCREV = "2ccf0e5e5aaac73166d52374650a25652bd6aed2"
 

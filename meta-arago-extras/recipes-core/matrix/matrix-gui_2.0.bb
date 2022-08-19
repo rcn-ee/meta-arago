@@ -20,7 +20,7 @@ SRCREV = "9a2d12590102fefc5c29fc9e8d346ce6b0198468"
 
 MATRIX_INITSCRIPT = "${@oe.utils.conditional('QT_PROVIDER', 'qt5', bb.utils.contains('DISTRO_FEATURES', 'wayland', 'init', 'init.eglfs', d), 'init', d)}"
 
-SRC_URI = "git://git.ti.com/matrix-gui-v2/matrix-gui-v2.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://git.ti.com/git/matrix-gui-v2/matrix-gui-v2.git;protocol=https;branch=${BRANCH} \
            file://${MATRIX_INITSCRIPT} \
            file://php.ini \
            file://matrix-gui-2.0.service \

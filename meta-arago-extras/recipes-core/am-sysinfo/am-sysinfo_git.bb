@@ -10,7 +10,7 @@ PR = "r10"
 BRANCH ?= "master"
 SRCREV = "5df7da69a50d27b7f594db0918c5e6793c3a6237"
 
-SRC_URI = "git://git.ti.com/apps/am_sysinfo.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/apps/am_sysinfo.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

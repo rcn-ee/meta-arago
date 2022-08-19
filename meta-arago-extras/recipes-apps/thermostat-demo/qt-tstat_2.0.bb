@@ -19,7 +19,7 @@ DEPENDS += "${QT_DEPENDS_SVG} ${QT_DEPENDS_SCRIPT}"
 BRANCH ?= "master"
 SRCREV = "665bff9a7bc0dbf82f9d6a58ff2778c03fe04fd1"
 
-SRC_URI = "git://git.ti.com/apps/thermostat-demo.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/apps/thermostat-demo.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git/"
 

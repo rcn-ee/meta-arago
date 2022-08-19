@@ -9,8 +9,8 @@ DEBIAN_NOAUTONAME_${PN}-dev = "1"
 DEBIAN_NOAUTONAME_${PN}-dbg = "1"
 DEBIAN_NOAUTONAME_${PN}-staticdev = "1"
 
-NETAPI_GIT_URI = "git://git.ti.com/keystone-rtos/netapi.git"
-NETAPI_GIT_PROTOCOL = "git"
+NETAPI_GIT_URI = "git://git.ti.com/git/keystone-rtos/netapi.git"
+NETAPI_GIT_PROTOCOL = "https"
 NETAPI_GIT_BRANCH = "master"
 
 # Below Commit ID corresponds to "DEV.NETAPI.01.01.00.07"

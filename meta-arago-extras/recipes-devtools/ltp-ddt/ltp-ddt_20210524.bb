@@ -18,7 +18,7 @@ SRCREV = "0ac70c1f1b1feaa6bc4c83b559ba0a7057911058"
 BRANCH ?= "master"
 
 SRC_URI_remove = "git://github.com/linux-test-project/ltp.git;protocol=https;branch=master"
-SRC_URI_prepend = "git://git.ti.com/test-automation/ltp-ddt.git;branch=${BRANCH} "
+SRC_URI_prepend = "git://git.ti.com/git/test-automation/ltp-ddt.git;protocol=https;branch=${BRANCH} "
 
 export prefix = "/opt/ltp"
 export exec_prefix = "/opt/ltp"

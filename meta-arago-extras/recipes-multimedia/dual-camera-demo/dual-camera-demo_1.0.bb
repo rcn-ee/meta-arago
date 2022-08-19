@@ -12,7 +12,7 @@ PR = "r20"
 BRANCH = "master"
 SRCREV = "3188b1eacb14dda0dcf3a58877962d86687b6d20"
 
-SRC_URI = "git://git.ti.com/sitara-linux/dual-camera-demo.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://git.ti.com/git/sitara-linux/dual-camera-demo.git;protocol=https;branch=${BRANCH} \
            file://desc_dual-camera.html \
            file://dual_camera_qt5.sh \
            file://dual_camera_qt4.sh \

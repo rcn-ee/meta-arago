@@ -14,7 +14,7 @@ SRCREV = "7e3938f0854be99583f8b204f600907ea9e6471d"
 BRANCH ?= "master"
 
 SRC_URI = " \
-    git://git.ti.com/glsdk/gst-plugin-ducati.git;protocol=git;branch=${BRANCH} \
+    git://git.ti.com/git/glsdk/gst-plugin-ducati.git;protocol=https;branch=${BRANCH} \
     file://0001-gstducati-configure.ac-stop-using-export-symbols-reg.patch \
 "
 

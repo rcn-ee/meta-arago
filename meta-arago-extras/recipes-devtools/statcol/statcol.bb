@@ -3,10 +3,10 @@ SUMMARY = "Statistics collector application"
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6bc27cd44417c389a180bd62f552a0"
 
-PROTOCOL = "git"
+PROTOCOL = "https"
 BRANCH = "master"
 SRCREV = "dd0131eadf3633e8f9d06cb390d3c6c1b074d873"
-SRC_URI = "git://git.ti.com/glsdk/statcol.git;protocol=${PROTOCOL};branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/glsdk/statcol.git;protocol=${PROTOCOL};branch=${BRANCH}"
 
 DEPENDS = "ti-rpmsg-char websocketd"
 RDEPENDS_${PN} = "bash"

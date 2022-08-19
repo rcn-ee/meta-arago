@@ -20,8 +20,8 @@ TI_LINUX_FW_SRCREV = "${AUTOREV}"
 K3_IMAGE_GEN_SRCREV = "${AUTOREV}"
 
 # Point to latest nightly metadata
-#TI_RTOS_METADATA_URI = "git://git.ti.com/processor-sdk/coresdk_rtos_releases.git"
-#TI_RTOS_METADATA_PROTOCOL = "git"
+#TI_RTOS_METADATA_URI = "git://git.ti.com/git/processor-sdk/coresdk_rtos_releases.git"
+#TI_RTOS_METADATA_PROTOCOL = "https"
 TI_RTOS_METADATA_SRCREV = "${AUTOREV}"
 TI_RTOS_METADATA_BRANCH = "next"
 

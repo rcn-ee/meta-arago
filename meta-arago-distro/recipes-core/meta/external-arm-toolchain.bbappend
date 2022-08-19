@@ -6,8 +6,8 @@
 BRANCH = "ti-linux-5.10.y"
 SRCREV = "73aa709ca10103b61fba3a07471dbb4dcb56db45"
 
-KERNEL_GIT_URI = "git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git"
-KERNEL_GIT_PROTOCOL = "git"
+KERNEL_GIT_URI = "git://git.ti.com/git/ti-linux-kernel/ti-linux-kernel.git"
+KERNEL_GIT_PROTOCOL = "https"
 SRC_URI += "${KERNEL_GIT_URI};protocol=${KERNEL_GIT_PROTOCOL};branch=${BRANCH}"
 
 PKGV_linux-libc-headers-dev = "5.10"

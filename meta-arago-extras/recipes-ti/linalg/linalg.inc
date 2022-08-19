@@ -1,4 +1,4 @@
-HOMEPAGE = "git://git.ti.com/dense-linear-algebra-libraries/linalg.git"
+HOMEPAGE = "git://git.ti.com/git/dense-linear-algebra-libraries/linalg.git"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://src/ti/linalg/docs/LINALG_1.2.0_manifest.html;md5=f30895e41e5947c3439b1ad4cf4c8555"
 
@@ -16,7 +16,7 @@ REQUIRED_MACHINE_FEATURES = "dsp"
 REQUIRED_DISTRO_FEATURES = "opencl openmp"
 
 SRC_URI = " \
-	git://git.ti.com/dense-linear-algebra-libraries/linalg.git;protocol=git;branch=${BRANCH} \
+	git://git.ti.com/git/dense-linear-algebra-libraries/linalg.git;protocol=https;branch=${BRANCH} \
 	file://0001-Makefile-fix-toolchain-variables.patch \
 	file://0001-Makefile-pass-PARALLEL_MAKE-variable-to-overwrite-j8.patch \
 "

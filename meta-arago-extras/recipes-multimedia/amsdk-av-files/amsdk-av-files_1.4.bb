@@ -25,7 +25,7 @@ VIDEO_FILES_keystone = "video_720p "
 
 BRANCH = "master"
 
-SRC_URI = "git://git.ti.com/processor-sdk/amsdk-av-files.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/processor-sdk/amsdk-av-files.git;protocol=https;branch=${BRANCH}"
 SRCREV = "1b73009090265328ebaf1b6c880dfeccae5a8f19"
 
 S = "${WORKDIR}/git"

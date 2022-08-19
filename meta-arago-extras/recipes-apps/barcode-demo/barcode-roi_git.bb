@@ -13,7 +13,7 @@ PV = "01.00.00"
 PR = "r1"
 
 BRANCH = "master"
-SRC_URI = "git://git.ti.com/apps/barcode-roi-detection.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/apps/barcode-roi-detection.git;protocol=https;branch=${BRANCH}"
 
 SRCREV = "50fa051f66012ebaa10eba1cb289287c4c5e7432"
 

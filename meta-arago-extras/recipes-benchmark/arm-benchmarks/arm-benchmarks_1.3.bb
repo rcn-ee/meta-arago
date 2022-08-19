@@ -9,7 +9,7 @@ PR = "r13"
 BRANCH ?= "master"
 SRCREV = "fefaf9bdd6f36ab0cebaab8dbf34e5beb50f471c"
 
-SRC_URI = "git://git.ti.com/apps/arm_benchmarks.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/apps/arm_benchmarks.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

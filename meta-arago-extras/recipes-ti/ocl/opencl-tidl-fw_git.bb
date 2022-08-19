@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE = "dra7xx"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-GIT_URI      = "git://git.ti.com/opencl/opencl-firmware.git"
-GIT_PROTOCOL = "git"
+GIT_URI      = "git://git.ti.com/git/opencl/opencl-firmware.git"
+GIT_PROTOCOL = "https"
 BRANCH       = "master"
 SRCREV       = "9e3d0b34f604203f275fba4807481a8a763a4f63"
 

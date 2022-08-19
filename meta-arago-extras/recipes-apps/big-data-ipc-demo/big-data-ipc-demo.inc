@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://makefile;beginline=1;endline=31;md5=2f2ea348b98d5cc78
 COMPATIBLE_MACHINE = "omap-a15|keystone"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-BIG_DATA_IPC_GIT_URI = "git://git.ti.com/processor-sdk/big-data-ipc-examples.git"
-BIG_DATA_IPC_GIT_PROTOCOL = "git"
+BIG_DATA_IPC_GIT_URI = "git://git.ti.com/git/processor-sdk/big-data-ipc-examples.git"
+BIG_DATA_IPC_GIT_PROTOCOL = "https"
 BIG_DATA_IPC_GIT_BRANCH = "master"
 
 # Below commit ID corresponds to "DEV.BIG_DATA_IPC.01.03.00.00"

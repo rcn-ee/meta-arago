@@ -14,7 +14,7 @@ REQUIRED_DISTRO_FEATURES = "opencl"
 
 BRANCH = "master"
 LIC_FILES_CHKSUM = "file://src/ti/libarch/docs/LibArch_1.0.0_manifest.html;md5=bb48cacb8827ec8d8e5a94c4f2425ee3"
-SRC_URI = "git://git.ti.com/library-architecture/libarch.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/library-architecture/libarch.git;protocol=https;branch=${BRANCH}"
 SRCREV = "cb6d785e95cd390c6388853a4f1e99a302e5a58f"
 
 COMPATIBLE_MACHINE = "k2hk|dra7xx"

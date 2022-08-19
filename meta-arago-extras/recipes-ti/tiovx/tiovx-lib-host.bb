@@ -15,7 +15,7 @@ PV = "01.00.00.00"
 PR = "r1"
 
 BRANCH = "master"
-SRC_URI = "git://git.ti.com/processor-sdk/tiovx.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/processor-sdk/tiovx.git;protocol=https;branch=${BRANCH}"
 SRC_URI += "file://0001-Fix-paths-for-Yocto-build-and-add-RTOS-build-var.patch "
 SRCREV = "2bfa01201804eaf2e675c743e708e88ab612049e"
 

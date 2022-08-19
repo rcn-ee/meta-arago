@@ -8,7 +8,7 @@ PV = "1.0"
 PR = "r0"
 
 BRANCH = "master"
-SRC_URI = "git://git.ti.com/sitara-linux/mmwavegesture-hmi.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/sitara-linux/mmwavegesture-hmi.git;protocol=https;branch=${BRANCH}"
 
 SRCREV = "0881fc8bc5b3c3411af7b69c3837a8b3a1fbedc5"
 
