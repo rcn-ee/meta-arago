@@ -49,7 +49,6 @@ UTILS_append_ti43x = " mmc-utils \
 UTILS_append_omap-a15 = " mmc-utils \
                           switch-config \
                           libdrm-omap \
-                          stream-openmp \
                           pru-icss \
                           ti-ipc-rtos-fw \
                           uio-test-pruss \
