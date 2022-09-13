@@ -81,10 +81,13 @@ ARAGO_TI_TEST:append:k3 = " \
     k3conf \
 "
 
-# Disable due to breakage
-#    viddec-test-app 
 ARAGO_TI_TEST:append:j7 = " \
     ufs-utils \
+"
+
+# Disable due to breakage
+#    viddec-test-app 
+ARAGO_TI_TEST:append:j721e = " \
     videnc-test-app \
 "
 
