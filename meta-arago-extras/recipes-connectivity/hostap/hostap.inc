@@ -18,7 +18,7 @@ INITSCRIPT_NAME="hostapd"
 
 CONFFILES:${PN} += "${sysconfdir}/hostapd.conf"
 
-SRC_URI = "git://git.ti.com/wilink8-wlan/hostap.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://git.ti.com/git/wilink8-wlan/hostap.git;protocol=https;branch=${BRANCH} \
            file://defconfig \
 	       file://init"
 

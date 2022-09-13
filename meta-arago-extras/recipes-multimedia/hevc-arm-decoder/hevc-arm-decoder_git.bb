@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "dra7xx"
 
 BRANCH = "master"
 
-SRC_URI = "git://git.ti.com/processor-sdk/hevc_arm_decode.git;protocol=git;branch=${BRANCH} \
+SRC_URI = "git://git.ti.com/git/processor-sdk/hevc_arm_decode.git;protocol=https;branch=${BRANCH} \
            file://Testparams.cfg \
 "
 

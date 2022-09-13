@@ -6,7 +6,7 @@ PR = "r47"
 
 BRANCH ?= "master"
 SRCREV = "eae21af9be4e7a0028045cc3e4038fe2157a266d"
-SRC_URI = "git://git.ti.com/arago-project/tisdk-setup-scripts.git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/arago-project/tisdk-setup-scripts.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

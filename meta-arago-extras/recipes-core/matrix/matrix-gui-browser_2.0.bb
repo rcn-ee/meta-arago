@@ -13,7 +13,7 @@ SRCREV = "78ad5db716d1abc4c05abfe435f066b6b88454d5"
 
 BRANCH ?= "master"
 
-SRC_URI = "git://git.ti.com/matrix-gui-v2/matrix_browser.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/matrix-gui-v2/matrix_browser.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

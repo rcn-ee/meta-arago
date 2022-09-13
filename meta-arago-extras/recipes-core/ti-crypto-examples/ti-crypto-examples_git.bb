@@ -10,7 +10,7 @@ PR = "r7"
 BRANCH ?= "master"
 SRCREV = "6f4b09fffe970bb6b448369875874e798ef282f6"
 
-SRC_URI = "git://git.ti.com/git/arago-project-org/crypto-example-apps.git;protocol=https;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/git/arago-project-org/crypto-example-apps.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 

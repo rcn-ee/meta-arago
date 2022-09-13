@@ -7,7 +7,7 @@ require recipes-ti/includes/arago-paths.inc
 
 PR = "${INC_PR}.0"
 
-CLOCL_WIN_GIT_URI = "git://git.ti.com/opencl/clocl-win.git"
+CLOCL_WIN_GIT_URI = "git://git.ti.com/git/opencl/clocl-win.git"
 CLOCL_WIN_GIT_BRANCH = "master"
 CLOCL_WIN_SRCREV = "eac7ac7cc2e64a9ff05e4238e44dff3f9a9fcf6b"
 

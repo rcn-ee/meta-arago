@@ -8,6 +8,6 @@ inherit allarch
 
 BRANCH ?= "master"
 SRCREV = "e58f941784fb45fd826779a45b33973e6342700f"
-SRC_URI = "git://git.ti.com/git/arago-project/oe-layersetup.git;protocol=https;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/git/arago-project/oe-layersetup.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"

@@ -4,8 +4,8 @@ INC_PR = "r4"
 require recipes-ti/includes/arago-paths.inc
 
 
-FFTLIB_GIT_URI = "git://git.ti.com/fftlib/fftlib"
-FFTLIB_GIT_PROTOCOL = "git"
+FFTLIB_GIT_URI = "git://git.ti.com/git/fftlib/fftlib"
+FFTLIB_GIT_PROTOCOL = "https"
 FFTLIB_GIT_BRANCH = "master"
 FFTLIB_GIT_DESTSUFFIX = "${WORKDIR}/git"
 

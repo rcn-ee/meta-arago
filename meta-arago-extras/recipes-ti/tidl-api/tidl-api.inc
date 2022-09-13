@@ -3,8 +3,8 @@ INC_PR = "r0"
 
 LIC_FILES_CHKSUM = "file://license.txt;md5=e3daeabffb9fc131a73f16d16cbdb118"
 
-GIT_URI = "git://git.ti.com/tidl/tidl-api.git"
-GIT_PROTOCOL = "git"
+GIT_URI = "git://git.ti.com/git/tidl/tidl-api.git"
+GIT_PROTOCOL = "https"
 BRANCH = "master"
 
 SRC_URI = "${GIT_URI};protocol=${GIT_PROTOCOL};branch=${BRANCH}"

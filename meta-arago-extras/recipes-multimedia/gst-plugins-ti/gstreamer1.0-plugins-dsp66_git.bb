@@ -3,7 +3,7 @@ HOMEPAGE = "https://git.ti.com/processor-sdk/gst-plugin-dsp66"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2827f94fc0a1adeff4d9702e97ce2979"
 
-SRC_URI = "git://git.ti.com/processor-sdk/gst-plugin-dsp66.git;protocol=git;branch=master \
+SRC_URI = "git://git.ti.com/git/processor-sdk/gst-plugin-dsp66.git;protocol=https;branch=master \
 	file://0001-Makefile-correct-use-of-CPP-CXX-and-other-standard-v.patch \
 	file://0001-configure.ac-stop-using-export-symbols-regex.patch \
 "

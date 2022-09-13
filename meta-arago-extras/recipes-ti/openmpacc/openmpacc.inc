@@ -16,8 +16,8 @@ LIC_FILES_CHKSUM = "file://../debian/copyright;md5=aaa2a0939d08197132fc382e97b62
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/openmpacc:"
 
-OMPACC_GIT_URI = "git://git.ti.com/openmp/ti-openmpacc.git"
-OMPACC_GIT_PROTOCOL = "git"
+OMPACC_GIT_URI = "git://git.ti.com/git/openmp/ti-openmpacc.git"
+OMPACC_GIT_PROTOCOL = "https"
 OMPACC_GIT_BRANCH = "master"
 
 OMPACC_SRCREV = "7c4e68a0bf73ec193edff9dfc23ea764ae6ad434"

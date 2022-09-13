@@ -17,7 +17,7 @@ PV = "1.3.3"
 PR = "r3"
 
 BRANCH = "master"
-SRC_URI = "git://git.ti.com/apps/qt-opencv-opencl-opengl-multithreaded.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/apps/qt-opencv-opencl-opengl-multithreaded.git;protocol=https;branch=${BRANCH}"
 
 SRCREV = "80051ec8befd921e40cfb74a49234ed045576bbc"
 

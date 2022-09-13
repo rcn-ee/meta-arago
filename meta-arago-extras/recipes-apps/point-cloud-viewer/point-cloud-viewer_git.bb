@@ -13,7 +13,7 @@ COMPATIBLE_MACHINE = "dra7xx"
 
 BRANCH = "master"
 
-SRC_URI = "git://git.ti.com/processor-sdk/point-cloud-viewer.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/processor-sdk/point-cloud-viewer.git;protocol=https;branch=${BRANCH}"
 
 SRCREV = "f0af54e63a6c802b4f8f0657873e74f1cb486e86"
 
