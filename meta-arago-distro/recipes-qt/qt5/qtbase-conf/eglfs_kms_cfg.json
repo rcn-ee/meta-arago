@@ -8,8 +8,7 @@
       "mode": "off"
     },
     {
-      "name": "HDMI1",
-      "mode": "1024x768"
+      "name": "HDMI1"
     }
   ]
 }
