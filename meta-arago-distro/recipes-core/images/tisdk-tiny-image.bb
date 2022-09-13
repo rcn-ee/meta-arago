@@ -13,6 +13,4 @@ IMAGE_INSTALL = " \
 	${ARAGO_TINY_IMAGE_EXTRA_INSTALL} \
 "
 
-deltask do_packagedata
-
 export IMAGE_BASENAME = "tisdk-tiny-image"
