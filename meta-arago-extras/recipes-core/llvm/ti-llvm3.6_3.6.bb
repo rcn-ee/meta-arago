@@ -45,6 +45,8 @@ SRC_URI = " \
 SRCREV_${LLVM_GIT_NAME} = "${LLVM_GIT_SRCREV}"
 SRCREV_${CLANG_GIT_NAME} = "${CLANG_GIT_SRCREV}"
 
+SRCREV_FORMAT = "${LLVM_GIT_NAME}"
+
 S = "${WORKDIR}/git"
 
 LIBXML2_INC = "`pkg-config libxml-2.0 --cflags`"
