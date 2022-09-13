@@ -1,20 +1,21 @@
-From be4eb4c5c3992deee2cfaa5da8913473623f728b Mon Sep 17 00:00:00 2001
-From: Franklin S. Cooper Jr <fcooper@ti.com>
-Date: Fri, 21 Sep 2012 15:18:24 -0500
-Subject: [PATCH] psplash: Add Arago custom color
+From 02f63cdcff468e0b7e6dfe29cfb1e484497c38d6 Mon Sep 17 00:00:00 2001
+From: Ryan Eatmon <reatmon@ti.com>
+Date: Wed, 4 May 2022 13:55:44 -0500
+Subject: [PATCH 1/2] psplash: Add Arago custom color
 
 * Port custom colors used in psplash-ti from oe-classic.
 
 Signed-off-by: Franklin S. Cooper Jr <fcooper@ti.com>
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- psplash-colors.h |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+ psplash-colors.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/psplash-colors.h b/psplash-colors.h
-index d701089..a6a5992 100644
+index 82a9893..427fff7 100644
 --- a/psplash-colors.h
 +++ b/psplash-colors.h
-@@ -20,15 +20,15 @@
+@@ -12,15 +12,15 @@
  #define _HAVE_PSPLASH_COLORS_H
  
  /* This is the overall background color */
@@ -35,5 +36,5 @@ index d701089..a6a5992 100644
  
  #endif
 -- 
-1.7.0.4
+2.17.1
 

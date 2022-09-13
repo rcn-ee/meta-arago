@@ -1,15 +1,22 @@
-upstream: http://bugzilla.o-hand.com/show_bug.cgi?id=1764
+From c3f76ec5c4bc5867e30cbfaf6cc43cf847ae76f2 Mon Sep 17 00:00:00 2001
+From: Ryan Eatmon <reatmon@ti.com>
+Date: Wed, 4 May 2022 13:56:39 -0500
+Subject: [PATCH 2/2] upstream: http://bugzilla.o-hand.com/show_bug.cgi?id=1764
 
+This is a reworked patch to address a code update in psplash.
+Original source is unknown.
+
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
- psplash-fb.c |    8 +++++++-
- psplash-fb.h |    1 +
- 2 files changed, 8 insertions(+), 1 deletions(-)
+ psplash-fb.c | 8 +++++++-
+ psplash-fb.h | 1 +
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/psplash-fb.c b/psplash-fb.c
-index 71740cd..860c0c0 100644
+index 2babb5f..0aff9bd 100644
 --- a/psplash-fb.c
 +++ b/psplash-fb.c
-@@ -160,6 +160,7 @@ psplash_fb_new (int angle)
+@@ -223,6 +223,7 @@ psplash_fb_new (int angle, int fbdev_id)
    fb->real_width  = fb->width  = fb_var.xres;
    fb->real_height = fb->height = fb_var.yres;
    fb->bpp    = fb_var.bits_per_pixel;
@@ -17,7 +24,7 @@ index 71740cd..860c0c0 100644
    fb->stride = fb_fix.line_length;
    fb->type   = fb_fix.type;
    fb->visual = fb_fix.visual;
-@@ -308,7 +309,7 @@ psplash_fb_plot_pixel (PSplashFB    *fb,
+@@ -399,7 +400,7 @@ psplash_fb_plot_pixel (PSplashFB    *fb,
          break;
        }
    } else if (fb->rgbmode == BGR565 || fb->rgbmode == BGR888) {
@@ -25,10 +32,10 @@ index 71740cd..860c0c0 100644
 +    switch (fb->depth)
        {
        case 24:
-       case 32:
-@@ -316,6 +317,11 @@ psplash_fb_plot_pixel (PSplashFB    *fb,
-         *(fb->data + off + 1) = green;
-         *(fb->data + off + 2) = blue;
+ #if __BYTE_ORDER == __BIG_ENDIAN
+@@ -416,6 +417,11 @@ psplash_fb_plot_pixel (PSplashFB    *fb,
+         *(volatile uint32_t *) (fb->bdata + off)
+           = (blue << 16) | (green << 8) | (red);
          break;
 +      case 18:
 +        *(fb->data + off)     = (red >> 2) | ((green & 0x0C) << 4);
@@ -36,13 +43,13 @@ index 71740cd..860c0c0 100644
 +        *(fb->data + off + 2) = (blue & 0xC0) >> 6;
 +        break;
        case 16:
-         *(volatile uint16_t *) (fb->data + off)
+         *(volatile uint16_t *) (fb->bdata + off)
  	  = ((blue >> 3) << 11) | ((green >> 2) << 5) | (red >> 3);
 diff --git a/psplash-fb.h b/psplash-fb.h
-index ef5b39e..160cdeb 100644
+index 16e2b20..cf17f51 100644
 --- a/psplash-fb.h
 +++ b/psplash-fb.h
-@@ -34,6 +34,7 @@ typedef struct PSplashFB
+@@ -27,6 +27,7 @@ typedef struct PSplashFB
    int            visual;		
    int            width, height;
    int            bpp;
@@ -51,5 +58,5 @@ index ef5b39e..160cdeb 100644
    char		*data;
    char		*base;
 -- 
-1.6.3.3
+2.17.1
 
