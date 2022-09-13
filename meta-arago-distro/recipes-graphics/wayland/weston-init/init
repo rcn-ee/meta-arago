@@ -9,8 +9,21 @@
 ### END INIT INFO
 
 killproc() {
-        pid=`/bin/pidof $1`
-        [ "$pid" != "" ] && kill $pid
+	all_pids=`/bin/pidof $1`
+
+	# busybox pidof doesn't ommit the current pid
+	# as this script is called weston on the target
+	# in thinlinux with a busybox based utility load
+	# later killproc operations end up killing this
+	# script.
+	for pid in $all_pids
+	do
+		if [ "$pid" != "$$" ]; then
+			kill_pids+=$pid
+		fi
+	done
+
+	[ "$kill_pids" != "" ] && kill $kill_pids
 }
 
 read CMDLINE < /proc/cmdline
