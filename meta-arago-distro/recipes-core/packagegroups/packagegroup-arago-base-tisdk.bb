@@ -9,6 +9,7 @@ inherit packagegroup
 OPTEE_PKGS = " \
     optee-client \
     optee-test \
+    optee-examples \
 "
 
 RDEPENDS:${PN} = "\
