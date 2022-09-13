@@ -37,7 +37,6 @@ ARAGO_TEST = "\
     linuxptp \
     openntpd \
     nbench-byte \
-    stream \
 "
 
 ARAGO_TEST:append:armv7a = " \
