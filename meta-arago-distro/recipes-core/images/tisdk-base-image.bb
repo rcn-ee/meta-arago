@@ -1,5 +1,7 @@
-# Arago TI SDK base image with test tools
-# Suitable for initramfs
+SUMMARY = "Arago TI SDK base image with test tools"
+
+DESCRIPTION = "Arago SDK base image suitable for initramfs containing\
+ comprehensive test tools."
 
 require arago-image.inc
 
