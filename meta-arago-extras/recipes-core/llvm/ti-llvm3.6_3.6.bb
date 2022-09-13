@@ -15,6 +15,8 @@ do_configure:prepend() {
 
 require recipes-core/llvm/llvm.inc
 
+inherit pkgconfig
+
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=47e311aa9caedd1b3abf098bd7814d1d"
 
 DEPENDS += "libxml2 groff-native"
