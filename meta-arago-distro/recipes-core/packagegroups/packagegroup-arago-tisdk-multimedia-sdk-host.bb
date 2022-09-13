@@ -11,8 +11,8 @@ BARCODE_PKG = ""
 #    ${@['','barcode-roi-source'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 #"
 
-DUAL_CAMERA_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'dual-camera-demo-src', '', d)}"
-IMAGE_GALLERY_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu','image-gallery-src', '', d)}"
+DUAL_CAMERA_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'dual-camera-demo-source', '', d)}"
+IMAGE_GALLERY_PKG = "${@bb.utils.contains('MACHINE_FEATURES', 'gpu','image-gallery-source', '', d)}"
 
 MULTIMEDIA = ""
 

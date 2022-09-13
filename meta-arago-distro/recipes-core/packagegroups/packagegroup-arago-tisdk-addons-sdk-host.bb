@@ -50,7 +50,7 @@ UTILS:append:am65xx = " \
 "
 
 UTILS:append:am64xx = " \
-    pru-icss-src \
+    pru-icss-source \
 "
 
 EXTRA_LIBS = ""
@@ -76,7 +76,7 @@ EXTRA_LIBS:append:ti43x = " \
 "
 
 PDM_ANOMALY_PKG_SRC = "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'pdm-anomaly-detection-src', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'pdm-anomaly-detection-source', '', d)} \
 "
 
 EXTRA_PACKAGES = ""
