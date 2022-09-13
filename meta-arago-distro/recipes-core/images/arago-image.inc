@@ -22,6 +22,7 @@ IMAGE_LINGUAS = ""
 TOOLCHAIN_HOST_TASK += "nativesdk-buildtools-perl-dummy"
 SDK_PACKAGE_ARCHS += "buildtools-dummy-${SDKPKGSUFFIX}"
 
+# FIXME: remove bashisms from this function (currently disabled)
 make_bootfiles_symlinks_relative() {
     for f in "${IMAGE_ROOTFS}/boot"/*
     do

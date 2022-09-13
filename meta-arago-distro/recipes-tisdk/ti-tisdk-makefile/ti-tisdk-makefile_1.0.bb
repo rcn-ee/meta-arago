@@ -267,7 +267,7 @@ do_install () {
 
     cat ${D}/Makefile | grep "__DTB_DEPEND__" > /dev/null
 
-    if [ "$?" == "0" ]
+    if [ "$?" = "0" ]
     then
         sed -i -e "s|__KERNEL_DEVICETREE__|${KERNEL_DEVICETREE}|" ${D}/Makefile
         sed -i -e "s/__DTB_DEPEND__/linux-dtbs/" ${D}/Makefile

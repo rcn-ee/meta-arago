@@ -500,7 +500,7 @@ generate_sw_manifest_table() {
         return 1
     fi
 
-    if [ "$gplv3_only" == "" ]
+    if [ "$gplv3_only" = "" ]
     then
         # The second parameter was not passed so set to false
         gplv3_only="false"
@@ -633,7 +633,7 @@ EOF
             esac
         done
 
-        if [ "$extra_files" == "1" ]
+        if [ "$extra_files" = "1" ]
         then
             source="$source"" <br>Files from:<br><a href=https://git.yoctoproject.org/meta-arago>https://git.yoctoproject.org/meta-arago</a><br><a href=https://git.yoctoproject.org/meta-ti>https://git.yoctoproject.org/meta-ti</a>"
         fi
@@ -662,7 +662,7 @@ echo "
 " >> ${SW_MANIFEST_FILE}
 
 cat >> ${SW_MANIFEST_TEXT} << EOF
-| ${package} | ${version} | ${license//\|/or} | ${delivered_as} | ${modified} | ${location} | ${source}
+| ${package} | ${version} | ${license} | ${delivered_as} | ${modified} | ${location} | ${source}
 EOF
     done
 

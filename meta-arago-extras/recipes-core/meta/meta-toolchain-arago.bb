@@ -112,17 +112,17 @@ arago_sdk_fixup () {
 	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS} ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS}
 	tcpath="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/${TOOLCHAIN_SYS}"
 	mkdir -p $tcpath
-	pushd $tcpath
-	ln -s ${SDKTARGETSYSROOT}/include include
-	if [ "${TOOLCHAIN_BRAND}" != "arago" ]; then
-		mkdir -p libc
-		cd libc
-	fi
-	mkdir -p usr
-	ln -s ${SDKTARGETSYSROOT}/lib lib
-	ln -s ${SDKTARGETSYSROOT}/usr/lib usr/lib
-	ln -s ${SDKTARGETSYSROOT}/usr/include usr/include
-	popd
+	( cd $tcpath; \
+		ln -s ${SDKTARGETSYSROOT}/include include; \
+		if [ "${TOOLCHAIN_BRAND}" != "arago" ]; then \
+			mkdir -p libc; \
+			cd libc; \
+		fi; \
+		mkdir -p usr; \
+		ln -s ${SDKTARGETSYSROOT}/lib lib; \
+		ln -s ${SDKTARGETSYSROOT}/usr/lib usr/lib; \
+		ln -s ${SDKTARGETSYSROOT}/usr/include usr/include; \
+	)
 }
 
 fakeroot create_sdk_files() {
