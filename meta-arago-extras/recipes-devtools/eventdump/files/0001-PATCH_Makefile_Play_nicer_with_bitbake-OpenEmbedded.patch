@@ -1,0 +1,34 @@
+From e8c5094e2d59fe48ad0e7234f196d04508f53727 Mon Sep 17 00:00:00 2001
+From: Daniel Thompson <daniel.thompson@linaro.org>
+Date: Wed, 20 Jul 2022 18:05:09 +0100
+Subject: [PATCH] Makefile: Play nicer with bitbake/OpenEmbedded
+
+Unconditionally adding -L$(NFSROOT)/lib to the link line risks seriously
+confusing the linker if NFSROOT is not set (which would be common when
+building OE/bitbake) because we end up trying to link against whatever
+zany things we might find in the host /lib directory). Fix this the
+obvious way.
+
+Upstream-Status: Pending
+Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+---
+ Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index e313e50..afb5472 100755
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,9 @@
+ CC = $(CROSS_COMPILE)gcc
+ CFLAGS = -O2 -Wall
+
++ifneq ($(NFSROOT),)
+ LDFLAGS += -L$(NFSROOT)/lib
++endif
+ #LIBS += -lopenobex -lbluetooth -lmisc
+
+ OBJS = eventdump.o
+--
+2.36.1
+
