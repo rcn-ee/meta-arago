@@ -2,7 +2,7 @@ DESCRIPTION = "Package containing scripts to setup the development host and targ
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://setup.sh;beginline=3;endline=31;md5=fc4b04a33df6d892c9f4d4a9d92b945e"
 
-PR = "r46"
+PR = "r47"
 
 BRANCH ?= "master"
 SRCREV = "22f4e5af1894a60d9e7d04caf83f26a556c14eca"
