@@ -12,7 +12,10 @@ SRCREV = "035c18cc3e6962dabd5ea2ad8845260726a4a99e"
 
 # bitbake only exports proxy variables during fetching, but go handles
 # module fetching on its own during compile and needs proxy settings
+# along with network access for the task
 export http_proxy
+export https_proxy
+do_compile[network] = "1"
 
 # Development package contains all the examples in different languages
 INSANE_SKIP:${PN}-dev = "file-rdeps"
