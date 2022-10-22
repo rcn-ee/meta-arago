@@ -23,7 +23,6 @@ EXTRA_FILES:k3 = "tisdk-readme tisdk-uenv"
 RDEPENDS:${PN} = "\
     ti-tisdk-setup \
     ${EXTRA_FILES} \
-    ti-tisdk-makefile \
     ${UBOOT_SRC} \
     ${KERNEL_SRC} \
     ${@oe.utils.conditional('KERNEL_SHADOW_CLONE_ENABLED','true','unshallow-repositories','',d)} \
