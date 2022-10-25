@@ -51,8 +51,6 @@ BT_TI = "\
     bt-fw \
 "
 
-#    net-snmp
-#    net-snmp-server-snmpd
 CONNECTIVITY_RDEPENDS = " \
     htop \
     iptables \
