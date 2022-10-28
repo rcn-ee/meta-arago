@@ -33,13 +33,5 @@ TISDK_TOOLCHAIN = "${@bb.utils.contains('MACHINE_FEATURES','gpu','meta-toolchain
 TOOLCHAIN_SUFFIX = "${@bb.utils.contains('MACHINE_FEATURES','gpu','-tisdk','-tisdk-server',d)}"
 
 IMAGE_INSTALL = "\
-    packagegroup-arago-tisdk-addons-sdk-host \
-    ${@['','packagegroup-arago-tisdk-opencl-sdk-host'][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
-    packagegroup-arago-tisdk-crypto-sdk-host \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-graphics-sdk-host','',d)} \
-    packagegroup-arago-tisdk-matrix-sdk-host \
-    packagegroup-arago-tisdk-multimedia-sdk-host \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-hmi-sdk-host','',d)} \
-    packagegroup-arago-tisdk-amsdk-sdk-host${ARAGO_KERNEL_SUFFIX} \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-qte-sdk-host','',d)} \
+    packagegroup-arago-tisdk-amsdk-sdk-host \
 "
