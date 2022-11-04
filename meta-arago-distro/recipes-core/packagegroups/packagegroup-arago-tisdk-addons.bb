@@ -34,16 +34,12 @@ UTILS_DSP = " \
 UTILS:append:ti33x = " mmc-utils \
                        switch-config \
                        pru-icss \
-                       uio-module-drv-test \
-                       uio-test-pruss \
 "
 
 UTILS:append:ti43x = " mmc-utils \
                        switch-config \
                        libdrm-omap \
                        pru-icss \
-                       uio-module-drv-test \
-                       uio-test-pruss \
 "
 
 UTILS:append:omap-a15 = " mmc-utils \
@@ -51,8 +47,6 @@ UTILS:append:omap-a15 = " mmc-utils \
                           libdrm-omap \
                           pru-icss \
                           ti-ipc-rtos-fw \
-                          uio-test-pruss \
-                          uio-module-drv-test \
 "
 
 UTILS:append:k3 = " mmc-utils \
@@ -76,19 +70,6 @@ UTILS:append:omapl138 = " ti-ipc-rtos-fw"
 UTILS:append:dra7xx = " \
                         ${UTILS_DSP} \
                         ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-example-apps','',d)} \
-"
-
-EXTRA_LIBS = ""
-EXTRA_LIBS:append:omap-a15 = " \
-    uio-module-drv \
-"
-
-EXTRA_LIBS:append:ti43x = " \
-    uio-module-drv \
-"
-
-EXTRA_LIBS:append:ti33x = " \
-    uio-module-drv \
 "
 
 EXTRA_PACKAGES = " \
@@ -118,7 +99,6 @@ EXTRA_PACKAGES:append:omap-a15 = " \
 RDEPENDS:${PN} = "\
     ${UTILS} \
     ${UTILS_UBOOT_FW} \
-    ${EXTRA_LIBS} \
 "
 
 RDEPENDS:${PN}-extra = "\
