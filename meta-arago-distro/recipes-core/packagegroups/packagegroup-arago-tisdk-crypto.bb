@@ -13,7 +13,6 @@ CRYPTO_SUPPORT = "\
     openssl-engines \
 "
 
-#ti-crypto-examples
 CRYPTO_SUPPORT:append:ti33x = " cryptodev-module cryptodev-tests"
 CRYPTO_SUPPORT:append:ti43x = " cryptodev-module cryptodev-tests"
 CRYPTO_SUPPORT:append:dra7xx = " cryptodev-module cryptodev-tests"
