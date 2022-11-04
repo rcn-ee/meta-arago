@@ -78,7 +78,7 @@ ARAGO_TI_TEST:append:k3 = " \
     k3conf \
 "
 
-ARAGO_TI_TEST:append:j7 = " \
+ARAGO_TI_TEST:append:j721e = " \
     ufs-utils \
 "
 

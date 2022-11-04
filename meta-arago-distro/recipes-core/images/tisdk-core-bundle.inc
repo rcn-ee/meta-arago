@@ -24,7 +24,9 @@ DTB_FILTER:am57xx-hs-evm = "${DTB_FILTER:am57xx-evm}"
 DTB_FILTER:ti43x = "am43"
 DTB_FILTER:omapl138 = "da850"
 DTB_FILTER:am65xx = "am65"
-DTB_FILTER:j7 = "j721e"
+DTB_FILTER:j721e = "j721e"
+DTB_FILTER:j7200 = "j7200"
+DTB_FILTER:j721s2 = "j721s2"
 
 # List of target side images to build for the SDK
 TARGET_IMAGES = "tisdk-base-image tisdk-default-image tisdk-thinlinux-image tisdk-bootstrap-image"
