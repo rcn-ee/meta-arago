@@ -37,29 +37,29 @@ PDM_ANOMALY_PKG_DEV = "\
 
 
 EXTRA_PACKAGES = ""
-EXTRA_PACKAGES:append:ti33x = " \
-                                arm-compute-library-dev \
-                                tensorflow-lite-dev \
-                                tensorflow-lite-staticdev \
-                                ${PDM_ANOMALY_PKG_DEV} \
-"
-EXTRA_PACKAGES:append:ti43x = " \
-                                arm-compute-library-dev \
-                                tensorflow-lite-dev \
-                                tensorflow-lite-staticdev \
-                                ${PDM_ANOMALY_PKG_DEV} \
-"
-EXTRA_PACKAGES:append:omap-a15 = " \
-                                arm-compute-library-dev \
-                                tensorflow-lite-dev \
-                                tensorflow-lite-staticdev \
-                                ${PDM_ANOMALY_PKG_DEV} \
-"
-EXTRA_PACKAGES:append:am65xx = " arm-compute-library-dev \
-                             tensorflow-lite-dev \
-                             tensorflow-lite-staticdev \
-                             ${PDM_ANOMALY_PKG_DEV} \
-"
+#EXTRA_PACKAGES:append:ti33x = " \
+#                                arm-compute-library-dev \
+#                                tensorflow-lite-dev \
+#                                tensorflow-lite-staticdev \
+#                                ${PDM_ANOMALY_PKG_DEV} \
+#"
+#EXTRA_PACKAGES:append:ti43x = " \
+#                                arm-compute-library-dev \
+#                                tensorflow-lite-dev \
+#                                tensorflow-lite-staticdev \
+#                                ${PDM_ANOMALY_PKG_DEV} \
+#"
+#EXTRA_PACKAGES:append:omap-a15 = " \
+#                                arm-compute-library-dev \
+#                                tensorflow-lite-dev \
+#                                tensorflow-lite-staticdev \
+#                                ${PDM_ANOMALY_PKG_DEV} \
+#"
+#EXTRA_PACKAGES:append:am65xx = " arm-compute-library-dev \
+#                             tensorflow-lite-dev \
+#                             tensorflow-lite-staticdev \
+#                             ${PDM_ANOMALY_PKG_DEV} \
+#"
 
 IPCDEV = " \
 	ti-ipc-dev \
