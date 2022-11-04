@@ -57,13 +57,10 @@ UTILS:append:k3 = " mmc-utils \
                     statcol \
 "
 
-UTILS:append:am64xx = " ti-rtos-firmware pru-icss"
-UTILS:append:am62xx = " ti-rtos-firmware"
-#UTILS:append:am65xx = " ti-rtos-firmware pru-icss pru-pwm-fw"
-UTILS:append:am65xx = " ti-rtos-firmware pru-icss"
-UTILS:append:j7 = " ti-rtos-firmware"
-UTILS:append:j721e-evm = " pru-icss"
-UTILS:append:j721e-hs-evm = " pru-icss"
+UTILS:append:k3 = " ti-rtos-firmware"
+UTILS:append:am64xx = " pru-icss"
+UTILS:append:am65xx = " pru-icss"
+UTILS:append:j721e = " pru-icss"
 
 UTILS:append:omapl138 = " ti-ipc-rtos-fw"
 
