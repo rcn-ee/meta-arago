@@ -16,15 +16,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 #       into the same layer as libgles this may be acceptable, or perhaps
 #       we can use an RRECOMMENDS instead.
 
-PACKAGES = "matrix-3d-demo-chameleon \
-            matrix-3d-demo-coverflow \
-            matrix-3d-demo-film      \
-            matrix-3d-demo-lantern   \
-            matrix-3d-demo-skull     \
-            matrix-3d-demo-shaders   \
-            matrix-3d-demo-vase      \
-            matrix-3d-demo-navigation   \
-            matrix-3d-demo-exampleui    \
+PACKAGES = " \
 "
 
 PACKAGES:append:omap-a15 = " \
@@ -53,44 +45,15 @@ do_install:prepend() {
 
 3D_DEMOS_RDEPENDS_MATRIX = "matrix-gui-apps-images matrix-gui-submenus-3d"
 3D_DEMOS_RDEPENDS = "${3D_DEMOS_RDEPENDS_MATRIX}"
-3D_DEMOS_RDEPENDS:omap-a15 = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
-3D_DEMOS_RDEPENDS:ti43x    = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
-3D_DEMOS_RDEPENDS:ti33x    = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
-3D_DEMOS_RDEPENDS:k3       = "${3D_DEMOS_RDEPENDS_MATRIX} img-pvr-sdk"
+3D_DEMOS_RDEPENDS:omap-a15 = "${3D_DEMOS_RDEPENDS_MATRIX}"
+3D_DEMOS_RDEPENDS:ti43x    = "${3D_DEMOS_RDEPENDS_MATRIX}"
+3D_DEMOS_RDEPENDS:ti33x    = "${3D_DEMOS_RDEPENDS_MATRIX}"
+3D_DEMOS_RDEPENDS:k3       = "${3D_DEMOS_RDEPENDS_MATRIX}"
 
-RDEPENDS:matrix-3d-demo-chameleon = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-coverflow = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-film      = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-lantern   = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-skull     = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-shaders   = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-vase      = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-navigation    = "${3D_DEMOS_RDEPENDS}"
-RDEPENDS:matrix-3d-demo-exampleui     = "${3D_DEMOS_RDEPENDS}"
 RDEPENDS:matrix-3d-demo-kmscube       = "${3D_DEMOS_RDEPENDS_MATRIX} kmscube"
 #RDEPENDS:matrix-3d-demo-kmscubevideo  = "${3D_DEMOS_RDEPENDS_MATRIX} omapdrmtest"
 RDEPENDS:matrix-3d-demo-kmscubevideo  = "${3D_DEMOS_RDEPENDS_MATRIX}"
 
 # Split the matrix files by 3d demos
-FILES:matrix-3d-demo-chameleon = "${MATRIX_APP_DIR}/3d_chameleon/*"
-FILES:matrix-3d-demo-coverflow = "${MATRIX_APP_DIR}/3d_coverflow/*"
-FILES:matrix-3d-demo-film      = "${MATRIX_APP_DIR}/3d_film/*"
-FILES:matrix-3d-demo-lantern   = "${MATRIX_APP_DIR}/3d_lantern/*"
-FILES:matrix-3d-demo-skull     = "${MATRIX_APP_DIR}/3d_skull/*"
-FILES:matrix-3d-demo-shaders   = "${MATRIX_APP_DIR}/3d_shaders/*"
-FILES:matrix-3d-demo-vase      = "${MATRIX_APP_DIR}/3d_vase/*"
-FILES:matrix-3d-demo-navigation       = "${MATRIX_APP_DIR}/3d_navigation/*"
-FILES:matrix-3d-demo-exampleui        = "${MATRIX_APP_DIR}/3d_exampleui/*"
 FILES:matrix-3d-demo-kmscube          = "${MATRIX_APP_DIR}/3d_kmscube/*"
 FILES:matrix-3d-demo-kmscubevideo     = "${MATRIX_APP_DIR}/3d_kmscubevideo/*"
-
-# Split the ${bindir} files by 3d demos
-FILES:matrix-3d-demo-chameleon += "${bindir}/runOGLES2ChameleonMan.sh"
-FILES:matrix-3d-demo-coverflow += "${bindir}/runOGLES2Coverflow.sh"
-FILES:matrix-3d-demo-film      += "${bindir}/runOGLESFilmTV.sh"
-FILES:matrix-3d-demo-lantern   += "${bindir}/runOGLES2MagicLantern.sh"
-FILES:matrix-3d-demo-skull     += "${bindir}/runOGLESEvilSkull.sh"
-FILES:matrix-3d-demo-shaders   += "${bindir}/runOGLES2Shaders.sh"
-FILES:matrix-3d-demo-vase      += "${bindir}/runOGLESVase.sh"
-FILES:matrix-3d-demo-navigation      += "${bindir}/runOGLES2Navigation.sh"
-FILES:matrix-3d-demo-exampleui       += "${bindir}/runOGLES2ExampleUI.sh"

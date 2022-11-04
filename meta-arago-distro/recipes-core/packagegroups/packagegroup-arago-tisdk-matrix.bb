@@ -69,10 +69,6 @@ MATRIX_TOUCH_APPS = " \
 "
 
 MATRIX_GPU_DEMOS = " \
-    matrix-3d-demo-chameleon \
-    matrix-3d-demo-coverflow \
-    matrix-3d-demo-navigation \
-    matrix-3d-demo-exampleui \
     matrix-3d-demo-kmscube \
 "
 
