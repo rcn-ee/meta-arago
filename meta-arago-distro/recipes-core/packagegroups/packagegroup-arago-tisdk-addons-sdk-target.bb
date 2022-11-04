@@ -26,11 +26,6 @@ UTILS:append:k3 = "\
 "
 
 EXTRA_LIBS = ""
-EXTRA_LIBS:append:ti43x = "\
-    cmem-dev \
-    cmem-staticdev \
-"
-EXTRA_LIBS:append:omap-a15 = " cmem-dev"
 EXTRA_LIBS:append:dra7xx = " libulm-dev \
                              libulm-staticdev \
                              gdbserver-c6x-dev \

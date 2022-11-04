@@ -80,12 +80,10 @@ UTILS:append:dra7xx = " \
 
 EXTRA_LIBS = ""
 EXTRA_LIBS:append:omap-a15 = " \
-    cmem \
     uio-module-drv \
 "
 
 EXTRA_LIBS:append:ti43x = " \
-    cmem \
     uio-module-drv \
 "
 
