@@ -21,8 +21,8 @@ GSTREAMER_DSP = " \
     ${@['','gstreamer1.0-plugins-dsp66'][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
 
+#    gstreamer1.0-plugins-hevc 
 GSTREAMER_DEPS:append:dra7xx = " \
-    gstreamer1.0-plugins-hevc \
     ${GSTREAMER_DSP} \
 "
 
