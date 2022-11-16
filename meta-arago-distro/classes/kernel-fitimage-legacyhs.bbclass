@@ -127,7 +127,7 @@ fitimage_emit_section_kernel() {
 	fi
 
 	cat << EOF >> ${1}
-                kernel@${2} {
+                kernel-${2} {
                         description = "Linux kernel";
                         data = /incbin/("${3}");
                         type = "kernel";
@@ -139,7 +139,7 @@ fitimage_emit_section_kernel() {
 EOF
 	if test -n "${FITIMAGE_HASH_ALGO}"; then
 		cat << EOF >> ${1}
-                        hash@1 {
+                        hash-1 {
                                 algo = "${kernel_csum}";
                         };
 EOF
@@ -172,7 +172,7 @@ fitimage_emit_section_dtb() {
 EOF
 	if test -n "${FITIMAGE_HASH_ALGO}"; then
 		cat << EOF >> ${1}
-                        hash@1 {
+                        hash-1 {
                                 algo = "${dtb_csum}";
                         };
 EOF
@@ -202,7 +202,7 @@ fitimage_emit_section_tee() {
 EOF
 	if test -n "${FITIMAGE_HASH_ALGO}"; then
 		cat << EOF >> ${1}
-                        hash@1 {
+                        hash-1 {
                                 algo = "${tee_csum}";
                         };
 EOF
@@ -223,7 +223,7 @@ fitimage_emit_section_setup() {
 	setup_csum=${FITIMAGE_HASH_ALGO}
 
 	cat << EOF >> ${1}
-                setup@${2} {
+                setup-${2} {
                         description = "Linux setup.bin";
                         data = /incbin/("${3}");
                         type = "x86_setup";
@@ -235,7 +235,7 @@ fitimage_emit_section_setup() {
 EOF
 	if test -n "${FITIMAGE_HASH_ALGO}"; then
 		cat << EOF >> ${1}
-                        hash@1 {
+                        hash-1 {
                                 algo = "${setup_csum}";
                         };
 EOF
@@ -275,7 +275,7 @@ fitimage_emit_section_ramdisk() {
 	esac
 
 	cat << EOF >> ${1}
-                ramdisk@${2} {
+                ramdisk-${2} {
                         description = "ramdisk image";
                         data = /incbin/("${3}");
                         type = "ramdisk";
@@ -297,7 +297,7 @@ EOF
 
 	if test -n "${FITIMAGE_HASH_ALGO}"; then
 		cat << EOF >> ${1}
-                        hash@1 {
+                        hash-1 {
                                 algo = "${ramdisk_csum}";
                         };
 EOF
@@ -334,7 +334,7 @@ fitimage_emit_section_config() {
 	if [ -n "${2}" ]; then
 		conf_desc="Linux kernel"
 		sep=", "
-		kernel_line="kernel = \"kernel@${2}\";"
+		kernel_line="kernel = \"kernel-${2}\";"
 	fi
 
 	if [ -n "${3}" ]; then
@@ -345,13 +345,13 @@ fitimage_emit_section_config() {
 	if [ -n "${4}" ]; then
 		conf_desc="${conf_desc}${sep}ramdisk"
 		sep=", "
-		ramdisk_line="ramdisk = \"ramdisk@${4}\";"
+		ramdisk_line="ramdisk = \"ramdisk-${4}\";"
 	fi
 
 	if [ -n "${5}" ]; then
 		conf_desc="${conf_desc}${sep}setup"
 		sep=", "
-		setup_line="setup = \"setup@${5}\";"
+		setup_line="setup = \"setup-${5}\";"
 	fi
 
 	if [ -n "${6}" -a "x${FITIMAGE_PACK_TEE}" = "x1" ]; then
@@ -359,9 +359,9 @@ fitimage_emit_section_config() {
 			loadables_line="loadables = \"${6}.optee\";"
 			loadables_pager_line="loadables = \"${6}-pager.optee\";"
 		else
-			loadables_line="loadables = \"tee@${6}\";"
+			loadables_line="loadables = \"tee-${6}\";"
 			nextnum=`expr ${6} + 1`
-			loadables_pager_line="loadables = \"tee@${nextnum}\";"
+			loadables_pager_line="loadables = \"tee-${nextnum}\";"
 		fi
 		final_conf_desc="${conf_desc}${sep}OPTEE OS Image"
 	else
@@ -377,13 +377,13 @@ fitimage_emit_section_config() {
 		if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
 			conf_name="${DTB}"
 		else
-			conf_name="conf@${dtbcount}"
+			conf_name="conf-${dtbcount}"
 		fi
 
 		if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
 			fdt_line="fdt = \"${DTB}\";"
 		else
-			fdt_line="fdt = \"fdt@${dtbcount}\";"
+			fdt_line="fdt = \"fdt-${dtbcount}\";"
 		fi
 
 		if [ "x${dtbcount}" = "x1" ]; then
@@ -408,7 +408,7 @@ EOF
 			fi
 			if test -n "${FITIMAGE_HASH_ALGO}"; then
 				cat << EOF >> ${1}
-                        hash@1 {
+                        hash-1 {
                                 algo = "${conf_csum}";
                         };
 EOF
@@ -433,7 +433,7 @@ EOF
 				sign_line="${sign_line};"
 
 				cat << EOF >> ${1}
-                        signature@1 {
+                        signature-1 {
                                 algo = "${conf_csum},rsa2048";
                                 key-name-hint = "${conf_sign_keyname}";
                                 ${sign_line}
@@ -451,7 +451,7 @@ EOF
 			if [ "x${FITIMAGE_CONF_BY_NAME}" = "x1" ] ; then
 				conf_name="${DTB}-pager"
 			else
-				conf_name="conf@${dtbcount}"
+				conf_name="conf-${dtbcount}"
 			fi
 
 			cat << EOF >> ${1}
@@ -469,7 +469,7 @@ EOF
 			fi
 			if test -n "${FITIMAGE_HASH_ALGO}"; then
 				cat << EOF >> ${1}
-                        hash@1 {
+                        hash-1 {
                                 algo = "${conf_csum}";
                         };
 EOF
@@ -494,7 +494,7 @@ EOF
 				sign_line="${sign_line};"
 
 				cat << EOF >> ${1}
-                        signature@1 {
+                        signature-1 {
                                 algo = "${conf_csum},rsa2048";
                                 key-name-hint = "${conf_sign_keyname}";
                                 ${sign_line}
@@ -571,7 +571,7 @@ fitimage_assemble() {
 			if [ "x${FITIMAGE_DTB_BY_NAME}" = "x1" ] ; then
 				fitimage_emit_section_dtb ${1} ${DTB} ${DTB_PATH}.sec "${dtb_loadline}"
 			else
-				fitimage_emit_section_dtb ${1} "fdt@${dtbcount}" ${DTB_PATH}.sec "${dtb_loadline}"
+				fitimage_emit_section_dtb ${1} "fdt-${dtbcount}" ${DTB_PATH}.sec "${dtb_loadline}"
 			fi
 			if [ "x${dtbcount}" = "x1" ]; then
 				dtbref=${DTB}
@@ -594,7 +594,7 @@ fitimage_assemble() {
 		if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
 			fitimage_emit_section_tee ${1} ${OPTEEFLAVOR}.optee ${TEE_PATH}.sec
 		else
-			fitimage_emit_section_tee ${1} "tee@${teecount}" ${TEE_PATH}.sec
+			fitimage_emit_section_tee ${1} "tee-${teecount}" ${TEE_PATH}.sec
 		fi
 
 		if [ "${OPTEEPAGER}" = "y" ]; then
@@ -608,7 +608,7 @@ fitimage_assemble() {
 			if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
 				fitimage_emit_section_tee ${1} ${OPTEEFLAVOR}-pager.optee ${TEE_PATH}.sec
 			else
-				fitimage_emit_section_tee ${1} "tee@${teecount}" ${TEE_PATH}.sec
+				fitimage_emit_section_tee ${1} "tee-${teecount}" ${TEE_PATH}.sec
 			fi
 		fi
 	fi
@@ -653,7 +653,7 @@ fitimage_assemble() {
 	fitimage_emit_section_maint ${1} confstart
 
 	if [ "x${FITIMAGE_DTB_BY_NAME}" != "x1" ] ; then
-		dtbref="fdt@${dtbcount}"
+		dtbref="fdt-${dtbcount}"
 	fi
 	if [ "x${FITIMAGE_TEE_BY_NAME}" = "x1" ] ; then
 		teeref="${OPTEEFLAVOR}"
