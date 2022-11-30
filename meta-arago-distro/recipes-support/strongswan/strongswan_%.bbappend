@@ -8,6 +8,7 @@ PACKAGECONFIG = "charon curl openssl stroke sqlite3 \
 EXTRA_OECONF += " \
         --enable-ctr \
         --enable-pkcs11 \
+        --enable-mgf1 \
 "
 
 SRC_URI += "file://pkcs11_plugin.conf"
