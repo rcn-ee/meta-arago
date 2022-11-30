@@ -16,7 +16,6 @@ UTILS = " \
     oprofile \
     netkit-ftp \
     ptpd \
-    libdrm-kms \
     strongswan \
     kexec \
     kdump \
