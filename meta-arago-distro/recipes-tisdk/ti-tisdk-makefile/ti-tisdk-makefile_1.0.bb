@@ -377,6 +377,7 @@ K3_UBOOT_MACHINE_R5_j721s2-evm = "j721s2_evm_r5_config"
 K3_UBOOT_MACHINE_R5_j784s4-evm = "j784s4_evm_r5_config"
 K3_UBOOT_MACHINE_R5_am62xx-evm = "am62x_evm_r5_config"
 K3_UBOOT_MACHINE_R5_am62xx-lp-evm = "am62x_lpsk_r5_config"
+K3_UBOOT_MACHINE_R5_am62axx-evm = "am62ax_evm_r5_config"
 
 do_install_append_k3() {
     cat >> ${D}/Rules.make << __EOF__

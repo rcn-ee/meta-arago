@@ -12,6 +12,7 @@ SYSFW_SOC_am65xx-evm = am65x
 SYSFW_SOC_am65xx-hs-evm = am65x
 SYSFW_SOC_am64xx-evm = am64x_sr2
 SYSFW_SOC_am62xx-evm = am62x
+SYSFW_SOC_am62axx-evm = am62ax
 SYSFW_SOC_j7-evm = j721e
 SYSFW_SOC_j7-hs-evm = j721e
 SYSFW_SOC = $(SYSFW_SOC_$(PLATFORM))
@@ -19,6 +20,7 @@ SYSFW_SOC = $(SYSFW_SOC_$(PLATFORM))
 SYSFW_PREFIX_$(SYSFW_SOC) = ti-sci-firmware
 SYSFW_PREFIX_j7 = ti-fs-firmware
 SYSFW_PREFIX_am62x = ti-fs-firmware
+SYSFW_PREFIX_am62ax = ti-fs-firmware
 SYSFW_PREFIX = $(SYSFW_PREFIX_$(SYSFW_SOC))
 
 SYSFW_BASE = $(SYSFW_PREFIX)-$(SYSFW_SOC)-$(PLATFORM_TYPE)
