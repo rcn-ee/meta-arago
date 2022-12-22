@@ -115,9 +115,14 @@ do_install() {
 	${@oe.utils.conditional('PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH}', 'external-arm-sdk-toolchain', 'install -d ${D}${datadir}/man/man1', '', d)}
 	install -d ${D}${gcclibdir}/${EAT_TARGET_SYS}/${EAT_VER_GCC}/include
 
-	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/${LIBDIR}/{libstdc++.*,libgcc_s.*,libsupc++.*} ${D}${prefix}/${EAT_TARGET_SYS}/lib
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/${LIBDIR}/libstdc++.* ${D}${prefix}/${EAT_TARGET_SYS}/lib
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/${LIBDIR}/libgcc_s.* ${D}${prefix}/${EAT_TARGET_SYS}/lib
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/${LIBDIR}/libsupc++.* ${D}${prefix}/${EAT_TARGET_SYS}/lib
 	cp -a ${TOOLCHAIN_PATH}/lib/gcc/${EAT_TARGET_SYS}/${EAT_VER_GCC}/* ${D}${gcclibdir}/${EAT_TARGET_SYS}/${EAT_VER_GCC}
-	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{gcov,gcc*,g++,cpp} ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcov ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gcc* ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}g++ ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}cpp ${D}${bindir}
 	cp -a ${TOOLCHAIN_PATH}/libexec/* ${D}${libexecdir}
 
 	${@oe.utils.conditional('PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH}', 'external-arm-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gdb* ${D}${bindir}', '', d)}
@@ -125,7 +130,27 @@ do_install() {
 	${@oe.utils.conditional('PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH}', 'external-arm-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/share/info/* ${D}${datadir}/info/', '', d)}
 	${@oe.utils.conditional('PREFERRED_PROVIDER_gdb-cross-canadian-${TRANSLATED_TARGET_ARCH}', 'external-arm-sdk-toolchain', 'cp -a ${TOOLCHAIN_PATH}/share/man/man1/${TARGET_PREFIX}* ${D}${datadir}/man/man1/', '', d)}
 
-	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/{ld*,objcopy,strip,nm,ranlib,as,ar,objdump} ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/ld* ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/objcopy ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/strip ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/nm ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/ranlib ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/as ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/ar ${D}${prefix}/${EAT_TARGET_SYS}/bin
+	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/bin/objdump ${D}${prefix}/${EAT_TARGET_SYS}/bin
 	cp -a ${TOOLCHAIN_PATH}/${EAT_TARGET_SYS}/lib/ldscripts/* ${D}${prefix}/${EAT_TARGET_SYS}/lib/ldscripts
-	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}{ld*,addr2line,objcopy,readelf,strip,nm,ranlib,gprof,as,c++filt,ar,strings,objdump,size} ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ld* ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}addr2line ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}objcopy ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}readelf ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}strip ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}nm ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ranlib ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}gprof ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}as ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}c++filt ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}ar ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}strings ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}objdump ${D}${bindir}
+	cp -a ${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}size ${D}${bindir}
 }
