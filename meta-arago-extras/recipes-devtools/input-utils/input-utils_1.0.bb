@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 PV = "1.0"
 PR = "r0"
 
-SRC_URI = "http://ftp.de.debian.org/debian/pool/main/i/input-utils/input-utils_1.0.orig.tar.gz"
+SRC_URI = "http://ftp.de.debian.org/debian/pool/main/i/input-utils/input-utils_1.0.orig.tar.gz \
+	file://fix-ftbfs-echo.patch"
 SRC_URI_append_arm = " file://0001-autoconf-fix-for-cross-compilation-for-ARM.patch"
 
 SRC_URI[md5sum] = "3e58772e8647093b1de2f2c90bfb9ee8"
