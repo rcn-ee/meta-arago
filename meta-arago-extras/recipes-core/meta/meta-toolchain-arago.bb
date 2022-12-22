@@ -106,13 +106,22 @@ arago_sdk_fixup () {
 		lexec="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/libexec/gcc/${TOOLCHAIN_SYS}"
 	fi
 	tcv=`ls -1 $lexec|head -1`
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/${TOOLCHAIN_SYS} ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/${TOOLCHAIN_SYS}
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS} ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS}
+	if [ ! -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv ]; then
+		ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv
+	fi
+	if [ ! -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv ]; then
+		ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv
+	fi
+	if [ ! -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/${TOOLCHAIN_SYS} ]; then
+		ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/${TOOLCHAIN_SYS}
+	fi
+	if [ ! -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS} ]; then
+		ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS}
+	fi
 	tcpath="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/${TOOLCHAIN_SYS}"
 	mkdir -p $tcpath
-	pushd $tcpath
+	curdir=$(pwd)
+	cd $tcpath
 	ln -s ${SDKTARGETSYSROOT}/include include
 	if [ "${TOOLCHAIN_BRAND}" != "arago" ]; then
 		mkdir -p libc
@@ -122,7 +131,7 @@ arago_sdk_fixup () {
 	ln -s ${SDKTARGETSYSROOT}/lib lib
 	ln -s ${SDKTARGETSYSROOT}/usr/lib usr/lib
 	ln -s ${SDKTARGETSYSROOT}/usr/include usr/include
-	popd
+	cd $curdir
 }
 
 fakeroot create_sdk_files() {
