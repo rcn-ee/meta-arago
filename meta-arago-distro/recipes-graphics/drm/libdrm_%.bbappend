@@ -8,10 +8,4 @@ file://0001-libsync-add-support-for-pre-v4.7-kernels.patch \
 file://0002-Add-sync_fence_info-and-sync_pt_info.patch \
 "
 
-PR:append = ".arago3"
-
-inherit update-alternatives
-
-ALTERNATIVE_PRIORITY = "10"
-ALTERNATIVE:${PN} = "kmstest"
-ALTERNATIVE_LINK_NAME[kmstest] = "${bindir}/kmstest"
+PR:append = ".arago4"
