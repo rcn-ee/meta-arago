@@ -9,7 +9,7 @@ PR = "r0"
 BRANCH ?= "master"
 SRCREV = "b66f2bab5d6d0b35732ef8406ae03873725a3306"
 
-SRC_URI = "git://git.ti.com/git/sitara-linux/stream.git;protocol=https;branch=${BRANCH}"
+SRC_URI = "git://git.ti.com/git/arago-project-org/stream.git;protocol=https;branch=${BRANCH}"
 
 S = "${WORKDIR}/git"
 
