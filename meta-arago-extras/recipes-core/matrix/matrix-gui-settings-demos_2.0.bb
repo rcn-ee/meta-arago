@@ -14,7 +14,6 @@ PACKAGES =+ "matrix-gui-weston-terminal-demo"
 SETTINGS_DEMOS_RDEPENDS = " \
     matrix-gui-apps-images \
     matrix-gui-submenus-settings \
-    am-sysinfo \
 "
 
 RDEPENDS:${PN} += "${SETTINGS_DEMOS_RDEPENDS}"

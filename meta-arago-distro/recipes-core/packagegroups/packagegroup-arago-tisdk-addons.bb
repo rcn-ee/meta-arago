@@ -11,7 +11,6 @@ PACKAGES =+ "${PN}-extra"
 #    dt
 
 UTILS = " \
-    am-sysinfo \
     gdbserver \
     oprofile \
     netkit-ftp \
