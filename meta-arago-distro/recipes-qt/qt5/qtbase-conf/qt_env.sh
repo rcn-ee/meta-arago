@@ -11,3 +11,6 @@ export QT_WAYLAND_SHELL_INTEGRATION=xdg-shell
 # from the pthread implementation. Disable this feature temporarily until
 # those issues are resolved.
 export QTWEBENGINE_CHROMIUM_FLAGS="--disable-seccomp-filter-sandbox"
+
+export QTWEBENGINE_DISABLE_SANDBOX=1
+#export QT_QPA_PLATFORM=eglfs
