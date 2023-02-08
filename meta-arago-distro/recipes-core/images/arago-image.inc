@@ -22,25 +22,6 @@ IMAGE_LINGUAS = ""
 TOOLCHAIN_HOST_TASK += "nativesdk-buildtools-perl-dummy"
 SDK_PACKAGE_ARCHS += "buildtools-dummy-${SDKPKGSUFFIX}"
 
-# FIXME: remove bashisms from this function (currently disabled)
-make_bootfiles_symlinks_relative() {
-    for f in "${IMAGE_ROOTFS}/boot"/*
-    do
-        [ -L "$f" ] || continue
-
-        l=$(readlink "$f")
-        if [ "${l:0:6}" == "/boot/" ]
-        then
-            ln -sf "${l##/boot/}" "$f"
-        elif ["${l:0:1}" == "/" ]
-        then
-            ln -sf "..$l" "$f"
-        fi
-    done
-}
-
-#ROOTFS_POSTPROCESS_COMMAND += "make_bootfiles_symlinks_relative;"
-
 BAD_RECOMMENDATIONS += " \
     ti-llvm3.6-dev \
     opencl-monitor-dev \
