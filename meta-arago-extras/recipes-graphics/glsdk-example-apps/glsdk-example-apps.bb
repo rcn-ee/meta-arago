@@ -16,7 +16,9 @@ SRC_URI = "git://git.ti.com/git/glsdk/example-applications.git;protocol=https;br
 
 SRCREV="52466430609c402a9f1c0667ccf727d096336d0d"
 
-PR = "r52"
+PR = "r53"
+
+CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DEGL_NO_X11',d)}"
 
 do_install:append () {
     install -d ${D}${sysconfdir}/glsdkstatcoll
