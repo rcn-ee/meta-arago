@@ -7,22 +7,19 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 "
 
-DEPENDS += "qtwebengine"
+DEPENDS += "qtbase qtdeclarative qtwebengine"
 PACKAGES += "${PN}-examples"
 
-PR = "r1"
+PR = "r0"
 
 BRANCH = "dev"
-SRCREV = "023733af5523a5ad84359926224fa106001215f4"
-
-SRC_URI = "git://code.qt.io/qt-apps/qtwebbrowser.git;protocol=git;branch=${BRANCH} \
-"
+SRC_URI = "git://code.qt.io/qt-apps/qtwebbrowser.git;protocol=git;branch=${BRANCH}"
+SRCREV = "a09ec269e8b296d39d78b45ae251edb3d7bada41"
 
 S = "${WORKDIR}/git"
 
 inherit qt5
 
-# Install qtwebbrowser under /usr/bin
 do_install() {
     install -d ${D}${bindir}
     install -d ${D}${datadir}/examples/webengine/webbrowser/src
@@ -32,3 +29,18 @@ do_install() {
 
 FILES:${PN} +=  "${bindir}/qtwebbrowser"
 FILES:${PN}-examples +=  "${datadir}/examples/webengine/webbrowser/*"
+
+RDEPENDS:${PN} += " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland-qmlplugins', '', d)} \
+    qtvirtualkeyboard-qmlplugins \
+    qtdeclarative-qmlplugins \
+    qtquickcontrols-qmlplugins \
+    qtgraphicaleffects-qmlplugins \
+    qtmultimedia-qmlplugins \
+    qtwebengine-qmlplugins \
+    ttf-dejavu-common \
+    ttf-dejavu-sans \
+    ttf-dejavu-sans-mono \
+    liberation-fonts \
+    ca-certificates \
+"
