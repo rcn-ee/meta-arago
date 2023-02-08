@@ -38,6 +38,7 @@ ARAGO_TEST = "\
     openntpd \
     nbench-byte \
     stream \
+    cryptodev-tests \
 "
 
 ARAGO_TEST:append:armv7a = " \
