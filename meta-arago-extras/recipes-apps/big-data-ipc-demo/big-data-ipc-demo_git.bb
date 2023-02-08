@@ -39,10 +39,6 @@ EXTRA_OEMAKE = "\
     ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
 "
 
-do_create_srcipk:prepend() {
-    rm -rf host_bios
-}
-
 do_compile() {
     oe_runmake host_linux
 }
