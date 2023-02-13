@@ -1,8 +1,10 @@
 # Define the following to support multiple platforms
 PLATFORM_TYPE_$(PLATFORM) = gp
-PLATFORM_TYPE_am64xx-evm = hs-fs
+PLATFORM_TYPE_am64xx-evm = $(DEVICE_TYPE_SEC)
 PLATFORM_TYPE_am65xx-hs-evm = hs
-PLATFORM_TYPE_am62xx-lp-evm = hs
+PLATFORM_TYPE_am62xx-lp-evm = $(DEVICE_TYPE_SEC)
+PLATFORM_TYPE_am62xx-evm = $(DEVICE_TYPE_SEC)
+PLATFORM_TYPE_am62axx-evm = $(DEVICE_TYPE_SEC)
 PLATFORM_TYPE_j7-hs-evm = hs
 PLATFORM_TYPE = $(PLATFORM_TYPE_$(PLATFORM))
 
