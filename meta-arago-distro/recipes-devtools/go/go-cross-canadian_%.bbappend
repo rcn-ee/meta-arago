@@ -1,3 +1,0 @@
-
-require go-patch.inc
-
