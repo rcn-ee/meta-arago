@@ -4,9 +4,7 @@ PR = "r26"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup features_check
-
-REQUIRED_MACHINE_FEATURES = "gpu"
+inherit packagegroup
 
 GFX_WAYLAND = "\
     weston-init \

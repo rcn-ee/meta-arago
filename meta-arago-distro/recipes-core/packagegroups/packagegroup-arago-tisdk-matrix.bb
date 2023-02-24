@@ -65,7 +65,7 @@ MATRIX_QT_APPS:append:ti43x = " \
 "
 
 MATRIX_TOUCH_APPS = " \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu','matrix-gui-touch-demos','',d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES','touchscreen','matrix-gui-touch-demos','',d)} \
 "
 
 MATRIX_GPU_DEMOS = " \
@@ -75,6 +75,8 @@ MATRIX_GPU_DEMOS = " \
 MATRIX_GPU_DEMOS:append:omap-a15 = " \
     matrix-3d-demo-kmscubevideo \
 "
+
+MATRIX_GPU_DEMOS:omapl138 = ""
 
 MATRIX_OPENCL_APPS = " \
     matrix-opencl-demo-floatcompute  \
@@ -151,7 +153,7 @@ MATRIX_APPS:append:omap-a15 = "     \
     matrix-gui-pm-demos-governor    \
 "
 
-#    ${@['','matrix-gui-browser-demos'][bb.utils.contains('MACHINE_FEATURES','gpu',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
+#    ${@['','matrix-gui-browser-demos'][bb.utils.contains('DISTRO_FEATURES','opengl',True,False,d) and bb.utils.contains('DISTRO_FEATURES','wayland',True,False,d)]} \
 #                                \
 #
 
@@ -184,9 +186,9 @@ RDEPENDS:${PN} = "        \
     ${MATRIX_APPS}        \
     ${MATRIX_COMMON_APPS} \
     ${@bb.utils.contains('MACHINE_FEATURES','touchscreen',"${MATRIX_TOUCH_APPS}",'',d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_GUI}",'',d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_QT_APPS}",'',d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES','gpu',"${MATRIX_GPU_DEMOS}",'',d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES','opengl',"${MATRIX_GUI}",'',d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES','opengl',"${MATRIX_QT_APPS}",'',d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES','opengl',"${MATRIX_GPU_DEMOS}",'',d)} \
     ${@['',"${MATRIX_OPENCL_APPS}"][oe.utils.all_distro_features(d, 'opencl', True, False) and bb.utils.contains('MACHINE_FEATURES', 'dsp', True, False, d)]} \
 "
 

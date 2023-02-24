@@ -29,7 +29,7 @@ RDEPENDS:matrix-machinevision-demo-dlp3dscanner = " \
 "
 
 RDEPENDS:matrix-machinevision-demo-dlp3dscanner:append:dra7xx = " \
-    ${@['','point-cloud-viewer'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('MACHINE_FEATURES', 'gpu', True, False, d)]} \
+    ${@['','point-cloud-viewer'][oe.utils.all_distro_features(d, 'opencv', True, False) and bb.utils.contains('DISTRO_FEATURES', 'opengl', True, False, d)]} \
 "
 
 RDEPENDS:matrix-machinevision-demo-barcoderoi = " \

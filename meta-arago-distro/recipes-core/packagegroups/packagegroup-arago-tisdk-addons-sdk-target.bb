@@ -32,7 +32,7 @@ EXTRA_LIBS:append:dra7xx = " libulm-dev \
 "
 
 PDM_ANOMALY_PKG_DEV = "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'gpu', 'pdm-anomaly-detection-dev', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'pdm-anomaly-detection-dev', '', d)} \
 "
 
 
