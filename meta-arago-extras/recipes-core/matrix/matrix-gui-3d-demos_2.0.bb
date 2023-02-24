@@ -17,23 +17,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 #       we can use an RRECOMMENDS instead.
 
 PACKAGES = " \
+            matrix-3d-demo-kmscube      \
 "
 
 PACKAGES:append:omap-a15 = " \
-            matrix-3d-demo-kmscube      \
             matrix-3d-demo-kmscubevideo \
-"
-
-PACKAGES:append:ti43x = " \
-            matrix-3d-demo-kmscube \
-"
-
-PACKAGES:append:ti33x = " \
-            matrix-3d-demo-kmscube \
-"
-
-PACKAGES:append:k3 = " \
-            matrix-3d-demo-kmscube \
 "
 
 MATRIX_3D_DEMO_SGX_QAF_PARAM = "1000"

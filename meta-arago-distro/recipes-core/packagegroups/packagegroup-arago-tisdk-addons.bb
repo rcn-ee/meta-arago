@@ -65,7 +65,7 @@ UTILS:append:omapl138 = " ti-ipc-rtos-fw"
 
 UTILS:append:dra7xx = " \
                         ${UTILS_DSP} \
-                        ${@bb.utils.contains('MACHINE_FEATURES','gpu','glsdk-example-apps','',d)} \
+                        ${@bb.utils.contains('DISTRO_FEATURES','opengl','glsdk-example-apps','',d)} \
 "
 
 EXTRA_PACKAGES = " \

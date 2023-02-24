@@ -4,9 +4,7 @@ PR = "r10"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit packagegroup features_check
-
-REQUIRED_MACHINE_FEATURES = "gpu"
+inherit packagegroup
 
 RDEPENDS:${PN} = "\
     libegl-dev \

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e28b998056a1a513e87be11c5045e85b"
 
 inherit features_check
 
-REQUIRED_MACHINE_FEATURES = "dsp"
+REQUIRED_MACHINE_FEATURES = "dsp gpu"
 REQUIRED_DISTRO_FEATURES = "opencv opencl opengl"
 
 DEPENDS += "opencv opencl virtual/egl ti-cgt6x-native clocl-native dsplib-c66x"
