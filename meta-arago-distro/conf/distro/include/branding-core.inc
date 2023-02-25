@@ -14,3 +14,6 @@ ALTERNATIVE_PRIORITY:pn-ti-ipc-rtos = "15"
 
 # Remove mmip - DRM allocator, KMS sink, Wayland sink need porting to GST 1.18
 MACHINE_FEATURES:remove = "mmip"
+
+# Remove gc320 - the driver fails to build with gcc12
+MACHINE_FEATURES:remove = "gc320"
