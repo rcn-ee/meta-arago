@@ -7,6 +7,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
+WEBKIT = " \
+        qtwebkit-mkspecs \
+        qtwebkit-dev \
+"
+WEBKIT:armv5 = ""
+
 RDEPENDS:${PN} += " \
         packagegroup-arago-standalone-sdk-target \
         libsqlite3-dev \
@@ -27,8 +33,7 @@ RDEPENDS:${PN} += " \
         qtsensors-dev \
         qtsvg-dev \
         qtxmlpatterns-dev \
-        qtwebkit-mkspecs \
-        qtwebkit-dev \
+        ${WEBKIT} \
         ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "qtwebengine-mkspecs qtwebengine-dev", "", d)} \
         qtserialport-mkspecs \
         qtserialport-dev  \
