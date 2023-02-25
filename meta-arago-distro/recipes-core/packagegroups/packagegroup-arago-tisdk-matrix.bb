@@ -17,6 +17,7 @@ MATRIX_GUI = "               \
     refresh-screen           \
     matrix-gui-browser       \
 "
+MATRIX_GUI:omapl138 = ""
 
 MATRIX_COMMON_APPS = "              \
     matrix-gui-armbenchmarks-demos  \
