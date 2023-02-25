@@ -65,8 +65,11 @@ UTILS:append:omapl138 = " ti-ipc-rtos-fw"
 
 UTILS:append:dra7xx = " \
                         ${UTILS_DSP} \
-                        ${@bb.utils.contains('DISTRO_FEATURES','opengl','glsdk-example-apps','',d)} \
 "
+# glsdk-example-apps depends on libkms, which has been removed upstream from libdrm:
+# https://gitlab.freedesktop.org/mesa/drm/-/commit/2b997bb4bb688be00620887c8646ff24ccb9396b
+#                        ${@bb.utils.contains('DISTRO_FEATURES','opengl','glsdk-example-apps','',d)} \
+#"
 
 EXTRA_PACKAGES = " \
     nodejs \
