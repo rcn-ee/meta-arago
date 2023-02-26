@@ -38,3 +38,6 @@ do_install:append(){
     # other appends.
     cd -
 }
+
+RDEPENDS:${PN}-dev = ""
+RRECOMMENDS:${PN}-dev = ""
