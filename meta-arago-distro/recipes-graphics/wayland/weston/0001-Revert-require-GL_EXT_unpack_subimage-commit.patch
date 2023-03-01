@@ -19,7 +19,7 @@ diff --git a/libweston/renderer-gl/gl-renderer-internal.h b/libweston/renderer-g
 index 72101b47..7a6e2f48 100644
 --- a/libweston/renderer-gl/gl-renderer-internal.h
 +++ b/libweston/renderer-gl/gl-renderer-internal.h
-@@ -133,6 +133,8 @@ struct gl_renderer {
+@@ -148,6 +148,8 @@ struct gl_renderer {
 	PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC create_platform_window;
 	bool has_platform_base;
 
@@ -32,42 +32,42 @@ diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl/gl-rend
 index a5f5eae4..410ba85c 100644
 --- a/libweston/renderer-gl/gl-renderer.c
 +++ b/libweston/renderer-gl/gl-renderer.c
-@@ -1835,6 +1835,7 @@ gl_renderer_flush_damage(struct weston_surface *surface)
+@@ -1793,6 +1793,7 @@ 			 struct weston_buffer *buffer)
  {
 	const struct weston_testsuite_quirks *quirks =
 		&surface->compositor->test_data.test_quirks;
 +	struct gl_renderer *gr = get_renderer(surface->compositor);
 	struct gl_surface_state *gs = get_surface_state(surface);
-	struct weston_buffer *buffer = gs->buffer_ref.buffer;
+	struct gl_buffer_state *gb = gs->buffer;
 	struct weston_view *view;
-@@ -1872,6 +1873,24 @@ gl_renderer_flush_damage(struct weston_surface *surface)
+@@ -1835,6 +1836,24 @@ 			 struct weston_buffer *buffer)
 
 	glActiveTexture(GL_TEXTURE0);
 
 +	if (!gr->has_unpack_subimage) {
 +		wl_shm_buffer_begin_access(buffer->shm_buffer);
-+		for (j = 0; j < gs->num_textures; j++) {
-+			glBindTexture(GL_TEXTURE_2D, gs->textures[j]);
++		for (j = 0; j < gs->buffer->num_textures; j++) {
++			glBindTexture(GL_TEXTURE_2D, gs->buffer->textures[j]);
 +			glTexImage2D(GL_TEXTURE_2D, 0,
-+				     gs->gl_format[j],
-+				     gs->pitch / gs->hsub[j],
-+				     buffer->height / gs->vsub[j],
++				     gs->buffer->gl_format[j],
++				     gs->buffer->pitch / pixel_format_hsub(buffer->pixel_format, j),
++				     buffer->height / pixel_format_vsub(buffer->pixel_format, j),
 +				     0,
-+				     gl_format_from_internal(gs->gl_format[j]),
-+				     gs->gl_pixel_type,
-+				     data + gs->offset[j]);
++				     gl_format_from_internal(gs->buffer->gl_format[j]),
++				     gs->buffer->gl_pixel_type,
++				     data + gs->buffer->offset[j]);
 +		}
 +		wl_shm_buffer_end_access(buffer->shm_buffer);
 +
 +		goto done;
 +	}
 +
-	if (gs->needs_full_upload || quirks->gl_force_full_upload) {
+	if (gb->needs_full_upload || quirks->gl_force_full_upload) {
 		glPixelStorei(GL_UNPACK_SKIP_PIXELS_EXT, 0);
 		glPixelStorei(GL_UNPACK_SKIP_ROWS_EXT, 0);
-@@ -3932,11 +3951,9 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
+@@ -3896,11 +3915,9 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
 	else
-		ec->read_format = PIXMAN_a8b8g8r8;
+		ec->read_format = pixel_format_get_info_by_pixman(PIXMAN_a8b8g8r8);
 
 -	if (gr->gl_version < gr_gl_version(3, 0) &&
 -	    !weston_check_egl_extension(extensions, "GL_EXT_unpack_subimage")) {
@@ -80,11 +80,12 @@ index a5f5eae4..410ba85c 100644
 
 	if (gr->gl_version >= gr_gl_version(3, 0) ||
 	    weston_check_egl_extension(extensions, "GL_EXT_texture_type_2_10_10_10_REV"))
-@@ -3977,6 +3994,8 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
+@@ -3945,6 +3962,8 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
 		   gr_gl_version_minor(gr->gl_version));
 	weston_log_continue(STAMP_SPACE "read-back format: %s\n",
-		ec->read_format == PIXMAN_a8r8g8b8 ? "BGRA" : "RGBA");
+			    ec->read_format->drm_format_name);
 +	weston_log_continue(STAMP_SPACE "wl_shm sub-image to texture: %s\n",
 +			    gr->has_unpack_subimage ? "yes" : "no");
-	weston_log_continue(STAMP_SPACE "EGL Wayland extension: %s\n",
-			    gr->has_bind_display ? "yes" : "no");
+	weston_log_continue(STAMP_SPACE "wl_shm 10 bpc formats: %s\n",
+			    yesno(gr->has_texture_type_2_10_10_10_rev));
+	weston_log_continue(STAMP_SPACE "wl_shm 16 bpc formats: %s\n",
