@@ -19,7 +19,7 @@ export IMAGE_BASENAME = "arago-image"
 
 IMAGE_LINGUAS = ""
 
-TOOLCHAIN_HOST_TASK += "nativesdk-buildtools-perl-dummy"
+TOOLCHAIN_HOST_TASK:append = " nativesdk-buildtools-perl-dummy"
 SDK_PACKAGE_ARCHS += "buildtools-dummy-${SDKPKGSUFFIX}"
 
 BAD_RECOMMENDATIONS += " \
