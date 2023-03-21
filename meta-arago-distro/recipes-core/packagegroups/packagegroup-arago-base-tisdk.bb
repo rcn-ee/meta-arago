@@ -27,5 +27,7 @@ RDEPENDS:${PN} = "\
     nfs-utils-client \
     cifs-utils \
     phytool \
-    ${@bb.utils.contains_any('OPTEEOUTPUTMACHINE', 'ti k3', "${OPTEE_PKGS}", "", d)} \
+    ${@bb.utils.contains_any('OPTEEOUTPUTMACHINE', 'ti', "${OPTEE_PKGS}", "", d)} \
 "
+
+RDEPENDS:${PN}:append:k3 = " ${OPTEE_PKGS}"
