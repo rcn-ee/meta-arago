@@ -7,6 +7,8 @@ require arago-image.inc
 
 SPLASH = "${@bb.utils.contains('MACHINE_FEATURES','gpu','psplash','',d)}"
 
+ARAGO_DEFAULT_IMAGE_EXTRA_INSTALL ?= ""
+
 IMAGE_INSTALL += "\
     packagegroup-arago-base \
     packagegroup-arago-console \
@@ -27,6 +29,7 @@ IMAGE_INSTALL += "\
     ${@bb.utils.contains('MACHINE_FEATURES','gpu','packagegroup-arago-tisdk-hmi','packagegroup-arago-base-tisdk-server-extra',d)} \
     ti-analytics \
     ti-demos \
+    ${ARAGO_DEFAULT_IMAGE_EXTRA_INSTALL} \
 "
 
 export IMAGE_BASENAME = "tisdk-default-image"
