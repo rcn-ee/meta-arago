@@ -14,4 +14,5 @@ RDEPENDS:${PN}-ibt-18 += "${PN}-ibt-license"
 
 do_install:append() {
 	rm -rf  ${D}/lib/firmware/ti-connectivity/
+	rm -rf  ${D}/lib/firmware/cadence/
 }
