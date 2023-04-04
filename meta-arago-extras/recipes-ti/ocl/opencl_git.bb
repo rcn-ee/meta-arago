@@ -19,7 +19,7 @@ PACKAGES =+ "${PN}-runtime"
 MONITORS                      = " opencl-monitor"
 MONITORS:append:dra7xx        = " opencl-monitor-ipu"
 
-DEPENDS = " ocl-gl-headers \
+DEPENDS = " virtual/libgl \
             ${MONITORS} \
             cmake-native \
             cmem \
@@ -40,7 +40,7 @@ DEPENDS = " ocl-gl-headers \
 DEPENDS:append:dra7xx = " ti-ipc virtual/kernel"
 
 RDEPENDS:${PN}-runtime += "bash ${MONITORS}"
-RDEPENDS:${PN}-dev += "ocl-gl-headers-dev"
+RDEPENDS:${PN}-dev += "virtual/libgl-dev"
 RDEPENDS:${PN} += "${PN}-runtime clocl bash"
 
 # Use main package to pull in full support
