@@ -9,3 +9,6 @@ PREFERRED_VERSION_u-boot-ti-staging = "2023.04%"
 MACHINE_FEATURES:remove = "gpu"
 PREFERRED_PROVIDER_virtual/gpudriver = ""
 
+# GC320 support requires out-of-tree drivers not available in until LTS prep is
+# complete. Disable for now.
+MACHINE_FEATURES:remove = "gc320"
