@@ -3,8 +3,8 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://makefile;beginline=1;endline=31;md5=2f2ea348b98d5cc7807ece7adcc2c43a"
 
 SRC_URI = "git://git.ti.com/processor-sdk/big-data-ipc-examples.git;protocol=git;branch=master"
-SRCREV = "984edb3c69c8a1f51da02e0abcd2201319650894"
-PV = "01.03.00.00"
+SRCREV = "3dedbde2a539834ee8f4d0419888116ea80789d0"
+PV = "01.03.00.01"
 
 S = "${WORKDIR}/git"
 
@@ -19,8 +19,8 @@ DEPENDS = "ti-ipc \
            ti-xdctools-native \
            ti-sysbios \
            ti-ipc-rtos \
-           cmem \
            ti-cgt6x-native \
+           virtual/kernel \
 "
 
 PLATFORM = "UNKNOWN"
@@ -33,7 +33,7 @@ EXTRA_OEMAKE = "\
     XDC_INSTALL_DIR="${XDC_INSTALL_DIR}" \
     BIOS_INSTALL_DIR="${SYSBIOS_INSTALL_DIR}" \
     IPC_INSTALL_DIR="${IPC_INSTALL_DIR}" \
-    LINUX_SYSROOT_DIR="${STAGING_INCDIR}" \
+    LINUX_SYSROOT_DIR="${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
     gnu.targets.arm.A15F="${GCC_ARM_NONE_TOOLCHAIN}" \
     ti.targets.elf.C66="${STAGING_DIR_NATIVE}/usr/share/ti/cgt-c6x" \
     ti.targets.arm.elf.M4="${M4_TOOLCHAIN_INSTALL_DIR}" \
