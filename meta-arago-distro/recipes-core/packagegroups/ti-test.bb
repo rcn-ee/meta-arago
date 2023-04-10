@@ -50,9 +50,9 @@ ARAGO_TEST:append:armv7ve = " \
 "
 
 #    timestamping
-#    ltp-ddt
-#    input-utils 
 ARAGO_TI_TEST = " \
+    ltp-ddt \
+    input-utils \
     cpuloadgen \
     uvc-gadget \
     arm-benchmarks \
