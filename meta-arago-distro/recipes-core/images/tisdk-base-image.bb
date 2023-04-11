@@ -6,7 +6,6 @@ DESCRIPTION = "Arago SDK base image suitable for initramfs containing\
 require arago-image.inc
 
 IMAGE_FSTYPES += "cpio.xz"
-IMAGE_FSTYPES:append:dra7xx = " ubifs ubi"
 
 ARAGO_BASE_IMAGE_EXTRA_INSTALL ?= ""
 
