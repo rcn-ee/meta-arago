@@ -20,11 +20,14 @@ BRANCH ?= "master"
 SRC_URI:remove = "git://github.com/linux-test-project/ltp.git;protocol=https;branch=master"
 SRC_URI:prepend = "git://git.ti.com/git/test-automation/ltp-ddt.git;protocol=https;branch=${BRANCH} "
 
+SRC_URI:append = "https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/plain/include/uapi/linux/rpmsg_rpc.h?h=ti-linux-5.10.y;name=rpmsg_rpc;subdir=linux;downloadfilename=rpmsg_rpc.h"
+SRC_URI[rpmsg_rpc.sha256sum] = "cd237f40a37520a1f2df19fbfeefd00c0a5ad68efeaba9ba0fba60ca16ea09be"
+
 export prefix = "/opt/ltp"
 export exec_prefix = "/opt/ltp"
 
 EXTRA_OEMAKE:append = " \
-    KERNEL_USR_INC=${STAGING_INCDIR} \
+    KERNEL_USR_INC=${WORKDIR} \
     ALSA_INCPATH=${STAGING_INCDIR} \
     ALSA_LIBPATH=${STAGING_LIBDIR} \
 "
