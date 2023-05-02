@@ -13,7 +13,7 @@ OPTEE_PKGS = " \
 "
 
 RDEPENDS:${PN} = "\
-    dbus \
+    dbus-broker \
     expat \
     glib-2.0 \
     libxml2 \
