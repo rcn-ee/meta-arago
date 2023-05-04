@@ -59,6 +59,10 @@ UTILS:append:k3 = " mmc-utils \
 
 UTILS:append:k3 = " ti-rtos-firmware"
 UTILS:append:am64xx = " pru-icss"
+
+ARAGO_JAILHOUSE_ENABLE ?= "0"
+UTILS:append:am62xx = " ${@oe.utils.conditional("ARAGO_JAILHOUSE_ENABLE", "1", "jailhouse", "", d)}"
+
 UTILS:append:am65xx = " pru-icss"
 UTILS:append:j721e = " pru-icss"
 
