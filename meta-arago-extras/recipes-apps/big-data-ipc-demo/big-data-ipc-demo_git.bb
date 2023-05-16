@@ -23,6 +23,8 @@ DEPENDS = "ti-ipc \
            virtual/kernel \
 "
 
+do_configure[depends] += "virtual/kernel:do_shared_workdir"
+
 PLATFORM = "UNKNOWN"
 PLATFORM:omap-a15 = "DRA7XX"
 
