@@ -40,7 +40,7 @@ DEPENDS = " virtual/libgl \
 DEPENDS:append:dra7xx = " ti-ipc virtual/kernel"
 
 RDEPENDS:${PN}-runtime += "bash ${MONITORS}"
-RDEPENDS:${PN}-dev += "virtual/libgl-dev"
+RDEPENDS:${PN}-dev += "virtual-libgl-dev"
 RDEPENDS:${PN} += "${PN}-runtime clocl bash"
 
 # Use main package to pull in full support
