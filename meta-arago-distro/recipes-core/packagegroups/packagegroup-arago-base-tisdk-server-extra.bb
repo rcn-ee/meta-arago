@@ -38,7 +38,6 @@ RDEPENDS:${PN} = "\
     libdnet \
     bridge-utils \
     ebtables \
-    rng-tools \
     elfutils \
     zip \
     libsdl \

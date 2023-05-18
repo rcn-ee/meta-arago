@@ -23,7 +23,6 @@ UTILS = " \
 	 net-tools \
 	 ethtool  \
 	 pciutils \
-	 rng-tools \
 	 stress-ng \
 	 iperf \
 	 lmbench \
