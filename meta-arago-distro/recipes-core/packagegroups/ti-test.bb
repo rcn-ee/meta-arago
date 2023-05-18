@@ -20,7 +20,6 @@ ARAGO_TEST = "\
     stress \
     stress-ng \
     yavta \
-    rng-tools \
     perf \
     v4l-utils \
     smcroute \
