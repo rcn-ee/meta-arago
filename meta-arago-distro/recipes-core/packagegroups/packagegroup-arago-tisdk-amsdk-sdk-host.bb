@@ -12,7 +12,6 @@ EXTRA_FILES:omap-a15 = "tisdk-readme tisdk-uenv"
 EXTRA_FILES:k3 = "tisdk-readme tisdk-uenv"
 
 RDEPENDS:${PN} = "\
-    ti-tisdk-setup \
     ${EXTRA_FILES} \
     tisdk-install \
 "
