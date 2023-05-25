@@ -1,0 +1,61 @@
+From 26e2a60d29456a9cc6acb16ea19039414808bc5e Mon Sep 17 00:00:00 2001
+From: Jai Luthra <j-luthra@ti.com>
+Date: Tue, 5 Jul 2022 16:23:39 +0530
+Subject: [PATCH] media-ctl: add support for RGBIr bayer formats
+
+Signed-off-by: Jai Luthra <j-luthra@ti.com>
+---
+ include/linux/media-bus-format.h | 10 +++++++++-
+ include/linux/videodev2.h        |  9 +++++++++
+ 2 files changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/include/linux/media-bus-format.h b/include/linux/media-bus-format.h
+index ca9a24c8..cbdf3798 100644
+--- a/include/linux/media-bus-format.h
++++ b/include/linux/media-bus-format.h
+@@ -117,7 +117,7 @@
+ #define MEDIA_BUS_FMT_YUV16_1X48		0x202a
+ #define MEDIA_BUS_FMT_UYYVYY16_0_5X48		0x202b
+
+-/* Bayer - next is	0x3021 */
++/* Bayer - next is	0x3029 */
+ #define MEDIA_BUS_FMT_SBGGR8_1X8		0x3001
+ #define MEDIA_BUS_FMT_SGBRG8_1X8		0x3013
+ #define MEDIA_BUS_FMT_SGRBG8_1X8		0x3002
+@@ -150,6 +150,14 @@
+ #define MEDIA_BUS_FMT_SGBRG16_1X16		0x301e
+ #define MEDIA_BUS_FMT_SGRBG16_1X16		0x301f
+ #define MEDIA_BUS_FMT_SRGGB16_1X16		0x3020
++#define MEDIA_BUS_FMT_SRGGI10_1X10		0x3021
++#define MEDIA_BUS_FMT_SGRIG10_1X10		0x3022
++#define MEDIA_BUS_FMT_SBGGI10_1X10		0x3023
++#define MEDIA_BUS_FMT_SGBIG10_1X10		0x3024
++#define MEDIA_BUS_FMT_SGIRG10_1X10		0x3025
++#define MEDIA_BUS_FMT_SIGGR10_1X10		0x3026
++#define MEDIA_BUS_FMT_SGIBG10_1X10		0x3027
++#define MEDIA_BUS_FMT_SIGGB10_1X10		0x3028
+
+ /* JPEG compressed formats - next is	0x4002 */
+ #define MEDIA_BUS_FMT_JPEG_1X8			0x4001
+diff --git a/include/linux/videodev2.h b/include/linux/videodev2.h
+index 5eb96692..093104ab 100644
+--- a/include/linux/videodev2.h
++++ b/include/linux/videodev2.h
+@@ -682,6 +682,15 @@ struct v4l2_pix_format {
+ #define V4L2_PIX_FMT_SGBRG16 v4l2_fourcc('G', 'B', '1', '6') /* 16  GBGB.. RGRG.. */
+ #define V4L2_PIX_FMT_SGRBG16 v4l2_fourcc('G', 'R', '1', '6') /* 16  GRGR.. BGBG.. */
+ #define V4L2_PIX_FMT_SRGGB16 v4l2_fourcc('R', 'G', '1', '6') /* 16  RGRG.. GBGB.. */
++	/* 10bit raw bayer with IR (4x4) */
++#define V4L2_PIX_FMT_SRGGI10 v4l2_fourcc('R', 'G', 'I', '0') /* 10 RGBG.. GIrGIr.. */
++#define V4L2_PIX_FMT_SGRIG10 v4l2_fourcc('G', 'R', 'I', '0') /* 10 GRGB.. IrGIrG.. */
++#define V4L2_PIX_FMT_SBGGI10 v4l2_fourcc('B', 'G', 'I', '0') /* 10 BGRG.. GIrGIr.. */
++#define V4L2_PIX_FMT_SGBIG10 v4l2_fourcc('G', 'B', 'I', '0') /* 10 GBGR.. IrGIrG.. */
++#define V4L2_PIX_FMT_SGIRG10 v4l2_fourcc('G', 'I', 'R', '0') /* 10 GIrGIr.. RGBG.. */
++#define V4L2_PIX_FMT_SIGGR10 v4l2_fourcc('I', 'G', 'R', '0') /* 10 IrGIrG.. GRGB.. */
++#define V4L2_PIX_FMT_SGIBG10 v4l2_fourcc('G', 'I', 'B', '0') /* 10 GIrGIr.. BGRG.. */
++#define V4L2_PIX_FMT_SIGGB10 v4l2_fourcc('I', 'G', 'B', '0') /* 10 IrGIrG.. GBGR.. */
+
+ /* HSV formats */
+ #define V4L2_PIX_FMT_HSV24 v4l2_fourcc('H', 'S', 'V', '3')
+--
+2.40.0
