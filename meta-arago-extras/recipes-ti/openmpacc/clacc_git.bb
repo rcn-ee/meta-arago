@@ -9,9 +9,9 @@ RDEPENDS:${PN} += "clocl"
 
 S = "${WORKDIR}/git/host"
 
-TARGET:class-target = "clacc:arm"
-TARGET:class-native = "clacc:x86"
-TARGET:class-nativesdk = "clacc:x86"
+TARGET:class-target = "clacc_arm"
+TARGET:class-native = "clacc_x86"
+TARGET:class-nativesdk = "clacc_x86"
 
 export LINUX_DEVKIT_ROOT = "${STAGING_DIR_HOST}"
 export X86_HOST_ROOT = "${STAGING_DIR_HOST}"
