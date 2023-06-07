@@ -6,6 +6,11 @@ COMPATIBLE_MACHINE = "ti-soc"
 
 IMAGE_FEATURES += "package-management splash"
 
+# this is required to make sure the proper systemd default target gets set
+IMAGE_FEATURES += " \
+	${@bb.utils.contains("DISTRO_FEATURES", "wayland", "weston", "", d)} \
+"
+
 # 4KB per 1 inode should be enough
 EXTRA_IMAGECMD:ext2.gz += "-i 4096"
 
