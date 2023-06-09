@@ -13,5 +13,4 @@ EXTRA_FILES:k3 = "tisdk-readme tisdk-uenv"
 
 RDEPENDS:${PN} = "\
     ${EXTRA_FILES} \
-    tisdk-install \
 "
