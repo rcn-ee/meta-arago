@@ -8,8 +8,6 @@ inherit packagegroup
 
 PACKAGES =+ "${PN}-extra"
 
-#    dt
-
 UTILS = " \
     gdbserver \
     oprofile \
