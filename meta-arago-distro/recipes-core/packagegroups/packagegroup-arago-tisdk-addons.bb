@@ -18,6 +18,7 @@ UTILS = " \
     kdump \
     open62541-examples \
     open62541-tests \
+    sudo \
 "
 
 UTILS_UBOOT_FW = "libubootenv-bin"
