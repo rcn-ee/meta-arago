@@ -2,8 +2,6 @@ PR:append = ".arago6"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG:append = " networkd resolved"
-
 SRC_URI:append = " \
     file://local.rules \
     file://usb1-rules.sh \
