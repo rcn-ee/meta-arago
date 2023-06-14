@@ -3,8 +3,6 @@ PR:append = ".arago6"
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 PACKAGECONFIG:append = " networkd resolved"
-USERADD_PARAM:${PN} += "--system -d / -M --shell /bin/nologin systemd-network;"
-USERADD_PARAM:${PN} += "--system -d / -M --shell /bin/nologin systemd-resolve;"
 
 SRC_URI:append = " \
     file://local.rules \
