@@ -38,9 +38,6 @@ ARAGO_TEST = "\
     nbench-byte \
     stream \
     cryptodev-tests \
-    piglit \
-    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "opengl-es-cts", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "vulkan-cts", "", d)} \
 "
 
 ARAGO_TEST:append:armv7a = " \
