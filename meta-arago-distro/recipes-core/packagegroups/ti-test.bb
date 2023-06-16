@@ -40,6 +40,12 @@ ARAGO_TEST = "\
     cryptodev-tests \
 "
 
+ARAGO_TEST_EXTRAS = " \
+    piglit \
+    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "opengl-es-cts", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "vulkan-cts", "", d)} \
+"
+
 ARAGO_TEST:append:armv7a = " \
     cpuburn-neon \
 "
@@ -96,4 +102,10 @@ ARAGO_TI_TEST:append:omapl138 = " \
 RDEPENDS:${PN} = "\
     ${ARAGO_TEST} \
     ${ARAGO_TI_TEST} \
+"
+
+# Package group for things that should only be present in tisdk-default-image
+PACKAGES += " ${PN}-extras"
+RDEPENDS:${PN}-extras = "\
+    ${ARAGO_TEST_EXTRAS} \
 "
