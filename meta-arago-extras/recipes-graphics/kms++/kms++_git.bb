@@ -12,9 +12,8 @@ SRCREV = "5afc8d918f2c084acd65027604868dfde43395cf"
 
 DEPENDS = "drm fmt"
 
-# New meson build system fails to find pybind11 in sysroot, disable for now
-#DEPENDS += "python3-pybind11"
-#EXTRA_OEMESON = "-Dsystem-pybind11=enabled"
+DEPENDS += "libevdev python3-pybind11"
+EXTRA_OEMESON = "-Dsystem-pybind11=enabled"
 
 PACKAGES =+ "${PN}-python"
 
