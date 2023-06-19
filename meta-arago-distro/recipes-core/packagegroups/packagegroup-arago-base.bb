@@ -26,8 +26,6 @@ ARAGO_BASE = "\
     libgpiod-tools \
 "
 
-# these require meta-openembedded/meta-oe layer
-#    kms++-python is not provided yet
 ARAGO_EXTRA = "\
     devmem2 \
     tcpdump \
@@ -35,6 +33,7 @@ ARAGO_EXTRA = "\
     dropbear \
     openssh-sftp-server \
     kms++ \
+    kms++-python \
     can-utils \
     docker \
 "
