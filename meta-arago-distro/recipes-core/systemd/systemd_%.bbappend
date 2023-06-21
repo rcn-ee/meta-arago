@@ -1,4 +1,4 @@
-PR:append = ".arago6"
+PR:append = ".arago7"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
@@ -11,6 +11,7 @@ SRC_URI:append = " \
     file://30-wlan.network \
     file://60-usb.network \
     file://sync-clocks.service \
+    file://timesyncd.conf \
 "
 
 do_install:append() {
@@ -38,4 +39,7 @@ do_install:append() {
     # Need NAMESPACES enabled in the kernel, workaround for now
     install -m 0644 ${D}${systemd_system_unitdir}/systemd-hostnamed.service ${D}${sysconfdir}/systemd/system/
     sed -i 's/PrivateNetwork=yes/PrivateNetwork=no/g' ${D}${sysconfdir}/systemd/system/systemd-hostnamed.service
+
+    install -d ${D}${sysconfdir}/systemd/
+    install -m 0644 ${WORKDIR}/timesyncd.conf ${D}${sysconfdir}/systemd/
 }
