@@ -5,6 +5,8 @@ Subject: [PATCH 2/2] wayland-drm: Update to version 2
 
 Update the wayland-drm protocol to version 2
 
+Upstream-Status: Pending
+
 Signed-off-by: Angela Stegmaier <angelabaker@ti.com>
 ---
  stable/wayland-drm/wayland-drm.xml | 35 +++++++++++++++++++++++++++++++++--

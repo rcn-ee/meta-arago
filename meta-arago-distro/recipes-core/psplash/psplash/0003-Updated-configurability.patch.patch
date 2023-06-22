@@ -6,6 +6,8 @@ Subject: [PATCH 3/3] Updated configurability.patch
 * Updating configurability.patch to work with the most recent version
   (last update 5/10/2012) of psplash.
 
+Upstream-Status: Inappropriate [customization for arago]
+
 Signed-off-by: Franklin S Cooper Jr <fcooper@ti.com>
 ---
  psplash.c |   16 ++++++++--------

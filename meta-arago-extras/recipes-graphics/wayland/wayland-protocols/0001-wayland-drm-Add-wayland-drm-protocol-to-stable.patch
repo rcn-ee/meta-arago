@@ -7,6 +7,8 @@ wayland-drm protocol is missing in the protocols list since this
 protocol is MESA specific. For waylandsink gstreamer support
 wayland-drm protocol is needed.
 
+Upstream-Status: Pending
+
 Signed-off-by: Ramprasad N <x0038811@ti.com>
 ---
  stable/wayland-drm/wayland-drm.xml | 155 +++++++++++++++++++++++++++++++++++++

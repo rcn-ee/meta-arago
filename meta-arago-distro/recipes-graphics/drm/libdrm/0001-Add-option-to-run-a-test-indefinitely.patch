@@ -9,6 +9,8 @@ allows using modetest within ltp-ddt, before this patch modetest
 was not able to run in ltp-ddt because ltp-ddt sends data to stdin
 when a test is run
 
+Upstream-Status: Pending
+
 Signed-off-by: Alejandro Hernandez <ajhernandez@ti.com>
 Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 

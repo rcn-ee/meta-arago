@@ -4,6 +4,9 @@ Date: Tue, 13 Jun 2017 15:52:44 +0100
 Subject: [PATCH 1/2] libsync: add support for pre-v4.7 kernels
 
 Add support for the the sync merge ioctl supported by older kernels.
+
+Upstream-Status: Pending
+
 ---
  libsync.h | 44 +++++++++++++++++++++++++++++++++++++++++---
  1 file changed, 41 insertions(+), 3 deletions(-)

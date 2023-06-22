@@ -11,6 +11,8 @@ Supervision frames. This is done by adding 3 additional attributes
 to the hsr/prp link type and passing this to Linux HSR/PRP
 device through the ip link command.
 
+Upstream-Status: Pending
+
 Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
 ---
  include/uapi/linux/if_link.h |  3 +++

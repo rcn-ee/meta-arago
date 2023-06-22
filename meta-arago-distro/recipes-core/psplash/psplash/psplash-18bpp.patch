@@ -6,6 +6,8 @@ Subject: [PATCH 2/2] upstream: http://bugzilla.o-hand.com/show_bug.cgi?id=1764
 This is a reworked patch to address a code update in psplash.
 Original source is unknown.
 
+Upstream-Status: Pending
+
 Signed-off-by: Ryan Eatmon <reatmon@ti.com>
 ---
  psplash-fb.c | 8 +++++++-

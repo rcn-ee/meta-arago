@@ -9,6 +9,8 @@ That commit removed support for GPU drivers without GL_EXT_unpack_subimage
 which SGX does not support. Add back support for GPUs without this
 extension.
 
+Upstream-Status: Pending
+
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
  libweston/renderer-gl/gl-renderer-internal.h |  2 ++
