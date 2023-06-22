@@ -43,8 +43,6 @@ ARAGO_TEST = "\
 ARAGO_TEST_EXTRAS = " \
     python3-numpy \
     piglit \
-    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "opengl-es-cts", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "vulkan-cts", "", d)} \
 "
 
 ARAGO_TEST:append:armv7a = " \
