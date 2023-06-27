@@ -1,0 +1,123 @@
+From: Emmanuel Madrigal <emmanuel.madrigal@ridgerun.com>
+Date: Tue Feb 22 03:50:52 IST 2022
+Subject: Adding support for raw10, raw12 and raw16 bayer formats
+
+Gstreamer 1.16 only supports raw8 bayer by default. This patch enables
+sensors that support raw10, raw12 or raw16 to be used with v4l2src.
+Will need to be carried in meta-psdkla as long as we are using Gstreamer 1.16
+
+Upstream-Status: Pending
+Signed-off-by: Limaye, Aniket <a-limaye@ti.com>
+
+diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
+index 2c78e2227..a5d2e2de1 100644
+--- a/sys/v4l2/gstv4l2object.c
++++ b/sys/v4l2/gstv4l2object.c
+@@ -162,6 +162,18 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
+   {V4L2_PIX_FMT_SGBRG8, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_SGRBG8, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_SRGGB8, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SBGGR10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGBRG10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGRBG10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SRGGB10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SBGGR12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGBRG12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGRBG12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SRGGB12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SBGGR16, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGBRG16, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGRBG16, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SRGGB16, TRUE, GST_V4L2_RAW},
+
+   /* compressed formats */
+   {V4L2_PIX_FMT_MJPEG, FALSE, GST_V4L2_CODEC},
+@@ -1105,6 +1117,18 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
+     case V4L2_PIX_FMT_SGBRG8:
+     case V4L2_PIX_FMT_SGRBG8:
+     case V4L2_PIX_FMT_SRGGB8:
++    case V4L2_PIX_FMT_SBGGR10:
++    case V4L2_PIX_FMT_SGBRG10:
++    case V4L2_PIX_FMT_SGRBG10:
++    case V4L2_PIX_FMT_SRGGB10:
++    case V4L2_PIX_FMT_SBGGR12:
++    case V4L2_PIX_FMT_SGBRG12:
++    case V4L2_PIX_FMT_SGRBG12:
++    case V4L2_PIX_FMT_SRGGB12:
++    case V4L2_PIX_FMT_SBGGR16:
++    case V4L2_PIX_FMT_SGBRG16:
++    case V4L2_PIX_FMT_SGRBG16:
++    case V4L2_PIX_FMT_SRGGB16:
+       rank = BAYER_BASE_RANK;
+       break;
+
+@@ -1521,7 +1545,37 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+           fourcc == V4L2_PIX_FMT_SBGGR8 ? "bggr" :
+           fourcc == V4L2_PIX_FMT_SGBRG8 ? "gbrg" :
+           fourcc == V4L2_PIX_FMT_SGRBG8 ? "grbg" :
+-          /* fourcc == V4L2_PIX_FMT_SRGGB8 ? */ "rggb", NULL);
++          fourcc == V4L2_PIX_FMT_SRGGB8 ? "rggb" : "rggb", NULL);
++      break;
++    case V4L2_PIX_FMT_SBGGR10:
++    case V4L2_PIX_FMT_SGBRG10:
++    case V4L2_PIX_FMT_SGRBG10:
++    case V4L2_PIX_FMT_SRGGB10:
++      structure = gst_structure_new ("video/x-bayer", "format", G_TYPE_STRING,
++          fourcc == V4L2_PIX_FMT_SBGGR10 ? "bggr10" :
++          fourcc == V4L2_PIX_FMT_SGBRG10 ? "gbrg10" :
++          fourcc == V4L2_PIX_FMT_SGRBG10 ? "grbg10" :
++          fourcc == V4L2_PIX_FMT_SRGGB10 ? "rggb10" : "rggb10", NULL);
++      break;
++    case V4L2_PIX_FMT_SBGGR12:
++    case V4L2_PIX_FMT_SGBRG12:
++    case V4L2_PIX_FMT_SGRBG12:
++    case V4L2_PIX_FMT_SRGGB12:
++      structure = gst_structure_new ("video/x-bayer", "format", G_TYPE_STRING,
++          fourcc == V4L2_PIX_FMT_SBGGR12 ? "bggr12" :
++          fourcc == V4L2_PIX_FMT_SGBRG12 ? "gbrg12" :
++          fourcc == V4L2_PIX_FMT_SGRBG12 ? "grbg12" :
++          fourcc == V4L2_PIX_FMT_SRGGB12 ? "rggb12" : "rggb12", NULL);
++      break;
++    case V4L2_PIX_FMT_SBGGR16:
++    case V4L2_PIX_FMT_SGBRG16:
++    case V4L2_PIX_FMT_SGRBG16:
++    case V4L2_PIX_FMT_SRGGB16:
++      structure = gst_structure_new ("video/x-bayer", "format", G_TYPE_STRING,
++          fourcc == V4L2_PIX_FMT_SBGGR16 ? "bggr16" :
++          fourcc == V4L2_PIX_FMT_SGBRG16 ? "gbrg16" :
++          fourcc == V4L2_PIX_FMT_SGRBG16 ? "grbg16" :
++          fourcc == V4L2_PIX_FMT_SRGGB16 ? "rggb16" : "rggb16", NULL);
+       break;
+     case V4L2_PIX_FMT_SN9C10X:
+       structure = gst_structure_new_empty ("video/x-sonix");
+@@ -1847,6 +1901,30 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
+           fourcc = V4L2_PIX_FMT_SGRBG8;
+         else if (!g_ascii_strcasecmp (format, "rggb"))
+           fourcc = V4L2_PIX_FMT_SRGGB8;
++        else if (!g_ascii_strcasecmp (format, "bggr10"))
++          fourcc = V4L2_PIX_FMT_SBGGR10;
++        else if (!g_ascii_strcasecmp (format, "gbrg10"))
++          fourcc = V4L2_PIX_FMT_SGBRG10;
++        else if (!g_ascii_strcasecmp (format, "grbg10"))
++          fourcc = V4L2_PIX_FMT_SGRBG10;
++        else if (!g_ascii_strcasecmp (format, "rggb10"))
++          fourcc = V4L2_PIX_FMT_SRGGB10;
++        else if (!g_ascii_strcasecmp (format, "bggr12"))
++          fourcc = V4L2_PIX_FMT_SBGGR12;
++        else if (!g_ascii_strcasecmp (format, "gbrg12"))
++          fourcc = V4L2_PIX_FMT_SGBRG12;
++        else if (!g_ascii_strcasecmp (format, "grbg12"))
++          fourcc = V4L2_PIX_FMT_SGRBG12;
++        else if (!g_ascii_strcasecmp (format, "rggb12"))
++          fourcc = V4L2_PIX_FMT_SRGGB12;
++        else if (!g_ascii_strcasecmp (format, "bggr16"))
++          fourcc = V4L2_PIX_FMT_SBGGR16;
++        else if (!g_ascii_strcasecmp (format, "gbrg16"))
++          fourcc = V4L2_PIX_FMT_SGBRG16;
++        else if (!g_ascii_strcasecmp (format, "grbg16"))
++          fourcc = V4L2_PIX_FMT_SGRBG16;
++        else if (!g_ascii_strcasecmp (format, "rggb16"))
++          fourcc = V4L2_PIX_FMT_SRGGB16;
+       }
+     } else if (g_str_equal (mimetype, "video/x-sonix")) {
+       fourcc = V4L2_PIX_FMT_SN9C10X;
