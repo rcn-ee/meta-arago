@@ -65,8 +65,8 @@ DEPLOY_TISCI_FW_NAME ?= ""
 # process.
 # This manifest follows the TI manifest format requirements which is why
 # it differs from some of the default manifest code in oe-core.
-SW_MANIFEST_FILE ?= "${IMAGE_ROOTFS}/docs/software_manifest.htm"
-SW_MANIFEST_TEXT ?= "${IMAGE_ROOTFS}/docs/software_manifest.txt"
+SW_MANIFEST_FILE ?= "${IMAGE_ROOTFS}/manifest/software_manifest.htm"
+SW_MANIFEST_TEXT ?= "${IMAGE_ROOTFS}/manifest/software_manifest.txt"
 
 # helper function for generating a set of strings based on a list.  Taken
 # from the image.bbclass.
@@ -240,7 +240,7 @@ echo "
 <h2>Credits</h2>
 
 <h2>Licenses</h2>
-<p>Licenses can be found in the \"docs/licenses\" directory of the SDK install directory</p>
+<p>Licenses can be found in the \"licenses\" directory of the SDK install directory</p>
 
 <h2><u><b>GCC RUNTIME LIBRARY EXCEPTION</b></u></h2>
 <p>Version 3.1, 31 March 2009</p>
@@ -287,7 +287,7 @@ cat >> ${SW_MANIFEST_TEXT} << 'EOF'
 
 <Licenses>
 
-Licenses can be found in the "docs/licenses" directory of the SDK install directory
+Licenses can be found in the "licenses/" directory of the SDK install directory
 GCC RUNTIME LIBRARY EXCEPTION
 
 Version 3.1, 31 March 2009
@@ -876,14 +876,14 @@ tisdk_image_build () {
     # the licenses that were used in the build.
     if [ -d ${DEPLOY_DIR}/licenses ]
     then
-        if [ ! -d ${IMAGE_ROOTFS}/docs ]
-        then
-            mkdir -p ${IMAGE_ROOTFS}/docs
-        fi
-        cp -rf ${DEPLOY_DIR}/licenses ${IMAGE_ROOTFS}/docs/
+        cp -rf ${DEPLOY_DIR}/licenses ${IMAGE_ROOTFS}/
     fi
 
     # Create the TI software manifest
+    if [ ! -d ${IMAGE_ROOTFS}/manifest ]
+    then
+        mkdir -p ${IMAGE_ROOTFS}/manifest
+    fi
     generate_sw_manifest
 
     # Delete installed toolchain sdk since we need the toolchain sdk installer
