@@ -28,6 +28,7 @@ IMAGE_INSTALL += "\
     ti-analytics \
     ti-demos \
     ${ARAGO_DEFAULT_IMAGE_EXTRA_INSTALL} \
+    packagegroup-arago-tisdk-sysrepo \
 "
 
 export IMAGE_BASENAME = "tisdk-default-image"
