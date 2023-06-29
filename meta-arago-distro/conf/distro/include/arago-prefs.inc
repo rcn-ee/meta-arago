@@ -10,6 +10,10 @@ PREFERRED_PROVIDER_virtual/kernel:append = "${ARAGO_KERNEL_SUFFIX}"
 
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 
+# open62541 requires entropy_poll.h which is not provided by mbedtls 3.x
+PREFERRED_VERSION_mbedtls = "2.%"
+PREFERRED_VERSION_nativesdk-mbedtls = "2.%"
+
 # Setting PREFERRED_VERSIONS due to selecting a specific version of a library or
 # application that does not have a GPLv3 license
 PREFERRED_VERSION_crda = "3.18"
