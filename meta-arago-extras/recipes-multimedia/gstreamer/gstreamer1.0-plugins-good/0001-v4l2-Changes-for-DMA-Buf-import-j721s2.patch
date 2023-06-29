@@ -1,4 +1,4 @@
-From b46a76bc1010aee88828eddcb4b3da01ce710b27 Mon Sep 17 00:00:00 2001
+From 6b01fbb7785a0c950d7b4b0a3767aa35c9f7e60f Mon Sep 17 00:00:00 2001
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 Date: Wed, 7 Jun 2023 18:24:55 +0530
 Subject: [PATCH] v4l2: Changes for DMA Buf import j721s2
@@ -6,6 +6,7 @@ Subject: [PATCH] v4l2: Changes for DMA Buf import j721s2
 Add checks to release the buffer to downstream pool when returned with
 error flag from the driver. This buffer which registered with driver is
 used a an offset buffer without any new allocation in downstram pool.
+Set buffer offset to ref_frames plus 3.
 
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 ---
@@ -67,7 +68,7 @@ index 60340c2..cec4207 100644
 
  #endif /*__GST_V4L2_BUFFER_POOL_H__ */
 diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
-index ee60540..e9026da 100644
+index ee60540..0952bb4 100644
 --- a/sys/v4l2/gstv4l2object.c
 +++ b/sys/v4l2/gstv4l2object.c
 @@ -5040,7 +5040,7 @@ gst_v4l2_object_decide_allocation (GstV4l2Object * obj, GstQuery * query)
@@ -75,7 +76,7 @@ index ee60540..e9026da 100644
      /* In this case we'll have to configure two buffer pool. For our buffer
       * pool, we'll need what the driver one, and one more, so we can dequeu */
 -    own_min = obj->min_buffers + 1;
-+    own_min = obj->min_buffers + 2;
++    own_min = obj->min_buffers + 3;
      own_min = MAX (own_min, GST_V4L2_MIN_BUFFERS (obj));
 
      /* for the downstream pool, we keep what downstream wants, though ensure
