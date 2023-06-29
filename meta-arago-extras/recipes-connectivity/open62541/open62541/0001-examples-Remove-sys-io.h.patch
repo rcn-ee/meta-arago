@@ -1,0 +1,68 @@
+From 123f7274cf6cb65866c910dec16ec1595495d1dc Mon Sep 17 00:00:00 2001
+From: Ryan Eatmon <reatmon@ti.com>
+Date: Thu, 29 Jun 2023 11:14:50 -0500
+Subject: [PATCH] examples: Remove sys/io.h
+
+This header is missing on some architectures, aarch64 being one of them.
+
+Upstream-Status: Pending
+
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ examples/pubsub_realtime/pubsub_TSN_loopback.c                  | 1 -
+ examples/pubsub_realtime/pubsub_TSN_loopback_single_thread.c    | 1 -
+ examples/pubsub_realtime/pubsub_TSN_publisher.c                 | 1 -
+ examples/pubsub_realtime/pubsub_TSN_publisher_multiple_thread.c | 1 -
+ 4 files changed, 4 deletions(-)
+
+diff --git a/examples/pubsub_realtime/pubsub_TSN_loopback.c b/examples/pubsub_realtime/pubsub_TSN_loopback.c
+index 803a3c107..e90015aa3 100644
+--- a/examples/pubsub_realtime/pubsub_TSN_loopback.c
++++ b/examples/pubsub_realtime/pubsub_TSN_loopback.c
+@@ -77,7 +77,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <linux/types.h>
+-#include <sys/io.h>
+ #include <getopt.h>
+ 
+ /* For thread operations */
+diff --git a/examples/pubsub_realtime/pubsub_TSN_loopback_single_thread.c b/examples/pubsub_realtime/pubsub_TSN_loopback_single_thread.c
+index 7db37e9d5..ba5f7aff6 100644
+--- a/examples/pubsub_realtime/pubsub_TSN_loopback_single_thread.c
++++ b/examples/pubsub_realtime/pubsub_TSN_loopback_single_thread.c
+@@ -54,7 +54,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <linux/types.h>
+-#include <sys/io.h>
+ #include <getopt.h>
+ 
+ /* For thread operations */
+diff --git a/examples/pubsub_realtime/pubsub_TSN_publisher.c b/examples/pubsub_realtime/pubsub_TSN_publisher.c
+index 945ec3d4f..5ff866908 100644
+--- a/examples/pubsub_realtime/pubsub_TSN_publisher.c
++++ b/examples/pubsub_realtime/pubsub_TSN_publisher.c
+@@ -78,7 +78,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <linux/types.h>
+-#include <sys/io.h>
+ #include <getopt.h>
+ 
+ /* For thread operations */
+diff --git a/examples/pubsub_realtime/pubsub_TSN_publisher_multiple_thread.c b/examples/pubsub_realtime/pubsub_TSN_publisher_multiple_thread.c
+index 72dcd3997..73967577f 100644
+--- a/examples/pubsub_realtime/pubsub_TSN_publisher_multiple_thread.c
++++ b/examples/pubsub_realtime/pubsub_TSN_publisher_multiple_thread.c
+@@ -57,7 +57,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <linux/types.h>
+-#include <sys/io.h>
+ #include <getopt.h>
+ 
+ /* For thread operations */
+-- 
+2.17.1
+
