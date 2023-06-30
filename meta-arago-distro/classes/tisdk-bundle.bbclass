@@ -408,12 +408,12 @@ sw_manifest_target() {
     for image in ${TARGET_IMAGES}
     do
         # Only extract tar.gz or tar.bz2 types
-        if [ -e ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.xz ]
+        if [ -e ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.rootfs.tar.xz ]
         then
-            tar xJf ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.xz -C ${IMAGE_ROOTFS}/filesystem --wildcards *.control
-        elif [ -e ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.gz ]
+            tar xJf ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.rootfs.tar.xz -C ${IMAGE_ROOTFS}/filesystem --wildcards *.control
+        elif [ -e ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.rootfs.tar.gz ]
         then
-            tar xzf ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.tar.gz -C ${IMAGE_ROOTFS}/filesystem --wildcards *.control
+            tar xzf ${IMAGE_ROOTFS}/filesystem/${image}-${MACHINE}.rootfs.tar.gz -C ${IMAGE_ROOTFS}/filesystem --wildcards *.control
         fi
     done
 
@@ -756,9 +756,9 @@ tisdk_image_build () {
     do
         for type in ${TARGET_IMAGE_TYPES}
         do
-            if [ -e ${DEPLOY_DIR_IMAGE}/${image}-${MACHINE}.${type} ]
+            if [ -e ${DEPLOY_DIR_IMAGE}/${image}-${MACHINE}.rootfs.${type} ]
             then
-                cp ${DEPLOY_DIR_IMAGE}/${image}-${MACHINE}.${type} ${IMAGE_ROOTFS}/filesystem/
+                cp ${DEPLOY_DIR_IMAGE}/${image}-${MACHINE}.rootfs.${type} ${IMAGE_ROOTFS}/filesystem/
             fi
         done
     done
