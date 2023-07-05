@@ -7,6 +7,11 @@ require arago-image.inc
 
 ARAGO_DEFAULT_IMAGE_EXTRA_INSTALL ?= ""
 
+# we're assuming some display manager is being installed with opengl
+SYSTEMD_DEFAULT_TARGET = " \
+    ${@bb.utils.contains('DISTRO_FEATURES','opengl','graphical.target','multi-user.target',d)} \
+"
+
 IMAGE_INSTALL += "\
     packagegroup-arago-base \
     packagegroup-arago-console \
