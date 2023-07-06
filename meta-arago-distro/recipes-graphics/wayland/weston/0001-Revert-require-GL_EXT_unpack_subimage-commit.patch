@@ -1,6 +1,6 @@
-From 6558a9153cc81199146132041c61023a2c2e1b2e Mon Sep 17 00:00:00 2001
-From: Andrew Davis <afd@ti.com>
-Date: Thu, 6 Oct 2022 15:49:31 -0500
+From 14513f40b8776b2c75d28368cbeb6393fe89fef1 Mon Sep 17 00:00:00 2001
+From: Denys Dmytriyenko <denys@konsulko.com>
+Date: Thu, 6 Jul 2023 01:48:41 +0000
 Subject: [PATCH] Revert require GL_EXT_unpack_subimage commit
 
 This reverts commit 593d5af43a8e2c2a3371088fa7ae430d0517c82d.
@@ -9,19 +9,20 @@ That commit removed support for GPU drivers without GL_EXT_unpack_subimage
 which SGX does not support. Add back support for GPUs without this
 extension.
 
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [specific to TI SGX]
 
 Signed-off-by: Andrew Davis <afd@ti.com>
+Signed-off-by: Denys Dmytriyenko <denys@konsulko.com>
 ---
  libweston/renderer-gl/gl-renderer-internal.h |  2 ++
  libweston/renderer-gl/gl-renderer.c          | 29 ++++++++++++++++----
  2 files changed, 26 insertions(+), 5 deletions(-)
 
 diff --git a/libweston/renderer-gl/gl-renderer-internal.h b/libweston/renderer-gl/gl-renderer-internal.h
-index 72101b47..7a6e2f48 100644
+index 888df84..cabf1ed 100644
 --- a/libweston/renderer-gl/gl-renderer-internal.h
 +++ b/libweston/renderer-gl/gl-renderer-internal.h
-@@ -148,6 +148,8 @@ struct gl_renderer {
+@@ -153,6 +153,8 @@ struct gl_renderer {
 	PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC create_platform_window;
 	bool has_platform_base;
 
@@ -31,10 +32,10 @@ index 72101b47..7a6e2f48 100644
 	PFNEGLUNBINDWAYLANDDISPLAYWL unbind_display;
 	PFNEGLQUERYWAYLANDBUFFERWL query_buffer;
 diff --git a/libweston/renderer-gl/gl-renderer.c b/libweston/renderer-gl/gl-renderer.c
-index a5f5eae4..410ba85c 100644
+index 4a6da14..3cddf6e 100644
 --- a/libweston/renderer-gl/gl-renderer.c
 +++ b/libweston/renderer-gl/gl-renderer.c
-@@ -1793,6 +1793,7 @@ 			 struct weston_buffer *buffer)
+@@ -1970,6 +1970,7 @@ gl_renderer_flush_damage(struct weston_surface *surface,
  {
 	const struct weston_testsuite_quirks *quirks =
 		&surface->compositor->test_data.test_quirks;
@@ -42,7 +43,7 @@ index a5f5eae4..410ba85c 100644
 	struct gl_surface_state *gs = get_surface_state(surface);
 	struct gl_buffer_state *gb = gs->buffer;
 	struct weston_view *view;
-@@ -1835,6 +1836,24 @@ 			 struct weston_buffer *buffer)
+@@ -2012,6 +2013,24 @@ gl_renderer_flush_damage(struct weston_surface *surface,
 
 	glActiveTexture(GL_TEXTURE0);
 
@@ -67,7 +68,7 @@ index a5f5eae4..410ba85c 100644
 	if (gb->needs_full_upload || quirks->gl_force_full_upload) {
 		glPixelStorei(GL_UNPACK_SKIP_PIXELS_EXT, 0);
 		glPixelStorei(GL_UNPACK_SKIP_ROWS_EXT, 0);
-@@ -3896,11 +3915,9 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
+@@ -4103,11 +4122,9 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
 	else
 		ec->read_format = pixel_format_get_info_by_pixman(PIXMAN_a8b8g8r8);
 
@@ -82,12 +83,14 @@ index a5f5eae4..410ba85c 100644
 
 	if (gr->gl_version >= gr_gl_version(3, 0) ||
 	    weston_check_egl_extension(extensions, "GL_EXT_texture_type_2_10_10_10_REV"))
-@@ -3945,6 +3962,8 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
+@@ -4194,6 +4211,8 @@ gl_renderer_setup(struct weston_compositor *ec, EGLSurface egl_surface)
 		   gr_gl_version_minor(gr->gl_version));
 	weston_log_continue(STAMP_SPACE "read-back format: %s\n",
 			    ec->read_format->drm_format_name);
 +	weston_log_continue(STAMP_SPACE "wl_shm sub-image to texture: %s\n",
 +			    gr->has_unpack_subimage ? "yes" : "no");
+	weston_log_continue(STAMP_SPACE "glReadPixels supports y-flip: %s\n",
+			    yesno(gr->has_pack_reverse));
 	weston_log_continue(STAMP_SPACE "wl_shm 10 bpc formats: %s\n",
-			    yesno(gr->has_texture_type_2_10_10_10_rev));
-	weston_log_continue(STAMP_SPACE "wl_shm 16 bpc formats: %s\n",
+--
+2.25.1
