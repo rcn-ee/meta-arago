@@ -12,6 +12,8 @@ to NV12M over NV12.
 The logic to give preference to NV12 before NV12M whenever GST_VIDEO_FORMAT_NV12
 is set.
 
+Upstream-Status: Pending
+
 Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 ---

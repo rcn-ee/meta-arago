@@ -7,6 +7,8 @@ Add support for bayer formats with IR component.
 this is required for cameras like ov2312 which
 captures both RGB and IR
 
+Upstream-Status: Pending
+
 Signed-off-by: Rahul T R <r-ravikumar@ti.com>
 ---
  sys/v4l2/ext/videodev2.h |  9 +++++++

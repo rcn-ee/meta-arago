@@ -8,6 +8,8 @@ error flag from the driver. This buffer which registered with driver is
 used a an offset buffer without any new allocation in downstram pool.
 Set buffer offset to ref_frames plus 3.
 
+Upstream-Status: Pending
+
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 ---
  sys/v4l2/gstv4l2bufferpool.c | 17 ++++++++++++++---
