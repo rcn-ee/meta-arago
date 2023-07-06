@@ -35,9 +35,20 @@ TARGET_IMAGES ?= "tisdk-base-image"
 # path to install the meta-toolchain package in the SDK
 TISDK_TOOLCHAIN_PATH ?= "linux-devkit"
 
-# meta toolchain recipe to build and package as part of the tisdk image
+# Linux glibc toolchain recipe(s) to build and package as part of the tisdk bundle
 TISDK_TOOLCHAIN ?= "meta-toolchain-arago"
 TOOLCHAIN_SUFFIX ?= "-sdk"
+
+# K3R5 baremetal toolchain recipe(s) to build and package as part of the tisdk bundle
+TOOLCHAIN_MC_DEP = ""
+TOOLCHAIN_MC_DEP:k3 = "mc::k3r5:meta-toolchain-arago"
+TISDK_TOOLCHAIN_K3R5 ?= "${TOOLCHAIN_MC_DEP}"
+TOOLCHAIN_K3R5_SUFFIX ?= "-sdk"
+
+# Since K3R5 packaging happens in the main default MC, these vars
+# are not accessible and have to be set here
+ARMPKGARCH_K3R5 ?= "armv7a"
+TARGET_OS_K3R5 ?= "eabi"
 
 # List of the type of target file system images we want to include
 TARGET_IMAGE_TYPES ?= "tar.xz tar.gz ubi wic.gz wic.xz"
@@ -81,6 +92,7 @@ do_rootfs[depends] += "${@string_set('%s:do_image_complete' % pn for pn in (d.ge
 # variable which will force us to build the toolchain first so that it will be
 # available for packaging
 do_rootfs[depends] += "${@string_set('%s:do_populate_sdk' % pn for pn in (d.getVar("TISDK_TOOLCHAIN") or "").split())}"
+do_rootfs[mcdepends] += "${@string_set('%s:do_populate_sdk' % pn for pn in (d.getVar("TISDK_TOOLCHAIN_K3R5") or "").split())}"
 
 do_rootfs[nostamp] = "1"
 do_rootfs[lockfiles] += "${IMAGE_ROOTFS}.lock"
@@ -698,12 +710,16 @@ tisdk_image_setup () {
     mkdir -p ${IMAGE_ROOTFS}/var/lib/opkg
     mkdir -p ${IMAGE_ROOTFS}/lib
 
-    if [ -e ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ]
+    if [ -e ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ]
     then
-        chmod 755 ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}*.sh
+        chmod 755 ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh
 
         # Temporarily extract the toolchain sdk so we can read license information from it.
-        echo "${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}" | ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}*.sh
+        echo "${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}" | ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh
+    fi
+    if [ -e ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH_K3R5}-${TARGET_OS_K3R5}${TOOLCHAIN_K3R5_SUFFIX}.sh ]
+    then
+        chmod 755 ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH_K3R5}-${TARGET_OS_K3R5}${TOOLCHAIN_K3R5_SUFFIX}.sh
     fi
 }
 
@@ -849,11 +865,18 @@ tisdk_image_build () {
     # not the extracted version
     rm -rf ${IMAGE_ROOTFS}/${TISDK_TOOLCHAIN_PATH}
 
-    # Copy over the toolchain sdk installer an give it a simple name which
+    # Copy over Linux glibc toolchain sdk installer and give it a simple name which
     # matches the traditional name within the SDK.
-    if [ -e ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ]
+    if [ -e ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ]
     then
-        cp ${DEPLOY_DIR}/sdk/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ${IMAGE_ROOTFS}/linux-devkit.sh
+        cp ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH}-${TARGET_OS}${TOOLCHAIN_SUFFIX}.sh ${IMAGE_ROOTFS}/linux-devkit.sh
+    fi
+
+    # Copy over K3R5 baremetal toolchain sdk installer and give it a simple name which
+    # matches the traditional name within the SDK.
+    if [ -e ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH_K3R5}-${TARGET_OS_K3R5}${TOOLCHAIN_K3R5_SUFFIX}.sh ]
+    then
+        cp ${SDK_DEPLOY}/${SDK_NAME}-${ARMPKGARCH_K3R5}-${TARGET_OS_K3R5}${TOOLCHAIN_K3R5_SUFFIX}.sh ${IMAGE_ROOTFS}/k3r5-devkit.sh
     fi
 
     # Copy the opkg.conf used by the image to allow for future updates
