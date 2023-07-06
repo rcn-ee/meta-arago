@@ -33,8 +33,8 @@ toolchain_create_sdk_env_script () {
 	echo 'fi' >> $script
 	echo 'export SDK_SYS=${SDK_SYS}' >> $script
 	echo 'export REAL_MULTIMACH_TARGET_SYS=${REAL_MULTIMACH_TARGET_SYS}' >> $script
-	echo 'export TOOLCHAIN_SYS=${TOOLCHAIN_SYS}' >> $script
-	echo 'export TOOLCHAIN_PREFIX=$TOOLCHAIN_SYS-' >> $script
+	echo 'export TARGET_SYS=${TARGET_SYS}' >> $script
+	echo 'export TARGET_PREFIX=$TARGET_SYS-' >> $script
 	echo 'export SDK_PATH_NATIVE=$SDK_PATH/sysroots/$SDK_SYS' >> $script
 	echo 'export SDK_PATH_TARGET=$SDK_PATH/sysroots/$REAL_MULTIMACH_TARGET_SYS' >> $script
 	echo 'export PATH=$SDK_PATH_NATIVE${bindir_nativesdk}:$SDK_PATH_NATIVE${bindir_nativesdk}/${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}:$PATH' >> $script
@@ -43,18 +43,18 @@ toolchain_create_sdk_env_script () {
 	echo 'export PKG_CONFIG_PATH=$SDK_PATH_TARGET${libdir}/pkgconfig:$SDK_PATH_TARGET${datadir}/pkgconfig' >> $script
 	echo 'export PKG_CONFIG_ALLOW_SYSTEM_LIBS=1' >> $script
 	echo 'export CONFIG_SITE=$SDK_PATH/site-config-$REAL_MULTIMACH_TARGET_SYS' >> $script
-	printf 'export CC="\x24{TOOLCHAIN_PREFIX}gcc --sysroot=$SDK_PATH_TARGET"\n' >> $script
-	printf 'export CXX="\x24{TOOLCHAIN_PREFIX}g++ --sysroot=$SDK_PATH_TARGET"\n' >> $script
-	printf 'export GDB=\x24{TOOLCHAIN_PREFIX}gdb\n' >> $script
-	printf 'export CPP="\x24{TOOLCHAIN_PREFIX}gcc -E --sysroot=$SDK_PATH_TARGET"\n' >> $script
-	printf 'export LD="\x24{TOOLCHAIN_PREFIX}ld --sysroot=$SDK_PATH_TARGET"\n' >> $script
-	printf 'export NM=\x24{TOOLCHAIN_PREFIX}nm\n' >> $script
-	printf 'export AS=\x24{TOOLCHAIN_PREFIX}as\n' >> $script
-	printf 'export AR=\x24{TOOLCHAIN_PREFIX}ar\n' >> $script
-	printf 'export RANLIB=\x24{TOOLCHAIN_PREFIX}ranlib\n' >> $script
-	printf 'export OBJCOPY=\x24{TOOLCHAIN_PREFIX}objcopy\n' >> $script
-	printf 'export OBJDUMP=\x24{TOOLCHAIN_PREFIX}objdump\n' >> $script
-	printf 'export STRIP=\x24{TOOLCHAIN_PREFIX}strip\n' >> $script
+	printf 'export CC="\x24{TARGET_PREFIX}gcc --sysroot=$SDK_PATH_TARGET"\n' >> $script
+	printf 'export CXX="\x24{TARGET_PREFIX}g++ --sysroot=$SDK_PATH_TARGET"\n' >> $script
+	printf 'export GDB=\x24{TARGET_PREFIX}gdb\n' >> $script
+	printf 'export CPP="\x24{TARGET_PREFIX}gcc -E --sysroot=$SDK_PATH_TARGET"\n' >> $script
+	printf 'export LD="\x24{TARGET_PREFIX}ld --sysroot=$SDK_PATH_TARGET"\n' >> $script
+	printf 'export NM=\x24{TARGET_PREFIX}nm\n' >> $script
+	printf 'export AS=\x24{TARGET_PREFIX}as\n' >> $script
+	printf 'export AR=\x24{TARGET_PREFIX}ar\n' >> $script
+	printf 'export RANLIB=\x24{TARGET_PREFIX}ranlib\n' >> $script
+	printf 'export OBJCOPY=\x24{TARGET_PREFIX}objcopy\n' >> $script
+	printf 'export OBJDUMP=\x24{TARGET_PREFIX}objdump\n' >> $script
+	printf 'export STRIP=\x24{TARGET_PREFIX}strip\n' >> $script
 	echo 'export CONFIGURE_FLAGS="--target=${TARGET_SYS} --host=${TARGET_SYS} --build=${SDK_ARCH}-linux --with-libtool-sysroot=$SDK_PATH_TARGET"' >> $script
 	echo 'export CPPFLAGS="${TARGET_CC_ARCH} --sysroot=$SDK_PATH_TARGET"' >> $script
 	echo 'export CFLAGS="$CPPFLAGS"' >> $script
@@ -97,32 +97,6 @@ arago_sdk_fixup () {
 	done
 
 	cleanup_toolchain_packages
-
-	# Do some extra setup work due to new structure
-	mkdir -p "${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/lib/${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
-	if [ "${TOOLCHAIN_TYPE}" = "internal" ]; then
-		lexec="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/libexec/${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}/gcc/${TOOLCHAIN_SYS}"
-	else
-		lexec="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/libexec/gcc/${TOOLCHAIN_SYS}"
-	fi
-	tcv=`ls -1 $lexec|head -1`
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/$tcv
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/$tcv
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/${TOOLCHAIN_SYS} ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/lib/${TOOLCHAIN_SYS}
-	[ -e ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS} ] || ln -s . ${SDK_OUTPUT}/${SDKTARGETSYSROOT}/usr/lib/${TOOLCHAIN_SYS}
-	tcpath="${SDK_OUTPUT}/${SDKPATHNATIVE}${prefix_nativesdk}/${TOOLCHAIN_SYS}"
-	mkdir -p $tcpath
-	( cd $tcpath; \
-		ln -s ${SDKTARGETSYSROOT}/include include; \
-		if [ "${TOOLCHAIN_BRAND}" != "arago" ]; then \
-			mkdir -p libc; \
-			cd libc; \
-		fi; \
-		mkdir -p usr; \
-		ln -s ${SDKTARGETSYSROOT}/lib lib; \
-		ln -s ${SDKTARGETSYSROOT}/usr/lib usr/lib; \
-		ln -s ${SDKTARGETSYSROOT}/usr/include usr/include; \
-	)
 }
 
 fakeroot create_sdk_files() {
