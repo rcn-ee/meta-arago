@@ -8,6 +8,8 @@ inherit packagegroup
 
 MULTIMEDIA = " \
     amsdk-av-files \
+    libcamera \
+    libcamera-gst \
 "
 
 MULTIMEDIA:omapl138 = ""
