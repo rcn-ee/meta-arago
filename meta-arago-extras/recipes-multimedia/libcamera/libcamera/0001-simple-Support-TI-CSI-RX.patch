@@ -1,0 +1,32 @@
+From d0e4f4f224671e9fc992d39e7beb9c486303ede1 Mon Sep 17 00:00:00 2001
+From: Jai Luthra <j-luthra@ti.com>
+Date: Thu, 23 Mar 2023 11:38:46 +0530
+Subject: [PATCH] simple: Support TI CSI-RX
+
+Add support for TI's CSI-RX pixel grabber device for the simple
+pipeline.
+
+The driver is not yet merged, but v7 is posted [1] upstream.
+
+Link: https://lore.kernel.org/all/20230314115516.667-1-vaishnav.a@ti.com/ [1]
+Upstream-Status: Pending
+Signed-off-by: Jai Luthra <j-luthra@ti.com>
+---
+ src/libcamera/pipeline/simple/simple.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/libcamera/pipeline/simple/simple.cpp b/src/libcamera/pipeline/simple/simple.cpp
+index e1f8b989..520405a1 100644
+--- a/src/libcamera/pipeline/simple/simple.cpp
++++ b/src/libcamera/pipeline/simple/simple.cpp
+@@ -194,6 +194,8 @@ static const SimplePipelineInfo supportedDevices[] = {
+	{ "mxc-isi", {} },
+	{ "qcom-camss", {} },
+	{ "sun6i-csi", {} },
++	{ "j721e-csi2rx", {} },
++
+ };
+
+ } /* namespace */
+--
+2.41.0
