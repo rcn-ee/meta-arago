@@ -95,16 +95,16 @@ diff --git a/sys/v4l2/gstv4l2videodec.c b/sys/v4l2/gstv4l2videodec.c
 index 3042995..0e4ac09 100644
 --- a/sys/v4l2/gstv4l2videodec.c
 +++ b/sys/v4l2/gstv4l2videodec.c
-@@ -536,6 +536,8 @@ gst_v4l2_video_dec_loop (GstVideoDecoder * decoder)
+@@ -738,6 +738,8 @@ gst_v4l2_video_dec_loop (GstVideoDecoder * decoder)
    GstVideoCodecFrame *frame;
    GstBuffer *buffer = NULL;
    GstFlowReturn ret;
 +  GstV4l2MemoryGroup *group;
 +  int buffer_valid=0;
 
-   GST_LOG_OBJECT (decoder, "Allocate output buffer");
+   GST_LOG_OBJECT (self, "Looping.");
 
-@@ -558,6 +560,7 @@ gst_v4l2_video_dec_loop (GstVideoDecoder * decoder)
+@@ -795,6 +797,7 @@ gst_v4l2_video_dec_loop (GstVideoDecoder * decoder)
 
      if (ret != GST_FLOW_OK)
        goto beach;
@@ -112,7 +112,7 @@ index 3042995..0e4ac09 100644
 
      GST_LOG_OBJECT (decoder, "Process output buffer");
      {
-@@ -602,13 +605,18 @@ gst_v4l2_video_dec_loop (GstVideoDecoder * decoder)
+@@ -861,13 +864,18 @@ gst_v4l2_video_dec_loop (GstVideoDecoder * decoder)
      if (oldest_frame)
        gst_video_codec_frame_unref (oldest_frame);
 
