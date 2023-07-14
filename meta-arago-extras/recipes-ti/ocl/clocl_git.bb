@@ -19,7 +19,7 @@ TARGET:class-nativesdk = "x86"
 EXTRA_OEMAKE = " -C ${S}/clocl \
                  _PRODUCT_VERSION=${PV} \
                  TARGET=${TARGET} \
-                 LLVM_CONFIG_EXE=llvm-config \
+                 LLVM_CONFIG_EXE=${STAGING_BINDIR_NATIVE}/llvm-config \
 "
 
 do_compile() {
